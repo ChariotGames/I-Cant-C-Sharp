@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Scripts.Pascal
+namespace _Scripts
 {
     public class P_Level01 : MonoBehaviour
     {
