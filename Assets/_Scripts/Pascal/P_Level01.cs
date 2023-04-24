@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Scripts
+namespace _Scripts.Pascal
 {
     public class P_Level01 : MonoBehaviour
     {

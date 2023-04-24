@@ -1,4 +1,5 @@
-﻿using _Scripts.Input;
+﻿using _Scripts._Interfaces;
+using _Scripts.Input;
 using UnityEngine;
 
 namespace _Scripts

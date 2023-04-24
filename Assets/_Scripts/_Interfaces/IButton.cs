@@ -1,4 +1,4 @@
-﻿namespace _Scripts
+﻿namespace _Scripts._Interfaces
 {
     public interface IButton
     {
