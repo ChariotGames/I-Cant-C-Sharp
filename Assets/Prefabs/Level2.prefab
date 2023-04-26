@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonPrefab: {fileID: 9072757584049928196}
+  obstaclePrefab: {fileID: 4273202934983420467, guid: 9067a4d3d1ca82a4590eb3ddf2ba4084, type: 3}
+  spawnTimeUpperBounds: 1
+  spawnTimeLowerBounds: 3
 --- !u!1001 &4352014020336988848
 PrefabInstance:
   m_ObjectHideFlags: 0
