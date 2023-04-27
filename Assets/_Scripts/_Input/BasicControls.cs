@@ -164,8 +164,8 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""147a81a0-8669-49f9-9a1b-ffccf5ab2054"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""ee1e9a82-c8b8-4bc5-ab2b-0fd1c862a879"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -175,8 +175,8 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""32f464a2-36fd-4dff-858b-a0e855512e0c"",
-                    ""path"": ""<Mouse>/position"",
+                    ""id"": ""f142da81-8875-4103-982d-f1bede149e95"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

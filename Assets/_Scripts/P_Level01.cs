@@ -11,6 +11,7 @@ namespace _Scripts
         [SerializeField] private float spawnTimeUpperBounds;
         [SerializeField] private float spawnTimeLowerBounds;
         
+        
         private Camera _mainCamera;
         private SpriteRenderer _previousButton;
         private Bounds _cameraViewportBounds;
