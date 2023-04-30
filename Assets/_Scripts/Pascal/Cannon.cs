@@ -43,8 +43,6 @@ namespace _Scripts.Pascal
             // only use x-axis movement of input
             var inputDelta = InputHandler.CourserPos.x;
             
-            if(inputDelta == 0) return;   
-            
             //  Mathf.Sign will return 1,-1 or 0
             var direction = Vector2.right * Mathf.Sign(inputDelta);
 
