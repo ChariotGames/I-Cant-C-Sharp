@@ -45,12 +45,12 @@ namespace _Scripts.Pascal
             
             if(inputDelta == 0) return;   
             
-            // calculate the direction from the barrel to the mouse - Mathf.Sign will return 1,-1 or 0
+            //  Mathf.Sign will return 1,-1 or 0
             var direction = Vector2.right * Mathf.Sign(inputDelta);
-                     
+
             // calculate the angle to rotate the barrel
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-
+            
             // restrict the angle to the range of -180 to 180 degrees 
             // angle = angle % 360f;
             // if (angle > 180f) {
@@ -60,13 +60,15 @@ namespace _Scripts.Pascal
             // } == Mathf.Repeat
             
             angle = Mathf.Repeat(angle + 180f, 360f) - 180f; 
-                     
+            
             // clamp the angle to the range of -maxRotation to maxRotation
             angle = Mathf.Clamp(angle, -maxRotation, maxRotation);
           
-            // use some lerp for smoothing
+            // multiply the maxRotationSpeed by the inputDelta value
+            var rotationSpeed = maxRotationSpeed * Mathf.Abs(inputDelta);
+            
             var targetRotation = Quaternion.Euler(0f, 0f, angle);
-            gunBarrel.rotation = Quaternion.Lerp(gunBarrel.rotation, targetRotation, Time.deltaTime * maxRotationSpeed);
+            gunBarrel.rotation = Quaternion.RotateTowards(gunBarrel.rotation, targetRotation, Time.deltaTime * rotationSpeed);;
             
         }
         

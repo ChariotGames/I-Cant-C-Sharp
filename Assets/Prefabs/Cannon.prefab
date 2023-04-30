@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d078960ea4854674a91b4544bed9b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationSpeed: 3.5
-  maxRotation: 100
+  maxRotationSpeed: 250
+  maxRotation: 90
   bulletSpeed: 20
   bulletPrefab: {fileID: 5066922524047970336, guid: 918794dc8e90bed4aafcd479b6b5344a, type: 3}
   gunBarrel: {fileID: 4723604506438083396}
