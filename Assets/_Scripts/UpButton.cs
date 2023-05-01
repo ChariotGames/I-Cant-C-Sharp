@@ -1,5 +1,5 @@
-﻿using _Scripts._Interfaces;
-using _Scripts.Input;
+﻿using _Scripts._Input;
+using _Scripts._Interfaces;
 using UnityEngine;
 
 namespace _Scripts
@@ -8,7 +8,7 @@ namespace _Scripts
     {
         private void OnEnable()
         {
-            InputHandler.UpKeyAction += ButtonPressed;
+            InputHandler.UpArrowBtnAction += ButtonPressed;
         }
 
         public void ButtonPressed()
@@ -18,7 +18,7 @@ namespace _Scripts
         
         private void OnDisable()
         {
-            InputHandler.UpKeyAction -= ButtonPressed;
+            InputHandler.UpArrowBtnAction -= ButtonPressed;
         }
     }
 }

@@ -1,4 +1,4 @@
-using _Scripts.Input;
+using _Scripts._Input;
 using UnityEngine;
 
 namespace _Scripts.Pascal
@@ -20,7 +20,7 @@ namespace _Scripts.Pascal
 
         private void OnEnable()
         {
-            InputHandler.UpKeyAction += ShootProjectile;
+            InputHandler.UpArrowBtnAction += ShootProjectile;
         }
 
         private void ShootProjectile()
@@ -41,7 +41,7 @@ namespace _Scripts.Pascal
         private void RotateTowardsMouse()
         {
             // only use x-axis movement of input
-            var inputDelta = InputHandler.CourserPos.x;
+            var inputDelta = InputHandler.RightStickDelta.x;
             
             //  Mathf.Sign will return 1,-1 or 0
             var direction = Vector2.right * Mathf.Sign(inputDelta);
@@ -73,7 +73,7 @@ namespace _Scripts.Pascal
         
         private void OnDisable()
         {
-            InputHandler.UpKeyAction -= ShootProjectile;
+            InputHandler.UpArrowBtnAction -= ShootProjectile;
         }
 
     }

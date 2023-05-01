@@ -62,7 +62,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8920256311643867259}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnLeftKey
+        m_MethodName: OnLeftButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -78,7 +78,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8920256311643867259}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnRightKey
+        m_MethodName: OnRightButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8920256311643867259}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnDownKey
+        m_MethodName: OnDownButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8920256311643867259}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnUpKey
+        m_MethodName: OnUpButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8920256311643867259}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnAim
+        m_MethodName: OnRightStick
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -138,6 +138,182 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0fa21c14-e7f5-41c7-b325-8a2ec38ebeb1
     m_ActionName: Player/CourserPos[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnLeftStick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: da14c616-ecbf-4871-a9bf-d7ac93725e5e
+    m_ActionName: Player/LeftStick[/DualShock4GamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnEastButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0627f2f0-a70c-4b61-b33d-0f5b55ba4701
+    m_ActionName: Player/EastButton[/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnNorthButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c1544e96-f668-4202-880c-cda58f5eafce
+    m_ActionName: Player/NorthButton[/DualShock4GamepadHID/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnSouthButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 98a5405e-61d8-4cf1-abdd-f449afbf55a8
+    m_ActionName: Player/SouthButton[/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnWestButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1fe6c057-d0a8-4b4c-9f77-b24e3ac906ac
+    m_ActionName: Player/WestButton[/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnRightShoulderButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bd33ea74-1970-4ddb-af4f-9a839042e21a
+    m_ActionName: Player/RightShoulder[/DualShock4GamepadHID/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnRightTriggerButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1dd97957-271f-489e-b67c-586197fa9e10
+    m_ActionName: Player/RightTrigger[/DualShock4GamepadHID/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnLeftShoulderButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1c96bf0e-7a4f-419e-84d8-9d92c4917925
+    m_ActionName: Player/LeftShoulder[/DualShock4GamepadHID/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnLeftTriggerButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ad32f23a-1200-4a3a-b925-604f1bd00ca6
+    m_ActionName: Player/LeftTrigger[/DualShock4GamepadHID/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnRightStickPress
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 258fb52f-9f70-4978-bf9a-372547861cbf
+    m_ActionName: Player/RightStickPress[/DualShock4GamepadHID/rightStickPress]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnLeftStickPress
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4a62edff-b05a-4b14-b975-21b6da26fc13
+    m_ActionName: Player/LeftStickPress[/DualShock4GamepadHID/leftStickPress]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
