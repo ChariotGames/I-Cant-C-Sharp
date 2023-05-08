@@ -36,17 +36,17 @@ public class G03_SAB : MonoBehaviour
         
     }
 
-    private int spawnSymbol()
+    private void spawnSymbol()
     {
         index = Random.Range(0, sprites.Count);
         sprite.sprite = sprites[index];
         sprite.gameObject.SetActive(true);
-        return index;
     }
 
     private IEnumerator GameStartCoroutine()
     {
-        lastSprite = spawnSymbol();
+        spawnSymbol();
+        lastSprite = index;
         yield return new WaitForSeconds(1);
         sprite.gameObject.SetActive(false);
         StartCoroutine(SpawnCoroutine());
@@ -59,14 +59,15 @@ public class G03_SAB : MonoBehaviour
         {
             if (sprite.gameObject.activeSelf)
             {
+                Debug.Log(index + " " + lastSprite);
                 yield return new WaitUntil(() => isYes || isNo);
-                Debug.Log(index + " " + lastSprite + " " + isYes + " " + isNo);
                 if ((index == lastSprite && isYes && !isNo) || (index != lastSprite && isNo && !isYes))
                 {
                     Debug.Log("Win");
                     sprite.gameObject.SetActive(false);
                     isYes = false;
                     isNo = false;
+                    lastSprite = index;
                 }
                 else
                 {
@@ -77,7 +78,7 @@ public class G03_SAB : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(1);
-                lastSprite = spawnSymbol();
+                spawnSymbol();
             }
         }
     }
