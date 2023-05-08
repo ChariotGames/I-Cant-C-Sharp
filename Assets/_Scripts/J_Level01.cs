@@ -71,7 +71,7 @@ public class J_Level01 : MonoBehaviour {
             {
                 spawnedButtons[i].SetActive(false);
             }
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.1f);
         }
     }
 

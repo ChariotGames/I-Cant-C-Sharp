@@ -33,13 +33,13 @@ namespace _Scripts._Input
         public void OnRightStick(InputAction.CallbackContext ctx)
         {
             RightStickDelta = ctx.ReadValue<Vector2>();
-            Debug.Log("RightStickDelta" + RightStickDelta);
+            //Debug.Log("RightStickDelta" + RightStickDelta);
         }
         
         public void OnLeftStick(InputAction.CallbackContext ctx)
         {
             LeftStickDelta = ctx.ReadValue<Vector2>();
-            Debug.Log("LeftStickDelta" + LeftStickDelta);
+            //Debug.Log("LeftStickDelta" + LeftStickDelta);
         }
 
         public void OnUpButton(InputAction.CallbackContext ctx)
