@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50128f8a-23b3-417c-bd80-c6f66489e84d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/G03_SAB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/G03_SAB.cs" afterDir="false" />
-    </list>
+    <list default="true" id="50128f8a-23b3-417c-bd80-c6f66489e84d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +102,7 @@
       <workItem from="1682860743362" duration="4699000" />
       <workItem from="1682931871071" duration="1275000" />
       <workItem from="1683547524452" duration="9262000" />
-      <workItem from="1683573880485" duration="1784000" />
+      <workItem from="1683573880485" duration="2566000" />
     </task>
     <servers />
   </component>
