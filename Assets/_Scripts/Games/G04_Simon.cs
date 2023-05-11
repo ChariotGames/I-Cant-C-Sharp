@@ -19,23 +19,19 @@ namespace _Scripts.Games
     /// </summary>
     public class G04_Simon : MonoBehaviour
     {
-        [SerializeField] private GameObject buttons;
-        [SerializeField] private List<Colors> displayPattern, guessPattern;
-        [SerializeField] private const int MIN_LENGTH = 3, CHANCE = 3;
+
+        [SerializeField] private List<GameObject> buttons, infoIcons, displayPattern, guessPattern, infoPattern;
         [SerializeField] private Difficulty currentLevel = Difficulty.LVL1;
+        private const int MIN_LENGTH = 3, CHANCE = 3;
         private bool isPlayerTurn = false;
-        int checkingIndex = 0;
+        private int checkingIndex = 0;
 
         // Start is called before the first frame update
         void Start()
         {
             StartCoroutine(ActivateButtons());
             GeneratePattern(MIN_LENGTH);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
+            StartCoroutine(AnimateButtons());
         }
 
         /// <summary>
@@ -43,45 +39,21 @@ namespace _Scripts.Games
         /// </summary>
         private IEnumerator ActivateButtons()
         {
-            foreach (Transform child in buttons.transform)
+            foreach (GameObject button in buttons)
             {
-                child.gameObject.SetActive(true);
+                button.SetActive(true);
                 yield return new WaitForSeconds(0.25f);
             }
         }
 
         /// <summary>
-        /// This method reacts on user presses and checks
-        /// the input against the guessing pattern.
+        /// Restarts guessing process and disables player input.
         /// </summary>
-        /// <param name="color">Enum of the color to check.</param>
-        private void CheckColor(Colors color)
+        private void ResetTurn()
         {
-            if (!isPlayerTurn)
-            {
-                return;
-            }
-
-            if (guessPattern[checkingIndex] == color)
-            {
-                Debug.Log("correct color");
-                checkingIndex++;
-            }
-            else
-            {
-                Debug.Log("wrong color");
-                isPlayerTurn = false;
-                StartCoroutine(AnimateButtons());
-            }
-
-            if (checkingIndex >= guessPattern.Count)
-            {
-                checkingIndex = 0;
-                isPlayerTurn = false;
-                ToggleInput(isPlayerTurn);
-                Debug.Log("guessing done");
-                GeneratePattern(displayPattern.Count + 1);
-            }
+            checkingIndex = 0;
+            isPlayerTurn = false;
+            ToggleInput(isPlayerTurn);
         }
 
         /// <summary>
@@ -91,14 +63,17 @@ namespace _Scripts.Games
         /// /// <param name="length">The length of the pattern</param>
         private void GeneratePattern(int length)
         {
-            Colors randomColor;
+            ResetTurn();
+
+            if (displayPattern.Count == length) return;
+
+            GameObject randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = (Colors)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Colors)).Length);
+                randomColor = buttons[UnityEngine.Random.Range(0, buttons.Count)];
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
-            StartCoroutine(AnimateButtons());
         }
 
         /// <summary>
@@ -106,24 +81,27 @@ namespace _Scripts.Games
         /// Depending on the Level and Modifiers it may differ
         /// from the patern the user gets to actually see.
         /// </summary>
-        /// <param name="color">Enum of the color to add to the pattern.</param>
-        private void SetGuessPattern(Colors color)
+        /// <param name="button">The button to add to the pattern.</param>
+        private void SetGuessPattern(GameObject button)
         {
             int chance = UnityEngine.Random.Range(0, CHANCE);
 
-            if (currentLevel == Difficulty.LVL3 && chance == 0)
+            if (currentLevel == Difficulty.LVL3 && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
+                infoPattern.Add(infoIcons.Find(obj => obj.name.Equals("IconNone")));
                 return;
             }
 
-            if (currentLevel == Difficulty.LVL2 && chance == 0)
+            infoPattern.Add(null);
+            guessPattern.Add(button);
+
+            if (currentLevel != Difficulty.LVL1 && chance > 1)
             {
                 // On Level 2 the color is doubled
-                guessPattern.Add(color);
+                infoPattern[^1] = infoIcons.Find(obj => obj.name.Equals("IconDouble"));
+                guessPattern.Add(button);
             }
-
-            guessPattern.Add(color);
         }
 
         /// <summary>
@@ -132,13 +110,14 @@ namespace _Scripts.Games
         /// <returns></returns>
         private IEnumerator AnimateButtons()
         {
-            yield return new WaitForSeconds(0.20f * buttons.transform.childCount*2);
+            yield return new WaitForSeconds(0.20f * buttons.Count*2);
 
-            foreach (Colors color in displayPattern)
+            for (int i = 0; i < displayPattern.Count; i++)
             {
-                SimonButton button = GameObject.Find(color.ToString()).GetComponent<SimonButton>();
-
-                button.ButtonPressed();
+                GameObject button = displayPattern[i];
+                GameObject icon = infoPattern[i];
+                if (button != null) button.GetComponent<SimonButton>().Animate();
+                if (icon != null) icon.GetComponent<SimonButton>().Animate(Color.white);
                 yield return new WaitForSeconds(1.0f);
             }
 
@@ -146,20 +125,61 @@ namespace _Scripts.Games
             ToggleInput(isPlayerTurn);
         }
 
+        /// <summary>
+        /// Toggles if buttons are able to take input.
+        /// Depending on the state if it is the player's turn.
+        /// </summary>
+        /// <param name="state">State of the player's turn.</param>
         private void ToggleInput(bool state)
         {
-            foreach (Transform child in buttons.transform)
+            foreach (GameObject button in buttons)
             {
-                SimonButton button = child.gameObject.GetComponent<SimonButton>();
-                if (state)
-                {
-                    button.AllowInput(child.gameObject.name);
-                }else
-                {
-                    button.DisableInput(child.gameObject.name);
-                }
+                button.GetComponent<SimonButton>().ToggleInput(button, state);
             }
-            
+        }
+
+        /// <summary>
+        /// This method reacts on user presses and checks
+        /// the input against the guessing pattern.
+        /// </summary>
+        /// <param name="color">The object to check.</param>
+        private void CheckColor(GameObject button)
+        {
+            if (!isPlayerTurn)
+            {
+                return;
+            }
+
+            if (guessPattern[checkingIndex] == button)
+            {
+                Debug.Log("correct color");
+                checkingIndex++;
+            }
+            else
+            {
+                Debug.Log("wrong color");
+                ResetTurn();
+                StartCoroutine(AnimateButtons());
+            }
+
+            if (checkingIndex >= guessPattern.Count)
+            {
+                Debug.Log("guessing done");
+                ClearInfoPattern();
+                GeneratePattern(displayPattern.Count + 1);
+                StartCoroutine(AnimateButtons());
+            }
+        }
+
+        private void ClearInfoPattern()
+        {
+            GameObject icon = infoIcons.Find(obj => obj.name.Equals("IconOk"));
+            if (icon != null) icon.GetComponent<SimonButton>().Animate(Color.white);
+
+            for (int i = 0; i < infoPattern.Count; i++)
+            {
+                infoPattern[i] = null;
+            }
         }
     }
 }
