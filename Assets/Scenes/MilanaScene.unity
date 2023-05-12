@@ -489,6 +489,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &651911568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4608718060615349989, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
+  m_PrefabInstance: {fileID: 3122696434223148333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &961711720
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,9 +831,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3122696433480124130, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
+      propertyPath: count
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122696433480124130, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 368593205}
+    - target: {fileID: 3122696433480124130, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
+      propertyPath: buttonContainer
+      value: 
+      objectReference: {fileID: 651911568}
     - target: {fileID: 3122696433480124131, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
       propertyPath: m_Name
       value: MissingKey_Lvl1
