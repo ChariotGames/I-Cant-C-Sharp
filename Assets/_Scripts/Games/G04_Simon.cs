@@ -20,7 +20,9 @@ namespace _Scripts.Games
     public class G04_Simon : MonoBehaviour
     {
 
-        [SerializeField] private List<GameObject> buttons, infoIcons, displayPattern, guessPattern, infoPattern;
+        [SerializeField] private List<GameObject> buttons, icons;
+        [SerializeField] private List<Simon> displayPattern, guessPattern, infoPattern;
+        [SerializeField] private GameObject middle, overlay;
         [SerializeField] private Difficulty currentLevel = Difficulty.LVL1;
         private const int MIN_LENGTH = 3, CHANCE = 3;
         private bool isPlayerTurn = false;
@@ -39,9 +41,13 @@ namespace _Scripts.Games
         /// </summary>
         private IEnumerator ActivateButtons()
         {
+            yield return new WaitForSeconds(0.25f);
+            middle.SetActive(true);
+            yield return new WaitForSeconds(0.25f);
             foreach (GameObject button in buttons)
             {
                 button.SetActive(true);
+                button.GetComponent<SimonButton>().Animate();
                 yield return new WaitForSeconds(0.25f);
             }
         }
@@ -53,6 +59,7 @@ namespace _Scripts.Games
         {
             checkingIndex = 0;
             isPlayerTurn = false;
+            overlay.SetActive(isPlayerTurn);
             ToggleInput(isPlayerTurn);
         }
 
@@ -67,10 +74,10 @@ namespace _Scripts.Games
 
             if (displayPattern.Count == length) return;
 
-            GameObject randomColor;
+            Simon randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = buttons[UnityEngine.Random.Range(0, buttons.Count)];
+                randomColor = (Simon)UnityEngine.Random.Range(0, buttons.Count);
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
@@ -81,25 +88,25 @@ namespace _Scripts.Games
         /// Depending on the Level and Modifiers it may differ
         /// from the patern the user gets to actually see.
         /// </summary>
-        /// <param name="button">The button to add to the pattern.</param>
-        private void SetGuessPattern(GameObject button)
+        /// <param name="button">Enum of the color to add to the pattern.</param>
+        private void SetGuessPattern(Simon button)
         {
             int chance = UnityEngine.Random.Range(0, CHANCE);
 
             if (currentLevel == Difficulty.LVL3 && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
-                infoPattern.Add(infoIcons.Find(obj => obj.name.Equals("IconNone")));
+                infoPattern.Add(Simon.NONE);
                 return;
             }
 
-            infoPattern.Add(null);
+            infoPattern.Add(Simon.SAME);
             guessPattern.Add(button);
 
             if (currentLevel != Difficulty.LVL1 && chance > 1)
             {
                 // On Level 2 the color is doubled
-                infoPattern[^1] = infoIcons.Find(obj => obj.name.Equals("IconDouble"));
+                infoPattern[^1] = Simon.DOUBLE;
                 guessPattern.Add(button);
             }
         }
@@ -114,14 +121,15 @@ namespace _Scripts.Games
 
             for (int i = 0; i < displayPattern.Count; i++)
             {
-                GameObject button = displayPattern[i];
-                GameObject icon = infoPattern[i];
-                if (button != null) button.GetComponent<SimonButton>().Animate();
-                if (icon != null) icon.GetComponent<SimonButton>().Animate(Color.white);
+                Simon button = displayPattern[i];
+                Simon icon = infoPattern[i];
+                buttons[(int)button].GetComponent<SimonButton>().Animate();
+                if(icon != Simon.SAME) icons[(int)icon%icons.Count].GetComponent<SimonButton>().Animate();
                 yield return new WaitForSeconds(1.0f);
             }
 
             isPlayerTurn = true;
+            overlay.SetActive(isPlayerTurn);
             ToggleInput(isPlayerTurn);
         }
 
@@ -142,15 +150,15 @@ namespace _Scripts.Games
         /// This method reacts on user presses and checks
         /// the input against the guessing pattern.
         /// </summary>
-        /// <param name="color">The object to check.</param>
-        private void CheckColor(GameObject button)
+        /// <param name="color">The color to check.</param>
+        private void CheckColor(Simon color)
         {
             if (!isPlayerTurn)
             {
                 return;
             }
 
-            if (guessPattern[checkingIndex] == button)
+            if (guessPattern[checkingIndex] == color)
             {
                 Debug.Log("correct color");
                 checkingIndex++;
@@ -173,12 +181,12 @@ namespace _Scripts.Games
 
         private void ClearInfoPattern()
         {
-            GameObject icon = infoIcons.Find(obj => obj.name.Equals("IconOk"));
-            if (icon != null) icon.GetComponent<SimonButton>().Animate(Color.white);
+            GameObject icon = icons.Find(obj => obj.name.Equals("IconOk"));
+            if (icon != null) icon.GetComponent<SimonButton>().Animate();
 
             for (int i = 0; i < infoPattern.Count; i++)
             {
-                infoPattern[i] = null;
+                infoPattern[i] = Simon.SAME;
             }
         }
     }
