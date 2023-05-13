@@ -19,23 +19,25 @@ namespace _Scripts.Games
     /// </summary>
     public class G04_Simon : MonoBehaviour
     {
-        [SerializeField] private GameObject buttons;
-        [SerializeField] private List<Colors> displayPattern, guessPattern;
-        [SerializeField] private const int MIN_LENGTH = 3, CHANCE = 3;
-        [SerializeField] private Difficulty currentLevel = Difficulty.LVL1;
+
+        [SerializeField] private List<GameObject> buttons, infos;
+        [SerializeField] private List<Simon> displayPattern, guessPattern, infoPattern;
+        [SerializeField] private GameObject middle, overlay;
+        private Difficulty CurrentLevel { get; set; } = Difficulty.LVL2;
+        private Color middleOriginal;
+
+        private const float WAIT_TIME = 0.25f;
+        private const int MIN_LENGTH = 3, CHANCE = 3;
+        [SerializeField]  private int checkingIndex = 0, correctGuesses = 0;
         private bool isPlayerTurn = false;
-        int checkingIndex = 0;
 
         // Start is called before the first frame update
         void Start()
         {
+            middleOriginal = middle.GetComponent<SpriteRenderer>().color;
             StartCoroutine(ActivateButtons());
             GeneratePattern(MIN_LENGTH);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
+            StartCoroutine(AnimateButtons(buttons));
         }
 
         /// <summary>
@@ -43,45 +45,27 @@ namespace _Scripts.Games
         /// </summary>
         private IEnumerator ActivateButtons()
         {
-            foreach (Transform child in buttons.transform)
+            yield return new WaitForSeconds(WAIT_TIME);
+            middle.SetActive(true);
+            yield return new WaitForSeconds(WAIT_TIME);
+            foreach (GameObject button in buttons)
             {
-                child.gameObject.SetActive(true);
-                yield return new WaitForSeconds(0.25f);
+                button.SetActive(true);
+                button.GetComponent<SimonButton>().Animate();
+                yield return new WaitForSeconds(WAIT_TIME);
             }
         }
 
         /// <summary>
-        /// This method reacts on user presses and checks
-        /// the input against the guessing pattern.
+        /// Restarts guessing process and disables player input.
         /// </summary>
-        /// <param name="color">Enum of the color to check.</param>
-        private void CheckColor(Colors color)
+        private void ResetTurn()
         {
-            if (!isPlayerTurn)
-            {
-                return;
-            }
-
-            if (guessPattern[checkingIndex] == color)
-            {
-                Debug.Log("correct color");
-                checkingIndex++;
-            }
-            else
-            {
-                Debug.Log("wrong color");
-                isPlayerTurn = false;
-                StartCoroutine(AnimateButtons());
-            }
-
-            if (checkingIndex >= guessPattern.Count)
-            {
-                checkingIndex = 0;
-                isPlayerTurn = false;
-                ToggleInput(isPlayerTurn);
-                Debug.Log("guessing done");
-                GeneratePattern(displayPattern.Count + 1);
-            }
+            checkingIndex = 0;
+            isPlayerTurn = false;
+            overlay.SetActive(isPlayerTurn);
+            middle.GetComponent<SpriteRenderer>().color = middleOriginal;
+            ToggleInput(isPlayerTurn);
         }
 
         /// <summary>
@@ -91,14 +75,17 @@ namespace _Scripts.Games
         /// /// <param name="length">The length of the pattern</param>
         private void GeneratePattern(int length)
         {
-            Colors randomColor;
+            ResetTurn();
+
+            if (displayPattern.Count == length) return;
+
+            Simon randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = (Colors)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Colors)).Length);
+                randomColor = (Simon)UnityEngine.Random.Range(0, buttons.Count);
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
-            StartCoroutine(AnimateButtons());
         }
 
         /// <summary>
@@ -106,60 +93,130 @@ namespace _Scripts.Games
         /// Depending on the Level and Modifiers it may differ
         /// from the patern the user gets to actually see.
         /// </summary>
-        /// <param name="color">Enum of the color to add to the pattern.</param>
-        private void SetGuessPattern(Colors color)
+        /// <param name="button">Enum of the color to add to the pattern.</param>
+        private void SetGuessPattern(Simon button)
         {
             int chance = UnityEngine.Random.Range(0, CHANCE);
 
-            if (currentLevel == Difficulty.LVL3 && chance == 0)
+            if (CurrentLevel == Difficulty.LVL3 && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
+                infoPattern.Add(Simon.NONE);
                 return;
             }
 
-            if (currentLevel == Difficulty.LVL2 && chance == 0)
+            infoPattern.Add(Simon.SAME);
+            guessPattern.Add(button);
+
+            if (CurrentLevel != Difficulty.LVL1 && chance > 1)
             {
                 // On Level 2 the color is doubled
-                guessPattern.Add(color);
+                infoPattern[^1] = Simon.DOUBLE;
+                guessPattern.Add(button);
             }
-
-            guessPattern.Add(color);
         }
 
         /// <summary>
         /// Plays the animation of the buttons to play.
         /// </summary>
-        /// <returns></returns>
-        private IEnumerator AnimateButtons()
+        /// <param name="buttons">The list of objects to animate.</param>
+        /// <returns>An object that can be used to control the coroutine's execution.</returns>
+        private IEnumerator AnimateButtons(List<GameObject> buttons)
         {
-            yield return new WaitForSeconds(0.20f * buttons.transform.childCount*2);
+            yield return new WaitForSeconds(WAIT_TIME * buttons.Count*2);
 
-            foreach (Colors color in displayPattern)
+            for (int i = 0; i < displayPattern.Count; i++)
             {
-                SimonButton button = GameObject.Find(color.ToString()).GetComponent<SimonButton>();
-
-                button.ButtonPressed();
-                yield return new WaitForSeconds(1.0f);
+                Simon button = displayPattern[i];
+                Simon info = infoPattern[i];
+                buttons[(int)button].GetComponent<SimonButton>().Animate();
+                if (info != Simon.SAME)
+                {
+                    GameObject icon = infos[(int)info % 4];
+                    icon.GetComponent<SimonButton>().Animate();
+                }
+                yield return new WaitForSeconds(WAIT_TIME * buttons.Count);
             }
 
             isPlayerTurn = true;
+            overlay.SetActive(isPlayerTurn);
+            middle.GetComponent<SpriteRenderer>().color = middleOriginal + middleOriginal;
             ToggleInput(isPlayerTurn);
         }
 
+        /// <summary>
+        /// Toggles if buttons are able to take input.
+        /// Depending on the state if it is the player's turn.
+        /// </summary>
+        /// <param name="state">State of the player's turn.</param>
         private void ToggleInput(bool state)
         {
-            foreach (Transform child in buttons.transform)
+            foreach (GameObject button in buttons)
             {
-                SimonButton button = child.gameObject.GetComponent<SimonButton>();
-                if (state)
-                {
-                    button.AllowInput(child.gameObject.name);
-                }else
-                {
-                    button.DisableInput(child.gameObject.name);
-                }
+                button.GetComponent<SimonButton>().ToggleInput(button, state);
             }
-            
+        }
+
+        /// <summary>
+        /// This method reacts on user presses and checks
+        /// the input against the guessing pattern.
+        /// </summary>
+        /// <param name="color">The color to check.</param>
+        private void CheckColor(Simon color)
+        {
+            if (guessPattern[checkingIndex] == color)
+            {
+                checkingIndex++; //correct color
+            }
+            else //wrong color
+            {
+                GameObject icon = infos.Find(obj => obj.name.Equals("IconNone"));
+                if (icon != null) icon.GetComponent<SimonButton>().Animate();
+                correctGuesses-=(int)CurrentLevel+1;
+                ResetTurn();
+                StartCoroutine(AnimateButtons(buttons));
+            }
+
+            if (checkingIndex >= guessPattern.Count)
+            {
+                //guessing done
+                correctGuesses++;
+                UpdateLevel(correctGuesses);
+                ClearInfoPattern();
+                GeneratePattern(displayPattern.Count + 1);
+                StartCoroutine(AnimateButtons(buttons));
+            }
+        }
+
+        /// <summary>
+        /// Clears the info pattern for next round, obscuring previous hints.
+        /// </summary>
+        private void ClearInfoPattern()
+        {
+            GameObject icon = infos.Find(obj => obj.name.Equals("IconOk"));
+            if (icon != null) icon.GetComponent<SimonButton>().Animate();
+
+            for (int i = 0; i < infoPattern.Count; i++)
+            {
+                infoPattern[i] = Simon.SAME;
+            }
+        }
+
+        /// <summary>
+        /// Updates the game level for next spawn and messages to the GameController.
+        /// </summary>
+        private void UpdateLevel(int rounds)
+        {
+            if(rounds <= 0)
+            {
+                SendMessageUpwards("SetLevel", new object[] { gameObject, Difficulty.LVL1 });
+                correctGuesses = 0;
+            }
+
+            if(rounds >= 10)
+            {
+                SendMessageUpwards("SetLevel", new object[] { gameObject, (Difficulty)(rounds/10) });
+            }
         }
     }
 }

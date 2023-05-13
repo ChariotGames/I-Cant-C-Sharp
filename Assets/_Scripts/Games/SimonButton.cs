@@ -9,10 +9,10 @@ namespace _Scripts.Games
 {
     public class SimonButton : MonoBehaviour, IButton
     {
-        private static readonly Dictionary<Colors, (Action listener, Action silencer)> objectActions = new();
+        private static readonly Dictionary<Simon, (Action listener, Action silencer)> simonActions = new();
         private Color originalColor, targetColor;
         private SpriteRenderer spriteRenderer;
-        private readonly float transitionDuration = 0.15f;
+        private const float DURATION = 0.15f;
 
         /// <summary>
         /// Reacts on button press events and simulates such.
@@ -20,38 +20,44 @@ namespace _Scripts.Games
         /// </summary>
         public void ButtonPressed()
         {
-            StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, transitionDuration));
-            SendMessageUpwards("CheckColor", Enum.Parse(typeof(Colors), gameObject.name.ToUpper()));
+            Animate();
+            if(Enum.TryParse<Simon>(gameObject.name, true, out Simon key)) SendMessageUpwards("CheckColor", key);
         }
 
-        /// <summary>
-        /// Enables user Input for this button.
-        /// </summary>
-        /// <param name="name">The name of the object to allow Input for.</param>
-        public void AllowInput(string name)
+        public void Animate()
         {
-            objectActions[(Colors)Enum.Parse(typeof(Colors), name.ToUpper())].listener();
+            StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, DURATION));
         }
 
         /// <summary>
-        /// Disables user Input for this button by removing it from the InputHandler.
+        /// Enables user Input for this button by adding it to the InputHandler.
         /// </summary>
-        /// <param name="name">The name of the object to disable Input for.</param>
-        public void DisableInput(string name)
+        /// <param name="button">The object to allow Input for.</param>
+        /// <param name="state">The state to set to: on or off.</param>
+        public void ToggleInput(GameObject button, bool state)
         {
-            objectActions[(Colors)Enum.Parse(typeof(Colors), name.ToUpper())].silencer();
+            Enum.TryParse<Simon>(button.name, true, out Simon key);
+            if (!simonActions.ContainsKey(key)) return;
+            if (state)
+            {
+                simonActions[key].listener();
+            }
+            else
+            {
+                simonActions[key].silencer();
+            }
         }
 
         /// <summary>
-        /// Fakes a blinking animation of the button color
+        /// Fakes a blinking animation of the button color.
         /// </summary>
-        /// <returns></returns>
-        private IEnumerator AnimateColor(SpriteRenderer property, Color original, Color target, float duration)
+        /// <returns>An object that can be used to control the coroutine's execution.</returns>
+        private IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)
         {
             float elapsedTime = 0f;
             while (elapsedTime < duration)
             {
-                property.color = Color.Lerp(original, target, elapsedTime / duration);
+                sprite.color = Color.Lerp(original, target, elapsedTime / duration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -59,11 +65,11 @@ namespace _Scripts.Games
             elapsedTime = 0f;
             while (elapsedTime < duration)
             {
-                property.color = Color.Lerp(target, original, elapsedTime / duration);
+                sprite.color = Color.Lerp(target, original, elapsedTime / duration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-            property.color = original;
+            sprite.color = original;
         }
 
         private void Awake()
@@ -71,46 +77,42 @@ namespace _Scripts.Games
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             originalColor = spriteRenderer.color;
             targetColor = originalColor + originalColor;
+            if (targetColor == new Color(2, 2, 2, 0)) targetColor += new Color(1, 1, 1, 1);
 
             // Adds lambda expressions as anonymous functions to the Dictionary
-            if (gameObject.name.Equals(Colors.BLUE.ToString()))
+            if (gameObject.name.Equals(Simon.BLUE.ToString()))
             {
-                objectActions.Add(Colors.BLUE, (
+                simonActions.Add(Simon.BLUE, (
                     () => InputHandler.UpArrowBtnAction += ButtonPressed,
                     () => InputHandler.UpArrowBtnAction -= ButtonPressed
                 ));
             }
-            if (gameObject.name.Equals(Colors.RED.ToString()))
+            if (gameObject.name.Equals(Simon.RED.ToString()))
             {
-                objectActions.Add(Colors.RED, (
+                simonActions.Add(Simon.RED, (
                     () => InputHandler.RightArrowBtnAction += ButtonPressed,
                     () => InputHandler.RightArrowBtnAction -= ButtonPressed
                 ));
             }
-            if (gameObject.name.Equals(Colors.YELLOW.ToString()))
+            if (gameObject.name.Equals(Simon.YELLOW.ToString()))
             {
-                objectActions.Add(Colors.YELLOW, (
+                simonActions.Add(Simon.YELLOW, (
                     () => InputHandler.DownArrowBtnAction += ButtonPressed,
                     () => InputHandler.DownArrowBtnAction -= ButtonPressed
                 ));
             }
-            if (gameObject.name.Equals(Colors.GREEN.ToString()))
+            if (gameObject.name.Equals(Simon.GREEN.ToString()))
             {
-                objectActions.Add(Colors.GREEN, (
+                simonActions.Add(Simon.GREEN, (
                     () => InputHandler.LeftArrowBtnAction += ButtonPressed,
                     () => InputHandler.LeftArrowBtnAction -= ButtonPressed
                 ));
             }
         }
 
-        private void OnEnable()
-        {
-            StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, transitionDuration));
-        }
-
         private void OnDisable()
         {
-            DisableInput(gameObject.name);
+            ToggleInput(gameObject, false);
         }
     }
 }
