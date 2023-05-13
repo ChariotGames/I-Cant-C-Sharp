@@ -28,7 +28,7 @@ namespace _Scripts.Games
 
         private const float WAIT_TIME = 0.25f;
         private const int MIN_LENGTH = 3, CHANCE = 3;
-        [SerializeField]  private int checkingIndex = 0, correctGuesses = 0;
+        private int checkingIndex = 0, correctGuesses = 0;
         private bool isPlayerTurn = false;
 
         // Start is called before the first frame update
