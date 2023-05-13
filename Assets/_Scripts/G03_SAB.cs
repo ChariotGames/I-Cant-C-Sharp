@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,22 +9,24 @@ using TMPro;
 
 public class G03_SAB : MonoBehaviour
 {
-    [SerializeField] private int difficulty;
+    [SerializeField] private Difficulty difficulty;
+    [SerializeField] private int maxStepBacks;
     [SerializeField] private List<GameObject> options;
     [SerializeField] private TMP_Text stepBackText;
-    
+
     private bool isYes;
     private bool isNo;
-    private int lastSprite;
+    private LinkedList<int> lastIndices = new();
     private int index;
-    private int steps = 1;
+    private int steps;
+    private const string sBT = "Steps: ";
     
     
     
     // Start is called before the first frame update
     void Start()
     {
-        stepBackText.text += steps;
+        stepBackText.text = sBT + steps;
         StartCoroutine(GameStartCoroutine());
     }
     
@@ -33,10 +36,35 @@ public class G03_SAB : MonoBehaviour
         options[index].SetActive(true);
     }
 
+    private void UpdateSteps()
+    {
+        switch (difficulty)
+        {
+            case Difficulty.LVL1:
+                steps = 0;
+                break;
+            case Difficulty.LVL2:
+                steps = Math.Min(1, lastIndices.Count - 1);
+                break;
+            case Difficulty.LVL3:
+                steps = Random.Range(0, Math.Min(maxStepBacks, lastIndices.Count));
+                break;
+            default:
+                steps = 0;
+                break;
+        }
+    }
+    
+    private void UpdateStepBackText()
+    {
+        stepBackText.text = sBT + (steps + 1);
+    }
+
     private IEnumerator GameStartCoroutine()
     {
         SpawnSymbol();
-        lastSprite = index;
+        lastIndices.AddFirst(index);
+        if(lastIndices.Count > maxStepBacks){ lastIndices.RemoveLast();}
         yield return new WaitForSeconds(1);
         options[index].SetActive(false);
         StartCoroutine(SpawnCoroutine());
@@ -48,16 +76,19 @@ public class G03_SAB : MonoBehaviour
         {
             if (options[0].activeSelf || options[1].activeSelf)
             {
-                Debug.Log(index + " " + lastSprite);
+                //Debug.Log(lastIndices.Count);
+                Debug.Log(index + " : " + lastIndices.ElementAt(steps) + "\tsteps: " + (steps + 1));
+
                 float timer = Time.unscaledTime;
-                yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > 5);
-                if ((index == lastSprite && isYes && !isNo) || (index != lastSprite && isNo && !isYes))
+                yield return new WaitUntil(() => isYes || isNo ); //|| Time.unscaledTime - timer > 5
+                if ((index == lastIndices.ElementAt(steps) && isYes && !isNo) || (index != lastIndices.ElementAt(steps) && isNo && !isYes))
                 {
                     Debug.Log("Win");
                     options[index].SetActive(false);
                     isYes = false;
                     isNo = false;
-                    lastSprite = index;
+                    lastIndices.AddFirst(index);
+                    if(lastIndices.Count > maxStepBacks){ lastIndices.RemoveLast();}
                 }
                 else
                 {
@@ -70,9 +101,12 @@ public class G03_SAB : MonoBehaviour
             {
                 yield return new WaitForSeconds(1);
                 SpawnSymbol();
+                UpdateSteps();
+                UpdateStepBackText();
             }
         }
     }
+
 
     private void OnEnable()
     {

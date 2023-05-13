@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="50128f8a-23b3-417c-bd80-c6f66489e84d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/G03_SAB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/G03_SAB.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JannisScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JannisScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/G03_SAB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/G03_SAB.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/_Input/InputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/_Input/InputHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +17,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/G03_SAB.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/janni/OneDrive/Dokumente/GitHub/Minigame/Assets/_Scripts/J_Level01.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Games/SimonButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

@@ -93,7 +93,7 @@ namespace _Scripts._Input
         public void OnLeftShoulderButton(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) LeftShoulderBtnAction?.Invoke();
-            Debug.Log("LeftShoulderAction");
+            //Debug.Log("LeftShoulderAction");
         }
         
         public void OnLeftTriggerButton(InputAction.CallbackContext ctx)
@@ -105,7 +105,7 @@ namespace _Scripts._Input
         public void OnRightShoulderButton(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) RightShoulderBtnAction?.Invoke();
-            Debug.Log("RightShoulderAction");
+            //Debug.Log("RightShoulderAction");
         }
         
         public void OnRightTriggerButton(InputAction.CallbackContext ctx)
