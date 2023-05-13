@@ -12,7 +12,7 @@ namespace _Scripts.Games
         private static readonly Dictionary<Simon, (Action listener, Action silencer)> simonActions = new();
         private Color originalColor, targetColor;
         private SpriteRenderer spriteRenderer;
-        private const float DURATION = 0.15f;
+        private const float DURATION = 0.30f;
 
         /// <summary>
         /// Reacts on button press events and simulates such.

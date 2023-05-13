@@ -23,10 +23,10 @@ namespace _Scripts.Games
         [SerializeField] private List<GameObject> buttons, infos;
         [SerializeField] private List<Simon> displayPattern, guessPattern, infoPattern;
         [SerializeField] private GameObject middle, overlay;
-        private Difficulty CurrentLevel { get; set; } = Difficulty.LVL2;
+        private Difficulty CurrentLevel { get; set; } = Difficulty.LVL1;
         private Color middleOriginal;
 
-        private const float WAIT_TIME = 0.25f;
+        private const float WAIT_TIME = 0.50f;
         private const int MIN_LENGTH = 3, CHANCE = 3;
         private int checkingIndex = 0, correctGuesses = 0;
         private bool isPlayerTurn = false;
