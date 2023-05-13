@@ -83,29 +83,29 @@ namespace _Scripts.Games
             if (gameObject.name.Equals(Simon.BLUE.ToString()))
             {
                 simonActions.Add(Simon.BLUE, (
-                    () => InputHandler.UpArrowBtnAction += ButtonPressed,
-                    () => InputHandler.UpArrowBtnAction -= ButtonPressed
+                    () => InputHandler.NorthBtnAction += ButtonPressed,
+                    () => InputHandler.NorthBtnAction -= ButtonPressed
                 ));
             }
             if (gameObject.name.Equals(Simon.RED.ToString()))
             {
                 simonActions.Add(Simon.RED, (
-                    () => InputHandler.RightArrowBtnAction += ButtonPressed,
-                    () => InputHandler.RightArrowBtnAction -= ButtonPressed
+                    () => InputHandler.EastBtnAction += ButtonPressed,
+                    () => InputHandler.EastBtnAction -= ButtonPressed
                 ));
             }
             if (gameObject.name.Equals(Simon.YELLOW.ToString()))
             {
                 simonActions.Add(Simon.YELLOW, (
-                    () => InputHandler.DownArrowBtnAction += ButtonPressed,
-                    () => InputHandler.DownArrowBtnAction -= ButtonPressed
+                    () => InputHandler.SouthBtnAction += ButtonPressed,
+                    () => InputHandler.SouthBtnAction -= ButtonPressed
                 ));
             }
             if (gameObject.name.Equals(Simon.GREEN.ToString()))
             {
                 simonActions.Add(Simon.GREEN, (
-                    () => InputHandler.LeftArrowBtnAction += ButtonPressed,
-                    () => InputHandler.LeftArrowBtnAction -= ButtonPressed
+                    () => InputHandler.WestBtnAction += ButtonPressed,
+                    () => InputHandler.WestBtnAction -= ButtonPressed
                 ));
             }
         }
