@@ -12,7 +12,7 @@ namespace _Scripts.Games
         private static readonly Dictionary<Simon, (Action listener, Action silencer)> simonActions = new();
         private Color originalColor, targetColor;
         private SpriteRenderer spriteRenderer;
-        private readonly float transitionDuration = 0.15f;
+        private const float DURATION = 0.15f;
 
         /// <summary>
         /// Reacts on button press events and simulates such.
@@ -26,7 +26,7 @@ namespace _Scripts.Games
 
         public void Animate()
         {
-            StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, transitionDuration));
+            StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, DURATION));
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace _Scripts.Games
         /// <summary>
         /// Fakes a blinking animation of the button color.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An object that can be used to control the coroutine's execution.</returns>
         private IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)
         {
             float elapsedTime = 0f;
