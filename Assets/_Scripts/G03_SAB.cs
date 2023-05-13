@@ -21,14 +21,13 @@ public class G03_SAB : MonoBehaviour
     private LinkedList<int> lastIndices = new();
     private int index;
     private int steps;
-    private const string sBT = "Steps: ";
+    private const string stepBackTextString = "Steps: ";
     
     
     
     // Start is called before the first frame update
     void Start()
     {
-        stepBackText.text = sBT + steps;
         StartCoroutine(GameStartCoroutine());
     }
     
@@ -59,7 +58,7 @@ public class G03_SAB : MonoBehaviour
     
     private void UpdateStepBackText()
     {
-        stepBackText.text = sBT + (steps + 1);
+        stepBackText.text = stepBackTextString + (steps + 1);
     }
 
     private IEnumerator GameStartCoroutine()
