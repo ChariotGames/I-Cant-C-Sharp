@@ -525,7 +525,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 961711721}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnLeftKey
+        m_MethodName: OnLeftButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -541,7 +541,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 961711721}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnRightKey
+        m_MethodName: OnRightButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -557,7 +557,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 961711721}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnDownKey
+        m_MethodName: OnDownButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -573,7 +573,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 961711721}
         m_TargetAssemblyTypeName: _Scripts.Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnUpKey
+        m_MethodName: OnUpButton
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

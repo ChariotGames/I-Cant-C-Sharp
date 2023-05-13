@@ -1,27 +1,26 @@
-using _Scripts.Input;
+using _Scripts._Input;
 using UnityEngine;
 
 namespace _Scripts.Pascal
 {
     public class Cannon : MonoBehaviour
     {
+        [SerializeField] private float maxRotationSpeed = 2.5f;
         [SerializeField] private float maxRotation = 60f;
         [SerializeField] private float bulletSpeed;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform gunBarrel;
         [SerializeField] private Transform gunSpawnPos;
-        private Camera _mainCamera;
         
         
         private void Awake()
         {
-            _mainCamera = Camera.main;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void OnEnable()
         {
-            InputHandler.UpKeyAction += ShootProjectile;
+            InputHandler.UpArrowBtnAction += ShootProjectile;
         }
 
         private void ShootProjectile()
@@ -41,38 +40,40 @@ namespace _Scripts.Pascal
 
         private void RotateTowardsMouse()
         {
-            // get the mouse position in world space
-            var mousePos = _mainCamera.ScreenToWorldPoint(InputHandler.CourserPos);
-                     
-            // calculate the direction from the barrel to the mouse
-            var direction = mousePos - gunBarrel.transform.position;
-                     
+            // only use x-axis movement of input
+            var inputDelta = InputHandler.RightStickDelta.x;
+            
+            //  Mathf.Sign will return 1,-1 or 0
+            var direction = Vector2.right * Mathf.Sign(inputDelta);
+
             // calculate the angle to rotate the barrel
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-
+            
             // restrict the angle to the range of -180 to 180 degrees 
             // angle = angle % 360f;
             // if (angle > 180f) {
             //     angle -= 360f;
             // } else if (angle < -180f) {
             //     angle += 360f;
-            // }
-            angle = Mathf.Repeat(angle + 180f, 360f) - 180f; // new 
-                     
+            // } == Mathf.Repeat
+            
+            angle = Mathf.Repeat(angle + 180f, 360f) - 180f; 
+            
             // clamp the angle to the range of -maxRotation to maxRotation
             angle = Mathf.Clamp(angle, -maxRotation, maxRotation);
           
-            // smoothly adjust the rotation to the clamped angle using lerp
+            // multiply the maxRotationSpeed by the inputDelta value
+            var rotationSpeed = maxRotationSpeed * Mathf.Abs(inputDelta);
+            
             var targetRotation = Quaternion.Euler(0f, 0f, angle);
-            gunBarrel.rotation = targetRotation;
+            gunBarrel.rotation = Quaternion.RotateTowards(gunBarrel.rotation, targetRotation, Time.deltaTime * rotationSpeed);;
+            
         }
-
-
-
+        
         
         private void OnDisable()
         {
-            InputHandler.UpKeyAction -= ShootProjectile;
+            InputHandler.UpArrowBtnAction -= ShootProjectile;
         }
 
     }
