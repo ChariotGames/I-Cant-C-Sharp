@@ -6,6 +6,7 @@ using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Serialization;
 
 public class G03_SAB : MonoBehaviour
@@ -15,6 +16,7 @@ public class G03_SAB : MonoBehaviour
     [SerializeField] private int timeToAsAnswer;
     [SerializeField] private List<GameObject> options;
     [SerializeField] private TMP_Text stepBackText;
+    [SerializeField] private GameObject failText;
 
     private bool isYes;
     private bool isNo;
@@ -95,6 +97,7 @@ public class G03_SAB : MonoBehaviour
                 {
                     Debug.Log("Lose Condition");
                     options[index].SetActive(false);
+                    failText.SetActive(true);
                     yield break;
                 }
             }
