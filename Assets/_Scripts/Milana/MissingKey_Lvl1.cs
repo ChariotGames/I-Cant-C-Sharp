@@ -21,6 +21,7 @@ public class MissingKey_Lvl1 : MonoBehaviour
     private float _playfieldWidth;
     private Bounds _cameraViewportBounds;
     private Camera _mainCamera;
+    private float _time = 0;
 
 
     private void Awake()
@@ -42,7 +43,27 @@ public class MissingKey_Lvl1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        _time += Time.deltaTime;
+        Debug.Log(_time);
+        // 5 seconds to solve game
+        if (_time >= 5.0f)
+        {
+            
+            TimerEnded();
+        }
+        
         NextRound();
+    }
+
+    private void TimerEnded()
+    {
+        loseDisplay.SetActive(true);
+        DeleteAll();
+        InputHandler.RightArrowBtnAction -= PlayerPress;
+        InputHandler.LeftArrowBtnAction -= PlayerPress;
+        InputHandler.UpArrowBtnAction -= PlayerPress;
+        InputHandler.DownArrowBtnAction -= PlayerPress;
     }
 
     // Subscribes to playerPress()
@@ -130,6 +151,7 @@ public class MissingKey_Lvl1 : MonoBehaviour
     private void PlayerPress()
     {
         _playerPressed = true;
+        _time = 0;
     }
 
     private void NextRound()
