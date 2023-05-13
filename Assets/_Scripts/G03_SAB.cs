@@ -23,7 +23,7 @@ public class G03_SAB : MonoBehaviour
     private LinkedList<int> lastIndices = new();
     private int index;
     private int steps;
-    private const string stepBackTextString = "Steps: ";
+    private const string StepBackTextString = "Steps: ";
     
     
     
@@ -60,7 +60,7 @@ public class G03_SAB : MonoBehaviour
     
     private void UpdateStepBackText()
     {
-        stepBackText.text = stepBackTextString + (steps + 1);
+        stepBackText.text = StepBackTextString + (steps + 1);
     }
 
     private IEnumerator GameStartCoroutine()
