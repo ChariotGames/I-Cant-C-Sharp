@@ -700,11 +700,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
       propertyPath: difficulty
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: answerTimer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
       propertyPath: maxStepBacks
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: timeToAsAnswer
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3698711568559123564, guid: 4feb5dd879318934b999770a65598759, type: 3}
       propertyPath: m_RootOrder

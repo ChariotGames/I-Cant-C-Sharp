@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="50128f8a-23b3-417c-bd80-c6f66489e84d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JannisScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JannisScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/G03_SAB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/G03_SAB.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/_Input/InputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/_Input/InputHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -6,11 +6,13 @@ using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class G03_SAB : MonoBehaviour
 {
     [SerializeField] private Difficulty difficulty;
     [SerializeField] private int maxStepBacks;
+    [SerializeField] private int timeToAsAnswer;
     [SerializeField] private List<GameObject> options;
     [SerializeField] private TMP_Text stepBackText;
 
@@ -80,7 +82,7 @@ public class G03_SAB : MonoBehaviour
                 Debug.Log(index + " : " + lastIndices.ElementAt(steps) + "\tsteps: " + (steps + 1));
 
                 float timer = Time.unscaledTime;
-                yield return new WaitUntil(() => isYes || isNo ); //|| Time.unscaledTime - timer > 5
+                yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > timeToAsAnswer);
                 if ((index == lastIndices.ElementAt(steps) && isYes && !isNo) || (index != lastIndices.ElementAt(steps) && isNo && !isYes))
                 {
                     Debug.Log("Win");
