@@ -21,7 +21,7 @@ namespace _Scripts.Games
         public void ButtonPressed()
         {
             Animate();
-            if(Enum.TryParse<Simon>(gameObject.name, true, out Simon key)) SendMessageUpwards("CheckColor", key);
+            if(Enum.TryParse(gameObject.name, true, out Simon key)) SendMessageUpwards("CheckColor", key);
         }
 
         public void Animate()
@@ -36,7 +36,7 @@ namespace _Scripts.Games
         /// <param name="state">The state to set to: on or off.</param>
         public void ToggleInput(GameObject button, bool state)
         {
-            Enum.TryParse<Simon>(button.name, true, out Simon key);
+            Enum.TryParse(button.name, true, out Simon key);
             if (!simonActions.ContainsKey(key)) return;
             if (state)
             {

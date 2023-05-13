@@ -27,7 +27,7 @@ namespace _Scripts.Games
         private Color middleOriginal;
 
         private const float WAIT_TIME = 0.50f;
-        private const int MIN_LENGTH = 3, CHANCE = 3;
+        private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5;
         private int checkingIndex = 0, correctGuesses = 0;
         private bool isPlayerTurn = false;
 
@@ -213,9 +213,9 @@ namespace _Scripts.Games
                 correctGuesses = 0;
             }
 
-            if(rounds >= 10)
+            if(rounds >= LVL_CHANGE)
             {
-                SendMessageUpwards("SetLevel", new object[] { gameObject, (Difficulty)(rounds/10) });
+                SendMessageUpwards("SetLevel", new object[] { gameObject, (Difficulty)(rounds/ LVL_CHANGE) });
             }
         }
     }
