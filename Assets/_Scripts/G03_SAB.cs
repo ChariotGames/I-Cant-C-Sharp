@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 
 public class G03_SAB : MonoBehaviour
 {
-
+    [SerializeField] private int difficulty;
+    
     private bool isYes;
     private bool isNo;
     private int lastSprite;
@@ -27,11 +28,18 @@ public class G03_SAB : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawnUIElements();
         StartCoroutine(GameStartCoroutine());
     }
+    
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+    
+    private void spawnUIElements()
     {
         
     }
@@ -60,7 +68,8 @@ public class G03_SAB : MonoBehaviour
             if (sprite.gameObject.activeSelf)
             {
                 Debug.Log(index + " " + lastSprite);
-                yield return new WaitUntil(() => isYes || isNo);
+                float timer = Time.unscaledTime;
+                yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > 5);
                 if ((index == lastSprite && isYes && !isNo) || (index != lastSprite && isNo && !isYes))
                 {
                     Debug.Log("Win");
@@ -72,6 +81,7 @@ public class G03_SAB : MonoBehaviour
                 else
                 {
                     Debug.Log("Lose Condition");
+                    sprite.gameObject.SetActive(false);
                     yield break;
                 }
             }
