@@ -15,6 +15,7 @@ public class G03_SAB : MonoBehaviour
     [SerializeField] private int maxStepBacks;
     [SerializeField] private int timeToAsAnswer;
     [SerializeField] private List<GameObject> options;
+    [SerializeField] private GameObject startText;
     [SerializeField] private TMP_Text stepBackText;
     [SerializeField] private GameObject failText;
 
@@ -63,8 +64,24 @@ public class G03_SAB : MonoBehaviour
         stepBackText.text = StepBackTextString + (steps + 1);
     }
 
+    private IEnumerator AnimationStartText(float distance)
+    {
+        float offset = 0;
+        float delta = 0.005f;
+        while (offset < distance)
+        {
+            startText.transform.Translate(0, delta, 0, Space.Self);
+            offset += delta;
+            yield return new WaitForSeconds(0.001f);
+        }
+        yield return new WaitForSeconds(1);
+        startText.SetActive(false);
+    }
+
     private IEnumerator GameStartCoroutine()
     {
+        StartCoroutine(AnimationStartText(2.1f));
+        yield return new WaitForSeconds(1);
         SpawnSymbol();
         lastIndices.AddFirst(index);
         if(lastIndices.Count > maxStepBacks){ lastIndices.RemoveLast();}
