@@ -9,11 +9,16 @@ namespace _Scripts.Games
 {
     public class SimonButton : MonoBehaviour, IButton
     {
+        #region  Fields
+
         private static readonly Dictionary<Simon, (Action listener, Action silencer)> simonActions = new();
         private Color originalColor, targetColor;
         private SpriteRenderer spriteRenderer;
         private const float DURATION = 0.30f;
 
+        #endregion
+
+        #region Button Mechanics
         /// <summary>
         /// Reacts on button press events and simulates such.
         /// Sending upwards calls to the parent object.
@@ -22,11 +27,6 @@ namespace _Scripts.Games
         {
             Animate();
             if(Enum.TryParse(gameObject.name, true, out Simon key)) SendMessageUpwards("CheckColor", key);
-        }
-
-        public void Animate()
-        {
-            StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, DURATION));
         }
 
         /// <summary>
@@ -46,6 +46,17 @@ namespace _Scripts.Games
             {
                 simonActions[key].silencer();
             }
+        }
+
+        #endregion
+
+        #region Animations
+        /// <summary>
+        /// Exposed method to animate buttons more freely.
+        /// </summary>
+        public void Animate()
+        {
+            StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, DURATION));
         }
 
         /// <summary>
@@ -72,6 +83,9 @@ namespace _Scripts.Games
             sprite.color = original;
         }
 
+        #endregion
+
+        #region Unity Built-Ins
         private void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -114,6 +128,8 @@ namespace _Scripts.Games
         {
             ToggleInput(gameObject, false);
         }
+
+        #endregion
     }
 }
 
