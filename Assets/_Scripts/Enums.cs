@@ -1,6 +1,6 @@
 public enum Simon
 {
-    BLUE, RED, YELLOW, GREEN, SAME, DOUBLE, NONE, OK
+    BLUE, RED, YELLOW, GREEN, EMPTY, DOUBLE, NONE, OK
 }
 
 public enum Difficulty
