@@ -33,6 +33,7 @@ public class MissingKey_Lvl1 : MonoBehaviour
     void Start()
     {
         //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
+        // TODO: View width anpassen an Container und nicht an camera (z.B. bei split screen)
         _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
         _playfieldWidth = _cameraViewportBounds.size.x;
         //Debug.Log(_cameraViewportBounds.max.x);

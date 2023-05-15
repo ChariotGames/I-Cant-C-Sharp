@@ -832,7 +832,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3122696433480124130, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
       propertyPath: count
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3122696433480124130, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
       propertyPath: canvas
