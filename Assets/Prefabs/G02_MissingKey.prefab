@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3122696433480124157}
   - component: {fileID: 3122696433480124130}
   m_Layer: 0
-  m_Name: MissingKey_Lvl1
+  m_Name: G02_MissingKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

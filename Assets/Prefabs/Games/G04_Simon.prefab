@@ -475,21 +475,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceceaaccb4d8fb747a41c29c2058bcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayPattern: 
+  guessPattern: 
+  infoPattern: 
   buttons:
   - {fileID: 3923420841840725213}
   - {fileID: 3923420841232928206}
   - {fileID: 3923420840941362654}
   - {fileID: 3923420841825610097}
+  - {fileID: 3534996337712372485}
   infos:
   - {fileID: 4789386491302321126}
   - {fileID: 9086356697543899546}
   - {fileID: 6638981845291472354}
   - {fileID: 6114598051593611201}
-  displayPattern: 
-  guessPattern: 
-  infoPattern: 
-  middle: {fileID: 3534996337712372485}
-  inputOverlay: {fileID: 3619042334536100596}
+  - {fileID: 3619042334536100596}
   timer: {fileID: 3306312410208930860}
 --- !u!1 &3923420840941362654
 GameObject:
@@ -1474,7 +1474,7 @@ GameObject:
   - component: {fileID: 4482550922325124664}
   - component: {fileID: 2174261488555436606}
   m_Layer: 0
-  m_Name: IconOk
+  m_Name: Ok
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1571,7 +1571,7 @@ GameObject:
   - component: {fileID: 8756185251969290319}
   - component: {fileID: 1436895881120735570}
   m_Layer: 0
-  m_Name: IconNone
+  m_Name: None
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6515,7 +6515,7 @@ GameObject:
   - component: {fileID: 30094574263601125}
   - component: {fileID: 6759993551196869684}
   m_Layer: 0
-  m_Name: IconDouble
+  m_Name: Double
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

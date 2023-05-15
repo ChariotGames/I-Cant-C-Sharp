@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts._Input;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class G03_SAB : MonoBehaviour
+public class G03_SameAsBefore : MonoBehaviour
 {
     [SerializeField] private int difficulty;
     
