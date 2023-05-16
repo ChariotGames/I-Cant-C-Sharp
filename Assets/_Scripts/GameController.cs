@@ -6,38 +6,91 @@ namespace _Scripts
 {
     public class GameController : MonoBehaviour
     {
+        #region Serialized Fields
+
         [SerializeField] private Data gameVariables;
         [SerializeField] private List<Game> games;
         [SerializeField] private GameObject[] spawnPoints;
+
+        #endregion
+
+        #region Fields
+
+        private GameObject game1, game2;
         private (int min, int max) spawnRange;
+
+        #endregion
 
         void Awake()
         {
             spawnRange = (0, games.Count - 1);
-            //SpawnGame();
+            game1 = SpawnGame();
+            game2 = SpawnGame();
         }
 
-        private void SpawnGame()
+        private GameObject SpawnGame()
         {
-            Game game = games[UnityEngine.Random.Range(spawnRange.min, spawnRange.max)];
+            Direction direction = FindFreeSpawnPoint();
+            if (direction == Direction.NONE)
+            {
+                // TODO: Add a proper exception
+                Debug.Log("All Spawnpoints are busy");
+                return null;
+            }
 
-            while (AlreadySpawned(game.Prefab))
+            Game game = games[UnityEngine.Random.Range(2, 4)];
+            while (AlreadySpawned(game.Prefab) && CheckOrientation(direction, game.Orientation))
             {
                 game = games[UnityEngine.Random.Range(spawnRange.min, spawnRange.max)];
             }
 
-            int index = FindFreeSpawnPoint(game.Orientation);
-            _ = spawnPoints[0].transform.childCount;
+            return Instantiate(game.Prefab, spawnPoints[(int)direction].transform);
         }
-
-        private bool AlreadySpawned(GameObject game)
+        private Direction FindFreeSpawnPoint()
         {
             for (int i = 0; i < spawnPoints.Length; i++)
             {
-                if (spawnPoints[i].transform.GetChild(0).Equals(game)) return true;
+                if (spawnPoints[i].transform.childCount == 0)
+                {
+                    return (Direction)i;
+                }
             }
+
+            return (Direction)(-1);
+        }
+        private bool AlreadySpawned(GameObject game)
+        {
+            if (game1 == null || game2 == null) return false;
+
+            return game1 == game || game2 == game;
+        }
+        private bool CheckOrientation(Direction spawnPosition, Orientation orientation)
+        {
+
+
+            if (orientation == Orientation.FULLSCREEN && (spawnPosition == Direction.CENTER))
+            {
+                return true;
+            }
+
+            if (orientation == Orientation.HORIZONTAL && (spawnPosition == Direction.UP || spawnPosition == Direction.DOWN))
+            {
+                return true;
+            }
+
+            if (orientation == Orientation.VERTICAL && (spawnPosition == Direction.LEFT || spawnPosition == Direction.RIGHT))
+            {
+                return true;
+            }
+
+            if (orientation == Orientation.QUARTER)
+            {
+                return true;
+            }
+
             return false;
         }
+
 
         private void WinCondition(GameObject game)
         {
@@ -49,18 +102,7 @@ namespace _Scripts
             Debug.Log("Lose from " + game.name);
         }
 
-        private int FindFreeSpawnPoint(Orientation orientation)
-        {
-            for (int i = 0; i < spawnPoints.Length; i++)
-            {
-                if (orientation.HasFlag(Orientation.HORIZONTAL))
-                {
-
-                }
-            }
-            // TODO: implement the correct code.
-            return -1;
-        }
+        
 
 
     }

@@ -34,7 +34,8 @@ namespace _Scripts.Games
 
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
         private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
-        private int checkingIndex = 0, correctGuesses = 0, animationTime;
+        private float animationTime;
+        private int checkingIndex = 0, correctGuesses = 0;
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace _Scripts.Games
         // Start is called before the first frame update
         void Start()
         {
-            animationTime = (int)(BLINK_TIME * COLORS);
+            animationTime = BLINK_TIME * COLORS;
             StartCoroutine(ActivateButtons(BLINK_TIME));
             GeneratePattern(MIN_LENGTH);
             StartCoroutine(AnimateButtons(buttons, animationTime * 2, animationTime));
@@ -295,7 +296,7 @@ namespace _Scripts.Games
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
-            StartCoroutine(AnimateButtons(buttons, BLINK_TIME * COLORS, BLINK_TIME * COLORS));
+            StartCoroutine(AnimateButtons(buttons, animationTime, animationTime));
         }
 
         #endregion
