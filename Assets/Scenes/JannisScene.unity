@@ -690,9 +690,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 888037505940594430, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3698711568559123562, guid: 4feb5dd879318934b999770a65598759, type: 3}
       propertyPath: m_Name
       value: G03_SAB
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: difficulty
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: answerTimer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: maxStepBacks
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698711568559123563, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: timeToAsAnswer
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3698711568559123564, guid: 4feb5dd879318934b999770a65598759, type: 3}
       propertyPath: m_RootOrder
@@ -737,6 +757,10 @@ PrefabInstance:
     - target: {fileID: 3698711568559123564, guid: 4feb5dd879318934b999770a65598759, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389326188143829006, guid: 4feb5dd879318934b999770a65598759, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4feb5dd879318934b999770a65598759, type: 3}

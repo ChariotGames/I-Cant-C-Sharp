@@ -1,97 +1,133 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using TMPro;
+using UnityEngine.Assertions.Must;
+using UnityEngine.Serialization;
 
 public class G03_SAB : MonoBehaviour
 {
-    [SerializeField] private int difficulty;
-    
+    [SerializeField] private Difficulty difficulty;
+    [SerializeField] private int maxStepsBack;
+    [SerializeField] private int timeToAsAnswer;
+    [SerializeField] private List<GameObject> options;
+    [SerializeField] private GameObject startText;
+    [SerializeField] private TMP_Text stepBackText;
+    [SerializeField] private GameObject failText;
+
     private bool isYes;
     private bool isNo;
-    private int lastSprite;
+    private LinkedList<int> lastIndices = new();
     private int index;
-    private SpriteRenderer sprite;
-
-    [SerializeField] private List<Sprite> sprites = new List<Sprite>();
-
-    private void Awake()
-    {
-        GameObject symbol = new GameObject();
-        symbol.transform.Translate(0,0,0, Space.World);
-        symbol.SetActive(true);
-        sprite = symbol.AddComponent<SpriteRenderer>();
-    }
+    private int steps;
+    private const string StepBackTextString = "Steps: ";
+    
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        spawnUIElements();
         StartCoroutine(GameStartCoroutine());
     }
     
-
-    // Update is called once per frame
-    void Update()
+    private void SpawnSymbol()
     {
-        
+        index = Random.Range(0, options.Count);
+        options[index].SetActive(true);
+    }
+
+    private void UpdateSteps()
+    {
+        switch (difficulty)
+        {
+            case Difficulty.LVL1:
+                steps = 0;
+                break;
+            case Difficulty.LVL2:
+                steps = Math.Min(1, lastIndices.Count - 1);
+                break;
+            case Difficulty.LVL3:
+                steps = Random.Range(0, Math.Min(maxStepsBack, lastIndices.Count));
+                break;
+            default:
+                steps = 0;
+                break;
+        }
     }
     
-    private void spawnUIElements()
+    private void UpdateStepBackText()
     {
-        
+        stepBackText.text = StepBackTextString + (steps + 1);
     }
 
-    private void spawnSymbol()
+    private IEnumerator AnimationStartText(float distance)
     {
-        index = Random.Range(0, sprites.Count);
-        sprite.sprite = sprites[index];
-        sprite.gameObject.SetActive(true);
+        float offset = 0;
+        float delta = 0.005f;
+        while (offset < distance)
+        {
+            startText.transform.Translate(0, delta, 0, Space.Self);
+            offset += delta;
+            yield return new WaitForSeconds(0.001f);
+        }
+        yield return new WaitForSeconds(1);
+        startText.SetActive(false);
     }
 
     private IEnumerator GameStartCoroutine()
     {
-        spawnSymbol();
-        lastSprite = index;
+        StartCoroutine(AnimationStartText(2.1f));
         yield return new WaitForSeconds(1);
-        sprite.gameObject.SetActive(false);
+        SpawnSymbol();
+        lastIndices.AddFirst(index);
+        if(lastIndices.Count > maxStepsBack){ lastIndices.RemoveLast();}
+        yield return new WaitForSeconds(1);
+        options[index].SetActive(false);
         StartCoroutine(SpawnCoroutine());
-        yield break;
     }
 
     private IEnumerator SpawnCoroutine()
     {
         while (true)
         {
-            if (sprite.gameObject.activeSelf)
+            if (options[0].activeSelf || options[1].activeSelf)
             {
-                Debug.Log(index + " " + lastSprite);
+                //Debug.Log(lastIndices.Count);
+                Debug.Log(index + " : " + lastIndices.ElementAt(steps) + "\tsteps: " + (steps + 1));
+
                 float timer = Time.unscaledTime;
-                yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > 5);
-                if ((index == lastSprite && isYes && !isNo) || (index != lastSprite && isNo && !isYes))
+                yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > timeToAsAnswer);
+                if ((index == lastIndices.ElementAt(steps) && isYes && !isNo) || (index != lastIndices.ElementAt(steps) && isNo && !isYes))
                 {
                     Debug.Log("Win");
-                    sprite.gameObject.SetActive(false);
+                    options[index].SetActive(false);
                     isYes = false;
                     isNo = false;
-                    lastSprite = index;
+                    lastIndices.AddFirst(index);
+                    if(lastIndices.Count > maxStepsBack){ lastIndices.RemoveLast();}
                 }
                 else
                 {
                     Debug.Log("Lose Condition");
-                    sprite.gameObject.SetActive(false);
+                    options[index].SetActive(false);
+                    failText.SetActive(true);
                     yield break;
                 }
             }
             else
             {
                 yield return new WaitForSeconds(1);
-                spawnSymbol();
+                SpawnSymbol();
+                UpdateSteps();
+                UpdateStepBackText();
             }
         }
     }
+
 
     private void OnEnable()
     {
