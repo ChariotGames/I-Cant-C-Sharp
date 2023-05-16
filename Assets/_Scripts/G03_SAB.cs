@@ -12,7 +12,7 @@ using UnityEngine.Serialization;
 public class G03_SAB : MonoBehaviour
 {
     [SerializeField] private Difficulty difficulty;
-    [SerializeField] private int maxStepBacks;
+    [SerializeField] private int maxStepsBack;
     [SerializeField] private int timeToAsAnswer;
     [SerializeField] private List<GameObject> options;
     [SerializeField] private GameObject startText;
@@ -51,7 +51,7 @@ public class G03_SAB : MonoBehaviour
                 steps = Math.Min(1, lastIndices.Count - 1);
                 break;
             case Difficulty.LVL3:
-                steps = Random.Range(0, Math.Min(maxStepBacks, lastIndices.Count));
+                steps = Random.Range(0, Math.Min(maxStepsBack, lastIndices.Count));
                 break;
             default:
                 steps = 0;
@@ -84,7 +84,7 @@ public class G03_SAB : MonoBehaviour
         yield return new WaitForSeconds(1);
         SpawnSymbol();
         lastIndices.AddFirst(index);
-        if(lastIndices.Count > maxStepBacks){ lastIndices.RemoveLast();}
+        if(lastIndices.Count > maxStepsBack){ lastIndices.RemoveLast();}
         yield return new WaitForSeconds(1);
         options[index].SetActive(false);
         StartCoroutine(SpawnCoroutine());
@@ -108,7 +108,7 @@ public class G03_SAB : MonoBehaviour
                     isYes = false;
                     isNo = false;
                     lastIndices.AddFirst(index);
-                    if(lastIndices.Count > maxStepBacks){ lastIndices.RemoveLast();}
+                    if(lastIndices.Count > maxStepsBack){ lastIndices.RemoveLast();}
                 }
                 else
                 {
