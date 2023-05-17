@@ -2,13 +2,14 @@ using UnityEngine;
 
 namespace _Scripts
 {
-    [CreateAssetMenu(fileName = "Game", menuName = "ScriptableObjects/Game", order = 1)]
-    public class Game : ScriptableObject
+    [CreateAssetMenu(fileName = "GameAsset", menuName = "ScriptableObjects/GameAsset", order = 1)]
+    public class GameAsset : ScriptableObject
     {
         #region Fields
 
         [SerializeField] private GameObject prefab;
         [SerializeField] private string fullName;
+        [SerializeField] private int origin;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;
         [SerializeField] private Orientation orientation;
@@ -28,6 +29,12 @@ namespace _Scripts
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public int Origin
+        {
+            get { return origin; }
+            set { origin = value; }
         }
 
         public Difficulty Difficulty

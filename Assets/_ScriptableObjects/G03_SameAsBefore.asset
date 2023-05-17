@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3698711568559123562, guid: 4feb5dd879318934b999770a65598759, type: 3}
   fullName: Same As Before?
+  origin: 0
   difficulty: 0
   genre: 2
   orientation: 2

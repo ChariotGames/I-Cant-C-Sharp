@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3923420840596175640, guid: d59161f1ad86e6b4f956afd22b4e1bbd, type: 3}
   fullName: Simon
+  origin: 0
   difficulty: 0
   genre: 1
   orientation: 3

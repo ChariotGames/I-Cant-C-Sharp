@@ -18,7 +18,7 @@ namespace _Scripts.Games
     /// On Level 2, there is a chance for a color to be added twice.
     /// On Level 3, a color is displayed but has to be skipped in guessing.
     /// </summary>
-    public class G04_Simon : MonoBehaviour
+    public class G04_Simon : Game
     {
         #region Serialized Fields
 
@@ -29,8 +29,6 @@ namespace _Scripts.Games
         #endregion
 
         #region Fields
-
-        private Difficulty currentDifficulty = Difficulty.LVL1;
 
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
         private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
@@ -55,15 +53,6 @@ namespace _Scripts.Games
         #region Overarching Game Mechanics
 
         /// <summary>
-        /// Autoproperty to the value of currentDifficulty
-        /// </summary>
-        public Difficulty CurrentDifficulty
-        {
-            get { return currentDifficulty; }
-            set { currentDifficulty = value; }
-        }
-
-        /// <summary>
         /// Restarts guessing process and disables player input.
         /// </summary>
         private void ResetTurn()
@@ -81,13 +70,13 @@ namespace _Scripts.Games
         {
             if (rounds <= 0)
             {
-                SendMessageUpwards("SetDifficulty", new object[] { gameObject, Difficulty.LVL1 });
+                base.UpdateDifficulty(new object[] { gameObject, Difficulty.LVL1 });
                 correctGuesses = 0;
             }
 
             if (rounds >= LVL_CHANGE)
             {
-                SendMessageUpwards("SetDifficulty", new object[] { gameObject, (Difficulty)(rounds / LVL_CHANGE) });
+                base.UpdateDifficulty(new object[] { gameObject, (Difficulty)(rounds / LVL_CHANGE) });
             }
         }
 
@@ -129,7 +118,7 @@ namespace _Scripts.Games
 
             int chance = UnityEngine.Random.Range(0, CHANCE);
 
-            if (currentDifficulty == Difficulty.LVL3 && chance < 1)
+            if (base.Difficulty == Difficulty.LVL3 && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
                 infoPattern.Add(Simon.NONE);
@@ -139,7 +128,7 @@ namespace _Scripts.Games
             infoPattern.Add(Simon.EMPTY);
             guessPattern.Add(button);
 
-            if (currentDifficulty != Difficulty.LVL1 && chance > 1)
+            if (base.Difficulty != Difficulty.LVL1 && chance > 1)
             {
                 // On Level 2 the color is doubled
                 infoPattern[^1] = Simon.DOUBLE;
@@ -278,8 +267,8 @@ namespace _Scripts.Games
         {
             GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("None"))];
             if (icon != null) icon.GetComponent<SimonButton>().Animate();
-            correctGuesses -= (int)currentDifficulty + 1;
-            SendMessageUpwards("LoseCondition", gameObject);
+            correctGuesses -= (int)base.Difficulty + 1;
+            base.Lose(gameObject);
             ResetTurn();
             StartCoroutine(AnimateButtons(buttons, animationTime, BLINK_TIME));
         }
@@ -292,7 +281,7 @@ namespace _Scripts.Games
         {
             correctGuesses++;
             UpdateDifficulty(correctGuesses);
-            SendMessageUpwards("WinCondition", gameObject);
+            base.Win(gameObject);
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);

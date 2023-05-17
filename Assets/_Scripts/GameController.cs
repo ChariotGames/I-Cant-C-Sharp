@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using _Scripts.Games;
 
 namespace _Scripts
 {
@@ -9,7 +10,7 @@ namespace _Scripts
         #region Serialized Fields
 
         [SerializeField] private Data gameVariables;
-        [SerializeField] private List<Game> games;
+        [SerializeField] private List<GameAsset> games;
         [SerializeField] private GameObject[] spawnPoints;
 
         #endregion
@@ -23,9 +24,15 @@ namespace _Scripts
 
         void Awake()
         {
-            spawnRange = (0, games.Count - 1);
+            /*spawnRange = (0, games.Count - 1);
             game1 = SpawnGame();
-            game2 = SpawnGame();
+            game2 = SpawnGame();*/
+
+            Debug.Log(games[4].Prefab.GetInstanceID());
+            GameObject g1 = Instantiate(games[4].Prefab);
+            GameObject g2 = Instantiate(games[4].Prefab);
+            Debug.Log(g1.GetInstanceID());
+            Debug.Log(g2.GetInstanceID());
         }
 
         private GameObject SpawnGame()
@@ -38,7 +45,7 @@ namespace _Scripts
                 return null;
             }
 
-            Game game = games[UnityEngine.Random.Range(2, 4)];
+            GameAsset game = games[UnityEngine.Random.Range(2, 4)];
             while (AlreadySpawned(game.Prefab) && CheckOrientation(direction, game.Orientation))
             {
                 game = games[UnityEngine.Random.Range(spawnRange.min, spawnRange.max)];
@@ -60,8 +67,7 @@ namespace _Scripts
         }
         private bool AlreadySpawned(GameObject game)
         {
-            if (game1 == null || game2 == null) return false;
-
+            if (game1 == null && game2 == null) return false;
             return game1 == game || game2 == game;
         }
         private bool CheckOrientation(Direction spawnPosition, Orientation orientation)

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3122696433480124131, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
   fullName: Missing Key
+  origin: 0
   difficulty: 0
   genre: 4
   orientation: 2
