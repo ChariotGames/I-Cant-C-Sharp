@@ -70,14 +70,15 @@ namespace _Scripts.Games
         {
             if (rounds <= 0)
             {
-                base.UpdateDifficulty(new object[] { gameObject, Difficulty.LVL1 });
-                correctGuesses = 0;
+                base.Easier();
             }
 
             if (rounds >= LVL_CHANGE)
             {
-                base.UpdateDifficulty(new object[] { gameObject, (Difficulty)(rounds / LVL_CHANGE) });
+                base.Harder();
             }
+
+            correctGuesses %= LVL_CHANGE;
         }
 
         #endregion
@@ -142,7 +143,7 @@ namespace _Scripts.Games
         private void ClearInfoPattern()
         {
             GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("Ok"))];
-            if (icon != null) icon.GetComponent<SimonButton>().Animate();
+            if (icon != null) icon.GetComponent<G04_SimonButton>().Animate();
 
             for (int i = 0; i < infoPattern.Count; i++)
             {
@@ -159,7 +160,7 @@ namespace _Scripts.Games
         {
             foreach (GameObject obj in buttons)
             {
-                SimonButton button = obj.GetComponent<SimonButton>();
+                G04_SimonButton button = obj.GetComponent<G04_SimonButton>();
                 if (button != null) button.ToggleInput(obj, isPlayersTurn);
             }
             infos[Array.FindIndex(infos, obj => obj.name.Equals("Input"))].SetActive(isPlayersTurn);
@@ -180,7 +181,7 @@ namespace _Scripts.Games
             foreach (GameObject obj in buttons)
             {
                 obj.SetActive(true);
-                SimonButton button = obj.GetComponent<SimonButton>();
+                G04_SimonButton button = obj.GetComponent<G04_SimonButton>();
                 if(button != null) button.Animate();
                 yield return new WaitForSeconds(time);
             }
@@ -201,11 +202,11 @@ namespace _Scripts.Games
             {
                 Simon button = displayPattern[i];
                 Simon info = infoPattern[i];
-                buttons[(int)button].GetComponent<SimonButton>().Animate();
+                buttons[(int)button].GetComponent<G04_SimonButton>().Animate();
                 if (info != Simon.EMPTY)
                 {
                     GameObject icon = infos[(int)info % COLORS];
-                    icon.GetComponent<SimonButton>().Animate();
+                    icon.GetComponent<G04_SimonButton>().Animate();
                 }
                 yield return new WaitForSeconds(duration);
             }
@@ -266,9 +267,9 @@ namespace _Scripts.Games
         private void WrongColor()
         {
             GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("None"))];
-            if (icon != null) icon.GetComponent<SimonButton>().Animate();
+            if (icon != null) icon.GetComponent<G04_SimonButton>().Animate();
             correctGuesses -= (int)base.Difficulty + 1;
-            base.Lose(gameObject);
+            base.Lose();
             ResetTurn();
             StartCoroutine(AnimateButtons(buttons, animationTime, BLINK_TIME));
         }
@@ -281,7 +282,7 @@ namespace _Scripts.Games
         {
             correctGuesses++;
             UpdateDifficulty(correctGuesses);
-            base.Win(gameObject);
+            base.Win();
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);

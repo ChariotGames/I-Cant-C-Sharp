@@ -54,8 +54,7 @@ MonoBehaviour:
   pattern: []
   count: 4
   loseDisplay: {fileID: 3122696435033995262}
-  ButtonContainer: {fileID: 4608718060615349989}
-  canvas: {fileID: 0}
+  buttonContainer: {fileID: 4608718060615349989}
 --- !u!1 &3122696434066152788
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,8 +30,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5897317456917386129}
-  - {fileID: 5897317457267304668}
   - {fileID: 5897317456894251580}
+  - {fileID: 5897317457267304668}
   - {fileID: 5897317456820109986}
   - {fileID: 427280543943923183}
   m_Father: {fileID: 0}
@@ -58,9 +58,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed8f271ce60dd2a41baeb07aa580408a, type: 2}
   spawnPoints:
   - {fileID: 5897317456917386128}
-  - {fileID: 5897317457267304667}
   - {fileID: 5897317456894251579}
+  - {fileID: 5897317457267304667}
   - {fileID: 5897317456820109985}
+  - {fileID: 6006360214424919404}
 --- !u!1 &5897317456820109985
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +122,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5897317456580356394}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5897317456917386128
 GameObject:
@@ -183,7 +184,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5897317456580356394}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6006360214424919404
 GameObject:

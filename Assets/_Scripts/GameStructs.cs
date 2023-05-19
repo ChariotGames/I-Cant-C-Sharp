@@ -1,4 +1,4 @@
-namespace _Scripts
+/*namespace _Scripts
 {
     public struct GameStruct
     {
@@ -51,3 +51,4 @@ namespace _Scripts
         #endregion
     }
 }
+*/

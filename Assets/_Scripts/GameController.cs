@@ -17,99 +17,124 @@ namespace _Scripts
 
         #region Fields
 
-        private GameObject game1, game2;
-        private (int min, int max) spawnRange;
+        private int[] loadedGames = new int[2];
 
         #endregion
 
         void Awake()
         {
-            /*spawnRange = (0, games.Count - 1);
-            game1 = SpawnGame();
-            game2 = SpawnGame();*/
+            SetOriginIDs();
 
-            Debug.Log(games[4].Prefab.GetInstanceID());
-            GameObject g1 = Instantiate(games[4].Prefab);
-            GameObject g2 = Instantiate(games[4].Prefab);
-            Debug.Log(g1.GetInstanceID());
-            Debug.Log(g2.GetInstanceID());
+            loadedGames[0] = SpawnGame();
+            loadedGames[1] = SpawnGame();
         }
 
-        private GameObject SpawnGame()
+        #region Instantiate
+        
+        /// <summary>
+        /// Sets the Game Assets' origin IDs.
+        /// Based on the Instance IDs of the Prefabs.
+        /// </summary>
+        private void SetOriginIDs()
         {
-            Direction direction = FindFreeSpawnPoint();
-            if (direction == Direction.NONE)
+            foreach (GameAsset game in games)
             {
-                // TODO: Add a proper exception
-                Debug.Log("All Spawnpoints are busy");
-                return null;
+                game.Origin = game.Prefab.GetInstanceID();
             }
-
-            GameAsset game = games[UnityEngine.Random.Range(2, 4)];
-            while (AlreadySpawned(game.Prefab) && CheckOrientation(direction, game.Orientation))
-            {
-                game = games[UnityEngine.Random.Range(spawnRange.min, spawnRange.max)];
-            }
-
-            return Instantiate(game.Prefab, spawnPoints[(int)direction].transform);
         }
-        private Direction FindFreeSpawnPoint()
+
+        /// <summary>
+        /// Spawns a random game from the Game list.
+        /// </summary>
+        /// <returns>An instance of a picked Prefab.</returns>
+        private int SpawnGame()
         {
-            for (int i = 0; i < spawnPoints.Length; i++)
+
+            GameAsset game = games[UnityEngine.Random.Range(0, games.Count)];
+
+            while (AlreadySpawned(game.Origin))
             {
-                if (spawnPoints[i].transform.childCount == 0)
-                {
-                    return (Direction)i;
-                }
+                game = games[UnityEngine.Random.Range(0, games.Count)];
             }
 
-            return (Direction)(-1);
+            Transform parent = SetParent(game.Orientation);
+
+            while (parent == null)
+            {
+                parent = SetParent(game.Orientation);
+            }
+
+            Instantiate(game.Prefab, parent);
+
+            return game.Origin;
         }
-        private bool AlreadySpawned(GameObject game)
+
+        /// <summary>
+        /// Checks if picked game is already spawned.
+        /// </summary>
+        /// <param name="gameID">The game's ID</param>
+        /// <returns>True or false if it exists.</returns>
+        private bool AlreadySpawned(int gameID)
         {
-            if (game1 == null && game2 == null) return false;
-            return game1 == game || game2 == game;
-        }
-        private bool CheckOrientation(Direction spawnPosition, Orientation orientation)
-        {
-
-
-            if (orientation == Orientation.FULLSCREEN && (spawnPosition == Direction.CENTER))
-            {
-                return true;
-            }
-
-            if (orientation == Orientation.HORIZONTAL && (spawnPosition == Direction.UP || spawnPosition == Direction.DOWN))
-            {
-                return true;
-            }
-
-            if (orientation == Orientation.VERTICAL && (spawnPosition == Direction.LEFT || spawnPosition == Direction.RIGHT))
-            {
-                return true;
-            }
-
-            if (orientation == Orientation.QUARTER)
-            {
-                return true;
-            }
+            if (loadedGames[0] == gameID || loadedGames[1] == gameID) return true;
 
             return false;
         }
 
-
-        private void WinCondition(GameObject game)
+        /// <summary>
+        /// Finds a fitting spawn container according to game specs.
+        /// </summary>
+        /// <param name="orientation">The game's orientation settings</param>
+        /// <returns>A Transform to contain the game.</returns>
+        private Transform SetParent(Orientation orientation)
         {
-            Debug.Log("Win from " + game.name);
+            if (orientation.HasFlag(Orientation.FULLSCREEN) && spawnPoints[^1].transform.childCount == 0){
+                return spawnPoints[(int)Direction.CENTER].transform;
+            }
+
+            if (orientation.HasFlag(Orientation.HORIZONTAL))
+            {
+                for (int i = 0; i < spawnPoints.Length - 1; i += 2)
+                {
+                    Transform trans = spawnPoints[i].transform;
+                    if (trans.childCount == 0) return trans;
+                }
+            }
+
+            if (orientation.HasFlag(Orientation.VERTICAL)) {
+                for (int i = 1; i < spawnPoints.Length - 1; i += 2)
+                {
+                    Transform trans = spawnPoints[i].transform;
+                    if (trans.childCount == 0) return trans;
+                }
+            }
+
+            if (orientation.HasFlag(Orientation.QUARTER))
+            {
+                for (int i = 0; i < spawnPoints.Length - 1; i++)
+                {
+                    Transform trans = spawnPoints[i].transform;
+                    if (trans.childCount == 0) return trans;
+                }
+            }
+
+            return null;
         }
 
-        private void LoseCondition(GameObject game)
+        #endregion
+
+        #region Game Mechanics
+
+        private void WinCondition(int origin)
         {
-            Debug.Log("Lose from " + game.name);
+            Debug.Log("Win from " + games.Find(obj => obj.Origin == origin).Name);
         }
 
-        
+        private void LoseCondition(int origin)
+        {
+            Debug.Log("Lose from " + games.Find(obj => obj.Origin == origin).Name);
+        }
 
-
+        #endregion
     }
 }
