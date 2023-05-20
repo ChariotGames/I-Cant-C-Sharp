@@ -39,6 +39,7 @@ namespace _Scripts
     public enum Keys
     {
         NONE = 0,
+
         RightStick  = 1,
         LeftStick   = 2,
 

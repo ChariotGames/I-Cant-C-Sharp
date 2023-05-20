@@ -9,6 +9,7 @@ namespace _Scripts
 
         [SerializeField] private GameObject prefab;
         [SerializeField] private string fullName;
+        [TextArea] [SerializeField] private string description;
         [SerializeField] private int origin;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;

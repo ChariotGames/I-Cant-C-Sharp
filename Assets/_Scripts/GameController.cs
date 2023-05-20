@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using _Scripts.Games;
 
 namespace _Scripts
 {
@@ -143,6 +141,11 @@ namespace _Scripts
         private void LoseCondition(int origin)
         {
             Debug.Log("Lose from " + games.Find(obj => obj.Origin == origin).Name);
+        }
+
+        private void SetDifficulty( int origin, Difficulty difficulty)
+        {
+            // TODO: Implement
         }
 
         #endregion

@@ -9,7 +9,7 @@ namespace _Scripts.Games
         protected int origin;
         protected Difficulty currentDifficulty = Difficulty.LVL1;
 
-        private (int min, int max) difficultyRange = ((int)Difficulty.LVL1, (int)Difficulty.LVL9);
+        private (int min, int max) difficultyRange = ((int)Difficulty.LVL1, (int)Difficulty.LVL3);
 
         #endregion
 
@@ -20,7 +20,6 @@ namespace _Scripts.Games
         /// <summary>
         /// Informs the Game Controller, that the game triggered a win condition
         /// </summary>
-        /// <param name="game">The ID of the game.</param>
         protected void Win()
         {
             SendMessageUpwards("WinCondition", origin);
