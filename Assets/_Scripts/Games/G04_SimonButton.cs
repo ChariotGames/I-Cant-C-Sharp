@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace _Scripts.Games
 {
-    public class SimonButton : MonoBehaviour, IButton
+    public class G04_SimonButton : MonoBehaviour, IButton
     {
         #region  Fields
 
@@ -94,28 +94,28 @@ namespace _Scripts.Games
             if (targetColor == new Color(2, 2, 2, 0)) targetColor += new Color(1, 1, 1, 1);
 
             // Adds lambda expressions as anonymous functions to the Dictionary
-            if (gameObject.name.Equals(Simon.BLUE.ToString()))
+            if (gameObject.name.Equals(Simon.BLUE.ToString()) && !simonActions.ContainsKey(Simon.BLUE))
             {
                 simonActions.Add(Simon.BLUE, (
                     () => InputHandler.NorthBtnAction += ButtonPressed,
                     () => InputHandler.NorthBtnAction -= ButtonPressed
                 ));
             }
-            if (gameObject.name.Equals(Simon.RED.ToString()))
+            if (gameObject.name.Equals(Simon.RED.ToString()) && !simonActions.ContainsKey(Simon.RED))
             {
                 simonActions.Add(Simon.RED, (
                     () => InputHandler.EastBtnAction += ButtonPressed,
                     () => InputHandler.EastBtnAction -= ButtonPressed
                 ));
             }
-            if (gameObject.name.Equals(Simon.YELLOW.ToString()))
+            if (gameObject.name.Equals(Simon.YELLOW.ToString()) && !simonActions.ContainsKey(Simon.YELLOW))
             {
                 simonActions.Add(Simon.YELLOW, (
                     () => InputHandler.SouthBtnAction += ButtonPressed,
                     () => InputHandler.SouthBtnAction -= ButtonPressed
                 ));
             }
-            if (gameObject.name.Equals(Simon.GREEN.ToString()))
+            if (gameObject.name.Equals(Simon.GREEN.ToString()) && !simonActions.ContainsKey(Simon.GREEN))
             {
                 simonActions.Add(Simon.GREEN, (
                     () => InputHandler.WestBtnAction += ButtonPressed,
