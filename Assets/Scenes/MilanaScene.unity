@@ -457,8 +457,8 @@ Canvas:
   m_GameObject: {fileID: 650444151}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -832,7 +832,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3122696433480124130, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
       propertyPath: count
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3122696433480124130, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
       propertyPath: canvas
