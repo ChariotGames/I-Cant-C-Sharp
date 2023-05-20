@@ -29,7 +29,7 @@ namespace _Scripts
             loadedGames[1] = SpawnGame();
         }
 
-        #region Instantiate
+        #region Instance Management
         
         /// <summary>
         /// Sets the Game Assets' origin IDs.
@@ -119,6 +119,16 @@ namespace _Scripts
             }
 
             return null;
+        }
+
+        private void RemoveGame()
+        {
+            // TODO: implement
+        }
+
+        private void ResizeGame()
+        {
+            // TODO: implement
         }
 
         #endregion
