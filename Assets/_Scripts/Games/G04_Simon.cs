@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,39 +17,36 @@ namespace _Scripts.Games
     /// On Level 2, there is a chance for a color to be added twice.
     /// On Level 3, a color is displayed but has to be skipped in guessing.
     /// </summary>
-    public class G04_Simon : Game
+    public class G04_Simon : MonoBehaviour
     {
         #region Serialized Fields
 
+        [SerializeField] private List<GameObject> buttons, infos;
         [SerializeField] private List<Simon> displayPattern, guessPattern, infoPattern;
-        [SerializeField] private GameObject[] buttons, infos;
+        [SerializeField] private GameObject middle, inputOverlay;
         [SerializeField] private Image timer;
 
         #endregion
 
         #region Fields
 
-        private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
-        private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
-        private float animationTime;
+        private Difficulty CurrentLevel { get; set; } = Difficulty.LVL1;
+
+        private const float WAIT_TIME = 0.50f, TURN_TIME = 5.0f;
+        private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5;
         private int checkingIndex = 0, correctGuesses = 0;
 
         #endregion
 
-        #region Unity Built-Ins
+        #region Overarching Game Mechanics
 
         // Start is called before the first frame update
         void Start()
         {
-            animationTime = BLINK_TIME * COLORS;
-            StartCoroutine(ActivateButtons(BLINK_TIME));
+            StartCoroutine(ActivateButtons(WAIT_TIME));
             GeneratePattern(MIN_LENGTH);
-            StartCoroutine(AnimateButtons(buttons, animationTime * 2, animationTime));
+            StartCoroutine(AnimateButtons(buttons, WAIT_TIME * buttons.Count * 2, WAIT_TIME * buttons.Count));
         }
-
-        #endregion
-
-        #region Overarching Game Mechanics
 
         /// <summary>
         /// Restarts guessing process and disables player input.
@@ -70,15 +66,14 @@ namespace _Scripts.Games
         {
             if (rounds <= 0)
             {
-                base.Easier();
+                SendMessageUpwards("SetDifficulty", new object[] { gameObject, Difficulty.LVL1 });
+                correctGuesses = 0;
             }
 
             if (rounds >= LVL_CHANGE)
             {
-                base.Harder();
+                SendMessageUpwards("SetDifficulty", new object[] { gameObject, (Difficulty)(rounds / LVL_CHANGE) });
             }
-
-            correctGuesses %= LVL_CHANGE;
         }
 
         #endregion
@@ -95,7 +90,7 @@ namespace _Scripts.Games
             Simon randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = (Simon)UnityEngine.Random.Range(0, COLORS);
+                randomColor = (Simon)Random.Range(0, buttons.Count);
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
@@ -117,9 +112,9 @@ namespace _Scripts.Games
                 return;
             }
 
-            int chance = UnityEngine.Random.Range(0, CHANCE);
+            int chance = Random.Range(0, CHANCE);
 
-            if (base.Difficulty == Difficulty.LVL3 && chance < 1)
+            if (CurrentLevel == Difficulty.LVL3 && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
                 infoPattern.Add(Simon.NONE);
@@ -129,7 +124,7 @@ namespace _Scripts.Games
             infoPattern.Add(Simon.EMPTY);
             guessPattern.Add(button);
 
-            if (base.Difficulty != Difficulty.LVL1 && chance > 1)
+            if (CurrentLevel != Difficulty.LVL1 && chance > 1)
             {
                 // On Level 2 the color is doubled
                 infoPattern[^1] = Simon.DOUBLE;
@@ -142,8 +137,8 @@ namespace _Scripts.Games
         /// </summary>
         private void ClearInfoPattern()
         {
-            GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("Ok"))];
-            if (icon != null) icon.GetComponent<G04_SimonButton>().Animate();
+            GameObject icon = infos.Find(obj => obj.name.Equals("IconOk"));
+            if (icon != null) icon.GetComponent<SimonButton>().Animate();
 
             for (int i = 0; i < infoPattern.Count; i++)
             {
@@ -158,12 +153,11 @@ namespace _Scripts.Games
         /// <param name="isPlayersTurn">State of the player's turn.</param>
         private void PlayerTurn(bool isPlayersTurn)
         {
-            foreach (GameObject obj in buttons)
+            foreach (GameObject button in buttons)
             {
-                G04_SimonButton button = obj.GetComponent<G04_SimonButton>();
-                if (button != null) button.ToggleInput(obj, isPlayersTurn);
+                button.GetComponent<SimonButton>().ToggleInput(button, isPlayersTurn);
             }
-            infos[Array.FindIndex(infos, obj => obj.name.Equals("Input"))].SetActive(isPlayersTurn);
+            inputOverlay.SetActive(isPlayersTurn);
         }
 
         #endregion
@@ -176,13 +170,12 @@ namespace _Scripts.Games
         private IEnumerator ActivateButtons(float time)
         {
             yield return new WaitForSeconds(time);
-            buttons[^1].SetActive(true);
+            middle.SetActive(true);
             yield return new WaitForSeconds(time);
-            foreach (GameObject obj in buttons)
+            foreach (GameObject button in buttons)
             {
-                obj.SetActive(true);
-                G04_SimonButton button = obj.GetComponent<G04_SimonButton>();
-                if(button != null) button.Animate();
+                button.SetActive(true);
+                button.GetComponent<SimonButton>().Animate();
                 yield return new WaitForSeconds(time);
             }
         }
@@ -194,7 +187,7 @@ namespace _Scripts.Games
         /// <param name="delay">The delay of the overal animation.</param>
         /// <param name="duration">The duration of each button's animation.</param>
         /// <returns>An object that can be used to control the coroutine's execution.</returns>
-        private IEnumerator AnimateButtons(GameObject[] buttons, float delay, float duration)
+        private IEnumerator AnimateButtons(List<GameObject> buttons, float delay, float duration)
         {
             yield return new WaitForSeconds(delay);
 
@@ -202,11 +195,11 @@ namespace _Scripts.Games
             {
                 Simon button = displayPattern[i];
                 Simon info = infoPattern[i];
-                buttons[(int)button].GetComponent<G04_SimonButton>().Animate();
+                buttons[(int)button].GetComponent<SimonButton>().Animate();
                 if (info != Simon.EMPTY)
                 {
-                    GameObject icon = infos[(int)info % COLORS];
-                    icon.GetComponent<G04_SimonButton>().Animate();
+                    GameObject icon = infos[(int)info % 4];
+                    icon.GetComponent<SimonButton>().Animate();
                 }
                 yield return new WaitForSeconds(duration);
             }
@@ -266,12 +259,12 @@ namespace _Scripts.Games
         /// </summary>
         private void WrongColor()
         {
-            GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("None"))];
-            if (icon != null) icon.GetComponent<G04_SimonButton>().Animate();
-            correctGuesses -= (int)base.Difficulty + 1;
-            base.Lose();
+            GameObject icon = infos.Find(obj => obj.name.Equals("IconNone"));
+            if (icon != null) icon.GetComponent<SimonButton>().Animate();
+            correctGuesses -= (int)CurrentLevel + 1;
+            SendMessageUpwards("LoseCondition", gameObject);
             ResetTurn();
-            StartCoroutine(AnimateButtons(buttons, animationTime, BLINK_TIME));
+            StartCoroutine(AnimateButtons(buttons, WAIT_TIME * buttons.Count, WAIT_TIME));
         }
 
         /// <summary>
@@ -282,11 +275,11 @@ namespace _Scripts.Games
         {
             correctGuesses++;
             UpdateDifficulty(correctGuesses);
-            base.Win();
+            SendMessageUpwards("WinCondition", gameObject);
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
-            StartCoroutine(AnimateButtons(buttons, animationTime, animationTime));
+            StartCoroutine(AnimateButtons(buttons, WAIT_TIME * buttons.Count, WAIT_TIME * buttons.Count));
         }
 
         #endregion
