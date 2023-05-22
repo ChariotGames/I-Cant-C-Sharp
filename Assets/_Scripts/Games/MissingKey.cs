@@ -19,6 +19,7 @@ namespace _Scripts.Games
         private GameObject buttonContainer;
         private bool _playerPressed = false;
         private float _playfieldWidth;
+        private const float ROUND_TIME = 5.0f;
         private Bounds _cameraViewportBounds;
         private Camera _mainCamera;
         private float _time = 0;
@@ -44,13 +45,9 @@ namespace _Scripts.Games
         // Update is called once per frame
         void Update()
         {
-
             _time += Time.deltaTime;
-            Debug.Log(_time);
-            // 5 seconds to solve game
-            if (_time >= 5.0f)
+            if (_time >= ROUND_TIME)
             {
-
                 TimerEnded();
             }
 
@@ -74,7 +71,6 @@ namespace _Scripts.Games
             InputHandler.LeftArrowBtnAction += PlayerPress;
             InputHandler.UpArrowBtnAction += PlayerPress;
             InputHandler.DownArrowBtnAction += PlayerPress;
-
         }
 
         // Creates a new random pattern 
@@ -106,7 +102,6 @@ namespace _Scripts.Games
 
         private void DisplayPattern()
         {
-
             //float canvasWidth = 1920;
             int count = pattern.Count;
             float step = _playfieldWidth / (count + 1); // Schrittlänge
@@ -122,11 +117,9 @@ namespace _Scripts.Games
 
         private bool CheckWin()
         {
-
             //go through each button and check if one was deactivated
             for (int i = 0; i < buttonContainer.transform.childCount; i++)
             {
-
                 bool isActive = buttonContainer.transform.GetChild(i).gameObject.activeInHierarchy;
 
                 //a button on the screen was deactivated -> lose 
@@ -134,9 +127,7 @@ namespace _Scripts.Games
                 {
                     return false;
                 }
-
             }
-
 
             return true;
         }
@@ -164,7 +155,6 @@ namespace _Scripts.Games
                 {
                     GeneratePattern();
                     DisplayPattern();
-
                 }
                 else
                 {
@@ -177,6 +167,5 @@ namespace _Scripts.Games
             }
             _playerPressed = false;
         }
-
     }
 }
