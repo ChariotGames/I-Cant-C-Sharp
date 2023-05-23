@@ -8,9 +8,12 @@ namespace _Scripts.Pascal
         [SerializeField] private float maxRotationSpeed = 2.5f;
         [SerializeField] private float maxRotation = 60f;
         [SerializeField] private float bulletSpeed;
+        [SerializeField] private float attackSpeed;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform gunBarrel;
         [SerializeField] private Transform gunSpawnPos;
+
+        private float _lastShootTime;
         
         
         private void Awake()
@@ -25,12 +28,18 @@ namespace _Scripts.Pascal
 
         private void ShootProjectile()
         {
+            
+            // checking for "attack speed"
+            if (Time.time - _lastShootTime < attackSpeed) return;
+        
+
             var bullet = Instantiate(bulletPrefab, gunSpawnPos.position, Quaternion.identity);
             var bulletRb = bullet.GetComponent<Rigidbody2D>();
             var fireDirection = gunSpawnPos.transform.up;
             bulletRb.AddForce(fireDirection * bulletSpeed, ForceMode2D.Impulse);
             Destroy(bullet, 5f);
-            
+
+            _lastShootTime = Time.time; // Update the time of the last shot
         }
 
         private void Update()

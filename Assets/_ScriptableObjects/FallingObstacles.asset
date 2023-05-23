@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
-  m_Name: FallingKeys
+  m_Name: FallingObstacles
   m_EditorClassIdentifier: 
-  assetName: Falling Keys
+  assetName: Falling Obstacles
   description: 
   difficulty: 0
-  genre: 0
-  keys: 0
-  orientation: 0
-  prefab: {fileID: 0}
-  version: 
+  genre: 6
+  keys: 67584
+  orientation: 8
+  prefab: {fileID: 6926883230700997361, guid: 37dda47af0efb0346a8934b3441bffd5, type: 3}
+  version: 0.1

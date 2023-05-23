@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4723604506161597108}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.858984, y: -0.48999995, z: 0}
+  m_LocalPosition: {x: 0, y: -0.48999995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d078960ea4854674a91b4544bed9b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationSpeed: 250
+  maxRotationSpeed: 200
   maxRotation: 90
   bulletSpeed: 20
+  attackSpeed: 0.3
   bulletPrefab: {fileID: 5066922524047970336, guid: 918794dc8e90bed4aafcd479b6b5344a, type: 3}
   gunBarrel: {fileID: 4723604506438083396}
   gunSpawnPos: {fileID: 4723604506508736599}
