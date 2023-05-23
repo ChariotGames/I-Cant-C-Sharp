@@ -15,7 +15,7 @@ namespace _Scripts
 
         #region Fields
 
-        private int[] loadedGames = new int[2];
+        private GameAsset[] loadedGames = new GameAsset[2];
 
         #endregion
 
@@ -25,8 +25,8 @@ namespace _Scripts
         {
             SetOriginIDs();
 
-            loadedGames[0] = SpawnGame();
-            loadedGames[1] = SpawnGame();
+            if (loadedGames[0] == null) loadedGames[0] = SpawnGame();
+            if (loadedGames[1] == null) loadedGames[1] = SpawnGame();
         }
 
         #endregion
@@ -48,13 +48,16 @@ namespace _Scripts
         /// <summary>
         /// Spawns a random game from the Game list.
         /// </summary>
-        /// <returns>An instance of a picked Prefab.</returns>
-        private int SpawnGame()
+        /// <returns>A GameAsset reference.</returns>
+        private GameAsset SpawnGame()
         {
-
             GameAsset game = games[Random.Range(0, games.Count)];
 
-            while (AlreadySpawned(game.Origin))
+            // TODO: Check for fullscreen?
+
+            // TODO: needs optimization!!!
+
+            while (game.Prefab == null || AlreadySpawned(game.Origin) || SameOrientation(game.Orientation))
             {
                 game = games[Random.Range(0, games.Count)];
             }
@@ -66,11 +69,9 @@ namespace _Scripts
                 parent = SetParent(game.Orientation);
             }
 
-            // TODO: check for overlaps!
-
             Instantiate(game.Prefab, parent);
 
-            return game.Origin;
+            return game;
         }
 
         /// <summary>
@@ -80,9 +81,46 @@ namespace _Scripts
         /// <returns>True or false if it exists.</returns>
         private bool AlreadySpawned(int gameID)
         {
-            if (loadedGames[0] == gameID || loadedGames[1] == gameID) return true;
+            bool one = false;
+            bool two = false;
+            if (loadedGames[0] != null)
+            {
+                one = loadedGames[0].Origin == gameID;
+            }
 
-            return false;
+            if (loadedGames[1] != null)
+            {
+                two = loadedGames[1].Origin == gameID;
+            }
+
+            return one || two;
+            //if ((loadedGames[0] != null && loadedGames[0].Origin == gameID) ||
+            //    (loadedGames[1] != null && loadedGames[1].Origin == gameID)) return true;
+
+            //return false;
+        }
+
+        /// <summary>
+        /// Checks if a game would overlap with already spawned ones
+        /// </summary>
+        /// <param name="orientation">The game's orionatation flags.</param>
+        /// <returns>True when overlap is found.</returns>
+        private bool SameOrientation(Orientation orientation)
+        {
+            bool one = false;
+            bool two = false;
+
+            if (loadedGames[0] != null)
+            {
+                one = (loadedGames[0].Orientation & orientation) != orientation;
+            }
+
+            if (loadedGames[1] != null)
+            {
+                two = (loadedGames[1].Orientation & orientation) != orientation;
+            }
+
+            return one || two;
         }
 
         /// <summary>
