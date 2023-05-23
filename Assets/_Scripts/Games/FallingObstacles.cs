@@ -93,6 +93,10 @@ namespace _Scripts.Games
         private void TakeDamage()
         {
             _healthPoints--;
+            if (_healthPoints == 0)
+            {
+                Lose();
+            }
             lifeCounterTextMeshPro.text = _healthPoints.ToString();
         }
 
