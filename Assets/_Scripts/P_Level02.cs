@@ -18,7 +18,6 @@ namespace _Scripts
         private void Awake()
         {
             _mainCamera = Camera.main;
-            
         }
 
         private void Start()
