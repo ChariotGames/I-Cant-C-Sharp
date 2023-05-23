@@ -5,8 +5,8 @@ using UnityEngine;
 public class MagicRing : MonoBehaviour
 {
     
-    [SerializeField] private float size = 256f;
-    [SerializeField] private float thickness = 15f;
+    [SerializeField] private float radius = 4f; //256
+    [SerializeField] private LineRenderer ringRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -16,47 +16,30 @@ public class MagicRing : MonoBehaviour
         //if (rnum == 1) thickness = Random.Range(45, 91);
     }
 
-    /*private void DrawRing()
+
+    private void drawRing(int steps, float radius)
     {
-        //GameObject obj = Instantiate(ring, ringContainer.transform);
-        //SpriteRenderer sp = obj.GetComponent<SpriteRenderer>();
-    }*/
+        ringRenderer.positionCount = steps;
 
-    private void ReDrawRing(int size, int thickness)
-    {
-        // create a new texture with transparent background
-        Texture2D texture = new(size, size, TextureFormat.ARGB32, false);
-        Color[] pixels = new Color[size * size];
-        for (int i = 0; i < pixels.Length; i++)
+        for (int i = 0; i < steps; i++)
         {
-            pixels[i] = Color.clear;
-        }
-        texture.SetPixels(pixels); 
-        // TODO: SetPixels32 for faster performance.
+            float cProg = (float) i / steps;
+            float currentRadian = cProg * 2 * Mathf.PI;
+            float xScaled = Mathf.Cos(currentRadian);
+            float yScaled = Mathf.Sin(currentRadian);
 
-        // draw the ring
-        int radius = (size / 2);
-        for (int x = -radius; x <= radius; x++)
-        {
-            for (int y = -radius; y <= radius; y++)
-            {
-                float distance = Mathf.Sqrt(x * x + y * y);
-                if (distance >= radius - thickness && distance <= radius - thickness / 2)
-                {
-                    texture.SetPixel(x + radius, y + radius, Color.white);
-                }
-            }
-        }
+            float x = xScaled * radius;
+            float y = yScaled * radius;
 
-        // apply changes to the texture and create a sprite
-        texture.Apply();
-        gameObject.GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f));
-        gameObject.AddComponent<PolygonCollider2D>();
+            Vector3 currentPosition = new Vector3(x, y, 0);
+            ringRenderer.SetPosition(i, currentPosition);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        ReDrawRing((int)(size -= Time.deltaTime * 100), (int)(thickness));
+        if (radius < 0.5) Destroy(gameObject);
+        drawRing(1024, radius -= Time.deltaTime * 0.5f); //0.0001f);
     }
 }
