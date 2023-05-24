@@ -40,6 +40,6 @@ public class MagicRing : MonoBehaviour
     void Update()
     {
         if (radius < 0.5) Destroy(gameObject);
-        drawRing(1024, radius -= Time.deltaTime * 0.5f); //0.0001f);
+        drawRing(1024, radius -= Time.deltaTime * 0.5f);
     }
 }
