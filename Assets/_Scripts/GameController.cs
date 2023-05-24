@@ -25,8 +25,10 @@ namespace _Scripts
         {
             SetOriginIDs();
 
-            if (loadedGames[0] == null) loadedGames[0] = SpawnGame();
-            if (loadedGames[1] == null) loadedGames[1] = SpawnGame();
+            loadedGames[0] = SpawnGame(new List<GameAsset>(games));
+            loadedGames[1] = SpawnGame(new List<GameAsset>(games));
+            //if (loadedGames[0] == null) loadedGames[0] = SpawnGame();
+            //if (loadedGames[1] == null) loadedGames[1] = SpawnGame();
         }
 
         #endregion
@@ -48,18 +50,21 @@ namespace _Scripts
         /// <summary>
         /// Spawns a random game from the Game list.
         /// </summary>
+        /// <param name="gameList">A game list to pick from.</param>
         /// <returns>A GameAsset reference.</returns>
-        private GameAsset SpawnGame()
+        private GameAsset SpawnGame(List<GameAsset> gameList)
         {
-            GameAsset game = games[Random.Range(0, games.Count)];
+            if (loadedGames[0] != null) gameList.Remove(loadedGames[0]);
+            if (loadedGames[1] != null) gameList.Remove(loadedGames[1]);
+
+            GameAsset game = gameList[Random.Range(0, gameList.Count)];
 
             // TODO: Check for fullscreen?
 
-            // TODO: needs optimization!!!
-
             while (game.Prefab == null || AlreadySpawned(game.Origin) || SameOrientation(game.Orientation))
             {
-                game = games[Random.Range(0, games.Count)];
+                gameList.Remove(game);
+                game = gameList[Random.Range(0, gameList.Count)];
             }
 
             Transform parent = SetParent(game.Orientation);
