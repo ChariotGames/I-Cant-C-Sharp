@@ -181,7 +181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473866825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -662,7 +662,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 4
+  live: 0
+  level: 0
+  timer: 0.5
   ringRenderer: {fileID: 1577584427}
+  colorChance: 0
+  ringColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!120 &1577584427
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -704,9 +709,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 1, y: 1, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -922,7 +925,9 @@ MonoBehaviour:
   ringContainer: {fileID: 1163948377}
   ring: {fileID: 1577584423}
   circle: {fileID: 473866825}
-  time: 0
+  stop: 0
+  sTime: 0
+  sDelay: 0
 --- !u!1 &1819797253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8920256311643867258, guid: e4571502578e7854a9c9d78759e9b10e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4571502578e7854a9c9d78759e9b10e, type: 3}
@@ -1115,4 +1120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 4
+  live: 0
+  level: 0
+  timer: 0.5
   ringRenderer: {fileID: 0}
+  colorChance: 0
+  ringColor: {r: 1, g: 0, b: 0, a: 1}

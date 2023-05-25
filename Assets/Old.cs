@@ -101,4 +101,12 @@ public class Old : MonoBehaviour
 
     obj.AddComponent<PolygonCollider2D>();*/
 
+    /*
+        for (int i = 0; i < Random.Range(1, 2); i++) // 10, 16
+        {
+            GameObject obj = Instantiate(ring, ringContainer.transform);
+        }
+        */
+
+    //ringScript = ring.GetComponent<MagicRing>();
 }

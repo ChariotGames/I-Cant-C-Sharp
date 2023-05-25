@@ -1,21 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using _Scripts._Input;
+using System;
 
 public class MagicRing : MonoBehaviour
 {
     
-    [SerializeField] private float radius = 4f; //256
+    public float radius = 4f;
+    public bool live = false;
+    public Difficulty level;
+
+    [SerializeField] private float timer = 0.5f;
     [SerializeField] private LineRenderer ringRenderer;
+    [SerializeField] private int colorChance;
+    [SerializeField] private Color ringColor= new Color(0, 1, 1, 1);
 
     // Start is called before the first frame update
     void Start()
     {
-        //DrawRing();
-        //int rnum = Random.Range(1, 5);
-        //if (rnum == 1) thickness = Random.Range(45, 91);
+        gameObject.SetActive(live);
+        InputHandler.LeftShoulderBtnAction += checkmethod;
+        colorChance = UnityEngine.Random.Range(0, 2);
+        //ringRenderer = GetComponent<LineRenderer>();
+
+        if (level == Difficulty.LVL2 || level == Difficulty.LVL2)
+        {
+            if(colorChance == 1)
+            {
+                ringRenderer.startColor = ringColor;
+                ringRenderer.endColor = ringColor;
+            }
+            InputHandler.RightShoulderBtnAction += checkmethod;
+        }
     }
 
+    private void checkmethod()
+    {
+        if (radius <= 0.65 && radius >= 0.35)
+        {
+            SendMessageUpwards("WinCondition", gameObject);
+        }
+
+        /*
+        else
+        {
+            SendMessageUpwards("LoseCondition", gameObject);
+        }
+        */
+    }
 
     private void drawRing(int steps, float radius)
     {
@@ -39,7 +72,21 @@ public class MagicRing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (radius < 0.5) Destroy(gameObject);
-        drawRing(1024, radius -= Time.deltaTime * 0.5f);
+        if (radius < 0.35)
+        {
+            SendMessageUpwards("LoseCondition", gameObject);
+            //Destroy(gameObject);
+        }
+        if(live)
+        {
+            drawRing(1024, radius -= Time.deltaTime * timer);
+        }
+        
+    }
+
+    private void OnDestroy()
+    {
+        InputHandler.LeftShoulderBtnAction -= checkmethod;
+        InputHandler.RightShoulderBtnAction -= checkmethod;
     }
 }
