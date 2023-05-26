@@ -12,7 +12,7 @@ public class G01_MagicCircle : MonoBehaviour
     [SerializeField] private bool stop = false;
     [SerializeField] private float sTime = 3;
     [SerializeField] private float sDelay;
-    private Difficulty CurrentLevel { get; set; } = Difficulty.LVL2;
+    private Difficulty CurrentLevel { get; set; } = Difficulty.LVL1;
 
     //private MagicRing ringScript;
 
@@ -32,12 +32,15 @@ public class G01_MagicCircle : MonoBehaviour
         obj.SetActive(true);
         objScript.live = true;
         objScript.level = CurrentLevel;
+
+        if (ringContainer.transform.childCount == 1) objScript.activateInput();
+
+        sDelay = UnityEngine.Random.Range(1, 5);
+        Invoke("SpawnRings", sDelay);
         if (stop)
         {
             CancelInvoke("SpawnRings");
         }
-        sDelay = UnityEngine.Random.Range(1, 5);
-        Invoke("SpawnRings", sDelay);
     }
 
     private void WinCondition(GameObject obj)
@@ -46,6 +49,14 @@ public class G01_MagicCircle : MonoBehaviour
         if(obj.GetComponent<MagicRing>().live == true)
         {
             Destroy(obj);
+            try
+            {
+                ringContainer.transform.GetChild(1).GetComponent<MagicRing>().activateInput();
+            }
+            catch
+            {
+                //nothing to catch
+            }
         }
     }
 
@@ -55,6 +66,14 @@ public class G01_MagicCircle : MonoBehaviour
         if (obj.GetComponent<MagicRing>().live == true)
         {
             Destroy(obj);
+            try
+            {
+                ringContainer.transform.GetChild(1).GetComponent<MagicRing>().activateInput();
+            }
+            catch
+            {
+                //nothing to catch
+            }
         }
     }
 

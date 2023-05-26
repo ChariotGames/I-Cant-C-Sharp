@@ -13,41 +13,57 @@ public class MagicRing : MonoBehaviour
 
     [SerializeField] private float timer = 0.5f;
     [SerializeField] private LineRenderer ringRenderer;
-    [SerializeField] private int colorChance;
+    [SerializeField] private int chance = 0;
     [SerializeField] private Color ringColor= new Color(0, 1, 1, 1);
 
     // Start is called before the first frame update
     void Start()
     {
         gameObject.SetActive(live);
-        InputHandler.LeftShoulderBtnAction += checkmethod;
-        colorChance = UnityEngine.Random.Range(0, 2);
+        chance = UnityEngine.Random.Range(0, 2);
         //ringRenderer = GetComponent<LineRenderer>();
 
-        if (level == Difficulty.LVL2 || level == Difficulty.LVL2)
+        if (level == Difficulty.LVL2 || level == Difficulty.LVL3)
         {
-            if(colorChance == 1)
+            if(chance == 1)
             {
                 ringRenderer.startColor = ringColor;
                 ringRenderer.endColor = ringColor;
             }
-            InputHandler.RightShoulderBtnAction += checkmethod;
         }
     }
 
-    private void checkmethod()
+    public void activateInput()
     {
-        if (radius <= 0.65 && radius >= 0.35)
+        InputHandler.LeftShoulderBtnAction += checkLeft;
+        if (level == Difficulty.LVL2 || level == Difficulty.LVL3) InputHandler.RightShoulderBtnAction += checkRight;
+    }
+
+    private void checkLeft()
+    {
+        
+        if (radius <= 0.65 && radius >= 0.35 && chance == 0)
         {
             SendMessageUpwards("WinCondition", gameObject);
         }
-
-        /*
         else
         {
             SendMessageUpwards("LoseCondition", gameObject);
         }
-        */
+        
+    }
+
+    private void checkRight()
+    {
+
+        if (radius <= 0.65 && radius >= 0.35 && chance == 1)
+        {
+            SendMessageUpwards("WinCondition", gameObject);
+        }
+        else
+        {
+            SendMessageUpwards("LoseCondition", gameObject);
+        }
     }
 
     private void drawRing(int steps, float radius)
@@ -86,7 +102,7 @@ public class MagicRing : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputHandler.LeftShoulderBtnAction -= checkmethod;
-        InputHandler.RightShoulderBtnAction -= checkmethod;
+        InputHandler.LeftShoulderBtnAction -= checkLeft;
+        InputHandler.RightShoulderBtnAction -= checkRight;
     }
 }
