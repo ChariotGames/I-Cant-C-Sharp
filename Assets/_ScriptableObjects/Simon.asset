@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: Simon
   m_EditorClassIdentifier: 
-  assetName: Simon
+  assetID: 11952
   description: "Simulates the electronic guessing & memory game: Simon.\r\nColor
     patterns are generated and displayed at random,\r each round adding a varying
     number of colors to the\r existing pattern.\r\n\r\n- Level 1, each color is added

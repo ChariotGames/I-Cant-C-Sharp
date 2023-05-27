@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
-  m_Name: AutoRun
+  m_Name: FallingObstacles
   m_EditorClassIdentifier: 
-  assetID: 23553
+  assetID: 11042
   description: 
   difficulty: 0
-  genre: 2
-  keys: 0
-  orientation: 1
-  prefab: {fileID: 5920264850204584917, guid: 031a16bd02a52994bbc5b50358c6626e, type: 3}
-  version: 
+  genre: 6
+  keys: 67584
+  orientation: 8
+  prefab: {fileID: 6926883230700997361, guid: 37dda47af0efb0346a8934b3441bffd5, type: 3}
+  version: 0.1
