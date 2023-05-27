@@ -23,6 +23,7 @@ public class G01_MagicCircle : Game
     void Start()
     {
         Invoke("SpawnRings", sTime);
+        circle.GetComponent<SpriteRenderer>();
     }
 
     private void SpawnRings()
@@ -34,6 +35,7 @@ public class G01_MagicCircle : Game
         obj.SetActive(true);
         objScript.live = true;
         objScript.level = CurrentLevel;
+        objScript.offset = gameObject.transform.position;
 
         if (ringContainer.transform.childCount == 1) objScript.activateInput();
 
@@ -49,7 +51,8 @@ public class G01_MagicCircle : Game
     {
         base.Win();
         Debug.Log("win");
-        if(obj.GetComponent<MagicRing>().live == true)
+        StartCoroutine(AnimateColor(circle.GetComponent<SpriteRenderer>(), Color.blue, Color.green, 0.25f));
+        if (obj.GetComponent<MagicRing>().live == true)
         {
             Destroy(obj);
             try
@@ -67,6 +70,7 @@ public class G01_MagicCircle : Game
     {
         base.Lose();
         Debug.Log("Lose");
+        StartCoroutine(AnimateColor(circle.GetComponent<SpriteRenderer>(), Color.blue, Color.red, 0.25f));
         if (obj.GetComponent<MagicRing>().live == true)
         {
             Destroy(obj);
@@ -79,6 +83,26 @@ public class G01_MagicCircle : Game
                 //nothing to catch
             }
         }
+    }
+
+    private IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            sprite.color = Color.Lerp(original, target, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            sprite.color = Color.Lerp(target, original, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        sprite.color = original;
     }
 
     // Update is called once per frame

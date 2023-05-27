@@ -11,6 +11,7 @@ public class MagicRing : MonoBehaviour
     public float radius = 4f;
     public bool live = false;
     public Difficulty level;
+    public Vector3 offset;
 
     [SerializeField] private float timer = 0.5f;
     [SerializeField] private LineRenderer ringRenderer;
@@ -81,7 +82,7 @@ public class MagicRing : MonoBehaviour
             float x = xScaled * radius;
             float y = yScaled * radius;
 
-            Vector3 currentPosition = new Vector3(x, y, 0);
+            Vector3 currentPosition = new Vector3(x, y, 0) + offset;
             ringRenderer.SetPosition(i, currentPosition);
         }
     }
