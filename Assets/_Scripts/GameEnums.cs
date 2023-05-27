@@ -109,14 +109,19 @@ namespace _Scripts
         G99_UnnamedGame = 31743,
     }
 
-    public enum Simon
+    public enum Simon // TO BE DELETED
     {
         BLUE, RED, YELLOW, GREEN, EMPTY, DOUBLE, NONE, OK
     }
 
     public enum Colors
     {
-        NONE, BLUE, RED, YELLOW, GREEN, PURPLE
+        NONE, BLUE, RED, YELLOW, GREEN, PURPLE, ANY
+    }
+
+    public enum Complexity
+    {
+        NONE, SOLO, MIDDLE, MIX
     }
 
     public enum Difficulty
@@ -129,6 +134,11 @@ namespace _Scripts
         NONE = -1, UP, DOWN, LEFT, RIGHT, CENTER
     }
 
+    public enum GameModes
+    {
+        NONE, ENDLESS, SINGLE, MIXED, TUTORIAL
+    }
+
     public enum Modifier
     {
         NONE, NORMAL, REVERSE, DOUBLE, EXPONENTIAL, MIRROR, NEGATIVE, TIME, ROTATION, SPEED, ALTERNATE, BEFORE, ROULETTE, OK
@@ -137,11 +147,6 @@ namespace _Scripts
     public enum Orientation
     {
         NONE, HORIZONTAL, VERTICAL, QUARTER, FULLSCREEN
-    }
-
-    public enum Shape
-    {
-        NONE, RECT, CIRCLE, TRIANGLE, CAPSULE, OTHER
     }
 
     #endregion
