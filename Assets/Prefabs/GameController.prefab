@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5897317456580356394}
   - component: {fileID: 5897317456580356395}
+  - component: {fileID: 3604962633004372342}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -56,13 +57,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 561e5eda916b9124e881c6e34a54b13f, type: 2}
   - {fileID: 11400000, guid: f2ce0483e2a25e74bad44748d727df58, type: 2}
   - {fileID: 11400000, guid: ab65f45f24b010741ae49bb8d1f237b0, type: 2}
-  - {fileID: 11400000, guid: e0d657ac69fa6a64a93954f7e8f6cb06, type: 2}
+  - {fileID: 11400000, guid: be5fe3973c8b6b346a00d021c0493a95, type: 2}
   spawnPoints:
   - {fileID: 5897317456917386128}
   - {fileID: 5897317456894251579}
   - {fileID: 5897317457267304667}
   - {fileID: 5897317456820109985}
   - {fileID: 6006360214424919404}
+  loadedGames: []
+--- !u!114 &3604962633004372342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897317456580356393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13899b82f7d2341958c2af87ebe44bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5897317456820109985
 GameObject:
   m_ObjectHideFlags: 0

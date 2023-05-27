@@ -6,9 +6,8 @@ namespace _Scripts.Games
     {
         #region Fields
 
-        protected int origin;
+        protected AssetID id;
         protected Difficulty currentDifficulty = Difficulty.LVL1;
-
         private (int min, int max) difficultyRange = ((int)Difficulty.LVL1, (int)Difficulty.LVL3);
 
         #endregion
@@ -22,7 +21,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Win()
         {
-            SendMessageUpwards("WinCondition", origin);
+            SendMessageUpwards("WinCondition", id);
         }
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Lose()
         {
-            SendMessageUpwards("WinCondition", origin);
+            SendMessageUpwards("LoseCondition", id);
         }
 
         /// <summary>
@@ -38,7 +37,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            SendMessageUpwards("SetDifficulty", new object[] { origin, Clamp(currentDifficulty - 1) });
+            SendMessageUpwards("SetDifficulty", new object[] { id, Clamp(currentDifficulty - 1) });
         }
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            SendMessageUpwards("SetDifficulty", new object[] { origin, Clamp(currentDifficulty + 1) });
+            SendMessageUpwards("SetDifficulty", new object[] { id, Clamp(currentDifficulty + 1) });
         }
 
         #endregion
@@ -69,10 +68,10 @@ namespace _Scripts.Games
 
         #region GetSets
 
-        public int Origin
+        public AssetID ID
         {
-            get { return origin; }
-            set { origin = value; }
+            get { return id; }
+            set { id = value; }
         }
 
         public Difficulty Difficulty

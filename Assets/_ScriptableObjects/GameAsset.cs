@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts
@@ -7,35 +8,26 @@ namespace _Scripts
     {
         #region Serialized Fields
 
-        [SerializeField] private string assetName;
+        [SerializeField] private AssetID assetID;
         [TextArea(3, 10)] [SerializeField] private string description;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;
         [SerializeField] private Keys keys;
         [SerializeField] private Orientation orientation;
+        //[SerializeField] private Shape shape;
         [SerializeField] private GameObject prefab;
-        [SerializeField] private string version;
 
-        #endregion
-
-        #region Fields
-
-        private int origin;
-
-        #endregion
+        #endregion Serialized Fields
 
         #region GetSets
-
-        public string Asset
+        public AssetID AssetID
         {
-            get { return assetName; }
-            set { assetName = value; }
+            get { return assetID; }
         }
 
         public string Description
         {
             get { return description; }
-            set { description = value; }
         }
 
         public Difficulty Difficulty
@@ -47,34 +39,24 @@ namespace _Scripts
         public Genre Genre
         {
             get { return genre; }
-            set { genre = value; }
         }
 
         public Keys Keys
         {
             get { return keys; }
-            set { keys = value; }
         }
 
         public Orientation Orientation
         {
             get { return orientation; }
-            set { orientation = value; }
         }
 
         public GameObject Prefab
         {
             get { return prefab; }
-            set { prefab = value; }
         }
 
-        public int Origin
-        {
-            get { return origin; }
-            set { origin = value; }
-        }
-
-        #endregion
+        #endregion GetSets
     }
 }
 

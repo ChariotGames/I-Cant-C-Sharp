@@ -1,3 +1,5 @@
+using _Scripts.Games;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +17,7 @@ namespace _Scripts
 
         #region Fields
 
-        private GameAsset[] loadedGames = new GameAsset[2];
+        private List<GameAsset> loadedGames = new();
 
         #endregion
 
@@ -23,10 +25,8 @@ namespace _Scripts
 
         void Awake()
         {
-            SetOriginIDs();
-
-            if (loadedGames[0] == null) loadedGames[0] = SpawnGame();
-            if (loadedGames[1] == null) loadedGames[1] = SpawnGame();
+            PickGame(new List<GameAsset>(games));
+            PickGame(new List<GameAsset>(games));
         }
 
         #endregion
@@ -34,93 +34,80 @@ namespace _Scripts
         #region Instance Management
 
         /// <summary>
-        /// Sets the Game Assets' origin IDs.
-        /// Based on the Instance IDs of the Prefabs.
+        /// Picks a random game from the Game list.
         /// </summary>
-        private void SetOriginIDs()
+        /// <param name="gameList">A game list to pick from.</param>
+        private void PickGame(List<GameAsset> gameList)
         {
-            foreach (GameAsset game in games)
+            gameList.RemoveAll(item => loadedGames.Contains(item));
+
+            GameAsset game = gameList[Random.Range(0, gameList.Count)];
+
+            // Remove games before loading a new one
+            if (loadedGames.Count >= 2 || spawnPoints[^1].transform.childCount == 1)
             {
-                game.Origin = game.Prefab.GetInstanceID();
+                RemoveGame(game.Orientation.HasFlag(Orientation.FULLSCREEN));
             }
+
+            if (game.Orientation == Orientation.FULLSCREEN)
+            {
+                loadedGames.Add(LoadGame(game, SetParent(game.Orientation)));
+                return;
+            }
+
+            // Find the fitting game
+            while (game.Prefab == null || loadedGames.Count != 0 && !CheckFit(game))
+            {
+                gameList.Remove(game);
+                game = gameList[Random.Range(0, gameList.Count)];
+            }
+
+            loadedGames.Add(LoadGame(game, SetParent(game.Orientation)));
         }
 
         /// <summary>
-        /// Spawns a random game from the Game list.
+        /// Goes over each property of a game asset and checks if
+        /// it would fit with the currently loaded games on screen.
         /// </summary>
-        /// <returns>A GameAsset reference.</returns>
-        private GameAsset SpawnGame()
+        /// <param name="game">The game to check.</param>
+        /// <returns>True if no overlaps are found.</returns>
+        private bool CheckFit(GameAsset game)
         {
-            GameAsset game = games[Random.Range(0, games.Count)];
+            if (game.Prefab == null) return false;
 
-            // TODO: Check for fullscreen?
+            if (!CheckProperty((int)game.Orientation, (int)loadedGames[0].Orientation)) return false;
 
-            // TODO: needs optimization!!!
+            if (CheckProperty((int)game.Keys, (int)loadedGames[0].Keys)) return false;
 
-            while (game.Prefab == null || AlreadySpawned(game.Origin) || SameOrientation(game.Orientation))
-            {
-                game = games[Random.Range(0, games.Count)];
-            }
+            if (CheckProperty((int)game.Genre, (int)loadedGames[0].Genre)) return false;
 
-            Transform parent = SetParent(game.Orientation);
+            return true;
+        }
 
-            while (parent == null)
-            {
-                parent = SetParent(game.Orientation);
-            }
+        /// <summary>
+        /// Checks enum property values by bitwise XOR comparison.
+        /// </summary>
+        /// <param name="one">Value of game one.</param>
+        /// <param name="two">Value of game two.</param>
+        /// <returns>True if a match was found.</returns>
+        private bool CheckProperty(int one, int two)
+        {
+            return (one ^ two) == 0;
+        }
 
+        /// <summary>
+        /// Instantiates a chosen game asset.
+        /// </summary>
+        /// <param name="game">The game asset to load from.</param>
+        /// <param name="parent">The parent to load it into.</param>
+        /// <returns>The successfully loaded game.</returns>
+        private GameAsset LoadGame(GameAsset game, Transform parent)
+        {
             Instantiate(game.Prefab, parent);
-
+            Game prefab = game.Prefab.GetComponent<Game>();
+            prefab.ID = game.AssetID;
+            prefab.Difficulty = game.Difficulty;
             return game;
-        }
-
-        /// <summary>
-        /// Checks if picked game is already spawned.
-        /// </summary>
-        /// <param name="gameID">The game's ID</param>
-        /// <returns>True or false if it exists.</returns>
-        private bool AlreadySpawned(int gameID)
-        {
-            bool one = false;
-            bool two = false;
-            if (loadedGames[0] != null)
-            {
-                one = loadedGames[0].Origin == gameID;
-            }
-
-            if (loadedGames[1] != null)
-            {
-                two = loadedGames[1].Origin == gameID;
-            }
-
-            return one || two;
-            //if ((loadedGames[0] != null && loadedGames[0].Origin == gameID) ||
-            //    (loadedGames[1] != null && loadedGames[1].Origin == gameID)) return true;
-
-            //return false;
-        }
-
-        /// <summary>
-        /// Checks if a game would overlap with already spawned ones
-        /// </summary>
-        /// <param name="orientation">The game's orionatation flags.</param>
-        /// <returns>True when overlap is found.</returns>
-        private bool SameOrientation(Orientation orientation)
-        {
-            bool one = false;
-            bool two = false;
-
-            if (loadedGames[0] != null)
-            {
-                one = (loadedGames[0].Orientation & orientation) != orientation;
-            }
-
-            if (loadedGames[1] != null)
-            {
-                two = (loadedGames[1].Orientation & orientation) != orientation;
-            }
-
-            return one || two;
         }
 
         /// <summary>
@@ -168,9 +155,22 @@ namespace _Scripts
         /// <summary>
         /// Removes the game instance from the scene.
         /// </summary>
-        private void RemoveGame()
+        /// <param name="removeAllFlag">Removes all games if true.</param>
+        private void RemoveGame(bool removeAllFlag)
         {
-            // TODO: implement
+            if (removeAllFlag)
+            {
+                foreach (GameAsset game in loadedGames)
+                {
+                    Destroy(GameObject.FindObjectOfType<GameObject>(game.Prefab));
+                }
+                loadedGames.Clear();
+            }
+
+            int index = Random.Range(0, loadedGames.Count);
+            GameObject instance = GameObject.FindObjectOfType<GameObject>(loadedGames[index].Prefab);
+            Destroy(instance);
+            loadedGames.Remove(loadedGames[index]);
         }
 
         /// <summary>
@@ -185,19 +185,26 @@ namespace _Scripts
 
         #region Game Mechanics
 
-        private void WinCondition(int origin)
+        private void WinCondition(AssetID id)
         {
-            Debug.Log("Win from " + games.Find(obj => obj.Origin == origin).Asset);
+            Debug.Log("Win from " + id);
         }
 
-        private void LoseCondition(int origin)
+        private void LoseCondition(AssetID id)
         {
-            Debug.Log("Lose from " + games.Find(obj => obj.Origin == origin).Asset);
+            Debug.Log("Lose from " + id);
+            gameVariables.Lives--;
+            Debug.Log(gameVariables.Lives);
+            if(gameVariables.Lives <= 0)
+            {
+                //PickGame(new List<GameAsset>(games));
+                gameObject.GetComponent<SceneChanger>().ChangeScene(0);
+            }
         }
 
-        private void SetDifficulty(int origin, Difficulty difficulty)
+        private void SetDifficulty(AssetID id, Difficulty difficulty)
         {
-            // TODO: Implement
+            games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
         }
 
         #endregion
