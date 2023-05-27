@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetID: 16897
   description: 
+  complexity: 0
   difficulty: 0
   genre: 2
-  keys: 0
-  orientation: 0
-  prefab: {fileID: 0}
-  version: 
+  keys: 6144
+  orientation: 2
+  prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
