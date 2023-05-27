@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: FallingObstacles
   m_EditorClassIdentifier: 
-  assetName: Falling Obstacles
+  assetID: 11042
   description: 
   difficulty: 0
   genre: 6

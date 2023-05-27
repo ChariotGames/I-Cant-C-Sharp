@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: SameAsBefore
   m_EditorClassIdentifier: 
-  assetName: Same As Before
+  assetID: 20227
   description: 
   difficulty: 0
   genre: 3

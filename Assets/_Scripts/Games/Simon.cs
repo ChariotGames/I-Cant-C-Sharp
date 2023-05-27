@@ -22,7 +22,8 @@ namespace _Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] private List<_Scripts.Simon> displayPattern, guessPattern, infoPattern;
+        [SerializeField] private List<Colors> displayPattern, guessPattern;
+        [SerializeField] private List<Modifier> infoPattern;
         [SerializeField] private GameObject[] buttons, infos;
         [SerializeField] private Image timer;
 
@@ -92,10 +93,10 @@ namespace _Scripts.Games
         /// /// <param name="length">The length of the pattern</param>
         private void GeneratePattern(int length)
         {
-            _Scripts.Simon randomColor;
+            Colors randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = (_Scripts.Simon)UnityEngine.Random.Range(0, COLORS);
+                randomColor = (Colors)UnityEngine.Random.Range(0, COLORS);
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
@@ -103,16 +104,16 @@ namespace _Scripts.Games
 
         /// <summary>
         /// Sets the actual pattern for the user to guess.
-        /// Depending on the Level and Modifiers it may differ
+        /// Depending on the Level and Modifier it may differ
         /// from the patern the user gets to actually see.
         /// </summary>
         /// <param name="button">Enum of the color to add to the pattern.</param>
-        private void SetGuessPattern(_Scripts.Simon button)
+        private void SetGuessPattern(Colors button)
         {
             if (displayPattern.Count <= MIN_LENGTH)
             {
                 // Only do the extra difficulty after the 3rd round!
-                infoPattern.Add(_Scripts.Simon.EMPTY);
+                infoPattern.Add(Modifier.NORMAL);
                 guessPattern.Add(button);
                 return;
             }
@@ -122,17 +123,17 @@ namespace _Scripts.Games
             if (base.Difficulty == Difficulty.LVL3 && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
-                infoPattern.Add(_Scripts.Simon.NONE);
+                infoPattern.Add(Modifier.NONE);
                 return;
             }
 
-            infoPattern.Add(_Scripts.Simon.EMPTY);
+            infoPattern.Add(Modifier.NORMAL);
             guessPattern.Add(button);
 
             if (base.Difficulty != Difficulty.LVL1 && chance > 1)
             {
                 // On Level 2 the color is doubled
-                infoPattern[^1] = _Scripts.Simon.DOUBLE;
+                infoPattern[^1] = Modifier.DOUBLE;
                 guessPattern.Add(button);
             }
         }
@@ -147,7 +148,7 @@ namespace _Scripts.Games
 
             for (int i = 0; i < infoPattern.Count; i++)
             {
-                infoPattern[i] = _Scripts.Simon.EMPTY;
+                infoPattern[i] = Modifier.NORMAL;
             }
         }
 
@@ -200,10 +201,10 @@ namespace _Scripts.Games
 
             for (int i = 0; i < displayPattern.Count; i++)
             {
-                _Scripts.Simon button = displayPattern[i];
-                _Scripts.Simon info = infoPattern[i];
+                Colors button = displayPattern[i];
+                Modifier info = infoPattern[i];
                 buttons[(int)button].GetComponent<SimonButton>().Animate();
-                if (info != _Scripts.Simon.EMPTY)
+                if (info != Modifier.NORMAL)
                 {
                     GameObject icon = infos[(int)info % COLORS];
                     icon.GetComponent<SimonButton>().Animate();
@@ -245,7 +246,7 @@ namespace _Scripts.Games
         /// the input against the guessing pattern.
         /// </summary>
         /// <param name="color">The color to check.</param>
-        private void CheckColor(_Scripts.Simon color)
+        private void CheckColor(Colors color)
         {
             if (!(guessPattern[checkingIndex] == color))
             {

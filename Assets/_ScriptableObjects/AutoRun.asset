@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: AutoRun
   m_EditorClassIdentifier: 
-  assetName: AutoRun
+  assetID: 23553
   description: 
   difficulty: 0
   genre: 2
   keys: 0
   orientation: 1
   prefab: {fileID: 5920264850204584917, guid: 031a16bd02a52994bbc5b50358c6626e, type: 3}
+  version: 
