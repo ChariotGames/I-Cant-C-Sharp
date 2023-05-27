@@ -14,8 +14,10 @@ public class G01_MagicCircle : Game
     [SerializeField] private bool stop = false;
     [SerializeField] private float sTime = 3;
     [SerializeField] private float sDelay;
-    private Difficulty CurrentLevel { get; set; } = Difficulty.LVL1;
-
+    [SerializeField] private float rotationspeed;
+    [SerializeField] private Vector3 rotationDir;
+    private Difficulty CurrentLevel { get; set; } = Difficulty.LVL2;
+    private SpriteRenderer circleRenderer;
     //private MagicRing ringScript;
 
 
@@ -23,7 +25,7 @@ public class G01_MagicCircle : Game
     void Start()
     {
         Invoke("SpawnRings", sTime);
-        circle.GetComponent<SpriteRenderer>();
+        circleRenderer= circle.GetComponent<SpriteRenderer>();
     }
 
     private void SpawnRings()
@@ -47,11 +49,11 @@ public class G01_MagicCircle : Game
         }
     }
 
-    private void WinCondition(GameObject obj)
+    private void WinCon(GameObject obj)
     {
         base.Win();
         Debug.Log("win");
-        StartCoroutine(AnimateColor(circle.GetComponent<SpriteRenderer>(), Color.blue, Color.green, 0.25f));
+        StartCoroutine(AnimateColor(circleRenderer, Color.blue, Color.green, 0.25f));
         if (obj.GetComponent<MagicRing>().live == true)
         {
             Destroy(obj);
@@ -66,11 +68,11 @@ public class G01_MagicCircle : Game
         }
     }
 
-    private void LoseCondition(GameObject obj)
+    private void LoseCon(GameObject obj)
     {
         base.Lose();
         Debug.Log("Lose");
-        StartCoroutine(AnimateColor(circle.GetComponent<SpriteRenderer>(), Color.blue, Color.red, 0.25f));
+        StartCoroutine(AnimateColor(circleRenderer, Color.blue, Color.red, 0.25f));
         if (obj.GetComponent<MagicRing>().live == true)
         {
             Destroy(obj);
@@ -108,6 +110,6 @@ public class G01_MagicCircle : Game
     // Update is called once per frame
     void Update()
     {
-        
+        circle.transform.Rotate(rotationspeed * Time.deltaTime * rotationDir);
     }
 }

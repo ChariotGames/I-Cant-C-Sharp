@@ -22,12 +22,13 @@ public class MagicRing : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(live);
-        chance = UnityEngine.Random.Range(0, 2);
+        
         //ringRenderer = GetComponent<LineRenderer>();
 
         if (level == Difficulty.LVL2 || level == Difficulty.LVL3)
         {
-            if(chance == 1)
+            chance = UnityEngine.Random.Range(0, 2);
+            if (chance == 1)
             {
                 ringRenderer.startColor = ringColor;
                 ringRenderer.endColor = ringColor;
@@ -46,11 +47,11 @@ public class MagicRing : MonoBehaviour
         
         if (radius <= 0.75 && radius >= 0.25 && chance == 0)
         {
-            SendMessageUpwards("WinCondition", gameObject);
+            SendMessageUpwards("WinCon", gameObject);
         }
         else
         {
-            SendMessageUpwards("LoseCondition", gameObject);
+            SendMessageUpwards("LoseCon", gameObject);
         }
         
     }
@@ -60,11 +61,11 @@ public class MagicRing : MonoBehaviour
 
         if (radius <= 0.75 && radius >= 0.25 && chance == 1)
         {
-            SendMessageUpwards("WinCondition", gameObject);
+            SendMessageUpwards("WinCon", gameObject);
         }
         else
         {
-            SendMessageUpwards("LoseCondition", gameObject);
+            SendMessageUpwards("LoseCon", gameObject);
         }
     }
 
@@ -92,7 +93,7 @@ public class MagicRing : MonoBehaviour
     {
         if (radius < 0.24)
         {
-            SendMessageUpwards("LoseCondition", gameObject);
+            SendMessageUpwards("LoseCon", gameObject);
             //Destroy(gameObject);
         }
         if(live)
