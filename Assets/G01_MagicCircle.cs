@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using _Scripts._Input;
 using System;
+using _Scripts;
+using _Scripts.Games;
 
-public class G01_MagicCircle : MonoBehaviour
+public class G01_MagicCircle : Game
 {
     //[SerializeField] private float time = 0f;
 
@@ -45,6 +47,7 @@ public class G01_MagicCircle : MonoBehaviour
 
     private void WinCondition(GameObject obj)
     {
+        base.Win();
         Debug.Log("win");
         if(obj.GetComponent<MagicRing>().live == true)
         {
@@ -62,6 +65,7 @@ public class G01_MagicCircle : MonoBehaviour
 
     private void LoseCondition(GameObject obj)
     {
+        base.Lose();
         Debug.Log("Lose");
         if (obj.GetComponent<MagicRing>().live == true)
         {

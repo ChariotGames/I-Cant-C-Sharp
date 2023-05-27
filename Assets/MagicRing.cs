@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using _Scripts._Input;
 using System;
+using _Scripts;
 
 public class MagicRing : MonoBehaviour
 {
