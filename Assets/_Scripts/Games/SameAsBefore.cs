@@ -103,7 +103,7 @@ namespace _Scripts.Games
                     yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > timeToAsAnswer);
                     if ((index == lastIndices.ElementAt(steps) && isYes && !isNo) || (index != lastIndices.ElementAt(steps) && isNo && !isYes))
                     {
-                        Debug.Log("Win");
+                        base.Win();
                         options[index].SetActive(false);
                         isYes = false;
                         isNo = false;
@@ -112,7 +112,7 @@ namespace _Scripts.Games
                     }
                     else
                     {
-                        Debug.Log("Lose Condition");
+                        base.Lose();
                         options[index].SetActive(false);
                         failText.SetActive(true);
                         yield break;

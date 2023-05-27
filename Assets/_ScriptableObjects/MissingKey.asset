@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: MissingKey
   m_EditorClassIdentifier: 
-  assetName: Missing Key
+  assetID: 32011
   description: 
+  complexity: 3
   difficulty: 0
   genre: 4
   keys: 60
