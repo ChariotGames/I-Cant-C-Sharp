@@ -42,7 +42,7 @@ public class MagicRing : MonoBehaviour
     private void checkLeft()
     {
         
-        if (radius <= 0.65 && radius >= 0.35 && chance == 0)
+        if (radius <= 0.75 && radius >= 0.25 && chance == 0)
         {
             SendMessageUpwards("WinCondition", gameObject);
         }
@@ -56,7 +56,7 @@ public class MagicRing : MonoBehaviour
     private void checkRight()
     {
 
-        if (radius <= 0.65 && radius >= 0.35 && chance == 1)
+        if (radius <= 0.75 && radius >= 0.25 && chance == 1)
         {
             SendMessageUpwards("WinCondition", gameObject);
         }
@@ -88,7 +88,7 @@ public class MagicRing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (radius < 0.35)
+        if (radius < 0.24)
         {
             SendMessageUpwards("LoseCondition", gameObject);
             //Destroy(gameObject);
