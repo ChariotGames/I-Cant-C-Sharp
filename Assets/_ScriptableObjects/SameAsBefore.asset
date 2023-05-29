@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: SameAsBefore
   m_EditorClassIdentifier: 
-  assetName: Same As Before
+  assetID: 20227
   description: 
+  complexity: 2
   difficulty: 0
   genre: 3
   keys: 6144
   orientation: 2
   prefab: {fileID: 3698711568559123562, guid: 4feb5dd879318934b999770a65598759, type: 3}
-  version: 

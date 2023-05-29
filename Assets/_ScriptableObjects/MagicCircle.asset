@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: MagicCircle
   m_EditorClassIdentifier: 
-  assetName: Magic Circle
+  assetID: 16897
   description: 
+  complexity: 0
   difficulty: 0
   genre: 2
-  keys: 0
-  orientation: 0
-  prefab: {fileID: 0}
+  keys: 6144
+  orientation: 2
+  prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
