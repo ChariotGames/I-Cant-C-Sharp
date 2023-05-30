@@ -17,9 +17,17 @@ MonoBehaviour:
   description: Represents our default Scene with just an empty Canvas and Inputsystem
   preview: {fileID: 0}
   dependencies:
+  - dependency: {fileID: 12800000, guid: c9afbd86b7528094eb74cef3955ecf6c, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 3028dc075ba8c584d9bc7d1e0255e038, type: 3}
     instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: -944628639613478452, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 7f4d402bd660e914883965ec4756219e, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
     instantiationMode: 1
   - dependency: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
     instantiationMode: 1
