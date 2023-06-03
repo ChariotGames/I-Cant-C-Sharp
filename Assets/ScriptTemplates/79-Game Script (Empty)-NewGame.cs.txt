@@ -8,14 +8,14 @@ namespace _Scripts.Games
     public class #SCRIPTNAME# : Game
     {
         #region Serialized Fields
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion Serialized Fields
 
         #region Fields
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion Fields
 
@@ -34,14 +34,14 @@ namespace _Scripts.Games
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         public void TemplateMethod(bool param)
         {
@@ -51,8 +51,8 @@ namespace _Scripts.Games
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion Overarching Methods / Helpers
     }

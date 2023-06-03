@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts
@@ -10,6 +11,7 @@ namespace _Scripts
         [SerializeField] private byte lives = 3, players = 1;
         [SerializeField] private GameMode mode = GameMode.SINGLE;
         [SerializeField] private GameAsset selectedGame;
+        [SerializeField] private List<GameAsset> games;
 
         #endregion
 
@@ -36,6 +38,12 @@ namespace _Scripts
         {
             get { return selectedGame; }
             set { selectedGame = value; }
+        }
+
+        public List<GameAsset> Games
+        {
+            get { return games; }
+            set { games = value; }
         }
 
         #endregion

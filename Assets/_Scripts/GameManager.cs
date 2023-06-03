@@ -12,7 +12,6 @@ namespace _Scripts
         #region Serialized Fields
 
         [SerializeField] private Settings settings;
-        [SerializeField] private List<GameAsset> games;
         [SerializeField] private GameObject[] spawnPoints;
 
         #endregion
@@ -29,8 +28,8 @@ namespace _Scripts
         {
             if(settings.SelectedGame == null)
             {
-                PickGame(new List<GameAsset>(games));
-                PickGame(new List<GameAsset>(games));
+                PickGame(new List<GameAsset>(settings.Games));
+                PickGame(new List<GameAsset>(settings.Games));
             } else
             {
                 loadedGames.Add(LoadGame(settings.SelectedGame, SetParent(Orientation.FULLSCREEN)));
@@ -212,7 +211,7 @@ namespace _Scripts
 
         private void SetDifficulty(AssetID id, Difficulty difficulty)
         {
-            games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
+            settings.Games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
         }
 
         #endregion
