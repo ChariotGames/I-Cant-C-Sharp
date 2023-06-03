@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Scripts
 {
@@ -10,12 +10,13 @@ namespace _Scripts
 
         [SerializeField] private AssetID assetID;
         [TextArea(3, 10)] [SerializeField] private string description;
+        [SerializeField] private Complexity complexity;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;
         [SerializeField] private Keys keys;
         [SerializeField] private Orientation orientation;
-        //[SerializeField] private Shape shape;
         [SerializeField] private GameObject prefab;
+        [SerializeField] private Image screenshot;
 
         #endregion Serialized Fields
 
@@ -23,6 +24,11 @@ namespace _Scripts
         public AssetID AssetID
         {
             get { return assetID; }
+        }
+
+        public Complexity Complexity
+        {
+            get { return complexity; }
         }
 
         public string Description
@@ -54,6 +60,11 @@ namespace _Scripts
         public GameObject Prefab
         {
             get { return prefab; }
+        }
+
+        public Image Screenshot
+        {
+            get { return screenshot; }
         }
 
         #endregion GetSets
