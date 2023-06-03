@@ -162,7 +162,7 @@ namespace _Scripts.Games
         
         private void gameLost()
         {
-            gameStateText.text = timeElapsed > 0 ? "To slow!" : "To Early!";
+            gameStateText.text = timeElapsed > 0 ? "Too slow!" : "Too Early!";
             base.Lose();
         }
 
