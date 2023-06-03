@@ -3,35 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using _Scripts._Input;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Debug = System.Diagnostics.Debug;
+using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
     public class RapidReflex : Game
     {
-        #region Serialized Fields
+    #region Serialized Fields
         
-        [SerializeField] private int timeToAnswer;
+        [SerializeField] private Difficulty difficulty;
+        [SerializeField] private int timeToAnswerInMs;
         [SerializeField] private float lightTimer;
-        [SerializeField] private GameObject lightsTop, lightsBottom, light;
+        [SerializeField] private GameObject lightsTop, lightsBottom, light, overlayContainer;
         [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen;
+        [SerializeField] private TMP_Text gameStateText;
 
-        #endregion Serialized Fields
+    #endregion Serialized Fields
 
-        #region Fields
-
-        
+    #region Fields
+    
         private const int NUMBER_LIGHTS = 5;
         private SpriteRenderer[] bulbsSpriteTop = new SpriteRenderer[NUMBER_LIGHTS];
         private SpriteRenderer[] bulbsSpriteBottom = new SpriteRenderer[NUMBER_LIGHTS];
         private float timeElapsed = 0;
         private bool isButtonPressed = false;
+        private float randomDelay = 0;
 
-        #endregion Fields
+    #endregion Fields
 
-        #region Built-Ins / MonoBehaviours
+    #region Built-Ins / MonoBehaviours
 
         void Start()
         {
@@ -39,30 +44,34 @@ namespace _Scripts.Games
             StartCoroutine(GameCoroutine());
         }
 
-        #endregion Built-Ins / MonoBehaviours
+    #endregion Built-Ins / MonoBehaviours
 
-        #region GetSets / Properties
+    #region GetSets / Properties
 
             
 
-        #endregion GetSets / Properties
+    #endregion GetSets / Properties
 
-        #region Game Mechanics / Methods
+    #region Game Mechanics / Methods
 
         private IEnumerator GameCoroutine()
         {
             yield return new WaitForSeconds(1);
             while (true)
             {
+                updateRandomDelay();
                 yield return StartCoroutine(lightAnimation());
                 
                 yield return StartCoroutine(measureTime());
+                
+                turnOffAllLights();
+                yield return StartCoroutine(determineGamestate());
             }
         }
 
-        #endregion Game Mechanics / Methods
+    #endregion Game Mechanics / Methods
 
-        #region Overarching Methods / Helpers
+    #region Overarching Methods / Helpers
 
         private void spawnLights()
         {
@@ -104,12 +113,15 @@ namespace _Scripts.Games
 
         private IEnumerator lightAnimation()
         {
+            isButtonPressed = false;
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
+                if (checkForEarlyLose()) yield break; 
                 updateLightColor(bulbsSpriteTop[i], lightRed);
-                yield return new WaitForSeconds(lightTimer);
+                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && difficulty != Difficulty.LVL1 ? randomDelay : 0));
+                if (checkForEarlyLose()) yield break; 
             }
-            isButtonPressed = false;
+            UnityEngine.Debug.Log("Delay: " + (randomDelay + randomDelay) + " s");
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
                 updateLightColor(bulbsSpriteBottom[i], lightGreen);
@@ -119,31 +131,74 @@ namespace _Scripts.Games
         private IEnumerator measureTime()
         {
             timeElapsed = 0;
+            if (checkForEarlyLose()) yield break; 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            yield return new WaitUntil(() => isButtonPressed);
+            yield return new WaitUntil(() => isButtonPressed || stopwatch.ElapsedMilliseconds > timeToAnswerInMs);
             stopwatch.Stop();
             timeElapsed = stopwatch.ElapsedMilliseconds;
-            turnOffAllLights();
+        }
+
+        private IEnumerator determineGamestate()
+        {
+            overlayContainer.SetActive(true);
+            if (timeElapsed < timeToAnswerInMs && timeElapsed >= 0)
+            {
+                gameWon();
+            }
+            else
+            {
+                gameLost();
+            }
             yield return new WaitForSeconds(2);
+            overlayContainer.SetActive(false);
+        }
+
+        private void gameWon()
+        {
+            gameStateText.text = "Rapid Reflex: " + timeElapsed + " ms";
+            base.Win();
         }
         
-        
+        private void gameLost()
+        {
+            gameStateText.text = timeElapsed > 0 ? "To slow!" : "To Early!";
+            base.Lose();
+        }
+
+        private void updateRandomDelay()
+        {
+            randomDelay = Random.Range(0, 1.5f);
+        }
+
+        private Boolean checkForEarlyLose()
+        {
+            if (isButtonPressed)
+            {
+                timeElapsed = -1;
+                return true;
+            }
+            return false;
+        }
+
         private void OnEnable()
         {
             InputHandler.EastBtnAction += EastButtonPressed;
+            InputHandler.RightShoulderBtnAction += EastButtonPressed;
         }
 
         public void EastButtonPressed()
         {
             isButtonPressed = true;
+            UnityEngine.Debug.Log("Button Pressed!");
         }
         
         private void OnDisable()
         {
             InputHandler.EastBtnAction -= EastButtonPressed;
+            InputHandler.RightShoulderBtnAction -= EastButtonPressed;
         }
 
-        #endregion Overarching Methods / Helpers
+    #endregion Overarching Methods / Helpers
     }
 }
