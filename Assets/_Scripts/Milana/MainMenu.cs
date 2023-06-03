@@ -3,51 +3,89 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using _Scripts;
 
 
-public class Minigame
+public class MainMenu : MonoBehaviour
 {
-    public string name;
-}
-
-public class MenuButtonHandler : MonoBehaviour
-{
-    
-    private MenuButtonHandler.Scene currentScene;
-    [SerializeField] private TMP_Text mainTitle;
-    [SerializeField] private TMP_Text playerTitle;
-    [SerializeField] private TMP_Text modeTitle;
-    [SerializeField] private TMP_Text gamesTitle;
-    [SerializeField] private GameObject buttonPanel;
-    [SerializeField] private GameObject startButton;
-    [SerializeField] private GameObject optionsButton;
-    [SerializeField] private GameObject quitButton;
-    [SerializeField] private GameObject singlePlayerButton;
-    [SerializeField] private GameObject multiplayerButton;
-    [SerializeField] private GameObject selectGameButton;
-    [SerializeField] private GameObject endlessModeButton;
-    [SerializeField] private GameObject backButton;
-    [SerializeField] private GameObject simonSays;
-    [SerializeField] private GameObject missingKey;
-    [SerializeField] private GameObject autoRunner;
-    [SerializeField] private GameObject SAB;
-    [SerializeField] private GameObject tankGame;
-    [SerializeField] private GameObject game0;
-    [SerializeField] private GameObject game1;
-    [SerializeField] private GameObject game2;
-    [SerializeField] private GameObject game3;
-    [SerializeField] private GameObject game4;
-
+    [SerializeField] private GameObject templateMenuButton, templateGameButton, subMenus, gamesContainer;
+    [SerializeField] private List<GameAsset> games;
     private List<string> playerMode;
+    private List<GameObject> gameButtons;
+    private Bounds _cameraViewportBounds;
+    private Camera _mainCamera;
+    private float _playfieldWidth;
 
-    enum Scene
+    private void Awake()
     {
-        MainMenu,
-        PlayerMenu,
-        ModeMenu,
-        GamesMenu
+        _mainCamera = Camera.main;
     }
 
+    private void Start()
+    {
+        _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+        _playfieldWidth = _cameraViewportBounds.size.x;
+        //fillGamesContainer();
+    }
+
+    public void ActivateSubMenu(int menuName)
+    {
+        for (int i = 0; i < subMenus.transform.childCount; i++)
+        {
+            Transform child = subMenus.transform.GetChild(i);
+            child.gameObject.SetActive(false);
+        }
+        /*
+        foreach (var menu in subMenus.transform.GetComponentsInChildren<GameObject>())
+        {
+            menu.SetActive(false);
+        }*/
+        subMenus.transform.GetChild(menuName).gameObject.SetActive(true);
+
+        //Games Menu
+        if(menuName==3)
+        {
+            fillGamesContainer();
+        }
+    }
+
+    public void Quit()
+    {
+        Debug.Log("Bye bye!");
+        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
+
+    }
+
+    public void fillGamesContainer()
+    {
+        //List<GameAsset> games = getGames();
+        foreach (var game in games)
+        {
+            //TODO NullReferenceException!
+            gameButtons.Add(Instantiate(templateGameButton, gamesContainer.transform));
+            GameObject obj = GameObject.Find("GameButton");
+            obj.GetComponentInChildren<TMP_Text>().text = game.AssetID.ToString()[4..];
+            
+        }
+        sortButtons();
+    }
+
+    private void sortButtons()
+    {
+        foreach (var button in gameButtons)
+        {
+            //TODO Button pos anordnen
+        }
+    }
+
+   private List<GameAsset> getGames()
+    {
+        //TODO load assets from folder
+        return new List<GameAsset>();
+    }
+
+    /*
     private void Awake()
     {
         currentScene = Scene.MainMenu;
@@ -181,5 +219,6 @@ public class MenuButtonHandler : MonoBehaviour
                 break;
         }
     }
+    */
 
 }
