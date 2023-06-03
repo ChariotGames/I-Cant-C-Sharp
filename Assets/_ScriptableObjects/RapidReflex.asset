@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
   m_Name: RapidReflex
   m_EditorClassIdentifier: 
-  assetID: 0
+  assetID: 27261
   description: 
   difficulty: 0
-  genre: 0
-  keys: 0
-  orientation: 0
-  prefab: {fileID: 0}
+  genre: 2
+  keys: 128
+  orientation: 2
+  prefab: {fileID: 6392271741382647194, guid: 62e95bc5bd41cdc45ab5d5c25ab44dfe, type: 3}
