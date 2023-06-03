@@ -184,7 +184,6 @@ namespace _Scripts.Games
         private void OnEnable()
         {
             InputHandler.EastBtnAction += EastButtonPressed;
-            InputHandler.RightShoulderBtnAction += EastButtonPressed;
         }
 
         public void EastButtonPressed()
@@ -196,7 +195,6 @@ namespace _Scripts.Games
         private void OnDisable()
         {
             InputHandler.EastBtnAction -= EastButtonPressed;
-            InputHandler.RightShoulderBtnAction -= EastButtonPressed;
         }
 
     #endregion Overarching Methods / Helpers
