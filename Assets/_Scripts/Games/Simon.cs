@@ -65,7 +65,7 @@ namespace _Scripts.Games
         }
 
         /// <summary>
-        /// Updates the game difficulty for next spawn and messages to the GameController.
+        /// Updates the game difficulty for next spawn and messages to the GameManager.
         /// </summary>
         private void UpdateDifficulty(int rounds)
         {

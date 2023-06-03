@@ -1,15 +1,17 @@
 using _Scripts.Games;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts
 {
-    public class GameController : MonoBehaviour
+    /// <summary>
+    /// Manages matching, spawning and deletion of game assets.
+    /// </summary>
+    public class GameManager : MonoBehaviour
     {
         #region Serialized Fields
 
-        [SerializeField] private Data gameVariables;
+        [SerializeField] private Settings settings;
         [SerializeField] private List<GameAsset> games;
         [SerializeField] private GameObject[] spawnPoints;
 
@@ -25,8 +27,14 @@ namespace _Scripts
 
         void Awake()
         {
-            PickGame(new List<GameAsset>(games));
-            PickGame(new List<GameAsset>(games));
+            if(settings.SelectedGame == null)
+            {
+                PickGame(new List<GameAsset>(games));
+                PickGame(new List<GameAsset>(games));
+            } else
+            {
+                loadedGames.Add(LoadGame(settings.SelectedGame, SetParent(Orientation.FULLSCREEN)));
+            }
         }
 
         #endregion
@@ -49,9 +57,9 @@ namespace _Scripts
                 RemoveGame(game.Orientation.HasFlag(Orientation.FULLSCREEN));
             }
 
-            if (game.Orientation == Orientation.FULLSCREEN)
+            if (game.Orientation == Orientation.FULLSCREEN || game.Complexity == Complexity.SOLO)
             {
-                loadedGames.Add(LoadGame(game, SetParent(game.Orientation)));
+                loadedGames.Add(LoadGame(game, SetParent(Orientation.FULLSCREEN)));
                 return;
             }
 
@@ -193,9 +201,9 @@ namespace _Scripts
         private void LoseCondition(AssetID id)
         {
             Debug.Log("Lose from " + id);
-            gameVariables.Lives--;
-            Debug.Log(gameVariables.Lives);
-            if(gameVariables.Lives <= 0)
+            settings.Lives--;
+            Debug.Log(settings.Lives);
+            if(settings.Lives <= 0)
             {
                 //PickGame(new List<GameAsset>(games));
                 gameObject.GetComponent<SceneChanger>().ChangeScene(0);
