@@ -12,9 +12,19 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private List<GameAsset> games;
     private List<string> playerMode;
     private List<GameObject> gameButtons;
+    private Bounds _cameraViewportBounds;
+    private Camera _mainCamera;
+    private float _playfieldWidth;
+
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+    }
 
     private void Start()
     {
+        _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+        _playfieldWidth = _cameraViewportBounds.size.x;
         //fillGamesContainer();
     }
 
@@ -31,6 +41,12 @@ public class MainMenu : MonoBehaviour
             menu.SetActive(false);
         }*/
         subMenus.transform.GetChild(menuName).gameObject.SetActive(true);
+
+        //Games Menu
+        if(menuName==3)
+        {
+            fillGamesContainer();
+        }
     }
 
     public void Quit()
@@ -46,6 +62,7 @@ public class MainMenu : MonoBehaviour
         //List<GameAsset> games = getGames();
         foreach (var game in games)
         {
+            //TODO NullReferenceException!
             gameButtons.Add(Instantiate(templateGameButton, gamesContainer.transform));
             GameObject obj = GameObject.Find("GameButton");
             obj.GetComponentInChildren<TMP_Text>().text = game.AssetID.ToString()[4..];
