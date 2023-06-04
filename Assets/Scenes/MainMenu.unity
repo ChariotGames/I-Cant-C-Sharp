@@ -379,6 +379,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 475061172}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &89239558
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1170,6 +1182,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 89239554}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &305718945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1440,6 +1464,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 89239554}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &441064678
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1634,6 +1670,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1007687554}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &475061176
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1822,6 +1870,18 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1122776467}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1330930947}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -4343,6 +4403,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1007687554}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &926588869
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4620,6 +4692,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 926588866}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5564,6 +5648,18 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 226108386}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 441064675}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -6792,7 +6888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 89239554}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1695267416
@@ -7649,8 +7745,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1178884896}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: ActivateSubMenu
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: ToggleSubMenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1122776467}
@@ -7661,11 +7757,23 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1178884896}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: DeactivateSubMenu
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: ToggleSubMenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1330930947}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 475061172}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -7909,6 +8017,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1178884896}
+        m_TargetAssemblyTypeName: _Scripts.MainMenu, Assembly-CSharp
+        m_MethodName: SetSelected
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 926588866}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

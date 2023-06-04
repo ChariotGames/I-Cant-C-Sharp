@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace _Scripts
 {
@@ -33,12 +34,6 @@ namespace _Scripts
 
         #endregion Built-Ins / MonoBehaviours
 
-        #region GetSets / Properties
-
-
-
-        #endregion GetSets / Properties
-
         #region Game Mechanics / Methods
 
         /// <summary>
@@ -65,6 +60,15 @@ namespace _Scripts
                     UnityEditor.EditorApplication.isPlaying = false;
         #endif
             Application.Quit();
+        }
+
+        /// <summary>
+        /// On menu change, set the given button as selected.
+        /// </summary>
+        /// <param name="button">The buton to select.</param>
+        public void SetSelected(GameObject button)
+        {
+            EventSystem.current.SetSelectedGameObject(button);
         }
 
         /// <summary>
