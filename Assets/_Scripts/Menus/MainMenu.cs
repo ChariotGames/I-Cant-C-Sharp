@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 namespace _Scripts
 {
+    /// <summary>
+    /// A basic main menu control.
+    /// </summary>
     public class MainMenu : MonoBehaviour
     {
         #region Serialized Fields
@@ -29,6 +32,7 @@ namespace _Scripts
 
         void Start()
         {
+            ResetSettings();
             gameButtons = new();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             livesText.text = settings.Lives.ToString();
