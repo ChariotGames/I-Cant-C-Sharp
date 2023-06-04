@@ -649,7 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 0
   maxStepsBack: 3
-  timeToAsAnswer: 60
+  timeToAnswer: 10
   options:
   - {fileID: 888037505940594430}
   - {fileID: 5097884201152601589}
