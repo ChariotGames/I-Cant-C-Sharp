@@ -49,13 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc79b1fc0f3eb64a83079d3ba06e23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 65dcec6c5cbe3474cb38f18418f92669, type: 2}
-  games:
-  - {fileID: 11400000, guid: 2a8376e5aa24a9141a748197b7871601, type: 2}
-  - {fileID: 11400000, guid: 3e7e50a94181e784daff6560a2a0bcd4, type: 2}
-  - {fileID: 11400000, guid: 561e5eda916b9124e881c6e34a54b13f, type: 2}
-  - {fileID: 11400000, guid: f2ce0483e2a25e74bad44748d727df58, type: 2}
-  - {fileID: 11400000, guid: ab65f45f24b010741ae49bb8d1f237b0, type: 2}
+  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
   spawnPoints:
   - {fileID: 5897317456917386128}
   - {fileID: 5897317456894251579}

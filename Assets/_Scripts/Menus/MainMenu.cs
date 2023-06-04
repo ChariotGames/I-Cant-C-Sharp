@@ -12,8 +12,9 @@ namespace _Scripts
 
         [SerializeField] private Camera mainCamera;
         [SerializeField] private CanvasScaler canvasScaler;
-        [SerializeField] private GameObject gamesContainer, templateGameButton;
-        [SerializeField] private Settings settings;
+        [SerializeField] private GameObject gamesContainer, templateGameButton, optionLives;
+        [SerializeField] private Settings defaultSettings, settings;
+        [SerializeField] private TMP_Text livesText;
 
         #endregion Serialized Fields
 
@@ -30,6 +31,7 @@ namespace _Scripts
         {
             gameButtons = new();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
+            livesText.text = settings.Lives.ToString();
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -46,7 +48,7 @@ namespace _Scripts
             foreach (var game in settings.Games)
             {
                 GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
-                button.GetComponentInChildren<TMP_Text>().text = CovertIDtoName(game.AssetID);
+                button.GetComponent<MainMenuGame>().SetupButton(game);
                 gameButtons.Add(button);
             }
         }
@@ -57,9 +59,48 @@ namespace _Scripts
         public void Quit()
         {
         #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
         #endif
             Application.Quit();
+        }
+
+        /// <summary>
+        /// Resets all settings back to default.
+        /// </summary>
+        public void ResetSettings()
+        {
+            settings.Lives = defaultSettings.Lives;
+            SetLives(0);
+            settings.Mode = defaultSettings.Mode;
+            settings.Players = defaultSettings.Players;
+            settings.SelectedGame = defaultSettings.SelectedGame;
+            settings.Games = defaultSettings.Games;
+        }
+        /// <summary>
+        /// Sets the game mode to endless.
+        /// </summary>
+        public void SetEndlessMode()
+        {
+            settings.Mode = GameMode.ENDLESS;
+        }
+
+        /// <summary>
+        /// Updates the life counter.
+        /// </summary>
+        /// <param name="change">The difference to set to.</param>
+        public void SetLives(int change)
+        {
+            settings.Lives = (byte)Mathf.Clamp(settings.Lives + change, 1, 9);
+            livesText.text = settings.Lives.ToString();
+        }
+
+        /// <summary>
+        /// Sets the number of player.
+        /// </summary>
+        /// <param name="count">The number of players.</param>
+        public void SetPlayers(int count)
+        {
+            settings.Players = (byte)Mathf.Clamp(count, 0, 4);
         }
 
         /// <summary>
@@ -81,27 +122,5 @@ namespace _Scripts
         }
 
         #endregion Game Mechanics / Methods
-
-        #region Overarching Methods / Helpers
-
-        /// <summary>
-        /// Converts an AssetID enum to a propper game name.
-        /// </summary>
-        /// <param name="id">The ID to convert.</param>
-        /// <returns>Name with spaces.</returns>
-        private string CovertIDtoName(AssetID id)
-        {
-            string name = id.ToString()[4..];
-            string result = "";
-
-            foreach (char c in name)
-            {
-                if (char.IsUpper(c)) result += " ";
-                result += c;
-            }
-            return result.Trim();
-        }
-
-        #endregion Overarching Methods / Helpers
     }
 }

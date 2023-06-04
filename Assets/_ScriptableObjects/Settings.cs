@@ -10,8 +10,8 @@ namespace _Scripts
 
         [SerializeField] private byte lives = 3, players = 1;
         [SerializeField] private GameMode mode = GameMode.SINGLE;
-        [SerializeField] private GameAsset selectedGame;
-        [SerializeField] private List<GameAsset> games;
+        [SerializeField] private GameAsset selectedGame = null;
+        [SerializeField] private List<GameAsset> games = new();
 
         #endregion
 
@@ -19,31 +19,31 @@ namespace _Scripts
 
         public byte Lives
         {
-            get { return lives; }
-            set { lives = value; }
+            get => lives;
+            set => lives = value;
         }
         public byte Players
         {
-            get { return players; }
-            set { players = value; }
+            get => players;
+            set => players = value;
         }
 
         public GameMode Mode
         {
-            get { return mode; }
-            set { mode = value; }
+            get => mode;
+            set => mode = value;
         }
 
         public GameAsset SelectedGame
         {
-            get { return selectedGame; }
-            set { selectedGame = value; }
+            get => selectedGame;
+            set => selectedGame = value;
         }
 
         public List<GameAsset> Games
         {
-            get { return games; }
-            set { games = value; }
+            get => games;
+            set => games = value;
         }
 
         #endregion
