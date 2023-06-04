@@ -19,17 +19,19 @@ namespace _Scripts.Games
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private int timeToAnswerInMs;
         [SerializeField] private float lightTimer;
-        [SerializeField] private GameObject lightsTop, lightsBottom, light, overlayContainer;
+        [SerializeField] private GameObject lightsTop, lightsBottom, light, overlayContainer, background;
         [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen;
+        [SerializeField] private List<Color> flashColor;
         [SerializeField] private TMP_Text gameStateText;
 
     #endregion Serialized Fields
 
     #region Fields
     
-        private const int NUMBER_LIGHTS = 5;
-        private SpriteRenderer[] bulbsSpriteTop = new SpriteRenderer[NUMBER_LIGHTS];
-        private SpriteRenderer[] bulbsSpriteBottom = new SpriteRenderer[NUMBER_LIGHTS];
+        private const int NUMBER_LIGHTS_ROW = 5;
+        private SpriteRenderer[] bulbsSpriteTop = new SpriteRenderer[NUMBER_LIGHTS_ROW];
+        private SpriteRenderer[] bulbsSpriteBottom = new SpriteRenderer[NUMBER_LIGHTS_ROW];
+        private SpriteRenderer backroundSprite;
         private float timeElapsed = 0;
         private bool isButtonPressed = false;
         private float randomDelay = 0;
@@ -40,6 +42,9 @@ namespace _Scripts.Games
 
         void Start()
         {
+            flashColor.Add(lightRed);
+            flashColor.Add(lightGreen);
+            backroundSprite = background.GetComponent<SpriteRenderer>();
             spawnLights();
             StartCoroutine(GameCoroutine());
         }
@@ -75,24 +80,24 @@ namespace _Scripts.Games
 
         private void spawnLights()
         {
-            for (int i = -NUMBER_LIGHTS / 2; i <= NUMBER_LIGHTS / 2; i++)
+            for (int i = -NUMBER_LIGHTS_ROW / 2; i <= NUMBER_LIGHTS_ROW / 2; i++)
             {
                 GameObject newLight = Instantiate(light, lightsTop.transform);
                 newLight.transform.Translate(i*1.1f, 0,0,Space.Self);
                 GameObject bulb = newLight.transform.GetChild(0).gameObject;
                 SpriteRenderer bulbSprite = bulb.GetComponent<SpriteRenderer>();
                 bulbSprite.color = darkRed;
-                bulbsSpriteTop[i+NUMBER_LIGHTS / 2] = bulbSprite;
+                bulbsSpriteTop[i+NUMBER_LIGHTS_ROW / 2] = bulbSprite;
                 newLight.SetActive(true);
             }
-            for (int i = -NUMBER_LIGHTS / 2; i <= NUMBER_LIGHTS / 2; i++)
+            for (int i = -NUMBER_LIGHTS_ROW / 2; i <= NUMBER_LIGHTS_ROW / 2; i++)
             {
                 GameObject newLight = Instantiate(light, lightsBottom.transform);
                 newLight.transform.Translate(i*1.1f, 0,0,Space.Self);
                 GameObject bulb = newLight.transform.GetChild(0).gameObject;
                 SpriteRenderer bulbSprite = bulb.GetComponent<SpriteRenderer>();
                 bulbSprite.color = darkGreen;
-                bulbsSpriteBottom[i+NUMBER_LIGHTS / 2] = bulbSprite;
+                bulbsSpriteBottom[i+NUMBER_LIGHTS_ROW / 2] = bulbSprite;
                 newLight.SetActive(true);
             }
         }
@@ -104,7 +109,7 @@ namespace _Scripts.Games
 
         private void turnOffAllLights()
         {
-            for (int i = 0; i < NUMBER_LIGHTS; i++)
+            for (int i = 0; i < NUMBER_LIGHTS_ROW; i++)
             {
                 updateLightColor(bulbsSpriteTop[i], darkRed);
                 updateLightColor(bulbsSpriteBottom[i], darkGreen);
@@ -114,15 +119,16 @@ namespace _Scripts.Games
         private IEnumerator lightAnimation()
         {
             isButtonPressed = false;
-            for (int i = 0; i < NUMBER_LIGHTS; i++)
+            for (int i = 0; i < NUMBER_LIGHTS_ROW; i++)
             {
                 if (checkForEarlyLose()) yield break; 
                 updateLightColor(bulbsSpriteTop[i], lightRed);
-                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && difficulty != Difficulty.LVL1 ? randomDelay : 0));
+                if (difficulty == Difficulty.LVL3 && i == NUMBER_LIGHTS_ROW-1) StartCoroutine(randomDistraction());
+                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS_ROW-1 && difficulty != Difficulty.LVL1 ? randomDelay : 0));
                 if (checkForEarlyLose()) yield break; 
             }
-            UnityEngine.Debug.Log("Delay: " + (randomDelay + randomDelay) + " s");
-            for (int i = 0; i < NUMBER_LIGHTS; i++)
+            UnityEngine.Debug.Log("Delay: " + (lightTimer + randomDelay) + " s");
+            for (int i = 0; i < NUMBER_LIGHTS_ROW; i++)
             {
                 updateLightColor(bulbsSpriteBottom[i], lightGreen);
             }
@@ -152,6 +158,28 @@ namespace _Scripts.Games
             }
             yield return new WaitForSeconds(2);
             overlayContainer.SetActive(false);
+        }
+
+        private IEnumerator randomDistraction()
+        {
+            if (Random.Range(0, 1.1f) > 0.5f)
+            {
+                UnityEngine.Debug.Log("No Distraction");
+                yield break;
+            }
+
+            float delay = Random.Range(0.5f, lightTimer + randomDelay / 3);
+            yield return new WaitForSeconds(delay);
+            UnityEngine.Debug.Log("Flashdelay: " + delay);
+            StartCoroutine(flashBackground());
+        }
+
+        private IEnumerator flashBackground()
+        {
+            backroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
+            background.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            background.SetActive(false);
         }
 
         private void gameWon()
