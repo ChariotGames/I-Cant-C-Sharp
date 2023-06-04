@@ -9,7 +9,7 @@ namespace _Scripts
         #region Serialized Fields
 
         [SerializeField] private Settings settings;
-        [SerializeField] private Image screenshot;
+        [SerializeField] private Image preview;
         [SerializeField] private TMP_Text title;
 
         #endregion Serialized Fields
@@ -38,7 +38,7 @@ namespace _Scripts
         {
             game = input;
             title.text = ConvertIDtoName(game.AssetID);
-            if (game.Screenshot != null) screenshot = game.Screenshot;
+            if (game.Preview != null) preview.sprite = game.Preview;
         }
 
         #endregion Game Mechanics / Methods

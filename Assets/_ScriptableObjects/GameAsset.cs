@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Scripts
 {
@@ -16,7 +15,7 @@ namespace _Scripts
         [SerializeField] private Keys keys;
         [SerializeField] private Orientation orientation;
         [SerializeField] private GameObject prefab;
-        [SerializeField] private Image screenshot;
+        [SerializeField] private Sprite preview;
 
         #endregion Serialized Fields
 
@@ -62,9 +61,9 @@ namespace _Scripts
             get { return prefab; }
         }
 
-        public Image Screenshot
+        public Sprite Preview
         {
-            get { return screenshot; }
+            get { return preview; }
         }
 
         #endregion GetSets
