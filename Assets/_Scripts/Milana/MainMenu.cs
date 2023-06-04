@@ -85,17 +85,6 @@ namespace _Scripts
         #region Overarching Methods / Helpers
 
         /// <summary>
-        /// Sorts the game buttons on screen. Might be obsolete!
-        /// </summary>
-        private void SortButtons()
-        {
-            foreach (var button in gameButtons)
-            {
-                //TODO Button pos anordnen
-            }
-        }
-
-        /// <summary>
         /// Converts an AssetID enum to a propper game name.
         /// </summary>
         /// <param name="id">The ID to convert.</param>
