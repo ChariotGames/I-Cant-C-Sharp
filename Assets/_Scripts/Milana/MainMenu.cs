@@ -1,61 +1,114 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using _Scripts;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+namespace _Scripts
 {
-    [SerializeField] private GameObject gamesContainer, templateGameButton;
-    [SerializeField] private Settings settings;
-    [SerializeField] private Camera mainCamera;
-    private List<string> playerMode;
-    private List<GameObject> gameButtons;
-    //private Bounds _cameraViewportBounds;
-    //private float _playfieldWidth;
-
-    private void Start()
+    public class MainMenu : MonoBehaviour
     {
-        gameButtons = new();
-        gameObject.GetComponent<CanvasScaler>().scaleFactor = mainCamera.pixelWidth / 1920.0f;
-        //_cameraViewportBounds = new Bounds(mainCamera.transform.position, mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - mainCamera.ViewportToWorldPoint(Vector3.zero));
-        //_playfieldWidth = _cameraViewportBounds.size.x;
-    }
+        #region Serialized Fields
 
-    public void ActivateSubMenu(GameObject menu)
-    {
-        menu.SetActive(true);
-    }
-    public void DeactivateSubMenu(GameObject menu)
-    {
-        menu.SetActive(false);
-    }
+        [SerializeField] private Camera mainCamera;
+        [SerializeField] private CanvasScaler canvasScaler;
+        [SerializeField] private GameObject gamesContainer, templateGameButton;
+        [SerializeField] private Settings settings;
 
-    public void Quit()
-    {
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
-    }
+        #endregion Serialized Fields
 
-    public void FillGamesContainer()
-    {
-        if (gamesContainer.transform.childCount != 0) return;
+        #region Fields
 
-        foreach (var game in settings.Games)
+        private List<GameObject> gameButtons;
+        private const float REFERENCE_WIDTH = 1920f;
+
+        #endregion Fields
+
+        #region Built-Ins / MonoBehaviours
+
+        void Start()
         {
-            gameButtons.Add(Instantiate(templateGameButton, gamesContainer.transform));
-            GameObject gameButton = GameObject.Find("GameButton");
-            gameButton.GetComponentInChildren<TMP_Text>().text = game.AssetID.ToString()[4..];
-            
+            gameButtons = new();
+            canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
         }
-        SortButtons();
-    }
 
-    private void SortButtons()
-    {
-        foreach (var button in gameButtons)
+        #endregion Built-Ins / MonoBehaviours
+
+        #region GetSets / Properties
+
+
+
+        #endregion GetSets / Properties
+
+        #region Game Mechanics / Methods
+
+        /// <summary>
+        /// Fills the games page with game assets on the first run.
+        /// </summary>
+        public void FillGamesContainer()
         {
-            //TODO Button pos anordnen
+            if (gamesContainer.transform.childCount != 0) return;
+
+            foreach (var game in settings.Games)
+            {
+                GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
+                button.GetComponentInChildren<TMP_Text>().text = CovertIDtoName(game.AssetID);
+                gameButtons.Add(button);
+            }
         }
+
+        /// <summary>
+        /// Quits the application or editor.
+        /// </summary>
+        public void Quit()
+        {
+        #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+            Application.Quit();
+        }
+
+        /// <summary>
+        /// Toggles a given menu on or off.
+        /// </summary>
+        /// <param name="menu">The menu to toggle.</param>
+        public void ToggleSubMenu(GameObject menu)
+        {
+            menu.SetActive(!menu.activeInHierarchy);
+        }
+
+        #endregion Game Mechanics / Methods
+
+        #region Overarching Methods / Helpers
+
+        /// <summary>
+        /// Sorts the game buttons on screen. Might be obsolete!
+        /// </summary>
+        private void SortButtons()
+        {
+            foreach (var button in gameButtons)
+            {
+                //TODO Button pos anordnen
+            }
+        }
+
+        /// <summary>
+        /// Converts an AssetID enum to a propper game name.
+        /// </summary>
+        /// <param name="id">The ID to convert.</param>
+        /// <returns>Name with spaces.</returns>
+        private string CovertIDtoName(AssetID id)
+        {
+            string name = id.ToString()[4..];
+            string result = "";
+
+            foreach (char c in name)
+            {
+                if (char.IsUpper(c)) result += " ";
+                result += c;
+            }
+            return result.Trim();
+        }
+
+        #endregion Overarching Methods / Helpers
     }
 }
