@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8a423baa9afdd47a12200b94646979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDifficulty: 0
   buttonPrefabs:
   - {fileID: 4665578903151798918}
   - {fileID: 4665578905087092962}
@@ -611,7 +612,7 @@ MonoBehaviour:
   - {fileID: 4665578903968837698}
   spawnTimeUpperBounds: 3
   spawnTimeLowerBounds: 0.5
-  timerTextMesh: {fileID: 0}
+  timerTextMesh: {fileID: 2205721906282556870}
 --- !u!1 &4665578905087092962
 GameObject:
   m_ObjectHideFlags: 0

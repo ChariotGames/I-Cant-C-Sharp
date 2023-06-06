@@ -108,7 +108,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6826700626887985766, guid: da9f44b2eb6a04165a2b8588a8961f72, type: 3}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 3
