@@ -4,13 +4,19 @@ namespace _Scripts.Games
 {
     public abstract class Game : MonoBehaviour
     {
+        #region Serialized Fields
+
+        [SerializeField] protected Difficulty currentDifficulty = Difficulty.LVL1;
+
+        #endregion Serialized Fields
+
         #region Fields
 
         protected AssetID id;
-        protected Difficulty currentDifficulty = Difficulty.LVL1;
+        
         private (int min, int max) difficultyRange = ((int)Difficulty.LVL1, (int)Difficulty.LVL3);
 
-        #endregion
+        #endregion Fields
 
         #region Methods
 
@@ -64,7 +70,7 @@ namespace _Scripts.Games
 
         #endregion
 
-        #endregion
+        #endregion  Methods
 
         #region GetSets
 
@@ -80,6 +86,6 @@ namespace _Scripts.Games
             set { currentDifficulty = value; }
         }
 
-        #endregion
+        #endregion GetSets
     }
 }
