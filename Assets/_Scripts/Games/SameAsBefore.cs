@@ -6,6 +6,7 @@ using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Games
 {
@@ -13,7 +14,7 @@ namespace _Scripts.Games
     {
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private int maxStepsBack;
-        [SerializeField] private int timeToAsAnswer;
+        [SerializeField] private int timeToAnswer;
         [SerializeField] private List<GameObject> options;
         [SerializeField] private GameObject startText;
         [SerializeField] private TMP_Text stepBackText;
@@ -100,7 +101,7 @@ namespace _Scripts.Games
                     Debug.Log(index + " : " + lastIndices.ElementAt(steps) + "\tsteps: " + (steps + 1));
 
                     float timer = Time.unscaledTime;
-                    yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > timeToAsAnswer);
+                    yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > timeToAnswer);
                     if ((index == lastIndices.ElementAt(steps) && isYes && !isNo) || (index != lastIndices.ElementAt(steps) && isNo && !isYes))
                     {
                         base.Win();

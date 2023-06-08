@@ -15,12 +15,12 @@ namespace _Scripts.Games
     {
         #region Fields
 
-        private static readonly Dictionary<_Scripts.Simon, (Action listener, Action silencer)> simonActions = new();
+        private static readonly Dictionary<Colors, (Action listener, Action silencer)> simonActions = new();
         private Color originalColor, targetColor;
         private SpriteRenderer spriteRenderer;
         private const float DURATION = 0.30f;
 
-        #endregion
+        #endregion Fields
 
         #region Built-Ins
 
@@ -32,34 +32,34 @@ namespace _Scripts.Games
             if (targetColor == new Color(2, 2, 2, 0)) targetColor += new Color(1, 1, 1, 1);
 
             // Adds lambda expressions as anonymous functions to the Dictionary
-            if (gameObject.name.Equals(_Scripts.Simon.BLUE.ToString()) &&
-                !simonActions.ContainsKey(_Scripts.Simon.BLUE))
+            if (gameObject.name.Equals(Colors.BLUE.ToString()) &&
+                !simonActions.ContainsKey(Colors.BLUE))
             {
-                simonActions.Add(_Scripts.Simon.BLUE, (
+                simonActions.Add(Colors.BLUE, (
                     (Action)(() => InputHandler.NorthBtnAction += ButtonPressed),
                     (Action)(() => InputHandler.NorthBtnAction -= ButtonPressed)
                 ));
             }
-            if (gameObject.name.Equals(_Scripts.Simon.RED.ToString()) &&
-                !simonActions.ContainsKey(_Scripts.Simon.RED))
+            if (gameObject.name.Equals(Colors.RED.ToString()) &&
+                !simonActions.ContainsKey(Colors.RED))
             {
-                simonActions.Add(_Scripts.Simon.RED, (
+                simonActions.Add(Colors.RED, (
                     (Action)(() => InputHandler.EastBtnAction += ButtonPressed),
                     (Action)(() => InputHandler.EastBtnAction -= ButtonPressed)
                 ));
             }
-            if (gameObject.name.Equals(_Scripts.Simon.YELLOW.ToString()) &&
-                !simonActions.ContainsKey(_Scripts.Simon.YELLOW))
+            if (gameObject.name.Equals(Colors.YELLOW.ToString()) &&
+                !simonActions.ContainsKey(Colors.YELLOW))
             {
-                simonActions.Add(_Scripts.Simon.YELLOW, (
+                simonActions.Add(Colors.YELLOW, (
                     (Action)(() => InputHandler.SouthBtnAction += ButtonPressed),
                     (Action)(() => InputHandler.SouthBtnAction -= ButtonPressed)
                 ));
             }
-            if (gameObject.name.Equals(_Scripts.Simon.GREEN.ToString()) &&
-                !simonActions.ContainsKey(_Scripts.Simon.GREEN))
+            if (gameObject.name.Equals(Colors.GREEN.ToString()) &&
+                !simonActions.ContainsKey(Colors.GREEN))
             {
-                simonActions.Add(_Scripts.Simon.GREEN, (
+                simonActions.Add(Colors.GREEN, (
                     (Action)(() => InputHandler.WestBtnAction += ButtonPressed),
                     (Action)(() => InputHandler.WestBtnAction -= ButtonPressed)
                 ));
@@ -71,7 +71,7 @@ namespace _Scripts.Games
             ToggleInput(gameObject, false);
         }
 
-        #endregion
+        #endregion Built-Ins
 
         #region Button Controls
 
@@ -82,7 +82,7 @@ namespace _Scripts.Games
         public void ButtonPressed()
         {
             Animate();
-            if (Enum.TryParse(gameObject.name, true, out _Scripts.Simon key)) SendMessageUpwards("CheckColor", key);
+            if (Enum.TryParse(gameObject.name, true, out Colors key)) SendMessageUpwards("CheckColor", key);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace _Scripts.Games
         /// <param name="state">The state to set to: on or off.</param>
         public void ToggleInput(GameObject button, bool state)
         {
-            Enum.TryParse(button.name, true, out _Scripts.Simon key);
+            Enum.TryParse(button.name, true, out Colors key);
             if (!simonActions.ContainsKey(key)) return;
             if (state)
             {
@@ -104,7 +104,7 @@ namespace _Scripts.Games
             }
         }
 
-        #endregion
+        #endregion Button Controls
 
         #region Animations
 
@@ -140,7 +140,7 @@ namespace _Scripts.Games
             sprite.color = original;
         }
 
-        #endregion
+        #endregion Animations
     }
 }
 

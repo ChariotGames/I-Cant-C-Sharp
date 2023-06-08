@@ -1,16 +1,17 @@
 using _Scripts.Games;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts
 {
-    public class GameController : MonoBehaviour
+    /// <summary>
+    /// Manages matching, spawning and deletion of game assets.
+    /// </summary>
+    public class GameManager : MonoBehaviour
     {
         #region Serialized Fields
 
-        [SerializeField] private Data gameVariables;
-        [SerializeField] private List<GameAsset> games;
+        [SerializeField] private Settings settings;
         [SerializeField] private GameObject[] spawnPoints;
 
         #endregion
@@ -25,8 +26,14 @@ namespace _Scripts
 
         void Awake()
         {
-            PickGame(new List<GameAsset>(games));
-            PickGame(new List<GameAsset>(games));
+            if(settings.SelectedGame == null)
+            {
+                PickGame(new List<GameAsset>(settings.Games));
+                PickGame(new List<GameAsset>(settings.Games));
+            } else
+            {
+                loadedGames.Add(LoadGame(settings.SelectedGame, SetParent(Orientation.FULLSCREEN)));
+            }
         }
 
         #endregion
@@ -49,9 +56,9 @@ namespace _Scripts
                 RemoveGame(game.Orientation.HasFlag(Orientation.FULLSCREEN));
             }
 
-            if (game.Orientation == Orientation.FULLSCREEN)
+            if (game.Orientation == Orientation.FULLSCREEN || game.Complexity == Complexity.SOLO)
             {
-                loadedGames.Add(LoadGame(game, SetParent(game.Orientation)));
+                loadedGames.Add(LoadGame(game, SetParent(Orientation.FULLSCREEN)));
                 return;
             }
 
@@ -193,9 +200,9 @@ namespace _Scripts
         private void LoseCondition(AssetID id)
         {
             Debug.Log("Lose from " + id);
-            gameVariables.Lives--;
-            Debug.Log(gameVariables.Lives);
-            if(gameVariables.Lives <= 0)
+            settings.Lives--;
+            Debug.Log(settings.Lives);
+            if(settings.Lives <= 0)
             {
                 //PickGame(new List<GameAsset>(games));
                 gameObject.GetComponent<SceneChanger>().ChangeScene(0);
@@ -204,7 +211,7 @@ namespace _Scripts
 
         private void SetDifficulty(AssetID id, Difficulty difficulty)
         {
-            games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
+            settings.Games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
         }
 
         #endregion

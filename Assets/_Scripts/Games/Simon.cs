@@ -27,29 +27,32 @@ namespace _Scripts.Games
         [SerializeField] private GameObject[] buttons, infos;
         [SerializeField] private Image timer;
 
-        #endregion
+        #endregion Serialized Fields
 
         #region Fields
 
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
-        private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
+        private const int CHANCE = 3, COLORS = 4, ENUM_OFFSET = 1, MIN_LENGTH = 1, MAX_LENGTH = 5; 
         private float animationTime;
-        private int checkingIndex = 0, correctGuesses = 0;
+        private int checkingIndex = 0, correctGuesses = 0, wrongGuesses = 0;
 
-        #endregion
+        #endregion Fields
 
         #region Unity Built-Ins
 
         // Start is called before the first frame update
         void Start()
         {
+            checkingIndex = 0;
+            correctGuesses = 0;
+            wrongGuesses = 0;
             animationTime = BLINK_TIME * COLORS;
             StartCoroutine(ActivateButtons(BLINK_TIME));
             GeneratePattern(MIN_LENGTH);
             StartCoroutine(AnimateButtons(buttons, animationTime * 2, animationTime));
         }
 
-        #endregion
+        #endregion Unity Built-Ins
 
         #region Overarching Game Mechanics
 
@@ -65,24 +68,17 @@ namespace _Scripts.Games
         }
 
         /// <summary>
-        /// Updates the game difficulty for next spawn and messages to the GameController.
+        /// Updates the game difficulty for next spawn and messages to the GameManager.
         /// </summary>
+        /// <param name="rounds">The number of played rounds.</param>
         private void UpdateDifficulty(int rounds)
         {
-            if (rounds <= 0)
-            {
-                base.Easier();
-            }
+            if (rounds <= 0) base.Easier();
 
-            if (rounds >= LVL_CHANGE)
-            {
-                base.Harder();
-            }
-
-            correctGuesses %= LVL_CHANGE;
+            if (rounds >= MAX_LENGTH / 2 + 1) base.Harder();
         }
 
-        #endregion
+        #endregion Overarching Game Mechanics
 
         #region Pattern Setups
 
@@ -96,7 +92,7 @@ namespace _Scripts.Games
             Colors randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = (Colors)UnityEngine.Random.Range(0, COLORS);
+                randomColor = (Colors)(UnityEngine.Random.Range(0, COLORS) + ENUM_OFFSET);
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
@@ -167,7 +163,7 @@ namespace _Scripts.Games
             infos[Array.FindIndex(infos, obj => obj.name.Equals("Input"))].SetActive(isPlayersTurn);
         }
 
-        #endregion
+        #endregion Pattern Setups
 
         #region Animations
 
@@ -203,10 +199,10 @@ namespace _Scripts.Games
             {
                 Colors button = displayPattern[i];
                 Modifier info = infoPattern[i];
-                buttons[(int)button].GetComponent<SimonButton>().Animate();
+                buttons[(int)button - ENUM_OFFSET].GetComponent<SimonButton>().Animate();
                 if (info != Modifier.NORMAL)
                 {
-                    GameObject icon = infos[(int)info % COLORS];
+                    GameObject icon = infos[((int)info + ENUM_OFFSET) % COLORS];
                     icon.GetComponent<SimonButton>().Animate();
                 }
                 yield return new WaitForSeconds(duration);
@@ -216,12 +212,11 @@ namespace _Scripts.Games
             StartCoroutine(AnimateTimer(TURN_TIME));
         }
 
-
         /// <summary>
         /// Animates the circular progess bar aka. timer.
         /// </summary>
         /// <param name="duration">The duration of timer.</param>
-        /// <returns></returns>
+        /// <returns>An object that can be used to control the coroutine's execution.</returns>
         private IEnumerator AnimateTimer(float duration)
         {
             float elapsedTime = 0f;
@@ -237,7 +232,7 @@ namespace _Scripts.Games
             WrongColor();
         }
 
-        #endregion
+        #endregion Animations
 
         #region Game Checks
 
@@ -267,10 +262,12 @@ namespace _Scripts.Games
         /// </summary>
         private void WrongColor()
         {
+            wrongGuesses++;
+            if (wrongGuesses == 3) base.Lose();
+
             GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("None"))];
             if (icon != null) icon.GetComponent<SimonButton>().Animate();
             correctGuesses -= (int)base.Difficulty + 1;
-            base.Lose();
             ResetTurn();
             StartCoroutine(AnimateButtons(buttons, animationTime, BLINK_TIME));
         }
@@ -282,14 +279,15 @@ namespace _Scripts.Games
         private void GuessingDone()
         {
             correctGuesses++;
+            if (correctGuesses == MAX_LENGTH) base.Win();
+
             UpdateDifficulty(correctGuesses);
-            base.Win();
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
             StartCoroutine(AnimateButtons(buttons, animationTime, animationTime));
         }
 
-        #endregion
+        #endregion Game Checks
     }
 }

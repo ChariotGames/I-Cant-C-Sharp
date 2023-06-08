@@ -134,7 +134,7 @@ namespace _Scripts
         NONE = -1, UP, DOWN, LEFT, RIGHT, CENTER
     }
 
-    public enum GameModes
+    public enum GameMode
     {
         NONE, ENDLESS, SINGLE, MIXED, TUTORIAL
     }
