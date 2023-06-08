@@ -12,8 +12,6 @@ namespace _Scripts.Games
         [SerializeField] float speed = 5f;
         [SerializeField] private float maxRotationSpeed = 2.5f;
         [SerializeField] private float maxRotation = 180f;
-        
-
 
         #endregion Serialized Fields
 
@@ -36,6 +34,8 @@ namespace _Scripts.Games
             gameObject.transform.Translate(InputHandler.LeftStickDelta * Time.deltaTime * speed);
             
             RotatePlayer();
+        
+
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -52,22 +52,13 @@ namespace _Scripts.Games
 
         public void RotatePlayer()
         {
-            var inputDelta = InputHandler.LeftStickDelta.x;
-            //  Mathf.Sign will return 1,-1 or 0
-            var direction = Vector2.right * Mathf.Sign(inputDelta);
-
+            var inputDelta = InputHandler.LeftStickDelta;
             // calculate the angle to rotate the barrel
-            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+            var angle = Mathf.Atan2(inputDelta.y, inputDelta.x);
 
-            angle = Mathf.Repeat(angle + 180f, 360f) - 180f;
-
-            // clamp the angle to the range of -maxRotation to maxRotation
-            //angle = Mathf.Clamp(angle, -maxRotation, maxRotation);
-       
-            // multiply the maxRotationSpeed by the inputDelta value
-            var rotationSpeed = maxRotationSpeed * Mathf.Abs(inputDelta);
+            var rotationSpeed = maxRotationSpeed * Mathf.Abs(angle);
             var targetRotation = Quaternion.Euler(0f, 0f, angle);
-            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, targetRotation, rotationSpeed); ;
+            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, targetRotation, rotationSpeed);
 
         }
 

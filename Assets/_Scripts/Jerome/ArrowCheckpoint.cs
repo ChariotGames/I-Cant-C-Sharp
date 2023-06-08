@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowEnemy : MonoBehaviour, IarrowTouchable
+public class ArrowCheckpoint : MonoBehaviour, IarrowTouchable
 {
     [SerializeField] private PolygonCollider2D playerCollider;
 
