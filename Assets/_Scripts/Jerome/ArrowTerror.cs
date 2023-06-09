@@ -8,17 +8,15 @@ namespace _Scripts.Games
     public class ArrowTerror : Game
     {
         #region Serialized Fields
-        [SerializeField] private int ammountOfEnemys, ammountCheckpoints, lives = 3; 
-        [SerializeField] private GameObject tempPlayer, tempGoal, tempCheckpoint, tempEnemy;
-        [SerializeField] private GameObject[] Checkpoints, Enemys;
 
-
+        [SerializeField] [Range(0,10)] private int ammountEnemies = 0, ammountCheckpoints = 0, lives = 3; 
+        [SerializeField] private GameObject player, goal, checkpoint, enemy, checkpointContainer, enemyContainer;
 
         #endregion Serialized Fields
 
         #region Fields
-        private GameObject player, goal, checkpoint, enemy;
 
+        private int checkpointsCollected = 0;
 
         #endregion Fields
 
@@ -26,14 +24,10 @@ namespace _Scripts.Games
 
         void Start()
         {
-            Checkpoints = spawnObjekts(checkpoint, ammountCheckpoints);
-            Enemys = spawnObjekts(enemy, ammountOfEnemys);
-
-            //player = Instantiate(tempPlayer);
-            //goal = Instantiate(tempGoal);
+            SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
+            SpawnObjects(enemy, enemyContainer, ammountEnemies);
+            SpawnObjects(goal, gameObject, 1);
         }
-
-     
 
         void Update()
         {
@@ -52,55 +46,36 @@ namespace _Scripts.Games
 
         public void PlayerTouched(GameObject obj)
         {
-            if (obj.name.Contains("Checkpoint"))
-            {
-                removeCheckpoint(obj);
-            }
-            if (obj.name.Contains("Enemy"))
-            {
-                lives--;
-            }
-            if (obj.name.Contains("Goal"))
-            {
-                if (Checkpoints.Length == 0)
-                {
-                    base.Win();
-                }
-            }
-        }
+            Type type = obj.GetComponent<ArrowObject>().type;
 
-       
-
-        public void TemplateMethod(bool param)
-        {
-            
+            switch (type)
+            {
+                case Type.CHECKPOINT:
+                    Destroy(obj);
+                    checkpointsCollected++;
+                    break;
+                case Type.ENEMY:
+                    lives--;
+                    break;
+                case Type.GOAL:
+                    if (checkpointsCollected == ammountCheckpoints)
+                    {
+                        base.Win();
+                    }
+                    break;
+            }
         }
 
         #endregion Game Mechanics / Public Methods
 
         #region Overarching Methods / Private Helpers
 
-        private GameObject[] spawnObjekts(GameObject obj, int ammount)
+        private void SpawnObjects(GameObject type, GameObject parent, int ammount)
         {
-            GameObject[] objects = new GameObject[ammount];
-
             for (int i = 0; i < ammount; i++)
             {
-                GameObject o = Instantiate(obj);
-                objects[i] = o;
-            }
-            return objects;
-        }
-
-        private void removeCheckpoint(GameObject obj)
-        {
-            for (int i = 0; i < Checkpoints.Length; i++)
-            {
-                if (obj == Checkpoints[i])
-                {
-                    Destroy(Checkpoints[i]);
-                    Checkpoints[i] = null;
-                }
+                GameObject obj = Instantiate(type, parent.transform);
+                // TODO: Random positions
             }
         }
 

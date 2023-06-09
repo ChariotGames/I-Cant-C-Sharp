@@ -149,6 +149,11 @@ namespace _Scripts
         NONE, HORIZONTAL, VERTICAL, QUARTER, FULLSCREEN
     }
 
+    public enum Type
+    {
+        NONE, PLAYER, ENEMY, CHECKPOINT, GOAL
+    }
+
     #endregion
 
     #region Flags
