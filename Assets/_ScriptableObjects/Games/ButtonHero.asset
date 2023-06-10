@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetID: 0
   description: 
-  complexity: 0
-  difficulty: 0
+  complexity: 3
+  difficulty: 1
   genre: 2
   keys: 1472
   orientation: 4

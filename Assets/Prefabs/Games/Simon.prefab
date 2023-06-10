@@ -595,7 +595,7 @@ MonoBehaviour:
   duration: 0.3
   buttonColor: 3
   buttonAction: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
+  parent: {fileID: 0}
 --- !u!1 &3923420841216393777
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +871,7 @@ MonoBehaviour:
   duration: 0.3
   buttonColor: 2
   buttonAction: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
+  parent: {fileID: 0}
 --- !u!1 &3923420841571965842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   duration: 0.3
   buttonColor: 4
   buttonAction: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
+  parent: {fileID: 0}
 --- !u!1 &3923420841840725213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   duration: 0.3
   buttonColor: 1
   buttonAction: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
+  parent: {fileID: 0}
 --- !u!1 &6114598051593611201
 GameObject:
   m_ObjectHideFlags: 0

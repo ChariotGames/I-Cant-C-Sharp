@@ -16,7 +16,7 @@ public class G01_MagicCircle : BaseGame
     [SerializeField] private float sDelay;
     [SerializeField] private float rotationspeed;
     [SerializeField] private Vector3 rotationDir;
-    private Difficulty CurrentLevel { get; set; } = Difficulty.LVL2;
+    private Difficulty CurrentLevel { get; set; } = Difficulty.MEDIUM;
     private SpriteRenderer circleRenderer;
     //private MagicRing ringScript;
 

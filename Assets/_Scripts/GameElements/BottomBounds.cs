@@ -1,17 +1,13 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 public class BottomBounds : MonoBehaviour
 {
-    
-    public static event Action damageTaken;
+    public static event Action DamageTaken;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
        Destroy(other.gameObject);
-       damageTaken?.Invoke();
+       DamageTaken?.Invoke();
     }
-
-   
 }

@@ -25,7 +25,7 @@ public class MagicRing : MonoBehaviour
         
         //ringRenderer = GetComponent<LineRenderer>();
 
-        if (level == Difficulty.LVL2 || level == Difficulty.LVL3)
+        if (level == Difficulty.MEDIUM || level == Difficulty.HARD)
         {
             chance = UnityEngine.Random.Range(0, 2);
             if (chance == 1)
@@ -39,7 +39,7 @@ public class MagicRing : MonoBehaviour
     public void activateInput()
     {
         InputHandler.ShoulderLeft += checkLeft;
-        if (level == Difficulty.LVL2 || level == Difficulty.LVL3) InputHandler.ShoulderRight += checkRight;
+        if (level == Difficulty.MEDIUM || level == Difficulty.HARD) InputHandler.ShoulderRight += checkRight;
     }
 
     private void checkLeft()

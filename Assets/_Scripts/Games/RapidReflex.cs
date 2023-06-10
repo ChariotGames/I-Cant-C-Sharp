@@ -16,7 +16,6 @@ namespace _Scripts.Games
     {
     #region Serialized Fields
         
-        [SerializeField] private Difficulty difficulty;
         [SerializeField] private int timeToAnswerInMs;
         [SerializeField] private float lightTimer;
         [SerializeField] private GameObject lightsTop, lightsBottom, light, overlayContainer;
@@ -118,7 +117,7 @@ namespace _Scripts.Games
             {
                 if (checkForEarlyLose()) yield break; 
                 updateLightColor(bulbsSpriteTop[i], lightRed);
-                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && difficulty != Difficulty.LVL1 ? randomDelay : 0));
+                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && difficulty != Difficulty.EASY ? randomDelay : 0));
                 if (checkForEarlyLose()) yield break; 
             }
             UnityEngine.Debug.Log("Delay: " + (randomDelay + randomDelay) + " s");

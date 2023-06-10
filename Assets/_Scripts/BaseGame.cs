@@ -8,7 +8,7 @@ namespace _Scripts.Games
         #region Serialized Fields
 
         [SerializeField] protected MinigameManager manager;
-        [SerializeField] protected Difficulty currentDifficulty = Difficulty.LVL1;
+        [SerializeField] protected Difficulty currentDifficulty = Difficulty.EASY;
 
         #endregion Serialized Fields
 
@@ -16,7 +16,7 @@ namespace _Scripts.Games
 
         protected AssetID id;
         
-        private (int min, int max) difficultyRange = ((int)Difficulty.LVL1, (int)Difficulty.LVL3);
+        private (int min, int max) difficultyRange = ((int)Difficulty.EASY, (int)Difficulty.HARD);
 
         #endregion Fields
 

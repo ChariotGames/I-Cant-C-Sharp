@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: ArrowTerror
   m_EditorClassIdentifier: 
-  assetID: 0
+  assetID: 19961
   description: 
   complexity: 3
-  difficulty: 0
+  difficulty: 1
   genre: 4
   keys: 1
   orientation: 3
-  prefab: {fileID: 0}
+  prefab: {fileID: 971172574723824690, guid: ed3cb08cacecb47188b43efa7f30c768, type: 3}
   preview: {fileID: 0}

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
-  currentDifficulty: 0
+  currentDifficulty: 1
   buttons:
   - {fileID: 624045978044500738, guid: 47f7eb17d52ec54469a6f6eb7be83a3e, type: 3}
   - {fileID: 8441314915383463970, guid: 3001b7a34444f1142bdc3b4ad3a66885, type: 3}

@@ -15,9 +15,9 @@ namespace _Scripts.Games
     /// each round adding a varying number of colors to the
     /// existing pattern.
     /// 
-    /// On Level 1, each color is added once.
-    /// On Level 2, there is a chance for a color to be added twice.
-    /// On Level 3, a color is displayed but has to be skipped in guessing.
+    /// On Easy, each color is added once.
+    /// On Medium, there is a chance for a color to be added twice.
+    /// On Hard, a color is displayed but has to be skipped in guessing additionally.
     /// </summary>
     public class Simon : BaseGame
     {
@@ -134,7 +134,7 @@ namespace _Scripts.Games
 
             int chance = UnityEngine.Random.Range(0, CHANCE);
 
-            if (base.Difficulty == Difficulty.LVL3 && chance < 1)
+            if (base.Difficulty == Difficulty.HARD && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
                 infoPattern.Add(Modifier.NONE);
@@ -144,7 +144,7 @@ namespace _Scripts.Games
             infoPattern.Add(Modifier.NORMAL);
             guessPattern.Add(color);
 
-            if (base.Difficulty != Difficulty.LVL1 && chance > 1)
+            if (base.Difficulty != Difficulty.EASY && chance > 1)
             {
                 // On Level 2 the color is doubled
                 infoPattern[^1] = Modifier.DOUBLE;
@@ -306,87 +306,4 @@ namespace _Scripts.Games
 
         #endregion
     }
-
-    #region Editor Overrides
-
-    [CustomEditor(typeof(Simon))]
-    public class SimonEditor : Editor
-    {
-        SerializedProperty controller, currentDifficulty;
-        SerializedProperty displayPattern, guessPattern, infoPattern;
-        SerializedProperty buttonsContainer, blue, red, yellow, green, middle;
-        SerializedProperty inputOverlay, infoOverlay, twice, not, ok, timer;
-
-        bool showGameProperties, showGuessLists, showButtons, showInfos = false;
-
-        void OnEnable()
-        {
-            currentDifficulty = serializedObject.FindProperty("currentDifficulty");
-            controller = serializedObject.FindProperty("manager");
-
-            displayPattern = serializedObject.FindProperty("displayPattern");
-            guessPattern = serializedObject.FindProperty("guessPattern");
-            infoPattern = serializedObject.FindProperty("infoPattern");
-
-            buttonsContainer = serializedObject.FindProperty("buttonsContainer");
-            blue = serializedObject.FindProperty("blue");
-            red = serializedObject.FindProperty("red");
-            yellow = serializedObject.FindProperty("yellow");
-            green = serializedObject.FindProperty("green");
-            middle = serializedObject.FindProperty("middle");
-
-            inputOverlay = serializedObject.FindProperty("inputOverlay");
-            infoOverlay = serializedObject.FindProperty("infoOverlay");
-            twice = serializedObject.FindProperty("twice");
-            not = serializedObject.FindProperty("not");
-            ok = serializedObject.FindProperty("ok");
-            timer = serializedObject.FindProperty("timer");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-
-            showGameProperties = EditorGUILayout.Foldout(showGameProperties, "Base Game Properties");
-            if (showGameProperties)
-            {
-                EditorGUILayout.PropertyField(controller);
-                EditorGUILayout.PropertyField(currentDifficulty);
-            }
-
-            showGuessLists = EditorGUILayout.Foldout(showGuessLists, "Guess Lists");
-            if (showGuessLists)
-            {
-                EditorGUILayout.PropertyField(displayPattern);
-                EditorGUILayout.PropertyField(guessPattern);
-                EditorGUILayout.PropertyField(infoPattern);
-            }
-
-            showButtons = EditorGUILayout.Foldout(showButtons, "Buttons");
-            if (showButtons)
-            {
-                EditorGUILayout.PropertyField(buttonsContainer);
-                EditorGUILayout.PropertyField(blue);
-                EditorGUILayout.PropertyField(red);
-                EditorGUILayout.PropertyField(yellow);
-                EditorGUILayout.PropertyField(green);
-                EditorGUILayout.PropertyField(middle);
-            }
-
-            showInfos = EditorGUILayout.Foldout(showInfos, "Infos");
-            if (showInfos)
-            {
-                EditorGUILayout.PropertyField(inputOverlay);
-                EditorGUILayout.PropertyField(infoOverlay);
-                EditorGUILayout.PropertyField(twice);
-                EditorGUILayout.PropertyField(not);
-                EditorGUILayout.PropertyField(ok);
-                EditorGUILayout.PropertyField(timer);
-            }
-
-            serializedObject.ApplyModifiedProperties();
-        }
-    }
 }
-
-    #endregion Editor Overrides

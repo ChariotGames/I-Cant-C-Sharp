@@ -19,7 +19,7 @@ namespace _Scripts.Games
 
         #region Built-Ins
 
-        private void Awake()
+        private void OnEnable()
         {
             if(buttonAction != null) ToggleInput(true);
         }

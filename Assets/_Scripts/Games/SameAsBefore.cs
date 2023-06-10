@@ -12,7 +12,6 @@ namespace _Scripts.Games
 {
     public class SameAsBefore : BaseGame
     {
-        [SerializeField] private Difficulty difficulty;
         [SerializeField] private int maxStepsBack;
         [SerializeField] private int timeToAnswer;
         [SerializeField] private List<GameObject> options;
@@ -43,15 +42,15 @@ namespace _Scripts.Games
 
         private void UpdateSteps()
         {
-            switch (difficulty)
+            switch (Difficulty)
             {
-                case Difficulty.LVL1:
+                case Difficulty.EASY:
                     steps = 0;
                     break;
-                case Difficulty.LVL2:
+                case Difficulty.MEDIUM:
                     steps = Math.Min(1, lastIndices.Count - 1);
                     break;
-                case Difficulty.LVL3:
+                case Difficulty.HARD:
                     steps = Random.Range(0, Math.Min(maxStepsBack, lastIndices.Count));
                     break;
                 default:

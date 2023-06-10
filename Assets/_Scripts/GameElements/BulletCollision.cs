@@ -9,7 +9,5 @@ namespace _Scripts.Pascal
             Destroy(gameObject);
             Destroy(other.gameObject);
         }
-
-       
     }
 }

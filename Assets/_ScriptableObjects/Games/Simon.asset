@@ -19,7 +19,7 @@ MonoBehaviour:
     once.\r\n- Level 2, there is a chance for a color to be added twice.\r\n- Level
     3, a color is displayed but has to be skipped in guessing."
   complexity: 1
-  difficulty: 0
+  difficulty: 1
   genre: 1
   keys: 1472
   orientation: 2
