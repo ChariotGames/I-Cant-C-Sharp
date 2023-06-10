@@ -134,7 +134,7 @@ namespace _Scripts
         NONE = -1, UP, DOWN, LEFT, RIGHT, CENTER
     }
 
-    public enum GameMode
+    public enum GameModes
     {
         NONE, ENDLESS, SINGLE, MIXED, TUTORIAL
     }
@@ -147,6 +147,11 @@ namespace _Scripts
     public enum Orientation
     {
         NONE, HORIZONTAL, VERTICAL, QUARTER, FULLSCREEN
+    }
+
+    public enum Type
+    {
+        NONE, PLAYER, ENEMY, CHECKPOINT, GOAL
     }
 
     #endregion
