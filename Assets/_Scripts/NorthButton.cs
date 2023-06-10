@@ -12,7 +12,7 @@ namespace _Scripts
 
         private void OnEnable()
         {
-            InputHandler.NorthBtnAction += ButtonPressed;
+            InputHandler.ButtonNorth += ButtonPressed;
         }
 
         
@@ -25,7 +25,7 @@ namespace _Scripts
         
         private void OnDisable()
         {
-            InputHandler.NorthBtnAction -= ButtonPressed;
+            InputHandler.ButtonNorth -= ButtonPressed;
         }
     }
 }

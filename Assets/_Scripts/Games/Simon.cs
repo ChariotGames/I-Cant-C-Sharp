@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace _Scripts.Games
 {
     /// <summary>
-    /// Game script that controls and simulates the 
+    /// BaseGame script that controls and simulates the 
     /// electronic guessing & memory game: Simon.
     /// 
     /// Color patterns are generated and displayed at random,
@@ -18,7 +18,7 @@ namespace _Scripts.Games
     /// On Level 2, there is a chance for a color to be added twice.
     /// On Level 3, a color is displayed but has to be skipped in guessing.
     /// </summary>
-    public class Simon : Game
+    public class Simon : BaseGame
     {
         #region Serialized Fields
 
@@ -68,7 +68,7 @@ namespace _Scripts.Games
         }
 
         /// <summary>
-        /// Updates the game difficulty for next spawn and messages to the GameManager.
+        /// Updates the game difficulty for next spawn and messages to the MinigameManager.
         /// </summary>
         /// <param name="rounds">The number of played rounds.</param>
         private void UpdateDifficulty(int rounds)
@@ -258,7 +258,7 @@ namespace _Scripts.Games
 
         /// <summary>
         /// Checks if the user input was wrong.
-        /// If so, restart the current round and inform the Game Controller of lose.
+        /// If so, restart the current round and inform the BaseGame Controller of lose.
         /// </summary>
         private void WrongColor()
         {
@@ -274,7 +274,7 @@ namespace _Scripts.Games
 
         /// <summary>
         /// Checks if the player is done guessing.
-        /// If so, starts the new round an inform the Game Controller of win.
+        /// If so, starts the new round an inform the BaseGame Controller of win.
         /// </summary>
         private void GuessingDone()
         {

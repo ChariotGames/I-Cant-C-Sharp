@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class FallingObstacles : Game
+    public class FallingObstacles : BaseGame
     {
         #region Fields
 

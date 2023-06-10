@@ -17,7 +17,7 @@ namespace _Scripts.Games
     /// Player has to Brace for the Walls with FaceNorth/DpadUp or FaceWest/DpadLeft depending on the color of the Wall.
     /// On Level 3, Spikes, Walls & "CeilingSpikes" appear & game is even faster. Player has to duck under them with FaceEast/DpadRight
     /// </summary>
-    public class AutoRun : Game
+    public class AutoRun : BaseGame
     {
 
         #region Serialized Fields

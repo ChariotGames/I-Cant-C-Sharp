@@ -16,7 +16,7 @@ namespace _Scripts
 
         #region Fields
 
-        private GameAsset game;
+        private Minigame game;
 
         #endregion Fields
 
@@ -34,7 +34,7 @@ namespace _Scripts
         /// Sets up the button's properties at creation.
         /// </summary>
         /// <param name="input">The game asset to get the relevant data from.</param>
-        public void SetupButton(GameAsset input)
+        public void SetupButton(Minigame input)
         {
             game = input;
             title.text = ConvertIDtoName(game.AssetID);

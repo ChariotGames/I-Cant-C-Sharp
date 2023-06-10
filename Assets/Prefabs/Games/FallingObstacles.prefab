@@ -117,6 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394e10214e00b0b4fa3d762fdac46c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+  currentDifficulty: 0
   cannonPrefab: {fileID: 2032116415423184656, guid: 8ed677d3dd640a94fb24f2b3538b58ff, type: 3}
   obstaclePrefab: {fileID: 4273202934983420467, guid: 9067a4d3d1ca82a4590eb3ddf2ba4084, type: 3}
   cannonMovementSpeed: 2

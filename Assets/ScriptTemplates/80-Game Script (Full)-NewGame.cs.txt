@@ -15,7 +15,7 @@ namespace _Scripts.Games
     /// On Level 2, keep it short and concise.
     /// On Level 3, maybe one-liners are possible.
     /// </summary>
-    public class #SCRIPTNAME# : Game
+    public class #SCRIPTNAME# : BaseGame
     {
         /**
          * TODO: General Structure Ideas:
@@ -82,8 +82,8 @@ namespace _Scripts.Games
         /**
         public returnType FieldNameWithCapitalStart
         {
-            get { return fieldName; }
-            set { fieldName = value; }
+            get => fieldName;
+            set => fieldName = value;
         }
         */
 
@@ -113,4 +113,41 @@ namespace _Scripts.Games
 
         #endregion Overarching Methods / Helpers
     }
+
+    #region Editor Overrides
+
+    /// <summary>
+    /// This can be used to restructure the inspector a little bit.
+    /// To group items in collapsable items and change appearences.
+    /// Please use with caution! Otherwise DELETE THE WHOLE REGION!
+    /// </summary>
+    [CustomEditor(typeof(#SCRIPTNAME#))]
+    public class #SCRIPTNAME#Editor : Editor
+    {
+        SerializedProperty manager, currentDifficulty;
+
+        bool showGameProperties = false;
+
+        void OnEnable()
+        {
+            currentDifficulty = serializedObject.FindProperty("currentDifficulty");
+            manager = serializedObject.FindProperty("manager");
+        }
+
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            showGameProperties = EditorGUILayout.Foldout(showGameProperties, "Base Game Properties");
+            if (showGameProperties)
+            {
+                EditorGUILayout.PropertyField(manager);
+                EditorGUILayout.PropertyField(currentDifficulty);
+            }
+
+            serializedObject.ApplyModifiedProperties();
+        }
+    }
+
+    #endregion Editor Overrides
 }

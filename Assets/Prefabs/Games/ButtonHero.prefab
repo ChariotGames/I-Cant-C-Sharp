@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8a423baa9afdd47a12200b94646979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 0
   buttonPrefabs:
   - {fileID: 4665578903151798918}

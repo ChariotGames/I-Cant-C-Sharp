@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class ButtonHero : Game
+    public class ButtonHero : BaseGame
     {
         #region Fields
 

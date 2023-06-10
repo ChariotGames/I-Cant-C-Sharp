@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 
 namespace _Scripts.Games
 {
-    public class SameAsBefore : Game
+    public class SameAsBefore : BaseGame
     {
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private int maxStepsBack;
@@ -132,8 +132,8 @@ namespace _Scripts.Games
 
         private void OnEnable()
         {
-            InputHandler.RightShoulderBtnAction += RightShoulderPressed;
-            InputHandler.LeftShoulderBtnAction += LeftShoulderPressed;
+            InputHandler.ShoulderRight += RightShoulderPressed;
+            InputHandler.ShoulderLeft += LeftShoulderPressed;
         }
 
         public void RightShoulderPressed()
@@ -148,8 +148,8 @@ namespace _Scripts.Games
 
         private void OnDisable()
         {
-            InputHandler.RightShoulderBtnAction -= RightShoulderPressed;
-            InputHandler.LeftShoulderBtnAction -= LeftShoulderPressed;
+            InputHandler.ShoulderRight -= RightShoulderPressed;
+            InputHandler.ShoulderLeft -= LeftShoulderPressed;
         }
     }
 }

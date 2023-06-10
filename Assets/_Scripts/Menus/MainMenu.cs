@@ -86,7 +86,7 @@ namespace _Scripts
         public void SetEndlessMode()
         {
             settings.SelectedGame = null;
-            settings.Mode = GameMode.ENDLESS;
+            settings.Mode = Mode.ENDLESS;
         }
 
         /// <summary>

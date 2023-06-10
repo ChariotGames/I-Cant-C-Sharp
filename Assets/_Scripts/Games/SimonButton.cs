@@ -36,32 +36,32 @@ namespace _Scripts.Games
                 !simonActions.ContainsKey(Colors.BLUE))
             {
                 simonActions.Add(Colors.BLUE, (
-                    (Action)(() => InputHandler.NorthBtnAction += ButtonPressed),
-                    (Action)(() => InputHandler.NorthBtnAction -= ButtonPressed)
+                    (Action)(() => InputHandler.ButtonNorth += ButtonPressed),
+                    (Action)(() => InputHandler.ButtonNorth -= ButtonPressed)
                 ));
             }
             if (gameObject.name.Equals(Colors.RED.ToString()) &&
                 !simonActions.ContainsKey(Colors.RED))
             {
                 simonActions.Add(Colors.RED, (
-                    (Action)(() => InputHandler.EastBtnAction += ButtonPressed),
-                    (Action)(() => InputHandler.EastBtnAction -= ButtonPressed)
+                    (Action)(() => InputHandler.ButtonEast += ButtonPressed),
+                    (Action)(() => InputHandler.ButtonEast -= ButtonPressed)
                 ));
             }
             if (gameObject.name.Equals(Colors.YELLOW.ToString()) &&
                 !simonActions.ContainsKey(Colors.YELLOW))
             {
                 simonActions.Add(Colors.YELLOW, (
-                    (Action)(() => InputHandler.SouthBtnAction += ButtonPressed),
-                    (Action)(() => InputHandler.SouthBtnAction -= ButtonPressed)
+                    (Action)(() => InputHandler.ButtonSouth += ButtonPressed),
+                    (Action)(() => InputHandler.ButtonSouth -= ButtonPressed)
                 ));
             }
             if (gameObject.name.Equals(Colors.GREEN.ToString()) &&
                 !simonActions.ContainsKey(Colors.GREEN))
             {
                 simonActions.Add(Colors.GREEN, (
-                    (Action)(() => InputHandler.WestBtnAction += ButtonPressed),
-                    (Action)(() => InputHandler.WestBtnAction -= ButtonPressed)
+                    (Action)(() => InputHandler.ButtonWest += ButtonPressed),
+                    (Action)(() => InputHandler.ButtonWest -= ButtonPressed)
                 ));
             }
         }

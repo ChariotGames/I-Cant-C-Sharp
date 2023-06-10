@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Scripts.Games
 {
-    public class ArrowTerror : Game
+    public class ArrowTerror : BaseGame
     {
         #region Serialized Fields
 

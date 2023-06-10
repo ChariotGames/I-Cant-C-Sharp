@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53836c4eedddc452599a3a0e7afdd7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+  currentDifficulty: 0
   ammountEnemies: 0
   ammountCheckpoints: 0
   lives: 3
@@ -138,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73defb2441cff4961a5c557316b882fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  currentDifficulty: 0
   speed: 7
   maxRotationSpeed: 2.5
   maxRotation: 180

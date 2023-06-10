@@ -10,7 +10,7 @@ namespace _Scripts
     {
         private void OnEnable()
         {
-            InputHandler.WestBtnAction += ButtonPressed;
+            InputHandler.ButtonWest += ButtonPressed;
         }
 
 
@@ -22,7 +22,7 @@ namespace _Scripts
         
         private void OnDisable()
         {
-            InputHandler.WestBtnAction -= ButtonPressed;
+            InputHandler.ButtonWest -= ButtonPressed;
         }
     }
 }

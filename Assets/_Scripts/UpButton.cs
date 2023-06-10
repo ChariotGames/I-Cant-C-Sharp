@@ -8,7 +8,7 @@ namespace _Scripts
     {
         private void OnEnable()
         {
-            InputHandler.UpArrowBtnAction += ButtonPressed;
+            InputHandler.ArrowUp += ButtonPressed;
         }
 
         public void ButtonPressed()
@@ -18,7 +18,7 @@ namespace _Scripts
         
         private void OnDisable()
         {
-            InputHandler.UpArrowBtnAction -= ButtonPressed;
+            InputHandler.ArrowUp -= ButtonPressed;
         }
     }
 }
