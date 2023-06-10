@@ -28,25 +28,25 @@ namespace _Scripts._Input
         public void OnStickRight(InputAction.CallbackContext ctx)
         {
             StickRight = ctx.ReadValue<Vector2>();
-            Debug.Log("StickRight" + StickRight);
+            //Debug.Log("StickRight" + StickRight);
         }
         
         public void OnStickLeft(InputAction.CallbackContext ctx)
         {
             StickLeft = ctx.ReadValue<Vector2>();
-            Debug.Log("StickLeft" + StickLeft);
+            //Debug.Log("StickLeft" + StickLeft);
         }
 
         public void OnStickButtonLeft(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) StickButtonLeft?.Invoke();
-            Debug.Log("StickButtonLeft");
+            //Debug.Log("StickButtonLeft");
         }
 
         public void OnStickButtonRight(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) StickButtonRight?.Invoke();
-            Debug.Log("StickButtonRight");
+            //Debug.Log("StickButtonRight");
         }
 
         #endregion Sticks
@@ -56,25 +56,25 @@ namespace _Scripts._Input
         public void OnArrowUp(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ArrowUp?.Invoke();
-            Debug.Log("UpArrowAction");
+            //Debug.Log("UpArrowAction");
         }
     
         public void OnArrowDown(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ArrowDown?.Invoke();
-            Debug.Log("DownArrowAction");
+            //Debug.Log("DownArrowAction");
         }
     
         public void OnArrowLeft(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ArrowLeft?.Invoke();
-            Debug.Log("LeftArrowAction");
+            //Debug.Log("LeftArrowAction");
         }
     
         public void OnArrowRight(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ArrowRight?.Invoke();
-            Debug.Log("RightArrowAction");
+            //Debug.Log("RightArrowAction");
         }
 
         #endregion Arrows
@@ -84,25 +84,25 @@ namespace _Scripts._Input
         public void OnButtonNorth(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ButtonNorth?.Invoke();
-            Debug.Log("ButtonNorth");
+            //Debug.Log("ButtonNorth");
         }
 
         public void OnButtonSouth(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ButtonSouth?.Invoke();
-            Debug.Log("ButtonSouth");
+            //Debug.Log("ButtonSouth");
         }
 
         public void OnButtonEast(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ButtonEast?.Invoke();
-            Debug.Log("ButtonEast");
+            //Debug.Log("ButtonEast");
         }
         
         public void OnButtonWest(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) ButtonWest?.Invoke();
-            Debug.Log("ButtonWest");
+            //Debug.Log("ButtonWest");
         }
 
         #endregion Face Buttons
