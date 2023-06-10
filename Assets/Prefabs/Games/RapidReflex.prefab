@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6586789a3ce3444a210e33efb8c6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+  currentDifficulty: 0
   difficulty: 1
   timeToAnswerInMs: 250
   lightTimer: 1

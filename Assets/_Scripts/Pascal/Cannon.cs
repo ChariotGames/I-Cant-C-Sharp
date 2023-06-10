@@ -23,7 +23,7 @@ namespace _Scripts.Pascal
 
         private void OnEnable()
         {
-            InputHandler.RightTriggerBtnAction += ShootProjectile;
+            InputHandler.TriggerRight += ShootProjectile;
         }
 
         private void ShootProjectile()
@@ -50,7 +50,7 @@ namespace _Scripts.Pascal
         private void RotateTowardsMouse()
         {
             // only use x-axis movement of input
-            var inputDelta = InputHandler.LeftStickDelta.x;
+            var inputDelta = InputHandler.StickLeft.x;
             
             //  Mathf.Sign will return 1,-1 or 0
             var direction = Vector2.right * Mathf.Sign(inputDelta);
@@ -82,7 +82,7 @@ namespace _Scripts.Pascal
         
         private void OnDisable()
         {
-            InputHandler.RightTriggerBtnAction -= ShootProjectile;
+            InputHandler.TriggerRight -= ShootProjectile;
         }
 
     }

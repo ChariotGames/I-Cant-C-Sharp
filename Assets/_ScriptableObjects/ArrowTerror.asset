@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
-  m_Name: AutoRun
+  m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
+  m_Name: ArrowTerror
   m_EditorClassIdentifier: 
-  assetID: 23553
+  assetID: 0
   description: 
+  complexity: 3
   difficulty: 0
-  genre: 2
-  keys: 0
-  orientation: 1
-  prefab: {fileID: 5920264850204584917, guid: 031a16bd02a52994bbc5b50358c6626e, type: 3}
-  version: 
+  genre: 4
+  keys: 1
+  orientation: 3
+  prefab: {fileID: 0}
+  preview: {fileID: 0}

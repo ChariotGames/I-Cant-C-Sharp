@@ -1,31 +1,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts._Interfaces;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class ButtonHero : Game
+    public class ButtonHero : BaseGame
     {
         #region Fields
 
         [SerializeField] private List<GameObject> buttonPrefabs;
         [SerializeField] private float spawnTimeUpperBounds;
         [SerializeField] private float spawnTimeLowerBounds;
+        [SerializeField] private TextMeshPro timerTextMesh;
         
         
         private Camera _mainCamera;
         private TextMeshPro _previousButton;
         private Bounds _cameraViewportBounds;
         private readonly List<TextMeshPro> spawnedButtons = new ();
+        private static float _timer;
   
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
+       
         private void Awake()
         {
             _mainCamera = Camera.main;
@@ -49,6 +53,21 @@ namespace _Scripts.Games
             
         }
 
+        private void Update()
+        {
+            if (_previousButton && _previousButton.gameObject.activeSelf)
+            {
+                _timer += Time.deltaTime;
+                var seconds = Mathf.Floor(_timer);
+                var milliseconds = Mathf.Floor((_timer - seconds) * 1000f);
+
+                var timeText = $"{seconds:00}:{milliseconds:00}";
+                timerTextMesh.text = timeText;
+            }
+
+
+        }
+
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
@@ -58,7 +77,13 @@ namespace _Scripts.Games
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-
+        
+        public static void ResetTimer()
+        {
+            Debug.Log("It took " + _timer + " to react");
+            _timer = 0;
+            
+        }
             
         private void ActivateObjectAtRandomPos()
         {
@@ -68,6 +93,7 @@ namespace _Scripts.Games
                 return;
             }
 
+            
             // Get a random TextMeshPro from the list
             var randomIndex = Random.Range(0, spawnedButtons.Count);
             var randomButton = spawnedButtons[randomIndex];
@@ -110,8 +136,10 @@ namespace _Scripts.Games
                 var randomDelay = Random.Range(spawnTimeLowerBounds, spawnTimeUpperBounds);
                 ActivateObjectAtRandomPos();
                 yield return new WaitForSeconds(randomDelay);
+                
             }
         }
+        
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers

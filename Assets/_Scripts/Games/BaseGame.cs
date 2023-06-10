@@ -1,45 +1,43 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace _Scripts.Games
 {
-    public abstract class Game : MonoBehaviour
+    public abstract class BaseGame : MonoBehaviour
     {
-<<<<<<< Updated upstream
-=======
         #region Serialized Fields
 
-        [SerializeField] protected GameManager controller;
+        [SerializeField] protected MinigameManager manager;
         [SerializeField] protected Difficulty currentDifficulty = Difficulty.LVL1;
 
         #endregion Serialized Fields
 
->>>>>>> Stashed changes
         #region Fields
 
         protected AssetID id;
-        protected Difficulty currentDifficulty = Difficulty.LVL1;
+        
         private (int min, int max) difficultyRange = ((int)Difficulty.LVL1, (int)Difficulty.LVL3);
 
-        #endregion
+        #endregion Fields
 
         #region Methods
 
         #region protected
 
         /// <summary>
-        /// Informs the Game Controller, that the game triggered a win condition
+        /// Informs the BaseGame Controller, that the game triggered a win condition
         /// </summary>
         protected void Win()
         {
-            SendMessageUpwards("WinCondition", id);
+            manager.WinCondition(id);
         }
 
         /// <summary>
-        /// Informs the Game Controller, that the game triggered a lose condition
+        /// Informs the BaseGame Controller, that the game triggered a lose condition
         /// </summary>
         protected void Lose()
         {
-            SendMessageUpwards("LoseCondition", id);
+            manager.LoseCondition(id);
         }
 
         /// <summary>
@@ -47,7 +45,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            SendMessageUpwards("SetDifficulty", new object[] { id, Clamp(currentDifficulty - 1) });
+            manager.SetDifficulty(id, Clamp(currentDifficulty - 1));
         }
 
         /// <summary>
@@ -55,10 +53,10 @@ namespace _Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            SendMessageUpwards("SetDifficulty", new object[] { id, Clamp(currentDifficulty + 1) });
+            manager.SetDifficulty(id, Clamp(currentDifficulty + 1));
         }
 
-        #endregion
+        #endregion protected
 
         #region private
 
@@ -72,24 +70,24 @@ namespace _Scripts.Games
             return (Difficulty)Mathf.Clamp((int)(difficulty), difficultyRange.min, difficultyRange.max);
         }
 
-        #endregion
+        #endregion private
 
-        #endregion
+        #endregion  Methods
 
         #region GetSets
 
         public AssetID ID
         {
-            get { return id; }
-            set { id = value; }
+            get => id;
+            set => id = value;
         }
 
         public Difficulty Difficulty
         {
-            get { return currentDifficulty; }
-            set { currentDifficulty = value; }
+            get => currentDifficulty;
+            set => currentDifficulty = value;
         }
 
-        #endregion
+        #endregion GetSets
     }
 }

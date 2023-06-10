@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83c3fcfde7a81c346bcb6f32f95847ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: MagicCircle
   m_EditorClassIdentifier: 
   assetID: 16897
@@ -20,3 +20,4 @@ MonoBehaviour:
   keys: 6144
   orientation: 2
   prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
+  preview: {fileID: 0}

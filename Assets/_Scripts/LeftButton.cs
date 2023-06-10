@@ -8,7 +8,7 @@ namespace _Scripts
     {
         private void OnEnable()
         {
-            InputHandler.LeftArrowBtnAction += ButtonPressed;
+            InputHandler.ArrowLeft += ButtonPressed;
         }
 
         public void ButtonPressed()
@@ -18,7 +18,7 @@ namespace _Scripts
         
         private void OnDisable()
         {
-            InputHandler.LeftArrowBtnAction -= ButtonPressed;
+            InputHandler.ArrowLeft -= ButtonPressed;
         }
     }
 }

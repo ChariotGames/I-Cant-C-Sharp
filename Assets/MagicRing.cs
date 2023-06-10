@@ -38,8 +38,8 @@ public class MagicRing : MonoBehaviour
 
     public void activateInput()
     {
-        InputHandler.LeftShoulderBtnAction += checkLeft;
-        if (level == Difficulty.LVL2 || level == Difficulty.LVL3) InputHandler.RightShoulderBtnAction += checkRight;
+        InputHandler.ShoulderLeft += checkLeft;
+        if (level == Difficulty.LVL2 || level == Difficulty.LVL3) InputHandler.ShoulderRight += checkRight;
     }
 
     private void checkLeft()
@@ -105,7 +105,7 @@ public class MagicRing : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputHandler.LeftShoulderBtnAction -= checkLeft;
-        InputHandler.RightShoulderBtnAction -= checkRight;
+        InputHandler.ShoulderLeft -= checkLeft;
+        InputHandler.ShoulderRight -= checkRight;
     }
 }

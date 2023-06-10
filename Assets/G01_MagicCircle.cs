@@ -6,7 +6,7 @@ using System;
 using _Scripts;
 using _Scripts.Games;
 
-public class G01_MagicCircle : Game
+public class G01_MagicCircle : BaseGame
 {
     //[SerializeField] private float time = 0f;
 
@@ -30,7 +30,7 @@ public class G01_MagicCircle : Game
 
     private void SpawnRings()
     {
-        //InputHandler.LeftShoulderBtnAction += checkmethod;
+        //InputHandler.ShoulderLeft += checkmethod;
 
         GameObject obj = Instantiate(ring, ringContainer.transform);
         MagicRing objScript = obj.GetComponent<MagicRing>();

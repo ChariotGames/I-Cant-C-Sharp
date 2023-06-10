@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace _Scripts.Games
 {
-    public class #SCRIPTNAME# : Game
+    public class #SCRIPTNAME# : BaseGame
     {
         #region Serialized Fields
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion Serialized Fields
 
         #region Fields
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion Fields
 
@@ -34,14 +34,14 @@ namespace _Scripts.Games
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         public void TemplateMethod(bool param)
         {
@@ -51,9 +51,44 @@ namespace _Scripts.Games
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers
-
-            #NOTRIM#
+        
+        #NOTRIM#
 
         #endregion Overarching Methods / Helpers
     }
+
+    #region Editor Overrides
+
+    /// <summary>
+    /// Please use with caution! Otherwise DELETE THE WHOLE REGION!
+    /// </summary>
+    [CustomEditor(typeof(#SCRIPTNAME#))]
+    public class #SCRIPTNAME#Editor : Editor
+    {
+        SerializedProperty manager, currentDifficulty;
+
+        bool showGameProperties = false;
+
+        void OnEnable()
+        {
+            currentDifficulty = serializedObject.FindProperty("currentDifficulty");
+            manager = serializedObject.FindProperty("manager");
+        }
+
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            showGameProperties = EditorGUILayout.Foldout(showGameProperties, "Base Game Properties");
+            if (showGameProperties)
+            {
+                EditorGUILayout.PropertyField(manager);
+                EditorGUILayout.PropertyField(currentDifficulty);
+            }
+
+            serializedObject.ApplyModifiedProperties();
+        }
+    }
+
+    #endregion Editor Overrides
 }

@@ -1,5 +1,7 @@
-﻿using _Scripts._Input;
+﻿using System;
+using _Scripts._Input;
 using _Scripts._Interfaces;
+using _Scripts.Games;
 using UnityEngine;
 
 namespace _Scripts
@@ -8,17 +10,19 @@ namespace _Scripts
     {
         private void OnEnable()
         {
-            InputHandler.EastBtnAction += ButtonPressed;
+            InputHandler.ButtonEast += ButtonPressed;
         }
+
 
         public void ButtonPressed()
         {
             gameObject.SetActive(false);
+            ButtonHero.ResetTimer();
         }
         
         private void OnDisable()
         {
-            InputHandler.EastBtnAction -= ButtonPressed;
+            InputHandler.ButtonEast -= ButtonPressed;
         }
     }
 }

@@ -7,19 +7,18 @@ namespace _Scripts
     /// <summary>
     /// Manages matching, spawning and deletion of game assets.
     /// </summary>
-    public class GameManager : MonoBehaviour
+    public class MinigameManager : MonoBehaviour
     {
         #region Serialized Fields
 
         [SerializeField] private Settings settings;
-        [SerializeField] private List<GameAsset> games;
         [SerializeField] private GameObject[] spawnPoints;
 
         #endregion
 
         #region Fields
 
-        private List<GameAsset> loadedGames = new();
+        private List<Minigame> loadedGames = new();
 
         #endregion
 
@@ -29,8 +28,8 @@ namespace _Scripts
         {
             if(settings.SelectedGame == null)
             {
-                PickGame(new List<GameAsset>(games));
-                PickGame(new List<GameAsset>(games));
+                PickGame(new List<Minigame>(settings.Games));
+                PickGame(new List<Minigame>(settings.Games));
             } else
             {
                 loadedGames.Add(LoadGame(settings.SelectedGame, SetParent(Orientation.FULLSCREEN)));
@@ -42,14 +41,14 @@ namespace _Scripts
         #region Instance Management
 
         /// <summary>
-        /// Picks a random game from the Game list.
+        /// Picks a random game from the BaseGame list.
         /// </summary>
         /// <param name="gameList">A game list to pick from.</param>
-        private void PickGame(List<GameAsset> gameList)
+        private void PickGame(List<Minigame> gameList)
         {
             gameList.RemoveAll(item => loadedGames.Contains(item));
 
-            GameAsset game = gameList[Random.Range(0, gameList.Count)];
+            Minigame game = gameList[Random.Range(0, gameList.Count)];
 
             // Remove games before loading a new one
             if (loadedGames.Count >= 2 || spawnPoints[^1].transform.childCount == 1)
@@ -79,7 +78,7 @@ namespace _Scripts
         /// </summary>
         /// <param name="game">The game to check.</param>
         /// <returns>True if no overlaps are found.</returns>
-        private bool CheckFit(GameAsset game)
+        private bool CheckFit(Minigame game)
         {
             if (game.Prefab == null) return false;
 
@@ -109,10 +108,10 @@ namespace _Scripts
         /// <param name="game">The game asset to load from.</param>
         /// <param name="parent">The parent to load it into.</param>
         /// <returns>The successfully loaded game.</returns>
-        private GameAsset LoadGame(GameAsset game, Transform parent)
+        private Minigame LoadGame(Minigame game, Transform parent)
         {
             Instantiate(game.Prefab, parent);
-            Game prefab = game.Prefab.GetComponent<Game>();
+            BaseGame prefab = game.Prefab.GetComponent<BaseGame>();
             prefab.ID = game.AssetID;
             prefab.Difficulty = game.Difficulty;
             return game;
@@ -168,7 +167,7 @@ namespace _Scripts
         {
             if (removeAllFlag)
             {
-                foreach (GameAsset game in loadedGames)
+                foreach (Minigame game in loadedGames)
                 {
                     Destroy(GameObject.FindObjectOfType<GameObject>(game.Prefab));
                 }
@@ -193,26 +192,26 @@ namespace _Scripts
 
         #region Game Mechanics
 
-        private void WinCondition(AssetID id)
+        public void WinCondition(AssetID id)
         {
             Debug.Log("Win from " + id);
         }
 
-        private void LoseCondition(AssetID id)
+        public void LoseCondition(AssetID id)
         {
             Debug.Log("Lose from " + id);
             settings.Lives--;
             Debug.Log(settings.Lives);
             if(settings.Lives <= 0)
             {
-                //PickGame(new List<GameAsset>(games));
+                //PickGame(new List<Minigame>(games));
                 gameObject.GetComponent<SceneChanger>().ChangeScene(0);
             }
         }
 
-        private void SetDifficulty(AssetID id, Difficulty difficulty)
+        public void SetDifficulty(AssetID id, Difficulty difficulty)
         {
-            games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
+            settings.Games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
         }
 
         #endregion

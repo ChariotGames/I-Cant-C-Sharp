@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts
@@ -8,14 +9,9 @@ namespace _Scripts
         #region Fields
 
         [SerializeField] private byte lives = 3, players = 1;
-<<<<<<< Updated upstream
-        [SerializeField] private GameMode mode = GameMode.SINGLE;
-        [SerializeField] private GameAsset selectedGame;
-=======
         [SerializeField] private Mode mode = Mode.SINGLE;
-        [SerializeField] private GameAsset selectedGame = null;
-        [SerializeField] private List<GameAsset> games = new();
->>>>>>> Stashed changes
+        [SerializeField] private Minigame selectedGame = null;
+        [SerializeField] private List<Minigame> games = new();
 
         #endregion
 
@@ -23,25 +19,31 @@ namespace _Scripts
 
         public byte Lives
         {
-            get { return lives; }
-            set { lives = value; }
+            get => lives;
+            set => lives = value;
         }
         public byte Players
         {
-            get { return players; }
-            set { players = value; }
+            get => players;
+            set => players = value;
         }
 
         public Mode Mode
         {
-            get { return mode; }
-            set { mode = value; }
+            get => mode;
+            set => mode = value;
         }
 
-        public GameAsset SelectedGame
+        public Minigame SelectedGame
         {
-            get { return selectedGame; }
-            set { selectedGame = value; }
+            get => selectedGame;
+            set => selectedGame = value;
+        }
+
+        public List<Minigame> Games
+        {
+            get => games;
+            set => games = value;
         }
 
         #endregion

@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Scripts
 {
-    [CreateAssetMenu(fileName = "GameAsset", menuName = "ScriptableObjects/GameAsset", order = 1)]
-    public class GameAsset : ScriptableObject
+    [CreateAssetMenu(fileName = "Minigame", menuName = "ScriptableObjects/Minigame", order = 1)]
+    public class Minigame : ScriptableObject
     {
         #region Serialized Fields
 
@@ -16,55 +15,55 @@ namespace _Scripts
         [SerializeField] private Keys keys;
         [SerializeField] private Orientation orientation;
         [SerializeField] private GameObject prefab;
-        [SerializeField] private Image screenshot;
+        [SerializeField] private Sprite preview;
 
         #endregion Serialized Fields
 
         #region GetSets
         public AssetID AssetID
         {
-            get { return assetID; }
+            get => assetID;
         }
 
         public Complexity Complexity
         {
-            get { return complexity; }
+            get => complexity;
         }
 
         public string Description
         {
-            get { return description; }
+            get => description;
         }
 
         public Difficulty Difficulty
         {
-            get { return difficulty; }
-            set { difficulty = value; }
+            get => difficulty;
+            set => difficulty = value;
         }
 
         public Genre Genre
         {
-            get { return genre; }
+            get => genre;
         }
 
         public Keys Keys
         {
-            get { return keys; }
+            get => keys;
         }
 
         public Orientation Orientation
         {
-            get { return orientation; }
+            get => orientation;
         }
 
         public GameObject Prefab
         {
-            get { return prefab; }
+            get => prefab;
         }
 
-        public Image Screenshot
+        public Sprite Preview
         {
-            get { return screenshot; }
+            get => preview;
         }
 
         #endregion GetSets

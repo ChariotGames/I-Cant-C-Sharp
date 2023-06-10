@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class RapidReflex : Game
+    public class RapidReflex : BaseGame
     {
     #region Serialized Fields
         
@@ -183,8 +183,8 @@ namespace _Scripts.Games
 
         private void OnEnable()
         {
-            InputHandler.EastBtnAction += EastButtonPressed;
-            InputHandler.RightShoulderBtnAction += EastButtonPressed;
+            InputHandler.ButtonEast += EastButtonPressed;
+            InputHandler.ShoulderRight += EastButtonPressed;
         }
 
         public void EastButtonPressed()
@@ -195,8 +195,8 @@ namespace _Scripts.Games
         
         private void OnDisable()
         {
-            InputHandler.EastBtnAction -= EastButtonPressed;
-            InputHandler.RightShoulderBtnAction -= EastButtonPressed;
+            InputHandler.ButtonEast -= EastButtonPressed;
+            InputHandler.ShoulderRight -= EastButtonPressed;
         }
 
     #endregion Overarching Methods / Helpers

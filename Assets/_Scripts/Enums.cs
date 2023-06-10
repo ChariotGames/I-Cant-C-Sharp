@@ -109,11 +109,6 @@ namespace _Scripts
         G99_UnnamedGame = 31743,
     }
 
-    public enum Simon // TO BE DELETED
-    {
-        BLUE, RED, YELLOW, GREEN, EMPTY, DOUBLE, NONE, OK
-    }
-
     public enum Colors
     {
         NONE, BLUE, RED, YELLOW, GREEN, PURPLE, ANY
@@ -134,11 +129,7 @@ namespace _Scripts
         NONE = -1, UP, DOWN, LEFT, RIGHT, CENTER
     }
 
-<<<<<<< Updated upstream
-    public enum GameMode
-=======
     public enum Mode
->>>>>>> Stashed changes
     {
         NONE, ENDLESS, SINGLE, MIXED, TUTORIAL
     }
@@ -151,6 +142,11 @@ namespace _Scripts
     public enum Orientation
     {
         NONE, HORIZONTAL, VERTICAL, QUARTER, FULLSCREEN
+    }
+
+    public enum Type
+    {
+        NONE, PLAYER, ENEMY, CHECKPOINT, GOAL
     }
 
     #endregion
