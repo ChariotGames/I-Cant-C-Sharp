@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3783603590874394995, guid: ed3cb08cacecb47188b43efa7f30c768, type: 3}
       propertyPath: ammountEnemies
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3783603590874394995, guid: ed3cb08cacecb47188b43efa7f30c768, type: 3}
       propertyPath: ammountCheckpoints
