@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4202691917262487455}
   m_Layer: 0
-  m_Name: Overlay
+  m_Name: Overlays
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3923420840596175641}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -457,8 +457,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 3923420841571965843}
   - {fileID: 8395203610680565243}
+  - {fileID: 3923420841571965843}
   - {fileID: 4202691917262487455}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceceaaccb4d8fb747a41c29c2058bcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 0
   displayPattern: 
   guessPattern: 
@@ -489,7 +489,7 @@ MonoBehaviour:
   inputOverlay: {fileID: 3619042334536100596}
   infoOverlay: {fileID: 8236597517906972022}
   twice: {fileID: 9086356697543899546}
-  empty: {fileID: 6638981845291472354}
+  not: {fileID: 6638981845291472354}
   ok: {fileID: 6114598051593611201}
   timer: {fileID: 3306312410208930860}
 --- !u!1 &3923420840941362654
@@ -905,7 +905,7 @@ Transform:
   - {fileID: 3923420840941362655}
   - {fileID: 3923420841825610098}
   m_Father: {fileID: 3923420840596175641}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3923420841613081698
 GameObject:
@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 8756185251969290319}
   - component: {fileID: 3290319596319287276}
   m_Layer: 0
-  m_Name: Empty
+  m_Name: Not
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

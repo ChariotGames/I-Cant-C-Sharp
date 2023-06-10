@@ -19,25 +19,25 @@ namespace _Scripts.Games
     /// On Level 2, there is a chance for a color to be added twice.
     /// On Level 3, a color is displayed but has to be skipped in guessing.
     /// </summary>
-    public class Simon : Game
+    public class Simon : BaseGame
     {
         #region Serialized Fields
 
         [SerializeField] private List<Colors> displayPattern, guessPattern;
         [SerializeField] private List<Modifier> infoPattern;
         [SerializeField] private GameObject buttonsContainer, blue, red, yellow, green, middle;
-        [SerializeField] private GameObject inputOverlay, infoOverlay, twice, empty, ok;
+        [SerializeField] private GameObject inputOverlay, infoOverlay, twice, not, ok;
         [SerializeField] private Image timer;
 
         #endregion
 
         #region Fields
 
-        private SimonButton[] buttons;
+        private Dictionary<Colors, GameObject> buttonObjects;
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
-        private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
+        private const int MIN_LENGTH = 1, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
         private float animationTime;
-        private int checkingIndex = 0, correctGuesses = 0;
+        private int checkingIndex = 0, correctGuesses = 0, wrongGuesses = 0;
 
         #endregion
 
@@ -45,18 +45,19 @@ namespace _Scripts.Games
 
         private void Awake()
         {
-            buttons = new SimonButton[4];
-
-            for (int i = 0; i < buttonsContainer.transform.childCount-1; i++)
-            {
-                buttons[i] = buttonsContainer.transform.GetChild(i).GetComponent<SimonButton>();
-            }
+            // Initialize game
+            buttonObjects = new();
+            buttonObjects.Add(Colors.BLUE, blue);
+            buttonObjects.Add(Colors.RED, red);
+            buttonObjects.Add(Colors.YELLOW, yellow);
+            buttonObjects.Add(Colors.GREEN, green);
         }
 
         // Start is called before the first frame update
         void Start()
         {
             animationTime = BLINK_TIME * COLORS;
+            infoOverlay.SetActive(true);
             StartCoroutine(ActivateButtons(BLINK_TIME));
             GeneratePattern(MIN_LENGTH);
             StartCoroutine(AnimateButtons(animationTime * 2, animationTime));
@@ -109,7 +110,7 @@ namespace _Scripts.Games
             Colors randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = (Colors)UnityEngine.Random.Range(0, COLORS);
+                randomColor = (Colors)UnityEngine.Random.Range(0, COLORS) + 1;
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
@@ -120,14 +121,14 @@ namespace _Scripts.Games
         /// Depending on the Level and Modifier it may differ
         /// from the patern the user gets to actually see.
         /// </summary>
-        /// <param name="button">Enum of the color to add to the pattern.</param>
-        private void SetGuessPattern(Colors button)
+        /// <param name="color">Enum of the color to add to the pattern.</param>
+        private void SetGuessPattern(Colors color)
         {
             if (displayPattern.Count <= MIN_LENGTH)
             {
                 // Only do the extra difficulty after the 3rd round!
                 infoPattern.Add(Modifier.NORMAL);
-                guessPattern.Add(button);
+                guessPattern.Add(color);
                 return;
             }
 
@@ -141,13 +142,13 @@ namespace _Scripts.Games
             }
 
             infoPattern.Add(Modifier.NORMAL);
-            guessPattern.Add(button);
+            guessPattern.Add(color);
 
             if (base.Difficulty != Difficulty.LVL1 && chance > 1)
             {
                 // On Level 2 the color is doubled
                 infoPattern[^1] = Modifier.DOUBLE;
-                guessPattern.Add(button);
+                guessPattern.Add(color);
             }
         }
 
@@ -156,7 +157,7 @@ namespace _Scripts.Games
         /// </summary>
         private void ClearInfoPattern()
         {
-            ok.GetComponent<SimonButton>().Animate();
+            ok.GetComponent<SimonElement>().Animate();
 
             for (int i = 0; i < infoPattern.Count; i++)
             {
@@ -171,9 +172,9 @@ namespace _Scripts.Games
         /// <param name="isPlayersTurn">State of the player's turn.</param>
         private void PlayerTurn(bool isPlayersTurn)
         {
-            foreach (SimonButton button in buttons)
+            foreach (GameObject button in buttonObjects.Values)
             {
-                button.ToggleInput(isPlayersTurn);
+                button.GetComponent<SimonButton>().ToggleInput(isPlayersTurn);
             }
 
             inputOverlay.SetActive(isPlayersTurn);
@@ -193,10 +194,10 @@ namespace _Scripts.Games
             yield return new WaitForSeconds(time);
 
             buttonsContainer.SetActive(true);
-            for (int i = 0; i < buttonsContainer.transform.childCount; i++)
+            foreach (GameObject button in buttonObjects.Values)
             {
-                buttonsContainer.transform.GetChild(i).gameObject.SetActive(true);
-                buttons[i].Animate();
+                button.SetActive(true);
+                button.GetComponent<SimonButton>().Animate();
                 yield return new WaitForSeconds(time);
             }
         }
@@ -204,7 +205,6 @@ namespace _Scripts.Games
         /// <summary>
         /// Plays the animation of the buttons to play.
         /// </summary>
-        /// <param name="buttons">The list of objects to animate.</param>
         /// <param name="delay">The delay of the overal animation.</param>
         /// <param name="duration">The duration of each button's animation.</param>
         /// <returns>An object that can be used to control the coroutine's execution.</returns>
@@ -216,16 +216,11 @@ namespace _Scripts.Games
             {
                 Colors color = displayPattern[i];
                 Modifier info = infoPattern[i];
-<<<<<<< Updated upstream
-                buttons[(int)button].GetComponent<SimonButton>().Animate();
-=======
-                /*buttonsContainer[(int)button - ENUM_OFFSET].GetComponent<SimonButton>().Animate();
->>>>>>> Stashed changes
-                if (info != Modifier.NORMAL)
-                {
-                    GameObject icon = infos[(int)info % COLORS];
-                    icon.GetComponent<SimonButton>().Animate();
-                }*/
+
+                buttonObjects[color].GetComponent<SimonButton>().Animate();
+
+                if (info == Modifier.DOUBLE) twice.GetComponent<SimonElement>().Animate();
+                if (info == Modifier.NONE) not.GetComponent<SimonElement>().Animate();
                 yield return new WaitForSeconds(duration);
             }
 
@@ -284,17 +279,12 @@ namespace _Scripts.Games
         /// </summary>
         private void WrongColor()
         {
-<<<<<<< Updated upstream
-            GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("None"))];
-            if (icon != null) icon.GetComponent<SimonButton>().Animate();
-=======
             wrongGuesses++;
             if (wrongGuesses == 3) base.Lose();
 
-            empty.GetComponent<SimonElement>().Animate();
->>>>>>> Stashed changes
+            not.GetComponent<SimonElement>().Animate();
+
             correctGuesses -= (int)base.Difficulty + 1;
-            base.Lose();
             ResetTurn();
             StartCoroutine(AnimateButtons(animationTime, BLINK_TIME));
         }
@@ -307,7 +297,7 @@ namespace _Scripts.Games
         {
             correctGuesses++;
             UpdateDifficulty(correctGuesses);
-            base.Win();
+            if (correctGuesses == 0) base.Win();
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
@@ -325,14 +315,14 @@ namespace _Scripts.Games
         SerializedProperty controller, currentDifficulty;
         SerializedProperty displayPattern, guessPattern, infoPattern;
         SerializedProperty buttonsContainer, blue, red, yellow, green, middle;
-        SerializedProperty inputOverlay, infoOverlay, twice, empty, ok, timer;
+        SerializedProperty inputOverlay, infoOverlay, twice, not, ok, timer;
 
         bool showGameProperties, showGuessLists, showButtons, showInfos = false;
 
         void OnEnable()
         {
             currentDifficulty = serializedObject.FindProperty("currentDifficulty");
-            controller = serializedObject.FindProperty("controller");
+            controller = serializedObject.FindProperty("manager");
 
             displayPattern = serializedObject.FindProperty("displayPattern");
             guessPattern = serializedObject.FindProperty("guessPattern");
@@ -348,7 +338,7 @@ namespace _Scripts.Games
             inputOverlay = serializedObject.FindProperty("inputOverlay");
             infoOverlay = serializedObject.FindProperty("infoOverlay");
             twice = serializedObject.FindProperty("twice");
-            empty = serializedObject.FindProperty("empty");
+            not = serializedObject.FindProperty("not");
             ok = serializedObject.FindProperty("ok");
             timer = serializedObject.FindProperty("timer");
         }
@@ -389,7 +379,7 @@ namespace _Scripts.Games
                 EditorGUILayout.PropertyField(inputOverlay);
                 EditorGUILayout.PropertyField(infoOverlay);
                 EditorGUILayout.PropertyField(twice);
-                EditorGUILayout.PropertyField(empty);
+                EditorGUILayout.PropertyField(not);
                 EditorGUILayout.PropertyField(ok);
                 EditorGUILayout.PropertyField(timer);
             }
