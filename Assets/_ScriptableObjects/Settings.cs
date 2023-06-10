@@ -8,8 +8,14 @@ namespace _Scripts
         #region Fields
 
         [SerializeField] private byte lives = 3, players = 1;
+<<<<<<< Updated upstream
         [SerializeField] private GameMode mode = GameMode.SINGLE;
         [SerializeField] private GameAsset selectedGame;
+=======
+        [SerializeField] private Mode mode = Mode.SINGLE;
+        [SerializeField] private GameAsset selectedGame = null;
+        [SerializeField] private List<GameAsset> games = new();
+>>>>>>> Stashed changes
 
         #endregion
 
@@ -26,7 +32,7 @@ namespace _Scripts
             set { players = value; }
         }
 
-        public GameMode Mode
+        public Mode Mode
         {
             get { return mode; }
             set { mode = value; }

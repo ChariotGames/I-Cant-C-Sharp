@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,13 +25,15 @@ namespace _Scripts.Games
 
         [SerializeField] private List<Colors> displayPattern, guessPattern;
         [SerializeField] private List<Modifier> infoPattern;
-        [SerializeField] private GameObject[] buttons, infos;
+        [SerializeField] private GameObject buttonsContainer, blue, red, yellow, green, middle;
+        [SerializeField] private GameObject inputOverlay, infoOverlay, twice, empty, ok;
         [SerializeField] private Image timer;
 
         #endregion
 
         #region Fields
 
+        private SimonButton[] buttons;
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
         private const int MIN_LENGTH = 3, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
         private float animationTime;
@@ -40,13 +43,23 @@ namespace _Scripts.Games
 
         #region Unity Built-Ins
 
+        private void Awake()
+        {
+            buttons = new SimonButton[4];
+
+            for (int i = 0; i < buttonsContainer.transform.childCount-1; i++)
+            {
+                buttons[i] = buttonsContainer.transform.GetChild(i).GetComponent<SimonButton>();
+            }
+        }
+
         // Start is called before the first frame update
         void Start()
         {
             animationTime = BLINK_TIME * COLORS;
             StartCoroutine(ActivateButtons(BLINK_TIME));
             GeneratePattern(MIN_LENGTH);
-            StartCoroutine(AnimateButtons(buttons, animationTime * 2, animationTime));
+            StartCoroutine(AnimateButtons(animationTime * 2, animationTime));
         }
 
         #endregion
@@ -143,8 +156,7 @@ namespace _Scripts.Games
         /// </summary>
         private void ClearInfoPattern()
         {
-            GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("Ok"))];
-            if (icon != null) icon.GetComponent<SimonButton>().Animate();
+            ok.GetComponent<SimonButton>().Animate();
 
             for (int i = 0; i < infoPattern.Count; i++)
             {
@@ -159,12 +171,12 @@ namespace _Scripts.Games
         /// <param name="isPlayersTurn">State of the player's turn.</param>
         private void PlayerTurn(bool isPlayersTurn)
         {
-            foreach (GameObject obj in buttons)
+            foreach (SimonButton button in buttons)
             {
-                SimonButton button = obj.GetComponent<SimonButton>();
-                if (button != null) button.ToggleInput(obj, isPlayersTurn);
+                button.ToggleInput(isPlayersTurn);
             }
-            infos[Array.FindIndex(infos, obj => obj.name.Equals("Input"))].SetActive(isPlayersTurn);
+
+            inputOverlay.SetActive(isPlayersTurn);
         }
 
         #endregion
@@ -177,13 +189,14 @@ namespace _Scripts.Games
         private IEnumerator ActivateButtons(float time)
         {
             yield return new WaitForSeconds(time);
-            buttons[^1].SetActive(true);
+            middle.SetActive(true);
             yield return new WaitForSeconds(time);
-            foreach (GameObject obj in buttons)
+
+            buttonsContainer.SetActive(true);
+            for (int i = 0; i < buttonsContainer.transform.childCount; i++)
             {
-                obj.SetActive(true);
-                SimonButton button = obj.GetComponent<SimonButton>();
-                if (button != null) button.Animate();
+                buttonsContainer.transform.GetChild(i).gameObject.SetActive(true);
+                buttons[i].Animate();
                 yield return new WaitForSeconds(time);
             }
         }
@@ -195,20 +208,24 @@ namespace _Scripts.Games
         /// <param name="delay">The delay of the overal animation.</param>
         /// <param name="duration">The duration of each button's animation.</param>
         /// <returns>An object that can be used to control the coroutine's execution.</returns>
-        private IEnumerator AnimateButtons(GameObject[] buttons, float delay, float duration)
+        private IEnumerator AnimateButtons(float delay, float duration)
         {
             yield return new WaitForSeconds(delay);
 
             for (int i = 0; i < displayPattern.Count; i++)
             {
-                Colors button = displayPattern[i];
+                Colors color = displayPattern[i];
                 Modifier info = infoPattern[i];
+<<<<<<< Updated upstream
                 buttons[(int)button].GetComponent<SimonButton>().Animate();
+=======
+                /*buttonsContainer[(int)button - ENUM_OFFSET].GetComponent<SimonButton>().Animate();
+>>>>>>> Stashed changes
                 if (info != Modifier.NORMAL)
                 {
                     GameObject icon = infos[(int)info % COLORS];
                     icon.GetComponent<SimonButton>().Animate();
-                }
+                }*/
                 yield return new WaitForSeconds(duration);
             }
 
@@ -246,7 +263,7 @@ namespace _Scripts.Games
         /// the input against the guessing pattern.
         /// </summary>
         /// <param name="color">The color to check.</param>
-        private void CheckColor(Colors color)
+        public void CheckColor(Colors color)
         {
             if (!(guessPattern[checkingIndex] == color))
             {
@@ -267,12 +284,19 @@ namespace _Scripts.Games
         /// </summary>
         private void WrongColor()
         {
+<<<<<<< Updated upstream
             GameObject icon = infos[Array.FindIndex(infos, obj => obj.name.Equals("None"))];
             if (icon != null) icon.GetComponent<SimonButton>().Animate();
+=======
+            wrongGuesses++;
+            if (wrongGuesses == 3) base.Lose();
+
+            empty.GetComponent<SimonElement>().Animate();
+>>>>>>> Stashed changes
             correctGuesses -= (int)base.Difficulty + 1;
             base.Lose();
             ResetTurn();
-            StartCoroutine(AnimateButtons(buttons, animationTime, BLINK_TIME));
+            StartCoroutine(AnimateButtons(animationTime, BLINK_TIME));
         }
 
         /// <summary>
@@ -287,9 +311,92 @@ namespace _Scripts.Games
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
-            StartCoroutine(AnimateButtons(buttons, animationTime, animationTime));
+            StartCoroutine(AnimateButtons(animationTime, animationTime));
         }
 
         #endregion
     }
+
+    #region Editor Overrides
+
+    [CustomEditor(typeof(Simon))]
+    public class SimonEditor : Editor
+    {
+        SerializedProperty controller, currentDifficulty;
+        SerializedProperty displayPattern, guessPattern, infoPattern;
+        SerializedProperty buttonsContainer, blue, red, yellow, green, middle;
+        SerializedProperty inputOverlay, infoOverlay, twice, empty, ok, timer;
+
+        bool showGameProperties, showGuessLists, showButtons, showInfos = false;
+
+        void OnEnable()
+        {
+            currentDifficulty = serializedObject.FindProperty("currentDifficulty");
+            controller = serializedObject.FindProperty("controller");
+
+            displayPattern = serializedObject.FindProperty("displayPattern");
+            guessPattern = serializedObject.FindProperty("guessPattern");
+            infoPattern = serializedObject.FindProperty("infoPattern");
+
+            buttonsContainer = serializedObject.FindProperty("buttonsContainer");
+            blue = serializedObject.FindProperty("blue");
+            red = serializedObject.FindProperty("red");
+            yellow = serializedObject.FindProperty("yellow");
+            green = serializedObject.FindProperty("green");
+            middle = serializedObject.FindProperty("middle");
+
+            inputOverlay = serializedObject.FindProperty("inputOverlay");
+            infoOverlay = serializedObject.FindProperty("infoOverlay");
+            twice = serializedObject.FindProperty("twice");
+            empty = serializedObject.FindProperty("empty");
+            ok = serializedObject.FindProperty("ok");
+            timer = serializedObject.FindProperty("timer");
+        }
+
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            showGameProperties = EditorGUILayout.Foldout(showGameProperties, "Base Game Properties");
+            if (showGameProperties)
+            {
+                EditorGUILayout.PropertyField(controller);
+                EditorGUILayout.PropertyField(currentDifficulty);
+            }
+
+            showGuessLists = EditorGUILayout.Foldout(showGuessLists, "Guess Lists");
+            if (showGuessLists)
+            {
+                EditorGUILayout.PropertyField(displayPattern);
+                EditorGUILayout.PropertyField(guessPattern);
+                EditorGUILayout.PropertyField(infoPattern);
+            }
+
+            showButtons = EditorGUILayout.Foldout(showButtons, "Buttons");
+            if (showButtons)
+            {
+                EditorGUILayout.PropertyField(buttonsContainer);
+                EditorGUILayout.PropertyField(blue);
+                EditorGUILayout.PropertyField(red);
+                EditorGUILayout.PropertyField(yellow);
+                EditorGUILayout.PropertyField(green);
+                EditorGUILayout.PropertyField(middle);
+            }
+
+            showInfos = EditorGUILayout.Foldout(showInfos, "Infos");
+            if (showInfos)
+            {
+                EditorGUILayout.PropertyField(inputOverlay);
+                EditorGUILayout.PropertyField(infoOverlay);
+                EditorGUILayout.PropertyField(twice);
+                EditorGUILayout.PropertyField(empty);
+                EditorGUILayout.PropertyField(ok);
+                EditorGUILayout.PropertyField(timer);
+            }
+
+            serializedObject.ApplyModifiedProperties();
+        }
+    }
 }
+
+    #endregion Editor Overrides

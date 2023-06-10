@@ -4,6 +4,16 @@ namespace _Scripts.Games
 {
     public abstract class Game : MonoBehaviour
     {
+<<<<<<< Updated upstream
+=======
+        #region Serialized Fields
+
+        [SerializeField] protected GameManager controller;
+        [SerializeField] protected Difficulty currentDifficulty = Difficulty.LVL1;
+
+        #endregion Serialized Fields
+
+>>>>>>> Stashed changes
         #region Fields
 
         protected AssetID id;

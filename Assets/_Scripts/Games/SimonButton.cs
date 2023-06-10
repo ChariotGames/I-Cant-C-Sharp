@@ -1,9 +1,7 @@
-using _Scripts._Input;
-using _Scripts._Interfaces;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Scripts.Games
 {
@@ -11,21 +9,29 @@ namespace _Scripts.Games
     /// Represents a single button of the Simon game
     /// and their respective functionalities.
     /// </summary>
-    public class SimonButton : MonoBehaviour, IButton
+    public class SimonButton : SimonElement
     {
-        #region Fields
+        #region Serialized Fields
+        [SerializeField] private Colors buttonColor;
+        [SerializeField] private InputActionReference buttonAction;
+        [SerializeField] private Simon parent;
 
+<<<<<<< Updated upstream
         private static readonly Dictionary<_Scripts.Simon, (Action listener, Action silencer)> simonActions = new();
         private Color originalColor, targetColor;
         private SpriteRenderer spriteRenderer;
         private const float DURATION = 0.30f;
 
         #endregion
+=======
+        #endregion Serialized Fields
+>>>>>>> Stashed changes
 
         #region Built-Ins
 
         private void Awake()
         {
+<<<<<<< Updated upstream
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             originalColor = spriteRenderer.color;
             targetColor = originalColor + originalColor;
@@ -64,11 +70,14 @@ namespace _Scripts.Games
                     (Action)(() => InputHandler.WestBtnAction -= ButtonPressed)
                 ));
             }
+=======
+            if(buttonAction != null) ToggleInput(true);
+>>>>>>> Stashed changes
         }
 
         private void OnDisable()
         {
-            ToggleInput(gameObject, false);
+            if (buttonAction != null) ToggleInput(false);
         }
 
         #endregion
@@ -79,30 +88,39 @@ namespace _Scripts.Games
         /// Reacts on button press events and simulates such.
         /// Sending upwards calls to the parent object.
         /// </summary>
-        public void ButtonPressed()
+        public void ButtonPressed(InputAction.CallbackContext ctx)
         {
             Animate();
+<<<<<<< Updated upstream
             if (Enum.TryParse(gameObject.name, true, out _Scripts.Simon key)) SendMessageUpwards("CheckColor", key);
+=======
+            parent.CheckColor(buttonColor);
+>>>>>>> Stashed changes
         }
 
         /// <summary>
         /// Enables user Input for this button by adding it to the InputHandler.
         /// </summary>
-        /// <param name="button">The object to allow Input for.</param>
         /// <param name="state">The state to set to: on or off.</param>
-        public void ToggleInput(GameObject button, bool state)
+        public void ToggleInput(bool state)
         {
+<<<<<<< Updated upstream
             Enum.TryParse(button.name, true, out _Scripts.Simon key);
             if (!simonActions.ContainsKey(key)) return;
+=======
+>>>>>>> Stashed changes
             if (state)
             {
-                simonActions[key].listener();
+                buttonAction.action.performed += ButtonPressed;
+                buttonAction.action.Enable();
             }
             else
             {
-                simonActions[key].silencer();
+                buttonAction.action.performed -= ButtonPressed;
+                buttonAction.action.Disable();
             }
         }
+<<<<<<< Updated upstream
 
         #endregion
 
@@ -141,6 +159,9 @@ namespace _Scripts.Games
         }
 
         #endregion
+=======
+        #endregion Button Controls
+>>>>>>> Stashed changes
     }
 }
 

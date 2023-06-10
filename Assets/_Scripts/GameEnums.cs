@@ -134,7 +134,11 @@ namespace _Scripts
         NONE = -1, UP, DOWN, LEFT, RIGHT, CENTER
     }
 
+<<<<<<< Updated upstream
     public enum GameMode
+=======
+    public enum Mode
+>>>>>>> Stashed changes
     {
         NONE, ENDLESS, SINGLE, MIXED, TUTORIAL
     }
