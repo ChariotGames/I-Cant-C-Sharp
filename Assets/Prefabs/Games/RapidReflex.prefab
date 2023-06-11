@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6392271739422066057}
   - component: {fileID: 6392271739422066054}
   m_Layer: 0
-  m_Name: Overlay
+  m_Name: GameState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,18 +454,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
-  difficulty: 1
-  timeToAnswerInMs: 250
-  lightTimer: 1
   lightsTop: {fileID: 6392271739558440132}
   lightsBottom: {fileID: 6392271741430070786}
-  light: {fileID: 6392271740040212343}
+  lightTemplate: {fileID: 6392271740040212343}
   overlayContainer: {fileID: 6392271740472920053}
   darkRed: {r: 0.1254902, g: 0, b: 0, a: 1}
   lightRed: {r: 0.6415094, g: 0, b: 0, a: 1}
   darkGreen: {r: 0, g: 0.1254902, b: 0, a: 1}
   lightGreen: {r: 0, g: 0.6037736, b: 0, a: 1}
-  gameStateText: {fileID: 6392271739422066054}
+  gameState: {fileID: 6392271739422066054}
+  lightTimer: 1
+  timeToAnswerInMs: 250
 --- !u!1 &6392271741393476745
 GameObject:
   m_ObjectHideFlags: 0

@@ -593,8 +593,8 @@ MonoBehaviour:
   targetColor: {r: 1, g: 1, b: 0, a: 1}
   spriteRenderer: {fileID: 3923420840941362648}
   duration: 0.3
-  buttonColor: 3
-  button: {fileID: 0}
+  color: 3
+  button: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841216393777
 GameObject:
@@ -869,8 +869,8 @@ MonoBehaviour:
   targetColor: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 3923420841232928200}
   duration: 0.3
-  buttonColor: 2
-  button: {fileID: 0}
+  color: 2
+  button: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841571965842
 GameObject:
@@ -1352,8 +1352,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 1, b: 0, a: 1}
   spriteRenderer: {fileID: 3923420841825610099}
   duration: 0.3
-  buttonColor: 4
-  button: {fileID: 0}
+  color: 4
+  button: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841840725213
 GameObject:
@@ -1456,8 +1456,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 1, a: 1}
   spriteRenderer: {fileID: 3923420841840725215}
   duration: 0.3
-  buttonColor: 1
-  button: {fileID: 0}
+  color: 1
+  button: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   parent: {fileID: 6717256202175962813}
 --- !u!1 &6114598051593611201
 GameObject:

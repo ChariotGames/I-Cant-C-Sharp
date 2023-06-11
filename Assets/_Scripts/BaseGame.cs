@@ -1,4 +1,4 @@
-using UnityEditor;
+using _Scripts.Controllers;
 using UnityEngine;
 
 namespace _Scripts.Games
@@ -15,8 +15,6 @@ namespace _Scripts.Games
         #region Fields
 
         protected AssetID id;
-        
-        private (int min, int max) difficultyRange = ((int)Difficulty.EASY, (int)Difficulty.HARD);
 
         #endregion Fields
 
@@ -45,7 +43,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            manager.SetDifficulty(id, Clamp(currentDifficulty - 1));
+            manager.SetDifficulty(id, currentDifficulty - 1);
         }
 
         /// <summary>
@@ -53,24 +51,10 @@ namespace _Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            manager.SetDifficulty(id, Clamp(currentDifficulty + 1));
+            manager.SetDifficulty(id, currentDifficulty + 1);
         }
 
         #endregion protected
-
-        #region private
-
-        /// <summary>
-        /// Clamps the given difficulty to the set limits.
-        /// </summary>
-        /// <param name="difficulty">The value to clamp.</param>
-        /// <returns></returns>
-        private Difficulty Clamp(Difficulty difficulty)
-        {
-            return (Difficulty)Mathf.Clamp((int)(difficulty), difficultyRange.min, difficultyRange.max);
-        }
-
-        #endregion private
 
         #endregion  Methods
 

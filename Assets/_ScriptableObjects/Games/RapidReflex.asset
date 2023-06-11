@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: RapidReflex
   m_EditorClassIdentifier: 
   assetID: 27261
-  description: 
+  description: "Two rows of lights are turned on one bit by bit\r\n Player has to
+    press a button as fast as possible once all are on.\r\n\nEasy: each light turns
+    on after the same time\r\nMedium: last light has a random delay\r\nHard: distracting
+    popups appear"
   complexity: 3
   difficulty: 1
   genre: 2

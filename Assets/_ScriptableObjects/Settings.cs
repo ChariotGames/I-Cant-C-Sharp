@@ -8,7 +8,7 @@ namespace _Scripts
     {
         #region Fields
 
-        [SerializeField] private byte lives = 3, players = 1;
+        [SerializeField] private int lives = 3, players = 1;
         [SerializeField] private Mode mode = Mode.SINGLE;
         [SerializeField] private Minigame selectedGame = null;
         [SerializeField] private List<Minigame> games = new();
@@ -17,15 +17,15 @@ namespace _Scripts
 
         #region GetSets
 
-        public byte Lives
+        public int Lives
         {
             get => lives;
-            set => lives = value;
+            set => lives = Mathf.Clamp(value, 1, 9);
         }
-        public byte Players
+        public int Players
         {
             get => players;
-            set => players = value;
+            set => players = Mathf.Clamp(value, 1, 4);
         }
 
         public Mode Mode

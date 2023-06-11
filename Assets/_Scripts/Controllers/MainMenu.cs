@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-namespace _Scripts
+namespace _Scripts.Controllers
 {
     /// <summary>
     /// A basic main menu control.
@@ -95,7 +95,7 @@ namespace _Scripts
         /// <param name="change">The difference to set to.</param>
         public void SetLives(int change)
         {
-            settings.Lives = (byte)Mathf.Clamp(settings.Lives + change, 1, 9);
+            settings.Lives += change;
             livesText.text = settings.Lives.ToString();
         }
 
@@ -105,7 +105,7 @@ namespace _Scripts
         /// <param name="count">The number of players.</param>
         public void SetPlayers(int count)
         {
-            settings.Players = (byte)Mathf.Clamp(count, 0, 4);
+            settings.Players = count;
         }
 
         /// <summary>

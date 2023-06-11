@@ -6,17 +6,10 @@ namespace _Scripts.Games
 {
     public class MissingKey : BaseGame
     {
-        [SerializeField]
-        private List<GameObject> buttons;
-        [SerializeField]
-        private List<GameObject> pattern;
-        [SerializeField]
-        private int count = 3;
+        [SerializeField] private List<GameObject> buttons, pattern;
+        [SerializeField] private int count = 3;
         //private GameObject answer;
-        [SerializeField]
-        private GameObject loseDisplay;
-        [SerializeField]
-        private GameObject buttonContainer;
+        [SerializeField] private GameObject loseDisplay, buttonContainer;
         private bool _playerPressed = false;
         private float _playfieldWidth;
         private const float ROUND_TIME = 5.0f;

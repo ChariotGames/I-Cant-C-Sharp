@@ -27,7 +27,7 @@ namespace _Scripts.Games
 
         #region Fields
 
-        private int  _correctGuesses = 0, _wrongGuesses = 0;
+        private int _correctGuesses = 0, _wrongGuesses = 0;
 
         #endregion Fields
 

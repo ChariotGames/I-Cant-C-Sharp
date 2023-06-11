@@ -2,7 +2,7 @@ using _Scripts.Games;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts
+namespace _Scripts.Controllers
 {
     /// <summary>
     /// Manages matching, spawning and deletion of game assets.

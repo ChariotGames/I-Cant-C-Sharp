@@ -6,25 +6,20 @@ using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
-using UnityEngine.Serialization;
 
 namespace _Scripts.Games
 {
     public class SameAsBefore : BaseGame
     {
-        [SerializeField] private int maxStepsBack;
-        [SerializeField] private int timeToAnswer;
         [SerializeField] private List<GameObject> options;
-        [SerializeField] private GameObject startText;
+        [SerializeField] private GameObject startText, failText;
         [SerializeField] private TMP_Text stepBackText;
-        [SerializeField] private GameObject failText;
+        [SerializeField] private int maxStepsBack, timeToAnswer;
 
-        private bool isYes;
-        private bool isNo;
-        private LinkedList<int> lastIndices = new();
-        private int index;
-        private int steps;
-        private const string StepBackTextString = "Steps: ";
+        private LinkedList<int> _lastIndices = new();
+        private const string _stepsText = "Steps: ";
+        private int _index, _steps;
+        private bool _isYes, _isNo;
 
 
 
@@ -36,8 +31,8 @@ namespace _Scripts.Games
 
         private void SpawnSymbol()
         {
-            index = Random.Range(0, options.Count);
-            options[index].SetActive(true);
+            _index = Random.Range(0, options.Count);
+            options[_index].SetActive(true);
         }
 
         private void UpdateSteps()
@@ -45,23 +40,23 @@ namespace _Scripts.Games
             switch (Difficulty)
             {
                 case Difficulty.EASY:
-                    steps = 0;
+                    _steps = 0;
                     break;
                 case Difficulty.MEDIUM:
-                    steps = Math.Min(1, lastIndices.Count - 1);
+                    _steps = Math.Min(1, _lastIndices.Count - 1);
                     break;
                 case Difficulty.HARD:
-                    steps = Random.Range(0, Math.Min(maxStepsBack, lastIndices.Count));
+                    _steps = Random.Range(0, Math.Min(maxStepsBack, _lastIndices.Count));
                     break;
                 default:
-                    steps = 0;
+                    _steps = 0;
                     break;
             }
         }
 
         private void UpdateStepBackText()
         {
-            stepBackText.text = StepBackTextString + (steps + 1);
+            stepBackText.text = _stepsText + (_steps + 1);
         }
 
         private IEnumerator AnimationStartText(float distance)
@@ -83,10 +78,10 @@ namespace _Scripts.Games
             StartCoroutine(AnimationStartText(2.1f));
             yield return new WaitForSeconds(1);
             SpawnSymbol();
-            lastIndices.AddFirst(index);
-            if (lastIndices.Count > maxStepsBack) { lastIndices.RemoveLast(); }
+            _lastIndices.AddFirst(_index);
+            if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
             yield return new WaitForSeconds(1);
-            options[index].SetActive(false);
+            options[_index].SetActive(false);
             StartCoroutine(SpawnCoroutine());
         }
 
@@ -97,23 +92,23 @@ namespace _Scripts.Games
                 if (options[0].activeSelf || options[1].activeSelf)
                 {
                     //Debug.Log(lastIndices.Count);
-                    Debug.Log(index + " : " + lastIndices.ElementAt(steps) + "\tsteps: " + (steps + 1));
+                    Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tsteps: " + (_steps + 1));
 
                     float timer = Time.unscaledTime;
-                    yield return new WaitUntil(() => isYes || isNo || Time.unscaledTime - timer > timeToAnswer);
-                    if ((index == lastIndices.ElementAt(steps) && isYes && !isNo) || (index != lastIndices.ElementAt(steps) && isNo && !isYes))
+                    yield return new WaitUntil(() => _isYes || _isNo || Time.unscaledTime - timer > timeToAnswer);
+                    if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         base.Win();
-                        options[index].SetActive(false);
-                        isYes = false;
-                        isNo = false;
-                        lastIndices.AddFirst(index);
-                        if (lastIndices.Count > maxStepsBack) { lastIndices.RemoveLast(); }
+                        options[_index].SetActive(false);
+                        _isYes = false;
+                        _isNo = false;
+                        _lastIndices.AddFirst(_index);
+                        if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
                     }
                     else
                     {
                         base.Lose();
-                        options[index].SetActive(false);
+                        options[_index].SetActive(false);
                         failText.SetActive(true);
                         yield break;
                     }
@@ -137,12 +132,12 @@ namespace _Scripts.Games
 
         public void RightShoulderPressed()
         {
-            isYes = true;
+            _isYes = true;
         }
 
         public void LeftShoulderPressed()
         {
-            isNo = true;
+            _isNo = true;
         }
 
         private void OnDisable()

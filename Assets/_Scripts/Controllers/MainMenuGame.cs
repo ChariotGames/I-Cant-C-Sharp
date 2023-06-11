@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Scripts
+namespace _Scripts.Controllers
 {
     public class MainMenuGame : MonoBehaviour
     {

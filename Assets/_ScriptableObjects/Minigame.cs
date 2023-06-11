@@ -38,7 +38,7 @@ namespace _Scripts
         public Difficulty Difficulty
         {
             get => difficulty;
-            set => difficulty = value;
+            set => difficulty = (Difficulty)Mathf.Clamp((int)value, (int)Difficulty.EASY, (int)Difficulty.HARD);
         }
 
         public Genre Genre
