@@ -11,8 +11,8 @@ namespace _Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] private Colors buttonColor;
-        [SerializeField] private InputActionReference buttonAction;
+        [SerializeField] private Colors color;
+        [SerializeField] private InputActionReference button;
         [SerializeField] private Simon parent;
 
         #endregion Serialized Fields
@@ -21,12 +21,12 @@ namespace _Scripts.Games
 
         private void OnEnable()
         {
-            if(buttonAction != null) ToggleInput(true);
+            if(button != null) ToggleInput(true);
         }
 
         private void OnDisable()
         {
-            if (buttonAction != null) ToggleInput(false);
+            if (button != null) ToggleInput(false);
         }
 
         #endregion
@@ -35,12 +35,12 @@ namespace _Scripts.Games
 
         /// <summary>
         /// Reacts on button press events and simulates such.
-        /// Sending upwards calls to the parent object.
+        /// Calls the parent check method.
         /// </summary>
         public void ButtonPressed(InputAction.CallbackContext ctx)
         {
             Animate();
-            parent.CheckColor(buttonColor);
+            parent.CheckColor(color);
         }
 
         /// <summary>
@@ -51,13 +51,11 @@ namespace _Scripts.Games
         {
             if (state)
             {
-                buttonAction.action.performed += ButtonPressed;
-                buttonAction.action.Enable();
+                button.action.performed += ButtonPressed;
             }
             else
             {
-                buttonAction.action.performed -= ButtonPressed;
-                buttonAction.action.Disable();
+                button.action.performed -= ButtonPressed;
             }
         }
         #endregion Button Controls

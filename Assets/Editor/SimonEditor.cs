@@ -24,7 +24,7 @@ namespace _Scripts.EditorExtensions
 
             showButtons = DrawFoldout(false, showButtons, "Buttons", new[] { "buttonsContainer", "blue", "red", "yellow", "green", "middle" });
 
-            showInfos = DrawFoldout(false, showInfos, "Infos", new[] { "inputOverlay", "infoOverlay", "twice", "not", "ok", "timer" });
+            showInfos = DrawFoldout(false, showInfos, "Infos", new[] { "inputOverlay", "infoOverlay", "twice", "nothing", "ok", "timer" });
 
             serializedObject.ApplyModifiedProperties();
         }

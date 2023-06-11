@@ -476,21 +476,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
-  currentDifficulty: 0
+  currentDifficulty: 1
   displayPattern: 
   guessPattern: 
   infoPattern: 
   buttonsContainer: {fileID: 3923420841571965842}
-  blue: {fileID: 3923420841840725213}
-  red: {fileID: 3923420841232928206}
-  yellow: {fileID: 3923420840941362654}
-  green: {fileID: 3923420841825610097}
-  middle: {fileID: 3534996337712372485}
   inputOverlay: {fileID: 3619042334536100596}
   infoOverlay: {fileID: 8236597517906972022}
-  twice: {fileID: 9086356697543899546}
-  not: {fileID: 6638981845291472354}
-  ok: {fileID: 6114598051593611201}
+  middle: {fileID: 3534996337712372485}
+  blue: {fileID: 3923420841840725208}
+  red: {fileID: 3923420841232928201}
+  yellow: {fileID: 3923420840941362649}
+  green: {fileID: 3923420841825610108}
+  twice: {fileID: 1510255930576308506}
+  nothing: {fileID: 3290319596319287276}
+  ok: {fileID: 813813496016180088}
   timer: {fileID: 3306312410208930860}
 --- !u!1 &3923420840941362654
 GameObject:
@@ -589,13 +589,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColor: {r: 0.5019608, g: 0.5019608, b: 0, a: 0}
-  targetColor: {r: 1, g: 1, b: 0, a: 0}
+  originalColor: {r: 0.5019608, g: 0.5019608, b: 0, a: 1}
+  targetColor: {r: 1, g: 1, b: 0, a: 1}
   spriteRenderer: {fileID: 3923420840941362648}
   duration: 0.3
   buttonColor: 3
-  buttonAction: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 0}
+  button: {fileID: 0}
+  parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841216393777
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,13 +865,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColor: {r: 0.5019608, g: 0, b: 0, a: 0}
-  targetColor: {r: 1, g: 0, b: 0, a: 0}
+  originalColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 3923420841232928200}
   duration: 0.3
   buttonColor: 2
-  buttonAction: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 0}
+  button: {fileID: 0}
+  parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841571965842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,13 +1348,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColor: {r: 0, g: 0.5019608, b: 0, a: 0}
-  targetColor: {r: 0, g: 1, b: 0, a: 0}
+  originalColor: {r: 0, g: 0.5019608, b: 0, a: 1}
+  targetColor: {r: 0, g: 1, b: 0, a: 1}
   spriteRenderer: {fileID: 3923420841825610099}
   duration: 0.3
   buttonColor: 4
-  buttonAction: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 0}
+  button: {fileID: 0}
+  parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841840725213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,13 +1452,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColor: {r: 0, g: 0, b: 0.5019608, a: 0}
-  targetColor: {r: 0, g: 0, b: 1, a: 0}
+  originalColor: {r: 0, g: 0, b: 0.5019608, a: 1}
+  targetColor: {r: 0, g: 0, b: 1, a: 1}
   spriteRenderer: {fileID: 3923420841840725215}
   duration: 0.3
   buttonColor: 1
-  buttonAction: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 0}
+  button: {fileID: 0}
+  parent: {fileID: 6717256202175962813}
 --- !u!1 &6114598051593611201
 GameObject:
   m_ObjectHideFlags: 0

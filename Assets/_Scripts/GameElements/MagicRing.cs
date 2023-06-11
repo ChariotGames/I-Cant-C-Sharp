@@ -5,10 +5,7 @@ using UnityEngine.InputSystem;
 namespace _Scripts.Games
 {
     /// <summary>
-    /// A circle appears and larger rings are closing in on it. Press a defined button once a ring hits the circle.
-    /// Easy: Press button A once a ring hits the circle.
-    /// Medium: Rings have different colors. Adjust your input in regard to the color of the ring.
-    /// Hard: Rings can be thicker. Hold a button according to the length of the ring.
+    /// Represents a single magic ring of the MagicCircle minigame.
     /// </summary>
     public class MagicRing : MonoBehaviour
     {

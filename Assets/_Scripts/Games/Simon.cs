@@ -25,15 +25,16 @@ namespace _Scripts.Games
 
         [SerializeField] private List<Colors> displayPattern, guessPattern;
         [SerializeField] private List<Modifier> infoPattern;
-        [SerializeField] private GameObject buttonsContainer, blue, red, yellow, green, middle;
-        [SerializeField] private GameObject inputOverlay, infoOverlay, twice, not, ok;
+        [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay , middle;
+        [SerializeField] private SimonButton blue, red, yellow, green;
+        [SerializeField] private SimonElement twice, nothing, ok;
         [SerializeField] private Image timer;
 
         #endregion
 
         #region Fields
 
-        private Dictionary<Colors, GameObject> _buttonObjects;
+        private Dictionary<Colors, SimonButton> _buttonObjects;
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
         private const int MIN_LENGTH = 1, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
         private float _animationTime;
@@ -157,7 +158,7 @@ namespace _Scripts.Games
         /// </summary>
         private void ClearInfoPattern()
         {
-            ok.GetComponent<SimonElement>().Animate();
+            ok.Animate();
 
             for (int i = 0; i < infoPattern.Count; i++)
             {
@@ -172,9 +173,9 @@ namespace _Scripts.Games
         /// <param name="isPlayersTurn">State of the player's turn.</param>
         private void PlayerTurn(bool isPlayersTurn)
         {
-            foreach (GameObject button in _buttonObjects.Values)
+            foreach (SimonButton button in _buttonObjects.Values)
             {
-                button.GetComponent<SimonButton>().ToggleInput(isPlayersTurn);
+                button.ToggleInput(isPlayersTurn);
             }
 
             inputOverlay.SetActive(isPlayersTurn);
@@ -194,10 +195,10 @@ namespace _Scripts.Games
             yield return new WaitForSeconds(time);
 
             buttonsContainer.SetActive(true);
-            foreach (GameObject button in _buttonObjects.Values)
+            foreach (SimonButton button in _buttonObjects.Values)
             {
-                button.SetActive(true);
-                button.GetComponent<SimonButton>().Animate();
+                button.gameObject.SetActive(true);
+                button.Animate();
                 yield return new WaitForSeconds(time);
             }
         }
@@ -217,10 +218,10 @@ namespace _Scripts.Games
                 Colors color = displayPattern[i];
                 Modifier info = infoPattern[i];
 
-                _buttonObjects[color].GetComponent<SimonButton>().Animate();
+                _buttonObjects[color].Animate();
 
-                if (info == Modifier.DOUBLE) twice.GetComponent<SimonElement>().Animate();
-                if (info == Modifier.NONE) not.GetComponent<SimonElement>().Animate();
+                if (info == Modifier.DOUBLE) twice.Animate();
+                if (info == Modifier.NONE) nothing.Animate();
                 yield return new WaitForSeconds(duration);
             }
 
@@ -282,7 +283,7 @@ namespace _Scripts.Games
             _wrongGuesses++;
             if (_wrongGuesses == 3) base.Lose();
 
-            not.GetComponent<SimonElement>().Animate();
+            nothing.Animate();
 
             _correctGuesses -= (int)base.Difficulty + 1;
             ResetTurn();
