@@ -33,11 +33,11 @@ namespace _Scripts.Games
 
         #region Fields
 
-        private Dictionary<Colors, GameObject> buttonObjects;
+        private Dictionary<Colors, GameObject> _buttonObjects;
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
         private const int MIN_LENGTH = 1, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
-        private float animationTime;
-        private int checkingIndex = 0, correctGuesses = 0, wrongGuesses = 0;
+        private float _animationTime;
+        private int _checkingIndex = 0, _correctGuesses = 0, _wrongGuesses = 0;
 
         #endregion
 
@@ -46,21 +46,21 @@ namespace _Scripts.Games
         private void Awake()
         {
             // Initialize game
-            buttonObjects = new();
-            buttonObjects.Add(Colors.BLUE, blue);
-            buttonObjects.Add(Colors.RED, red);
-            buttonObjects.Add(Colors.YELLOW, yellow);
-            buttonObjects.Add(Colors.GREEN, green);
+            _buttonObjects = new();
+            _buttonObjects.Add(Colors.BLUE, blue);
+            _buttonObjects.Add(Colors.RED, red);
+            _buttonObjects.Add(Colors.YELLOW, yellow);
+            _buttonObjects.Add(Colors.GREEN, green);
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            animationTime = BLINK_TIME * COLORS;
+            _animationTime = BLINK_TIME * COLORS;
             infoOverlay.SetActive(true);
             StartCoroutine(ActivateButtons(BLINK_TIME));
             GeneratePattern(MIN_LENGTH);
-            StartCoroutine(AnimateButtons(animationTime * 2, animationTime));
+            StartCoroutine(AnimateButtons(_animationTime * 2, _animationTime));
         }
 
         #endregion
@@ -73,7 +73,7 @@ namespace _Scripts.Games
         private void ResetTurn()
         {
             StopAllCoroutines();
-            checkingIndex = 0;
+            _checkingIndex = 0;
             timer.fillAmount = 0f;
             PlayerTurn(false);
         }
@@ -93,7 +93,7 @@ namespace _Scripts.Games
                 base.Harder();
             }
 
-            correctGuesses %= LVL_CHANGE;
+            _correctGuesses %= LVL_CHANGE;
         }
 
         #endregion
@@ -172,7 +172,7 @@ namespace _Scripts.Games
         /// <param name="isPlayersTurn">State of the player's turn.</param>
         private void PlayerTurn(bool isPlayersTurn)
         {
-            foreach (GameObject button in buttonObjects.Values)
+            foreach (GameObject button in _buttonObjects.Values)
             {
                 button.GetComponent<SimonButton>().ToggleInput(isPlayersTurn);
             }
@@ -194,7 +194,7 @@ namespace _Scripts.Games
             yield return new WaitForSeconds(time);
 
             buttonsContainer.SetActive(true);
-            foreach (GameObject button in buttonObjects.Values)
+            foreach (GameObject button in _buttonObjects.Values)
             {
                 button.SetActive(true);
                 button.GetComponent<SimonButton>().Animate();
@@ -217,7 +217,7 @@ namespace _Scripts.Games
                 Colors color = displayPattern[i];
                 Modifier info = infoPattern[i];
 
-                buttonObjects[color].GetComponent<SimonButton>().Animate();
+                _buttonObjects[color].GetComponent<SimonButton>().Animate();
 
                 if (info == Modifier.DOUBLE) twice.GetComponent<SimonElement>().Animate();
                 if (info == Modifier.NONE) not.GetComponent<SimonElement>().Animate();
@@ -260,15 +260,15 @@ namespace _Scripts.Games
         /// <param name="color">The color to check.</param>
         public void CheckColor(Colors color)
         {
-            if (!(guessPattern[checkingIndex] == color))
+            if (!(guessPattern[_checkingIndex] == color))
             {
                 WrongColor();
                 return;
             }
 
-            checkingIndex++;
+            _checkingIndex++;
 
-            if (!(checkingIndex >= guessPattern.Count)) return;
+            if (!(_checkingIndex >= guessPattern.Count)) return;
 
             GuessingDone();
         }
@@ -279,14 +279,14 @@ namespace _Scripts.Games
         /// </summary>
         private void WrongColor()
         {
-            wrongGuesses++;
-            if (wrongGuesses == 3) base.Lose();
+            _wrongGuesses++;
+            if (_wrongGuesses == 3) base.Lose();
 
             not.GetComponent<SimonElement>().Animate();
 
-            correctGuesses -= (int)base.Difficulty + 1;
+            _correctGuesses -= (int)base.Difficulty + 1;
             ResetTurn();
-            StartCoroutine(AnimateButtons(animationTime, BLINK_TIME));
+            StartCoroutine(AnimateButtons(_animationTime, BLINK_TIME));
         }
 
         /// <summary>
@@ -295,13 +295,13 @@ namespace _Scripts.Games
         /// </summary>
         private void GuessingDone()
         {
-            correctGuesses++;
-            UpdateDifficulty(correctGuesses);
-            if (correctGuesses == 0) base.Win();
+            _correctGuesses++;
+            UpdateDifficulty(_correctGuesses);
+            if (_correctGuesses == 0) base.Win();
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
-            StartCoroutine(AnimateButtons(animationTime, animationTime));
+            StartCoroutine(AnimateButtons(_animationTime, _animationTime));
         }
 
         #endregion

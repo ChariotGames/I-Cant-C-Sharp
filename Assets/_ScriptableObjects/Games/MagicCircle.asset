@@ -16,8 +16,8 @@ MonoBehaviour:
   description: 
   complexity: 3
   difficulty: 1
-  genre: 2
+  genre: 10
   keys: 6144
-  orientation: 2
+  orientation: 3
   prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
   preview: {fileID: 0}

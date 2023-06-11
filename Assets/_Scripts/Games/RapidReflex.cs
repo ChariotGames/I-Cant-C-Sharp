@@ -117,7 +117,7 @@ namespace _Scripts.Games
             {
                 if (checkForEarlyLose()) yield break; 
                 updateLightColor(bulbsSpriteTop[i], lightRed);
-                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && difficulty != Difficulty.EASY ? randomDelay : 0));
+                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && Difficulty != Difficulty.EASY ? randomDelay : 0));
                 if (checkForEarlyLose()) yield break; 
             }
             UnityEngine.Debug.Log("Delay: " + (randomDelay + randomDelay) + " s");

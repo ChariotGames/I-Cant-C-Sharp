@@ -12,31 +12,13 @@ namespace _Scripts.EditorExtensions
     [CustomEditor(typeof(#SCRIPTNAME#))]
     public class #SCRIPTNAME#Editor : Editor
     {
-        SerializedProperty manager, currentDifficulty;
-
         bool showGameProperties = false;
-
-        void OnEnable()
-        {
-            currentDifficulty = serializedObject.FindProperty("currentDifficulty");
-            manager = serializedObject.FindProperty("manager");
-        }
 
         public override void OnInspectorGUI()
         {
-            #SCRIPTNAME# script = (#SCRIPTNAME#)target;
-
             serializedObject.Update();
 
-            GUILayout.BeginVertical("box");
-            showGameProperties = EditorGUILayout.Foldout(showGameProperties, "Base Game Properties");
-            if (showGameProperties)
-            {
-                DrawScriptField();
-                EditorGUILayout.PropertyField(manager);
-                EditorGUILayout.PropertyField(currentDifficulty);
-            }
-            GUILayout.EndVertical();
+            showGameProperties = DrawFoldout(showGameProperties, showGameProperties, "Base Game Properties", new[] { "currentDifficulty", "manager" });
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -52,16 +34,18 @@ namespace _Scripts.EditorExtensions
         private bool DrawFoldout(bool baseGame, bool status, string groupName, string[] serializedFields)
         {
             GUILayout.BeginVertical("Box");
-            status = EditorGUILayout.Foldout(status, groupName);
-            if (baseGame)
             {
-                DrawScriptField();
-            }
-            if (status)
-            {
-                foreach (string field in serializedFields)
+                status = EditorGUILayout.Foldout(status, groupName);
+                if (status)
                 {
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty(field));
+                    if (baseGame)
+                    {
+                        DrawScriptField();
+                    }
+                    foreach (string field in serializedFields)
+                    {
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty(field));
+                    }
                 }
             }
             GUILayout.EndVertical();
@@ -75,7 +59,7 @@ namespace _Scripts.EditorExtensions
         private void DrawScriptField()
         {
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.ObjectField("Script", (#SCRIPTNAME#)target, typeof(#SCRIPTNAME#), false);
+            EditorGUILayout.ObjectField("Script", serializedObject.FindProperty("m_Script").objectReferenceValue, typeof(#SCRIPTNAME#), false);
             EditorGUI.EndDisabledGroup();
         
             EditorGUILayout.Space();
