@@ -1,11 +1,6 @@
-using _Scripts._Input;
-using _Scripts._Interfaces;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 namespace _Scripts.Games
 {

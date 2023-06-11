@@ -1,5 +1,4 @@
-﻿using System;
-using _Scripts._Input;
+﻿using _Scripts._Input;
 using _Scripts._Interfaces;
 using _Scripts.Games;
 using UnityEngine;
@@ -12,7 +11,6 @@ namespace _Scripts
         {
             InputHandler.ButtonEast += ButtonPressed;
         }
-
 
         public void ButtonPressed()
         {

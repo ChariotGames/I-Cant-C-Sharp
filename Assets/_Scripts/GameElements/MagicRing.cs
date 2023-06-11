@@ -20,10 +20,10 @@ namespace _Scripts.Games
 
         #region Fields
 
-        private InputActionReference[] buttons;
-        private Color ringColor;
-        private Vector3 offset;
-        private float radius = 4f;
+        private InputActionReference[] _buttons;
+        private Color _ringColor;
+        private Vector3 _offset;
+        private float _radius = 4f;
 
         #endregion Fields
 
@@ -31,12 +31,12 @@ namespace _Scripts.Games
 
         void Update()
         {
-            if ( radius < 0.25)
+            if (_radius < 0.25)
             {
                 parent.EvaluateResult(gameObject, false);
             }
 
-            DrawRing(lineSegments, radius -= Time.deltaTime * timer);
+            DrawRing(lineSegments, _radius -= Time.deltaTime * timer);
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -55,15 +55,15 @@ namespace _Scripts.Games
         /// </summary>
         public void ToggleListeners(bool state)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < _buttons.Length; i++)
             {
                 if(state)
                 {
-                    buttons[i].action.performed += ButtonBressed;
+                    _buttons[i].action.performed += ButtonBressed;
                 }
                 else
                 {
-                    buttons[i].action.performed -= ButtonBressed;
+                    _buttons[i].action.performed -= ButtonBressed;
                 }
             }
         }
@@ -76,9 +76,9 @@ namespace _Scripts.Games
         /// <param name="inputs">The button references to listen for.</param>
         public void Setup(Vector3 parentOffset, Color color, InputActionReference[] inputs)
         {
-            offset = parentOffset;
-            ringColor = color;
-            buttons = inputs;
+            _offset = parentOffset;
+            _ringColor = color;
+            _buttons = inputs;
         }
 
         #endregion Game Mechanics / Methods
@@ -91,7 +91,7 @@ namespace _Scripts.Games
         /// <param name="ctx">Input event binding information.</param>
         private void ButtonBressed(InputAction.CallbackContext ctx)
         {
-            parent.EvaluateResult(gameObject, ctx.action == buttons[0].action && radius <= 0.75 && radius >= 0.25);
+            parent.EvaluateResult(gameObject, ctx.action == _buttons[0].action && _radius <= 0.75 && _radius >= 0.25);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace _Scripts.Games
         /// <param name="radius">The ring radius.</param>
         private void DrawRing(int steps, float radius)
         {
-            line.startColor = line.endColor = ringColor;
+            line.startColor = line.endColor = _ringColor;
             line.positionCount = steps;
 
             for (int i = 0; i < steps; i++)
@@ -114,7 +114,7 @@ namespace _Scripts.Games
                 float x = xScaled * radius;
                 float y = yScaled * radius;
 
-                Vector3 currentPosition = new Vector3(x, y, 0) + offset;
+                Vector3 currentPosition = new Vector3(x, y, 0) + _offset;
                 line.SetPosition(i, currentPosition);
             }
         }

@@ -1,13 +1,16 @@
 using System;
 using UnityEngine;
 
-public class BottomBounds : MonoBehaviour
+namespace _Scripts.Pascal
 {
-    public static event Action DamageTaken;
-    
-    private void OnTriggerEnter2D(Collider2D other)
+    public class BottomBounds : MonoBehaviour
     {
-       Destroy(other.gameObject);
-       DamageTaken?.Invoke();
+        public static event Action DamageTaken;
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Destroy(other.gameObject);
+            DamageTaken?.Invoke();
+        }
     }
 }
