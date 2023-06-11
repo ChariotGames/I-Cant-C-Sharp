@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using _Scripts._Input;
 using TMPro;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
@@ -13,7 +15,7 @@ namespace _Scripts.Games
         #region Serialized Fields
 
             [SerializeField] private TMP_Text letters;
-            [SerializeField] private GameObject letterContainer;
+            [SerializeField] private GameObject letterContainer, gamestateWin, gamestateLose;
             [SerializeField] private int timeout;
 
         #endregion Serialized Fields
@@ -22,6 +24,7 @@ namespace _Scripts.Games
 
             private bool _isYes;
             private bool _isNo;
+            private float _timeElapsed;
 
         #endregion Fields
 
@@ -44,10 +47,14 @@ namespace _Scripts.Games
         
             private IEnumerator GameCoroutine()
             {
+                yield return new WaitForSeconds(1);
                 while (true)
                 {
-                    bool isTrio = Random.Range(0, 1) > 0.5f;
-                    showLetters(isTrio);
+                    bool isTrio = Random.Range(0f, 1f) > 0.5f;
+                    ShowLetters(isTrio);
+
+                    yield return StartCoroutine(MeasureTime());
+                    yield return StartCoroutine(DetermineGamestate(isTrio));
                 }
             }
 
@@ -55,22 +62,82 @@ namespace _Scripts.Games
 
         #region Overarching Methods / Helpers
 
-            private void showLetters(bool isTrio)
+            private IEnumerator MeasureTime()
             {
+                _timeElapsed = -1;
+                Stopwatch stopwatch = new();
+                stopwatch.Start();
+                yield return new WaitUntil(() => _isYes || _isNo || stopwatch.ElapsedMilliseconds > timeout * 1000);
+                stopwatch.Stop();
+                _timeElapsed = stopwatch.ElapsedMilliseconds;
+            }
+            
+            private IEnumerator DetermineGamestate(bool isTrio)
+            {
+                if (_timeElapsed < timeout * 1000 && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
+                {
+                    GameWon();
+                }
+                else
+                {
+                    GameLost();
+                }
+                yield return new WaitForSeconds(1);
+                SceneReset();
+                yield return new WaitForSeconds(1);
+            }
+            
+            private void GameWon()
+            {
+                gamestateWin.SetActive(true);
+                //Win();
+            }
+        
+            private void GameLost()
+            {
+                gamestateLose.SetActive(true);
+                //Lose();
+            }
+        
+            private void ShowLetters(bool isTrio)
+            {
+                Debug.Log(isTrio);
+
+                int letter;
                 char[] newLetters;
                     
                 switch (isTrio)
                 {
                     case true:
-                        int letter = Random.Range(65, 91);
-                        newLetters = new []{(char)letter, (char)(letter+1), (char)(letter+2)};
+                        letter = Random.Range(66, 90);
+                        newLetters = new []{(char)(letter - 1), (char)letter, (char)(letter + 1)};
                         break;
                     case false:
-                        newLetters = new[] { (char)Random.Range(65, 91), (char)Random.Range(65, 91), (char)Random.Range(65, 91) };
+                        letter = Random.Range(66, 90);
+                        int random = letter == 66 ? 0 : letter == 89 ? 1 : Random.Range(0, 2);
+                        int shift1 = random == 0 ? 1 : Random.Range(2, letter - 65);
+                        int shift2 = random == 1 ? 1 : Random.Range(2, 90 - letter + 1);
+                        //Debug.Log(letter + " : " + shift1 + " , " + shift2);
+                        newLetters = new[]
+                        {
+                            (char)(letter - shift1), 
+                            (char)letter, 
+                            (char)(letter + shift2)
+                        };
                         break;
                 }
                 letters.text = newLetters[0] + " " + newLetters[1] + " " + newLetters[2];
                 letterContainer.SetActive(true);
+            }
+
+            private void SceneReset()
+            {
+                Debug.Log("Reset!");
+                _isYes = false;
+                _isNo = false;
+                letterContainer.SetActive(false);
+                gamestateWin.SetActive(false);
+                gamestateLose.SetActive(false);
             }
         
             private void OnEnable()

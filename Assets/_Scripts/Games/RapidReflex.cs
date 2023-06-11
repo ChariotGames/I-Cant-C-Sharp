@@ -28,7 +28,7 @@ namespace _Scripts.Games
 
         #endregion Serialized Fields
 
-        #region Fields
+    #region Fields
 
         private const int NUMBER_LIGHTS = 5;
         private float _timeElapsed = 0, _randomDelay = 0;
@@ -123,7 +123,7 @@ namespace _Scripts.Games
 
         private IEnumerator MeasureTime()
         {
-            _timeElapsed = 0;
+            _timeElapsed = -1;
             if (CheckForEarlyLose()) yield break; 
             Stopwatch stopwatch = new();
             stopwatch.Start();
@@ -168,7 +168,6 @@ namespace _Scripts.Games
         {
             if (_isButtonPressed)
             {
-                _timeElapsed = -1;
                 return true;
             }
             return false;
