@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,7 +24,7 @@ namespace _Scripts.Games
         [SerializeField] private List<Colors> displayPattern, guessPattern;
         [SerializeField] private List<Modifier> infoPattern;
         [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay , middle;
-        [SerializeField] private SimonButton blue, red, yellow, green;
+        [SerializeField] private SimonElement blue, red, yellow, green;
         [SerializeField] private SimonElement twice, nothing, ok;
         [SerializeField] private Image timer;
 
@@ -34,7 +32,7 @@ namespace _Scripts.Games
 
         #region Fields
 
-        private Dictionary<Colors, SimonButton> _buttonObjects;
+        private Dictionary<Colors, SimonElement> _buttonObjects;
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
         private const int MIN_LENGTH = 1, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
         private float _animationTime;
@@ -173,7 +171,7 @@ namespace _Scripts.Games
         /// <param name="isPlayersTurn">State of the player's turn.</param>
         private void PlayerTurn(bool isPlayersTurn)
         {
-            foreach (SimonButton button in _buttonObjects.Values)
+            foreach (SimonElement button in _buttonObjects.Values)
             {
                 button.ToggleInput(isPlayersTurn);
             }
@@ -195,7 +193,7 @@ namespace _Scripts.Games
             yield return new WaitForSeconds(time);
 
             buttonsContainer.SetActive(true);
-            foreach (SimonButton button in _buttonObjects.Values)
+            foreach (SimonElement button in _buttonObjects.Values)
             {
                 button.gameObject.SetActive(true);
                 button.Animate();

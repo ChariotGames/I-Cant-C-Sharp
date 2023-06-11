@@ -484,10 +484,10 @@ MonoBehaviour:
   inputOverlay: {fileID: 3619042334536100596}
   infoOverlay: {fileID: 8236597517906972022}
   middle: {fileID: 3534996337712372485}
-  blue: {fileID: 3923420841840725208}
-  red: {fileID: 3923420841232928201}
-  yellow: {fileID: 3923420840941362649}
-  green: {fileID: 3923420841825610108}
+  blue: {fileID: 2089873900423539431}
+  red: {fileID: 5385962071664078251}
+  yellow: {fileID: 4126133377107843626}
+  green: {fileID: 2481078224601194883}
   twice: {fileID: 1510255930576308506}
   nothing: {fileID: 3290319596319287276}
   ok: {fileID: 813813496016180088}
@@ -502,7 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3923420840941362655}
   - component: {fileID: 3923420840941362648}
-  - component: {fileID: 3923420840941362649}
+  - component: {fileID: 4126133377107843626}
   m_Layer: 0
   m_Name: YELLOW
   m_TagString: Untagged
@@ -577,7 +577,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3923420840941362649
+--- !u!114 &4126133377107843626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,16 +586,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3923420840941362654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
+  m_Script: {fileID: 11500000, guid: a2cd64e6f1bc5054b8a8aa4317c21514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6717256202175962813}
+  button: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0.5019608, g: 0.5019608, b: 0, a: 1}
   targetColor: {r: 1, g: 1, b: 0, a: 1}
+  colorEnum: 3
   spriteRenderer: {fileID: 3923420840941362648}
   duration: 0.3
-  color: 3
-  button: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841216393777
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3923420841232928207}
   - component: {fileID: 3923420841232928200}
-  - component: {fileID: 3923420841232928201}
+  - component: {fileID: 5385962071664078251}
   m_Layer: 0
   m_Name: RED
   m_TagString: Untagged
@@ -853,7 +853,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3923420841232928201
+--- !u!114 &5385962071664078251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -862,16 +862,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3923420841232928206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
+  m_Script: {fileID: 11500000, guid: a2cd64e6f1bc5054b8a8aa4317c21514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6717256202175962813}
+  button: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0.5019608, g: 0, b: 0, a: 1}
   targetColor: {r: 1, g: 0, b: 0, a: 1}
+  colorEnum: 2
   spriteRenderer: {fileID: 3923420841232928200}
   duration: 0.3
-  color: 2
-  button: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841571965842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3923420841825610098}
   - component: {fileID: 3923420841825610099}
-  - component: {fileID: 3923420841825610108}
+  - component: {fileID: 2481078224601194883}
   m_Layer: 0
   m_Name: GREEN
   m_TagString: Untagged
@@ -1336,7 +1336,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3923420841825610108
+--- !u!114 &2481078224601194883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1345,16 +1345,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3923420841825610097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
+  m_Script: {fileID: 11500000, guid: a2cd64e6f1bc5054b8a8aa4317c21514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6717256202175962813}
+  button: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0, g: 0.5019608, b: 0, a: 1}
   targetColor: {r: 0, g: 1, b: 0, a: 1}
+  colorEnum: 4
   spriteRenderer: {fileID: 3923420841825610099}
   duration: 0.3
-  color: 4
-  button: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
 --- !u!1 &3923420841840725213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,7 +1365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3923420841840725214}
   - component: {fileID: 3923420841840725215}
-  - component: {fileID: 3923420841840725208}
+  - component: {fileID: 2089873900423539431}
   m_Layer: 0
   m_Name: BLUE
   m_TagString: Untagged
@@ -1440,7 +1440,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3923420841840725208
+--- !u!114 &2089873900423539431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1449,16 +1449,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3923420841840725213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e4b7dabe9b5e345a82fea892b33ab2, type: 3}
+  m_Script: {fileID: 11500000, guid: a2cd64e6f1bc5054b8a8aa4317c21514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6717256202175962813}
+  button: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0, g: 0, b: 0.5019608, a: 1}
   targetColor: {r: 0, g: 0, b: 1, a: 1}
+  colorEnum: 1
   spriteRenderer: {fileID: 3923420841840725215}
   duration: 0.3
-  color: 1
-  button: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  parent: {fileID: 6717256202175962813}
 --- !u!1 &6114598051593611201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,8 +1556,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cd64e6f1bc5054b8a8aa4317c21514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6717256202175962813}
+  button: {fileID: 0}
   originalColor: {r: 1, g: 1, b: 1, a: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
+  colorEnum: 0
   spriteRenderer: {fileID: 4482550922325124664}
   duration: 0.3
 --- !u!1 &6638981845291472354
@@ -1657,8 +1660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cd64e6f1bc5054b8a8aa4317c21514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6717256202175962813}
+  button: {fileID: 0}
   originalColor: {r: 1, g: 1, b: 1, a: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
+  colorEnum: 0
   spriteRenderer: {fileID: 8756185251969290319}
   duration: 0.3
 --- !u!1 &8236597517906972022
@@ -1792,7 +1798,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cd64e6f1bc5054b8a8aa4317c21514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 6717256202175962813}
+  button: {fileID: 0}
   originalColor: {r: 1, g: 1, b: 1, a: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
+  colorEnum: 0
   spriteRenderer: {fileID: 30094574263601125}
   duration: 0.3

@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace _Scripts.Games
 {
+    /// <summary>
+    /// Represents an abstract idea of a game.
+    /// Encapsulates the basic values and functions
+    /// each game should have to function.
+    /// </summary>
     public abstract class BaseGame : MonoBehaviour
     {
         #region Serialized Fields

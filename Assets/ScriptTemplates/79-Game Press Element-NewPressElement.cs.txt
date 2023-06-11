@@ -1,0 +1,23 @@
+using UnityEngine.InputSystem;
+
+namespace _Scripts.Games
+{
+    public class #SCRIPTNAME#PressElement : BasePressElement
+    {
+        #region Fields
+
+        private #SCRIPTNAME# _game;
+
+        #endregion Fields
+
+        void Awake()
+        {
+            _game = (#SCRIPTNAME#)parent;
+        }
+
+        public override void ButtonPressed(InputAction.CallbackContext ctx)
+        {
+            // YOUR CODE HERE
+        }
+    }
+}

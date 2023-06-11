@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4665578903151798917}
   - component: {fileID: 4665578903151798916}
   - component: {fileID: 4665578903151798919}
-  - component: {fileID: 4665578903151798914}
+  - component: {fileID: 210855287898618956}
   m_Layer: 0
-  m_Name: ButtonIconText
+  m_Name: ButtonEast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4665578903151798916}
   m_maskType: 0
---- !u!114 &4665578903151798914
+--- !u!114 &210855287898618956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,9 +182,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4665578903151798918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b2ff086515463486d13bb93ddfa96a, type: 3}
+  m_Script: {fileID: 11500000, guid: 565be678faf09644dbb791e1378db1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 4665578903984628121}
+  button: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &4665578903866809551
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,9 +198,9 @@ GameObject:
   - component: {fileID: 4665578903866809546}
   - component: {fileID: 4665578903866809549}
   - component: {fileID: 4665578903866809548}
-  - component: {fileID: 4665578903866809547}
+  - component: {fileID: 2126826633450569923}
   m_Layer: 0
-  m_Name: ButtonIconText
+  m_Name: ButtonWest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +323,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -358,7 +360,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4665578903866809549}
   m_maskType: 0
---- !u!114 &4665578903866809547
+--- !u!114 &2126826633450569923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -367,9 +369,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4665578903866809551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b90350066f1745f0925ad0e160eff830, type: 3}
+  m_Script: {fileID: 11500000, guid: 565be678faf09644dbb791e1378db1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 4665578903984628121}
+  button: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &4665578903968837698
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,9 +385,9 @@ GameObject:
   - component: {fileID: 4665578903968837697}
   - component: {fileID: 4665578903968837696}
   - component: {fileID: 4665578903968837699}
-  - component: {fileID: 4665578903968837726}
+  - component: {fileID: 1718494462377305539}
   m_Layer: 0
-  m_Name: 'ButtonIconText '
+  m_Name: ButtonNorth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +510,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -543,7 +547,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4665578903968837696}
   m_maskType: 0
---- !u!114 &4665578903968837726
+--- !u!114 &1718494462377305539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -552,9 +556,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4665578903968837698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b6968232694e5b9ca1c302520c93a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 565be678faf09644dbb791e1378db1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 4665578903984628121}
+  button: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &4665578903984628120
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,11 +612,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
-  buttonPrefabs:
-  - {fileID: 4665578903151798918}
-  - {fileID: 4665578905087092962}
-  - {fileID: 4665578903866809551}
-  - {fileID: 4665578903968837698}
+  buttons:
+  - {fileID: 210855287898618956}
+  - {fileID: 1957282527193719119}
+  - {fileID: 2126826633450569923}
+  - {fileID: 1718494462377305539}
   spawnTimeUpperBounds: 3
   spawnTimeLowerBounds: 0.5
   timerTextMesh: {fileID: 2205721906282556870}
@@ -625,9 +631,9 @@ GameObject:
   - component: {fileID: 4665578905087092961}
   - component: {fileID: 4665578905087092960}
   - component: {fileID: 4665578905087092963}
-  - component: {fileID: 4665578905087092990}
+  - component: {fileID: 1957282527193719119}
   m_Layer: 0
-  m_Name: ButtonIconText
+  m_Name: ButtonSouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -750,7 +756,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -787,7 +793,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4665578905087092960}
   m_maskType: 0
---- !u!114 &4665578905087092990
+--- !u!114 &1957282527193719119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -796,9 +802,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4665578905087092962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de47b4469b8c42969e43193f3678b652, type: 3}
+  m_Script: {fileID: 11500000, guid: 565be678faf09644dbb791e1378db1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 4665578903984628121}
+  button: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &6426780519605465200
 GameObject:
   m_ObjectHideFlags: 0
