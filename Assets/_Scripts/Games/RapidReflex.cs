@@ -1,40 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using _Scripts._Input;
+using System.Collections;
+using System.Diagnostics;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Debug = System.Diagnostics.Debug;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class RapidReflex : Game
+    /// <summary>
+    /// Two rows of lights are turned on one bit by bit
+    /// Player has to press a button as fast as possible once all are on.
+    /// 
+    /// Easy: each light turns on after the same time
+    /// Medium: last light has a random delay
+    /// Hard: distracting popups appear
+    /// </summary>
+    public class RapidReflex : BaseGame
     {
     #region Serialized Fields
         
-        [SerializeField] private Difficulty difficulty;
-        [SerializeField] private int timeToAnswerInMs;
-        [SerializeField] private float lightTimer;
-        [SerializeField] private GameObject lightsTop, lightsBottom, light, overlayContainer, background;
+        [SerializeField] private GameObject lightsTop, lightsBottom, lightTemplate, overlayContainer;
+        [SerializeField] private SpriteRenderer[] _bulbsSpriteTop, _bulbsSpriteBottom;
         [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen;
-        [SerializeField] private List<Color> flashColor;
-        [SerializeField] private TMP_Text gameStateText;
+        [SerializeField] private TMP_Text gameState;
+        [SerializeField] private float lightTimer;
+        [SerializeField] [Range(100,1000)] private int timeToAnswerInMs;
 
-    #endregion Serialized Fields
+        #endregion Serialized Fields
 
-    #region Fields
-    
-        private const int NUMBER_LIGHTS_ROW = 5;
-        private SpriteRenderer[] bulbsSpriteTop = new SpriteRenderer[NUMBER_LIGHTS_ROW];
-        private SpriteRenderer[] bulbsSpriteBottom = new SpriteRenderer[NUMBER_LIGHTS_ROW];
-        private SpriteRenderer backroundSprite;
-        private float timeElapsed = 0;
-        private bool isButtonPressed = false;
-        private float randomDelay = 0;
+        #region Fields
+
+        private const int NUMBER_LIGHTS = 5;
+        private float _timeElapsed = 0, _randomDelay = 0;
+        private bool _isButtonPressed = false;
 
     #endregion Fields
 
@@ -42,10 +40,8 @@ namespace _Scripts.Games
 
         void Start()
         {
-            flashColor.Add(lightRed);
-            flashColor.Add(lightGreen);
-            backroundSprite = background.GetComponent<SpriteRenderer>();
-            spawnLights();
+            _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
+            _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
             StartCoroutine(GameCoroutine());
         }
 
@@ -64,13 +60,13 @@ namespace _Scripts.Games
             yield return new WaitForSeconds(1);
             while (true)
             {
-                updateRandomDelay();
-                yield return StartCoroutine(lightAnimation());
+                UpdateRandomDelay();
+                yield return StartCoroutine(LightAnimation());
                 
-                yield return StartCoroutine(measureTime());
+                yield return StartCoroutine(MeasureTime());
                 
-                turnOffAllLights();
-                yield return StartCoroutine(determineGamestate());
+                TurnOffAllLights();
+                yield return StartCoroutine(DetermineGamestate());
             }
         }
 
@@ -78,132 +74,101 @@ namespace _Scripts.Games
 
     #region Overarching Methods / Helpers
 
-        private void spawnLights()
+        private SpriteRenderer[] SpawnLights(int amount, Color color, Transform parent)
         {
-            for (int i = -NUMBER_LIGHTS_ROW / 2; i <= NUMBER_LIGHTS_ROW / 2; i++)
+            SpriteRenderer[] renderers = new SpriteRenderer[amount];
+            for (int i = -amount / 2; i <= amount / 2; i++)
             {
-                GameObject newLight = Instantiate(light, lightsTop.transform);
-                newLight.transform.Translate(i*1.1f, 0,0,Space.Self);
+                GameObject newLight = Instantiate(lightTemplate, parent);
+                newLight.transform.Translate(i * 1.1f, 0, 0, Space.Self);
                 GameObject bulb = newLight.transform.GetChild(0).gameObject;
                 SpriteRenderer bulbSprite = bulb.GetComponent<SpriteRenderer>();
-                bulbSprite.color = darkRed;
-                bulbsSpriteTop[i+NUMBER_LIGHTS_ROW / 2] = bulbSprite;
+                bulbSprite.color = color;
+                renderers[i + amount / 2] = bulbSprite;
                 newLight.SetActive(true);
             }
-            for (int i = -NUMBER_LIGHTS_ROW / 2; i <= NUMBER_LIGHTS_ROW / 2; i++)
-            {
-                GameObject newLight = Instantiate(light, lightsBottom.transform);
-                newLight.transform.Translate(i*1.1f, 0,0,Space.Self);
-                GameObject bulb = newLight.transform.GetChild(0).gameObject;
-                SpriteRenderer bulbSprite = bulb.GetComponent<SpriteRenderer>();
-                bulbSprite.color = darkGreen;
-                bulbsSpriteBottom[i+NUMBER_LIGHTS_ROW / 2] = bulbSprite;
-                newLight.SetActive(true);
-            }
+            return renderers;
         }
         
-        private void updateLightColor(SpriteRenderer bulb, Color color)
+        private void UpdateLightColor(SpriteRenderer bulb, Color color)
         {
             bulb.color = color;
         }
 
-        private void turnOffAllLights()
+        private void TurnOffAllLights()
         {
-            for (int i = 0; i < NUMBER_LIGHTS_ROW; i++)
+            for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
-                updateLightColor(bulbsSpriteTop[i], darkRed);
-                updateLightColor(bulbsSpriteBottom[i], darkGreen);
+                UpdateLightColor(_bulbsSpriteTop[i], darkRed);
+                UpdateLightColor(_bulbsSpriteBottom[i], darkGreen);
             }
         }
 
-        private IEnumerator lightAnimation()
+        private IEnumerator LightAnimation()
         {
-            isButtonPressed = false;
-            for (int i = 0; i < NUMBER_LIGHTS_ROW; i++)
+            _isButtonPressed = false;
+            for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
-                if (checkForEarlyLose()) yield break; 
-                updateLightColor(bulbsSpriteTop[i], lightRed);
-                if (difficulty == Difficulty.LVL3 && i == NUMBER_LIGHTS_ROW-1) StartCoroutine(randomDistraction());
-                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS_ROW-1 && difficulty != Difficulty.LVL1 ? randomDelay : 0));
-                if (checkForEarlyLose()) yield break; 
+                if (CheckForEarlyLose()) yield break; 
+                UpdateLightColor(_bulbsSpriteTop[i], lightRed);
+                yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && Difficulty != Difficulty.EASY ? _randomDelay : 0));
+                if (CheckForEarlyLose()) yield break; 
             }
-            UnityEngine.Debug.Log("Delay: " + (lightTimer + randomDelay) + " s");
-            for (int i = 0; i < NUMBER_LIGHTS_ROW; i++)
+            UnityEngine.Debug.Log("Delay: " + (_randomDelay + _randomDelay) + " s");
+            for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
-                updateLightColor(bulbsSpriteBottom[i], lightGreen);
+                UpdateLightColor(_bulbsSpriteBottom[i], lightGreen);
             }
         }
 
-        private IEnumerator measureTime()
+        private IEnumerator MeasureTime()
         {
-            timeElapsed = 0;
-            if (checkForEarlyLose()) yield break; 
-            Stopwatch stopwatch = new Stopwatch();
+            _timeElapsed = 0;
+            if (CheckForEarlyLose()) yield break; 
+            Stopwatch stopwatch = new();
             stopwatch.Start();
-            yield return new WaitUntil(() => isButtonPressed || stopwatch.ElapsedMilliseconds > timeToAnswerInMs);
+            yield return new WaitUntil(() => _isButtonPressed || stopwatch.ElapsedMilliseconds > timeToAnswerInMs);
             stopwatch.Stop();
-            timeElapsed = stopwatch.ElapsedMilliseconds;
+            _timeElapsed = stopwatch.ElapsedMilliseconds;
         }
 
-        private IEnumerator determineGamestate()
+        private IEnumerator DetermineGamestate()
         {
             overlayContainer.SetActive(true);
-            if (timeElapsed < timeToAnswerInMs && timeElapsed >= 0)
+            if (_timeElapsed < timeToAnswerInMs && _timeElapsed >= 0)
             {
-                gameWon();
+                GameWon();
             }
             else
             {
-                gameLost();
+                GameLost();
             }
             yield return new WaitForSeconds(2);
             overlayContainer.SetActive(false);
         }
 
-        private IEnumerator randomDistraction()
+        private void GameWon()
         {
-            if (Random.Range(0, 1.1f) > 0.5f)
-            {
-                UnityEngine.Debug.Log("No Distraction");
-                yield break;
-            }
-
-            float delay = Random.Range(0.5f, lightTimer + randomDelay / 3);
-            yield return new WaitForSeconds(delay);
-            UnityEngine.Debug.Log("Flashdelay: " + delay);
-            StartCoroutine(flashBackground());
-        }
-
-        private IEnumerator flashBackground()
-        {
-            backroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
-            background.SetActive(true);
-            yield return new WaitForSeconds(0.2f);
-            background.SetActive(false);
-        }
-
-        private void gameWon()
-        {
-            gameStateText.text = "Rapid Reflex: " + timeElapsed + " ms";
+            gameState.text = "Rapid Reflex: " + _timeElapsed + " ms";
             base.Win();
         }
         
-        private void gameLost()
+        private void GameLost()
         {
-            gameStateText.text = timeElapsed > 0 ? "Too slow!" : "Too Early!";
+            gameState.text = _timeElapsed > 0 ? "Too slow!" : "Too Early!";
             base.Lose();
         }
 
-        private void updateRandomDelay()
+        private void UpdateRandomDelay()
         {
-            randomDelay = Random.Range(0, 1.5f);
+            _randomDelay = Random.Range(0, 1.5f);
         }
 
-        private Boolean checkForEarlyLose()
+        private bool CheckForEarlyLose()
         {
-            if (isButtonPressed)
+            if (_isButtonPressed)
             {
-                timeElapsed = -1;
+                _timeElapsed = -1;
                 return true;
             }
             return false;
@@ -211,18 +176,20 @@ namespace _Scripts.Games
 
         private void OnEnable()
         {
-            InputHandler.EastBtnAction += EastButtonPressed;
+            InputHandler.ButtonEast += EastButtonPressed;
+            InputHandler.ShoulderRight += EastButtonPressed;
         }
 
         public void EastButtonPressed()
         {
-            isButtonPressed = true;
+            _isButtonPressed = true;
             UnityEngine.Debug.Log("Button Pressed!");
         }
         
         private void OnDisable()
         {
-            InputHandler.EastBtnAction -= EastButtonPressed;
+            InputHandler.ButtonEast -= EastButtonPressed;
+            InputHandler.ShoulderRight -= EastButtonPressed;
         }
 
     #endregion Overarching Methods / Helpers

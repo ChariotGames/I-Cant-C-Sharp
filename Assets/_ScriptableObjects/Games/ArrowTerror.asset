@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
+  m_Name: ArrowTerror
+  m_EditorClassIdentifier: 
+  assetID: 19961
+  description: 
+  complexity: 3
+  difficulty: 1
+  genre: 4
+  keys: 1
+  orientation: 3
+  prefab: {fileID: 971172574723824690, guid: ed3cb08cacecb47188b43efa7f30c768, type: 3}
+  preview: {fileID: 0}

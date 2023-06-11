@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
+  m_Name: MagicCircle
+  m_EditorClassIdentifier: 
+  assetID: 16897
+  description: 'A circle appears and larger rings are closing in on it. Press a defined
+    button once a ring hits the circle.
+
+
+    Easy: Press button A once a ring hits
+    the circle.
+
+    Medium: Rings have different colors. Adjust your input in regard
+    to the color of the ring.
+
+    Hard: Rings can be thicker. Hold a button according
+    to the length of the ring.'
+  complexity: 3
+  difficulty: 1
+  genre: 10
+  keys: 6144
+  orientation: 3
+  prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
+  preview: {fileID: 0}

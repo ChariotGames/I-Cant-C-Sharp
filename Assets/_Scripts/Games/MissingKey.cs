@@ -4,19 +4,12 @@ using _Scripts._Input;
 
 namespace _Scripts.Games
 {
-    public class MissingKey : Game
+    public class MissingKey : BaseGame
     {
-        [SerializeField]
-        private List<GameObject> buttons;
-        [SerializeField]
-        private List<GameObject> pattern;
-        [SerializeField]
-        private int count = 3;
+        [SerializeField] private List<GameObject> buttons, pattern;
+        [SerializeField] private int count = 3;
         //private GameObject answer;
-        [SerializeField]
-        private GameObject loseDisplay;
-        [SerializeField]
-        private GameObject buttonContainer;
+        [SerializeField] private GameObject loseDisplay, buttonContainer;
         private bool _playerPressed = false;
         private float _playfieldWidth;
         private const float ROUND_TIME = 5.0f;
@@ -58,19 +51,19 @@ namespace _Scripts.Games
         {
             loseDisplay.SetActive(true);
             DeleteAll();
-            InputHandler.RightArrowBtnAction -= PlayerPress;
-            InputHandler.LeftArrowBtnAction -= PlayerPress;
-            InputHandler.UpArrowBtnAction -= PlayerPress;
-            InputHandler.DownArrowBtnAction -= PlayerPress;
+            InputHandler.ArrowRight -= PlayerPress;
+            InputHandler.ArrowLeft -= PlayerPress;
+            InputHandler.ArrowUp -= PlayerPress;
+            InputHandler.ArrowDown -= PlayerPress;
         }
 
         // Subscribes to playerPress()
         private void OnEnable()
         {
-            InputHandler.RightArrowBtnAction += PlayerPress;
-            InputHandler.LeftArrowBtnAction += PlayerPress;
-            InputHandler.UpArrowBtnAction += PlayerPress;
-            InputHandler.DownArrowBtnAction += PlayerPress;
+            InputHandler.ArrowRight += PlayerPress;
+            InputHandler.ArrowLeft += PlayerPress;
+            InputHandler.ArrowUp += PlayerPress;
+            InputHandler.ArrowDown += PlayerPress;
         }
 
         // Creates a new random pattern 
@@ -159,10 +152,10 @@ namespace _Scripts.Games
                 else
                 {
                     loseDisplay.SetActive(true);
-                    InputHandler.RightArrowBtnAction -= PlayerPress;
-                    InputHandler.LeftArrowBtnAction -= PlayerPress;
-                    InputHandler.UpArrowBtnAction -= PlayerPress;
-                    InputHandler.DownArrowBtnAction -= PlayerPress;
+                    InputHandler.ArrowRight -= PlayerPress;
+                    InputHandler.ArrowLeft -= PlayerPress;
+                    InputHandler.ArrowUp -= PlayerPress;
+                    InputHandler.ArrowDown -= PlayerPress;
                 }
             }
             _playerPressed = false;
