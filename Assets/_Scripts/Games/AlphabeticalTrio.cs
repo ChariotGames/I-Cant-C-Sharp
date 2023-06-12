@@ -50,7 +50,7 @@ namespace _Scripts.Games
                 yield return new WaitForSeconds(1);
                 while (true)
                 {
-                    bool isTrio = Random.Range(0f, 1f) > 0.5f;
+                    bool isTrio = Random.Range(0f, 1f) > 0.48f;
                     ShowLetters(isTrio);
 
                     yield return StartCoroutine(MeasureTime());
@@ -126,8 +126,41 @@ namespace _Scripts.Games
                         };
                         break;
                 }
-                letters.text = newLetters[0] + " " + newLetters[1] + " " + newLetters[2];
+                SetLettersByDifficulty(newLetters);
                 letterContainer.SetActive(true);
+            }
+
+            private void SetLettersByDifficulty(char[] newLetters)
+            {
+                switch (Difficulty)
+                {
+                    case Difficulty.EASY:
+                        SetLettersInAlphabeticalOrder(newLetters);
+                        break;
+                    case Difficulty.MEDIUM:
+                        SetLettersInReverseAlphabeticalOrder(newLetters);
+                        break;
+                    case Difficulty.HARD:
+                        if (Random.Range(0, 2) == 1)
+                        {
+                            SetLettersInAlphabeticalOrder(newLetters);
+                        }
+                        else
+                        {
+                            SetLettersInReverseAlphabeticalOrder(newLetters);
+                        }
+                        break;
+                }
+            }
+
+            private void SetLettersInAlphabeticalOrder(char[] newLetters)
+            {
+                letters.text = newLetters[0] + " " + newLetters[1] + " " + newLetters[2];
+            }
+            
+            private void SetLettersInReverseAlphabeticalOrder(char[] newLetters)
+            {
+                letters.text = newLetters[2] + " " + newLetters[1] + " " + newLetters[0];
             }
 
             private void SceneReset()
