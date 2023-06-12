@@ -635,9 +635,9 @@ namespace Unity.VisualScripting.Generated.Aot
 	// SceneChanger.op_Implicit
 	// SceneChanger.op_Equality
 	// SceneChanger.op_Inequality
-	// _Scripts.GameAsset.op_Implicit
-	// _Scripts.GameAsset.op_Equality
-	// _Scripts.GameAsset.op_Inequality
+	// _Scripts.Minigame.op_Implicit
+	// _Scripts.Minigame.op_Equality
+	// _Scripts.Minigame.op_Inequality
 	// _Scripts.Settings.op_Implicit
 	// _Scripts.Settings.op_Equality
 	// _Scripts.Settings.op_Inequality
@@ -647,9 +647,9 @@ namespace Unity.VisualScripting.Generated.Aot
 	// _Scripts.EastButton.op_Implicit
 	// _Scripts.EastButton.op_Equality
 	// _Scripts.EastButton.op_Inequality
-	// _Scripts.GameManager.op_Implicit
-	// _Scripts.GameManager.op_Equality
-	// _Scripts.GameManager.op_Inequality
+	// _Scripts.MinigameManager.op_Implicit
+	// _Scripts.MinigameManager.op_Equality
+	// _Scripts.MinigameManager.op_Inequality
 	// _Scripts.LeftButton.op_Implicit
 	// _Scripts.LeftButton.op_Equality
 	// _Scripts.LeftButton.op_Inequality
@@ -698,9 +698,9 @@ namespace Unity.VisualScripting.Generated.Aot
 	// _Scripts.Games.FallingObstacles.op_Implicit
 	// _Scripts.Games.FallingObstacles.op_Equality
 	// _Scripts.Games.FallingObstacles.op_Inequality
-	// _Scripts.Games.Game.op_Implicit
-	// _Scripts.Games.Game.op_Equality
-	// _Scripts.Games.Game.op_Inequality
+	// _Scripts.Games.BaseGame.op_Implicit
+	// _Scripts.Games.BaseGame.op_Equality
+	// _Scripts.Games.BaseGame.op_Inequality
 	// _Scripts.Games.MissingKey.op_Implicit
 	// _Scripts.Games.MissingKey.op_Equality
 	// _Scripts.Games.MissingKey.op_Inequality
@@ -8273,7 +8273,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.GameAsset.op_Implicit
+		// _Scripts.Minigame.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameAsset_op_Implicit()
 		{
@@ -8284,7 +8284,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.GameAsset.op_Equality
+		// _Scripts.Minigame.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameAsset_op_Equality()
 		{
@@ -8296,7 +8296,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.GameAsset.op_Inequality
+		// _Scripts.Minigame.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameAsset_op_Inequality()
 		{
@@ -8413,7 +8413,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.GameManager.op_Implicit
+		// _Scripts.MinigameManager.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameManager_op_Implicit()
 		{
@@ -8424,7 +8424,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.GameManager.op_Equality
+		// _Scripts.MinigameManager.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameManager_op_Equality()
 		{
@@ -8436,7 +8436,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.GameManager.op_Inequality
+		// _Scripts.MinigameManager.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameManager_op_Inequality()
 		{
@@ -9008,7 +9008,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.Game.op_Implicit
+		// _Scripts.Games.BaseGame.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Game_op_Implicit()
 		{
@@ -9019,7 +9019,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.Game.op_Equality
+		// _Scripts.Games.BaseGame.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Game_op_Equality()
 		{
@@ -9031,7 +9031,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.Game.op_Inequality
+		// _Scripts.Games.BaseGame.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Game_op_Inequality()
 		{
