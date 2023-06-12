@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
-  currentDifficulty: 3
+  currentDifficulty: 1
   lightsTop: {fileID: 1887571885041113619}
   lightsBottom: {fileID: 1887571883439753429}
   lightTemplate: {fileID: 1887571884289595808}
