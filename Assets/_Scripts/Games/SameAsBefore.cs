@@ -12,7 +12,7 @@ namespace _Scripts.Games
     public class SameAsBefore : BaseGame
     {
         [SerializeField] private List<GameObject> options;
-        [SerializeField] private GameObject startText, failText;
+        [SerializeField] private GameObject startText, gamestateWin, gamestateLose;
         [SerializeField] private TMP_Text stepBackText;
         [SerializeField] private int maxStepsBack, timeToAnswer;
 
@@ -69,14 +69,12 @@ namespace _Scripts.Games
                 offset += delta;
                 yield return new WaitForSeconds(0.001f);
             }
-            yield return new WaitForSeconds(1);
             startText.SetActive(false);
         }
 
         private IEnumerator GameStartCoroutine()
         {
-            StartCoroutine(AnimationStartText(2.1f));
-            yield return new WaitForSeconds(1);
+            yield return StartCoroutine(AnimationStartText(2.1f));
             SpawnSymbol();
             _lastIndices.AddFirst(_index);
             if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
@@ -109,8 +107,6 @@ namespace _Scripts.Games
                     {
                         base.Lose();
                         options[_index].SetActive(false);
-                        failText.SetActive(true);
-                        yield break;
                     }
                 }
                 else
