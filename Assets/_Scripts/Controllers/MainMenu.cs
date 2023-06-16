@@ -15,7 +15,7 @@ namespace _Scripts.Controllers
 
         [SerializeField] private Camera mainCamera;
         [SerializeField] private CanvasScaler canvasScaler;
-        [SerializeField] private GameObject gamesContainer, templateGameButton, optionLives;
+        [SerializeField] private GameObject gamesContainer, templateGameButton, optionLives, startButton;
         [SerializeField] private Settings defaultSettings, settings;
         [SerializeField] private TMP_Text livesText;
 
@@ -32,9 +32,12 @@ namespace _Scripts.Controllers
 
         void Start()
         {
+            if (mainCamera) mainCamera = Camera.main;
+
             ResetSettings();
-            gameButtons = new();
+            SetSelected(startButton);
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
+            gameButtons = new();
             livesText.text = settings.Lives.ToString();
         }
 
@@ -47,14 +50,22 @@ namespace _Scripts.Controllers
         /// </summary>
         public void FillGamesContainer()
         {
-            if (gamesContainer.transform.childCount != 0) return;
+            if (gamesContainer.transform.childCount != 0)
+            {
+                EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
+                return;
+            }
+                
+                
 
-            foreach (var game in settings.Games)
+            foreach (Minigame game in settings.Games)
             {
                 GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
                 button.GetComponent<MainMenuGame>().SetupButton(game);
                 gameButtons.Add(button);
             }
+
+            EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
         }
 
         /// <summary>
