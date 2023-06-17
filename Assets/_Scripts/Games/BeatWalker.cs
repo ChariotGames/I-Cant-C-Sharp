@@ -2,62 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using _Scripts._Input;
 
 namespace _Scripts.Games
 {
-    /// <summary>
-    /// TODO: Provide a summary of your game here.
-    /// To create an auto-generated summary template
-    /// type 3 /// slash characters after you have
-    /// written your class or method signature.
-    /// 
-    /// On Level 1, describe the difficulty levels.
-    /// On Level 2, keep it short and concise.
-    /// On Level 3, maybe one-liners are possible.
-    /// </summary>
     public class BeatWalker : Game
     {
-        /**
-         * TODO: General Structure Ideas:
-         * 
-         * Try to keep an order of fields from most complex to primitive.
-         * GameObject go;
-         * struct point;
-         * float num;
-         * bool truthy;
-         * 
-         * Constants before variables maybe too.
-         * const int TIME_PLANNED_FOR_THIS
-         * int timeSpentOnThis
-         * 
-         * Also from most public to private. Valid for methods too.
-         * public
-         * internal
-         * protected
-         * private
-         * 
-         *  Then only probably by alphabet. If at all
-         */
-
         #region Serialized Fields
-
-        [SerializeField] private GameObject buttonPrefab;
-        [SerializeField] private List<GameObject> distractionButtons;
+        [SerializeField] private GameObject button;
+        [SerializeField] private GameObject buttonContainer;
+        private float leftBound;
+        private float rightBound;
+        private bool buttonPressed = false;
+        private bool lost = false;
+        private List<GameObject> buttons = new List<GameObject>();
+        private float instantiationDelay = 1f;
 
         #endregion Serialized Fields
 
         #region Fields
-        private float speed = 5f;
-        private GameObject button;
-        
-        private Camera _mainCamera;
-        
-        private Bounds _cameraViewportBounds;
-        private float width;
-        private float instantiationDelay; //= .5f;
-        private bool lose;
-        private List<GameObject> instantiatedButtons = new List<GameObject>();
+
 
         #endregion Fields
 
@@ -65,81 +29,110 @@ namespace _Scripts.Games
 
         private void Awake()
         {
-            _mainCamera = Camera.main;
-            _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
-            width = _cameraViewportBounds.size.x;
-            lose = false;
+            Physics2D.gravity = new Vector2(-9.8f, 0);
+
+            //Get coords of activation region
+            float regionSizeX = GameObject.Find("ActivationRegion").gameObject.GetComponent<Collider2D>().bounds.size.x;
+            float regionPosX = GameObject.Find("ActivationRegion").gameObject.transform.position.x;
+
+            leftBound = regionPosX - regionSizeX / 2;
+            rightBound = regionPosX + regionSizeX / 2;
         }
 
-        // Start is called before the first frame update
+        private void OnEnable()
+        {
+            InputHandler.LeftArrowBtnAction += ButtonPress;
+        }
+
         void Start()
         {
-            //TODO get the width of the parent of this game object
-            //gameObject.transform.parent.transform.width
+            instantiateButton();
+            //StartCoroutine(InstantiateButtonsWithDelay());
 
-            StartCoroutine(InstantiateButtonsWithDelay());
+
         }
-            
 
-        // Update is called once per frame
         void Update()
         {
-            instantiationDelay = Random.Range(0.5f, 2);
-            /*
-            foreach (GameObject b in instantiatedButtons)
+            if(!lost)
             {
-                b.transform.Translate(speed * Time.deltaTime * Vector3.left);
-                
-            }
-
-            foreach (GameObject b in instantiatedButtons)
-            {
-                if (b.transform.position.x < -width / 2)
-                {
-                    Destroy(b);
-                }
-            }
-            */
-
-            for (int i = instantiatedButtons.Count - 1; i >= 0; i--)
-            {
-                GameObject b = instantiatedButtons[i];
-                b.transform.Translate(speed * Time.deltaTime * Vector3.left);
-
-                if (b.transform.position.x < -width / 2)
-                {
-                    Destroy(b);
-                    instantiatedButtons.RemoveAt(i);
-                }
-            }
+                loseCondition();
+            } 
+            //TODO wird nach ein mal lose immer noch aufgerufen
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireCube(buttonContainer.transform.position, new Vector3(4f, 5f, 0));
+        }
+
+
 
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
 
-        
+
+
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
 
-       
-        /// <summary>
-        /// TODO: Provide a summary for the method
-        /// </summary>
-        /// <param name="param">List the parameters.</param>
-        /// <returns>Specify what it returns, if it does so.</returns>
+        private void ButtonPress()
+        {
+            buttonPressed = true;
+            Debug.Log("clicked!");
+        }
 
-        
+        private void instantiateButton()
+        {
+            GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
+            buttons.Add(newButton);
+            
+        }
+
+        private void loseCondition()
+        {
+            if (buttons.Count > 0)
+            {
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    float buttonPosX = buttonContainer.transform.GetChild(i).gameObject.transform.position.x;
+
+                    if (buttonPosX < leftBound)
+                    {
+                        Debug.Log("Lose");
+                        lost = true;
+                        buttons.RemoveAt(i);
+
+                    }
+                    else if (buttonPosX > rightBound && buttonPressed)
+                    {
+                        Debug.Log("Lose");
+                        lost = true;
+                        Destroy(buttons[i].gameObject);
+                        buttons.RemoveAt(i);
+
+                    }
+                    else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
+                    {
+                        Debug.Log("Win");
+                        lost = false;
+                        Destroy(buttons[i].gameObject);
+                        buttons.RemoveAt(i);
+                    }
+                }
+            }
+        }
 
         private IEnumerator InstantiateButtonsWithDelay()
         {
-            Vector3 spawnPos = new(transform.position.x + width / 2, transform.position.y, 0f);
-            while (lose==false)
+            while (lost == false)
             {
-                button = Instantiate(buttonPrefab, spawnPos, Quaternion.identity);
+                GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
 
-                instantiatedButtons.Add(button);
+                buttons.Add(newButton);
 
                 yield return new WaitForSeconds(instantiationDelay);
             }
@@ -149,7 +142,7 @@ namespace _Scripts.Games
 
         #region Overarching Methods / Helpers
 
-        
+
 
         #endregion Overarching Methods / Helpers
     }
