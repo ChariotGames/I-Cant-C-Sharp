@@ -97,17 +97,16 @@ namespace _Scripts.Games
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         base.Win();
-                        options[_index].SetActive(false);
-                        _isYes = false;
-                        _isNo = false;
-                        _lastIndices.AddFirst(_index);
-                        if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
                     }
                     else
                     {
                         base.Lose();
-                        options[_index].SetActive(false);
                     }
+                    options[_index].SetActive(false);
+                    _isYes = false;
+                    _isNo = false;
+                    _lastIndices.AddFirst(_index);
+                    if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
                 }
                 else
                 {
