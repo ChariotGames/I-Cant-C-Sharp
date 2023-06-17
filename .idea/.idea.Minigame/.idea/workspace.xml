@@ -7,6 +7,8 @@
     <list default="true" id="50128f8a-23b3-417c-bd80-c6f66489e84d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Minigame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/JannisScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JannisScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Games/AlphabeticalTrio.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Games/AlphabeticalTrio.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Games/RomanNumbers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Games/RomanNumbers.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

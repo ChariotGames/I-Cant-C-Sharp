@@ -165,7 +165,7 @@ namespace _Scripts.Games
 
             private void SceneReset()
             {
-                Debug.Log("Reset!");
+                //Debug.Log("Reset!");
                 _isYes = false;
                 _isNo = false;
                 letterContainer.SetActive(false);

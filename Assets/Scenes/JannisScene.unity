@@ -2013,8 +2013,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
-  currentDifficulty: 1
+  currentDifficulty: 2
   task: {fileID: 1426872946}
+  gamestateWin: {fileID: 244285274}
+  gamestateLose: {fileID: 1307285784}
   timeout: 60
 --- !u!4 &1217346602
 Transform:
@@ -2500,7 +2502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 17  <  XIX
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
