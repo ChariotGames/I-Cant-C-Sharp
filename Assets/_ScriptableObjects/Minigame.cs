@@ -12,7 +12,8 @@ namespace _Scripts
         [SerializeField] private Complexity complexity;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;
-        [SerializeField] private Keys keys;
+        [SerializeField] private Keys keysFirst, keysSecond;
+        [SerializeField] private KeyMap keysMain, keysAux;
         [SerializeField] private Orientation orientation;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Sprite preview;
@@ -46,9 +47,24 @@ namespace _Scripts
             get => genre;
         }
 
-        public Keys Keys
+        public Keys KeysFirst
         {
-            get => keys;
+            get => keysFirst;
+        }
+
+        public Keys KeysSecond
+        {
+            get => keysSecond;
+        }
+
+        public KeyMap KeysMain
+        {
+            get => keysMain;
+        }
+
+        public KeyMap KeysAux
+        {
+            get => keysAux;
         }
 
         public Orientation Orientation

@@ -23,7 +23,7 @@ namespace _Scripts.Games
 
         [SerializeField] private List<Colors> displayPattern, guessPattern;
         [SerializeField] private List<Modifier> infoPattern;
-        [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay , middle;
+        [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay, middle;
         [SerializeField] private SimonElement blue, red, yellow, green;
         [SerializeField] private SimonElement twice, nothing, ok;
         [SerializeField] private Image timer;
@@ -44,6 +44,10 @@ namespace _Scripts.Games
 
         private void Awake()
         {
+            displayPattern.Clear();
+            guessPattern.Clear();
+            infoPattern.Clear();
+
             // Initialize game
             _buttonObjects = new();
             _buttonObjects.Add(Colors.BLUE, blue);
@@ -296,7 +300,11 @@ namespace _Scripts.Games
         {
             _correctGuesses++;
             UpdateDifficulty(_correctGuesses);
-            if (_correctGuesses == 0) base.Win();
+            if (_correctGuesses == 0)
+            {
+                base.Win();
+                return;
+            }
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);

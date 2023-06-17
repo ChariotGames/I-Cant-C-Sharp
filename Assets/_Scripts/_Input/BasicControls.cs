@@ -471,6 +471,463 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Right"",
+            ""id"": ""535f8663-57ae-4ab7-9f2c-e013ae0a1e69"",
+            ""actions"": [
+                {
+                    ""name"": ""Stick"",
+                    ""type"": ""Value"",
+                    ""id"": ""faf108d2-3d86-4d43-bc89-ffee39a72143"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""StickButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""c05c2f91-a561-4cd7-8a0c-1a0fc31565f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d2961b5-048f-488c-b03f-a5a4556d7438"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ce96624-34cb-4b46-83a8-a2ea678b854f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1fb5b9f-2197-4631-ae7d-4b5aacd22b38"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""8241f2f7-1cc9-425c-8c7e-30da62ceba08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""44df284c-2033-4dee-96d2-c9bc651814b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Trigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb1b77ca-9a91-4d04-8bc0-69e1fa0392e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a982bb7d-2392-44bf-b4d8-01f62d745047"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45928ca9-ddea-4f6d-88be-0c6b505224e4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0c0da33-295b-4e80-898e-91b734b7f69f"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""870f5aae-852c-4d0a-b5d2-b15952b6aa70"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f978d7d5-c4ff-4cb3-93f0-f055f72bcc01"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""462102f8-734a-4224-8544-1ceba0b7bdde"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4d59b16-cea2-4a32-a68d-c3910cd580f2"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c02aa304-dfcd-4292-af61-eb33e623b4f0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95958411-53d3-42f8-b62e-d6df39fb88e7"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Trigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3077ceb-8616-4d8d-9cbe-315726a7a89a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85498739-7589-40df-a2ca-921fffa5daf0"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab839590-ae49-4090-82ee-2add09adc4a1"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37a7fcfe-b3f3-44d6-8d52-c70e207997f7"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f96bd2a-b235-416b-89dc-b6e44fc8689b"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Left"",
+            ""id"": ""318ecf8f-9337-4152-9abf-99e7ba73514e"",
+            ""actions"": [
+                {
+                    ""name"": ""Stick"",
+                    ""type"": ""Value"",
+                    ""id"": ""546a9efe-97d9-49c5-aa1a-bbb6f7fdeedd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""StickButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""36e0ca65-9ca0-40d2-b31f-b664f066922e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""32674c3a-3b51-481a-b095-8772fe50be53"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""06d05344-c607-4fab-9b0e-8615d3bd747d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""aae6d674-afdd-4a38-87f9-3c2ebf2462ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e9b48d4-be0f-473c-b7e7-c68086df7e8b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e0c6e2f-d4c9-4d6e-be5e-ae43751637de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Trigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""73dbe134-a91c-4ce7-bb5c-fae528a6d49d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c142addc-b2c1-4f80-ab1c-3ae749b27e38"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fad02cf6-e574-4000-8536-d30c2dc4c5ae"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b96f9e6c-6723-4e2c-8a66-d3db24c88578"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47dff139-da1a-44e2-a539-20c9f5c307c3"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47e4fcbb-99b1-4559-83d8-11cd74019065"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d057b6f6-3cfd-4730-9d01-1cafaabb8a43"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""684d3ebc-0d1a-4ffc-84c6-4eb3d8c5c103"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21897edd-caf6-4f6e-8d99-462f34b633c3"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bad2b668-a8a3-4ec1-a235-7bedcd393a9b"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e16e9bf-d6bf-42e7-ba01-63b95c4b9752"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""387163e4-7569-4e22-818f-466909a7e9cf"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Trigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""180e205f-fadb-4bcc-92ab-57e2bad8188e"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb029208-3314-41fe-9bce-f1c97937610f"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -493,6 +950,26 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
         m_Player_ShoulderRight = m_Player.FindAction("ShoulderRight", throwIfNotFound: true);
         m_Player_TriggerLeft = m_Player.FindAction("TriggerLeft", throwIfNotFound: true);
         m_Player_TriggerRight = m_Player.FindAction("TriggerRight", throwIfNotFound: true);
+        // Right
+        m_Right = asset.FindActionMap("Right", throwIfNotFound: true);
+        m_Right_Stick = m_Right.FindAction("Stick", throwIfNotFound: true);
+        m_Right_StickButton = m_Right.FindAction("StickButton", throwIfNotFound: true);
+        m_Right_Up = m_Right.FindAction("Up", throwIfNotFound: true);
+        m_Right_Down = m_Right.FindAction("Down", throwIfNotFound: true);
+        m_Right_Right = m_Right.FindAction("Right", throwIfNotFound: true);
+        m_Right_Left = m_Right.FindAction("Left", throwIfNotFound: true);
+        m_Right_Shoulder = m_Right.FindAction("Shoulder", throwIfNotFound: true);
+        m_Right_Trigger = m_Right.FindAction("Trigger", throwIfNotFound: true);
+        // Left
+        m_Left = asset.FindActionMap("Left", throwIfNotFound: true);
+        m_Left_Stick = m_Left.FindAction("Stick", throwIfNotFound: true);
+        m_Left_StickButton = m_Left.FindAction("StickButton", throwIfNotFound: true);
+        m_Left_Up = m_Left.FindAction("Up", throwIfNotFound: true);
+        m_Left_Down = m_Left.FindAction("Down", throwIfNotFound: true);
+        m_Left_Right = m_Left.FindAction("Right", throwIfNotFound: true);
+        m_Left_Left = m_Left.FindAction("Left", throwIfNotFound: true);
+        m_Left_Shoulder = m_Left.FindAction("Shoulder", throwIfNotFound: true);
+        m_Left_Trigger = m_Left.FindAction("Trigger", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -716,6 +1193,210 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Right
+    private readonly InputActionMap m_Right;
+    private List<IRightActions> m_RightActionsCallbackInterfaces = new List<IRightActions>();
+    private readonly InputAction m_Right_Stick;
+    private readonly InputAction m_Right_StickButton;
+    private readonly InputAction m_Right_Up;
+    private readonly InputAction m_Right_Down;
+    private readonly InputAction m_Right_Right;
+    private readonly InputAction m_Right_Left;
+    private readonly InputAction m_Right_Shoulder;
+    private readonly InputAction m_Right_Trigger;
+    public struct RightActions
+    {
+        private @BasicControls m_Wrapper;
+        public RightActions(@BasicControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Stick => m_Wrapper.m_Right_Stick;
+        public InputAction @StickButton => m_Wrapper.m_Right_StickButton;
+        public InputAction @Up => m_Wrapper.m_Right_Up;
+        public InputAction @Down => m_Wrapper.m_Right_Down;
+        public InputAction @Right => m_Wrapper.m_Right_Right;
+        public InputAction @Left => m_Wrapper.m_Right_Left;
+        public InputAction @Shoulder => m_Wrapper.m_Right_Shoulder;
+        public InputAction @Trigger => m_Wrapper.m_Right_Trigger;
+        public InputActionMap Get() { return m_Wrapper.m_Right; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(RightActions set) { return set.Get(); }
+        public void AddCallbacks(IRightActions instance)
+        {
+            if (instance == null || m_Wrapper.m_RightActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_RightActionsCallbackInterfaces.Add(instance);
+            @Stick.started += instance.OnStick;
+            @Stick.performed += instance.OnStick;
+            @Stick.canceled += instance.OnStick;
+            @StickButton.started += instance.OnStickButton;
+            @StickButton.performed += instance.OnStickButton;
+            @StickButton.canceled += instance.OnStickButton;
+            @Up.started += instance.OnUp;
+            @Up.performed += instance.OnUp;
+            @Up.canceled += instance.OnUp;
+            @Down.started += instance.OnDown;
+            @Down.performed += instance.OnDown;
+            @Down.canceled += instance.OnDown;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Shoulder.started += instance.OnShoulder;
+            @Shoulder.performed += instance.OnShoulder;
+            @Shoulder.canceled += instance.OnShoulder;
+            @Trigger.started += instance.OnTrigger;
+            @Trigger.performed += instance.OnTrigger;
+            @Trigger.canceled += instance.OnTrigger;
+        }
+
+        private void UnregisterCallbacks(IRightActions instance)
+        {
+            @Stick.started -= instance.OnStick;
+            @Stick.performed -= instance.OnStick;
+            @Stick.canceled -= instance.OnStick;
+            @StickButton.started -= instance.OnStickButton;
+            @StickButton.performed -= instance.OnStickButton;
+            @StickButton.canceled -= instance.OnStickButton;
+            @Up.started -= instance.OnUp;
+            @Up.performed -= instance.OnUp;
+            @Up.canceled -= instance.OnUp;
+            @Down.started -= instance.OnDown;
+            @Down.performed -= instance.OnDown;
+            @Down.canceled -= instance.OnDown;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Shoulder.started -= instance.OnShoulder;
+            @Shoulder.performed -= instance.OnShoulder;
+            @Shoulder.canceled -= instance.OnShoulder;
+            @Trigger.started -= instance.OnTrigger;
+            @Trigger.performed -= instance.OnTrigger;
+            @Trigger.canceled -= instance.OnTrigger;
+        }
+
+        public void RemoveCallbacks(IRightActions instance)
+        {
+            if (m_Wrapper.m_RightActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IRightActions instance)
+        {
+            foreach (var item in m_Wrapper.m_RightActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_RightActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public RightActions @Right => new RightActions(this);
+
+    // Left
+    private readonly InputActionMap m_Left;
+    private List<ILeftActions> m_LeftActionsCallbackInterfaces = new List<ILeftActions>();
+    private readonly InputAction m_Left_Stick;
+    private readonly InputAction m_Left_StickButton;
+    private readonly InputAction m_Left_Up;
+    private readonly InputAction m_Left_Down;
+    private readonly InputAction m_Left_Right;
+    private readonly InputAction m_Left_Left;
+    private readonly InputAction m_Left_Shoulder;
+    private readonly InputAction m_Left_Trigger;
+    public struct LeftActions
+    {
+        private @BasicControls m_Wrapper;
+        public LeftActions(@BasicControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Stick => m_Wrapper.m_Left_Stick;
+        public InputAction @StickButton => m_Wrapper.m_Left_StickButton;
+        public InputAction @Up => m_Wrapper.m_Left_Up;
+        public InputAction @Down => m_Wrapper.m_Left_Down;
+        public InputAction @Right => m_Wrapper.m_Left_Right;
+        public InputAction @Left => m_Wrapper.m_Left_Left;
+        public InputAction @Shoulder => m_Wrapper.m_Left_Shoulder;
+        public InputAction @Trigger => m_Wrapper.m_Left_Trigger;
+        public InputActionMap Get() { return m_Wrapper.m_Left; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LeftActions set) { return set.Get(); }
+        public void AddCallbacks(ILeftActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LeftActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LeftActionsCallbackInterfaces.Add(instance);
+            @Stick.started += instance.OnStick;
+            @Stick.performed += instance.OnStick;
+            @Stick.canceled += instance.OnStick;
+            @StickButton.started += instance.OnStickButton;
+            @StickButton.performed += instance.OnStickButton;
+            @StickButton.canceled += instance.OnStickButton;
+            @Up.started += instance.OnUp;
+            @Up.performed += instance.OnUp;
+            @Up.canceled += instance.OnUp;
+            @Down.started += instance.OnDown;
+            @Down.performed += instance.OnDown;
+            @Down.canceled += instance.OnDown;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Shoulder.started += instance.OnShoulder;
+            @Shoulder.performed += instance.OnShoulder;
+            @Shoulder.canceled += instance.OnShoulder;
+            @Trigger.started += instance.OnTrigger;
+            @Trigger.performed += instance.OnTrigger;
+            @Trigger.canceled += instance.OnTrigger;
+        }
+
+        private void UnregisterCallbacks(ILeftActions instance)
+        {
+            @Stick.started -= instance.OnStick;
+            @Stick.performed -= instance.OnStick;
+            @Stick.canceled -= instance.OnStick;
+            @StickButton.started -= instance.OnStickButton;
+            @StickButton.performed -= instance.OnStickButton;
+            @StickButton.canceled -= instance.OnStickButton;
+            @Up.started -= instance.OnUp;
+            @Up.performed -= instance.OnUp;
+            @Up.canceled -= instance.OnUp;
+            @Down.started -= instance.OnDown;
+            @Down.performed -= instance.OnDown;
+            @Down.canceled -= instance.OnDown;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Shoulder.started -= instance.OnShoulder;
+            @Shoulder.performed -= instance.OnShoulder;
+            @Shoulder.canceled -= instance.OnShoulder;
+            @Trigger.started -= instance.OnTrigger;
+            @Trigger.performed -= instance.OnTrigger;
+            @Trigger.canceled -= instance.OnTrigger;
+        }
+
+        public void RemoveCallbacks(ILeftActions instance)
+        {
+            if (m_Wrapper.m_LeftActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILeftActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LeftActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LeftActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LeftActions @Left => new LeftActions(this);
     public interface IPlayerActions
     {
         void OnStickRight(InputAction.CallbackContext context);
@@ -734,5 +1415,27 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
         void OnShoulderRight(InputAction.CallbackContext context);
         void OnTriggerLeft(InputAction.CallbackContext context);
         void OnTriggerRight(InputAction.CallbackContext context);
+    }
+    public interface IRightActions
+    {
+        void OnStick(InputAction.CallbackContext context);
+        void OnStickButton(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnShoulder(InputAction.CallbackContext context);
+        void OnTrigger(InputAction.CallbackContext context);
+    }
+    public interface ILeftActions
+    {
+        void OnStick(InputAction.CallbackContext context);
+        void OnStickButton(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnShoulder(InputAction.CallbackContext context);
+        void OnTrigger(InputAction.CallbackContext context);
     }
 }

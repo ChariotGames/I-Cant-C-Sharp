@@ -17,7 +17,18 @@ MonoBehaviour:
   complexity: 2
   difficulty: 1
   genre: 3
-  keys: 6144
+  keysFirst: 6144
+  keysSecond: 24576
+  keysMain:
+    one: {fileID: 0}
+    two: {fileID: 0}
+    three: {fileID: 0}
+    four: {fileID: 0}
+  keysAux:
+    one: {fileID: 0}
+    two: {fileID: 0}
+    three: {fileID: 0}
+    four: {fileID: 0}
   orientation: 2
   prefab: {fileID: 3698711568559123562, guid: 4feb5dd879318934b999770a65598759, type: 3}
   preview: {fileID: 0}

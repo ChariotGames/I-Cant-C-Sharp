@@ -1,6 +1,7 @@
 using _Scripts.Games;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Scripts.Controllers
 {
@@ -12,7 +13,7 @@ namespace _Scripts.Controllers
         #region Serialized Fields
 
         [SerializeField] private Settings settings;
-        [SerializeField] private GameObject[] spawnPoints;
+        [SerializeField] private SpawnPoints containers;
 
         #endregion
 
@@ -27,11 +28,12 @@ namespace _Scripts.Controllers
 
         void Awake()
         {
-            if(settings.SelectedGame == null || settings.Mode == Mode.ENDLESS)
+            if (settings.SelectedGame == null || settings.Mode == Mode.ENDLESS)
             {
                 PickGame(new List<Minigame>(settings.Games));
                 PickGame(new List<Minigame>(settings.Games));
-            } else
+            }
+            else
             {
                 loadedGames.Add(LoadGame(settings.SelectedGame, SetParent(Orientation.FULLSCREEN)));
             }
@@ -54,9 +56,9 @@ namespace _Scripts.Controllers
 
             Minigame game = gameList[Random.Range(0, gameList.Count)];
 
-            if (loadedGames.Count >= 2 || spawnPoints[^1].transform.childCount == 1)
+            if (loadedGames.Count >= 2 || containers.Center.childCount == 1)
             {
-                RemoveGame(game.Orientation.HasFlag(Orientation.FULLSCREEN));
+                RemoveGame(containers.Center.GetChild(0).gameObject);
             }
 
             if (game.Orientation == Orientation.FULLSCREEN || game.Complexity == Complexity.SOLO)
@@ -66,8 +68,10 @@ namespace _Scripts.Controllers
             }
 
             // Find the fitting game
-            while (game.Prefab == null || loadedGames.Count != 0 && !CheckFit(game))
+            while (loadedGames.Count != 0 && !CheckFit(game))
             {
+                if (gameList.Count == 0) break;
+
                 gameList.Remove(game);
                 game = gameList[Random.Range(0, gameList.Count)];
             }
@@ -87,9 +91,9 @@ namespace _Scripts.Controllers
 
             if (!CheckProperty((int)game.Orientation, (int)loadedGames[0].Orientation)) return false;
 
-            if (CheckProperty((int)game.Keys, (int)loadedGames[0].Keys)) return false;
+            if (CheckProperty((int)game.KeysFirst, (int)loadedGames[0].KeysFirst)) return false;
 
-            if (CheckProperty((int)game.Genre, (int)loadedGames[0].Genre)) return false;
+            if (!CheckProperty((int)game.Complexity, (int)loadedGames[0].Complexity)) return false;
 
             return true;
         }
@@ -113,74 +117,41 @@ namespace _Scripts.Controllers
         /// <returns>The successfully loaded game.</returns>
         private Minigame LoadGame(Minigame game, Transform parent)
         {
-            Instantiate(game.Prefab, parent);
-            BaseGame prefab = game.Prefab.GetComponent<BaseGame>();
+            GameObject obj = Instantiate(game.Prefab, parent);
+            BaseGame prefab = obj.GetComponent<BaseGame>();
             prefab.ID = game.AssetID;
             prefab.Difficulty = game.Difficulty;
+            //prefab.KeyMap = game.KeysFirst;
             return game;
-        }
-
-        /// <summary>
-        /// Finds a fitting spawn container according to game specs.
-        /// </summary>
-        /// <param name="orientation">The game's orientation settings</param>
-        /// <returns>A Transform to contain the game.</returns>
-        private Transform SetParent(Orientation orientation)
-        {
-            if (orientation == Orientation.FULLSCREEN && spawnPoints[^1].transform.childCount == 0)
-            {
-                return spawnPoints[(int)Direction.CENTER].transform;
-            }
-
-            if (orientation == Orientation.HORIZONTAL)
-            {
-                for (int i = 0; i < spawnPoints.Length - 1; i += 2)
-                {
-                    Transform trans = spawnPoints[i].transform;
-                    if (trans.childCount == 0) return trans;
-                }
-            }
-
-            if (orientation == Orientation.VERTICAL || orientation == Orientation.QUARTER)
-            {
-                for (int i = 1; i < spawnPoints.Length - 1; i += 2)
-                {
-                    Transform trans = spawnPoints[i].transform;
-                    if (trans.childCount == 0) return trans;
-                }
-            }
-
-            //if ()
-            //{
-            //    for (int i = 0; i < spawnPoints.Length - 1; i++)
-            //    {
-            //        Transform trans = spawnPoints[i].transform;
-            //        if (trans.childCount == 0) return trans;
-            //    }
-            //}
-
-            return null;
         }
 
         /// <summary>
         /// Removes the game instance from the scene.
         /// </summary>
-        /// <param name="removeAllFlag">Removes all games if true.</param>
-        private void RemoveGame(bool removeAllFlag)
+        private void RemoveGame(GameObject game)
         {
-            if (removeAllFlag)
+            GameObject instance = FindObjectOfType<GameObject>(game);
+            foreach (Minigame miniGame in settings.Games)
             {
-                foreach (Minigame game in loadedGames)
+                if (miniGame.Prefab == game)
                 {
-                    Destroy(FindObjectOfType<GameObject>(game.Prefab));
+                    loadedGames.Remove(miniGame);
+                    break;
                 }
-                loadedGames.Clear();
             }
-
-            int index = Random.Range(0, loadedGames.Count);
-            GameObject instance = FindObjectOfType<GameObject>(loadedGames[index].Prefab);
             Destroy(instance);
-            loadedGames.Remove(loadedGames[index]);
+        }
+
+        /// <summary>
+        /// Removes all game instance from the scene.
+        /// </summary>
+        private void RemoveAllGames()
+        {
+            foreach (Minigame game in loadedGames)
+            {
+                Destroy(FindObjectOfType<GameObject>(game.Prefab));
+            }
+            loadedGames.Clear();
         }
 
         /// <summary>
@@ -191,6 +162,33 @@ namespace _Scripts.Controllers
             // TODO: implement
         }
 
+        /// <summary>
+        /// Finds a fitting spawn container according to game specs.
+        /// </summary>
+        /// <param name="orientation">The game's orientation settings</param>
+        /// <returns>A Transform to contain the game.</returns>
+        private Transform SetParent(Orientation orientation)
+        {
+            if (orientation == Orientation.FULLSCREEN && containers.Center.childCount == 0)
+            {
+                return containers.Center;
+            }
+
+            if (orientation == Orientation.HORIZONTAL)
+            {
+                if (containers.Up.childCount == 0) return containers.Up;
+                if (containers.Down.childCount == 0) return containers.Down;
+            }
+
+            if (orientation == Orientation.VERTICAL || orientation == Orientation.QUARTER)
+            {
+                if (containers.Left.childCount == 0) return containers.Left;
+                if (containers.Right.childCount == 0) return containers.Right;
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Game Mechanics
@@ -198,6 +196,14 @@ namespace _Scripts.Controllers
         public void WinCondition(AssetID id)
         {
             Debug.Log("Win from " + id);
+            for (int i = 0; i < containers.All.Length; i++)
+            {
+                if (containers.All[i].childCount == 0) continue;
+
+                GameObject obj = containers.All[i].GetChild(0).gameObject;
+
+                if (obj.GetComponent<BaseGame>().ID == id) RemoveGame(obj);
+            }
         }
 
         public void LoseCondition(AssetID id)
@@ -205,7 +211,7 @@ namespace _Scripts.Controllers
             Debug.Log("Lose from " + id);
             settings.Lives--;
             Debug.Log(settings.Lives);
-            if(settings.Lives <= 0)
+            if (settings.Lives <= 0)
             {
                 //PickGame(new List<Minigame>(games));
                 gameObject.GetComponent<SceneChanger>().ChangeScene(0);

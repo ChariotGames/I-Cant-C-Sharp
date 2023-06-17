@@ -12,6 +12,7 @@ namespace _Scripts.Games
     {
         #region Serialized Fields
 
+        [SerializeField] protected KeyMap keyMap;
         [SerializeField] protected MinigameManager manager;
         [SerializeField] protected Difficulty currentDifficulty = Difficulty.EASY;
 
@@ -32,7 +33,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Win()
         {
-            manager.WinCondition(id);
+            Manager.WinCondition(id);
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Lose()
         {
-            manager.LoseCondition(id);
+            Manager.LoseCondition(id);
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            manager.SetDifficulty(id, currentDifficulty - 1);
+            Manager.SetDifficulty(id, currentDifficulty - 1);
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            manager.SetDifficulty(id, currentDifficulty + 1);
+            Manager.SetDifficulty(id, currentDifficulty + 1);
         }
 
         #endregion protected
@@ -71,10 +72,22 @@ namespace _Scripts.Games
             set => id = value;
         }
 
+        public KeyMap KeyMap
+        {
+            get => keyMap;
+            set => keyMap = value;
+        }
+
         public Difficulty Difficulty
         {
             get => currentDifficulty;
             set => currentDifficulty = value;
+        }
+
+        public MinigameManager Manager
+        {
+            get => manager;
+            set => manager = value;
         }
 
         #endregion GetSets
