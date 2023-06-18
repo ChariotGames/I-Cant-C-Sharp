@@ -2,8 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace _Scripts
+namespace _Scripts.Models
 {
+    /// <summary>
+    /// Represents a collective structure holding action references a game can use.
+    /// Makes button remapping kinda indepedant of a global manager.
+    /// Might be obsolete by a better gobal built-in button map management?
+    /// </summary>
     [Serializable]
     public struct KeyMap
     {
@@ -15,6 +20,10 @@ namespace _Scripts
         public InputActionReference[] All { get => new[] { One, Two, Three, Four }; }
     }
 
+    /// <summary>
+    /// Represents a collection of Transforms for game spawning positions.
+    /// Reduces code complexity and calculations accross games.
+    /// </summary>
     [Serializable]
     public struct SpawnPoints
     {

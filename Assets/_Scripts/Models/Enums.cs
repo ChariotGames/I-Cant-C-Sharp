@@ -1,9 +1,12 @@
 using System;
 
-namespace _Scripts
+namespace _Scripts.Models
 {
     #region Enums
 
+    /// <summary>
+    /// Represents a unique ID for a game asset to identify by.
+    /// </summary>
     public enum AssetID
     {
         NONE = 0,
@@ -109,42 +112,78 @@ namespace _Scripts
         G99_UnnamedGame = 31743,
     }
 
+    /// <summary>
+    /// Represents a color key to set and check.
+    /// </summary>
     public enum Colors
     {
         NONE, BLUE, RED, YELLOW, GREEN, PURPLE, ANY
     }
 
+    /// <summary>
+    /// Represents the complexity scale of a Minigame.
+    /// Solo is meant to be played alone in fullscreen.
+    /// Mix means, it can be mixed with other "mix" games.
+    /// Middle, is a rather indecisive type. Use carefully!
+    /// </summary>
     public enum Complexity
     {
         NONE, SOLO, MIDDLE, MIX
     }
 
+    /// <summary>
+    /// Represents a game's Difficulty setting.
+    /// Tutorial is effectively "no difficulty" - meant to learn the game.
+    /// </summary>
     public enum Difficulty
     {
         TUTORIAL, EASY, MEDIUM, HARD
     }
 
+    /// <summary>
+    /// Used for the Containers in Game Manager prefab.
+    /// Made obsolete with the <see cref="SpawnPoints">SpawnPoints struct</see>.
+    /// Left for legacy support.
+    /// </summary>
     public enum Direction
     {
         NONE = -1, UP, DOWN, LEFT, RIGHT, CENTER
     }
 
+    /// <summary>
+    /// Represents the selected game mode to play.
+    /// Tutorial effectively has no setting, just explaining the game.
+    /// Single, plays a single selected game.
+    /// Endless, plays random games in succession.
+    /// Mixed, could be a middle-ground of both. Experimental!
+    /// </summary>
     public enum Mode
     {
-        NONE, ENDLESS, SINGLE, MIXED, TUTORIAL
+        TUTORIAL, SINGLE, ENDLESS, MIXED
     }
 
+    /// <summary>
+    /// Represents a game modifier seleftion, that can change a games functionality.
+    /// </summary>
     public enum Modifier
     {
         NONE, NORMAL, REVERSE, DOUBLE, EXPONENTIAL, MIRROR, NEGATIVE, TIME, ROTATION, SPEED, ALTERNATE, BEFORE, ROULETTE, OK
     }
 
+    /// <summary>
+    /// Represents a game's possible orientation and associated position.
+    /// Might be changed / extended to utilize a struct instead.
+    /// </summary>
     public enum Orientation
     {
-        NONE, HORIZONTAL, VERTICAL, QUARTER, FULLSCREEN
+        ANY, HORIZONTAL, VERTICAL, FULLSCREEN
     }
 
-    public enum Type
+    /// <summary>
+    /// Represents a game element's type.
+    /// Used for ArrowTerror firstly and mainly.
+    /// </summary>
+    public enum ElementType
     {
         NONE, PLAYER, ENEMY, CHECKPOINT, GOAL
     }
@@ -153,12 +192,21 @@ namespace _Scripts
 
     #region Flags
 
+    /// <summary>
+    /// Represents genres a game may fall in.
+    /// So similar games aren't picked to play together.
+    /// Team decided, too similar games, might impair playability.
+    /// </summary>
     [Flags]
     public enum Genre
     {
         NONE = 0, MEMORY = 1, REACTION = 2, COGNITIVE = 4, RHYTHM = 8
     }
 
+    /// <summary>
+    /// Represents a choice of keys a game uses.
+    /// May be obsolete by <see cref="KeyMap">KeyMap struct</see>
+    /// </summary>
     [Flags]
     public enum Keys
     {

@@ -1,7 +1,7 @@
 using _Scripts.Games;
+using _Scripts.Models;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _Scripts.Controllers
 {
@@ -20,7 +20,8 @@ namespace _Scripts.Controllers
         #region Fields
 
         private Camera mainCamera;
-        private List<Minigame> loadedGames = new();
+        private List<Minigame> loadedGames = new(2);
+        private HashSet<Minigame> gamesSet = new(2);
 
         #endregion
 
@@ -28,17 +29,15 @@ namespace _Scripts.Controllers
 
         void Awake()
         {
-            if (settings.SelectedGame == null || settings.Mode == Mode.ENDLESS)
-            {
-                PickGame(new List<Minigame>(settings.Games));
-                PickGame(new List<Minigame>(settings.Games));
-            }
-            else
-            {
-                loadedGames.Add(LoadGame(settings.SelectedGame, SetParent(Orientation.FULLSCREEN)));
-            }
+            if (mainCamera == null) mainCamera = Camera.main;
 
-            if (mainCamera) mainCamera = Camera.main;
+            if (settings.Mode != Mode.ENDLESS) LoadGame(settings.SelectedGame, containers.Center);
+
+            if (settings.Mode == Mode.ENDLESS)
+            {
+                PickGame(new List<Minigame>(settings.Games));
+                PickGame(new List<Minigame>(settings.Games));
+            }
         }
 
         #endregion
@@ -180,7 +179,7 @@ namespace _Scripts.Controllers
                 if (containers.Down.childCount == 0) return containers.Down;
             }
 
-            if (orientation == Orientation.VERTICAL || orientation == Orientation.QUARTER)
+            if (orientation == Orientation.VERTICAL || orientation == Orientation.ANY)
             {
                 if (containers.Left.childCount == 0) return containers.Left;
                 if (containers.Right.childCount == 0) return containers.Right;

@@ -1,8 +1,9 @@
+using _Scripts._Input;
+using _Scripts.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;

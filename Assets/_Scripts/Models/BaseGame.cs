@@ -1,4 +1,5 @@
 using _Scripts.Controllers;
+using _Scripts.Models;
 using UnityEngine;
 
 namespace _Scripts.Games

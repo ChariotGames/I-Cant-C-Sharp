@@ -1,3 +1,4 @@
+using _Scripts.Models;
 using UnityEngine;
 
 namespace _Scripts.Games
@@ -6,7 +7,9 @@ namespace _Scripts.Games
     {
         [SerializeField] private ArrowTerror game;
         [SerializeField] private PolygonCollider2D player;
-        public Type type;
+        [SerializeField] private ElementType type;
+
+        public ElementType Type { get => type; set => type = value; }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

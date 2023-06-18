@@ -1,3 +1,4 @@
+using _Scripts.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,7 @@ namespace _Scripts.Controllers
         /// </summary>
         public void SetGame()
         {
+            settings.Mode = Mode.SINGLE;
             settings.SelectedGame = game;
         }
 

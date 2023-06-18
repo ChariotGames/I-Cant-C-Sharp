@@ -1,6 +1,5 @@
+using _Scripts.Models;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts.Games
@@ -46,18 +45,18 @@ namespace _Scripts.Games
 
         public void PlayerTouched(GameObject obj)
         {
-            Type type = obj.GetComponent<ArrowObject>().type;
+            ElementType type = obj.GetComponent<ArrowObject>().Type;
 
             switch (type)
             {
-                case Type.CHECKPOINT:
+                case ElementType.CHECKPOINT:
                     Destroy(obj);
                     checkpointsCollected++;
                     break;
-                case Type.ENEMY:
+                case ElementType.ENEMY:
                     lives--;
                     break;
-                case Type.GOAL:
+                case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
                         base.Win();

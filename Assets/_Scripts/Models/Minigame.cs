@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Scripts
+namespace _Scripts.Models
 {
     [CreateAssetMenu(fileName = "Minigame", menuName = "ScriptableObjects/Minigame", order = 1)]
     public class Minigame : ScriptableObject
@@ -8,7 +8,7 @@ namespace _Scripts
         #region Serialized Fields
 
         [SerializeField] private AssetID assetID;
-        [TextArea(3, 10)] [SerializeField] private string description;
+        [SerializeField] [TextArea(3, 10)] private string description;
         [SerializeField] private Complexity complexity;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;

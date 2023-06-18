@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using _Scripts.Models;
 
 namespace _Scripts.Controllers
 {
@@ -55,8 +56,6 @@ namespace _Scripts.Controllers
                 EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
                 return;
             }
-                
-                
 
             foreach (Minigame game in settings.Games)
             {
