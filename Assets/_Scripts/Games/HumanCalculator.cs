@@ -25,6 +25,16 @@ namespace _Scripts.Games
 
         private void Start()
         {
+            GenerateNewEquation();
+        }
+
+        
+        #endregion Built-Ins / MonoBehaviours
+
+        #region Game Mechanics / Methods
+
+        public void GenerateNewEquation()
+        {
             switch (Difficulty)
             {
                 case Difficulty.EASY:
@@ -37,13 +47,8 @@ namespace _Scripts.Games
                     CreateRandomEquation(2, 6, 1, 1000, true);
                     break;
             }
+            
         }
-        
-
-        #endregion Built-Ins / MonoBehaviours
-
-        #region Game Mechanics / Methods
-
         private void CreateRandomEquation(int minEquationLength, int maxEquationLength, int minNumber, int maxNumber, bool allowMultiplication)
         {
             var equationLength = Random.Range(minEquationLength, maxEquationLength);
@@ -132,6 +137,18 @@ namespace _Scripts.Games
             {
                 leftAnswer.text = (missingNumber - randomNumOffset).ToString();
                 rightAnswer.text = missingNumber.ToString();
+            }
+        }
+
+        public void CheckAnswer(string selectedAnswer)
+        {
+            if (selectedAnswer == missingNumber.ToString())
+            {
+                Debug.Log("Correct");
+            }
+            else
+            {
+                Debug.Log("Wrong");
             }
         }
 
