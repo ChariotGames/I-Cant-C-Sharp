@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -16,8 +14,9 @@ namespace _Scripts.Games
         [SerializeField] private TextMeshPro leftAnswer;
         [SerializeField] private TextMeshPro rightAnswer;
 
-        private int missingNumber;
-        private int equationResult;
+        private int _missingNumber;
+        private int _equationResult;
+        private int _maxFails = 3;
 
         #endregion Fields
 
@@ -38,13 +37,13 @@ namespace _Scripts.Games
             switch (Difficulty)
             {
                 case Difficulty.EASY:
-                    CreateRandomEquation(2, 6, 1, 1000, false);
+                    CreateRandomEquation(3, 6, 1, 1000, false);
                     break;
                 case Difficulty.MEDIUM:
-                    CreateRandomEquation(4, 8, 1, 1000, false);
+                    CreateRandomEquation(5, 8, 1, 1000, false);
                     break;
                 case Difficulty.HARD:
-                    CreateRandomEquation(2, 6, 1, 1000, true);
+                    CreateRandomEquation(3, 6, 1, 1000, true);
                     break;
             }
             
@@ -89,22 +88,22 @@ namespace _Scripts.Games
                 equation.Append(" ").Append(operators[i]).Append(" ").Append(numbers[i + 1]);
             }
 
-            missingNumber = numbers[Random.Range(0, equationLength)];
+            _missingNumber = numbers[Random.Range(0, equationLength)];
             
-            Debug.Log(missingNumber);
+            Debug.Log(_missingNumber);
 
-            equationResult = CalculateEquationResult(numbers, operators);
+            _equationResult = CalculateEquationResult(numbers, operators);
 
-            equationText.text = equation.ToString().Replace(missingNumber.ToString(), "?") + " = " + equationResult;
+            equationText.text = equation.ToString().Replace(_missingNumber.ToString(), "?") + " = " + _equationResult;
             
             DisplayAnswers();
         }
 
-        private int CalculateEquationResult(int[] numbers, char[] operators)
+        private int CalculateEquationResult(IReadOnlyList<int> numbers, IReadOnlyList<char> operators)
         {
-            int result = numbers[0];
+            var result = numbers[0];
 
-            for (var i = 0; i < operators.Length; i++)
+            for (var i = 0; i < operators.Count; i++)
             {
                 switch (operators[i])
                 {
@@ -126,29 +125,35 @@ namespace _Scripts.Games
         private void DisplayAnswers()
         {
             var randomCorrectPos = Random.Range(0, 2);
-            var randomNumOffset = Random.Range(1, 5); 
+            var randomNumOffset = Random.Range(1, 21); 
 
             if (randomCorrectPos == 0)
             {
-                leftAnswer.text = missingNumber.ToString();
-                rightAnswer.text = (missingNumber - randomNumOffset).ToString();
+                leftAnswer.text = _missingNumber.ToString();
+                rightAnswer.text = (_missingNumber - randomNumOffset).ToString();
             }
             else
             {
-                leftAnswer.text = (missingNumber - randomNumOffset).ToString();
-                rightAnswer.text = missingNumber.ToString();
+                leftAnswer.text = (_missingNumber - randomNumOffset).ToString();
+                rightAnswer.text = _missingNumber.ToString();
             }
         }
 
         public void CheckAnswer(string selectedAnswer)
         {
-            if (selectedAnswer == missingNumber.ToString())
+            if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
             }
             else
             {
                 Debug.Log("Wrong");
+                _maxFails -= 1;
+                if (_maxFails == 0)
+                {
+                    Debug.Log("GAME LOST");
+                    base.Lose();
+                }
             }
         }
 

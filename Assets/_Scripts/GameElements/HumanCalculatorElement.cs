@@ -14,7 +14,7 @@ namespace _Scripts.GameElements
 
             #endregion Fields
 
-            void Awake()
+            private void Awake()
             {
                 _game = (HumanCalculator)parent;
                 _textMeshPro = GetComponent<TextMeshPro>();
