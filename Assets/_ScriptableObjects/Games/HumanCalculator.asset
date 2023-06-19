@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HumanCalculator
   m_EditorClassIdentifier: 
   assetID: 0
-  description: 
+  description: Find the missing Number
   complexity: 0
-  difficulty: 0
-  genre: 0
-  keys: 0
-  orientation: 0
-  prefab: {fileID: 0}
+  difficulty: 1
+  genre: 4
+  keys: 1152
+  orientation: 3
+  prefab: {fileID: 2918756866687947654, guid: 2384a027b088f15418e1ad147b84cdfa, type: 3}
   preview: {fileID: 0}
