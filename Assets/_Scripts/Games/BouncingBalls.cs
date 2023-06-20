@@ -23,6 +23,7 @@ namespace _Scripts.Games
         private bool _guessingStage;
         private int _currentGuessNumber;
         private int _maxFails = 3;
+        private int _pointsToWin = 3;
         private float _elapsedTime;
         private float _maxRoundTime;
 
@@ -55,6 +56,8 @@ namespace _Scripts.Games
             {
                 ActivateGuessingOverlay();
             }
+
+            
         }
 
         
@@ -90,6 +93,12 @@ namespace _Scripts.Games
             if (_bounceCounter == _currentGuessNumber)
             {
                 Debug.Log("Correct Answer");
+                _pointsToWin++;
+                if (_pointsToWin == 3)
+                {
+                    Debug.Log("GAME WON");
+                    Win();
+                }
             }
             else
             {
@@ -97,8 +106,9 @@ namespace _Scripts.Games
                 _maxFails--;
                 if (_maxFails == 0)
                 {
+                    Debug.Log("GAME LOST");
                     Lose();
-                    Debug.Log("You lost all your lives in this Game");
+                    
                 }
             }
 

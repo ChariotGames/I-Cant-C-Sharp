@@ -17,6 +17,7 @@ namespace _Scripts.Games
         private int _missingNumber;
         private int _equationResult;
         private int _maxFails = 3;
+        private int _pointsToWin;
 
         #endregion Fields
 
@@ -144,11 +145,17 @@ namespace _Scripts.Games
             if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
+                _pointsToWin++;
+                if (_pointsToWin == 3)
+                {
+                    Debug.Log("GAME WON");
+                    Win();
+                }
             }
             else
             {
                 Debug.Log("Wrong");
-                _maxFails -= 1;
+                _maxFails--;
                 if (_maxFails == 0)
                 {
                     Debug.Log("GAME LOST");
