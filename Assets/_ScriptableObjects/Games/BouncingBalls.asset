@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
-  m_Name: HumanCalculator
+  m_Name: BouncingBalls
   m_EditorClassIdentifier: 
   assetID: 0
-  description: Find the missing Number
+  description: Count how often the Balls bounce of the ground
   complexity: 3
   difficulty: 1
-  genre: 4
-  keys: 1152
+  genre: 1
+  keys: 1216
   orientation: 3
-  prefab: {fileID: 2918756866687947654, guid: 2384a027b088f15418e1ad147b84cdfa, type: 3}
+  prefab: {fileID: 1181034897602295524, guid: 25234062938444c49b6da4ab8c0f63cc, type: 3}
   preview: {fileID: 0}
