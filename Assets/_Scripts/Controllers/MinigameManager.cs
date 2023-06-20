@@ -2,6 +2,7 @@ using _Scripts.Games;
 using _Scripts.Models;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Scripts.Controllers
 {
@@ -19,9 +20,10 @@ namespace _Scripts.Controllers
 
         #region Fields
 
-        private Camera mainCamera;
-        private List<Minigame> loadedGames = new(2);
-        private HashSet<Minigame> gamesSet = new(2);
+        private Camera _mainCamera;
+        private List<Minigame> _mixGames, _soloGames, _loaded;
+        private Queue<Minigame> _previous;
+        private const int MAX_LOADED = 2, MAX_QUE = 5;
 
         #endregion
 
@@ -29,14 +31,21 @@ namespace _Scripts.Controllers
 
         void Awake()
         {
-            if (mainCamera == null) mainCamera = Camera.main;
+            if (_mainCamera == null) _mainCamera = Camera.main;
 
-            if (settings.Mode != Mode.ENDLESS) LoadGame(settings.SelectedGame, containers.Center);
+            _mixGames = new List<Minigame>(settings.Games);
+            _soloGames = new List<Minigame>(settings.SoloGames);
+            _loaded = new(MAX_LOADED);
+            _previous = new(MAX_QUE);
+        }
 
-            if (settings.Mode == Mode.ENDLESS)
+        void Start()
+        {
+            if (LoadGame(settings.SelectedGame, containers.Center)) return;
+
+            while (_loaded.Count != MAX_LOADED)
             {
-                PickGame(new List<Minigame>(settings.Games));
-                PickGame(new List<Minigame>(settings.Games));
+                PickGame(new List<Minigame>(_mixGames));
             }
         }
 
@@ -50,62 +59,27 @@ namespace _Scripts.Controllers
         /// <param name="gameList">A game list to pick from.</param>
         private void PickGame(List<Minigame> gameList)
         {
-            // Remove games before loading a new one
-            gameList.RemoveAll(item => loadedGames.Contains(item));
-
             Minigame game = gameList[Random.Range(0, gameList.Count)];
 
-            if (loadedGames.Count >= 2 || containers.Center.childCount == 1)
+            Transform load = null;
+            foreach (Transform container in containers.All)
             {
-                RemoveGame(containers.Center.GetChild(0).gameObject);
-            }
+                if (container.childCount == 0) continue;
 
-            if (game.Orientation == Orientation.FULLSCREEN || game.Complexity == Complexity.SOLO)
-            {
-                loadedGames.Add(LoadGame(game, SetParent(Orientation.FULLSCREEN)));
-                return;
+                load = container;
+                break;
             }
 
             // Find the fitting game
-            while (loadedGames.Count != 0 && !CheckFit(game))
+            while (!CheckFit(game, load))
             {
-                if (gameList.Count == 0) break;
+                if (gameList.Count == 0) return;
 
                 gameList.Remove(game);
                 game = gameList[Random.Range(0, gameList.Count)];
             }
 
-            loadedGames.Add(LoadGame(game, SetParent(game.Orientation)));
-        }
-
-        /// <summary>
-        /// Goes over each property of a game asset and checks if
-        /// it would fit with the currently loaded games on screen.
-        /// </summary>
-        /// <param name="game">The game to check.</param>
-        /// <returns>True if no overlaps are found.</returns>
-        private bool CheckFit(Minigame game)
-        {
-            if (game.Prefab == null) return false;
-
-            if (!CheckProperty((int)game.Orientation, (int)loadedGames[0].Orientation)) return false;
-
-            if (CheckProperty((int)game.KeysFirst, (int)loadedGames[0].KeysFirst)) return false;
-
-            if (!CheckProperty((int)game.Complexity, (int)loadedGames[0].Complexity)) return false;
-
-            return true;
-        }
-
-        /// <summary>
-        /// Checks enum property values by bitwise XOR comparison.
-        /// </summary>
-        /// <param name="one">Value of game one.</param>
-        /// <param name="two">Value of game two.</param>
-        /// <returns>True if a match was found.</returns>
-        private bool CheckProperty(int one, int two)
-        {
-            return (one ^ two) == 0;
+            LoadGame(game, SetParent(game.Orientation));
         }
 
         /// <summary>
@@ -113,15 +87,23 @@ namespace _Scripts.Controllers
         /// </summary>
         /// <param name="game">The game asset to load from.</param>
         /// <param name="parent">The parent to load it into.</param>
-        /// <returns>The successfully loaded game.</returns>
-        private Minigame LoadGame(Minigame game, Transform parent)
+        /// <returns>The successfully loaded game object.</returns>
+        private bool LoadGame(Minigame game, Transform parent)
         {
+            if (game == null) return false;
+
+            _loaded.Add(game);
+
+            _mixGames.Remove(game);
+            if (_previous.Count == MAX_QUE) _mixGames.Add(_previous.Dequeue());
+            _previous.Enqueue(game);
+
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame prefab = obj.GetComponent<BaseGame>();
             prefab.ID = game.AssetID;
             prefab.Difficulty = game.Difficulty;
-            //prefab.KeyMap = game.KeysFirst;
-            return game;
+            //prefab.KeyMap = game.mainKeys;
+            return true;
         }
 
         /// <summary>
@@ -134,7 +116,7 @@ namespace _Scripts.Controllers
             {
                 if (miniGame.Prefab == game)
                 {
-                    loadedGames.Remove(miniGame);
+                    //loaded.Remove(miniGame);
                     break;
                 }
             }
@@ -146,11 +128,11 @@ namespace _Scripts.Controllers
         /// </summary>
         private void RemoveAllGames()
         {
-            foreach (Minigame game in loadedGames)
-            {
-                Destroy(FindObjectOfType<GameObject>(game.Prefab));
-            }
-            loadedGames.Clear();
+            //foreach (Minigame game in loaded)
+            //{
+            //    Destroy(FindObjectOfType<GameObject>(game.Prefab));
+            //}
+            //loaded.Clear();
         }
 
         /// <summary>
@@ -168,10 +150,7 @@ namespace _Scripts.Controllers
         /// <returns>A Transform to contain the game.</returns>
         private Transform SetParent(Orientation orientation)
         {
-            if (orientation == Orientation.FULLSCREEN && containers.Center.childCount == 0)
-            {
-                return containers.Center;
-            }
+            if (orientation == Orientation.FULLSCREEN) return containers.Center;
 
             if (orientation == Orientation.HORIZONTAL)
             {
@@ -188,28 +167,131 @@ namespace _Scripts.Controllers
             return null;
         }
 
-        #endregion
+        /// <summary>
+        /// Sets the game's main keyMap depending on the set orientation.
+        /// </summary>
+        /// <param name="orientation">The game's orientation setting.</param>
+        /// <returns>Main or auxilary key map.</returns>
+        private KeyMap SetKeyMap(Minigame game)
+        {
+            //if (orientation == Orientation.FULLSCREEN) return containers.Center;
+
+            //if (orientation == Orientation.HORIZONTAL)
+            //{
+            //    if (containers.Up.childCount == 0) return containers.Up;
+            //    if (containers.Down.childCount == 0) return containers.Down;
+            //}
+
+            //if (orientation == Orientation.VERTICAL || orientation == Orientation.ANY)
+            //{
+            //    if (containers.Left.childCount == 0) return containers.Left;
+            //    if (containers.Right.childCount == 0) return containers.Right;
+            //}
+
+            return new KeyMap();
+        }
+
+        #endregion Instance Management
+
+        #region Checks
+
+        /// <summary>
+        /// Goes over each property of a game asset and checks if
+        /// it would fit with the currently loaded games on screen.
+        /// </summary>
+        /// <param name="game">The game to check.</param>
+        /// <param name="load">The occupied position to compare against.</param>
+        /// <returns>True if no overlaps are found.</returns>
+        private bool CheckFit(Minigame game, Transform load)
+        {
+            if (game.Prefab == null) return false;
+
+            if (load == null) return true;
+
+            if (!CheckOrientation(game.Orientation, load)) return false;
+            //if (!CheckGenre(game, load)) return false;
+            if (!CheckKeys(game, load.GetChild(0).gameObject)) return false;
+
+            return true;
+        }
+
+        private bool CheckOrientation(Orientation orientation, Transform load)
+        {
+            if (orientation == Orientation.ANY) return true;
+
+            if (orientation == Orientation.HORIZONTAL &&
+               (load == containers.Up || load == containers.Down)) return true;
+
+            if (orientation == Orientation.VERTICAL &&
+               (load == containers.Left || load == containers.Right)) return true;
+
+            return false;
+        }
+
+        private bool CheckOrientation(Minigame game, Minigame load)
+        {
+            if (game.Orientation != Orientation.ANY ||
+                load.Orientation != Orientation.ANY) return false;
+
+            if (((int)game.Orientation ^ (int)load.Orientation) != 0) return false;
+
+            return true;
+        }
+
+        private bool CheckGenre(Minigame game, Minigame load)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private bool CheckKeys(Minigame game, GameObject load)
+        {
+            InputActionReference[] keys = load.GetComponent<BaseGame>().Keys.All;
+
+            foreach(InputActionReference key in keys)
+            {
+                if (key == null) continue;
+
+                foreach (InputActionReference button in game.KeysMain.All)
+                {
+                    if (button == null) continue;
+
+                    if (key == button) return false;
+                }
+
+                foreach (InputActionReference button in game.KeysAux.All)
+                {
+                    if (button == null) continue;
+
+                    if (key == button) return false;
+                }
+            }
+
+            return true;
+        }
+
+        #endregion Checks
 
         #region Game Mechanics
 
-        public void WinCondition(AssetID id)
+        public void WinCondition(AssetID id, GameObject game)
         {
-            Debug.Log("Win from " + id);
-            for (int i = 0; i < containers.All.Length; i++)
-            {
-                if (containers.All[i].childCount == 0) continue;
+            Debug.Log($"Win from {id}");
+            //for (int i = 0; i < containers.All.Length; i++)
+            //{
+            //    if (containers.All[i].childCount == 0) continue;
 
-                GameObject obj = containers.All[i].GetChild(0).gameObject;
+            //    GameObject obj = containers.All[i].GetChild(0).gameObject;
 
-                if (obj.GetComponent<BaseGame>().ID == id) RemoveGame(obj);
-            }
+            //    if (obj.GetComponent<BaseGame>().ID == id) RemoveGame(obj);
+            //}
+            RemoveGame(game);
         }
 
-        public void LoseCondition(AssetID id)
+        public void LoseCondition(AssetID id, GameObject game)
         {
-            Debug.Log("Lose from " + id);
+            Debug.Log($"Lose from {id}");
             settings.Lives--;
-            Debug.Log(settings.Lives);
+            Debug.Log($"Lives left: {settings.Lives}");
             if (settings.Lives <= 0)
             {
                 //PickGame(new List<Minigame>(games));

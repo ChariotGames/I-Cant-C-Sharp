@@ -126,10 +126,10 @@ namespace _Scripts.Models
     /// Mix means, it can be mixed with other "mix" games.
     /// Middle, is a rather indecisive type. Use carefully!
     /// </summary>
-    public enum Complexity
-    {
-        NONE, SOLO, MIDDLE, MIX
-    }
+    //public enum Complexity
+    //{
+    //    NONE, SOLO, MIDDLE, MIX
+    //}
 
     /// <summary>
     /// Represents a game's Difficulty setting.
@@ -138,28 +138,6 @@ namespace _Scripts.Models
     public enum Difficulty
     {
         TUTORIAL, EASY, MEDIUM, HARD
-    }
-
-    /// <summary>
-    /// Used for the Containers in Game Manager prefab.
-    /// Made obsolete with the <see cref="SpawnPoints">SpawnPoints struct</see>.
-    /// Left for legacy support.
-    /// </summary>
-    public enum Direction
-    {
-        NONE = -1, UP, DOWN, LEFT, RIGHT, CENTER
-    }
-
-    /// <summary>
-    /// Represents the selected game mode to play.
-    /// Tutorial effectively has no setting, just explaining the game.
-    /// Single, plays a single selected game.
-    /// Endless, plays random games in succession.
-    /// Mixed, could be a middle-ground of both. Experimental!
-    /// </summary>
-    public enum Mode
-    {
-        TUTORIAL, SINGLE, ENDLESS, MIXED
     }
 
     /// <summary>

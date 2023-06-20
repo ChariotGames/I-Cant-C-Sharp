@@ -20,12 +20,12 @@ MonoBehaviour:
   keysFirst: 60
   keysSecond: 1472
   keysMain:
-    one: {fileID: 0}
-    two: {fileID: 0}
-    three: {fileID: 0}
-    four: {fileID: 0}
+    one: {fileID: -1296664031527996890, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    two: {fileID: 1622813393052464144, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    three: {fileID: 6621765326027171438, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    four: {fileID: -6239444798889636999, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   keysAux:
-    one: {fileID: 0}
+    one: {fileID: 8619548347703401060, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}

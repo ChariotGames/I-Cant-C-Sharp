@@ -13,8 +13,8 @@ namespace _Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] protected KeyMap keyMap;
         [SerializeField] protected MinigameManager manager;
+        [SerializeField] protected KeyMap keys;
         [SerializeField] protected Difficulty currentDifficulty = Difficulty.EASY;
 
         #endregion Serialized Fields
@@ -34,7 +34,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Win()
         {
-            Manager.WinCondition(id);
+            Manager.WinCondition(id, gameObject);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Lose()
         {
-            Manager.LoseCondition(id);
+            Manager.LoseCondition(id, gameObject);
         }
 
         /// <summary>
@@ -67,16 +67,13 @@ namespace _Scripts.Games
 
         #region GetSets
 
+        /// <summary>
+        /// The game's unique ID.
+        /// </summary>
         public AssetID ID
         {
             get => id;
             set => id = value;
-        }
-
-        public KeyMap KeyMap
-        {
-            get => keyMap;
-            set => keyMap = value;
         }
 
         public Difficulty Difficulty
@@ -85,6 +82,18 @@ namespace _Scripts.Games
             set => currentDifficulty = value;
         }
 
+        /// <summary>
+        /// The game's set key map.
+        /// </summary>
+        public KeyMap Keys
+        {
+            get => keys;
+            set => keys = value;
+        }
+
+        /// <summary>
+        /// The Minigame Manager handling game controlls.
+        /// </summary>
         public MinigameManager Manager
         {
             get => manager;

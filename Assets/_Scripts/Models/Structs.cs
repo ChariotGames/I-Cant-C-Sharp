@@ -17,7 +17,7 @@ namespace _Scripts.Models
         public InputActionReference Two { get => two; set => two = value; }
         public InputActionReference Three { get => three; set => three = value; }
         public InputActionReference Four { get => four; set => four = value; }
-        public InputActionReference[] All { get => new[] { One, Two, Three, Four }; }
+        public InputActionReference[] All { get => new[] { one, two, three, four }; }
     }
 
     /// <summary>

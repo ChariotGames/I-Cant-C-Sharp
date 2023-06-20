@@ -23,15 +23,15 @@ MonoBehaviour:
   keysFirst: 8192
   keysSecond: 16384
   keysMain:
-    one: {fileID: 0}
+    one: {fileID: -16139843582656975, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
   keysAux:
-    one: {fileID: 0}
+    one: {fileID: -6316003147358869082, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
-  orientation: 2
+  orientation: 0
   prefab: {fileID: 6392271741382647194, guid: 62e95bc5bd41cdc45ab5d5c25ab44dfe, type: 3}
   preview: {fileID: 0}

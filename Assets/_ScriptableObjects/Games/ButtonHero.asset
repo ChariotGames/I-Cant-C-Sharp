@@ -20,15 +20,15 @@ MonoBehaviour:
   keysFirst: 1472
   keysSecond: 0
   keysMain:
-    one: {fileID: 0}
-    two: {fileID: 0}
-    three: {fileID: 0}
-    four: {fileID: 0}
+    one: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    two: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    three: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    four: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   keysAux:
-    one: {fileID: 0}
-    two: {fileID: 0}
-    three: {fileID: 0}
-    four: {fileID: 0}
-  orientation: 3
+    one: {fileID: -1296664031527996890, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    two: {fileID: 1622813393052464144, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    three: {fileID: 6621765326027171438, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    four: {fileID: -6239444798889636999, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+  orientation: 0
   prefab: {fileID: 4665578903984628120, guid: fd3022b129af2d745a5e33d7587757c8, type: 3}
   preview: {fileID: 0}
