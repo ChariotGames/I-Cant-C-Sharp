@@ -11,17 +11,17 @@ namespace _Scripts.Games
         #region Serialized Fields
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject buttonContainer;
+
+
+        #endregion Serialized Fields
+
+        #region Fields
         private float leftBound;
         private float rightBound;
         private bool buttonPressed = false;
         private bool lost = false;
         private List<GameObject> buttons = new List<GameObject>();
         private float instantiationDelay = 1f;
-
-        #endregion Serialized Fields
-
-        #region Fields
-
 
         #endregion Fields
 
@@ -46,8 +46,8 @@ namespace _Scripts.Games
 
         void Start()
         {
-            instantiateButton();
-            //StartCoroutine(InstantiateButtonsWithDelay());
+            //instantiateButton();
+            StartCoroutine(InstantiateButtonsWithDelay());
 
 
         }
@@ -94,35 +94,55 @@ namespace _Scripts.Games
 
         private void loseCondition()
         {
-            if (buttons.Count > 0)
+           
+            for (int i = 0; i < buttons.Count; i++)
             {
-                for (int i = 0; i < buttons.Count; i++)
+                float buttonPosX = buttonContainer.transform.GetChild(i).gameObject.transform.position.x;
+
+                if (buttonPosX < leftBound)
                 {
-                    float buttonPosX = buttonContainer.transform.GetChild(i).gameObject.transform.position.x;
+                    Debug.Log("Lose");
+                    lost = true;
+                    //buttons.RemoveAt(i);
+                    DestroyAll();
 
-                    if (buttonPosX < leftBound)
-                    {
-                        Debug.Log("Lose");
-                        lost = true;
-                        buttons.RemoveAt(i);
-
-                    }
-                    else if (buttonPosX > rightBound && buttonPressed)
-                    {
-                        Debug.Log("Lose");
-                        lost = true;
-                        Destroy(buttons[i].gameObject);
-                        buttons.RemoveAt(i);
-
-                    }
-                    else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
-                    {
-                        Debug.Log("Win");
-                        lost = false;
-                        Destroy(buttons[i].gameObject);
-                        buttons.RemoveAt(i);
-                    }
+                    buttonPressed = false;
+                    PauseGame();
                 }
+                else if (buttonPosX > rightBound && buttonPressed)
+                {
+                    Debug.Log("Lose");
+                    lost = true;
+                    //Destroy(buttons[i].gameObject);
+                    //buttons.RemoveAt(i);
+                    DestroyAll();
+                    buttonPressed = false;
+                    PauseGame();
+
+                }
+                else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
+                {
+                    Debug.Log("Win");
+                    lost = false;
+
+                    Destroy(buttons[i].gameObject);
+                    buttons.RemoveAt(i);
+                    buttonPressed = false;
+                }
+            }
+         }
+
+        void PauseGame()
+        {
+            Time.timeScale = 0;
+        }
+
+        private void DestroyAll()
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                Destroy(buttons[i].gameObject);
+                buttons.RemoveAt(i);
             }
         }
 
