@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Scripts.Games
 {
-    public class ArrowPlayer : Game
+    public class ArrowPlayer : BaseGame
     {
         #region Serialized Fields
         [SerializeField] ArrowTerror MainGame;
@@ -32,7 +32,7 @@ namespace _Scripts.Games
         void Update()
         {
             
-            gameObject.transform.Translate(InputHandler.LeftStickDelta * Time.deltaTime * speed);
+            gameObject.transform.Translate(InputHandler.StickLeft * Time.deltaTime * speed);
             //SendMessage("PlayerMoved",transform.position);
             //RotatePlayer();
             //transform.rotation = Quaternion.RotateTowards(transform.position, InputHandler.LeftStickDelta, 1, 1);
@@ -53,7 +53,7 @@ namespace _Scripts.Games
 
         public void RotatePlayer()
         {
-            var inputDelta = InputHandler.LeftStickDelta;
+            var inputDelta = InputHandler.StickLeft;
             // calculate the angle to rotate the barrel
             var angle = Mathf.Atan2(inputDelta.y, inputDelta.x);
 

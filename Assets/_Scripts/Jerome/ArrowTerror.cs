@@ -97,7 +97,25 @@ namespace _Scripts.Games
      
                 foreach (GameObject element in allObjects)
                 {
-                    while (Vector3.Distance(element.transform.position, newPosition) < 2)
+                    if (element.GetComponent<ArrowPlayer>() != null) continue;
+                   
+                    float minDistance = 0;
+                    switch (element.GetComponent<ArrowObject>().type)
+                    {
+                        case Type.CHECKPOINT:
+                            minDistance = 6;
+                            break;
+
+                        case Type.ENEMY:
+                            minDistance = 8;
+                            break;
+
+                        case Type.GOAL:
+                            minDistance = 6;
+                            break;
+                    }
+                    Debug.Log(Vector3.Distance(element.transform.position, newPosition));
+                    while (Vector3.Distance(element.transform.position, newPosition) < minDistance)
                     {
                         newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
                     }
