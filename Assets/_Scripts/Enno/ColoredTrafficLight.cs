@@ -40,8 +40,8 @@ namespace _Scripts.Games
         
         [SerializeField] private GameObject trafficLightPrefab, owner_ref,selector_ref;
         [SerializeField] private List<GameObject> trafficLights;
-        //[SerializeField] private Action inputL;
-        //[SerializeField] private Action inputR;
+        [SerializeField] private GameObject simonNot_ref;
+        [SerializeField] private GameObject simonOk_ref;
         
 
         #endregion Serialized Fields
@@ -51,6 +51,7 @@ namespace _Scripts.Games
         private List<trafficLight> correctColors;
         private List<trafficLight> secondWaveColors;
         private int correctLightAmount = 1;
+        private int correctLightsInSecondWave = 1;
         private int totalLightAmount = 3;
         private int selectorIndex;
         
@@ -78,31 +79,40 @@ namespace _Scripts.Games
             SpawnTrafficLights(totalLightAmount);
              
             //set correct color combinations
-            correctColors = GenLightColors(totalLightAmount, null);
-            SetLightColors(trafficLights, correctColors);
-            
-            
-            Invoke(nameof(SecondWave), 8);
+            correctColors = GenLightColors(correctLightAmount, null);
+            SetLightColors(trafficLights, correctColors, true);
+            Invoke(nameof(SecondStart), 8);
             
         }
 
-        private void SecondWave()
+        private void SecondStart()
         {
             //Mix correct colors with random generated ones and set them.
             secondWaveColors = MixCorrectColorsIntoWrongOnes(
-                GenLightColors(totalLightAmount, correctColors), correctColors, correctLightAmount);
-            SetLightColors(trafficLights, secondWaveColors);
-            
-            Invoke(nameof(CheckSelector), 7);
+                GenLightColors(totalLightAmount, correctColors), correctColors, correctLightsInSecondWave);
+            SetLightColors(trafficLights, secondWaveColors, false);
+            selector_ref.SetActive(true);
+            EnableInputs();
+            Invoke(nameof(ThirdStart), 7);
         }
-        
-        private void OnEnable()
+
+        private void ThirdStart()
         {
-            //spawn trafficlights
-            
-            //selector_ref.transform.SetParent(trafficLights[totalLightAmount/2].transform);
+            DisableInputs();
+            ShowResults();
+            Invoke(nameof(CheckSelector), 2);
+        }
+
+        private void EnableInputs()
+        {
             InputHandler.ArrowLeft += ButtonPressL;
             InputHandler.ArrowRight += ButtonPressR;
+        }
+
+        private void DisableInputs()
+        {
+            InputHandler.ArrowLeft -= ButtonPressL;
+            InputHandler.ArrowRight -= ButtonPressR;
         }
         
         private void OnDisable()
@@ -131,10 +141,11 @@ namespace _Scripts.Games
                     break;
                 case Difficulty.MEDIUM:
                     totalLightAmount = 5;
-                    correctLightAmount = 2;
+                    correctLightAmount = 3;
                     break;
                 case Difficulty.HARD:
                     totalLightAmount = 7;
+                    correctLightsInSecondWave = 2;
                     correctLightAmount = 3;
                     break;
             }
@@ -150,8 +161,60 @@ namespace _Scripts.Games
                 trafficLights.Add(trafficLight);
             }
         }
+
+        // selectorCheck
+        private void CheckSelector()
+        {
+            if (correctColors.Contains(secondWaveColors[selectorIndex]))
+            {
+                base.Win();
+            }
+            else
+            {
+                base.Lose();
+            }
+        }
+
+        private void ShowResults()
+        {
+            for (int i = 0; i < trafficLights.Count; i++)
+            {
+                if (correctColors.Contains(secondWaveColors[i]))
+                {
+                    Instantiate(simonOk_ref, trafficLights[i].transform);
+                    trafficLights[i].transform.GetChild(3).gameObject.SetActive(true);
+                }
+                else
+                {
+                    Instantiate(simonNot_ref, trafficLights[i].transform);
+                    trafficLights[i].transform.GetChild(3).gameObject.SetActive(true);
+                }
+            }
+        }
+
+        //Inputs
+        public void ButtonPressL()
+        {
+            if (selectorIndex != 0)
+            {
+                selector_ref.transform.Translate(1.5f,0,0);
+                --selectorIndex;
+            }
+        }
         
-        //colors
+        public void ButtonPressR()
+        {
+            if (selectorIndex != trafficLights.Count-1)
+            {
+                selector_ref.transform.Translate(-1.5f,0,0);
+                ++selectorIndex;
+            }
+        }
+
+        #endregion Game Mechanics / Methods
+
+        #region Overarching Methods / Helpers
+        
         private List<trafficLight> MixCorrectColorsIntoWrongOnes( List<trafficLight> colorList, List<trafficLight> colorsToMixInto, int amountToMixInto )
         {
             
@@ -200,59 +263,28 @@ namespace _Scripts.Games
             return genColors;
         }
 
-        private void SetLightColors(List<GameObject> lights, List<trafficLight> colors)
+        private void SetLightColors(List<GameObject> lights, List<trafficLight> colors, bool firstWave)
         {
-            for (int i = 0; i < lights.Count; i++)
+            int start = 0;
+            int end = lights.Count;
+            int colorI = 0;
+            if (firstWave)
             {
-                
-                lights[i].transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = GetColorFromColors(colors[i].colorTop);
-                lights[i].transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = GetColorFromColors(colors[i].colorBottom);
+                start++;
+                end--;
+                if (Difficulty == Difficulty.HARD)
+                {
+                    start++;
+                    end--;
+                }
+            }
+            for (int i = start; i < end; i++)
+            {
+                lights[i].transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = GetColorFromColors(colors[colorI].colorTop);
+                lights[i].transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = GetColorFromColors(colors[colorI].colorBottom);
+                colorI++;
             }
         }
-        
-        // selectorCheck
-        private void CheckSelector()
-        {
-            
-            //a.Any(a => b.Contains(a))
-            if (correctColors.Contains(secondWaveColors[selectorIndex]))
-            {
-                base.Win();
-            }
-            else
-            {
-                base.Lose();
-            }
-        }
-        
-        //Inputs
-        public void ButtonPressL()
-        {
-            
-            //print(trafficLights.IndexOf(selector_ref.transform.parent.gameObject)-1);
-            //.transform.SetParent(trafficLights[trafficLights.IndexOf(selector_ref.transform.parent.gameObject)-1].transform);
-            if (selectorIndex != 0)
-            {
-                selector_ref.transform.Translate(1.5f,0,0);
-                --selectorIndex;
-            }
-        }
-        
-        public void ButtonPressR()
-        {
-            
-            //print(trafficLights.IndexOf(selector_ref.transform.parent.gameObject)+1);
-            //selector_ref.transform.SetParent(trafficLights[trafficLights.IndexOf(selector_ref.transform.parent.gameObject)+1].transform);
-            if (selectorIndex != trafficLights.Count-1)
-            {
-                selector_ref.transform.Translate(-1.5f,0,0);
-                ++selectorIndex;
-            }
-        }
-
-        #endregion Game Mechanics / Methods
-
-        #region Overarching Methods / Helpers
 
         private trafficLight GenRandomColorCombination()
         {
