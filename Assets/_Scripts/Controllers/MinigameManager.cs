@@ -18,6 +18,7 @@ namespace _Scripts.Controllers
 
         #region Fields
 
+        private Camera mainCamera;
         private List<Minigame> loadedGames = new();
 
         #endregion
@@ -26,7 +27,7 @@ namespace _Scripts.Controllers
 
         void Awake()
         {
-            if(settings.SelectedGame == null)
+            if(settings.SelectedGame == null || settings.Mode == Mode.ENDLESS)
             {
                 PickGame(new List<Minigame>(settings.Games));
                 PickGame(new List<Minigame>(settings.Games));
@@ -34,6 +35,8 @@ namespace _Scripts.Controllers
             {
                 loadedGames.Add(LoadGame(settings.SelectedGame, SetParent(Orientation.FULLSCREEN)));
             }
+
+            if (mainCamera) mainCamera = Camera.main;
         }
 
         #endregion
@@ -46,11 +49,11 @@ namespace _Scripts.Controllers
         /// <param name="gameList">A game list to pick from.</param>
         private void PickGame(List<Minigame> gameList)
         {
+            // Remove games before loading a new one
             gameList.RemoveAll(item => loadedGames.Contains(item));
 
             Minigame game = gameList[Random.Range(0, gameList.Count)];
 
-            // Remove games before loading a new one
             if (loadedGames.Count >= 2 || spawnPoints[^1].transform.childCount == 1)
             {
                 RemoveGame(game.Orientation.HasFlag(Orientation.FULLSCREEN));
@@ -124,12 +127,12 @@ namespace _Scripts.Controllers
         /// <returns>A Transform to contain the game.</returns>
         private Transform SetParent(Orientation orientation)
         {
-            if (orientation.HasFlag(Orientation.FULLSCREEN) && spawnPoints[^1].transform.childCount == 0)
+            if (orientation == Orientation.FULLSCREEN && spawnPoints[^1].transform.childCount == 0)
             {
                 return spawnPoints[(int)Direction.CENTER].transform;
             }
 
-            if (orientation.HasFlag(Orientation.HORIZONTAL))
+            if (orientation == Orientation.HORIZONTAL)
             {
                 for (int i = 0; i < spawnPoints.Length - 1; i += 2)
                 {
@@ -138,7 +141,7 @@ namespace _Scripts.Controllers
                 }
             }
 
-            if (orientation.HasFlag(Orientation.VERTICAL))
+            if (orientation == Orientation.VERTICAL || orientation == Orientation.QUARTER)
             {
                 for (int i = 1; i < spawnPoints.Length - 1; i += 2)
                 {
@@ -147,14 +150,14 @@ namespace _Scripts.Controllers
                 }
             }
 
-            if (orientation.HasFlag(Orientation.QUARTER))
-            {
-                for (int i = 0; i < spawnPoints.Length - 1; i++)
-                {
-                    Transform trans = spawnPoints[i].transform;
-                    if (trans.childCount == 0) return trans;
-                }
-            }
+            //if ()
+            //{
+            //    for (int i = 0; i < spawnPoints.Length - 1; i++)
+            //    {
+            //        Transform trans = spawnPoints[i].transform;
+            //        if (trans.childCount == 0) return trans;
+            //    }
+            //}
 
             return null;
         }
@@ -169,13 +172,13 @@ namespace _Scripts.Controllers
             {
                 foreach (Minigame game in loadedGames)
                 {
-                    Destroy(GameObject.FindObjectOfType<GameObject>(game.Prefab));
+                    Destroy(FindObjectOfType<GameObject>(game.Prefab));
                 }
                 loadedGames.Clear();
             }
 
             int index = Random.Range(0, loadedGames.Count);
-            GameObject instance = GameObject.FindObjectOfType<GameObject>(loadedGames[index].Prefab);
+            GameObject instance = FindObjectOfType<GameObject>(loadedGames[index].Prefab);
             Destroy(instance);
             loadedGames.Remove(loadedGames[index]);
         }

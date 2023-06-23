@@ -1,6 +1,7 @@
+using _Scripts.Games;
 using UnityEngine.InputSystem;
 
-namespace _Scripts.Games
+namespace _Scripts.GameElements
 {
     public class ButtonHeroElement : BasePressElement
     {
@@ -10,7 +11,7 @@ namespace _Scripts.Games
 
         #endregion Fields
 
-        void Awake()
+        private void Awake()
         {
             _game = (ButtonHero)parent;
         }
