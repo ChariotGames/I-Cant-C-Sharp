@@ -24,6 +24,7 @@ namespace _Scripts.Games
 
         void Start()
         {
+            allObjects = new();
             allObjects.Add(player);
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
             SpawnObjects(enemy, enemyContainer, ammountEnemies);
@@ -67,6 +68,10 @@ namespace _Scripts.Games
                     break;
                 case Type.ENEMY:
                     lives--;
+                    if (lives == 0)
+                    {
+                        base.Lose();
+                    }
                     break;
                 case Type.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
@@ -90,14 +95,14 @@ namespace _Scripts.Games
 
                 // TODO: Random positions
                 //obj.transform.position = 
-                Vector3 newPosition = new Vector3(UnityEngine.Random.Range(-9f, 9f), UnityEngine.Random.Range(-5f, 5f), 0);
+                Vector3 newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
                 //for loop über alle objekte
                 // if else ob die entfernung stimmt ok wenn nicht neuer vector (while loop?)
                 foreach (GameObject element in allObjects)
                 {
                     while (Vector3.Distance(element.transform.position, newPosition) < 2)
                     {
-                        newPosition = new Vector3(UnityEngine.Random.Range(-9f, 9f), UnityEngine.Random.Range(-5f, 5f), 0);
+                        newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
 
                     }
                     obj.transform.position = newPosition; 
