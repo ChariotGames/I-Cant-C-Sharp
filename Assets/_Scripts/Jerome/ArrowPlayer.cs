@@ -34,7 +34,8 @@ namespace _Scripts.Games
             
             gameObject.transform.Translate(InputHandler.LeftStickDelta * Time.deltaTime * speed);
             //SendMessage("PlayerMoved",transform.position);
-            RotatePlayer();
+            //RotatePlayer();
+            //transform.rotation = Quaternion.RotateTowards(transform.position, InputHandler.LeftStickDelta, 1, 1);
             MainGame.UpdateEnemyPositions(transform.position);      
         }
 

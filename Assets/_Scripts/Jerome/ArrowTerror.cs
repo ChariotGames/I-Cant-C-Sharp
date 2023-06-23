@@ -93,21 +93,16 @@ namespace _Scripts.Games
                 GameObject obj = Instantiate(type, parent.transform);
                 allObjects.Add(obj);
 
-                // TODO: Random positions
-                //obj.transform.position = 
                 Vector3 newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
-                //for loop über alle objekte
-                // if else ob die entfernung stimmt ok wenn nicht neuer vector (while loop?)
+     
                 foreach (GameObject element in allObjects)
                 {
                     while (Vector3.Distance(element.transform.position, newPosition) < 2)
                     {
                         newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
-
                     }
                     obj.transform.position = newPosition; 
                 }
-               
             }
         }
 

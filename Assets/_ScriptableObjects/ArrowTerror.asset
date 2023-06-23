@@ -19,4 +19,4 @@ MonoBehaviour:
   genre: 4
   keys: 1
   orientation: 4
-  prefab: {fileID: 0}
+  prefab: {fileID: 5464692928381225925, guid: ed3cb08cacecb47188b43efa7f30c768, type: 3}
