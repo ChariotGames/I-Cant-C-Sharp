@@ -37,13 +37,13 @@ namespace _Scripts.Games
             switch (Difficulty)
             {
                 case Difficulty.EASY:
-                    CreateRandomEquation(3, 6, 1, 10, false);
+                    CreateRandomEquation(2, 2, 1, 10, false);
                     break;
                 case Difficulty.MEDIUM:
-                    CreateRandomEquation(5, 8, 1, 50, false);
+                    CreateRandomEquation(2, 2, 1, 50, false);
                     break;
                 case Difficulty.HARD:
-                    CreateRandomEquation(3, 6, 1, 100, true);
+                    CreateRandomEquation(3, 3, 1, 100, true);
                     break;
             }
             
