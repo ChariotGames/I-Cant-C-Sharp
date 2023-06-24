@@ -1,5 +1,6 @@
 using _Scripts._Input;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
@@ -19,20 +20,23 @@ namespace _Scripts.Games
     {
     #region Serialized Fields
         
-        [SerializeField] private GameObject lightsTop, lightsBottom, lightTemplate, overlayContainer;
+        [SerializeField] private GameObject lightsTop, lightsBottom, lightTemplate, overlayContainer, background;
         [SerializeField] private SpriteRenderer[] _bulbsSpriteTop, _bulbsSpriteBottom;
         [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen;
+        [SerializeField] private List<Color> flashColor;
         [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
         [SerializeField] [Range(100,1000)] private int timeToAnswerInMs;
 
         #endregion Serialized Fields
 
-        #region Fields
+    #region Fields
 
         private const int NUMBER_LIGHTS = 5;
         private float _timeElapsed = 0, _randomDelay = 0;
         private bool _isButtonPressed = false;
+        private SpriteRenderer _backroundSprite;
+        
 
     #endregion Fields
 
@@ -40,6 +44,9 @@ namespace _Scripts.Games
 
         void Start()
         {
+            flashColor.Add(lightRed);
+            flashColor.Add(lightGreen);
+            _backroundSprite = background.GetComponent<SpriteRenderer>();
             _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
             _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
             StartCoroutine(GameCoroutine());
@@ -111,6 +118,7 @@ namespace _Scripts.Games
             {
                 if (CheckForEarlyLose()) yield break; 
                 UpdateLightColor(_bulbsSpriteTop[i], lightRed);
+                if (Difficulty == Difficulty.HARD && i == NUMBER_LIGHTS-1) StartCoroutine(RandomDistraction());
                 yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && Difficulty != Difficulty.EASY ? _randomDelay : 0));
                 if (CheckForEarlyLose()) yield break; 
             }
@@ -123,7 +131,7 @@ namespace _Scripts.Games
 
         private IEnumerator MeasureTime()
         {
-            _timeElapsed = 0;
+            _timeElapsed = -1;
             if (CheckForEarlyLose()) yield break; 
             Stopwatch stopwatch = new();
             stopwatch.Start();
@@ -145,6 +153,28 @@ namespace _Scripts.Games
             }
             yield return new WaitForSeconds(2);
             overlayContainer.SetActive(false);
+        }
+        
+        private IEnumerator RandomDistraction()
+        {
+            if (Random.Range(0f, 1f) > 0.5f)
+            {
+                UnityEngine.Debug.Log("No Distraction");
+                yield break;
+            }
+
+            float delay = Random.Range(0.5f, lightTimer + _randomDelay / 3);
+            yield return new WaitForSeconds(delay);
+            UnityEngine.Debug.Log("Flashdelay: " + delay);
+            StartCoroutine(FlashBackground());
+        }
+
+        private IEnumerator FlashBackground()
+        {
+            _backroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
+            background.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            background.SetActive(false);
         }
 
         private void GameWon()
@@ -168,7 +198,6 @@ namespace _Scripts.Games
         {
             if (_isButtonPressed)
             {
-                _timeElapsed = -1;
                 return true;
             }
             return false;
@@ -177,7 +206,6 @@ namespace _Scripts.Games
         private void OnEnable()
         {
             InputHandler.ButtonEast += EastButtonPressed;
-            InputHandler.ShoulderRight += EastButtonPressed;
         }
 
         public void EastButtonPressed()
@@ -189,7 +217,6 @@ namespace _Scripts.Games
         private void OnDisable()
         {
             InputHandler.ButtonEast -= EastButtonPressed;
-            InputHandler.ShoulderRight -= EastButtonPressed;
         }
 
     #endregion Overarching Methods / Helpers
