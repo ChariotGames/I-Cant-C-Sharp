@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using _Scripts.Games;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Scripts.Games
+namespace _Scripts.Models
 {
     public class HumanCalculator : BaseGame
     {
