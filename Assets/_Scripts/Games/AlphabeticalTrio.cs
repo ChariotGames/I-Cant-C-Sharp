@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using _Scripts._Input;
+using _Scripts.Models;
 using TMPro;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
