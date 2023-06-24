@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using _Scripts.Models;
 
 namespace _Scripts.Controllers
 {
@@ -55,8 +56,6 @@ namespace _Scripts.Controllers
                 EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
                 return;
             }
-                
-                
 
             foreach (Minigame game in settings.Games)
             {
@@ -85,19 +84,11 @@ namespace _Scripts.Controllers
         public void ResetSettings()
         {
             settings.Lives = defaultSettings.Lives;
-            SetLives(0);
-            settings.Mode = defaultSettings.Mode;
+            SetLives(0); // Updates the menu text
             settings.Players = defaultSettings.Players;
             settings.SelectedGame = defaultSettings.SelectedGame;
             settings.Games = defaultSettings.Games;
-        }
-        /// <summary>
-        /// Sets the game mode to endless.
-        /// </summary>
-        public void SetEndlessMode()
-        {
-            settings.SelectedGame = null;
-            settings.Mode = Mode.ENDLESS;
+            settings.SoloGames = defaultSettings.SoloGames;
         }
 
         /// <summary>

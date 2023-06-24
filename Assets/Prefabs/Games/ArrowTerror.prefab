@@ -147,7 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 8227582182063253124}
   player: {fileID: 8227582181620018410}
-  EnemySpeed: 0.1
   type: 3
 --- !u!1 &3743491799928111876
 GameObject:
@@ -265,7 +264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 8227582182063253124}
   player: {fileID: 8227582181620018410}
-  EnemySpeed: 0.1
   type: 2
 --- !u!1 &3889990457547165737
 GameObject:
@@ -383,7 +381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 8227582182063253124}
   player: {fileID: 8227582181620018410}
-  EnemySpeed: 0.1
   type: 4
 --- !u!1 &4362404099380115479
 GameObject:
@@ -429,7 +426,7 @@ GameObject:
   m_Layer: 0
   m_Name: ArrowTerror
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -464,6 +461,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53836c4eedddc452599a3a0e7afdd7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  keys:
+    one: {fileID: 0}
+    two: {fileID: 0}
+    three: {fileID: 0}
+    four: {fileID: 0}
+  currentDifficulty: 1
   ammountEnemies: 2
   ammountCheckpoints: 3
   lives: 3
@@ -520,7 +524,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73defb2441cff4961a5c557316b882fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainGame: {fileID: 8227582182063253124}
+  manager: {fileID: 0}
+  keys:
+    one: {fileID: 0}
+    two: {fileID: 0}
+    three: {fileID: 0}
+    four: {fileID: 0}
+  currentDifficulty: 1
   speed: 7
   maxRotationSpeed: 2.5
   maxRotation: 180

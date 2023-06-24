@@ -1,4 +1,4 @@
-using System;
+using _Scripts.Models;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -18,10 +18,7 @@ namespace _Scripts.Games
         private int _missingNumber;
         private int _equationResult;
         private int _maxFails = 3;
-        private float _elapsedTime;
-        private float _timeoutStemp;
-        private bool _isAnswerScreen;
-        private float _timeoutDelay = 15f;
+        private int _pointsToWin;
 
         #endregion Fields
 
@@ -32,18 +29,7 @@ namespace _Scripts.Games
             GenerateNewEquation();
         }
 
-        private void Update()
-        {
-            _elapsedTime += Time.deltaTime;
-            if (_isAnswerScreen && _elapsedTime >= _timeoutStemp + _timeoutDelay)
-            {
-                _isAnswerScreen = false;
-                CheckAnswer("");
-                
-            }
-            
-        }
-
+        
         #endregion Built-Ins / MonoBehaviours
 
         #region Game Mechanics / Methods
@@ -53,13 +39,13 @@ namespace _Scripts.Games
             switch (Difficulty)
             {
                 case Difficulty.EASY:
-                    CreateRandomEquation(2, 2, 1, 10, false);
+                    CreateRandomEquation(3, 6, 1, 1000, false);
                     break;
                 case Difficulty.MEDIUM:
-                    CreateRandomEquation(2, 2, 1, 50, false);
+                    CreateRandomEquation(5, 8, 1, 1000, false);
                     break;
                 case Difficulty.HARD:
-                    CreateRandomEquation(3, 3, 1, 100, false);
+                    CreateRandomEquation(3, 6, 1, 1000, true);
                     break;
             }
             
@@ -94,36 +80,27 @@ namespace _Scripts.Games
                 }
             }
 
-            _missingNumber = numbers[Random.Range(0, equationLength)];
+            equation.Append(numbers[0]);
+            for (var i = 0; i < operators.Length; i++)
+            {
+                if (operators[i] == '*' && i > 0 && operators[i - 1] != '*')
+                {
+                    equation.Insert(0, "(").Append(")");
+                }
+                equation.Append(" ").Append(operators[i]).Append(" ").Append(numbers[i + 1]);
+            }
 
+            _missingNumber = numbers[Random.Range(0, equationLength)];
+            
             Debug.Log(_missingNumber);
 
             _equationResult = CalculateEquationResult(numbers, operators);
 
-            var missingNumberReplaced = false; 
-
-            for (var i = 0; i < equationLength; i++)
-            {
-                if (numbers[i] == _missingNumber && !missingNumberReplaced)
-                {
-                    equation.Append(" ? ");
-                    missingNumberReplaced = true;
-                }
-                else
-                {
-                    equation.Append(numbers[i]);
-                }
-
-                if (i < operators.Length)
-                {
-                    equation.Append(" ").Append(operators[i]).Append(" ");
-                }
-            }
-
-            equationText.text = equation + " = " + _equationResult;
-
+            equationText.text = equation.ToString().Replace(_missingNumber.ToString(), "?") + " = " + _equationResult;
+            
             DisplayAnswers();
         }
+
         private int CalculateEquationResult(IReadOnlyList<int> numbers, IReadOnlyList<char> operators)
         {
             var result = numbers[0];
@@ -150,9 +127,8 @@ namespace _Scripts.Games
         private void DisplayAnswers()
         {
             var randomCorrectPos = Random.Range(0, 2);
-            var randomNumOffset = Random.Range(1, 21);
-            _isAnswerScreen = true;
-            _timeoutStemp = _elapsedTime;
+            var randomNumOffset = Random.Range(1, 21); 
+
             if (randomCorrectPos == 0)
             {
                 leftAnswer.text = _missingNumber.ToString();
@@ -170,20 +146,23 @@ namespace _Scripts.Games
             if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
-                GenerateNewEquation();
+                _pointsToWin++;
+                if (_pointsToWin == 3)
+                {
+                    Debug.Log("GAME WON");
+                    Win();
+                }
             }
             else
             {
                 Debug.Log("Wrong");
-                _maxFails -= 1;
-                GenerateNewEquation();
+                _maxFails--;
                 if (_maxFails == 0)
                 {
                     Debug.Log("GAME LOST");
                     base.Lose();
                 }
             }
-            
         }
 
         #endregion Game Mechanics / Methods

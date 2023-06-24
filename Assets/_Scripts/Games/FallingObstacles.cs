@@ -1,6 +1,7 @@
+using _Scripts.Models;
+using _Scripts.Pascal;
 using System.Collections;
 using System.Collections.Generic;
-using _Scripts.Pascal;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
