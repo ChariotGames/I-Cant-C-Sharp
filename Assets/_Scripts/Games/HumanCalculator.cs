@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -17,6 +18,10 @@ namespace _Scripts.Games
         private int _missingNumber;
         private int _equationResult;
         private int _maxFails = 3;
+        private float _elapsedTime;
+        private float _timeoutStemp;
+        private bool _isAnswerScreen;
+        private float _timeoutDelay = 15f;
 
         #endregion Fields
 
@@ -27,7 +32,18 @@ namespace _Scripts.Games
             GenerateNewEquation();
         }
 
-        
+        private void Update()
+        {
+            _elapsedTime += Time.deltaTime;
+            if (_isAnswerScreen && _elapsedTime >= _timeoutStemp + _timeoutDelay)
+            {
+                _isAnswerScreen = false;
+                CheckAnswer("");
+                
+            }
+            
+        }
+
         #endregion Built-Ins / MonoBehaviours
 
         #region Game Mechanics / Methods
@@ -43,7 +59,7 @@ namespace _Scripts.Games
                     CreateRandomEquation(2, 2, 1, 50, false);
                     break;
                 case Difficulty.HARD:
-                    CreateRandomEquation(3, 3, 1, 100, true);
+                    CreateRandomEquation(3, 3, 1, 100, false);
                     break;
             }
             
@@ -84,7 +100,7 @@ namespace _Scripts.Games
 
             _equationResult = CalculateEquationResult(numbers, operators);
 
-            bool missingNumberReplaced = false; // Flag to track the replacement
+            var missingNumberReplaced = false; 
 
             for (var i = 0; i < equationLength; i++)
             {
@@ -104,13 +120,10 @@ namespace _Scripts.Games
                 }
             }
 
-            equationText.text = equation.ToString() + " = " + _equationResult;
+            equationText.text = equation + " = " + _equationResult;
 
             DisplayAnswers();
         }
-
-
-
         private int CalculateEquationResult(IReadOnlyList<int> numbers, IReadOnlyList<char> operators)
         {
             var result = numbers[0];
@@ -137,8 +150,9 @@ namespace _Scripts.Games
         private void DisplayAnswers()
         {
             var randomCorrectPos = Random.Range(0, 2);
-            var randomNumOffset = Random.Range(1, 21); 
-
+            var randomNumOffset = Random.Range(1, 21);
+            _isAnswerScreen = true;
+            _timeoutStemp = _elapsedTime;
             if (randomCorrectPos == 0)
             {
                 leftAnswer.text = _missingNumber.ToString();
@@ -156,17 +170,20 @@ namespace _Scripts.Games
             if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
+                GenerateNewEquation();
             }
             else
             {
                 Debug.Log("Wrong");
                 _maxFails -= 1;
+                GenerateNewEquation();
                 if (_maxFails == 0)
                 {
                     Debug.Log("GAME LOST");
                     base.Lose();
                 }
             }
+            
         }
 
         #endregion Game Mechanics / Methods

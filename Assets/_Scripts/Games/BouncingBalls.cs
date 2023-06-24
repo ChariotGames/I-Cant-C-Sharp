@@ -26,6 +26,8 @@ namespace _Scripts.Games
         private int _maxFails = 3;
         private float _elapsedTime;
         private float _maxRoundTime = 10;
+        private float _timeoutStemp;
+        private float _timeoutDelay = 15f;
 
         #endregion Fields
 
@@ -61,6 +63,13 @@ namespace _Scripts.Games
             if (_elapsedTime >= _maxRoundTime && !_guessingStage)
             {
                 ActivateGuessingOverlay();
+            }
+
+            if (_elapsedTime >= _timeoutStemp + _timeoutDelay && _guessingStage)
+            {
+                SubmitGuess();
+                _guessingStage = false;
+                
             }
         }
 
@@ -132,6 +141,7 @@ namespace _Scripts.Games
         {
             _guessingStage = true;
             Debug.Log(_bounceCounter);
+            _timeoutStemp = _elapsedTime;
             guessedNumber.text = _currentGuessNumber.ToString();
             balls.SetActive(false);
             guessingOverlay.SetActive(true);
