@@ -1,3 +1,4 @@
+using _Scripts.Models;
 using UnityEngine;
 
 namespace _Scripts.Games
@@ -8,7 +9,7 @@ namespace _Scripts.Games
         [SerializeField] private PolygonCollider2D player;
         [SerializeField] [Range(0.25f, 1f)] private float EnemySpeed = 0.1f;
 
-        public Type type;
+        public ElementType type;
 
         private void Start()
         {

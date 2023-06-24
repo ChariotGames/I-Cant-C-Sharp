@@ -1,3 +1,4 @@
+using _Scripts.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,5 +1,5 @@
+using _Scripts.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,22 +58,22 @@ namespace _Scripts.Games
 
         public void PlayerTouched(GameObject obj)
         {
-            Type type = obj.GetComponent<ArrowObject>().type;
+            ElementType type = obj.GetComponent<ArrowObject>().type;
 
             switch (type)
             {
-                case Type.CHECKPOINT:
+                case ElementType.CHECKPOINT:
                     Destroy(obj);
                     checkpointsCollected++;
                     break;
-                case Type.ENEMY:
+                case ElementType.ENEMY:
                     lives--;
                     if (lives == 0)
                     {
                         base.Lose();
                     }
                     break;
-                case Type.GOAL:
+                case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
                         base.Win();
@@ -102,15 +102,15 @@ namespace _Scripts.Games
                     float minDistance = 0;
                     switch (element.GetComponent<ArrowObject>().type)
                     {
-                        case Type.CHECKPOINT:
+                        case ElementType.CHECKPOINT:
                             minDistance = 6;
                             break;
 
-                        case Type.ENEMY:
+                        case ElementType.ENEMY:
                             minDistance = 8;
                             break;
 
-                        case Type.GOAL:
+                        case ElementType.GOAL:
                             minDistance = 6;
                             break;
                     }

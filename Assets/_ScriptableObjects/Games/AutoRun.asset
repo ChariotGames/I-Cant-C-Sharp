@@ -14,10 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetID: 23553
   description: 
-  complexity: 2
+  complexity: 3
   difficulty: 1
   genre: 2
-  keys: 0
+  keysFirst: 0
+  keysSecond: 0
+  keysMain:
+    one: {fileID: -1296664031527996890, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    two: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    three: {fileID: 0}
+    four: {fileID: 0}
+  keysAux:
+    one: {fileID: 8619548347703401060, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    two: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    three: {fileID: 0}
+    four: {fileID: 0}
   orientation: 1
   prefab: {fileID: 5920264850204584917, guid: 031a16bd02a52994bbc5b50358c6626e, type: 3}
   preview: {fileID: 0}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5897317456580356394}
   - component: {fileID: 5897317456580356395}
+  - component: {fileID: 8275405802908632855}
   m_Layer: 0
   m_Name: MinigameManager
   m_TagString: GameController
@@ -29,10 +30,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5897317456917386129}
-  - {fileID: 5897317456894251580}
-  - {fileID: 5897317457267304668}
-  - {fileID: 5897317456820109986}
+  - {fileID: 5064793300634688470}
+  - {fileID: 6707827418453113018}
+  - {fileID: 8420430536241138870}
+  - {fileID: 2825956107917368136}
   - {fileID: 427280543943923183}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,12 +51,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
-  spawnPoints:
-  - {fileID: 5897317456917386128}
-  - {fileID: 5897317456894251579}
-  - {fileID: 5897317457267304667}
-  - {fileID: 5897317456820109985}
-  - {fileID: 6006360214424919404}
+  containers:
+    up: {fileID: 5064793300634688470}
+    down: {fileID: 8420430536241138870}
+    left: {fileID: 6707827418453113018}
+    right: {fileID: 2825956107917368136}
+    center: {fileID: 427280543943923183}
+--- !u!114 &8275405802908632855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897317456580356393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13899b82f7d2341958c2af87ebe44bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5897317456820109985
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +77,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5897317456820109986}
+  - component: {fileID: 2825956107917368136}
   m_Layer: 0
   m_Name: ContainerRight
   m_TagString: Untagged
@@ -72,7 +85,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5897317456820109986
+--- !u!4 &2825956107917368136
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,15 +108,15 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5897317456894251580}
+  - component: {fileID: 6707827418453113018}
   m_Layer: 0
   m_Name: ContainerLeft
   m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5897317456894251580
+--- !u!4 &6707827418453113018
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,15 +139,15 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5897317456917386129}
+  - component: {fileID: 5064793300634688470}
   m_Layer: 0
   m_Name: ContainerUp
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5897317456917386129
+--- !u!4 &5064793300634688470
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,7 +170,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5897317457267304668}
+  - component: {fileID: 8420430536241138870}
   m_Layer: 0
   m_Name: ContainerDown
   m_TagString: Untagged
@@ -165,7 +178,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5897317457267304668
+--- !u!4 &8420430536241138870
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
