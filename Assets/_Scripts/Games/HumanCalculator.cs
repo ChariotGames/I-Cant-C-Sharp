@@ -124,6 +124,7 @@ namespace _Scripts.Games
 
             DisplayAnswers();
         }
+        
         private int CalculateEquationResult(IReadOnlyList<int> numbers, IReadOnlyList<char> operators)
         {
             var result = numbers[0];

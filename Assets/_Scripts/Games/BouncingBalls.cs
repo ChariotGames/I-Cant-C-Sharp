@@ -142,6 +142,8 @@ namespace _Scripts.Games
             _guessingStage = true;
             Debug.Log(_bounceCounter);
             _timeoutStemp = _elapsedTime;
+            var randomOffset = Random.Range(0, 5);
+            _currentGuessNumber = _bounceCounter + (Random.value < 0.5f ? randomOffset : -randomOffset);
             guessedNumber.text = _currentGuessNumber.ToString();
             balls.SetActive(false);
             guessingOverlay.SetActive(true);
