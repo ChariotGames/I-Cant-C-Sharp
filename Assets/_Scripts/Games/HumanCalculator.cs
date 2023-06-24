@@ -37,13 +37,13 @@ namespace _Scripts.Games
             switch (Difficulty)
             {
                 case Difficulty.EASY:
-                    CreateRandomEquation(3, 6, 1, 1000, false);
+                    CreateRandomEquation(3, 6, 1, 10, false);
                     break;
                 case Difficulty.MEDIUM:
-                    CreateRandomEquation(5, 8, 1, 1000, false);
+                    CreateRandomEquation(5, 8, 1, 50, false);
                     break;
                 case Difficulty.HARD:
-                    CreateRandomEquation(3, 6, 1, 1000, true);
+                    CreateRandomEquation(3, 6, 1, 100, true);
                     break;
             }
             
@@ -78,26 +78,38 @@ namespace _Scripts.Games
                 }
             }
 
-            equation.Append(numbers[0]);
-            for (var i = 0; i < operators.Length; i++)
-            {
-                if (operators[i] == '*' && i > 0 && operators[i - 1] != '*')
-                {
-                    equation.Insert(0, "(").Append(")");
-                }
-                equation.Append(" ").Append(operators[i]).Append(" ").Append(numbers[i + 1]);
-            }
-
             _missingNumber = numbers[Random.Range(0, equationLength)];
-            
+
             Debug.Log(_missingNumber);
 
             _equationResult = CalculateEquationResult(numbers, operators);
 
-            equationText.text = equation.ToString().Replace(_missingNumber.ToString(), "?") + " = " + _equationResult;
-            
+            bool missingNumberReplaced = false; // Flag to track the replacement
+
+            for (var i = 0; i < equationLength; i++)
+            {
+                if (numbers[i] == _missingNumber && !missingNumberReplaced)
+                {
+                    equation.Append(" ? ");
+                    missingNumberReplaced = true;
+                }
+                else
+                {
+                    equation.Append(numbers[i]);
+                }
+
+                if (i < operators.Length)
+                {
+                    equation.Append(" ").Append(operators[i]).Append(" ");
+                }
+            }
+
+            equationText.text = equation.ToString() + " = " + _equationResult;
+
             DisplayAnswers();
         }
+
+
 
         private int CalculateEquationResult(IReadOnlyList<int> numbers, IReadOnlyList<char> operators)
         {
