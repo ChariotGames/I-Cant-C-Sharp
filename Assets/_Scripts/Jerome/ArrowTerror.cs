@@ -1,5 +1,6 @@
 using _Scripts.Models;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts.Games
@@ -57,7 +58,7 @@ namespace _Scripts.Games
 
         public void PlayerTouched(GameObject obj)
         {
-            ElementType type = obj.GetComponent<ArrowObject>().Type;
+            ElementType type = obj.GetComponent<ArrowObject>().type;
 
             switch (type)
             {
@@ -101,15 +102,15 @@ namespace _Scripts.Games
                     float minDistance = 0;
                     switch (element.GetComponent<ArrowObject>().type)
                     {
-                        case Type.CHECKPOINT:
+                        case ElementType.CHECKPOINT:
                             minDistance = 6;
                             break;
 
-                        case Type.ENEMY:
+                        case ElementType.ENEMY:
                             minDistance = 8;
                             break;
 
-                        case Type.GOAL:
+                        case ElementType.GOAL:
                             minDistance = 6;
                             break;
                     }
