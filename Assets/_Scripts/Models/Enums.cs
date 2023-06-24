@@ -152,10 +152,10 @@ namespace _Scripts.Models
     /// Represents a game's possible orientation and associated position.
     /// Might be changed / extended to utilize a struct instead.
     /// </summary>
-    public enum Orientation
-    {
-        ANY, HORIZONTAL, VERTICAL, FULLSCREEN
-    }
+    //public enum Orientation
+    //{
+    //    ANY, HORIZONTAL, VERTICAL, FULLSCREEN
+    //}
 
     /// <summary>
     /// Represents a game element's type.
@@ -185,33 +185,33 @@ namespace _Scripts.Models
     /// Represents a choice of keys a game uses.
     /// May be obsolete by <see cref="KeyMap">KeyMap struct</see>
     /// </summary>
-    [Flags]
-    public enum Keys
-    {
-        NONE = 0,
+    //[Flags]
+    //public enum Keys
+    //{
+    //    NONE = 0,
 
-        RightStick = 1,
-        LeftStick = 2,
+    //    RightStick = 1,
+    //    LeftStick = 2,
 
-        UpArrow = 4,
-        DownArrow = 8,
-        LeftArrow = 16,
-        RightArrow = 32,
+    //    UpArrow = 4,
+    //    DownArrow = 8,
+    //    LeftArrow = 16,
+    //    RightArrow = 32,
 
-        NorthButton = 64,
-        EastButton = 128,
-        SouthButton = 256,
-        WestButton = 1024,
+    //    NorthButton = 64,
+    //    EastButton = 128,
+    //    SouthButton = 256,
+    //    WestButton = 1024,
 
-        RightShoulder = 2048,
-        LeftShoulder = 4096,
+    //    RightShoulder = 2048,
+    //    LeftShoulder = 4096,
 
-        RightTrigger = 8192,
-        LeftTrigger = 16384,
+    //    RightTrigger = 8192,
+    //    LeftTrigger = 16384,
 
-        RStickButton = 32768,
-        LStickButton = 65536
-    }
+    //    RStickButton = 32768,
+    //    LStickButton = 65536
+    //}
 
     #endregion
 }

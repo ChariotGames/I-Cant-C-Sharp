@@ -25,21 +25,17 @@ MonoBehaviour:
 
     Hard: Rings can be thicker. Hold a button according
     to the length of the ring.'
-  complexity: 3
   difficulty: 1
   genre: 10
-  keysFirst: 6144
-  keysSecond: 24576
   keysMain:
-    one: {fileID: 5314527531634765380, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-    two: {fileID: -6621357789243663484, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    one: {fileID: 11400000, guid: 890a9bb1fef2d554084cbdd6d1dca441, type: 2}
+    two: {fileID: 11400000, guid: ae76fd2c11623d94da24d8716aa5cd5b, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
   keysAux:
-    one: {fileID: -6316003147358869082, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-    two: {fileID: -16139843582656975, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    one: {fileID: 11400000, guid: ebcda37e637bd11459d614f349f0400f, type: 2}
+    two: {fileID: 11400000, guid: 9c00c3b0b6af2594eac9f1465554be0e, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
-  orientation: 2
   prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
   preview: {fileID: 0}

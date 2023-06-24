@@ -14,21 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetID: 32011
   description: 
-  complexity: 3
   difficulty: 1
   genre: 4
-  keysFirst: 60
-  keysSecond: 1472
   keysMain:
-    one: {fileID: -1296664031527996890, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-    two: {fileID: 1622813393052464144, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-    three: {fileID: 6621765326027171438, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-    four: {fileID: -6239444798889636999, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+    one: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
+    two: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
+    three: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
+    four: {fileID: 11400000, guid: abe13787bccab0e4082a39711884202c, type: 2}
   keysAux:
-    one: {fileID: 8619548347703401060, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-    two: {fileID: 0}
-    three: {fileID: 0}
-    four: {fileID: 0}
-  orientation: 1
+    one: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
+    two: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
+    three: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
+    four: {fileID: 11400000, guid: a4600da8be593ac44ad0fc8718a077f2, type: 2}
   prefab: {fileID: 3122696433480124131, guid: 7f7d6c5a0d4864eb9ba1e2e71bcc97ae, type: 3}
   preview: {fileID: 0}

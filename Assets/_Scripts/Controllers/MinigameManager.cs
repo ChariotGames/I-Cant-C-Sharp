@@ -2,7 +2,6 @@ using _Scripts.Games;
 using _Scripts.Models;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _Scripts.Controllers
 {
@@ -79,7 +78,7 @@ namespace _Scripts.Controllers
                 game = gameList[Random.Range(0, gameList.Count)];
             }
 
-            LoadGame(game, SetParent(game.Orientation));
+            //LoadGame(game, SetParent(game.Orientation));
         }
 
         /// <summary>
@@ -148,24 +147,24 @@ namespace _Scripts.Controllers
         /// </summary>
         /// <param name="orientation">The game's orientation settings</param>
         /// <returns>A Transform to contain the game.</returns>
-        private Transform SetParent(Orientation orientation)
-        {
-            if (orientation == Orientation.FULLSCREEN) return containers.Center;
+        //private Transform SetParent(Orientation orientation)
+        //{
+        //    if (orientation == Orientation.FULLSCREEN) return containers.Center;
 
-            if (orientation == Orientation.HORIZONTAL)
-            {
-                if (containers.Up.childCount == 0) return containers.Up;
-                if (containers.Down.childCount == 0) return containers.Down;
-            }
+        //    if (orientation == Orientation.HORIZONTAL)
+        //    {
+        //        if (containers.Up.childCount == 0) return containers.Up;
+        //        if (containers.Down.childCount == 0) return containers.Down;
+        //    }
 
-            if (orientation == Orientation.VERTICAL || orientation == Orientation.ANY)
-            {
-                if (containers.Left.childCount == 0) return containers.Left;
-                if (containers.Right.childCount == 0) return containers.Right;
-            }
+        //    if (orientation == Orientation.VERTICAL || orientation == Orientation.ANY)
+        //    {
+        //        if (containers.Left.childCount == 0) return containers.Left;
+        //        if (containers.Right.childCount == 0) return containers.Right;
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         /// <summary>
         /// Sets the game's main keyMap depending on the set orientation.
@@ -208,32 +207,32 @@ namespace _Scripts.Controllers
 
             if (load == null) return true;
 
-            if (!CheckOrientation(game.Orientation, load)) return false;
+            //if (!CheckOrientation(game.Orientation, load)) return false;
             //if (!CheckGenre(game, load)) return false;
             if (!CheckKeys(game, load.GetChild(0).gameObject)) return false;
 
             return true;
         }
 
-        private bool CheckOrientation(Orientation orientation, Transform load)
-        {
-            if (orientation == Orientation.ANY) return true;
+        //private bool CheckOrientation(Orientation orientation, Transform load)
+        //{
+        //    if (orientation == Orientation.ANY) return true;
 
-            if (orientation == Orientation.HORIZONTAL &&
-               (load == containers.Up || load == containers.Down)) return true;
+        //    if (orientation == Orientation.HORIZONTAL &&
+        //       (load == containers.Up || load == containers.Down)) return true;
 
-            if (orientation == Orientation.VERTICAL &&
-               (load == containers.Left || load == containers.Right)) return true;
+        //    if (orientation == Orientation.VERTICAL &&
+        //       (load == containers.Left || load == containers.Right)) return true;
 
-            return false;
-        }
+        //    return false;
+        //}
 
         private bool CheckOrientation(Minigame game, Minigame load)
         {
-            if (game.Orientation != Orientation.ANY ||
-                load.Orientation != Orientation.ANY) return false;
+            //if (game.Orientation != Orientation.ANY ||
+            //    load.Orientation != Orientation.ANY) return false;
 
-            if (((int)game.Orientation ^ (int)load.Orientation) != 0) return false;
+            //if (((int)game.Orientation ^ (int)load.Orientation) != 0) return false;
 
             return true;
         }
@@ -245,26 +244,26 @@ namespace _Scripts.Controllers
 
         private bool CheckKeys(Minigame game, GameObject load)
         {
-            InputActionReference[] keys = load.GetComponent<BaseGame>().Keys.All;
+            //InputActionReference[] keys = load.GetComponent<BaseGame>().Keys.All;
 
-            foreach(InputActionReference key in keys)
-            {
-                if (key == null) continue;
+            //foreach(InputActionReference key in keys)
+            //{
+            //    if (key == null) continue;
 
-                foreach (InputActionReference button in game.KeysMain.All)
-                {
-                    if (button == null) continue;
+            //    foreach (InputActionReference button in game.KeysMain.All)
+            //    {
+            //        if (button == null) continue;
 
-                    if (key == button) return false;
-                }
+            //        if (key == button) return false;
+            //    }
 
-                foreach (InputActionReference button in game.KeysAux.All)
-                {
-                    if (button == null) continue;
+            //    foreach (InputActionReference button in game.KeysAux.All)
+            //    {
+            //        if (button == null) continue;
 
-                    if (key == button) return false;
-                }
-            }
+            //        if (key == button) return false;
+            //    }
+            //}
 
             return true;
         }

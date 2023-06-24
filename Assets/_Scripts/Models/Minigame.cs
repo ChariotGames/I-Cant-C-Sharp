@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace _Scripts.Models
 {
+    /// <summary>
+    /// Represents a package containing all relevant information
+    /// of a single Minigame as a scriptable Object.
+    /// </summary>
     [CreateAssetMenu(fileName = "Minigame", menuName = "ScriptableObjects/Minigame", order = 1)]
     public class Minigame : ScriptableObject
     {
@@ -12,9 +16,9 @@ namespace _Scripts.Models
         //[SerializeField] private Complexity complexity;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;
-        [SerializeField] private Keys keysFirst, keysSecond;
+        //[SerializeField] private Keys keysFirst, keysSecond;
         [SerializeField] private KeyMap keysMain, keysAux;
-        [SerializeField] private Orientation orientation;
+        //[SerializeField] private Orientation orientation;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Sprite preview;
 
@@ -66,18 +70,18 @@ namespace _Scripts.Models
         /// <summary>
         /// The game's main keys flags.
         /// </summary>
-        public Keys KeysFirst
-        {
-            get => keysFirst;
-        }
+        //public Keys KeysFirst
+        //{
+        //    get => keysFirst;
+        //}
 
         /// <summary>
         /// The game's secondary keys flags.
         /// </summary>
-        public Keys KeysSecond
-        {
-            get => keysSecond;
-        }
+        //public Keys KeysSecond
+        //{
+        //    get => keysSecond;
+        //}
 
         /// <summary>
         /// The game's main key map, used for Up and Right positions.
@@ -98,10 +102,10 @@ namespace _Scripts.Models
         /// <summary>
         /// The game's orientation
         /// </summary>
-        public Orientation Orientation
-        {
-            get => orientation;
-        }
+        //public Orientation Orientation
+        //{
+        //    get => orientation;
+        //}
 
         /// <summary>
         /// The game's actual content game object - the prefab.

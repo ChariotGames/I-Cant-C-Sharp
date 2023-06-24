@@ -12,12 +12,13 @@ namespace _Scripts.Models
     [Serializable]
     public struct KeyMap
     {
-        [SerializeField] private InputActionReference one, two, three, four;
-        public InputActionReference One { get => one; set => one = value; }
-        public InputActionReference Two { get => two; set => two = value; }
-        public InputActionReference Three { get => three; set => three = value; }
-        public InputActionReference Four { get => four; set => four = value; }
-        public InputActionReference[] All { get => new[] { one, two, three, four }; }
+        [SerializeField] private Key one, two, three, four;
+
+        public Key One { get => one; set => one = value; }
+        public Key Two { get => two; set => two = value; }
+        public Key Three { get => three; set => three = value; }
+        public Key Four { get => four; set => four = value; }
+        public Key[] All { get => new[] { one, two, three, four }; }
     }
 
     /// <summary>
@@ -28,6 +29,7 @@ namespace _Scripts.Models
     public struct SpawnPoints
     {
         [SerializeField] private Transform up, down, left, right, center;
+
         public Transform Up { get => up; set => up = value; }
         public Transform Down { get => down; set => down = value; }
         public Transform Left { get => left; set => left = value; }
