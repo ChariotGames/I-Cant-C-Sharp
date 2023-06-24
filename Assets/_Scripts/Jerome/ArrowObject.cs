@@ -1,4 +1,3 @@
-using _Scripts.Models;
 using UnityEngine;
 
 namespace _Scripts.Games
@@ -7,9 +6,15 @@ namespace _Scripts.Games
     {
         [SerializeField] private ArrowTerror game;
         [SerializeField] private PolygonCollider2D player;
-        [SerializeField] private ElementType type;
+        [SerializeField] [Range(0.25f, 1f)] private float EnemySpeed = 0.1f;
 
-        public ElementType Type { get => type; set => type = value; }
+        public Type type;
+
+        private void Start()
+        {
+            EnemySpeed = Random.Range(0.25f, 1f);
+         //   transform.position = new Vector3(Random.Range(-9f, 9f), Random.Range(-5f, 5f), 0);
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -17,6 +22,11 @@ namespace _Scripts.Games
             {
                 game.PlayerTouched(gameObject);
             }
+        }
+        public void PlayerMoved(Vector3 playerPosition)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, playerPosition, EnemySpeed * Time.deltaTime);
+
         }
     }
 }
