@@ -59,11 +59,11 @@ namespace _Scripts.Games
             {
                 if(state)
                 {
-                    _buttons[i].action.performed += ButtonBressed;
+                    _buttons[i].action.performed += ButtonPressed;
                 }
                 else
                 {
-                    _buttons[i].action.performed -= ButtonBressed;
+                    _buttons[i].action.performed -= ButtonPressed;
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace _Scripts.Games
         /// Callback function on button press. The 0th button is always correct!
         /// </summary>
         /// <param name="ctx">Input event binding information.</param>
-        private void ButtonBressed(InputAction.CallbackContext ctx)
+        private void ButtonPressed(InputAction.CallbackContext ctx)
         {
             parent.EvaluateResult(gameObject, ctx.action == _buttons[0].action && _radius <= 0.75 && _radius >= 0.25);
         }
