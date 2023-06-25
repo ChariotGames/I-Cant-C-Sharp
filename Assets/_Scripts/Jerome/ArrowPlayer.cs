@@ -9,6 +9,7 @@ namespace _Scripts.Games
     public class ArrowPlayer : BaseGame
     {
         #region Serialized Fields
+        [SerializeField] ArrowTerror MainGame;
         [SerializeField] float speed = 5f;
         [SerializeField] private float maxRotationSpeed = 2.5f;
         [SerializeField] private float maxRotation = 180f;
@@ -32,10 +33,10 @@ namespace _Scripts.Games
         {
             
             gameObject.transform.Translate(InputHandler.StickLeft * Time.deltaTime * speed);
-            
-            RotatePlayer();
-        
-
+            //SendMessage("PlayerMoved",transform.position);
+            //RotatePlayer();
+            //transform.rotation = Quaternion.RotateTowards(transform.position, InputHandler.LeftStickDelta, 1, 1);
+            MainGame.UpdateEnemyPositions(transform.position);      
         }
 
         #endregion Built-Ins / MonoBehaviours

@@ -1,5 +1,5 @@
+using _Scripts.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,21 +17,33 @@ namespace _Scripts.Games
         #region Fields
 
         private int checkpointsCollected = 0;
-
+        private List<GameObject> allObjects;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
         void Start()
         {
+            allObjects = new();
+            allObjects.Add(player);
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
             SpawnObjects(enemy, enemyContainer, ammountEnemies);
             SpawnObjects(goal, gameObject, 1);
+            
         }
 
         void Update()
         {
            
+        }
+
+        internal void UpdateEnemyPositions(Vector3 position)
+        {
+            for (int i = 0; i < enemyContainer.transform.childCount; i++)
+            {
+                ArrowObject obj = enemyContainer.transform.GetChild(i).GetComponent<ArrowObject>();
+                obj.PlayerMoved(position);
+            }
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -46,18 +58,22 @@ namespace _Scripts.Games
 
         public void PlayerTouched(GameObject obj)
         {
-            Type type = obj.GetComponent<ArrowObject>().type;
+            ElementType type = obj.GetComponent<ArrowObject>().type;
 
             switch (type)
             {
-                case Type.CHECKPOINT:
+                case ElementType.CHECKPOINT:
                     Destroy(obj);
                     checkpointsCollected++;
                     break;
-                case Type.ENEMY:
+                case ElementType.ENEMY:
                     lives--;
+                    if (lives == 0)
+                    {
+                        base.Lose();
+                    }
                     break;
-                case Type.GOAL:
+                case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
                         base.Win();
@@ -75,7 +91,36 @@ namespace _Scripts.Games
             for (int i = 0; i < ammount; i++)
             {
                 GameObject obj = Instantiate(type, parent.transform);
-                // TODO: Random positions
+                allObjects.Add(obj);
+
+                Vector3 newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
+     
+                foreach (GameObject element in allObjects)
+                {
+                    if (element.GetComponent<ArrowPlayer>() != null) continue;
+                   
+                    float minDistance = 0;
+                    switch (element.GetComponent<ArrowObject>().type)
+                    {
+                        case ElementType.CHECKPOINT:
+                            minDistance = 6;
+                            break;
+
+                        case ElementType.ENEMY:
+                            minDistance = 8;
+                            break;
+
+                        case ElementType.GOAL:
+                            minDistance = 6;
+                            break;
+                    }
+                    Debug.Log(Vector3.Distance(element.transform.position, newPosition));
+                    while (Vector3.Distance(element.transform.position, newPosition) < minDistance)
+                    {
+                        newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
+                    }
+                    obj.transform.position = newPosition; 
+                }
             }
         }
 

@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetID: 11042
   description: 
-  complexity: 1
   difficulty: 1
   genre: 6
-  keys: 67584
-  orientation: 4
+  keysMain:
+    one: {fileID: 11400000, guid: 5b68a930ae7af724b80502d9028d70e4, type: 2}
+    two: {fileID: 11400000, guid: ae76fd2c11623d94da24d8716aa5cd5b, type: 2}
+    three: {fileID: 0}
+    four: {fileID: 0}
+  keysAux:
+    one: {fileID: 11400000, guid: 16ed777c82665e244875991db5a0d31f, type: 2}
+    two: {fileID: 11400000, guid: 890a9bb1fef2d554084cbdd6d1dca441, type: 2}
+    three: {fileID: 0}
+    four: {fileID: 0}
   prefab: {fileID: 6926883230700997361, guid: 37dda47af0efb0346a8934b3441bffd5, type: 3}
   preview: {fileID: 0}

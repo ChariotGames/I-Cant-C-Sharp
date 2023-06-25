@@ -1,8 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using _Scripts._Input;
 using _Scripts.GameElements;
+using _Scripts.Models;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -18,34 +18,42 @@ namespace _Scripts.Games
         [SerializeField] private TextMeshPro guessedNumber;
         [SerializeField] private GameObject balls;
         [SerializeField] private GameObject guessingOverlay;
+        [SerializeField] private PhysicsMaterial2D groundMaterial;
         
         private int _bounceCounter;
         private bool _guessingStage;
         private int _currentGuessNumber;
         private int _maxFails = 3;
-        private int _pointsToWin = 3;
         private float _elapsedTime;
-        private float _maxRoundTime;
+        private float _maxRoundTime = 10;
+        private float _timeoutStemp;
+        private float _timeoutDelay = 15f;
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
-        private void Start()
+        private void Awake()
         {
             switch (Difficulty)
             {
                 case Difficulty.EASY:
-                    _maxRoundTime = 10f;
+                    groundMaterial.bounciness = 1.05f;
                     break;
                 case Difficulty.MEDIUM:
-                    _maxRoundTime = 15f;
+                    groundMaterial.bounciness = 1f;
                     break;
                 case Difficulty.HARD:
-                    _maxRoundTime = 20f;
+                    groundMaterial.bounciness = 0.925f;
                     break;
 
             }
+        }
+
+        private void Start()
+        {
+            //groundMaterial = new PhysicsMaterial2D();
+           
             StartCoroutine(ReleaseBallsAfterDelay());
         }
 
@@ -57,7 +65,12 @@ namespace _Scripts.Games
                 ActivateGuessingOverlay();
             }
 
-            
+            if (_elapsedTime >= _timeoutStemp + _timeoutDelay && _guessingStage)
+            {
+                SubmitGuess();
+                _guessingStage = false;
+                
+            }
         }
 
         
@@ -93,12 +106,6 @@ namespace _Scripts.Games
             if (_bounceCounter == _currentGuessNumber)
             {
                 Debug.Log("Correct Answer");
-                _pointsToWin++;
-                if (_pointsToWin == 3)
-                {
-                    Debug.Log("GAME WON");
-                    Win();
-                }
             }
             else
             {
@@ -106,9 +113,8 @@ namespace _Scripts.Games
                 _maxFails--;
                 if (_maxFails == 0)
                 {
-                    Debug.Log("GAME LOST");
                     Lose();
-                    
+                    Debug.Log("You lost all your lives in this Game");
                 }
             }
 
@@ -135,6 +141,9 @@ namespace _Scripts.Games
         {
             _guessingStage = true;
             Debug.Log(_bounceCounter);
+            _timeoutStemp = _elapsedTime;
+            var randomOffset = Random.Range(0, 5);
+            _currentGuessNumber = _bounceCounter + (Random.value < 0.5f ? randomOffset : -randomOffset);
             guessedNumber.text = _currentGuessNumber.ToString();
             balls.SetActive(false);
             guessingOverlay.SetActive(true);

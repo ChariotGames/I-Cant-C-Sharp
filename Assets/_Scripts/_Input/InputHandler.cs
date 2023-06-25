@@ -13,7 +13,7 @@ namespace _Scripts._Input
 
         public static event Action ArrowUp, ArrowDown, ArrowLeft, ArrowRight;
 
-        public static event Action ButtonNorth,ButtonEast, ButtonSouth, ButtonWest;
+        public static event Action ButtonNorth, ButtonEast, ButtonSouth, ButtonWest;
         
         public static event Action ShoulderRight, ShoulderLeft;
 
