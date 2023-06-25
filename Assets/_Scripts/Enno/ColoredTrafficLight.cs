@@ -5,8 +5,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using _Scripts._Input;
+using _Scripts.Models;
 using Unity.VisualScripting;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
@@ -51,9 +53,9 @@ namespace _Scripts.Games
         private List<trafficLight> correctColors;
         private List<trafficLight> secondWaveColors;
         private int correctLightAmount = 1;
-        private int correctLightsInSecondWave = 1;
-        private int totalLightAmount = 3;
+        private int trafficLightAmount = 3;
         private int selectorIndex;
+        private bool gameVariant = true;
         
         private struct trafficLight
         {
@@ -73,15 +75,17 @@ namespace _Scripts.Games
 
         void Start()
         {
+            //decides which variant of coloredtrafficlights to run
+            if (Random.Range(0, 2) == 1) gameVariant = true;
             
             //setup
             SetDifficultyVariables();
-            SpawnTrafficLights(totalLightAmount);
+            SpawnTrafficLights(trafficLightAmount);
              
             //set correct color combinations
             correctColors = GenLightColors(correctLightAmount, null);
             SetLightColors(trafficLights, correctColors, true);
-            Invoke(nameof(SecondStart), 8);
+            Invoke(nameof(SecondStart), 4);
             
         }
 
@@ -89,11 +93,13 @@ namespace _Scripts.Games
         {
             //Mix correct colors with random generated ones and set them.
             secondWaveColors = MixCorrectColorsIntoWrongOnes(
-                GenLightColors(totalLightAmount, correctColors), correctColors, correctLightsInSecondWave);
+                GenLightColors(trafficLightAmount, correctColors), correctColors);
             SetLightColors(trafficLights, secondWaveColors, false);
+            if(gameVariant && Difficulty == Difficulty.MEDIUM) selector_ref.transform.Translate(-0.725f,0,0); /*selector_ref.transform.position = new Vector3(0, 1.2f, 0);*/
+            selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
             selector_ref.SetActive(true);
             EnableInputs();
-            Invoke(nameof(ThirdStart), 7);
+            Invoke(nameof(ThirdStart), 2);
         }
 
         private void ThirdStart()
@@ -123,41 +129,49 @@ namespace _Scripts.Games
 
         #endregion Built-Ins / MonoBehaviours
 
-        #region GetSets / Properties
-        
-        
-
-        #endregion GetSets / Properties
-
         #region Game Mechanics / Methods
         
         
         //sets variables & spawns traffic lights
         public void SetDifficultyVariables()
         {
-            switch (Difficulty)
+            if (gameVariant)
             {
-                case Difficulty.EASY:
-                    break;
-                case Difficulty.MEDIUM:
-                    totalLightAmount = 5;
-                    correctLightAmount = 3;
-                    break;
-                case Difficulty.HARD:
-                    totalLightAmount = 7;
-                    correctLightsInSecondWave = 2;
-                    correctLightAmount = 3;
-                    break;
+                switch (Difficulty)
+                {
+                    case Difficulty.EASY:
+                        break;
+                    case Difficulty.MEDIUM:
+                        trafficLightAmount = 4;
+                        break;
+                    case Difficulty.HARD:
+                        trafficLightAmount = 5;
+                        break;
+                }
             }
-            selectorIndex = totalLightAmount / 2;
+            else
+            {
+                switch (Difficulty)
+                {
+                    case Difficulty.EASY:
+                        break;
+                    case Difficulty.MEDIUM:
+                        correctLightAmount = 2;
+                        break;
+                    case Difficulty.HARD:
+                        correctLightAmount = 3;
+                        break;
+                }
+            }
+            
+            selectorIndex = trafficLightAmount / 2;
         }
 
         public void SpawnTrafficLights(int amountToSpawn )
         {
-            for (int i = -amountToSpawn/2; i <= amountToSpawn/2 ; i++)
+            for (int i = 0; i < amountToSpawn ; i++)
             {
-                GameObject trafficLight = Instantiate(trafficLightPrefab, owner_ref.transform);
-                trafficLight.transform.Translate(i*1.5f, 0, 0);
+                GameObject trafficLight = Instantiate(trafficLightPrefab, owner_ref.transform.GetChild(0).transform);
                 trafficLights.Add(trafficLight);
             }
         }
@@ -182,12 +196,12 @@ namespace _Scripts.Games
                 if (correctColors.Contains(secondWaveColors[i]))
                 {
                     Instantiate(simonOk_ref, trafficLights[i].transform);
-                    trafficLights[i].transform.GetChild(3).gameObject.SetActive(true);
+                    trafficLights[i].transform.GetChild(trafficLights[i].transform.childCount-1).gameObject.SetActive(true);
                 }
                 else
                 {
                     Instantiate(simonNot_ref, trafficLights[i].transform);
-                    trafficLights[i].transform.GetChild(3).gameObject.SetActive(true);
+                    trafficLights[i].transform.GetChild(trafficLights[i].transform.childCount-1).gameObject.SetActive(true);
                 }
             }
         }
@@ -197,8 +211,10 @@ namespace _Scripts.Games
         {
             if (selectorIndex != 0)
             {
-                selector_ref.transform.Translate(1.5f,0,0);
                 --selectorIndex;
+                selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
+                //selector_ref.transform.position.Set(0,1.2f,0); diese zeile sollte man eigentlich verwenden, oder position = new Vector3(0,1.2f,0); beide funktionieren nicht.
+                selector_ref.transform.Translate(1.45f,0,0);
             }
         }
         
@@ -206,8 +222,10 @@ namespace _Scripts.Games
         {
             if (selectorIndex != trafficLights.Count-1)
             {
-                selector_ref.transform.Translate(-1.5f,0,0);
                 ++selectorIndex;
+                selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
+                //selector_ref.transform.position.Set(0,1.2f,0); diese zeile sollte man eigentlich verwenden, oder position = new Vector3(0,1.2f,0); beide funktionieren nicht.
+                selector_ref.transform.Translate(-1.45f,0,0);
             }
         }
 
@@ -215,20 +233,17 @@ namespace _Scripts.Games
 
         #region Overarching Methods / Helpers
         
-        private List<trafficLight> MixCorrectColorsIntoWrongOnes( List<trafficLight> colorList, List<trafficLight> colorsToMixInto, int amountToMixInto )
+        private List<trafficLight> MixCorrectColorsIntoWrongOnes( List<trafficLight> colorList, List<trafficLight> colorsToMixInto)
         {
             
             List<trafficLight> newList = new List<trafficLight>(colorList);
             List<int> indicesToIgnore = new List<int>();
-            for (int i = 0; i < amountToMixInto; i++)
-            {
                 int tmp = Random.Range(0, colorsToMixInto.Count);
                 if (!indicesToIgnore.Contains(tmp))
                 {
                     indicesToIgnore.Add(tmp);
                     newList[Random.Range(0, newList.Count)] = new trafficLight(colorsToMixInto[tmp]);
                 }
-            }
             return newList;
         }
 
@@ -266,22 +281,32 @@ namespace _Scripts.Games
         private void SetLightColors(List<GameObject> lights, List<trafficLight> colors, bool firstWave)
         {
             int start = 0;
-            int end = lights.Count;
+            int end = colors.Count;
             int colorI = 0;
-            if (firstWave)
+            
+            
+            
+            if (firstWave && (gameVariant || Difficulty == Difficulty.EASY))
             {
                 start++;
-                end--;
+                end++;
+                
                 if (Difficulty == Difficulty.HARD)
                 {
                     start++;
-                    end--;
+                    end++;
                 }
+                
             }
+
             for (int i = start; i < end; i++)
             {
-                lights[i].transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = GetColorFromColors(colors[colorI].colorTop);
-                lights[i].transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = GetColorFromColors(colors[colorI].colorBottom);
+                for (int j = 1; j < 7; j++)
+                {
+                    lights[i].transform.GetChild(j).gameObject.SetActive((false));
+                }
+                lights[i].transform.GetChild((int)colors[colorI].colorTop).gameObject.SetActive((true));
+                lights[i].transform.GetChild((int)colors[colorI].colorBottom+3).gameObject.SetActive((true));
                 colorI++;
             }
         }
@@ -290,13 +315,13 @@ namespace _Scripts.Games
         {
             trafficLight generatedColors = new trafficLight();
 
-            generatedColors.colorTop = (Colors)Random.Range(1, 6);
-            generatedColors.colorBottom = (Colors)Random.Range(1, 6);
+            generatedColors.colorTop = (Colors)Random.Range(1, 4);
+            generatedColors.colorBottom = (Colors)Random.Range(1, 4);
             
             return generatedColors;
         }
 
-        private Color GetColorFromColors(Colors color)
+        /*private Color GetColorFromColors(Colors color)
         {
             Color col = new Color();
             switch(color)
@@ -318,7 +343,7 @@ namespace _Scripts.Games
                     break;
             }
             return col;
-        }
+        }*/
 
         #endregion Overarching Methods / Helpers
     }
