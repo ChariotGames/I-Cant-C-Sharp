@@ -12653,10 +12653,10 @@ namespace Unity.VisualScripting.Generated.Aot
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_AutoRun_winCondition()
 		{
-			global::_Scripts.Games.AutoRun target = default(global::_Scripts.Games.AutoRun);
+			global::Scripts.Games.AutoRun target = default(global::Scripts.Games.AutoRun);
 			target.winCondition();
-			global::Unity.VisualScripting.InstanceActionInvoker<_Scripts.Games.AutoRun> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<_Scripts.Games.AutoRun>(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(default(global::_Scripts.Games.AutoRun));
+			global::Unity.VisualScripting.InstanceActionInvoker<Scripts.Games.AutoRun> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<Scripts.Games.AutoRun>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(default(global::Scripts.Games.AutoRun));
 			optimized.Invoke(default(object[]));
 		}
 		
@@ -12664,10 +12664,10 @@ namespace Unity.VisualScripting.Generated.Aot
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_AutoRun_loseCondition()
 		{
-			global::_Scripts.Games.AutoRun target = default(global::_Scripts.Games.AutoRun);
+			global::Scripts.Games.AutoRun target = default(global::Scripts.Games.AutoRun);
 			target.loseCondition();
-			global::Unity.VisualScripting.InstanceActionInvoker<_Scripts.Games.AutoRun> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<_Scripts.Games.AutoRun>(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(default(global::_Scripts.Games.AutoRun));
+			global::Unity.VisualScripting.InstanceActionInvoker<Scripts.Games.AutoRun> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<Scripts.Games.AutoRun>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(default(global::Scripts.Games.AutoRun));
 			optimized.Invoke(default(object[]));
 		}
 		
