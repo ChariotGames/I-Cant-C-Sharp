@@ -136,6 +136,15 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ButtonStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""9eb1caa3-506a-4638-8c30-85d1f3ba1866"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ShoulderLeft"",
                     ""type"": ""Button"",
                     ""id"": ""1c96bf0e-7a4f-419e-84d8-9d92c4917925"",
@@ -469,6 +478,28 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
                     ""action"": ""TriggerLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15d8b064-a8b4-4667-9948-45c69d97d4bc"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ButtonStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4f5acce-d60b-40de-8eb9-3a03614c85e7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ButtonStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -489,6 +520,7 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
         m_Player_ButtonSouth = m_Player.FindAction("ButtonSouth", throwIfNotFound: true);
         m_Player_ButtonEast = m_Player.FindAction("ButtonEast", throwIfNotFound: true);
         m_Player_ButtonWest = m_Player.FindAction("ButtonWest", throwIfNotFound: true);
+        m_Player_ButtonStart = m_Player.FindAction("ButtonStart", throwIfNotFound: true);
         m_Player_ShoulderLeft = m_Player.FindAction("ShoulderLeft", throwIfNotFound: true);
         m_Player_ShoulderRight = m_Player.FindAction("ShoulderRight", throwIfNotFound: true);
         m_Player_TriggerLeft = m_Player.FindAction("TriggerLeft", throwIfNotFound: true);
@@ -566,6 +598,7 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ButtonSouth;
     private readonly InputAction m_Player_ButtonEast;
     private readonly InputAction m_Player_ButtonWest;
+    private readonly InputAction m_Player_ButtonStart;
     private readonly InputAction m_Player_ShoulderLeft;
     private readonly InputAction m_Player_ShoulderRight;
     private readonly InputAction m_Player_TriggerLeft;
@@ -586,6 +619,7 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
         public InputAction @ButtonSouth => m_Wrapper.m_Player_ButtonSouth;
         public InputAction @ButtonEast => m_Wrapper.m_Player_ButtonEast;
         public InputAction @ButtonWest => m_Wrapper.m_Player_ButtonWest;
+        public InputAction @ButtonStart => m_Wrapper.m_Player_ButtonStart;
         public InputAction @ShoulderLeft => m_Wrapper.m_Player_ShoulderLeft;
         public InputAction @ShoulderRight => m_Wrapper.m_Player_ShoulderRight;
         public InputAction @TriggerLeft => m_Wrapper.m_Player_TriggerLeft;
@@ -635,6 +669,9 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
             @ButtonWest.started += instance.OnButtonWest;
             @ButtonWest.performed += instance.OnButtonWest;
             @ButtonWest.canceled += instance.OnButtonWest;
+            @ButtonStart.started += instance.OnButtonStart;
+            @ButtonStart.performed += instance.OnButtonStart;
+            @ButtonStart.canceled += instance.OnButtonStart;
             @ShoulderLeft.started += instance.OnShoulderLeft;
             @ShoulderLeft.performed += instance.OnShoulderLeft;
             @ShoulderLeft.canceled += instance.OnShoulderLeft;
@@ -687,6 +724,9 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
             @ButtonWest.started -= instance.OnButtonWest;
             @ButtonWest.performed -= instance.OnButtonWest;
             @ButtonWest.canceled -= instance.OnButtonWest;
+            @ButtonStart.started -= instance.OnButtonStart;
+            @ButtonStart.performed -= instance.OnButtonStart;
+            @ButtonStart.canceled -= instance.OnButtonStart;
             @ShoulderLeft.started -= instance.OnShoulderLeft;
             @ShoulderLeft.performed -= instance.OnShoulderLeft;
             @ShoulderLeft.canceled -= instance.OnShoulderLeft;
@@ -730,6 +770,7 @@ public partial class @BasicControls: IInputActionCollection2, IDisposable
         void OnButtonSouth(InputAction.CallbackContext context);
         void OnButtonEast(InputAction.CallbackContext context);
         void OnButtonWest(InputAction.CallbackContext context);
+        void OnButtonStart(InputAction.CallbackContext context);
         void OnShoulderLeft(InputAction.CallbackContext context);
         void OnShoulderRight(InputAction.CallbackContext context);
         void OnTriggerLeft(InputAction.CallbackContext context);
