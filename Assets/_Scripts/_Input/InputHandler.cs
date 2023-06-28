@@ -15,7 +15,7 @@ namespace _Scripts._Input
 
         public static event Action ButtonNorth, ButtonEast, ButtonSouth, ButtonWest;
 
-        public static event Action OptionButtonStart; 
+        public static event Action OptionButtonStart, OptionButtonSelect; 
         
         public static event Action ShoulderRight, ShoulderLeft;
 
@@ -113,7 +113,13 @@ namespace _Scripts._Input
         public void OnOptionButtonStart(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) OptionButtonStart?.Invoke();
-            Debug.Log("ButtonStart");
+            //Debug.Log("ButtonStart");
+        }
+        
+        public void OnOptionButtonSelect(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) OptionButtonSelect?.Invoke();
+            //Debug.Log("ButtonSelect");
         }
 
         #endregion
