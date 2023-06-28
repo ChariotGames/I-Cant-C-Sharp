@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts._Input;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace _Scripts.Controllers
 {
@@ -12,6 +12,7 @@ namespace _Scripts.Controllers
         #region Serialized Fields
 
             [SerializeField] private GameObject pauseMenu;
+            [SerializeField] private GameObject button;
 
         #endregion Serialized Fields
 
@@ -39,14 +40,8 @@ namespace _Scripts.Controllers
 
         #region Built-Ins / MonoBehaviours
 
-        private void Awake()
-        {
-            
-        }
-
-        void Start()
+            void Start()
             {
-                InputHandler.OptionButtonStart += PauseButtonPressed;
                 _isPaused = false;
             }
 
@@ -59,6 +54,7 @@ namespace _Scripts.Controllers
             {
                 _isPaused = true;
                 pauseMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(button);
                 Time.timeScale = 0;
             }
         
@@ -86,7 +82,11 @@ namespace _Scripts.Controllers
         #endregion Game Mechanics / Methods
         
         #region Overarching Methods / Helpers
-        
+            private void OnEnable()
+            {
+                InputHandler.OptionButtonStart += PauseButtonPressed;
+            }
+
             private void PauseButtonPressed()
             {
                 Debug.Log("Input Registered");
@@ -100,7 +100,7 @@ namespace _Scripts.Controllers
                 }
             }
             
-            private void OnDestroy()
+            private void OnDisable()
             {
                 InputHandler.OptionButtonStart -= PauseButtonPressed;
             }
