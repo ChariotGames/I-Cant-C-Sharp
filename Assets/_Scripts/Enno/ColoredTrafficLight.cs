@@ -44,6 +44,8 @@ namespace _Scripts.Games
         [SerializeField] private List<GameObject> trafficLights;
         [SerializeField] private GameObject simonNot_ref;
         [SerializeField] private GameObject simonOk_ref;
+        [SerializeField] private int delaySecondWave = 5;
+        [SerializeField] private int timeToSelectLight = 5;
         
 
         #endregion Serialized Fields
@@ -85,7 +87,7 @@ namespace _Scripts.Games
             //set correct color combinations
             correctColors = GenLightColors(correctLightAmount, null);
             SetLightColors(trafficLights, correctColors, true);
-            Invoke(nameof(SecondStart), 4);
+            Invoke(nameof(SecondStart), delaySecondWave);
             
         }
 
@@ -99,7 +101,7 @@ namespace _Scripts.Games
             selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
             selector_ref.SetActive(true);
             EnableInputs();
-            Invoke(nameof(ThirdStart), 2);
+            Invoke(nameof(ThirdStart), timeToSelectLight);
         }
 
         private void ThirdStart()
