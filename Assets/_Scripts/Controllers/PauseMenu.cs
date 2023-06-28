@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts._Input;
@@ -38,8 +39,14 @@ namespace _Scripts.Controllers
 
         #region Built-Ins / MonoBehaviours
 
-            void Start()
+        private void Awake()
+        {
+            
+        }
+
+        void Start()
             {
+                InputHandler.OptionButtonStart += PauseButtonPressed;
                 _isPaused = false;
             }
 
@@ -79,13 +86,10 @@ namespace _Scripts.Controllers
         #endregion Game Mechanics / Methods
         
         #region Overarching Methods / Helpers
-            private void OnEnable()
-            {
-                InputHandler.ButtonStart += PauseButtonPressed;
-            }
-
+        
             private void PauseButtonPressed()
             {
+                Debug.Log("Input Registered");
                 if (_isPaused)
                 {
                     ResumeGame();
@@ -96,9 +100,9 @@ namespace _Scripts.Controllers
                 }
             }
             
-            private void OnDisable()
+            private void OnDestroy()
             {
-                InputHandler.ButtonStart -= PauseButtonPressed;
+                InputHandler.OptionButtonStart -= PauseButtonPressed;
             }
         
         #endregion Overarching Methods / Helpers
