@@ -2,28 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using _Scripts._Input;
+using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class BeatWalker : Game
+    /// <summary>
+    /// A row of buttons move from right to left with predefined spacing in between that define the rhythm.
+    /// A field in the middle defines the area where the buttons needs to be pressed when entering the field.
+    /// 
+    /// Easy: Button comes in rhythm.
+    /// Medium: Buttons randomly and suddenly disappear before reaching the field.
+    /// Hard: Other buttons appear that need to be ignored.
+    /// </summary>
+    public class BeatWalker : BaseGame
     {
         #region Serialized Fields
-        [SerializeField] private GameObject button;
-        [SerializeField] private GameObject buttonContainer;
 
+        [SerializeField] private GameObject buttonPrefab;
+        [SerializeField] private List<GameObject> distractionButtons;
 
         #endregion Serialized Fields
 
         #region Fields
-        private float leftBound;
-        private float rightBound;
-        private bool buttonPressed = false;
-        private bool lost = false;
-        private List<GameObject> buttons = new List<GameObject>();
-        private float instantiationDelay = 2f;
-        private float delayBetweenRhythm = 1f;
-        private int instantiationCount = 0;
+
+        private GameObject button;
+        private Camera _mainCamera;
+        
+        private Bounds _cameraViewportBounds;
+        private float _speed = 5f, _width, _instantiationDelay; //= .5f;
+        private bool _lose;
+        private List<GameObject> _instantiatedButtons = new();
 
         #endregion Fields
 
@@ -31,153 +39,82 @@ namespace _Scripts.Games
 
         private void Awake()
         {
-            //Physics2D.gravity = new Vector2(-9.8f, 0);
-
-            //Get coords of activation region
-            float regionSizeX = GameObject.Find("ActivationRegion").gameObject.GetComponent<Collider2D>().bounds.size.x;
-            float regionPosX = GameObject.Find("ActivationRegion").gameObject.transform.position.x;
-
-            leftBound = regionPosX - regionSizeX / 2;
-            rightBound = regionPosX + regionSizeX / 2;
+            _mainCamera = Camera.main;
+            _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+            _width = _cameraViewportBounds.size.x;
+            _lose = false;
         }
 
-        private void OnEnable()
-        {
-            InputHandler.LeftArrowBtnAction += ButtonPress;
-        }
-
+        // Start is called before the first frame update
         void Start()
         {
-            //instantiateButton();
+            //TODO get the width of the parent of this game object
+            //gameObject.transform.parent.transform.width
+
             StartCoroutine(InstantiateButtonsWithDelay());
-
-
         }
+            
 
+        // Update is called once per frame
         void Update()
         {
-            if(!lost)
+            _instantiationDelay = Random.Range(0.5f, 2);
+            /*
+            foreach (GameObject b in instantiatedButtons)
             {
-                loseCondition();
-            } 
-            //TODO wird nach ein mal lose immer noch aufgerufen
+                b.transform.Translate(speed * Time.deltaTime * Vector3.left);
+                
+            }
+
+            foreach (GameObject b in instantiatedButtons)
+            {
+                if (b.transform.position.x < -width / 2)
+                {
+                    Destroy(b);
+                }
+            }
+            */
+
+            for (int i = _instantiatedButtons.Count - 1; i >= 0; i--)
+            {
+                GameObject b = _instantiatedButtons[i];
+                b.transform.Translate(_speed * Time.deltaTime * Vector3.left);
+
+                if (b.transform.position.x < -_width / 2)
+                {
+                    Destroy(b);
+                    _instantiatedButtons.RemoveAt(i);
+                }
+            }
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireCube(buttonContainer.transform.position, new Vector3(4f, 5f, 0));
-        }
-
-
 
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
 
 
-
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
 
-        private void ButtonPress()
-        {
-            buttonPressed = true;
-            Debug.Log("clicked!");
-        }
 
-        private void instantiateButton()
-        {
-            GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
-            buttons.Add(newButton);
-            
-        }
-
-        private void loseCondition()
-        {
-           
-            for (int i = 0; i < buttons.Count; i++)
-            {
-                float buttonPosX = buttonContainer.transform.GetChild(i).gameObject.transform.position.x;
-
-                if (buttonPosX < leftBound)
-                {
-                    Debug.Log("Lose");
-                    lost = true;
-                    //buttons.RemoveAt(i);
-                    DestroyAll();
-
-                    buttonPressed = false;
-                    StopGame();
-                }
-                else if (buttonPosX > rightBound && buttonPressed)
-                {
-                    Debug.Log("Lose");
-                    lost = true;
-                    //Destroy(buttons[i].gameObject);
-                    //buttons.RemoveAt(i);
-                    DestroyAll();
-                    buttonPressed = false;
-                    StopGame();
-
-                }
-                else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
-                {
-                    Debug.Log("Win");
-                    lost = false;
-
-                    Destroy(buttons[i].gameObject);
-                    buttons.RemoveAt(i);
-                    buttonPressed = false;
-                }
-            }
-         }
-
-        void StopGame()
-        {
-            Time.timeScale = 0;
-        }
-
-        private void DestroyAll()
-        {
-            for (int i = 0; i < buttons.Count; i++)
-            {
-                Destroy(buttons[i].gameObject);
-                buttons.RemoveAt(i);
-            }
-        }
-
-        private IEnumerator InstantiateButtonsWithDelay()
-        {
-            while (lost == false)
-            {
-                if(instantiationCount == 4)
-                {
-                    yield return new WaitForSeconds(delayBetweenRhythm);
-                    instantiationCount = 0;
-                }
-                GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
-
-                buttons.Add(newButton);
-                instantiationCount++;
-                yield return new WaitForSeconds(instantiationDelay);
-            }
-        }
-
-        private void createRhythm()
-        {
-            if (instantiationCount == 4)
-            {
-
-            }
-        }
 
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers
 
+        private IEnumerator InstantiateButtonsWithDelay()
+        {
+            Vector3 spawnPos = new(transform.position.x + _width / 2, transform.position.y, 0f);
+            while (_lose == false)
+            {
+                button = Instantiate(buttonPrefab, spawnPos, Quaternion.identity);
 
+                _instantiatedButtons.Add(button);
+
+                yield return new WaitForSeconds(_instantiationDelay);
+            }
+        }
 
         #endregion Overarching Methods / Helpers
     }

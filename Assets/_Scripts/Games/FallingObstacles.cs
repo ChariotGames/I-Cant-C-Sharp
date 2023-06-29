@@ -1,29 +1,35 @@
-using System;
+using _Scripts.Models;
+using _Scripts.Pascal;
 using System.Collections;
 using System.Collections.Generic;
-using _Scripts.Pascal;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class FallingObstacles : Game
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FallingObstacles : BaseGame
     {
+        #region Serialized Fields
+
+        [SerializeField] private Cannon cannon;
+        [SerializeField] private GameObject obstacle, obstacleContainer;
+        [SerializeField] private TextMeshPro lifeCounter;
+        [SerializeField] private float cannonMovementSpeed;
+
+        #endregion Serialized Fields
+
         #region Fields
 
-        [SerializeField] private Cannon cannonPrefab;
-        [SerializeField] private GameObject obstaclePrefab;
-        [SerializeField] private float cannonMovementSpeed;
-        [SerializeField] private TextMeshPro lifeCounterTextMeshPro;
-
-        private float _spawnDelay;
         private Camera _mainCamera;
         private Bounds _cameraViewportBounds;
-        private int _numObstacles;
-        private Cannon _spawnedCannon;
         private Vector3 _obstacleExtents;
+        private float _spawnDelay;
         private int _healthPoints = 3;
+        private int _numObstacles;
 
         #endregion Fields
 
@@ -36,88 +42,73 @@ namespace _Scripts.Games
 
         private void OnEnable()
         {
-            BottomBounds.damageTaken += TakeDamage;
+            BottomBounds.DamageTaken += TakeDamage;
         }
-        
 
         private void Start()
         {
             // Calculate the camera's viewport bounds
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             
-            lifeCounterTextMeshPro.text = _healthPoints.ToString();
+            lifeCounter.text = _healthPoints.ToString();
             
-            _obstacleExtents = obstaclePrefab.GetComponent<Renderer>().bounds.extents;
-           
-            Difficulty = Difficulty.LVL1;
-           
-            _spawnedCannon = Instantiate(cannonPrefab);
+            _obstacleExtents = obstacle.GetComponent<Renderer>().bounds.extents;
+
+            cannon.gameObject.SetActive(true);
 
             // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
             switch (Difficulty)
             {
-                case Difficulty.LVL1:
+                case Difficulty.EASY:
                     _numObstacles = 1;
                     _spawnDelay = 1.5f;
                     break;
-                case Difficulty.LVL2:
+                case Difficulty.MEDIUM:
                     _numObstacles = 2;
                     _spawnDelay = 2f;
                     break;
-                case Difficulty.LVL3:
-                    _spawnDelay = 2f;
+                case Difficulty.HARD:
                     _numObstacles = 2;
+                    _spawnDelay = 2f;
                     ActivateHorizontalMovement();
                     break;
             }
-
 
             StartCoroutine(SpawnCoroutine());
         }
 
         private void OnDisable()
         {
-            BottomBounds.damageTaken -= TakeDamage;
+            BottomBounds.DamageTaken -= TakeDamage;
         }
 
         #endregion Built-Ins / MonoBehaviours
 
-        #region GetSets / Properties
-
-            
-
-        #endregion GetSets / Properties
-
         #region Game Mechanics / Methods
-        
+
+        /// <summary>
+        /// Is called via an event when an obstacle hits the ground.
+        /// </summary>
         private void TakeDamage()
         {
             _healthPoints--;
             if (_healthPoints == 0)
             {
-                Lose();
+                base.Lose();
             }
-            lifeCounterTextMeshPro.text = _healthPoints.ToString();
+            lifeCounter.text = _healthPoints.ToString();
         }
-
-        private IEnumerator SpawnCoroutine()
-        {
-            // endless loop
-            while (true)
-            {
-                SpawnObstacle();
-                yield return new WaitForSeconds(_spawnDelay);
-            }
-        }
-
-
-
+        
+        /// <summary>
+        /// The actual mechanic that allows moving the cannon horizontally.
+        /// </summary>
+        /// <param name="cannonBounds">The bounding boy of the canon.</param>
+        /// <returns></returns>
         private IEnumerator HorizontalMovementCoroutine(Bounds cannonBounds)
         {
-            
-            var targetXPos = _spawnedCannon.transform.position.x;
-            var minX = _cameraViewportBounds.min.x + cannonBounds.extents.x;
-            var maxX = _cameraViewportBounds.max.x - cannonBounds.extents.x;
+            float targetXPos = cannon.transform.position.x;
+            float minX = _cameraViewportBounds.min.x + cannonBounds.extents.x;
+            float maxX = _cameraViewportBounds.max.x - cannonBounds.extents.x;
 
             while (true)
             {
@@ -134,16 +125,17 @@ namespace _Scripts.Games
                     cannonMovementSpeed *= -1f;
                 }
 
-                var position = _spawnedCannon.transform.position;
+                Vector3 position = cannon.transform.position;
                 position = new Vector3(targetXPos, position.y, position.z);
-                _spawnedCannon.transform.position = position;
+                cannon.transform.position = position;
 
                 yield return null;
             }
         }
 
-        
-
+        /// <summary>
+        /// Actually spawns a new obstacle object within the camera bounds.
+        /// </summary>
         private void SpawnObstacle()
         {
             var spawnedPositions = new List<Vector3>();
@@ -159,11 +151,32 @@ namespace _Scripts.Games
 
                 } while (!IsPositionValid(obstaclePosition, spawnedPositions));
 
-                var obstacleGO = Instantiate(obstaclePrefab, obstaclePosition, Quaternion.identity);
+                Instantiate(obstacle, obstaclePosition, Quaternion.identity, obstacleContainer.transform).SetActive(true);
+
                 spawnedPositions.Add(obstaclePosition);
             }
         }
 
+        #endregion Game Mechanics / Methods
+
+        #region Overarching Methods / Helpers
+
+
+        /// <summary>
+        /// Activates horizontal movement for level 3.
+        /// </summary>
+        private void ActivateHorizontalMovement()
+        {
+            var cannonBounds = cannon.GetComponentInChildren<Renderer>().bounds;
+            StartCoroutine(HorizontalMovementCoroutine(cannonBounds));
+        }
+
+        /// <summary>
+        /// Checks if a new obstacle can be spawned.
+        /// </summary>
+        /// <param name="position">The new position.</param>
+        /// <param name="occupiedPositions">The already taken positions.</param>
+        /// <returns></returns>
         private bool IsPositionValid(Vector3 position, List<Vector3> occupiedPositions)
         {
             foreach (var occupiedPosition in occupiedPositions)
@@ -178,18 +191,19 @@ namespace _Scripts.Games
             return true;
         }
 
-
-        private void ActivateHorizontalMovement()
+        /// <summary>
+        /// Kick-starts and executes the actual spawning routine.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator SpawnCoroutine()
         {
-            var cannonBounds = cannonPrefab.GetComponentInChildren<Renderer>().bounds;
-            StartCoroutine(HorizontalMovementCoroutine(cannonBounds));
+            // endless loop
+            while (true)
+            {
+                SpawnObstacle();
+                yield return new WaitForSeconds(_spawnDelay);
+            }
         }
-
-        #endregion Game Mechanics / Methods
-
-        #region Overarching Methods / Helpers
-
-            
 
         #endregion Overarching Methods / Helpers
     }

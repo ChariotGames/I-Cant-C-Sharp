@@ -6,125 +6,134 @@ namespace _Scripts._Input
 {
     public class InputHandler : MonoBehaviour
     {
-        public static Vector2 RightStickDelta;
-        public static Vector2 LeftStickDelta;
-        
-        public static event Action UpArrowBtnAction;
-        public static event Action DownArrowBtnAction;
-        public static event Action LeftArrowBtnAction;
-        public static event Action RightArrowBtnAction;
+        #region Action Fields
+        public static Vector2 StickRight, StickLeft;
 
-        public static event Action NorthBtnAction;
-        public static event Action EastBtnAction;
-        public static event Action SouthBtnAction;
-        public static event Action WestBtnAction;
+        public static event Action StickButtonRight, StickButtonLeft;
+
+        public static event Action ArrowUp, ArrowDown, ArrowLeft, ArrowRight;
+
+        public static event Action ButtonNorth, ButtonEast, ButtonSouth, ButtonWest;
         
-        public static event Action RightShoulderBtnAction;
-        public static event Action RightTriggerBtnAction;
-        
-        public static event Action LeftShoulderBtnAction;
-        public static event Action LeftTriggerBtnAction;
-        
-        public static event Action RightStickPressAction;
-        public static event Action LeftStickPressAction;
-        
-        
-        
-        public void OnRightStick(InputAction.CallbackContext ctx)
+        public static event Action ShoulderRight, ShoulderLeft;
+
+        public static event Action TriggerRight, TriggerLeft;
+
+        #endregion Action Fields
+
+        #region Callback Methods
+
+        #region Sticks
+
+        public void OnStickRight(InputAction.CallbackContext ctx)
         {
-            RightStickDelta = ctx.ReadValue<Vector2>();
-            //Debug.Log("RightStickDelta" + RightStickDelta);
+            StickRight = ctx.ReadValue<Vector2>();
+            //Debug.Log("StickRight" + StickRight);
         }
         
-        public void OnLeftStick(InputAction.CallbackContext ctx)
+        public void OnStickLeft(InputAction.CallbackContext ctx)
         {
-            LeftStickDelta = ctx.ReadValue<Vector2>();
-            //Debug.Log("LeftStickDelta" + LeftStickDelta);
+            StickLeft = ctx.ReadValue<Vector2>();
+            //Debug.Log("StickLeft" + StickLeft);
         }
 
-        public void OnUpButton(InputAction.CallbackContext ctx)
+        public void OnStickButtonLeft(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) UpArrowBtnAction?.Invoke();
+            if (ctx.performed) StickButtonLeft?.Invoke();
+            //Debug.Log("StickButtonLeft");
+        }
+
+        public void OnStickButtonRight(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) StickButtonRight?.Invoke();
+            //Debug.Log("StickButtonRight");
+        }
+
+        #endregion Sticks
+
+        #region Arrows
+
+        public void OnArrowUp(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) ArrowUp?.Invoke();
             //Debug.Log("UpArrowAction");
         }
     
-        public void OnDownButton(InputAction.CallbackContext ctx)
+        public void OnArrowDown(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) DownArrowBtnAction?.Invoke();
+            if (ctx.performed) ArrowDown?.Invoke();
             //Debug.Log("DownArrowAction");
         }
     
-        public void OnLeftButton(InputAction.CallbackContext ctx)
+        public void OnArrowLeft(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) LeftArrowBtnAction?.Invoke();
+            if (ctx.performed) ArrowLeft?.Invoke();
             //Debug.Log("LeftArrowAction");
         }
     
-        public void OnRightButton(InputAction.CallbackContext ctx)
+        public void OnArrowRight(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) RightArrowBtnAction?.Invoke();
+            if (ctx.performed) ArrowRight?.Invoke();
             //Debug.Log("RightArrowAction");
         }
-        
-        public void OnNorthButton(InputAction.CallbackContext ctx)
+
+        #endregion Arrows
+
+        #region Face Buttons
+
+        public void OnButtonNorth(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) NorthBtnAction?.Invoke();
-            //Debug.Log("NorthBtnAction");
+            if (ctx.performed) ButtonNorth?.Invoke();
+            //Debug.Log("ButtonNorth");
+        }
+
+        public void OnButtonSouth(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) ButtonSouth?.Invoke();
+            //Debug.Log("ButtonSouth");
+        }
+
+        public void OnButtonEast(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) ButtonEast?.Invoke();
+            //Debug.Log("ButtonEast");
         }
         
-        public void OnEastButton(InputAction.CallbackContext ctx)
+        public void OnButtonWest(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) EastBtnAction?.Invoke();
-            //Debug.Log("EastBtnAction");
+            if (ctx.performed) ButtonWest?.Invoke();
+            //Debug.Log("ButtonWest");
         }
-        
-        public void OnSouthButton(InputAction.CallbackContext ctx)
+
+        #endregion Face Buttons
+
+        #region Shoulder & Trigger
+
+        public void OnShoulderLeft(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) SouthBtnAction?.Invoke();
-            //Debug.Log("SouthBtnAction");
-        }
-        
-        public void OnWestButton(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed) WestBtnAction?.Invoke();
-            //Debug.Log("WestBtnAction");
-        }
-        
-        public void OnLeftShoulderButton(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed) LeftShoulderBtnAction?.Invoke();
+            if (ctx.performed) ShoulderLeft?.Invoke();
             //Debug.Log("LeftShoulderAction");
         }
-        
-        public void OnLeftTriggerButton(InputAction.CallbackContext ctx)
+        public void OnShoulderRight(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) LeftTriggerBtnAction?.Invoke();
+            if (ctx.performed) ShoulderRight?.Invoke();
+            //Debug.Log("RightShoulderAction");
+        }
+
+        public void OnTriggerLeft(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) TriggerLeft?.Invoke();
             //Debug.Log("LeftTriggerAction");
         }
         
-        public void OnRightShoulderButton(InputAction.CallbackContext ctx)
+        public void OnTriggerRight(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed) RightShoulderBtnAction?.Invoke();
-            //Debug.Log("RightShoulderAction");
-        }
-        
-        public void OnRightTriggerButton(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed) RightTriggerBtnAction?.Invoke();
+            if (ctx.performed) TriggerRight?.Invoke();
             //Debug.Log("RightTriggerAction");
         }
-        
-        public void OnLeftStickPress(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed) LeftStickPressAction?.Invoke();
-            //Debug.Log("LeftStickPressAction");
-        }
-        
-        public void OnRightStickPress(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed) RightStickPressAction?.Invoke();
-            //Debug.Log("RightStickPressAction");
-        }
 
+        #endregion Shoulder & Trigger
+
+        #endregion Callback Methods
     }
 }

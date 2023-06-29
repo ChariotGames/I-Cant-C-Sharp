@@ -1,45 +1,44 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Scripts._Interfaces;
+using _Scripts.GameElements;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.Games
 {
-    public class ButtonHero : Game
+    public class ButtonHero : BaseGame
     {
-        #region Fields
+        #region Serialized Fields
 
-        [SerializeField] private List<GameObject> buttonPrefabs;
+        [SerializeField] private List<ButtonHeroElement> buttons;
         [SerializeField] private float spawnTimeUpperBounds;
         [SerializeField] private float spawnTimeLowerBounds;
         [SerializeField] private TextMeshPro timerTextMesh;
-        
-        
+
+        #endregion Serialized Fields
+
+        #region Fields
+
         private Camera _mainCamera;
         private TextMeshPro _previousButton;
         private Bounds _cameraViewportBounds;
-        private readonly List<TextMeshPro> spawnedButtons = new ();
+        private readonly List<TextMeshPro> _spawnedButtons = new ();
         private static float _timer;
-  
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
-       
         private void Awake()
         {
             _mainCamera = Camera.main;
-            for (var i = buttonPrefabs.Count - 1; i >= 0; i--)
+            for (var i = buttons.Count - 1; i >= 0; i--)
             {
-                var buttonPrefab = buttonPrefabs[i];
                 // just pool all the objects into a list
-                var button = Instantiate(buttonPrefab);
-                var buttonRenderer = button.GetComponent<TextMeshPro>();
-                spawnedButtons.Add(buttonRenderer);
+                GameObject button = Instantiate(buttons[i].gameObject);
+                TextMeshPro buttonRenderer = button.GetComponent<TextMeshPro>();
+                _spawnedButtons.Add(buttonRenderer);
                 button.SetActive(false);
             }
         }
@@ -50,7 +49,6 @@ namespace _Scripts.Games
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
 
             StartCoroutine(SpawnCoroutine());
-            
         }
 
         private void Update()
@@ -64,8 +62,6 @@ namespace _Scripts.Games
                 var timeText = $"{seconds:00}:{milliseconds:00}";
                 timerTextMesh.text = timeText;
             }
-
-
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -82,21 +78,26 @@ namespace _Scripts.Games
         {
             Debug.Log("It took " + _timer + " to react");
             _timer = 0;
-            
         }
-            
+
+        public void ResetTimer2()
+        {
+            Debug.Log("It took " + _timer + " to react");
+            _timer = 0;
+        }
+
+        #endregion Game Mechanics / Methods
+
+        #region Overarching Methods / Helpers
+
         private void ActivateObjectAtRandomPos()
         {
             // Make sure only one Button is visible at a time
-            if (_previousButton && _previousButton.gameObject.activeSelf)
-            {
-                return;
-            }
+            if (_previousButton && _previousButton.gameObject.activeSelf) return;
 
-            
             // Get a random TextMeshPro from the list
-            var randomIndex = Random.Range(0, spawnedButtons.Count);
-            var randomButton = spawnedButtons[randomIndex];
+            var randomIndex = Random.Range(0, _spawnedButtons.Count);
+            var randomButton = _spawnedButtons[randomIndex];
 
             // Calculate the preferred values of the text
             var preferredValues = randomButton.GetPreferredValues();
@@ -121,14 +122,6 @@ namespace _Scripts.Games
             _previousButton = randomButton;
         }
 
-
-
-
-
-
-
-        
-
         private IEnumerator SpawnCoroutine()
         {
             while (true)
@@ -136,15 +129,8 @@ namespace _Scripts.Games
                 var randomDelay = Random.Range(spawnTimeLowerBounds, spawnTimeUpperBounds);
                 ActivateObjectAtRandomPos();
                 yield return new WaitForSeconds(randomDelay);
-                
             }
         }
-        
-        #endregion Game Mechanics / Methods
-
-        #region Overarching Methods / Helpers
-
-            
 
         #endregion Overarching Methods / Helpers
     }
