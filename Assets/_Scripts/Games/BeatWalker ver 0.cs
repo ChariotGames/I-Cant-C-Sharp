@@ -16,7 +16,7 @@ namespace _Scripts.Games
     /// On Level 2, keep it short and concise.
     /// On Level 3, maybe one-liners are possible.
     /// </summary>
-    public class BeatWalker0 : Game
+    public class BeatWalker0 : BaseGame
     {
         /**
          * TODO: General Structure Ideas:

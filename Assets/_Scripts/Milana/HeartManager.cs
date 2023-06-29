@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
+using _Scripts.Models;
 
-namespace _Scripts
+namespace _Scripts.Controllers
 {
-    public class HealthManager : MonoBehaviour
+    public class HeartManager : MonoBehaviour
     {
         [SerializeField] private Settings settings;
         [SerializeField] private Image[] hearts;
@@ -13,7 +13,7 @@ namespace _Scripts
         [SerializeField] private Sprite fullHeart;
         [SerializeField] private Sprite emptyHeart;
 
-        
+
 
         private void Awake()
         {
@@ -37,3 +37,4 @@ namespace _Scripts
     }
 
 }
+
