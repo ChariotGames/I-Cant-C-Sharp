@@ -21,7 +21,9 @@ namespace _Scripts.Games
         private bool buttonPressed = false;
         private bool lost = false;
         private List<GameObject> buttons = new List<GameObject>();
-        private float instantiationDelay = 1f;
+        private float instantiationDelay = 2f;
+        private float delayBetweenRhythm = 1f;
+        private int instantiationCount = 0;
 
         #endregion Fields
 
@@ -29,7 +31,7 @@ namespace _Scripts.Games
 
         private void Awake()
         {
-            Physics2D.gravity = new Vector2(-9.8f, 0);
+            //Physics2D.gravity = new Vector2(-9.8f, 0);
 
             //Get coords of activation region
             float regionSizeX = GameObject.Find("ActivationRegion").gameObject.GetComponent<Collider2D>().bounds.size.x;
@@ -107,7 +109,7 @@ namespace _Scripts.Games
                     DestroyAll();
 
                     buttonPressed = false;
-                    PauseGame();
+                    StopGame();
                 }
                 else if (buttonPosX > rightBound && buttonPressed)
                 {
@@ -117,7 +119,7 @@ namespace _Scripts.Games
                     //buttons.RemoveAt(i);
                     DestroyAll();
                     buttonPressed = false;
-                    PauseGame();
+                    StopGame();
 
                 }
                 else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
@@ -132,7 +134,7 @@ namespace _Scripts.Games
             }
          }
 
-        void PauseGame()
+        void StopGame()
         {
             Time.timeScale = 0;
         }
@@ -150,11 +152,24 @@ namespace _Scripts.Games
         {
             while (lost == false)
             {
+                if(instantiationCount == 4)
+                {
+                    yield return new WaitForSeconds(delayBetweenRhythm);
+                    instantiationCount = 0;
+                }
                 GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
 
                 buttons.Add(newButton);
-
+                instantiationCount++;
                 yield return new WaitForSeconds(instantiationDelay);
+            }
+        }
+
+        private void createRhythm()
+        {
+            if (instantiationCount == 4)
+            {
+
             }
         }
 

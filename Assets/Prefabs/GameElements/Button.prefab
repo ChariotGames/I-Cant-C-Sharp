@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6714204614858107446}
   - component: {fileID: 3622584596617634882}
   - component: {fileID: 689166098908461217}
-  - component: {fileID: 6625366622514597191}
   - component: {fileID: 6625366622514597306}
+  - component: {fileID: -7904917534217257447}
   m_Layer: 6
   m_Name: Button
   m_TagString: Untagged
@@ -99,27 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7123081c1044a7a4b48fbc3b139832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &6625366622514597191
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3375330161855896988}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0.5
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &6625366622514597306
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,3 +125,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.982, y: 1.99}
   m_EdgeRadius: 0
+--- !u!114 &-7904917534217257447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3375330161855896988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09c7ff5bbe9c4ddbafade6510b8742c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
