@@ -3,6 +3,7 @@ using _Scripts._Input;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using _Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -36,7 +37,7 @@ namespace _Scripts.Games
         private const int NUMBER_LIGHTS = 5;
         private float _timeElapsed = 0, _randomDelay = 0;
         private bool _isButtonPressed = false;
-        private SpriteRenderer _backroundSprite;
+        private SpriteRenderer _backgroundSprite;
         
 
     #endregion Fields
@@ -47,7 +48,7 @@ namespace _Scripts.Games
         {
             flashColor.Add(lightRed);
             flashColor.Add(lightGreen);
-            _backroundSprite = background.GetComponent<SpriteRenderer>();
+            _backgroundSprite = background.GetComponent<SpriteRenderer>();
             _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
             _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
             StartCoroutine(GameCoroutine());
@@ -172,7 +173,7 @@ namespace _Scripts.Games
 
         private IEnumerator FlashBackground()
         {
-            _backroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
+            _backgroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
             background.SetActive(true);
             yield return new WaitForSeconds(0.2f);
             background.SetActive(false);
