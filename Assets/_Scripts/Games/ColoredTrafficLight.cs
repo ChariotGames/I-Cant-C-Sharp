@@ -46,7 +46,6 @@ namespace _Scripts.Games
         [SerializeField] private GameObject simonOk_ref;
         [SerializeField] private int delaySecondWave = 5;
         [SerializeField] private int timeToSelectLight = 5;
-        
 
         #endregion Serialized Fields
 
@@ -97,7 +96,6 @@ namespace _Scripts.Games
             secondWaveColors = MixCorrectColorsIntoWrongOnes(
                 GenLightColors(trafficLightAmount, correctColors), correctColors);
             SetLightColors(trafficLights, secondWaveColors, false);
-            if(gameVariant && Difficulty == Difficulty.MEDIUM) selector_ref.transform.Translate(-0.725f,0,0); /*selector_ref.transform.position = new Vector3(0, 1.2f, 0);*/
             selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
             selector_ref.SetActive(true);
             EnableInputs();
@@ -111,6 +109,12 @@ namespace _Scripts.Games
             Invoke(nameof(CheckSelector), 2);
         }
 
+        private void Update()
+        {
+            selector_ref.transform.position = selector_ref.transform.parent.transform.position;
+            selector_ref.transform.Translate(0,-1.2f,0);
+        }
+
         private void EnableInputs()
         {
             InputHandler.ArrowLeft += ButtonPressL;
@@ -122,7 +126,7 @@ namespace _Scripts.Games
             InputHandler.ArrowLeft -= ButtonPressL;
             InputHandler.ArrowRight -= ButtonPressR;
         }
-        
+
         private void OnDisable()
         {
             InputHandler.ArrowLeft -= ButtonPressL;
@@ -215,8 +219,6 @@ namespace _Scripts.Games
             {
                 --selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
-                //selector_ref.transform.position.Set(0,1.2f,0); diese zeile sollte man eigentlich verwenden, oder position = new Vector3(0,1.2f,0); beide funktionieren nicht.
-                selector_ref.transform.Translate(1.45f,0,0);
             }
         }
         
@@ -226,8 +228,6 @@ namespace _Scripts.Games
             {
                 ++selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
-                //selector_ref.transform.position.Set(0,1.2f,0); diese zeile sollte man eigentlich verwenden, oder position = new Vector3(0,1.2f,0); beide funktionieren nicht.
-                selector_ref.transform.Translate(-1.45f,0,0);
             }
         }
 
