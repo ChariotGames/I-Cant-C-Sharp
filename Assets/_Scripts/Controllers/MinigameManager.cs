@@ -24,6 +24,8 @@ namespace _Scripts.Controllers
         private Queue<Minigame> _previous;
         private const int MAX_LOADED = 2, MAX_QUE = 5;
 
+
+        private int totalScore = 0;
         #endregion
 
         #region Built-Ins
@@ -275,6 +277,9 @@ namespace _Scripts.Controllers
         public void WinCondition(AssetID id, GameObject game)
         {
             Debug.Log($"Win from {id}");
+            
+            totalScore++;
+            Debug.Log(totalScore);
             //for (int i = 0; i < containers.All.Length; i++)
             //{
             //    if (containers.All[i].childCount == 0) continue;
@@ -283,6 +288,11 @@ namespace _Scripts.Controllers
 
             //    if (obj.GetComponent<BaseGame>().ID == id) RemoveGame(obj);
             //}
+
+
+
+            //TODO instantiate text mesh pro with score
+
             RemoveGame(game);
         }
 

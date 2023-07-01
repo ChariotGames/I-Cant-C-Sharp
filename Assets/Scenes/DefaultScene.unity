@@ -1554,6 +1554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MinigameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5897317456580356393, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5897317456580356394, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: m_RootOrder
       value: 1
