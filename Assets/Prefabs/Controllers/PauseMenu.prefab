@@ -965,4 +965,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: -944628639613478452, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   pauseMenu: {fileID: 4357989686032796086}
-  button: {fileID: 2653348720613537965}
+  resumeButton: {fileID: 2653348720613537965}
+  button: {fileID: 3700162912877907380, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}

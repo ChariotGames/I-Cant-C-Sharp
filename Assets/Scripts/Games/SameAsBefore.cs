@@ -97,11 +97,11 @@ namespace Scripts.Games
                     yield return new WaitUntil(() => _isYes || _isNo || Time.timeScale - timer > timeToAnswer);
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
-                        base.Win();
+                        //base.Win();
                     }
                     else
                     {
-                        base.Lose();
+                        //base.Lose();
                     }
                     options[_index].SetActive(false);
                     _isYes = false;

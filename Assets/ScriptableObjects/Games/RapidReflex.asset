@@ -12,22 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: RapidReflex
   m_EditorClassIdentifier: 
-  assetID: 27261
   description: "Two rows of lights are turned on one bit by bit\r\n Player has to
     press a button as fast as possible once all are on.\r\n\nEasy: each light turns
     on after the same time\r\nMedium: last light has a random delay\r\nHard: distracting
     popups appear"
   difficulty: 1
   genre: 2
-  keysMain:
-    one: {fileID: 11400000, guid: ae76fd2c11623d94da24d8716aa5cd5b, type: 2}
+  keysLeft:
+    one: {fileID: 0}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
-  keysAux:
-    one: {fileID: 11400000, guid: 9c00c3b0b6af2594eac9f1465554be0e, type: 2}
+  keysRight:
+    one: {fileID: 0}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
-  prefab: {fileID: 6392271741382647194, guid: 62e95bc5bd41cdc45ab5d5c25ab44dfe, type: 3}
+  prefab: {fileID: 1887571883485080397, guid: 62e95bc5bd41cdc45ab5d5c25ab44dfe, type: 3}
   preview: {fileID: 0}
