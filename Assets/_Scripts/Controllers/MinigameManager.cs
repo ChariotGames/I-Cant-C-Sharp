@@ -294,7 +294,8 @@ namespace _Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 //PickGame(new List<Minigame>(games));
-                gameObject.GetComponent<SceneChanger>().ChangeScene(0);
+                //gameObject.GetComponent<SceneChanger>().ChangeScene(0);
+                SceneChanger.ChangeScene(0);
             }
         }
 

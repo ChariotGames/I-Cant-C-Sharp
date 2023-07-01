@@ -114,6 +114,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ButtonStart",
+                    "type": "Button",
+                    "id": "9eb1caa3-506a-4638-8c30-85d1f3ba1866",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ButtonSelect",
+                    "type": "Button",
+                    "id": "43950013-451c-46d0-a938-790980dfd0e6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ShoulderLeft",
                     "type": "Button",
                     "id": "1c96bf0e-7a4f-419e-84d8-9d92c4917925",
@@ -445,6 +463,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "TriggerLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15d8b064-a8b4-4667-9948-45c69d97d4bc",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4f5acce-d60b-40de-8eb9-3a03614c85e7",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0540b3c-f1c3-42a0-8cff-ff68a27c61f7",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonSelect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

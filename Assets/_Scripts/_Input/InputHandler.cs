@@ -14,6 +14,8 @@ namespace _Scripts._Input
         public static event Action ArrowUp, ArrowDown, ArrowLeft, ArrowRight;
 
         public static event Action ButtonNorth, ButtonEast, ButtonSouth, ButtonWest;
+
+        public static event Action OptionButtonStart, OptionButtonSelect; 
         
         public static event Action ShoulderRight, ShoulderLeft;
 
@@ -104,8 +106,23 @@ namespace _Scripts._Input
             if (ctx.performed) ButtonWest?.Invoke();
             //Debug.Log("ButtonWest");
         }
-
         #endregion Face Buttons
+
+        #region Option Buttons
+
+        public void OnOptionButtonStart(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) OptionButtonStart?.Invoke();
+            //Debug.Log("ButtonStart");
+        }
+        
+        public void OnOptionButtonSelect(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed) OptionButtonSelect?.Invoke();
+            //Debug.Log("ButtonSelect");
+        }
+
+        #endregion
 
         #region Shoulder & Trigger
 
