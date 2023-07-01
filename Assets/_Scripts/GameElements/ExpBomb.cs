@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using _Scripts.Games;
 using UnityEngine;
 
-public class ExpBomb : MonoBehaviour
+public class ExpBomb : BaseGame
 {
     [SerializeField] private Color[] colors;
     [SerializeField] private Exploooosions parent;
