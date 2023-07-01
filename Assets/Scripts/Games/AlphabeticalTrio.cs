@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using _Scripts._Input;
-using _Scripts.Models;
+using Scripts._Input;
+using Scripts.Models;
 using TMPro;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class AlphabeticalTrio : BaseGame
     {

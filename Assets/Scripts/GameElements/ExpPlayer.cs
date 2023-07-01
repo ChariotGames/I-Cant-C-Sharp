@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using _Scripts._Input;
+using Scripts._Input;
 using UnityEngine;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class ExpPlayer : BaseGame
     {
@@ -24,6 +24,7 @@ namespace _Scripts.Games
         {
             Vector2 input = new Vector2(InputHandler.StickLeft.x, InputHandler.StickLeft.y).normalized;
             Vector2 move = input * movementSpeed;
+            Debug.Log(knockback);
             move += knockback;
             rb.velocity = move;
         }

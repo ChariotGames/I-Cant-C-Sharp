@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using _Scripts._Input;
-using _Scripts.Models;
+using Scripts._Input;
+using Scripts.Models;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class LoseTile : BaseGame
     {

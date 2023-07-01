@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using _Scripts._Input;
+using Scripts._Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace _Scripts.Controllers
+namespace Scripts.Controllers
 {
     public class PauseMenu : MonoBehaviour
     {

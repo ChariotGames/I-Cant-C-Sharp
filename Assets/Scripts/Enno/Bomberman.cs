@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Scripts._Input;
-using _Scripts.Models;
+using Scripts._Input;
+using Scripts.Models;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     /// <summary>
     /// Bomberman, player spawns on a small Square, bombs spawn aswell and the player has to hide from them.

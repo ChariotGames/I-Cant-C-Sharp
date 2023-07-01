@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using _Scripts._Input;
-using _Scripts.Models;
+using Scripts._Input;
+using Scripts.Models;
 using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class ColoredTrafficLight : BaseGame
     {

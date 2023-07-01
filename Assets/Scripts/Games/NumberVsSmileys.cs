@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class NumberVsSmileys : BaseGame
     {

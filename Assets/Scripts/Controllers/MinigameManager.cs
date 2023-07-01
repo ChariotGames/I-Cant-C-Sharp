@@ -246,7 +246,7 @@ namespace Scripts.Controllers
             RemoveGame(game);
             if (settings.Lives <= 0)
             {
-                gameObject.GetComponent<SceneChanger>().ChangeScene(0);
+                SceneChanger.ChangeScene(0);
             }
         }
 

@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Scripts.Models;
+using Scripts.Models;
 using UnityEngine;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class LoseTileTile : MonoBehaviour
     {

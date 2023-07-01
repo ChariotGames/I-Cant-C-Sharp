@@ -1,9 +1,9 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using _Scripts.Models;
+using Scripts.Models;
 
-namespace _Scripts.Controllers
+namespace Scripts.Controllers
 {
     public class HeartManager : MonoBehaviour
     {
