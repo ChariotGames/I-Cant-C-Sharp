@@ -6,10 +6,17 @@ namespace _Scripts.Games
 {
     public class Exploooosions : BaseGame
     {
-        [SerializeField] private GameObject bombBase, bombDonut, bombCross, bombContainer, player;
+        [SerializeField] private GameObject bombBase, bombDonut, bombCross, bombContainer;
+
+        public GameObject player;
 
         private bool active = false;
         private GameObject[] bombs;
+        private int chance;
+        private int timer;
+        private int winCounter = 0;
+        private int loseCounter = 0;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -20,8 +27,51 @@ namespace _Scripts.Games
 
         private void SpawnBombs()
         {
-            GameObject bomb = Instantiate(bombs[0], gameObject.transform.position, Quaternion.identity, bombContainer.transform);
+            if (Difficulty == Difficulty.EASY)
+            {
+                chance = Random.Range(0, 1);
+            }
+            if (Difficulty == Difficulty.MEDIUM)
+            {
+                chance = Random.Range(0, 2);
+            }
+            if (Difficulty == Difficulty.HARD)
+            {
+                chance = Random.Range(0, 3);
+            }
+
+            GameObject bomb = Instantiate(bombs[chance], gameObject.transform.position, Quaternion.identity, bombContainer.transform);
+            bomb.transform.position = new Vector3(Random.Range(-5, 6), Random.Range(-5, 6), transform.position.z);
             bomb.SetActive(true);
+
+            timer = Random.Range(1, 4);
+            Invoke(nameof(SpawnBombs), timer);
+        }
+
+        public void CheckWinCondition(Collider2D col1, Collider2D col2)
+        {
+            if (col1.IsTouching(col2))
+            {
+                Debug.Log("Chuckles... I'm in danger.");
+                loseCounter++;
+            }
+            else
+            {
+                winCounter++;
+            }
+
+            if (winCounter == 25)
+            {
+                Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
+                active = false;
+                base.Win();
+            }
+            if (loseCounter == 3)
+            {
+                Debug.Log("Snake? SNAKE? SNAAAAAACKE!!!");
+                active = false;
+                base.Lose();
+            }
         }
 
         // Update is called once per frame

@@ -8,7 +8,7 @@ namespace _Scripts.Games
 {
     public class ExpPlayer : BaseGame
     {
-        [SerializeField] private float movementSpeed = 10f;
+        [SerializeField] private float movementSpeed = 5f;
         [SerializeField] private InputActionReference[] _buttons;
 
         private Rigidbody2D rb;
