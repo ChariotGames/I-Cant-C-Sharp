@@ -26,6 +26,7 @@ namespace Scripts.Controllers
         private KeyMap keys, otherKeys;
         private Transform parent;
         private const int MAX_QUE = 5;
+        private int loadedTimes = 3;
 
         #endregion
 
@@ -124,28 +125,28 @@ namespace Scripts.Controllers
             _previous.Enqueue(game);
 
             GameObject obj = Instantiate(game.Prefab, parent);
-            BaseGame prefab = obj.GetComponent<BaseGame>();
-            //prefab.ID = game.AssetID;
-            prefab.Difficulty = game.Difficulty;
-            prefab.Keys = keys;
-
+            BaseGame baseGame = obj.GetComponent<BaseGame>();
+            baseGame.Difficulty = game.Difficulty;
+            baseGame.Keys = keys;
+            baseGame.Bounds = SetBounds(parent.position, _soloGames.Contains(game));
+            loadedTimes++;
             return true; // Successfully loaded
         }
 
         /// <summary>
         /// Removes the game instance from the scene.
+        /// Messy code...
         /// </summary>
         private void RemoveGame(GameObject game)
         {
-            /*GameObject instance = FindObjectOfType<GameObject>(game);
-            foreach (Minigame miniGame in settings.Games)
+            if(loadedTimes == MAX_QUE)
             {
-                if (miniGame.Prefab == game)
-                {
-                    //loaded.Remove(miniGame);
-                    break;
-                }
-            }*/
+                RemoveAllGames();
+                List<Minigame> gameList = new(_soloGames);
+                Minigame bossGame = gameList[Random.Range(0, gameList.Count)];
+                LoadGame(bossGame, bossGame.KeysLeft, spawnCenter);
+                return;
+            }
 
             if (spawnLeft.GetChild(0).gameObject == game)
             {
@@ -173,23 +174,27 @@ namespace Scripts.Controllers
         }
 
         /// <summary>
-        /// Removes all game instance from the scene.
+        /// Removes all game instances from the scene.
         /// </summary>
         private void RemoveAllGames()
         {
-            //foreach (Minigame game in loaded)
-            //{
-            //    Destroy(FindObjectOfType<GameObject>(game.Prefab));
-            //}
-            //loaded.Clear();
-        }
+            if (spawnLeft.childCount != 0)
+            {
+                Destroy(spawnLeft.GetChild(0).gameObject);
+                loadedLeft = null;
+            }
 
-        /// <summary>
-        /// Resizes the game, to fit the current spawn position
-        /// </summary>
-        private void ResizeGame()
-        {
-            // TODO: implement
+            if (spawnRight.childCount != 0)
+            {
+                Destroy(spawnRight.GetChild(0).gameObject);
+                loadedRight = null;
+            }
+
+            if (spawnCenter.childCount != 0)
+            {
+                Destroy(spawnCenter.GetChild(0).gameObject);
+            }
+            loadedTimes = 0;
         }
 
         #endregion Instance Management
@@ -201,7 +206,7 @@ namespace Scripts.Controllers
         /// </summary>
         /// <param name="game">The game to load.</param>
         /// <param name="other">The still running game on screen.</param>
-        /// <returns></returns>
+        /// <returns>False if no overlaps are found.</returns>
         private bool CheckGenre(Minigame game, Minigame other)
         {
             if (other == null) return false;
@@ -219,26 +224,6 @@ namespace Scripts.Controllers
                     if (key == others) return true;
                 }
             }
-            //InputActionReference[] keys = load.GetComponent<BaseGame>().Keys.All;
-
-            //foreach(InputActionReference key in keys)
-            //{
-            //    if (key == null) continue;
-
-            //    foreach (InputActionReference button in game.KeysMain.All)
-            //    {
-            //        if (button == null) continue;
-
-            //        if (key == button) return false;
-            //    }
-
-            //    foreach (InputActionReference button in game.KeysAux.All)
-            //    {
-            //        if (button == null) continue;
-
-            //        if (key == button) return false;
-            //    }
-            //}
 
             return false;
         }
@@ -250,14 +235,6 @@ namespace Scripts.Controllers
         public void WinCondition(/*AssetID id,*/ GameObject game)
         {
             Debug.Log($"Win from {game.name}");
-            //for (int i = 0; i < containers.All.Length; i++)
-            //{
-            //    if (containers.All[i].childCount == 0) continue;
-
-            //    GameObject obj = containers.All[i].GetChild(0).gameObject;
-
-            //    if (obj.GetComponent<BaseGame>().ID == id) RemoveGame(obj);
-            //}
             RemoveGame(game);
         }
 
@@ -276,6 +253,20 @@ namespace Scripts.Controllers
         public void SetDifficulty(/*AssetID id,*/ GameObject game, Difficulty difficulty)
         {
             settings.Games.Find(obj => /*obj.AssetID == id*/obj.Prefab == game).Difficulty = difficulty;
+        }
+
+        /// <summary>
+        /// Sets the game's bounds, to fit the current spawn position.
+        /// <param name="centerPoint">The point to set to.</param>
+        /// <param name="isFullscreen">Only needed for fullscreen games.</param>
+        /// </summary>
+        private Bounds SetBounds(Vector3 centerPoint, bool isFullscreen)
+        {
+            Vector3 size = _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero);
+
+            if (isFullscreen) return new Bounds(_mainCamera.transform.position, size);
+
+            return new Bounds(centerPoint, size);
         }
 
         #endregion

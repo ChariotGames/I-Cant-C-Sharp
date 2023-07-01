@@ -21,8 +21,7 @@ namespace Scripts.Games
         #endregion Serialized Fields
 
         #region Fields
-/*
-        protected AssetID id;*/
+
         protected Bounds bounds;
         protected KeyMap keys;
         protected MinigameManager manager;
@@ -77,15 +76,6 @@ namespace Scripts.Games
         #region GetSets
 
         /// <summary>
-        /// The game's unique ID.
-        /// </summary>
-        /*public AssetID ID
-        {
-            get => id;
-            set => id = value;
-        }*/
-
-        /// <summary>
         /// The game's current difficulty.
         /// </summary>
         public Difficulty Difficulty
@@ -109,15 +99,15 @@ namespace Scripts.Games
         public MinigameManager Manager
         {
             get => manager;
-            set => manager = value;
+            //set => manager = value;
         }
 
         /// <summary>
         ///  The minigame's inner bounds, set by the manager.
         /// </summary>
-        protected Bounds Bounds
+        public Bounds Bounds
         {
-            get => bounds;
+            //get => bounds;
             set => bounds = value;
         }
 

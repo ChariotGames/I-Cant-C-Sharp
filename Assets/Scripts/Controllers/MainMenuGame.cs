@@ -38,32 +38,10 @@ namespace Scripts.Controllers
         public void SetupButton(Minigame input)
         {
             game = input;
-            title.text = ConvertIDtoName(game.AssetID);
+            title.text = game.Prefab.name;
             if (game.Preview != null) preview.sprite = game.Preview;
         }
 
         #endregion Game Mechanics / Methods
-
-        #region Overarching Methods / Helpers
-
-        /// <summary>
-        /// Converts an AssetID enum to a propper game name.
-        /// </summary>
-        /// <param name="id">The ID to convert.</param>
-        /// <returns>Name with spaces.</returns>
-        private string ConvertIDtoName(AssetID id)
-        {
-            string name = id.ToString()[4..];
-            string result = "";
-
-            foreach (char c in name)
-            {
-                if (char.IsUpper(c)) result += " ";
-                result += c;
-            }
-            return result.Trim();
-        }
-
-        #endregion Overarching Methods / Helpers
     }
 }

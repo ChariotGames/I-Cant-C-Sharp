@@ -11,7 +11,7 @@ namespace Scripts.Models
     {
         #region Serialized Fields
 
-        [SerializeField] private AssetID assetID;
+        //[SerializeField] private AssetID assetID;
         [SerializeField] [TextArea(3, 10)] private string description;
         //[SerializeField] private Complexity complexity;
         [SerializeField] private Difficulty difficulty;
@@ -29,10 +29,10 @@ namespace Scripts.Models
         /// <summary>
         /// The game's unique ID.
         /// </summary>
-        public AssetID AssetID
-        {
-            get => assetID;
-        }
+        //public AssetID AssetID
+        //{
+        //    get => assetID;
+        //}
 
         /// <summary>
         /// The game's complexity.
