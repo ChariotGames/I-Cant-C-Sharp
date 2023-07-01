@@ -19,16 +19,19 @@ namespace _Scripts.Games
         [SerializeField] private GameObject balls;
         [SerializeField] private GameObject guessingOverlay;
         [SerializeField] private PhysicsMaterial2D groundMaterial;
+        [SerializeField] private TextMeshPro infoText;
         
         private int _bounceCounter;
         private bool _guessingStage;
         private int _currentGuessNumber;
         private int _maxFails = 3;
         private float _elapsedTime;
-        private float _maxRoundTime = 10;
         private float _timeoutStemp;
-        private float _timeoutDelay = 15f;
-
+        private float _ballGravityScale = 1f;
+        private bool hasRandomGravity;
+        
+        private const float _timeoutDelay = 15f;
+        private const float _maxRoundTime = 10;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -45,6 +48,7 @@ namespace _Scripts.Games
                     break;
                 case Difficulty.HARD:
                     groundMaterial.bounciness = 0.925f;
+                    hasRandomGravity = true;
                     break;
 
             }
@@ -59,6 +63,10 @@ namespace _Scripts.Games
 
         private void Update()
         {
+            if (Time.time >= 5 && infoText.gameObject.activeSelf)
+            {
+                infoText.gameObject.SetActive(false);
+            }
             _elapsedTime += Time.deltaTime;
             if (_elapsedTime >= _maxRoundTime && !_guessingStage)
             {
@@ -69,7 +77,6 @@ namespace _Scripts.Games
             {
                 SubmitGuess();
                 _guessingStage = false;
-                
             }
         }
 
@@ -153,6 +160,11 @@ namespace _Scripts.Games
         {
             foreach (var ball in bouncingBalls)
             {
+                if (hasRandomGravity)
+                {
+                    var randomGravity = Random.Range(1.5f, 2.6f);
+                    ball.gravityScale = randomGravity;
+                }
                 var randomDelay = Random.Range(0f, 1.5f);
                 yield return new WaitForSeconds(randomDelay);
                 ball.isKinematic = false;
