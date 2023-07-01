@@ -8,10 +8,12 @@ namespace _Scripts.Games
 {
     public class ExpPlayer : BaseGame
     {
-        [SerializeField] private float movementSpeed = 10f;
+        [SerializeField] private float movementSpeed = 5f;
         [SerializeField] private InputActionReference[] _buttons;
 
-        private Rigidbody2D rb;
+        public Rigidbody2D rb;
+        public Vector2 knockback = new(0, 0);
+        private float knockbackDamp = 1.2f;
 
         private void Start()
         {
@@ -22,6 +24,7 @@ namespace _Scripts.Games
         {
             Vector2 input = new Vector2(InputHandler.StickLeft.x, InputHandler.StickLeft.y).normalized;
             Vector2 move = input * movementSpeed;
+            move += knockback;
             rb.velocity = move;
         }
 
@@ -29,6 +32,11 @@ namespace _Scripts.Games
         void Update()
         {
             move();
+            knockback /= knockbackDamp;
+            if (knockback.magnitude <= 0.01f)
+            {
+                knockback = Vector2.zero;
+            }
         }
     }
 }

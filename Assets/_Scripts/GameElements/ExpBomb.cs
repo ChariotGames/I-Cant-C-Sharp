@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Games;
 using UnityEngine;
 
-public class ExpBomb : MonoBehaviour
+public class ExpBomb : BaseGame
 {
     [SerializeField] private Color[] colors;
+    [SerializeField] private Exploooosions parent;
+    [SerializeField] private float size;
 
     private bool active = false;
+    private bool danger = false;
 
     // Start is called before the first frame update
     void Start()
@@ -14,14 +18,6 @@ public class ExpBomb : MonoBehaviour
         active = true;
         InvokeRepeating(nameof(LoopAnimation), 0, 1);
         Invoke(nameof(SetDefault), 3);
-    }
-
-    public void SetUp()
-    {
-        gameObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", colors[0]);
-        active = true;
-        InvokeRepeating(nameof(LoopAnimation), 0, 1);
-        
     }
 
     public void SetDefault()
@@ -35,19 +31,22 @@ public class ExpBomb : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", colors[0]);
             CancelInvoke();
-            Invoke(nameof(SetOff), 1);
+            Vector3 newSize = new(size, size, transform.position.z);
+            StartCoroutine(AnimateSize(gameObject.transform.localScale, newSize, 0.1f));
+            StartCoroutine(AnimateColor(gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));
+            Invoke(nameof(SetOff), 0.45f);
+            
         }
         else
         {
             StartCoroutine(AnimateColor(gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));
-            
         }
     }
 
     private void SetOff()
     {
-        gameObject.transform.localScale += new Vector3(10, 10, transform.position.z);
-        StartCoroutine(AnimateColor(gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));
+        parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>(), gameObject);
+        Destroy(gameObject);
     }
 
     private IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)
@@ -70,9 +69,20 @@ public class ExpBomb : MonoBehaviour
         sprite.color = original;
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator AnimateSize(Vector3 original, Vector3 target, float duration)
     {
-        
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            gameObject.transform.localScale = Vector3.Lerp(original, target, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+        // Update is called once per frame
+        void Update()
+    {
+        if (danger == true) parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>(), gameObject);
     }
 }
