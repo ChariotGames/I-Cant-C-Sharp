@@ -26,7 +26,7 @@ namespace Scripts.Controllers
         private KeyMap keys, otherKeys;
         private Transform parent;
         private const int MAX_QUE = 5;
-        private int loadedTimes = 3;
+        private int loadedTimes = 0;
 
         #endregion
 
