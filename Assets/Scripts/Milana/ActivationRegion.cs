@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using _Scripts._Input;
+using Scripts._Input;
 
 public class ActivationRegion : MonoBehaviour
 {

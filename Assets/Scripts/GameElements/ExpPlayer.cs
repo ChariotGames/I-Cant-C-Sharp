@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using _Scripts._Input;
+using Scripts._Input;
 using UnityEngine;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class ExpPlayer : BaseGame
     {

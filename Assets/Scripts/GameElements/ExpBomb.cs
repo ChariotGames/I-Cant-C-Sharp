@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using _Scripts.Games;
+using Scripts.Games;
 using UnityEngine;
 
 public class ExpBomb : BaseGame

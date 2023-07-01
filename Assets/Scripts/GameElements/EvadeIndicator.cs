@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class EvadeIndicator : BaseGame
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Random = UnityEngine.Random;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     /// <summary>
     /// TODO: Provide a summary of your game here.

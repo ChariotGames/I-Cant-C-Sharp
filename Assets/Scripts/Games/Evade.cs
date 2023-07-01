@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using _Scripts.Models;
+using Scripts.Models;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class Evade : BaseGame
     {

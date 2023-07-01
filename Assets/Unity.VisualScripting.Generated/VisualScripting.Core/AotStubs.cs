@@ -635,87 +635,87 @@ namespace Unity.VisualScripting.Generated.Aot
 	// SceneChanger.op_Implicit
 	// SceneChanger.op_Equality
 	// SceneChanger.op_Inequality
-	// _Scripts.Minigame.op_Implicit
-	// _Scripts.Minigame.op_Equality
-	// _Scripts.Minigame.op_Inequality
-	// _Scripts.Settings.op_Implicit
-	// _Scripts.Settings.op_Equality
-	// _Scripts.Settings.op_Inequality
-	// _Scripts.DownButton.op_Implicit
-	// _Scripts.DownButton.op_Equality
-	// _Scripts.DownButton.op_Inequality
-	// _Scripts.EastButton.op_Implicit
-	// _Scripts.EastButton.op_Equality
-	// _Scripts.EastButton.op_Inequality
-	// _Scripts.MinigameManager.op_Implicit
-	// _Scripts.MinigameManager.op_Equality
-	// _Scripts.MinigameManager.op_Inequality
-	// _Scripts.LeftButton.op_Implicit
-	// _Scripts.LeftButton.op_Equality
-	// _Scripts.LeftButton.op_Inequality
-	// _Scripts.MainMenu.op_Implicit
-	// _Scripts.MainMenu.op_Equality
-	// _Scripts.MainMenu.op_Inequality
-	// _Scripts.MainMenuGame.op_Implicit
-	// _Scripts.MainMenuGame.op_Equality
-	// _Scripts.MainMenuGame.op_Inequality
-	// _Scripts.NorthButton.op_Implicit
-	// _Scripts.NorthButton.op_Equality
-	// _Scripts.NorthButton.op_Inequality
-	// _Scripts.P_Level01.op_Implicit
-	// _Scripts.P_Level01.op_Equality
-	// _Scripts.P_Level01.op_Inequality
-	// _Scripts.P_Level02.op_Implicit
-	// _Scripts.P_Level02.op_Equality
-	// _Scripts.P_Level02.op_Inequality
-	// _Scripts.RightButton.op_Implicit
-	// _Scripts.RightButton.op_Equality
-	// _Scripts.RightButton.op_Inequality
-	// _Scripts.SouthButton.op_Implicit
-	// _Scripts.SouthButton.op_Equality
-	// _Scripts.SouthButton.op_Inequality
-	// _Scripts.UpButton.op_Implicit
-	// _Scripts.UpButton.op_Equality
-	// _Scripts.UpButton.op_Inequality
-	// _Scripts.WestButton.op_Implicit
-	// _Scripts.WestButton.op_Equality
-	// _Scripts.WestButton.op_Inequality
-	// _Scripts._Input.InputHandler.op_Implicit
-	// _Scripts._Input.InputHandler.op_Equality
-	// _Scripts._Input.InputHandler.op_Inequality
-	// _Scripts.Pascal.BulletCollision.op_Implicit
-	// _Scripts.Pascal.BulletCollision.op_Equality
-	// _Scripts.Pascal.BulletCollision.op_Inequality
-	// _Scripts.Pascal.Cannon.op_Implicit
-	// _Scripts.Pascal.Cannon.op_Equality
-	// _Scripts.Pascal.Cannon.op_Inequality
-	// _Scripts.Games.AutoRun.op_Implicit
-	// _Scripts.Games.AutoRun.op_Equality
-	// _Scripts.Games.AutoRun.op_Inequality
-	// _Scripts.Games.ButtonHero.op_Implicit
-	// _Scripts.Games.ButtonHero.op_Equality
-	// _Scripts.Games.ButtonHero.op_Inequality
-	// _Scripts.Games.FallingObstacles.op_Implicit
-	// _Scripts.Games.FallingObstacles.op_Equality
-	// _Scripts.Games.FallingObstacles.op_Inequality
-	// _Scripts.Games.BaseGame.op_Implicit
-	// _Scripts.Games.BaseGame.op_Equality
-	// _Scripts.Games.BaseGame.op_Inequality
-	// _Scripts.Games.MissingKey.op_Implicit
-	// _Scripts.Games.MissingKey.op_Equality
-	// _Scripts.Games.MissingKey.op_Inequality
-	// _Scripts.Games.RapidReflex.op_Implicit
-	// _Scripts.Games.RapidReflex.op_Equality
-	// _Scripts.Games.RapidReflex.op_Inequality
-	// _Scripts.Games.SameAsBefore.op_Implicit
-	// _Scripts.Games.SameAsBefore.op_Equality
-	// _Scripts.Games.SameAsBefore.op_Inequality
-	// _Scripts.Games.Simon.op_Implicit
-	// _Scripts.Games.Simon.op_Equality
-	// _Scripts.Games.Simon.op_Inequality
-	// _Scripts.Games.SimonButton.op_Implicit
-	// _Scripts.Games.SimonButton.op_Equality
-	// _Scripts.Games.SimonButton.op_Inequality
+	// Scripts.Minigame.op_Implicit
+	// Scripts.Minigame.op_Equality
+	// Scripts.Minigame.op_Inequality
+	// Scripts.Settings.op_Implicit
+	// Scripts.Settings.op_Equality
+	// Scripts.Settings.op_Inequality
+	// Scripts.DownButton.op_Implicit
+	// Scripts.DownButton.op_Equality
+	// Scripts.DownButton.op_Inequality
+	// Scripts.EastButton.op_Implicit
+	// Scripts.EastButton.op_Equality
+	// Scripts.EastButton.op_Inequality
+	// Scripts.MinigameManager.op_Implicit
+	// Scripts.MinigameManager.op_Equality
+	// Scripts.MinigameManager.op_Inequality
+	// Scripts.LeftButton.op_Implicit
+	// Scripts.LeftButton.op_Equality
+	// Scripts.LeftButton.op_Inequality
+	// Scripts.MainMenu.op_Implicit
+	// Scripts.MainMenu.op_Equality
+	// Scripts.MainMenu.op_Inequality
+	// Scripts.MainMenuGame.op_Implicit
+	// Scripts.MainMenuGame.op_Equality
+	// Scripts.MainMenuGame.op_Inequality
+	// Scripts.NorthButton.op_Implicit
+	// Scripts.NorthButton.op_Equality
+	// Scripts.NorthButton.op_Inequality
+	// Scripts.P_Level01.op_Implicit
+	// Scripts.P_Level01.op_Equality
+	// Scripts.P_Level01.op_Inequality
+	// Scripts.P_Level02.op_Implicit
+	// Scripts.P_Level02.op_Equality
+	// Scripts.P_Level02.op_Inequality
+	// Scripts.RightButton.op_Implicit
+	// Scripts.RightButton.op_Equality
+	// Scripts.RightButton.op_Inequality
+	// Scripts.SouthButton.op_Implicit
+	// Scripts.SouthButton.op_Equality
+	// Scripts.SouthButton.op_Inequality
+	// Scripts.UpButton.op_Implicit
+	// Scripts.UpButton.op_Equality
+	// Scripts.UpButton.op_Inequality
+	// Scripts.WestButton.op_Implicit
+	// Scripts.WestButton.op_Equality
+	// Scripts.WestButton.op_Inequality
+	// Scripts._Input.InputHandler.op_Implicit
+	// Scripts._Input.InputHandler.op_Equality
+	// Scripts._Input.InputHandler.op_Inequality
+	// Scripts.Pascal.BulletCollision.op_Implicit
+	// Scripts.Pascal.BulletCollision.op_Equality
+	// Scripts.Pascal.BulletCollision.op_Inequality
+	// Scripts.Pascal.Cannon.op_Implicit
+	// Scripts.Pascal.Cannon.op_Equality
+	// Scripts.Pascal.Cannon.op_Inequality
+	// Scripts.Games.AutoRun.op_Implicit
+	// Scripts.Games.AutoRun.op_Equality
+	// Scripts.Games.AutoRun.op_Inequality
+	// Scripts.Games.ButtonHero.op_Implicit
+	// Scripts.Games.ButtonHero.op_Equality
+	// Scripts.Games.ButtonHero.op_Inequality
+	// Scripts.Games.FallingObstacles.op_Implicit
+	// Scripts.Games.FallingObstacles.op_Equality
+	// Scripts.Games.FallingObstacles.op_Inequality
+	// Scripts.Games.BaseGame.op_Implicit
+	// Scripts.Games.BaseGame.op_Equality
+	// Scripts.Games.BaseGame.op_Inequality
+	// Scripts.Games.MissingKey.op_Implicit
+	// Scripts.Games.MissingKey.op_Equality
+	// Scripts.Games.MissingKey.op_Inequality
+	// Scripts.Games.RapidReflex.op_Implicit
+	// Scripts.Games.RapidReflex.op_Equality
+	// Scripts.Games.RapidReflex.op_Inequality
+	// Scripts.Games.SameAsBefore.op_Implicit
+	// Scripts.Games.SameAsBefore.op_Equality
+	// Scripts.Games.SameAsBefore.op_Inequality
+	// Scripts.Games.Simon.op_Implicit
+	// Scripts.Games.Simon.op_Equality
+	// Scripts.Games.Simon.op_Inequality
+	// Scripts.Games.SimonButton.op_Implicit
+	// Scripts.Games.SimonButton.op_Equality
+	// Scripts.Games.SimonButton.op_Inequality
 	// TMPro.TMP_DigitValidator.op_Implicit
 	// TMPro.TMP_DigitValidator.op_Equality
 	// TMPro.TMP_DigitValidator.op_Inequality
@@ -1013,8 +1013,8 @@ namespace Unity.VisualScripting.Generated.Aot
 	// UnityEngine.Transform.rotation
 	// UnityEngine.Transform.localScale
 	// UnityEngine.GameObject.Instantiate
-	// _Scripts.Games.AutoRun.winCondition
-	// _Scripts.Games.AutoRun.loseCondition
+	// Scripts.Games.AutoRun.winCondition
+	// Scripts.Games.AutoRun.loseCondition
 	// UnityEngine.Random.Range
 	// --------------- Scene Stubs
 	// --------------- Scene Stubs
@@ -8273,7 +8273,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Minigame.op_Implicit
+		// Scripts.Minigame.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameAsset_op_Implicit()
 		{
@@ -8284,7 +8284,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Minigame.op_Equality
+		// Scripts.Minigame.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameAsset_op_Equality()
 		{
@@ -8296,7 +8296,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Minigame.op_Inequality
+		// Scripts.Minigame.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameAsset_op_Inequality()
 		{
@@ -8308,7 +8308,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Settings.op_Implicit
+		// Scripts.Settings.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Settings_op_Implicit()
 		{
@@ -8319,7 +8319,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Settings.op_Equality
+		// Scripts.Settings.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Settings_op_Equality()
 		{
@@ -8331,7 +8331,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Settings.op_Inequality
+		// Scripts.Settings.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Settings_op_Inequality()
 		{
@@ -8343,7 +8343,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.DownButton.op_Implicit
+		// Scripts.DownButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_DownButton_op_Implicit()
 		{
@@ -8354,7 +8354,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.DownButton.op_Equality
+		// Scripts.DownButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_DownButton_op_Equality()
 		{
@@ -8366,7 +8366,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.DownButton.op_Inequality
+		// Scripts.DownButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_DownButton_op_Inequality()
 		{
@@ -8378,7 +8378,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.EastButton.op_Implicit
+		// Scripts.EastButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_EastButton_op_Implicit()
 		{
@@ -8389,7 +8389,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.EastButton.op_Equality
+		// Scripts.EastButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_EastButton_op_Equality()
 		{
@@ -8401,7 +8401,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.EastButton.op_Inequality
+		// Scripts.EastButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_EastButton_op_Inequality()
 		{
@@ -8413,7 +8413,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MinigameManager.op_Implicit
+		// Scripts.MinigameManager.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameManager_op_Implicit()
 		{
@@ -8424,7 +8424,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MinigameManager.op_Equality
+		// Scripts.MinigameManager.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameManager_op_Equality()
 		{
@@ -8436,7 +8436,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MinigameManager.op_Inequality
+		// Scripts.MinigameManager.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_GameManager_op_Inequality()
 		{
@@ -8448,7 +8448,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.LeftButton.op_Implicit
+		// Scripts.LeftButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_LeftButton_op_Implicit()
 		{
@@ -8459,7 +8459,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.LeftButton.op_Equality
+		// Scripts.LeftButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_LeftButton_op_Equality()
 		{
@@ -8471,7 +8471,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.LeftButton.op_Inequality
+		// Scripts.LeftButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_LeftButton_op_Inequality()
 		{
@@ -8483,7 +8483,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MainMenu.op_Implicit
+		// Scripts.MainMenu.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_MainMenu_op_Implicit()
 		{
@@ -8494,7 +8494,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MainMenu.op_Equality
+		// Scripts.MainMenu.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_MainMenu_op_Equality()
 		{
@@ -8506,7 +8506,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MainMenu.op_Inequality
+		// Scripts.MainMenu.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_MainMenu_op_Inequality()
 		{
@@ -8518,7 +8518,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MainMenuGame.op_Implicit
+		// Scripts.MainMenuGame.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_MainMenuGame_op_Implicit()
 		{
@@ -8529,7 +8529,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MainMenuGame.op_Equality
+		// Scripts.MainMenuGame.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_MainMenuGame_op_Equality()
 		{
@@ -8541,7 +8541,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.MainMenuGame.op_Inequality
+		// Scripts.MainMenuGame.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_MainMenuGame_op_Inequality()
 		{
@@ -8553,7 +8553,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.NorthButton.op_Implicit
+		// Scripts.NorthButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_NorthButton_op_Implicit()
 		{
@@ -8564,7 +8564,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.NorthButton.op_Equality
+		// Scripts.NorthButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_NorthButton_op_Equality()
 		{
@@ -8576,7 +8576,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.NorthButton.op_Inequality
+		// Scripts.NorthButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_NorthButton_op_Inequality()
 		{
@@ -8588,7 +8588,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.P_Level01.op_Implicit
+		// Scripts.P_Level01.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_P_Level01_op_Implicit()
 		{
@@ -8599,7 +8599,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.P_Level01.op_Equality
+		// Scripts.P_Level01.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_P_Level01_op_Equality()
 		{
@@ -8611,7 +8611,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.P_Level01.op_Inequality
+		// Scripts.P_Level01.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_P_Level01_op_Inequality()
 		{
@@ -8623,7 +8623,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.P_Level02.op_Implicit
+		// Scripts.P_Level02.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_P_Level02_op_Implicit()
 		{
@@ -8634,7 +8634,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.P_Level02.op_Equality
+		// Scripts.P_Level02.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_P_Level02_op_Equality()
 		{
@@ -8646,7 +8646,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.P_Level02.op_Inequality
+		// Scripts.P_Level02.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_P_Level02_op_Inequality()
 		{
@@ -8658,7 +8658,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.RightButton.op_Implicit
+		// Scripts.RightButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_RightButton_op_Implicit()
 		{
@@ -8669,7 +8669,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.RightButton.op_Equality
+		// Scripts.RightButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_RightButton_op_Equality()
 		{
@@ -8681,7 +8681,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.RightButton.op_Inequality
+		// Scripts.RightButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_RightButton_op_Inequality()
 		{
@@ -8693,7 +8693,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.SouthButton.op_Implicit
+		// Scripts.SouthButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_SouthButton_op_Implicit()
 		{
@@ -8704,7 +8704,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.SouthButton.op_Equality
+		// Scripts.SouthButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_SouthButton_op_Equality()
 		{
@@ -8716,7 +8716,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.SouthButton.op_Inequality
+		// Scripts.SouthButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_SouthButton_op_Inequality()
 		{
@@ -8728,7 +8728,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.UpButton.op_Implicit
+		// Scripts.UpButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_UpButton_op_Implicit()
 		{
@@ -8739,7 +8739,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.UpButton.op_Equality
+		// Scripts.UpButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_UpButton_op_Equality()
 		{
@@ -8751,7 +8751,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.UpButton.op_Inequality
+		// Scripts.UpButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_UpButton_op_Inequality()
 		{
@@ -8763,7 +8763,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.WestButton.op_Implicit
+		// Scripts.WestButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_WestButton_op_Implicit()
 		{
@@ -8774,7 +8774,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.WestButton.op_Equality
+		// Scripts.WestButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_WestButton_op_Equality()
 		{
@@ -8786,7 +8786,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.WestButton.op_Inequality
+		// Scripts.WestButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_WestButton_op_Inequality()
 		{
@@ -8798,7 +8798,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts._Input.InputHandler.op_Implicit
+		// Scripts._Input.InputHandler.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Input_InputHandler_op_Implicit()
 		{
@@ -8809,7 +8809,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts._Input.InputHandler.op_Equality
+		// Scripts._Input.InputHandler.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Input_InputHandler_op_Equality()
 		{
@@ -8821,7 +8821,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts._Input.InputHandler.op_Inequality
+		// Scripts._Input.InputHandler.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Input_InputHandler_op_Inequality()
 		{
@@ -8833,7 +8833,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Pascal.BulletCollision.op_Implicit
+		// Scripts.Pascal.BulletCollision.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Pascal_BulletCollision_op_Implicit()
 		{
@@ -8844,7 +8844,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Pascal.BulletCollision.op_Equality
+		// Scripts.Pascal.BulletCollision.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Pascal_BulletCollision_op_Equality()
 		{
@@ -8856,7 +8856,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Pascal.BulletCollision.op_Inequality
+		// Scripts.Pascal.BulletCollision.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Pascal_BulletCollision_op_Inequality()
 		{
@@ -8868,7 +8868,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Pascal.Cannon.op_Implicit
+		// Scripts.Pascal.Cannon.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Pascal_Cannon_op_Implicit()
 		{
@@ -8879,7 +8879,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Pascal.Cannon.op_Equality
+		// Scripts.Pascal.Cannon.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Pascal_Cannon_op_Equality()
 		{
@@ -8891,7 +8891,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Pascal.Cannon.op_Inequality
+		// Scripts.Pascal.Cannon.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Pascal_Cannon_op_Inequality()
 		{
@@ -8903,7 +8903,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.AutoRun.op_Implicit
+		// Scripts.Games.AutoRun.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_AutoRun_op_Implicit()
 		{
@@ -8914,7 +8914,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.AutoRun.op_Equality
+		// Scripts.Games.AutoRun.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_AutoRun_op_Equality()
 		{
@@ -8926,7 +8926,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.AutoRun.op_Inequality
+		// Scripts.Games.AutoRun.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_AutoRun_op_Inequality()
 		{
@@ -8938,7 +8938,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.ButtonHero.op_Implicit
+		// Scripts.Games.ButtonHero.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_ButtonHero_op_Implicit()
 		{
@@ -8949,7 +8949,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.ButtonHero.op_Equality
+		// Scripts.Games.ButtonHero.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_ButtonHero_op_Equality()
 		{
@@ -8961,7 +8961,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.ButtonHero.op_Inequality
+		// Scripts.Games.ButtonHero.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_ButtonHero_op_Inequality()
 		{
@@ -8973,7 +8973,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.FallingObstacles.op_Implicit
+		// Scripts.Games.FallingObstacles.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_FallingObstacles_op_Implicit()
 		{
@@ -8984,7 +8984,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.FallingObstacles.op_Equality
+		// Scripts.Games.FallingObstacles.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_FallingObstacles_op_Equality()
 		{
@@ -8996,7 +8996,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.FallingObstacles.op_Inequality
+		// Scripts.Games.FallingObstacles.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_FallingObstacles_op_Inequality()
 		{
@@ -9008,7 +9008,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.BaseGame.op_Implicit
+		// Scripts.Games.BaseGame.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Game_op_Implicit()
 		{
@@ -9019,7 +9019,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.BaseGame.op_Equality
+		// Scripts.Games.BaseGame.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Game_op_Equality()
 		{
@@ -9031,7 +9031,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.BaseGame.op_Inequality
+		// Scripts.Games.BaseGame.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Game_op_Inequality()
 		{
@@ -9043,7 +9043,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.MissingKey.op_Implicit
+		// Scripts.Games.MissingKey.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_MissingKey_op_Implicit()
 		{
@@ -9054,7 +9054,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.MissingKey.op_Equality
+		// Scripts.Games.MissingKey.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_MissingKey_op_Equality()
 		{
@@ -9066,7 +9066,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.MissingKey.op_Inequality
+		// Scripts.Games.MissingKey.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_MissingKey_op_Inequality()
 		{
@@ -9078,7 +9078,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.RapidReflex.op_Implicit
+		// Scripts.Games.RapidReflex.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_RapidReflex_op_Implicit()
 		{
@@ -9089,7 +9089,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.RapidReflex.op_Equality
+		// Scripts.Games.RapidReflex.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_RapidReflex_op_Equality()
 		{
@@ -9101,7 +9101,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.RapidReflex.op_Inequality
+		// Scripts.Games.RapidReflex.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_RapidReflex_op_Inequality()
 		{
@@ -9113,7 +9113,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.SameAsBefore.op_Implicit
+		// Scripts.Games.SameAsBefore.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_SameAsBefore_op_Implicit()
 		{
@@ -9124,7 +9124,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.SameAsBefore.op_Equality
+		// Scripts.Games.SameAsBefore.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_SameAsBefore_op_Equality()
 		{
@@ -9136,7 +9136,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.SameAsBefore.op_Inequality
+		// Scripts.Games.SameAsBefore.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_SameAsBefore_op_Inequality()
 		{
@@ -9148,7 +9148,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.Simon.op_Implicit
+		// Scripts.Games.Simon.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Simon_op_Implicit()
 		{
@@ -9159,7 +9159,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.Simon.op_Equality
+		// Scripts.Games.Simon.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Simon_op_Equality()
 		{
@@ -9171,7 +9171,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.Simon.op_Inequality
+		// Scripts.Games.Simon.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_Simon_op_Inequality()
 		{
@@ -9183,7 +9183,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.SimonButton.op_Implicit
+		// Scripts.Games.SimonButton.op_Implicit
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_SimonButton_op_Implicit()
 		{
@@ -9194,7 +9194,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.SimonButton.op_Equality
+		// Scripts.Games.SimonButton.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_SimonButton_op_Equality()
 		{
@@ -9206,7 +9206,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.SimonButton.op_Inequality
+		// Scripts.Games.SimonButton.op_Inequality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_SimonButton_op_Inequality()
 		{
@@ -12649,7 +12649,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.AutoRun.winCondition
+		// Scripts.Games.AutoRun.winCondition
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_AutoRun_winCondition()
 		{
@@ -12660,7 +12660,7 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// _Scripts.Games.AutoRun.loseCondition
+		// Scripts.Games.AutoRun.loseCondition
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void _Scripts_Games_AutoRun_loseCondition()
 		{

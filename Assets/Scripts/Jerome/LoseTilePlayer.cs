@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using _Scripts._Input;
+using Scripts._Input;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class LoseTilePlayer : MonoBehaviour
     {

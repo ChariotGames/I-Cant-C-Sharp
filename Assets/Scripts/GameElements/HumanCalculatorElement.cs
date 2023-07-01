@@ -1,9 +1,9 @@
-﻿using _Scripts.Games;
-using _Scripts.Models;
+﻿using Scripts.Games;
+using Scripts.Models;
 using TMPro;
 using UnityEngine.InputSystem;
 
-namespace _Scripts.GameElements
+namespace Scripts.GameElements
 {
     public class HumanCalculatorElement : BasePressElement
     {
