@@ -6,6 +6,8 @@ using System.Diagnostics;
 using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -28,7 +30,7 @@ namespace Scripts.Games
         [SerializeField] private List<Color> flashColor;
         [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
-        [SerializeField] [Range(100,1000)] private int timeToAnswerInMs;
+        [SerializeField] [Range(0.25f, 1)] private float timeToAnswer;
 
         #endregion Serialized Fields
 
@@ -71,7 +73,6 @@ namespace Scripts.Games
             {
                 UpdateRandomDelay();
                 yield return StartCoroutine(LightAnimation());
-                
                 yield return StartCoroutine(MeasureTime());
                 
                 TurnOffAllLights();
@@ -135,17 +136,15 @@ namespace Scripts.Games
         {
             _timeElapsed = -1;
             if (CheckForEarlyLose()) yield break; 
-            Stopwatch stopwatch = new();
-            stopwatch.Start();
-            yield return new WaitUntil(() => _isButtonPressed || stopwatch.ElapsedMilliseconds > timeToAnswerInMs);
-            stopwatch.Stop();
-            _timeElapsed = stopwatch.ElapsedMilliseconds;
+            float timer = Time.time;
+            yield return new WaitUntil(() => _isButtonPressed || Time.time - timer > timeToAnswer);
+            _timeElapsed = Time.time - timer;
         }
 
         private IEnumerator DetermineGamestate()
         {
             overlayContainer.SetActive(true);
-            if (_timeElapsed < timeToAnswerInMs && _timeElapsed >= 0)
+            if (_timeElapsed < timeToAnswer && _timeElapsed >= 0)
             {
                 GameWon();
             }
@@ -154,6 +153,7 @@ namespace Scripts.Games
                 GameLost();
             }
             yield return new WaitForSeconds(2);
+            Debug.Log("Test");
             overlayContainer.SetActive(false);
         }
         
@@ -181,7 +181,7 @@ namespace Scripts.Games
 
         private void GameWon()
         {
-            gameState.text = "Rapid Reflex: " + _timeElapsed + " ms";
+            gameState.text = "Rapid Reflex: " + (int)(_timeElapsed * 1000) + " ms";
             base.Win();
         }
         
