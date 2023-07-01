@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c7d25ff481bef40a1752f5911b8c02, type: 3}
   m_Name: SettingsMain
   m_EditorClassIdentifier: 
-  lives: 0
+  lives: 3
   players: 1
   selectedGame: {fileID: 0}
   games:

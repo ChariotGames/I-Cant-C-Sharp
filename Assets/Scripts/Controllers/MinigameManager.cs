@@ -125,7 +125,7 @@ namespace Scripts.Controllers
 
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame prefab = obj.GetComponent<BaseGame>();
-            prefab.ID = game.AssetID;
+            //prefab.ID = game.AssetID;
             prefab.Difficulty = game.Difficulty;
             prefab.Keys = keys;
 
@@ -137,7 +137,7 @@ namespace Scripts.Controllers
         /// </summary>
         private void RemoveGame(GameObject game)
         {
-            GameObject instance = FindObjectOfType<GameObject>(game);
+            /*GameObject instance = FindObjectOfType<GameObject>(game);
             foreach (Minigame miniGame in settings.Games)
             {
                 if (miniGame.Prefab == game)
@@ -145,8 +145,31 @@ namespace Scripts.Controllers
                     //loaded.Remove(miniGame);
                     break;
                 }
+            }*/
+
+            if (spawnLeft.GetChild(0).gameObject == game)
+            {
+                Destroy(spawnLeft.GetChild(0).gameObject);
+                loadedLeft = null;
+                loadedLeft = PickGame(new List<Minigame>(_mixGames));
+                return;
             }
-            Destroy(instance);
+
+            if (spawnRight.GetChild(0).gameObject == game)
+            {
+                Destroy(spawnRight.GetChild(0).gameObject);
+                loadedRight = null;
+                loadedRight = PickGame(new List<Minigame>(_mixGames));
+                return;
+            }
+
+            if (spawnCenter.GetChild(0).gameObject == game)
+            {
+                Destroy(spawnCenter.GetChild(0).gameObject);
+                loadedLeft = PickGame(new List<Minigame>(_mixGames));
+                loadedRight = PickGame(new List<Minigame>(_mixGames));
+                return;
+            }
         }
 
         /// <summary>
@@ -224,9 +247,9 @@ namespace Scripts.Controllers
 
         #region Game Mechanics
 
-        public void WinCondition(AssetID id, GameObject game)
+        public void WinCondition(/*AssetID id,*/ GameObject game)
         {
-            Debug.Log($"Win from {id}");
+            Debug.Log($"Win from {game.name}");
             //for (int i = 0; i < containers.All.Length; i++)
             //{
             //    if (containers.All[i].childCount == 0) continue;
@@ -238,21 +261,21 @@ namespace Scripts.Controllers
             RemoveGame(game);
         }
 
-        public void LoseCondition(AssetID id, GameObject game)
+        public void LoseCondition(/*AssetID id,*/ GameObject game)
         {
-            Debug.Log($"Lose from {id}");
+            Debug.Log($"Lose from {game.name}");
             settings.Lives--;
             Debug.Log($"Lives left: {settings.Lives}");
+            RemoveGame(game);
             if (settings.Lives <= 0)
             {
-                //PickGame(new List<Minigame>(games));
                 gameObject.GetComponent<SceneChanger>().ChangeScene(0);
             }
         }
 
-        public void SetDifficulty(AssetID id, Difficulty difficulty)
+        public void SetDifficulty(/*AssetID id,*/ GameObject game, Difficulty difficulty)
         {
-            settings.Games.Find(obj => obj.AssetID == id).Difficulty = difficulty;
+            settings.Games.Find(obj => /*obj.AssetID == id*/obj.Prefab == game).Difficulty = difficulty;
         }
 
         #endregion

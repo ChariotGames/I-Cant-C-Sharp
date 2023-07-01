@@ -109,7 +109,11 @@ namespace Scripts.Games
                 StartCoroutine(AnimateColor(circleRenderer, Color.blue, Color.red, 0.25f));
                 _wrongGuesses++;
 
-                if (_wrongGuesses == 3) base.Lose();
+                if (_wrongGuesses == 3)
+                {
+                    stop = true;
+                    base.Lose();
+                }
             }
         }
 

@@ -16,28 +16,36 @@ namespace Scripts.Games
 
         [SerializeField] protected Difficulty currentDifficulty = Difficulty.EASY;
         [SerializeField] protected ActionName actionNames;
-        [SerializeField] protected MinigameManager manager;
+        
 
         #endregion Serialized Fields
 
         #region Fields
-
-        protected AssetID id;
+/*
+        protected AssetID id;*/
         protected Bounds bounds;
         protected KeyMap keys;
+        protected MinigameManager manager;
 
         #endregion Fields
 
-        #region Methods
+        #region Built-Ins
 
-        #region protected
+        void Awake()
+        {
+            manager = GameObject.Find(nameof(MinigameManager)).GetComponent<MinigameManager>();
+        }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Informs the BaseGame Controller, that the game triggered a win condition
         /// </summary>
         protected void Win()
         {
-            Manager.WinCondition(id, gameObject);
+            Manager.WinCondition(gameObject);
         }
 
         /// <summary>
@@ -45,7 +53,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Lose()
         {
-            Manager.LoseCondition(id, gameObject);
+            Manager.LoseCondition(gameObject);
         }
 
         /// <summary>
@@ -53,7 +61,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            Manager.SetDifficulty(id, currentDifficulty - 1);
+            Manager.SetDifficulty(gameObject, currentDifficulty - 1);
         }
 
         /// <summary>
@@ -61,10 +69,8 @@ namespace Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            Manager.SetDifficulty(id, currentDifficulty + 1);
+            Manager.SetDifficulty(gameObject, currentDifficulty + 1);
         }
-
-        #endregion protected
 
         #endregion  Methods
 
@@ -73,11 +79,11 @@ namespace Scripts.Games
         /// <summary>
         /// The game's unique ID.
         /// </summary>
-        public AssetID ID
+        /*public AssetID ID
         {
             get => id;
             set => id = value;
-        }
+        }*/
 
         /// <summary>
         /// The game's current difficulty.

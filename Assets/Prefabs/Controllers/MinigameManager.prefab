@@ -51,12 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
-  containers:
-    up: {fileID: 5064793300634688470}
-    down: {fileID: 8420430536241138870}
-    left: {fileID: 6707827418453113018}
-    right: {fileID: 2825956107917368136}
-    center: {fileID: 427280543943923183}
+  spawnLeft: {fileID: 6707827418453113018}
+  spawnRight: {fileID: 2825956107917368136}
+  spawnCenter: {fileID: 427280543943923183}
 --- !u!114 &8275405802908632855
 MonoBehaviour:
   m_ObjectHideFlags: 0
