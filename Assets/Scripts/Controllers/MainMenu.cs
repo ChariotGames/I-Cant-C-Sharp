@@ -64,6 +64,13 @@ namespace Scripts.Controllers
                 gameButtons.Add(button);
             }
 
+            foreach (Minigame game in settings.SoloGames)
+            {
+                GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
+                button.GetComponent<MainMenuGame>().SetupButton(game);
+                gameButtons.Add(button);
+            }
+
             EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
         }
 

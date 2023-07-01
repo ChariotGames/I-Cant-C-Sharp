@@ -1,6 +1,5 @@
 using Scripts.Controllers;
 using Scripts.Models;
-using System;
 using UnityEngine;
 
 namespace Scripts.Games

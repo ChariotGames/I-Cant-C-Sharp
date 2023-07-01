@@ -172,6 +172,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 650444155}
     m_Modifications:
+    - target: {fileID: 207595797591661269, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3143910709494245598, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
       propertyPath: preview
       value: 
@@ -191,6 +195,34 @@ PrefabInstance:
     - target: {fileID: 4094033867495030282, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094033867519050066, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094033867519050066, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094033867519050066, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094033867519050067, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094033867519050067, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094033867519050067, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094033867519050067, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 4094033867965212750, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
       propertyPath: m_IsActive
