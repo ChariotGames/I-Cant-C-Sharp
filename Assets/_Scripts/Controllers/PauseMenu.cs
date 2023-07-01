@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts._Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace _Scripts.Controllers
 {
@@ -11,6 +13,7 @@ namespace _Scripts.Controllers
 
         #region Serialized Fields
 
+        [SerializeField] private InputActionAsset playerInput;
             [SerializeField] private GameObject pauseMenu;
             [SerializeField] private GameObject button;
 
@@ -40,7 +43,12 @@ namespace _Scripts.Controllers
 
         #region Built-Ins / MonoBehaviours
 
-            void Start()
+        private void Awake()
+        {
+            playerInput.actionMaps[1].Enable();
+        }
+
+        void Start()
             {
                 _isPaused = false;
             }
@@ -56,6 +64,7 @@ namespace _Scripts.Controllers
                 pauseMenu.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(button);
                 Time.timeScale = 0;
+                playerInput.actionMaps[0].Disable();
             }
         
             public void ResumeGame()
@@ -63,11 +72,13 @@ namespace _Scripts.Controllers
                 _isPaused = false;
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1;
+                playerInput.actionMaps[0].Enable();
             }
 
             public void GoToMenu()
             {
                 Time.timeScale = 1;
+                playerInput.actionMaps[0].Enable();
                 SceneChanger.ChangeScene(0);
             }
 

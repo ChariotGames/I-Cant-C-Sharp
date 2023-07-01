@@ -315,21 +315,17 @@ MonoBehaviour:
     m_ActionId: 4a62edff-b05a-4b14-b975-21b6da26fc13
     m_ActionName: Player/LeftStickPress[/DualShock4GamepadHID/leftStickPress]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8920256311643867259}
-        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
-        m_MethodName: OnOptionButtonStart
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 9eb1caa3-506a-4638-8c30-85d1f3ba1866
+      m_Calls: []
+    m_ActionId: aeedfb7d-8ec3-40f8-ae3a-e65492bfa0e5
     m_ActionName: Player/ButtonStart[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cd019f7a-ee82-4239-9bac-2831a2ffb081
+    m_ActionName: Player/ButtonSelect[/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0842561a-25e8-4492-9b1b-ca8799585d37
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8920256311643867259}
@@ -344,8 +340,60 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 43950013-451c-46d0-a938-790980dfd0e6
-    m_ActionName: Player/ButtonSelect[/XInputControllerWindows/select]
+    m_ActionId: 535c03f7-ffd7-4c95-b1f0-2783cef0743b
+    m_ActionName: UI/ButtonSelect[/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8920256311643867259}
+        m_TargetAssemblyTypeName: _Scripts._Input.InputHandler, Assembly-CSharp
+        m_MethodName: OnOptionButtonStart
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 141030d2-8d42-4221-844f-f4f4a5b52589
+    m_ActionName: UI/ButtonStart[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f1e484a3-a50a-4c07-b3e1-c1e2bfb5b34f
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 23d4af2d-4359-41c8-ba8f-233637b60f23
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2d00cfb2-4957-41a5-8429-6ba607b8c9c8
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 033d0253-697c-4d17-bf96-d510109af6c8
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9866f8aa-d18a-41e9-9b66-4f2a20fb3b6d
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81e4ff3d-c68c-4d0e-907c-3b2029acc522
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b9fd19fc-3a45-46f4-bf0b-68c071b991c3
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3ef50cc9-b4ad-4f8c-b981-2975ca8fa9af
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5c53f3d4-8354-49d7-b98e-816d1a59dd45
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
