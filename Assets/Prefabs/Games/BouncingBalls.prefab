@@ -1115,7 +1115,8 @@ MonoBehaviour:
   guessedNumber: {fileID: 1181034896615331142}
   balls: {fileID: 1181034895958681433}
   guessingOverlay: {fileID: 1181034896406039642}
-  groundMaterial: {fileID: 0}
+  groundMaterial: {fileID: 6200000, guid: e6f6803ad269fa049bbc2a4e72f58d7a, type: 2}
+  infoText: {fileID: 5117528973895865044}
 --- !u!1 &1181034897826818768
 GameObject:
   m_ObjectHideFlags: 0
