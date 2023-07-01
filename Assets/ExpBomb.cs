@@ -45,7 +45,7 @@ public class ExpBomb : MonoBehaviour
 
     private void SetOff()
     {
-        parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+        parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>(), gameObject);
         Destroy(gameObject);
     }
 
@@ -83,6 +83,6 @@ public class ExpBomb : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        if (danger == true) parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+        if (danger == true) parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>(), gameObject);
     }
 }

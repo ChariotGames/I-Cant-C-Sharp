@@ -27,15 +27,15 @@ namespace _Scripts.Games
 
         private void SpawnBombs()
         {
-            if (Difficulty == Difficulty.EASY)
+            if (Difficulty == Models.Difficulty.EASY)
             {
                 chance = Random.Range(0, 1);
             }
-            if (Difficulty == Difficulty.MEDIUM)
+            if (Difficulty == Models.Difficulty.MEDIUM)
             {
                 chance = Random.Range(0, 2);
             }
-            if (Difficulty == Difficulty.HARD)
+            if (Difficulty == Models.Difficulty.HARD)
             {
                 chance = Random.Range(0, 3);
             }
@@ -48,12 +48,14 @@ namespace _Scripts.Games
             Invoke(nameof(SpawnBombs), timer);
         }
 
-        public void CheckWinCondition(Collider2D col1, Collider2D col2)
+        public void CheckWinCondition(Collider2D col1, Collider2D col2, GameObject obj)
         {
             if (col1.IsTouching(col2))
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 loseCounter++;
+                player.GetComponent<ExpPlayer>().knockback = player.GetComponent<Rigidbody2D>().position - new Vector2(obj.transform.position.x, obj.transform.position.y);
+                // Does not work why?
             }
             else
             {
