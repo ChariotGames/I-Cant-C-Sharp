@@ -1,4 +1,5 @@
 using _Scripts.Controllers;
+using _Scripts.Models;
 using UnityEngine;
 
 namespace _Scripts.Games
@@ -13,6 +14,7 @@ namespace _Scripts.Games
         #region Serialized Fields
 
         [SerializeField] protected MinigameManager manager;
+        [SerializeField] protected KeyMap keys;
         [SerializeField] protected Difficulty currentDifficulty = Difficulty.EASY;
 
         #endregion Serialized Fields
@@ -32,7 +34,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Win()
         {
-            manager.WinCondition(id);
+            Manager.WinCondition(id, gameObject);
         }
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Lose()
         {
-            manager.LoseCondition(id);
+            Manager.LoseCondition(id, gameObject);
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            manager.SetDifficulty(id, currentDifficulty - 1);
+            Manager.SetDifficulty(id, currentDifficulty - 1);
         }
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace _Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            manager.SetDifficulty(id, currentDifficulty + 1);
+            Manager.SetDifficulty(id, currentDifficulty + 1);
         }
 
         #endregion protected
@@ -65,6 +67,9 @@ namespace _Scripts.Games
 
         #region GetSets
 
+        /// <summary>
+        /// The game's unique ID.
+        /// </summary>
         public AssetID ID
         {
             get => id;
@@ -75,6 +80,24 @@ namespace _Scripts.Games
         {
             get => currentDifficulty;
             set => currentDifficulty = value;
+        }
+
+        /// <summary>
+        /// The game's set key map.
+        /// </summary>
+        public KeyMap Keys
+        {
+            get => keys;
+            set => keys = value;
+        }
+
+        /// <summary>
+        /// The Minigame Manager handling game controlls.
+        /// </summary>
+        public MinigameManager Manager
+        {
+            get => manager;
+            set => manager = value;
         }
 
         #endregion GetSets

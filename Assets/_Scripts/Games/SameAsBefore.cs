@@ -1,8 +1,9 @@
+using _Scripts._Input;
+using _Scripts.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _Scripts._Input;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
@@ -12,7 +13,7 @@ namespace _Scripts.Games
     public class SameAsBefore : BaseGame
     {
         [SerializeField] private List<GameObject> options;
-        [SerializeField] private GameObject startText, failText;
+        [SerializeField] private GameObject startText, gamestateWin, gamestateLose;
         [SerializeField] private TMP_Text stepBackText;
         [SerializeField] private int maxStepsBack, timeToAnswer;
 
@@ -69,14 +70,12 @@ namespace _Scripts.Games
                 offset += delta;
                 yield return new WaitForSeconds(0.001f);
             }
-            yield return new WaitForSeconds(1);
             startText.SetActive(false);
         }
 
         private IEnumerator GameStartCoroutine()
         {
-            StartCoroutine(AnimationStartText(2.1f));
-            yield return new WaitForSeconds(1);
+            yield return StartCoroutine(AnimationStartText(2.1f));
             SpawnSymbol();
             _lastIndices.AddFirst(_index);
             if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
@@ -99,19 +98,16 @@ namespace _Scripts.Games
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         base.Win();
-                        options[_index].SetActive(false);
-                        _isYes = false;
-                        _isNo = false;
-                        _lastIndices.AddFirst(_index);
-                        if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
                     }
                     else
                     {
                         base.Lose();
-                        options[_index].SetActive(false);
-                        failText.SetActive(true);
-                        yield break;
                     }
+                    options[_index].SetActive(false);
+                    _isYes = false;
+                    _isNo = false;
+                    _lastIndices.AddFirst(_index);
+                    if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
                 }
                 else
                 {

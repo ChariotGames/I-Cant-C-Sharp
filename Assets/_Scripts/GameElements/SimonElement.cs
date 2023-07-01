@@ -1,5 +1,5 @@
+using _Scripts.Models;
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -84,30 +84,6 @@ namespace _Scripts.Games
         public void Animate()
         {
             StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, duration));
-        }
-
-        /// <summary>
-        /// Fakes a blinking animation of the button color.
-        /// </summary>
-        /// <returns>An object that can be used to control the coroutine's execution.</returns>
-        private IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)
-        {
-            float elapsedTime = 0f;
-            while (elapsedTime < duration)
-            {
-                sprite.color = Color.Lerp(original, target, elapsedTime / duration);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            elapsedTime = 0f;
-            while (elapsedTime < duration)
-            {
-                sprite.color = Color.Lerp(target, original, elapsedTime / duration);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-            sprite.color = original;
         }
 
         #endregion Animations
