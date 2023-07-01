@@ -41,7 +41,7 @@ public class ChatController : MonoBehaviour {
                 ChatDisplayOutput.text += "\n" + formattedInput;
         }
 
-        // Keep Chat input field active
+        // Keep Chat input Square active
         ChatInputField.ActivateInputField();
 
         // Set the scrollbar to the bottom when next text is submitted.

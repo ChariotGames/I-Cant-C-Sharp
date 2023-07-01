@@ -60,7 +60,7 @@ namespace _Scripts.EditorExtensions
         }
 
         /// <summary>
-        /// Draws the usual script field, without this, it's gone.
+        /// Draws the usual script Square, without this, it's gone.
         /// </summary>
         private void DrawScriptField()
         {

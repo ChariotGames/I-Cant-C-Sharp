@@ -8,10 +8,10 @@ namespace _Scripts.Games
 {
     /// <summary>
     /// A row of buttons move from right to left with predefined spacing in between that define the rhythm.
-    /// A field in the middle defines the area where the buttons needs to be pressed when entering the field.
+    /// A Square in the middle defines the area where the buttons needs to be pressed when entering the Square.
     /// 
     /// Easy: Button comes in rhythm.
-    /// Medium: Buttons randomly and suddenly disappear before reaching the field.
+    /// Medium: Buttons randomly and suddenly disappear before reaching the Square.
     /// Hard: Other buttons appear that need to be ignored.
     /// </summary>
     public class BeatWalker : BaseGame
