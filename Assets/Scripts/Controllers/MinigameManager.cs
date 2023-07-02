@@ -271,7 +271,7 @@ namespace Scripts.Controllers
             } else scoreCounter.text = score.ToString();
             
             //TODO: temporary
-            if (score > 3)
+            if (score > 1)
             {
                 RemoveGame(game);
             }
@@ -331,7 +331,6 @@ namespace Scripts.Controllers
                 _time += Time.deltaTime;
                 TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 timeCounter.text = timePlaying.ToString("mm':'ss");
-                Debug.Log(timePlaying);
                 yield return null;
             }
         }
