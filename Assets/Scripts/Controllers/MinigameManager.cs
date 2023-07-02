@@ -28,7 +28,7 @@ namespace Scripts.Controllers
         [SerializeField] private Settings settings;
         [SerializeField] private Transform spawnLeft, spawnRight, spawnCenter;
 
-        //[SerializeField] private GameObject GameOverPanel;
+        [SerializeField] private GameObject GameOverPanel;
         [SerializeField] private TMP_Text scoreCounter;
         [SerializeField] private TMP_Text timeCounter;
         #endregion
@@ -282,8 +282,8 @@ namespace Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 EndTimer();
-                //GameOverPanel.SetActive(true);
-                SceneChanger.ChangeScene(0);
+                GameOverPanel.SetActive(true);
+                //SceneChanger.ChangeScene(0);
 
             }
         }

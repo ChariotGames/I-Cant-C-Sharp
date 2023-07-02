@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -11,11 +12,17 @@ public class EndScreen : MonoBehaviour
         [SerializeField] private InputActionAsset playerInput;
         [SerializeField] private GameObject restartButton;
 
+        [SerializeField] private TMP_Text score;
+        [SerializeField] private TMP_Text timer;
+        [SerializeField] private TMP_Text scoreText;
+        [SerializeField] private TMP_Text timerText;
+
+
     #endregion Serialized Fields
-    
+
     #region Fields
-            
-        private InputActionMap playerMap, uiMap;
+
+    private InputActionMap playerMap, uiMap;
                 
         // TODO: maybe not static?
         private static bool _isPaused;
@@ -25,9 +32,13 @@ public class EndScreen : MonoBehaviour
     #region Built-Ins / MonoBehaviours
         private void Awake()
         {
+            scoreText.text = "Score: " + score;
+            timerText.text = "Time: " + timer;
+
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];
             uiMap.Enable();
+            
         }
 
         void Start()
