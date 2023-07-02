@@ -1749,6 +1749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811362495}
   - component: {fileID: 811362496}
+  - component: {fileID: 811362497}
   m_Layer: 5
   m_Name: MinigameOverlay
   m_TagString: Untagged
@@ -1801,6 +1802,18 @@ MonoBehaviour:
   heartCounter: {fileID: 820830843}
   fullHeart: {fileID: 21300000, guid: 4465120b8551e4633b4c86e817c015f9, type: 3}
   emptyHeart: {fileID: 21300000, guid: d95f47afd8611435fb66b6792c46cf4e, type: 3}
+--- !u!114 &811362497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811362490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f680ad11b8544af86a4c5f2fbf6a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &820830841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2269,7 +2282,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:30
+  m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2502,7 +2515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897317456580356393, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5897317456580356394, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: m_RootOrder
@@ -2561,9 +2574,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+      propertyPath: timeCounter
+      value: 
+      objectReference: {fileID: 1554103829}
+    - target: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: container.up
       value: 
       objectReference: {fileID: 1893183611}
+    - target: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+      propertyPath: scoreCounter
+      value: 
+      objectReference: {fileID: 530300936}
     - target: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: container.down
       value: 
