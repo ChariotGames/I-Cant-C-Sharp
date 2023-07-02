@@ -22,18 +22,15 @@ public class EndScreen : MonoBehaviour
 
     #region Fields
 
-    private InputActionMap playerMap, uiMap;
-                
-        // TODO: maybe not static?
-        private static bool _isPaused;
+        private InputActionMap playerMap, uiMap;
 
     #endregion Fields
     
     #region Built-Ins / MonoBehaviours
         private void Awake()
         {
-            scoreText.text = "Score: " + score;
-            timerText.text = "Time: " + timer;
+            scoreText.text = "Score: " + score.text;
+            timerText.text = "Time: " + timer.text;
 
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];

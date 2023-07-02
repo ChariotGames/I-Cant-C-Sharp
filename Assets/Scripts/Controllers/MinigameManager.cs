@@ -63,7 +63,9 @@ namespace Scripts.Controllers
 
         void Start()
         {
+            BeginTimer();
 
+            
             if (settings.SelectedGame != null)
             {
                 LoadGame(settings.SelectedGame, settings.SelectedGame.KeysLeft, spawnCenter);
@@ -72,8 +74,6 @@ namespace Scripts.Controllers
                 
             loadedLeft = PickGame(new List<Minigame>(_mixGames));
             loadedRight = PickGame(new List<Minigame>(_mixGames));
-
-            BeginTimer();
         }
 
 
@@ -172,7 +172,7 @@ namespace Scripts.Controllers
                 return;
             }
 
-            if (spawnLeft.GetChild(0).gameObject == game)
+            if (spawnLeft.childCount != 0 && spawnLeft.GetChild(0).gameObject == game)
             {
                 Destroy(spawnLeft.GetChild(0).gameObject);
                 loadedLeft = null;
@@ -180,7 +180,7 @@ namespace Scripts.Controllers
                 return;
             }
 
-            if (spawnRight.GetChild(0).gameObject == game)
+            if (spawnRight.childCount != 0 && spawnRight.GetChild(0).gameObject == game)
             {
                 Destroy(spawnRight.GetChild(0).gameObject);
                 loadedRight = null;
@@ -188,7 +188,7 @@ namespace Scripts.Controllers
                 return;
             }
 
-            if (spawnCenter.GetChild(0).gameObject == game)
+            if (spawnCenter.childCount != 0 && spawnCenter.GetChild(0).gameObject == game)
             {
                 Destroy(spawnCenter.GetChild(0).gameObject);
                 loadedLeft = PickGame(new List<Minigame>(_mixGames));
@@ -269,8 +269,12 @@ namespace Scripts.Controllers
             {
                 scoreCounter.text = "0" + score.ToString();
             } else scoreCounter.text = score.ToString();
-
-            RemoveGame(game); 
+            
+            //TODO: temporary
+            if (score > 3)
+            {
+                RemoveGame(game);
+            }
         }
 
         public void LoseCondition(/*AssetID id,*/ GameObject game)
@@ -278,9 +282,10 @@ namespace Scripts.Controllers
             Debug.Log($"Lose from {game.name}");
             settings.Lives--;
             Debug.Log($"Lives left: {settings.Lives}");
-            RemoveGame(game);
             if (settings.Lives <= 0)
             {
+                //TODO: temporary fix for RemoveGame()
+                RemoveGame(game);
                 EndTimer();
                 GameOverPanel.SetActive(true);
                 //SceneChanger.ChangeScene(0);
@@ -326,7 +331,7 @@ namespace Scripts.Controllers
                 _time += Time.deltaTime;
                 TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 timeCounter.text = timePlaying.ToString("mm':'ss");
-
+                Debug.Log(timePlaying);
                 yield return null;
             }
         }
