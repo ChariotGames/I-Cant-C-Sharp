@@ -42,8 +42,8 @@ namespace Scripts.Games
             {
                 // just pool all the objects into a list
                 GameObject button = Instantiate(buttons[i].gameObject);
-                TextMeshPro buttonRenderer = button.GetComponent<TextMeshPro>();
-                _spawnedButtons.Add(buttonRenderer);
+                TextMeshPro buttonText = button.GetComponent<TextMeshPro>();
+                _spawnedButtons.Add(buttonText);
                 button.SetActive(false);
             }
         }
