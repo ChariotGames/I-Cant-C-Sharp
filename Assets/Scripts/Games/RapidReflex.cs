@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
@@ -45,7 +46,6 @@ namespace Scripts.Games
     #endregion Fields
 
     #region Built-Ins / MonoBehaviours
-
         void Start()
         {
             flashColor.Add(lightRed);
@@ -56,7 +56,7 @@ namespace Scripts.Games
             StartCoroutine(GameCoroutine());
         }
 
-    #endregion Built-Ins / MonoBehaviours
+        #endregion Built-Ins / MonoBehaviours
 
     #region GetSets / Properties
 
@@ -207,18 +207,18 @@ namespace Scripts.Games
 
         private void OnEnable()
         {
-            InputHandler.ButtonEast += EastButtonPressed;
+            keys.One.Input.action.started += EastButtonPressed;
         }
 
-        public void EastButtonPressed()
+        public void EastButtonPressed(InputAction.CallbackContext ctx)
         {
             _isButtonPressed = true;
-            UnityEngine.Debug.Log("Button Pressed!");
+            UnityEngine.Debug.Log(ctx.canceled);
         }
         
         private void OnDisable()
         {
-            InputHandler.ButtonEast -= EastButtonPressed;
+            keys.One.Input.action.started -= EastButtonPressed;
         }
 
     #endregion Overarching Methods / Helpers

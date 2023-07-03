@@ -1,7 +1,20 @@
+//using Scripts.Games;
+//using Scripts.Models;
+//using System.Collections.Generic;
+//using TMPro;
+//using UnityEngine;
+//using System;
+//using System.Collections;
+
+
+using System.Collections;
+using TMPro;
 using Scripts.Games;
 using Scripts.Models;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 namespace Scripts.Controllers
 {
@@ -15,6 +28,9 @@ namespace Scripts.Controllers
         [SerializeField] private Settings settings;
         [SerializeField] private Transform spawnLeft, spawnRight, spawnCenter;
 
+        [SerializeField] private GameObject GameOverPanel;
+        [SerializeField] private TMP_Text scoreCounter;
+        [SerializeField] private TMP_Text timeCounter;
         #endregion
 
         #region Fields
@@ -27,6 +43,10 @@ namespace Scripts.Controllers
         private Transform parent;
         private const int MAX_QUE = 5;
         private int loadedTimes = 0;
+
+        private int score = 0;
+        private float _time = 0;
+        private bool timerOn;
 
         #endregion
 
@@ -43,6 +63,9 @@ namespace Scripts.Controllers
 
         void Start()
         {
+            BeginTimer();
+
+            
             if (settings.SelectedGame != null)
             {
                 LoadGame(settings.SelectedGame, settings.SelectedGame.KeysLeft, spawnCenter);
@@ -52,6 +75,7 @@ namespace Scripts.Controllers
             loadedLeft = PickGame(new List<Minigame>(_mixGames));
             loadedRight = PickGame(new List<Minigame>(_mixGames));
         }
+
 
         #endregion
 
@@ -124,11 +148,13 @@ namespace Scripts.Controllers
             if (_previous.Count == MAX_QUE) _mixGames.Add(_previous.Dequeue());
             _previous.Enqueue(game);
 
+            game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame baseGame = obj.GetComponent<BaseGame>();
             baseGame.Difficulty = game.Difficulty;
             baseGame.Keys = keys;
             baseGame.Bounds = SetBounds(parent.position, _soloGames.Contains(game));
+            obj.SetActive(true);
             loadedTimes++;
             return true; // Successfully loaded
         }
@@ -139,6 +165,10 @@ namespace Scripts.Controllers
         /// </summary>
         private void RemoveGame(GameObject game)
         {
+            if (settings.SelectedGame != null)
+            {
+                return;
+            }
             if(loadedTimes == MAX_QUE)
             {
                 RemoveAllGames();
@@ -148,7 +178,7 @@ namespace Scripts.Controllers
                 return;
             }
 
-            if (spawnLeft.GetChild(0).gameObject == game)
+            if (spawnLeft.childCount != 0 && spawnLeft.GetChild(0).gameObject == game)
             {
                 Destroy(spawnLeft.GetChild(0).gameObject);
                 loadedLeft = null;
@@ -156,7 +186,7 @@ namespace Scripts.Controllers
                 return;
             }
 
-            if (spawnRight.GetChild(0).gameObject == game)
+            if (spawnRight.childCount != 0 && spawnRight.GetChild(0).gameObject == game)
             {
                 Destroy(spawnRight.GetChild(0).gameObject);
                 loadedRight = null;
@@ -164,7 +194,7 @@ namespace Scripts.Controllers
                 return;
             }
 
-            if (spawnCenter.GetChild(0).gameObject == game)
+            if (spawnCenter.childCount != 0 && spawnCenter.GetChild(0).gameObject == game)
             {
                 Destroy(spawnCenter.GetChild(0).gameObject);
                 loadedLeft = PickGame(new List<Minigame>(_mixGames));
@@ -235,6 +265,18 @@ namespace Scripts.Controllers
         public void WinCondition(/*AssetID id,*/ GameObject game)
         {
             Debug.Log($"Win from {game.name}");
+            score++;
+
+            //TODO: check if score can get over 100? Maybe take different approach
+            if(score <10)
+            {
+                scoreCounter.text = "00" + score.ToString();
+            } else if(score <100)
+            {
+                scoreCounter.text = "0" + score.ToString();
+            } else scoreCounter.text = score.ToString();
+            
+            //TODO: temporary
             RemoveGame(game);
         }
 
@@ -243,11 +285,15 @@ namespace Scripts.Controllers
             Debug.Log($"Lose from {game.name}");
             settings.Lives--;
             Debug.Log($"Lives left: {settings.Lives}");
-            RemoveGame(game);
             if (settings.Lives <= 0)
             {
-                SceneChanger.ChangeScene(0);
+                //TODO: temporary fix for RemoveGame()
+                EndTimer();
+                GameOverPanel.SetActive(true);
+                //SceneChanger.ChangeScene(0);
+
             }
+            RemoveGame(game);
         }
 
         public void SetDifficulty(/*AssetID id,*/ GameObject game, Difficulty difficulty)
@@ -267,6 +313,29 @@ namespace Scripts.Controllers
             if (isFullscreen) return new Bounds(_mainCamera.transform.position, size);
 
             return new Bounds(centerPoint, size);
+        }
+
+        private void BeginTimer()
+        {
+            timerOn = true;
+            StartCoroutine(RunTimer());
+            
+        }
+
+        private void EndTimer()
+        {
+            timerOn = false;
+        }
+
+        private IEnumerator RunTimer()
+        {
+            while(timerOn)
+            {
+                _time += Time.deltaTime;
+                TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
+                timeCounter.text = timePlaying.ToString("mm':'ss");
+                yield return null;
+            }
         }
 
         #endregion

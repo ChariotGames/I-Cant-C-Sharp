@@ -31,7 +31,7 @@ namespace Scripts.Games
 
         void Awake()
         {
-            //manager = GameObject.Find(nameof(MinigameManager)).GetComponent<MinigameManager>();
+            manager = GameObject.Find(nameof(MinigameManager)).GetComponent<MinigameManager>();
         }
 
         #endregion
