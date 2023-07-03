@@ -35,12 +35,12 @@ namespace Scripts.Games
 
         private void OnEnable()
         {
-            if (button != null) ToggleInput(true);
+            if (Button != null) ToggleInput(true);
         }
 
         private void OnDisable()
         {
-            if (button != null) ToggleInput(false);
+            if (Button != null) ToggleInput(false);
         }
 
         #endregion Built-Ins
@@ -66,11 +66,11 @@ namespace Scripts.Games
         {
             if (state)
             {
-                button.action.performed += ButtonPressed;
+                Button.action.performed += ButtonPressed;
             }
             else
             {
-                button.action.performed -= ButtonPressed;
+                Button.action.performed -= ButtonPressed;
             }
         }
 
