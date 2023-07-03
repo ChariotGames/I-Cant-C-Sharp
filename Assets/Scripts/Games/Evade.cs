@@ -72,13 +72,13 @@ namespace Scripts.Games
             if (col1.IsTouching(col2) || col1.IsTouching(col3) && Difficulty != Difficulty.EASY && chance >= 0.33f)
             {
                 Debug.Log("Chuckles... I'm in danger.");
-                active = false;
+                //active = false;
                 base.Lose();
             }
             else if (col1.IsTouching(col2))
             {
                 Debug.Log("Chuckles... I'm in danger.");
-                active = false;
+                //active = false;
                 base.Lose();
             }
             else
@@ -89,7 +89,8 @@ namespace Scripts.Games
             if (winCounter == 5)
             {
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
-                active = false;
+                winCounter = 0;
+                //active = false;
                 base.Win();
             }
         }

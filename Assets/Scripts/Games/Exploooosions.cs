@@ -65,12 +65,14 @@ namespace Scripts.Games
             if (winCounter == 25)
             {
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
+                winCounter = 0;
                 active = false;
                 base.Win();
             }
             if (loseCounter == 3)
             {
                 Debug.Log("Snake? SNAKE? SNAAAAAACKE!!!");
+                loseCounter = 0;
                 active = false;
                 base.Lose();
             }

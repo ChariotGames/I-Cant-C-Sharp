@@ -97,8 +97,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0aa714842e2efc4c9ff3acb63ef4f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -422,8 +426,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0aa714842e2efc4c9ff3acb63ef4f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -525,8 +533,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0aa714842e2efc4c9ff3acb63ef4f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -547,7 +559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6074431469229620357
 Transform:
   m_ObjectHideFlags: 0
@@ -714,8 +726,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae5825e892b1f24a83b995af4d48c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   movementSpeed: 5
   _buttons:
   - {fileID: 8721284868211902829, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
@@ -929,8 +945,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e303849ccda5a4e9a13b53fc97aea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   indLeft: {fileID: 6074431468874699804}
   indMid: {fileID: 6074431468176991242}
   indRight: {fileID: 6074431468632746369}
