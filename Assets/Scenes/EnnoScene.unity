@@ -855,7 +855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1899896942
 Transform:
   m_ObjectHideFlags: 0
@@ -885,13 +885,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a22d504e5e88e4c833a651226218ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  keys:
-    one: {fileID: 0}
-    two: {fileID: 0}
-    three: {fileID: 0}
-    four: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   owner_ref: {fileID: 1899896941}
   bomb_ref: {fileID: 0}
   player_ref: {fileID: 972564177}
