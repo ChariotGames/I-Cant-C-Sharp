@@ -167,7 +167,8 @@ namespace Scripts.Controllers
         {
             if (settings.SelectedGame != null)
             {
-                SceneChanger.ChangeScene(1);
+                Destroy(spawnCenter.GetChild(0).gameObject, 1);
+                LoadGame(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter);
                 return;
             }
             
