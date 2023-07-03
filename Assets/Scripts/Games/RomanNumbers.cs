@@ -7,6 +7,7 @@ using Scripts._Input;
 using Scripts.Models;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -31,6 +32,11 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
+        private void Awake()
+        {
+            SetUp();
+        }
+        
         void Start()
         {
             StartCoroutine(GameCoroutine());
@@ -167,24 +173,24 @@ namespace Scripts.Games
             
             private void OnEnable()
             {
-                InputHandler.ShoulderRight += RightShoulderPressed;
-                InputHandler.ShoulderLeft += LeftShoulderPressed;
+                keys.One.Input.action.performed += YesButtonPressed;
+                keys.Two.Input.action.performed += NoButtonPressed;
             }
 
-            public void RightShoulderPressed()
+            public void YesButtonPressed(InputAction.CallbackContext ctx)
             {
                 _isYes = true;
             }
 
-            public void LeftShoulderPressed()
+            public void NoButtonPressed(InputAction.CallbackContext ctx)
             {
                 _isNo = true;
             }
 
             private void OnDisable()
             {
-                InputHandler.ShoulderRight -= RightShoulderPressed;
-                InputHandler.ShoulderLeft -= LeftShoulderPressed;
+                keys.One.Input.action.performed -= YesButtonPressed;
+                keys.Two.Input.action.performed -= NoButtonPressed;
             }
 
         #endregion Overarching Methods / Helpers

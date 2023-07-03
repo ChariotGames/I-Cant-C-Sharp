@@ -68,7 +68,7 @@ namespace Scripts.Controllers
             
             if (settings.SelectedGame != null)
             {
-                LoadGame(settings.SelectedGame, settings.SelectedGame.KeysLeft, spawnCenter);
+                LoadGame(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter);
                 return;
             }
                 
@@ -167,8 +167,11 @@ namespace Scripts.Controllers
         {
             if (settings.SelectedGame != null)
             {
+                Destroy(spawnCenter.GetChild(0).gameObject, 1);
+                LoadGame(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter);
                 return;
             }
+            
             if(loadedTimes == MAX_QUE)
             {
                 RemoveAllGames();
