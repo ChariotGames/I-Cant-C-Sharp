@@ -28,6 +28,7 @@ namespace Scripts.Games
         private float _elapsedTime;
         private float _timeoutStemp;
         private float _ballGravityScale = 1f;
+        private int _currentScore;
         private bool hasRandomGravity;
         
         private const float _timeoutDelay = 15f;
@@ -106,12 +107,21 @@ namespace Scripts.Games
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-
+        
+        public void IncreaseScore()
+        {
+            _currentScore++;
+            if (_currentScore >= 3)
+            {
+                base.Win();
+            }
+        }
         private void SubmitGuess()
         {
             if (!_guessingStage) return;
             if (_bounceCounter == _currentGuessNumber)
             {
+                IncreaseScore();
                 Debug.Log("Correct Answer");
             }
             else
