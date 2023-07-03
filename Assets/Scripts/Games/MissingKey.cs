@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts._Input;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Games
 {
@@ -16,6 +17,7 @@ namespace Scripts.Games
         private Bounds _cameraViewportBounds;
         private Camera _mainCamera;
         private float _time = 0;
+        private bool timerEnded;
 
 
         private void Awake()
@@ -41,29 +43,43 @@ namespace Scripts.Games
             _time += Time.deltaTime;
             if (_time >= ROUND_TIME)
             {
-                TimerEnded();
+                timerEnded = true;
+                //TimerEnded();
             }
 
             NextRound();
         }
 
-        private void TimerEnded()
-        {
-            loseDisplay.SetActive(true);
-            DeleteAll();
-            InputHandler.ArrowRight -= PlayerPress;
-            InputHandler.ArrowLeft -= PlayerPress;
-            InputHandler.ArrowUp -= PlayerPress;
-            InputHandler.ArrowDown -= PlayerPress;
-        }
+        //private void TimerEnded()
+        //{
+        //    base.Lose();
+        //    //loseDisplay.SetActive(true);
+        //    //DeleteAll();
+        //    //InputHandler.ArrowRight -= PlayerPress;
+        //    //InputHandler.ArrowLeft -= PlayerPress;
+        //    //InputHandler.ArrowUp -= PlayerPress;
+        //    //InputHandler.ArrowDown -= PlayerPress;
+        //}
 
         // Subscribes to playerPress()
         private void OnEnable()
         {
-            InputHandler.ArrowRight += PlayerPress;
-            InputHandler.ArrowLeft += PlayerPress;
-            InputHandler.ArrowUp += PlayerPress;
-            InputHandler.ArrowDown += PlayerPress;
+            keys.One.Input.action.performed += PlayerPress;
+            keys.Two.Input.action.performed += PlayerPress;
+            keys.Three.Input.action.performed += PlayerPress;
+            keys.Four.Input.action.performed += PlayerPress;
+            //InputHandler.ArrowRight += PlayerPress;
+            //InputHandler.ArrowLeft += PlayerPress;
+            //InputHandler.ArrowUp += PlayerPress;
+            //InputHandler.ArrowDown += PlayerPress;
+        }
+
+        private void OnDisable()
+        {
+            keys.One.Input.action.performed -= PlayerPress;
+            keys.Two.Input.action.performed -= PlayerPress;
+            keys.Three.Input.action.performed -= PlayerPress;
+            keys.Four.Input.action.performed -= PlayerPress;
         }
 
         // Creates a new random pattern 
@@ -155,7 +171,7 @@ namespace Scripts.Games
             }
         }
 
-        private void PlayerPress()
+        private void PlayerPress(InputAction.CallbackContext ctx)
         {
             _playerPressed = true;
             _time = 0;
@@ -166,13 +182,7 @@ namespace Scripts.Games
             if (_playerPressed)
             {
                 DeleteAll();
-                if (CheckWin())
-                {
-                    base.Win();
-                    GeneratePattern();
-                    DisplayPattern();
-                }
-                else
+                if (!CheckWin() || timerEnded)
                 {
                     base.Lose();
                     GeneratePattern();
@@ -182,6 +192,14 @@ namespace Scripts.Games
                     //InputHandler.ArrowLeft -= PlayerPress;
                     //InputHandler.ArrowUp -= PlayerPress;
                     //InputHandler.ArrowDown -= PlayerPress;
+
+                }
+                else
+                {
+                    base.Win();
+                    GeneratePattern();
+                    DisplayPattern();
+                    
                 }
             }
             _playerPressed = false;
