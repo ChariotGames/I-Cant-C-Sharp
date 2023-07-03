@@ -18,7 +18,7 @@ namespace Scripts.Controllers
         [SerializeField] private CanvasScaler canvasScaler;
         [SerializeField] private GameObject gamesContainer, templateGameButton, optionLives, startButton;
         [SerializeField] private Settings defaultSettings, settings;
-        [SerializeField] private TMP_Text livesText;
+        [SerializeField] private TMP_Text livesText, difficultyText;
 
         #endregion Serialized Fields
 
@@ -40,6 +40,7 @@ namespace Scripts.Controllers
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             gameButtons = new();
             livesText.text = settings.Lives.ToString();
+            difficultyText.text = settings.BaseDifficulty.ToString();
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -106,6 +107,17 @@ namespace Scripts.Controllers
         {
             settings.Lives += change;
             livesText.text = settings.Lives.ToString();
+        }
+
+        /// <summary>
+        /// Sets the base difficulty for all games.
+        /// </summary>
+        /// <param name="change">The difference to set to.</param>
+        public void SetDifficulty(int change)
+        {
+            int current = (int)settings.BaseDifficulty + change;
+            settings.BaseDifficulty = (Difficulty)Mathf.Clamp(current, (int)Difficulty.EASY, (int)Difficulty.HARD);
+            difficultyText.text = settings.BaseDifficulty.ToString();
         }
 
         /// <summary>
