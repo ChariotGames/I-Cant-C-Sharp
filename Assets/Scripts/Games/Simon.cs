@@ -1,6 +1,7 @@
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,7 @@ namespace Scripts.Games
 
         [SerializeField] private List<Colors> displayPattern, guessPattern;
         [SerializeField] private List<Modifier> infoPattern;
+        [SerializeField] private List<TMP_Text> inputTexts;
         [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay, middle;
         [SerializeField] private SimonElement blue, red, yellow, green;
         [SerializeField] private SimonElement twice, nothing, ok;
@@ -48,6 +50,18 @@ namespace Scripts.Games
             displayPattern.Clear();
             guessPattern.Clear();
             infoPattern.Clear();
+
+            // Set keys
+            blue.GetComponent<BasePressElement>().Button = keys.One.Input;
+            red.GetComponent<BasePressElement>().Button = keys.Two.Input;
+            yellow.GetComponent<BasePressElement>().Button = keys.Three.Input;
+            green.GetComponent<BasePressElement>().Button = keys.Four.Input;
+
+            // Set Icons
+            inputTexts[0].text = keys.One.Icon;
+            inputTexts[1].text = keys.Two.Icon;
+            inputTexts[2].text = keys.Three.Icon;
+            inputTexts[3].text = keys.Four.Icon;
 
             // Initialize game
             _buttonObjects = new();

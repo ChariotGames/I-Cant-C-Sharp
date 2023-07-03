@@ -475,11 +475,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceceaaccb4d8fb747a41c29c2058bcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: Blue
+    two: Red
+    three: Yellow
+    four: Green
   displayPattern: 
   guessPattern: 
   infoPattern: 
+  inputTexts:
+  - {fileID: 3923420841757164548}
+  - {fileID: 3923420841613081708}
+  - {fileID: 3923420840428119226}
+  - {fileID: 3923420841216393779}
   buttonsContainer: {fileID: 3923420841571965842}
   inputOverlay: {fileID: 3619042334536100596}
   infoOverlay: {fileID: 8236597517906972022}
@@ -590,7 +599,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6717256202175962813}
-  button: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0.5019608, g: 0.5019608, b: 0, a: 1}
   targetColor: {r: 1, g: 1, b: 0, a: 1}
   colorEnum: 3
@@ -866,7 +874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6717256202175962813}
-  button: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0.5019608, g: 0, b: 0, a: 1}
   targetColor: {r: 1, g: 0, b: 0, a: 1}
   colorEnum: 2
@@ -1349,7 +1356,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6717256202175962813}
-  button: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0, g: 0.5019608, b: 0, a: 1}
   targetColor: {r: 0, g: 1, b: 0, a: 1}
   colorEnum: 4
@@ -1453,7 +1459,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6717256202175962813}
-  button: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   originalColor: {r: 0, g: 0, b: 0.5019608, a: 1}
   targetColor: {r: 0, g: 0, b: 1, a: 1}
   colorEnum: 1
@@ -1557,7 +1562,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6717256202175962813}
-  button: {fileID: 0}
   originalColor: {r: 1, g: 1, b: 1, a: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorEnum: 0
@@ -1661,7 +1665,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6717256202175962813}
-  button: {fileID: 0}
   originalColor: {r: 1, g: 1, b: 1, a: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorEnum: 0
@@ -1799,7 +1802,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 6717256202175962813}
-  button: {fileID: 0}
   originalColor: {r: 1, g: 1, b: 1, a: 0}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorEnum: 0
