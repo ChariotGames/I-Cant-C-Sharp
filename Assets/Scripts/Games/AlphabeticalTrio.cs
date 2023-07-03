@@ -89,13 +89,13 @@ namespace Scripts.Games
             private void GameWon()
             {
                 gamestateWin.SetActive(true);
-                base.Win();
+                Win();
             }
         
             private void GameLost()
             {
                 gamestateLose.SetActive(true);
-                base.Lose();
+                Lose();
             }
         
             private void ShowLetters(bool isTrio)

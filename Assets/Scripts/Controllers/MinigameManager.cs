@@ -271,8 +271,9 @@ namespace Scripts.Controllers
             } else scoreCounter.text = score.ToString();
             
             //TODO: temporary
-            if (score > 1)
+            if (score > 2)
             {
+                score = 0;
                 RemoveGame(game);
             }
         }
@@ -285,12 +286,12 @@ namespace Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 //TODO: temporary fix for RemoveGame()
-                RemoveGame(game);
                 EndTimer();
                 GameOverPanel.SetActive(true);
                 //SceneChanger.ChangeScene(0);
 
             }
+            RemoveGame(game);
         }
 
         public void SetDifficulty(/*AssetID id,*/ GameObject game, Difficulty difficulty)

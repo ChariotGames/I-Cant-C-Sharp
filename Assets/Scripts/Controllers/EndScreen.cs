@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class EndScreen : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class EndScreen : MonoBehaviour
 
         [SerializeField] private InputActionAsset playerInput;
         [SerializeField] private GameObject restartButton;
+        [SerializeField] private Settings defaultSettings, settings;
 
         [SerializeField] private TMP_Text score;
         [SerializeField] private TMP_Text timer;
@@ -49,7 +52,8 @@ public class EndScreen : MonoBehaviour
     
         public void Restart()
         {
-            
+            settings.Lives = defaultSettings.Lives;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         
         public void GoToMenu()
