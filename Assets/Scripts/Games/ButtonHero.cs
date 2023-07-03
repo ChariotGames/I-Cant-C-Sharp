@@ -25,11 +25,16 @@ namespace Scripts.Games
         private Bounds _cameraViewportBounds;
         private readonly List<TextMeshPro> _spawnedButtons = new ();
         private static float _timer;
+        private float _timeoutDelay = 5f;
+        private int _maxFails = 3;
+        private float _elapsedTime;
+        private float _timeoutStemp;
+        private int _currentScore;
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
-
+        
         private void Awake()
         {
             _mainCamera = Camera.main;
@@ -53,14 +58,25 @@ namespace Scripts.Games
 
         private void Update()
         {
+
             if (_previousButton && _previousButton.gameObject.activeSelf)
             {
                 _timer += Time.deltaTime;
                 var seconds = Mathf.Floor(_timer);
-                var milliseconds = Mathf.Floor((_timer - seconds) * 1000f);
-
+                var milliseconds = Mathf.Floor((_timer - seconds) * 1000f); 
                 var timeText = $"{seconds:00}:{milliseconds:00}";
                 timerTextMesh.text = timeText;
+                if (_timer >= _timeoutDelay)
+                {
+                    _maxFails--;
+                    _previousButton.gameObject.SetActive(false);
+                    ResetTimer();
+                    if (_maxFails <= 0)
+                    {
+                        base.Lose();
+                    }
+                }
+               
             }
         }
 
@@ -74,16 +90,12 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
         
-        public static void ResetTimer()
-        {
-            Debug.Log("It took " + _timer + " to react");
-            _timer = 0;
-        }
 
-        public void ResetTimer2()
+        public void ResetTimer()
         {
             Debug.Log("It took " + _timer + " to react");
             _timer = 0;
+
         }
 
         #endregion Game Mechanics / Methods
@@ -133,5 +145,14 @@ namespace Scripts.Games
         }
 
         #endregion Overarching Methods / Helpers
+
+        public void IncreaseScore()
+        {
+            _currentScore++;
+            if (_currentScore >= 10)
+            {
+                base.Win();
+            }
+        }
     }
 }

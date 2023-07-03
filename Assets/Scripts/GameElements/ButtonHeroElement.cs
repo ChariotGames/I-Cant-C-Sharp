@@ -19,7 +19,8 @@ namespace Scripts.GameElements
         public override void ButtonPressed(InputAction.CallbackContext ctx)
         {
             gameObject.SetActive(false);
-            _game.ResetTimer2();
+            _game.ResetTimer();
+            _game.IncreaseScore();
         }
     }
 }
