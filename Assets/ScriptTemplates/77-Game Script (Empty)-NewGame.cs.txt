@@ -21,9 +21,14 @@ namespace _Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        void Start()
+        void Awake()
         {
             base.SetUp();
+        }
+
+        void Start()
+        {
+            #NOTRIM#
         }
 
         void Update()
