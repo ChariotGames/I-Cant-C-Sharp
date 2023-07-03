@@ -167,6 +167,7 @@ namespace Scripts.Controllers
         {
             if (settings.SelectedGame != null)
             {
+                SceneChanger.ChangeScene(1);
                 return;
             }
             
