@@ -17,7 +17,11 @@ namespace Scripts.Games
         private int winCounter = 0;
         private int loseCounter = 0;
 
-        // Start is called before the first frame update
+        private void Awake()
+        {
+            base.SetUp();
+        }
+
         void Start()
         {
             active = true;

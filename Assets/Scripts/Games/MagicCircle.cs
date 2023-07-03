@@ -36,6 +36,11 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
+        private void Awake()
+        {
+            base.SetUp();
+        }
+
         void Start()
         {
             ringButtons = keys.All;

@@ -358,7 +358,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 2918756866687947655}
-  button: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &2918756866687947654
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2918756866687947648
 Transform:
   m_ObjectHideFlags: 0
@@ -406,8 +405,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050f746ae03a480438061413acd23357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   equationText: {fileID: 2918756865153322556}
   leftAnswer: {fileID: 2918756866870625413}
   rightAnswer: {fileID: 2918756865382459727}
@@ -597,4 +600,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 2918756866687947655}
-  button: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
