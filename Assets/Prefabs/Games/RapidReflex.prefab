@@ -82,7 +82,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1887571883485080395
 Transform:
   m_ObjectHideFlags: 0
@@ -112,8 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6586789a3ce3444a210e33efb8c6ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   lightsTop: {fileID: 1887571885041113619}
   lightsBottom: {fileID: 1887571883439753429}
   lightTemplate: {fileID: 1887571884289595808}
@@ -132,7 +136,7 @@ MonoBehaviour:
   - {r: 0.06759523, g: 0.22107758, b: 0.46226418, a: 1}
   gameState: {fileID: 1887571884904592209}
   lightTimer: 1
-  timeToAnswerInMs: 250
+  timeToAnswer: 0.25
 --- !u!1 &1887571884289595808
 GameObject:
   m_ObjectHideFlags: 0
