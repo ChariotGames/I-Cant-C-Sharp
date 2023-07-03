@@ -57,6 +57,11 @@ namespace _Scripts.Games
         // Such as Awake, Start, Update.
         // But also OnEnable, OnDestroy, OnTrigger and such.
 
+        void Awake()
+        {
+            base.SetUp();
+        }
+
         // Start is called before the first frame update
         void Start()
         {
