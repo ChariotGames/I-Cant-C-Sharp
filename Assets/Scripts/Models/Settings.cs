@@ -9,6 +9,7 @@ namespace Scripts.Models
         #region Fields
 
         [SerializeField] private int lives = 3, players = 1;
+        [SerializeField] private Difficulty baseDifficulty;
         [SerializeField] private Minigame selectedGame = null;
         [SerializeField] private List<Minigame> games = new(), soloGames = new();
 
@@ -63,6 +64,7 @@ namespace Scripts.Models
             get => soloGames;
             set => soloGames = value;
         }
+        public Difficulty BaseDifficulty { get => baseDifficulty; set => baseDifficulty = value; }
 
         #endregion
     }
