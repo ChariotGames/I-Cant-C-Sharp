@@ -15,7 +15,7 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-            [SerializeField] private TMP_Text letters;
+            [SerializeField] private TMP_Text letters, buttonYes, buttonNo;
             [SerializeField] private GameObject letterContainer, gamestateWin, gamestateLose;
             [SerializeField] private int timeout;
 
@@ -34,6 +34,12 @@ namespace Scripts.Games
             void Start()
             {
                 StartCoroutine(GameCoroutine());
+            }
+
+            void Awake()
+            {
+                buttonYes.text = keys.One.Icon;
+                buttonNo.text = keys.Two.Icon;
             }
 
         #endregion Built-Ins / MonoBehaviours
@@ -66,16 +72,14 @@ namespace Scripts.Games
             private IEnumerator MeasureTime()
             {
                 _timeElapsed = -1;
-                Stopwatch stopwatch = new();
-                stopwatch.Start();
-                yield return new WaitUntil(() => _isYes || _isNo || stopwatch.ElapsedMilliseconds > timeout * 1000);
-                stopwatch.Stop();
-                _timeElapsed = stopwatch.ElapsedMilliseconds;
+                float timer = Time.time;
+                yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
+                _timeElapsed = Time.time - timer;
             }
             
             private IEnumerator DetermineGamestate(bool isTrio)
             {
-                if (_timeElapsed < timeout * 1000 && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
+                if (_timeElapsed < timeout && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
                 {
                     GameWon();
                 }
@@ -91,13 +95,13 @@ namespace Scripts.Games
             private void GameWon()
             {
                 gamestateWin.SetActive(true);
-                //Win();
+                Win();
             }
         
             private void GameLost()
             {
                 gamestateLose.SetActive(true);
-                //Lose();
+                Lose();
             }
         
             private void ShowLetters(bool isTrio)

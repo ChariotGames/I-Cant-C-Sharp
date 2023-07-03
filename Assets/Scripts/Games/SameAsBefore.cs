@@ -93,15 +93,15 @@ namespace Scripts.Games
                     //Debug.Log(lastIndices.Count);
                     Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tsteps: " + (_steps + 1));
 
-                    float timer = Time.unscaledTime;
-                    yield return new WaitUntil(() => _isYes || _isNo || Time.unscaledTime - timer > timeToAnswer);
+                    float timer = Time.time;
+                    yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeToAnswer);
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
-                        base.Win();
+                        Win();
                     }
                     else
                     {
-                        base.Lose();
+                        Lose();
                     }
                     options[_index].SetActive(false);
                     _isYes = false;

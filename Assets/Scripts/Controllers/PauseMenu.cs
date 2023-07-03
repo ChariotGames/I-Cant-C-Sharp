@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts._Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Scripts.Controllers
 {
@@ -11,15 +14,18 @@ namespace Scripts.Controllers
 
         #region Serialized Fields
 
-            [SerializeField] private GameObject pauseMenu;
-            [SerializeField] private GameObject button;
+        [SerializeField] private InputActionAsset playerInput;
+        [SerializeField] private GameObject pauseMenu, resumeButton;
+        [SerializeField] private InputActionReference button;
 
         #endregion Serialized Fields
 
 
         #region Fields
             
-        // TODO: maybe not static?
+            private InputActionMap playerMap, uiMap;
+            
+            // TODO: maybe not static?
             private static bool _isPaused;
 
         #endregion Fields
@@ -40,7 +46,14 @@ namespace Scripts.Controllers
 
         #region Built-Ins / MonoBehaviours
 
-            void Start()
+        private void Awake()
+        {
+            playerMap = playerInput.actionMaps[0];
+            uiMap = playerInput.actionMaps[1];
+            uiMap.Enable();
+        }
+
+        void Start()
             {
                 _isPaused = false;
             }
@@ -54,8 +67,9 @@ namespace Scripts.Controllers
             {
                 _isPaused = true;
                 pauseMenu.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(button);
+                EventSystem.current.SetSelectedGameObject(resumeButton);
                 Time.timeScale = 0;
+                playerMap.Disable();
             }
         
             public void ResumeGame()
@@ -63,11 +77,14 @@ namespace Scripts.Controllers
                 _isPaused = false;
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1;
+                playerMap.Enable();
             }
 
             public void GoToMenu()
             {
                 Time.timeScale = 1;
+                uiMap.Disable();
+                playerMap.Enable();
                 SceneChanger.ChangeScene(0);
             }
 
@@ -84,10 +101,10 @@ namespace Scripts.Controllers
         #region Overarching Methods / Helpers
             private void OnEnable()
             {
-                InputHandler.OptionButtonStart += PauseButtonPressed;
+                button.action.performed += PauseButtonPressed;
             }
 
-            private void PauseButtonPressed()
+            private void PauseButtonPressed(InputAction.CallbackContext ctx)
             {
                 Debug.Log("Input Registered");
                 if (_isPaused)
@@ -102,7 +119,7 @@ namespace Scripts.Controllers
             
             private void OnDisable()
             {
-                InputHandler.OptionButtonStart -= PauseButtonPressed;
+                button.action.performed -= PauseButtonPressed;
             }
         
         #endregion Overarching Methods / Helpers
