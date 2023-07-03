@@ -15,7 +15,8 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] protected BaseGame parent;
-        [SerializeField] protected InputActionReference button;
+
+        public InputActionReference Button { get; set; }
 
         #endregion Serialized Fields
 
@@ -23,12 +24,12 @@ namespace Scripts.Games
 
         void OnEnable()
         {
-            button.action.performed += ButtonPressed;
+            Button.action.performed += ButtonPressed;
         }
 
         void OnDisable()
         {
-            button.action.performed -= ButtonPressed;
+            Button.action.performed -= ButtonPressed;
         }
 
         #endregion Built-Ins / MonoBehaviours

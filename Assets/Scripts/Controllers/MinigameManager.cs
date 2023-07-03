@@ -148,11 +148,13 @@ namespace Scripts.Controllers
             if (_previous.Count == MAX_QUE) _mixGames.Add(_previous.Dequeue());
             _previous.Enqueue(game);
 
+            game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame baseGame = obj.GetComponent<BaseGame>();
             baseGame.Difficulty = game.Difficulty;
             baseGame.Keys = keys;
             baseGame.Bounds = SetBounds(parent.position, _soloGames.Contains(game));
+            obj.SetActive(true);
             loadedTimes++;
             return true; // Successfully loaded
         }
@@ -163,6 +165,10 @@ namespace Scripts.Controllers
         /// </summary>
         private void RemoveGame(GameObject game)
         {
+            if (settings.SelectedGame != null)
+            {
+                return;
+            }
             if(loadedTimes == MAX_QUE)
             {
                 RemoveAllGames();
@@ -271,11 +277,7 @@ namespace Scripts.Controllers
             } else scoreCounter.text = score.ToString();
             
             //TODO: temporary
-            if (score > 2)
-            {
-                score = 0;
-                RemoveGame(game);
-            }
+            RemoveGame(game);
         }
 
         public void LoseCondition(/*AssetID id,*/ GameObject game)

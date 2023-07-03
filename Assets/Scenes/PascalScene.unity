@@ -631,7 +631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4665578903984628120, guid: fd3022b129af2d745a5e33d7587757c8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4665578903984628121, guid: fd3022b129af2d745a5e33d7587757c8, type: 3}
       propertyPath: timerTextMesh
@@ -879,7 +879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1181034897602295524, guid: 25234062938444c49b6da4ab8c0f63cc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1181034897602295530, guid: 25234062938444c49b6da4ab8c0f63cc, type: 3}
       propertyPath: manager

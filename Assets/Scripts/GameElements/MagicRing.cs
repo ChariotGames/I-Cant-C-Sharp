@@ -39,6 +39,14 @@ namespace Scripts.Games
             DrawRing(lineSegments, _radius -= Time.deltaTime * timer);
         }
 
+        private void OnDisable()
+        {
+            for (int i = 0; i < _buttons.Length; i++)
+            {
+                _buttons[i].action.performed -= ButtonPressed;
+            }
+        }
+
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties

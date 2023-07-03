@@ -37,13 +37,15 @@ namespace Scripts.Games
         
         private void Awake()
         {
+            base.SetUp();
             _mainCamera = Camera.main;
             for (var i = buttons.Count - 1; i >= 0; i--)
             {
                 // just pool all the objects into a list
                 GameObject button = Instantiate(buttons[i].gameObject);
-                TextMeshPro buttonRenderer = button.GetComponent<TextMeshPro>();
-                _spawnedButtons.Add(buttonRenderer);
+                TextMeshPro buttonText = button.GetComponent<TextMeshPro>();
+                button.GetComponent<BasePressElement>().Button = keys.All[i].Input;
+                _spawnedButtons.Add(buttonText);
                 button.SetActive(false);
             }
         }
@@ -73,6 +75,7 @@ namespace Scripts.Games
                     ResetTimer();
                     if (_maxFails <= 0)
                     {
+                        _maxFails = 3;
                         base.Lose();
                     }
                 }
@@ -151,7 +154,9 @@ namespace Scripts.Games
             _currentScore++;
             if (_currentScore >= 10)
             {
+                _currentScore = 0;
                 base.Win();
+                
             }
         }
     }

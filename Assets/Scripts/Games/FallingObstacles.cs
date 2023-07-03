@@ -39,6 +39,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
+            base.SetUp();
             _mainCamera = Camera.main;
         }
 
@@ -94,6 +95,7 @@ namespace Scripts.Games
             _currentScore++;
             if (_currentScore >= 20)
             {
+                _currentScore = 0;
                 base.Win();
             }
         }
@@ -105,6 +107,7 @@ namespace Scripts.Games
             _healthPoints--;
             if (_healthPoints <= 0)
             {
+                _healthPoints = 3;
                 base.Lose();
             }
             lifeCounter.text = _healthPoints.ToString();

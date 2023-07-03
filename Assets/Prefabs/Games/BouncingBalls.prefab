@@ -1069,7 +1069,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1181034897602295531
 Transform:
   m_ObjectHideFlags: 0
@@ -1101,13 +1101,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093213cc36fa51241bf8935f582df995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  keys:
-    one: {fileID: 0}
-    two: {fileID: 0}
-    three: {fileID: 0}
-    four: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   bouncingBalls:
   - {fileID: 1181034897870326476}
   - {fileID: 1181034896170703930}

@@ -15,7 +15,7 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-            [SerializeField] private TMP_Text letters;
+            [SerializeField] private TMP_Text letters, buttonYes, buttonNo;
             [SerializeField] private GameObject letterContainer, gamestateWin, gamestateLose;
             [SerializeField] private int timeout;
 
@@ -34,6 +34,12 @@ namespace Scripts.Games
             void Start()
             {
                 StartCoroutine(GameCoroutine());
+            }
+
+            void Awake()
+            {
+                buttonYes.text = keys.One.Icon;
+                buttonNo.text = keys.Two.Icon;
             }
 
         #endregion Built-Ins / MonoBehaviours

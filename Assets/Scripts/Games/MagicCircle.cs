@@ -1,7 +1,9 @@
+using System;
 using Scripts.Models;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace Scripts.Games
 {
