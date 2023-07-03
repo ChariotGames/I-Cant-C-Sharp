@@ -23,10 +23,16 @@ namespace Scripts.Models
         private float _timeoutStemp;
         private bool _isAnswerScreen;
         private float _timeoutDelay = 15f;
+        private int _currentScore;
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
+
+        private void Awake()
+        {
+            base.SetUp();
+        }
 
         private void Start()
         {
@@ -172,16 +178,23 @@ namespace Scripts.Models
             if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
+                _currentScore++;
+                if (_currentScore >= 5)
+                {
+                    _currentScore = 0;
+                    base.Win();
+                }
                 GenerateNewEquation();
             }
             else
             {
                 Debug.Log("Wrong");
-                _maxFails -= 1;
+                _maxFails--;
                 GenerateNewEquation();
-                if (_maxFails == 0)
+                if (_maxFails <= 0)
                 {
                     Debug.Log("GAME LOST");
+                    _maxFails = 3;
                     base.Lose();
                 }
             }

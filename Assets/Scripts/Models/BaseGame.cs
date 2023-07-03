@@ -29,9 +29,10 @@ namespace Scripts.Games
 
         #region Built-Ins
 
-        void Awake()
+        
+        protected void SetUp()
         {
-            //manager = GameObject.Find(nameof(MinigameManager)).GetComponent<MinigameManager>();
+            manager = GameObject.Find(nameof(MinigameManager)).GetComponent<MinigameManager>();
         }
 
         #endregion

@@ -28,6 +28,7 @@ namespace Scripts.Games
         private float _elapsedTime;
         private float _timeoutStemp;
         private float _ballGravityScale = 1f;
+        private int _currentScore;
         private bool hasRandomGravity;
         
         private const float _timeoutDelay = 15f;
@@ -38,6 +39,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
+            base.SetUp();
             switch (Difficulty)
             {
                 case Difficulty.EASY:
@@ -106,12 +108,22 @@ namespace Scripts.Games
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-
+        
+        public void IncreaseScore()
+        {
+            _currentScore++;
+            if (_currentScore >= 3)
+            {
+                _currentScore = 0;
+                base.Win();
+            }
+        }
         private void SubmitGuess()
         {
             if (!_guessingStage) return;
             if (_bounceCounter == _currentGuessNumber)
             {
+                IncreaseScore();
                 Debug.Log("Correct Answer");
             }
             else
@@ -120,6 +132,7 @@ namespace Scripts.Games
                 _maxFails--;
                 if (_maxFails == 0)
                 {
+                    _maxFails = 3;
                     Lose();
                     Debug.Log("You lost all your lives in this Game");
                 }
