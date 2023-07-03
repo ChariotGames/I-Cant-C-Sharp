@@ -83,10 +83,14 @@ namespace Scripts.Games
             {
                 if (_timeElapsed < timeout && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
                 {
+                    gamestateWin.SetActive(true);
+                    yield return new WaitForSeconds(1);
                     GameWon();
                 }
                 else
                 {
+                    gamestateLose.SetActive(true);
+                    yield return new WaitForSeconds(1);
                     GameLost();
                 }
                 yield return new WaitForSeconds(1);
@@ -96,13 +100,11 @@ namespace Scripts.Games
             
             private void GameWon()
             {
-                gamestateWin.SetActive(true);
                 Win();
             }
         
             private void GameLost()
             {
-                gamestateLose.SetActive(true);
                 Lose();
             }
         

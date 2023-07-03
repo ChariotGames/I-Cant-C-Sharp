@@ -219,6 +219,8 @@ namespace Scripts.Games
             {
                 base.Lose();
             }
+
+            Invoke(nameof(Start), 1);
         }
 
         private void ShowResults()

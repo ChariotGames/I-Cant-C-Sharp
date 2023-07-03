@@ -102,11 +102,13 @@ namespace Scripts.Games
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         gamestateWin.SetActive(true);
+                        yield return new WaitForSeconds(1);
                         Win();
                     }
                     else
                     {
                         gamestateLose.SetActive(true);
+                        yield return new WaitForSeconds(1);
                         Lose();
                     }
                     options[_index].SetActive(false);

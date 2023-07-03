@@ -81,10 +81,14 @@ namespace Scripts.Games
             {
                 if (_timeElapsed < timeout && (_decimalNumber < _romanNumber && _isYes && !_isNo) || (_decimalNumber >= _romanNumber && !_isYes && _isNo))
                 {
+                    gamestateWin.SetActive(true);
+                    yield return new WaitForSeconds(1);
                     GameWon();
                 }
                 else
                 {
+                    gamestateLose.SetActive(true);
+                    yield return new WaitForSeconds(1);
                     GameLost();
                 }
                 yield return new WaitForSeconds(1);
@@ -161,13 +165,11 @@ namespace Scripts.Games
             
             private void GameWon()
             {
-                gamestateWin.SetActive(true);
                 base.Win();
             }
         
             private void GameLost()
             {
-                gamestateLose.SetActive(true);
                 base.Lose();
             }
             
