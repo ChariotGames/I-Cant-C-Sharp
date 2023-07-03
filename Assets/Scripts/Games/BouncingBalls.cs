@@ -39,6 +39,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
+            base.SetUp();
             switch (Difficulty)
             {
                 case Difficulty.EASY:

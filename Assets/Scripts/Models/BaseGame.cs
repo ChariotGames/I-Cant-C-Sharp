@@ -23,13 +23,14 @@ namespace Scripts.Games
 
         protected Bounds bounds;
         protected KeyMap keys;
-        public MinigameManager manager;
+        protected MinigameManager manager;
 
         #endregion Fields
 
         #region Built-Ins
 
-        void Awake()
+        
+        protected void SetUp()
         {
             manager = GameObject.Find(nameof(MinigameManager)).GetComponent<MinigameManager>();
         }

@@ -37,6 +37,7 @@ namespace Scripts.Games
         
         private void Awake()
         {
+            base.SetUp();
             _mainCamera = Camera.main;
             for (var i = buttons.Count - 1; i >= 0; i--)
             {

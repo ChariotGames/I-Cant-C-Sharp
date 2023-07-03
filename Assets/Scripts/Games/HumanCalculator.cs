@@ -29,6 +29,11 @@ namespace Scripts.Models
 
         #region Built-Ins / MonoBehaviours
 
+        private void Awake()
+        {
+            base.SetUp();
+        }
+
         private void Start()
         {
             GenerateNewEquation();
