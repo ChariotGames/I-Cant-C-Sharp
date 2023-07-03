@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Games
 {
@@ -53,6 +54,11 @@ namespace Scripts.Games
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
+
+        public InputActionReference getJumpInput()
+        {
+            return Keys.One.Input.action;
+        }
         
         public void winCondition()
         {

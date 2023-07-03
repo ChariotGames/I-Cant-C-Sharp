@@ -74,6 +74,10 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
+        void Awake()
+        {
+            base.setup;
+        }
         void Start()
         {
             //decides which variant of coloredtrafficlights to run
@@ -81,6 +85,8 @@ namespace Scripts.Games
             
             //setup
             SetDifficultyVariables();
+            
+            
             SpawnTrafficLights(trafficLightAmount);
              
             //set correct color combinations
