@@ -113,6 +113,7 @@ namespace Scripts.Games
             _currentScore++;
             if (_currentScore >= 3)
             {
+                _currentScore = 0;
                 base.Win();
             }
         }
@@ -130,6 +131,7 @@ namespace Scripts.Games
                 _maxFails--;
                 if (_maxFails == 0)
                 {
+                    _maxFails = 3;
                     Lose();
                     Debug.Log("You lost all your lives in this Game");
                 }

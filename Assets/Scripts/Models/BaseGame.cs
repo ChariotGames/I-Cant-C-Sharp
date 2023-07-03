@@ -23,7 +23,7 @@ namespace Scripts.Games
 
         protected Bounds bounds;
         protected KeyMap keys;
-        protected MinigameManager manager;
+        public MinigameManager manager;
 
         #endregion Fields
 
