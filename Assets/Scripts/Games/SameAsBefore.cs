@@ -24,8 +24,11 @@ namespace Scripts.Games
         private bool _isYes, _isNo;
 
 
+        private void Awake()
+        {
+            SetUp();
+        }
 
-        // Start is called before the first frame update
         void Start()
         {
             StartCoroutine(GameStartCoroutine());
