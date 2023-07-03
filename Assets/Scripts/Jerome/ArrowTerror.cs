@@ -10,17 +10,23 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] [Range(0,10)] private int ammountEnemies = 0, ammountCheckpoints = 0, lives = 3; 
-        [SerializeField] private GameObject player, goal, checkpoint, enemy, checkpointContainer, enemyContainer;
+        [SerializeField] private GameObject player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
 
         #endregion Serialized Fields
 
         #region Fields
 
         private int checkpointsCollected = 0;
+        private int winCounter = 0;
         private List<GameObject> allObjects;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
+
+        private void Awake()
+        {
+            base.SetUp();
+        }
 
         void Start()
         {
@@ -28,13 +34,25 @@ namespace Scripts.Games
             allObjects.Add(player);
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
             SpawnObjects(enemy, enemyContainer, ammountEnemies);
-            SpawnObjects(goal, gameObject, 1);
+            SpawnObjects(goal, Container, 1);
             
+        }
+
+        private void Restart()
+        {
+            allObjects.Add(player);
+            SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
+            SpawnObjects(enemy, enemyContainer, ammountEnemies);
+            SpawnObjects(goal, Container, 1);
         }
 
         void Update()
         {
-           
+           if (winCounter == 5)
+            {
+                winCounter = 0;
+                base.Win();
+            }
         }
 
         internal void UpdateEnemyPositions(Vector3 position)
@@ -67,16 +85,15 @@ namespace Scripts.Games
                     checkpointsCollected++;
                     break;
                 case ElementType.ENEMY:
-                    lives--;
-                    if (lives == 0)
-                    {
+                        
                         base.Lose();
-                    }
                     break;
                 case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
-                        base.Win();
+                        checkpointsCollected = 0;
+                        winCounter++;
+                        DestroyObjects();
                     }
                     break;
             }
@@ -122,6 +139,27 @@ namespace Scripts.Games
                     obj.transform.position = newPosition; 
                 }
             }
+        }
+
+        private void DestroyObjects()
+        {
+            for (int i = 0; i < checkpointContainer.transform.childCount; i++)
+            {
+                Destroy(checkpointContainer.transform.GetChild(i).gameObject);
+            }
+
+            for (int i = 0; i < enemyContainer.transform.childCount; i++)
+            {
+                Destroy(enemyContainer.transform.GetChild(i).gameObject);
+            }
+
+            for (int i = 0; i < Container.transform.childCount; i++)
+            {
+                Destroy(Container.transform.GetChild(i).gameObject);
+            }
+            allObjects.Clear();
+
+            Invoke(nameof(Restart), 3);
         }
 
         #endregion Overarching Methods / Private Helpers

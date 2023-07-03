@@ -8,6 +8,7 @@ using Scripts._Input;
 using Scripts.Models;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -74,6 +75,10 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
+        void Awake()
+        {
+            base.SetUp();
+        }
         void Start()
         {
             //decides which variant of coloredtrafficlights to run
@@ -115,23 +120,44 @@ namespace Scripts.Games
             selector_ref.transform.Translate(0,-1.2f,0);
         }
 
+        #region Inputs
         private void EnableInputs()
         {
-            InputHandler.ArrowLeft += ButtonPressL;
-            InputHandler.ArrowRight += ButtonPressR;
+            keys.One.Input.action.performed += ButtonPressR;
+            keys.Two.Input.action.performed += ButtonPressL;
         }
 
         private void DisableInputs()
         {
-            InputHandler.ArrowLeft -= ButtonPressL;
-            InputHandler.ArrowRight -= ButtonPressR;
+            keys.One.Input.action.performed -= ButtonPressR;
+            keys.Two.Input.action.performed -= ButtonPressL;
         }
 
         private void OnDisable()
         {
-            InputHandler.ArrowLeft -= ButtonPressL;
-            InputHandler.ArrowRight -= ButtonPressR;
+            keys.One.Input.action.performed -= ButtonPressR;
+            keys.Two.Input.action.performed -= ButtonPressL;
         }
+        
+        public void ButtonPressL(InputAction.CallbackContext ctx)
+        {
+            if (selectorIndex != 0)
+            {
+                --selectorIndex;
+                selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
+            }
+        }
+        
+        public void ButtonPressR(InputAction.CallbackContext ctx)
+        {
+            if (selectorIndex != trafficLights.Count-1)
+            {
+                ++selectorIndex;
+                selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
+            }
+        }
+        #endregion Inputs
+        
 
         #endregion Built-Ins / MonoBehaviours
 
@@ -193,6 +219,8 @@ namespace Scripts.Games
             {
                 base.Lose();
             }
+
+            Invoke(nameof(Start), 1);
         }
 
         private void ShowResults()
@@ -211,25 +239,7 @@ namespace Scripts.Games
                 }
             }
         }
-
-        //Inputs
-        public void ButtonPressL()
-        {
-            if (selectorIndex != 0)
-            {
-                --selectorIndex;
-                selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
-            }
-        }
         
-        public void ButtonPressR()
-        {
-            if (selectorIndex != trafficLights.Count-1)
-            {
-                ++selectorIndex;
-                selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
-            }
-        }
 
         #endregion Game Mechanics / Methods
 

@@ -12,17 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: SameAsBefore
   m_EditorClassIdentifier: 
-  assetID: 20227
   description: 
   difficulty: 1
   genre: 3
-  keysMain:
+  keysLeft:
     one: {fileID: 11400000, guid: 890a9bb1fef2d554084cbdd6d1dca441, type: 2}
-    two: {fileID: 11400000, guid: ae76fd2c11623d94da24d8716aa5cd5b, type: 2}
+    two: {fileID: 11400000, guid: ebcda37e637bd11459d614f349f0400f, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
-  keysAux:
-    one: {fileID: 11400000, guid: ebcda37e637bd11459d614f349f0400f, type: 2}
+  keysRight:
+    one: {fileID: 11400000, guid: ae76fd2c11623d94da24d8716aa5cd5b, type: 2}
     two: {fileID: 11400000, guid: 9c00c3b0b6af2594eac9f1465554be0e, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}

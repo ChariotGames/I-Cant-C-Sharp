@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5756814134303572314
 Transform:
   m_ObjectHideFlags: 0
@@ -131,14 +131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0c321c7859b5a48832549a62625694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   ringColors:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   ringButtons:
-  - {fileID: 5314527531634765380, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  - {fileID: -6621357789243663484, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   ringContainer: {fileID: 5756814134885858220}
   ring: {fileID: 5756814134968176082}
   circle: {fileID: 3202167790812030409}
@@ -321,6 +325,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae309ff37de6e3d499127efdd8f80eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   parent: {fileID: 5756814134303572293}
   line: {fileID: 5756814134968176094}
   timer: 0.5

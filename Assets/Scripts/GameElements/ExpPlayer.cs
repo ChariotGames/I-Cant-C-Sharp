@@ -24,7 +24,6 @@ namespace Scripts.Games
         {
             Vector2 input = new Vector2(InputHandler.StickLeft.x, InputHandler.StickLeft.y).normalized;
             Vector2 move = input * movementSpeed;
-            Debug.Log(knockback);
             move += knockback;
             rb.velocity = move;
         }

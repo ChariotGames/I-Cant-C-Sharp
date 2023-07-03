@@ -6,6 +6,7 @@ using UnityEngine;
 using Scripts._Input;
 using Scripts.Models;
 using TMPro;
+using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -31,18 +32,19 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
+            private void Awake()
+            {
+                SetUp();
+            }
+        
             void Start()
             {
                 StartCoroutine(GameCoroutine());
-            }
-
-            void Awake()
-            {
                 buttonYes.text = keys.One.Icon;
                 buttonNo.text = keys.Two.Icon;
             }
 
-        #endregion Built-Ins / MonoBehaviours
+            #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
         
@@ -81,10 +83,14 @@ namespace Scripts.Games
             {
                 if (_timeElapsed < timeout && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
                 {
+                    gamestateWin.SetActive(true);
+                    yield return new WaitForSeconds(1);
                     GameWon();
                 }
                 else
                 {
+                    gamestateLose.SetActive(true);
+                    yield return new WaitForSeconds(1);
                     GameLost();
                 }
                 yield return new WaitForSeconds(1);
@@ -94,13 +100,11 @@ namespace Scripts.Games
             
             private void GameWon()
             {
-                gamestateWin.SetActive(true);
                 Win();
             }
         
             private void GameLost()
             {
-                gamestateLose.SetActive(true);
                 Lose();
             }
         
@@ -180,24 +184,24 @@ namespace Scripts.Games
         
             private void OnEnable()
             {
-                InputHandler.ShoulderRight += RightShoulderPressed;
-                InputHandler.ShoulderLeft += LeftShoulderPressed;
+                keys.One.Input.action.performed += YesButtonPressed;
+                keys.Two.Input.action.performed += NoButtonPressed;
             }
 
-            public void RightShoulderPressed()
+            public void YesButtonPressed(InputAction.CallbackContext ctx)
             {
                 _isYes = true;
             }
 
-            public void LeftShoulderPressed()
+            public void NoButtonPressed(InputAction.CallbackContext ctx)
             {
                 _isNo = true;
             }
 
             private void OnDisable()
             {
-                InputHandler.ShoulderRight -= RightShoulderPressed;
-                InputHandler.ShoulderLeft -= LeftShoulderPressed;
+                keys.One.Input.action.performed -= YesButtonPressed;
+                keys.Two.Input.action.performed -= NoButtonPressed;
             }
 
         #endregion Overarching Methods / Helpers

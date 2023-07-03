@@ -18,7 +18,7 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] private Color[] ringColors;
-        [SerializeField] private InputActionReference[] ringButtons;
+        [SerializeField] private Key[] ringButtons;
         [SerializeField] private GameObject ringContainer, ring, circle;
         [SerializeField] private SpriteRenderer circleRenderer;
         [SerializeField] private Vector3 rotationDirection = Vector3.forward;
@@ -36,8 +36,14 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
+        private void Awake()
+        {
+            base.SetUp();
+        }
+
         void Start()
         {
+            ringButtons = keys.All;
             Invoke(nameof(SpawnRings), startTimeout);
         }
 
@@ -68,11 +74,11 @@ namespace Scripts.Games
             if (Difficulty == Difficulty.MEDIUM || Difficulty == Difficulty.HARD)
             {
                 int chance = Random.Range(0, 2);
-                script.Setup(gameObject.transform.position, ringColors[chance], new[] { ringButtons[chance], ringButtons[1-chance] });
+                script.Setup(gameObject.transform.position, ringColors[chance], new[] { ringButtons[chance].Input, ringButtons[1-chance].Input });
             }
             else
             {
-                script.Setup(gameObject.transform.position, ringColors[0], new[] { ringButtons[0] } );
+                script.Setup(gameObject.transform.position, ringColors[0], new[] { ringButtons[0].Input } );
             }
 
             if (ringContainer.transform.childCount == 1) script.ToggleListeners(true);

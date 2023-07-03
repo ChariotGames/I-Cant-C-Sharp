@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lives: 3
   players: 1
+  baseDifficulty: 0
   selectedGame: {fileID: 0}
   games:
   - {fileID: 11400000, guid: 788e14c7f0f55c448aa1c48a5453fb6e, type: 2}
   - {fileID: 11400000, guid: 9f149fbd8369e4531a5b9bba0ceb12d8, type: 2}
+  - {fileID: 11400000, guid: 2a8376e5aa24a9141a748197b7871601, type: 2}
   - {fileID: 11400000, guid: 774f48d2a423e5544a61ccdb551912f9, type: 2}
   - {fileID: 11400000, guid: 4fee8be33465f2e49aaee7bccfb1c232, type: 2}
+  - {fileID: 11400000, guid: 62f7db64b1df7924a823e7848427b3f8, type: 2}
+  - {fileID: 11400000, guid: cb257892afb0d8e499d0f832eb2ba7c6, type: 2}
   - {fileID: 11400000, guid: 3ddbfcbf1d314c242ac2c9ce1e4b9b35, type: 2}
   - {fileID: 11400000, guid: e26c616efdebca545bae1b19917f9796, type: 2}
   - {fileID: 11400000, guid: 3e7e50a94181e784daff6560a2a0bcd4, type: 2}
@@ -30,4 +34,3 @@ MonoBehaviour:
   soloGames:
   - {fileID: 11400000, guid: e0d657ac69fa6a64a93954f7e8f6cb06, type: 2}
   - {fileID: 11400000, guid: ab65f45f24b010741ae49bb8d1f237b0, type: 2}
-  - {fileID: 11400000, guid: cb257892afb0d8e499d0f832eb2ba7c6, type: 2}

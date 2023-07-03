@@ -7,7 +7,7 @@ namespace Scripts.Games
     /// <summary>
     /// Represents a single magic ring of the MagicCircle minigame.
     /// </summary>
-    public class MagicRing : MonoBehaviour
+    public class MagicRing : BaseGame
     {
         #region Serialized Fields
 
