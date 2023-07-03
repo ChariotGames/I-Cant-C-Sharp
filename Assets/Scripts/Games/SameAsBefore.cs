@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Games
 {
@@ -97,10 +98,12 @@ namespace Scripts.Games
                     yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeToAnswer);
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
+                        gamestateWin.SetActive(true);
                         Win();
                     }
                     else
                     {
+                        gamestateLose.SetActive(true);
                         Lose();
                     }
                     options[_index].SetActive(false);
@@ -112,6 +115,8 @@ namespace Scripts.Games
                 else
                 {
                     yield return new WaitForSeconds(1);
+                    gamestateWin.SetActive(false);
+                    gamestateLose.SetActive(false);
                     SpawnSymbol();
                     UpdateSteps();
                     UpdateStepBackText();
@@ -122,24 +127,24 @@ namespace Scripts.Games
 
         private void OnEnable()
         {
-            InputHandler.ShoulderRight += RightShoulderPressed;
-            InputHandler.ShoulderLeft += LeftShoulderPressed;
+            keys.One.Input.action.performed += YesButtonPressed;
+            keys.Two.Input.action.performed += NoButtonPressed;
         }
 
-        public void RightShoulderPressed()
+        public void YesButtonPressed(InputAction.CallbackContext ctx)
         {
             _isYes = true;
         }
 
-        public void LeftShoulderPressed()
+        public void NoButtonPressed(InputAction.CallbackContext ctx)
         {
             _isNo = true;
         }
 
         private void OnDisable()
         {
-            InputHandler.ShoulderRight -= RightShoulderPressed;
-            InputHandler.ShoulderLeft -= LeftShoulderPressed;
+            keys.One.Input.action.performed -= YesButtonPressed;
+            keys.Two.Input.action.performed -= NoButtonPressed;
         }
     }
 }
