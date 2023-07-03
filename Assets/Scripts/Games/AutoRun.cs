@@ -22,8 +22,10 @@ namespace Scripts.Games
     public class AutoRun : BaseGame
     {
         #region Serialized Fields
-        
-        
+
+        [SerializeField] private InputAction test1;
+
+        private InputAction test2;
 
         #endregion Serialized Fields
 
@@ -35,29 +37,32 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        void Start()
+        void Awake()
         {
-            
-        }
-
-        void Update()
-        {
-            
+            base.SetUp();
         }
 
         #endregion Built-Ins / MonoBehaviours
-
-        #region GetSets / Properties
         
-        
-
-        #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
 
-        public InputActionReference getJumpInput()
+        public InputAction getJumpInput()
         {
             return Keys.One.Input.action;
+        }
+        public InputAction getBraceBlueInput()
+        {
+            return Keys.Two.Input.action;
+        }
+        
+        public InputAction getBraceYellowInput()
+        {
+            return Keys.Three.Input.action;
+        }
+        public InputAction getDuckInput()
+        {
+            return Keys.Four.Input.action;
         }
         
         public void winCondition()

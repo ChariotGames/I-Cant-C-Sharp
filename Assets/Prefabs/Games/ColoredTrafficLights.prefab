@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &989249342879801686
 Transform:
   m_ObjectHideFlags: 0
@@ -132,19 +132,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209e024bf920aa74c9a54e6f89835efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  keys:
-    one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
-    two: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
-    three: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
-    four: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   trafficLightPrefab: {fileID: 6244205913135684408, guid: 191d15b78c8698c489a961ece84981a4, type: 3}
   owner_ref: {fileID: 989249342879803052}
   selector_ref: {fileID: 989249343899018306}
   trafficLights: []
   simonNot_ref: {fileID: 989249343446961647}
   simonOk_ref: {fileID: 989249342118284167}
+  delaySecondWave: 5
+  timeToSelectLight: 5
 --- !u!1 &989249343446961647
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &989249343899018304
 Transform:
   m_ObjectHideFlags: 0
@@ -366,7 +367,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
