@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3122696433480124130}
-  button: {fileID: 1622813393052464144, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!212 &4435865670440384886
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +114,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3122696433480124157
 Transform:
   m_ObjectHideFlags: 0
@@ -146,8 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0cfd97c562848239892c39b4ca0ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   buttons:
   - {fileID: 4218096137421886014}
   - {fileID: 8754205520340821975}
@@ -410,7 +413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3122696433480124130}
-  button: {fileID: -6239444798889636999, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!212 &4173794070255803412
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -540,7 +542,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3122696433480124130}
-  button: {fileID: 6621765326027171438, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!212 &5501790347149058077
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -639,7 +640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3122696433480124130}
-  button: {fileID: -1296664031527996890, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!212 &1365653295555579560
 SpriteRenderer:
   m_ObjectHideFlags: 0
