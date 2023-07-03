@@ -29,6 +29,11 @@ namespace Scripts.Models
 
         #region Built-Ins / MonoBehaviours
 
+        private void Awake()
+        {
+            base.SetUp();
+        }
+
         private void Start()
         {
             GenerateNewEquation();
@@ -176,6 +181,7 @@ namespace Scripts.Models
                 _currentScore++;
                 if (_currentScore >= 5)
                 {
+                    _currentScore = 0;
                     base.Win();
                 }
                 GenerateNewEquation();
@@ -188,6 +194,7 @@ namespace Scripts.Models
                 if (_maxFails <= 0)
                 {
                     Debug.Log("GAME LOST");
+                    _maxFails = 3;
                     base.Lose();
                 }
             }

@@ -60,7 +60,7 @@ namespace _Scripts.Games
         // Start is called before the first frame update
         void Start()
         {
-            #NOTRIM#
+            base.SetUp();
         }
 
         // Update is called once per frame

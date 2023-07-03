@@ -19,12 +19,12 @@ MonoBehaviour:
   difficulty: 1
   genre: 2
   keysLeft:
-    one: {fileID: 0}
+    one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
   keysRight:
-    one: {fileID: 0}
+    one: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}

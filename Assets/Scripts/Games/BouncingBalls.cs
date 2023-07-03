@@ -39,6 +39,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
+            base.SetUp();
             switch (Difficulty)
             {
                 case Difficulty.EASY:
@@ -113,6 +114,7 @@ namespace Scripts.Games
             _currentScore++;
             if (_currentScore >= 3)
             {
+                _currentScore = 0;
                 base.Win();
             }
         }
@@ -130,6 +132,7 @@ namespace Scripts.Games
                 _maxFails--;
                 if (_maxFails == 0)
                 {
+                    _maxFails = 3;
                     Lose();
                     Debug.Log("You lost all your lives in this Game");
                 }
