@@ -23,7 +23,7 @@ namespace _Scripts.Games
 
         void Start()
         {
-            #NOTRIM#
+            base.SetUp();
         }
 
         void Update()
