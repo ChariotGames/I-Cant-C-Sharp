@@ -29,7 +29,7 @@ namespace Scripts.Games
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
             // TODO: View width anpassen an Container und nicht an camera (z.B. bei split screen)
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
-            _playfieldWidth = _cameraViewportBounds.size.x;
+            _playfieldWidth = _cameraViewportBounds.size.x/2;
             //Debug.Log(_cameraViewportBounds.max.x);
             GeneratePattern();
             DisplayPattern();
@@ -97,9 +97,31 @@ namespace Scripts.Games
         {
             //float canvasWidth = 1920;
             int count = pattern.Count;
+            int x, y;
+            x = pattern.Count / 2;
+            y = pattern.Count - x;
+
+            //for (int c = 0; c < count; c++)
+            //{
+
+            //    GameObject obj = Instantiate(pattern[c], buttonContainer.transform);
+
+            //    for (int i = -x; i <= x; i++)
+            //    {
+            //        for (int j = -y; j <= y; j++)
+            //        {
+            //            //float buttonPosX = pattern[i].transform.localScale.x - 1 + x * (i + 1) - _playfieldWidth / 2;
+
+
+            //            obj.transform.Translate(x * 1.5f, y * 1.5f, 0);
+            //        }
+            //    }
+            //}
+
             float step = _playfieldWidth / (count + 1); // Schrittlänge
             for (int i = 0; i < count; i++)
             {
+
                 float buttonPosX = pattern[i].transform.localScale.x - 1 + step * (i + 1) - _playfieldWidth / 2;
 
                 //Vector3 newPosition = ButtonContainer.transform.position + new Vector3(step * (count + 1) - playfieldWidth / 2, 0, 0);
@@ -146,16 +168,20 @@ namespace Scripts.Games
                 DeleteAll();
                 if (CheckWin())
                 {
+                    base.Win();
                     GeneratePattern();
                     DisplayPattern();
                 }
                 else
                 {
-                    loseDisplay.SetActive(true);
-                    InputHandler.ArrowRight -= PlayerPress;
-                    InputHandler.ArrowLeft -= PlayerPress;
-                    InputHandler.ArrowUp -= PlayerPress;
-                    InputHandler.ArrowDown -= PlayerPress;
+                    base.Lose();
+                    GeneratePattern();
+                    DisplayPattern();
+                    //loseDisplay.SetActive(true);
+                    //InputHandler.ArrowRight -= PlayerPress;
+                    //InputHandler.ArrowLeft -= PlayerPress;
+                    //InputHandler.ArrowUp -= PlayerPress;
+                    //InputHandler.ArrowDown -= PlayerPress;
                 }
             }
             _playerPressed = false;
