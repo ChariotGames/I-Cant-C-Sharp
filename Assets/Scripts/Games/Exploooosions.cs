@@ -45,7 +45,7 @@ namespace Scripts.Games
             }
 
             GameObject bomb = Instantiate(bombs[chance], gameObject.transform.position, Quaternion.identity, bombContainer.transform);
-            bomb.transform.position = new Vector3(Random.Range(-5, 6), Random.Range(-5, 6), transform.position.z);
+            bomb.transform.position = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), transform.position.z);
             bomb.SetActive(true);
 
             timer = Random.Range(1, 4);

@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
-  button: {fileID: 5576857148941676536, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &4665578903866809551
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +372,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
-  button: {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &4665578903968837698
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
-  button: {fileID: -6340346684566004052, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &4665578903984628120
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +574,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4665578903984628118
 Transform:
   m_ObjectHideFlags: 0
@@ -610,8 +607,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8a423baa9afdd47a12200b94646979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   buttons:
   - {fileID: 210855287898618956}
   - {fileID: 1957282527193719119}
@@ -806,7 +807,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
-  button: {fileID: 7533030553546536191, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &6426780519605465200
 GameObject:
   m_ObjectHideFlags: 0
