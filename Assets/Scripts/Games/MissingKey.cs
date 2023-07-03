@@ -9,6 +9,7 @@ namespace Scripts.Games
     {
         [SerializeField] private List<GameObject> buttons, pattern;
         [SerializeField] private int count = 3;
+
         //private GameObject answer;
         [SerializeField] private GameObject loseDisplay, buttonContainer;
         private bool _playerPressed = false;
@@ -22,15 +23,21 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            base.SetUp();
+            SetUp();
             _mainCamera = Camera.main;
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                BasePressElement bpe = buttons[i].GetComponent<BasePressElement>();
+                buttons[i].GetComponent<BasePressElement>().Button = keys.All[i].Input;
+
+            }
         }
 
         // Start is called before the first frame update
         void Start()
         {
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
-            // TODO: View width anpassen an Container und nicht an camera (z.B. bei split screen)
+            
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             _playfieldWidth = _cameraViewportBounds.size.x/2;
             //Debug.Log(_cameraViewportBounds.max.x);
@@ -44,23 +51,25 @@ namespace Scripts.Games
             _time += Time.deltaTime;
             if (_time >= ROUND_TIME)
             {
-                timerEnded = true;
-                //TimerEnded();
+                //timerEnded = true;
+                TimerEnded();
             }
 
             NextRound();
         }
 
-        //private void TimerEnded()
-        //{
-        //    base.Lose();
-        //    //loseDisplay.SetActive(true);
-        //    //DeleteAll();
-        //    //InputHandler.ArrowRight -= PlayerPress;
-        //    //InputHandler.ArrowLeft -= PlayerPress;
-        //    //InputHandler.ArrowUp -= PlayerPress;
-        //    //InputHandler.ArrowDown -= PlayerPress;
-        //}
+        private void TimerEnded()
+        {
+            _time = 0;
+            Lose();
+            
+            //loseDisplay.SetActive(true);
+            //DeleteAll();
+            //InputHandler.ArrowRight -= PlayerPress;
+            //InputHandler.ArrowLeft -= PlayerPress;
+            //InputHandler.ArrowUp -= PlayerPress;
+            //InputHandler.ArrowDown -= PlayerPress;
+        }
 
         // Subscribes to playerPress()
         private void OnEnable()
@@ -135,15 +144,17 @@ namespace Scripts.Games
             //    }
             //}
 
-            float step = _playfieldWidth / (count + 1); // Schrittlänge
+            //float step = _playfieldWidth / (count + 1); // Schrittlänge
             for (int i = 0; i < count; i++)
             {
 
-                float buttonPosX = pattern[i].transform.localScale.x - 1 + step * (i + 1) - _playfieldWidth / 2;
+               // float buttonPosX = pattern[i].transform.localScale.x - 1 + step * (i + 1) - _playfieldWidth / 2;
 
                 //Vector3 newPosition = ButtonContainer.transform.position + new Vector3(step * (count + 1) - playfieldWidth / 2, 0, 0);
                 //float offset = pattern[i].transform.localScale.x  + startPoint * i;
-                Instantiate(pattern[i], new Vector3(buttonPosX, 0, 0), Quaternion.identity, buttonContainer.transform);
+                GameObject obj = Instantiate(pattern[i], new Vector3(0, 0, 0), Quaternion.identity, buttonContainer.transform);
+                obj.GetComponent<BasePressElement>().Button = pattern[i].GetComponent<BasePressElement>().Button;
+                obj.SetActive(true);
             }
         }
 
@@ -183,9 +194,16 @@ namespace Scripts.Games
             if (_playerPressed)
             {
                 DeleteAll();
-                if (!CheckWin() || timerEnded)
+                if (CheckWin())
                 {
-                    base.Lose();
+
+                    Win();
+                    GeneratePattern();
+                    DisplayPattern();
+                }
+                else
+                {
+                    Lose();
                     GeneratePattern();
                     DisplayPattern();
                     //loseDisplay.SetActive(true);
@@ -193,13 +211,7 @@ namespace Scripts.Games
                     //InputHandler.ArrowLeft -= PlayerPress;
                     //InputHandler.ArrowUp -= PlayerPress;
                     //InputHandler.ArrowDown -= PlayerPress;
-
-                }
-                else
-                {
-                    base.Win();
-                    GeneratePattern();
-                    DisplayPattern();
+                   
                     
                 }
             }
