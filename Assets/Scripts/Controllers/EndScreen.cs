@@ -61,6 +61,7 @@ namespace Scripts.Controllers
 
         public void GoToMenu()
         {
+            uiMap.Disable();
             SceneChanger.ChangeScene(0);
         }
 

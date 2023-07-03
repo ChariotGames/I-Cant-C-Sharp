@@ -46,7 +46,13 @@ namespace Scripts.Games
     #endregion Fields
 
     #region Built-Ins / MonoBehaviours
-        void Start()
+        
+        private void Awake()
+        {
+            SetUp();
+        }
+    
+    void Start()
         {
             flashColor.Add(lightRed);
             flashColor.Add(lightGreen);

@@ -278,7 +278,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -818,7 +818,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3698711568559123564
 Transform:
   m_ObjectHideFlags: 0
@@ -848,8 +848,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57412bd615561314380c787509c752ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   options:
   - {fileID: 888037505940594430}
   - {fileID: 5097884201152601589}
@@ -1227,7 +1231,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
