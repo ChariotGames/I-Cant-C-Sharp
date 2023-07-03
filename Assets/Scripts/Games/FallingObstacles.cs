@@ -19,6 +19,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject obstacle, obstacleContainer;
         [SerializeField] private TextMeshPro lifeCounter;
         [SerializeField] private float cannonMovementSpeed;
+        
 
         #endregion Serialized Fields
 
@@ -30,6 +31,7 @@ namespace Scripts.Games
         private float _spawnDelay;
         private int _healthPoints = 3;
         private int _numObstacles;
+        private int _currentScore;
 
         #endregion Fields
 
@@ -86,13 +88,22 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
+
+        public void IncreasePoints()
+        {
+            _currentScore++;
+            if (_currentScore >= 20)
+            {
+                base.Win();
+            }
+        }
         /// <summary>
         /// Is called via an event when an obstacle hits the ground.
         /// </summary>
         private void TakeDamage()
         {
             _healthPoints--;
-            if (_healthPoints == 0)
+            if (_healthPoints <= 0)
             {
                 base.Lose();
             }
