@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -77,7 +76,7 @@ namespace Scripts.Games
 
             if (_elapsedTime >= _timeoutStemp + _timeoutDelay && _guessingStage)
             {
-                SubmitGuess(new InputAction.CallbackContext());
+                SubmitGuess();
                 _guessingStage = false;
             }
         }
@@ -86,17 +85,17 @@ namespace Scripts.Games
         private void OnEnable()
         {
             BounceGround.HitGround += IncreaseBounceCounter;
-            base.keys.One.Input.action.performed += IncreaseGuessingNumber;
-            base.keys.Two.Input.action.performed += DecreaseGuessingNumber;
-            base.keys.Three.Input.action.performed += SubmitGuess;
+            InputHandler.ButtonEast += IncreaseGuessingNumber;
+            InputHandler.ButtonWest += DecreaseGuessingNumber;
+            InputHandler.ButtonSouth += SubmitGuess;
         }
 
         private void OnDisable()
         {
             BounceGround.HitGround -= IncreaseBounceCounter;
-            base.keys.One.Input.action.performed -= IncreaseGuessingNumber;
-            base.keys.Two.Input.action.performed -= DecreaseGuessingNumber;
-            base.keys.Three.Input.action.performed -= SubmitGuess;
+            InputHandler.ButtonEast -= IncreaseGuessingNumber;
+            InputHandler.ButtonWest -= DecreaseGuessingNumber;
+            InputHandler.ButtonSouth -= SubmitGuess;
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -117,7 +116,7 @@ namespace Scripts.Games
                 base.Win();
             }
         }
-        private void SubmitGuess(InputAction.CallbackContext ctx)
+        private void SubmitGuess()
         {
             if (!_guessingStage) return;
             if (_bounceCounter == _currentGuessNumber)
@@ -139,7 +138,7 @@ namespace Scripts.Games
             StartNewRound();
         }
 
-        private void IncreaseGuessingNumber(InputAction.CallbackContext ctx)
+        private void IncreaseGuessingNumber()
         {
             if (!_guessingStage) return;
 
@@ -147,7 +146,7 @@ namespace Scripts.Games
             guessedNumber.text = _currentGuessNumber.ToString();
         }
 
-        private void DecreaseGuessingNumber(InputAction.CallbackContext ctx)
+        private void DecreaseGuessingNumber()
         {
             if (!_guessingStage || _currentGuessNumber == 0) return;
 
