@@ -59,7 +59,6 @@ namespace Scripts.Games
                     groundMaterial.bounciness = 0.925f;
                     hasRandomGravity = true;
                     break;
-
             }
         }
 
