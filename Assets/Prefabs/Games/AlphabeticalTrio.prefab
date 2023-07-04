@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8687728356415758770
 Transform:
   m_ObjectHideFlags: 0
@@ -130,9 +130,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5a482551a211b43b74c9efcf82088e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   letters: {fileID: 8687728356737068271}
+  buttonYes: {fileID: 8687728357216914494}
+  buttonNo: {fileID: 8687728357371829093}
   letterContainer: {fileID: 8687728357638743890}
   gamestateWin: {fileID: 8687728356390974817}
   gamestateLose: {fileID: 8687728356552654445}
@@ -331,7 +337,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -439,7 +445,7 @@ GameObject:
   - component: {fileID: 8687728357216914495}
   - component: {fileID: 8687728357216914494}
   m_Layer: 0
-  m_Name: RightShoulder
+  m_Name: YesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,7 +651,7 @@ GameObject:
   - component: {fileID: 8687728357371829090}
   - component: {fileID: 8687728357371829093}
   m_Layer: 0
-  m_Name: LeftShoulder
+  m_Name: NoButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -916,7 +922,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1120,7 +1126,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

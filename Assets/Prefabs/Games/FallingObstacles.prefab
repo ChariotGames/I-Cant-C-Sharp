@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4b19f849916bc4599f82209cebb346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallingObstacles: {fileID: 6926883230700997366}
 --- !u!1 &4928510789893346696
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +673,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6926883230700997367
 Transform:
   m_ObjectHideFlags: 0
@@ -703,8 +704,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394e10214e00b0b4fa3d762fdac46c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
   currentDifficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   cannon: {fileID: 5616315245221226170}
   obstacle: {fileID: 5092726858402455563}
   obstacleContainer: {fileID: 198560678043567502}
