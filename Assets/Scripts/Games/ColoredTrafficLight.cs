@@ -9,6 +9,7 @@ using Scripts.Models;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -57,7 +58,7 @@ namespace Scripts.Games
         private int correctLightAmount = 1;
         private int trafficLightAmount = 3;
         private int selectorIndex;
-        private bool gameVariant = true;
+        private bool gameVariant;
         
         private struct trafficLight
         {
@@ -81,44 +82,86 @@ namespace Scripts.Games
         }
         void Start()
         {
+            StartCoroutine(GameCoroutine());
+        }
+        
+        private IEnumerator GameCoroutine()
+        {
+            while (true)
+            {
+                Setup();
+                FirstWave();
+                yield return new WaitForSeconds(delaySecondWave);
+                SecondWave();
+                yield return new WaitForSeconds(timeToSelectLight);
+                DisableInputs();
+                ShowResults();
+                yield return new WaitForSeconds(2);
+                CheckSelector();
+                Reset();
+            }
+            
+        }
+
+        private void Setup()
+        {
             //decides which variant of coloredtrafficlights to run
             if (Random.Range(0, 2) == 1) gameVariant = true;
+            else gameVariant = false;
             
             //setup
             SetDifficultyVariables();
             SpawnTrafficLights(trafficLightAmount);
-             
+        }
+
+        private void FirstWave()
+        {
             //set correct color combinations
             correctColors = GenLightColors(correctLightAmount, null);
             SetLightColors(trafficLights, correctColors, true);
-            Invoke(nameof(SecondStart), delaySecondWave);
-            
         }
 
-        private void SecondStart()
+        private void SecondWave()
         {
             //Mix correct colors with random generated ones and set them.
             secondWaveColors = MixCorrectColorsIntoWrongOnes(
                 GenLightColors(trafficLightAmount, correctColors), correctColors);
             SetLightColors(trafficLights, secondWaveColors, false);
             selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
-            selector_ref.SetActive(true);
-            EnableInputs();
-            Invoke(nameof(ThirdStart), timeToSelectLight);
-        }
-
-        private void ThirdStart()
-        {
-            DisableInputs();
-            ShowResults();
-            Invoke(nameof(CheckSelector), 2);
-        }
-
-        private void Update()
-        {
             selector_ref.transform.position = selector_ref.transform.parent.transform.position;
             selector_ref.transform.Translate(0,-1.2f,0);
+            selector_ref.SetActive(true);
+            EnableInputs();
         }
+
+        private void Reset()
+        {
+            GameObject selector = Instantiate(selector_ref, owner_ref.transform);
+            selector_ref = selector;
+            //Destroy(owner_ref.transform.GetChild(0));
+            GameObject horizontalLayout = owner_ref.transform.GetChild(0).gameObject;
+            int count = horizontalLayout.transform.childCount;
+            horizontalLayout.transform.DetachChildren();
+            for (int i = 0; i < count; ++i)
+            {
+                Destroy(trafficLights[i]);
+            }
+            
+            
+            
+            /*for (int i = owner_ref.transform.GetChild(0).transform.childCount-1; i > 0; i--)
+            {
+                GameObject obj = owner_ref.transform.GetChild(0).transform.GetChild(i).gameObject;
+                for (int j = obj.transform.childCount-1; j > 0; j--)
+                {
+                    Destroy(obj.transform.GetChild(i).gameObject);
+                }
+                Destroy(obj);
+            }*/
+
+            
+        }
+        
 
         #region Inputs
         private void EnableInputs()
@@ -145,6 +188,8 @@ namespace Scripts.Games
             {
                 --selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
+                selector_ref.transform.position = selector_ref.transform.parent.transform.position;
+                selector_ref.transform.Translate(0,-1.2f,0);
             }
         }
         
@@ -154,6 +199,8 @@ namespace Scripts.Games
             {
                 ++selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
+                selector_ref.transform.position = selector_ref.transform.parent.transform.position;
+                selector_ref.transform.Translate(0,-1.2f,0);
             }
         }
         #endregion Inputs
@@ -172,11 +219,15 @@ namespace Scripts.Games
                 switch (Difficulty)
                 {
                     case Difficulty.EASY:
+                        correctLightAmount = 1;
+                        trafficLightAmount = 3;
                         break;
                     case Difficulty.MEDIUM:
+                        correctLightAmount = 1;
                         trafficLightAmount = 4;
                         break;
                     case Difficulty.HARD:
+                        correctLightAmount = 1;
                         trafficLightAmount = 5;
                         break;
                 }
@@ -186,11 +237,15 @@ namespace Scripts.Games
                 switch (Difficulty)
                 {
                     case Difficulty.EASY:
+                        trafficLightAmount = 3;
+                        correctLightAmount = 1;
                         break;
                     case Difficulty.MEDIUM:
+                        trafficLightAmount = 3;
                         correctLightAmount = 2;
                         break;
                     case Difficulty.HARD:
+                        trafficLightAmount = 3;
                         correctLightAmount = 3;
                         break;
                 }
@@ -201,6 +256,7 @@ namespace Scripts.Games
 
         public void SpawnTrafficLights(int amountToSpawn )
         {
+            trafficLights = new List<GameObject>();
             for (int i = 0; i < amountToSpawn ; i++)
             {
                 GameObject trafficLight = Instantiate(trafficLightPrefab, owner_ref.transform.GetChild(0).transform);
@@ -219,8 +275,6 @@ namespace Scripts.Games
             {
                 base.Lose();
             }
-
-            Invoke(nameof(Start), 1);
         }
 
         private void ShowResults()
