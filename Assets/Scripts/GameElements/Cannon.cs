@@ -58,6 +58,7 @@ namespace Scripts.Pascal
             if (Time.time - _lastShootTime < attackSpeed) return;
 
             GameObject bullet = Instantiate(bulletPrefab, gunSpawnPos.position, Quaternion.identity);
+            bullet.transform.rotation = gunBarrel.rotation;
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             Vector3 fireDirection = gunSpawnPos.transform.up;
             bullet.SetActive(true);
