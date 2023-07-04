@@ -31,16 +31,11 @@ namespace Scripts.Games
         private float _spawnDelay;
         private int _healthPoints = 3;
         private int _numObstacles;
-<<<<<<< HEAD:Assets/Scripts/Games/FallingObstacles.cs
         private int _currentScore;
-=======
-<<<<<<< Updated upstream:Assets/_Scripts/Games/FallingObstacles.cs
-=======
+
         private int _currentScore;
         
         private const int _scoreToWin = 10;
->>>>>>> Stashed changes:Assets/Scripts/Games/FallingObstacles.cs
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/FallingObstacles.cs
 
         #endregion Fields
 
@@ -98,29 +93,19 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
-<<<<<<< HEAD:Assets/Scripts/Games/FallingObstacles.cs
-=======
-<<<<<<< Updated upstream:Assets/_Scripts/Games/FallingObstacles.cs
-=======
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/FallingObstacles.cs
+
 
         public void IncreasePoints()
         {
             _currentScore++;
-<<<<<<< HEAD:Assets/Scripts/Games/FallingObstacles.cs
-            if (_currentScore >= 20)
-=======
+
             if (_currentScore >= _scoreToWin)
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/FallingObstacles.cs
             {
                 _currentScore = 0;
                 base.Win();
             }
         }
-<<<<<<< HEAD:Assets/Scripts/Games/FallingObstacles.cs
-=======
->>>>>>> Stashed changes:Assets/Scripts/Games/FallingObstacles.cs
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/FallingObstacles.cs
+
         /// <summary>
         /// Is called via an event when an obstacle hits the ground.
         /// </summary>
