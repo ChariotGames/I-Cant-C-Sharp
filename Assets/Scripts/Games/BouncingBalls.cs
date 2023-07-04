@@ -33,7 +33,6 @@ namespace Scripts.Games
         private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
-        private int _currentScore;
 
         private int _currentScore;
         private bool hasRandomGravity;
@@ -117,19 +116,7 @@ namespace Scripts.Games
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-
         
-        public void IncreaseScore()
-        {
-            _currentScore++;
-            if (_currentScore >= 3)
-            {
-                _currentScore = 0;
-                base.Win();
-            }
-        }
-
-
         
         private void IncreaseScore()
         {

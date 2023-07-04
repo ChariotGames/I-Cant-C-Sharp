@@ -25,24 +25,14 @@ namespace Scripts.Games
         private Bounds _cameraViewportBounds;
         private readonly List<TextMeshPro> _spawnedButtons = new ();
         private static float _timer;
-<<<<<<< HEAD:Assets/Scripts/Games/ButtonHero.cs
-        private float _timeoutDelay = 5f;
-        private int _maxFails = 3;
-        private float _elapsedTime;
-        private float _timeoutStemp;
-        private int _currentScore;
-=======
-<<<<<<< Updated upstream:Assets/_Scripts/Games/ButtonHero.cs
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/ButtonHero.cs
-
-=======
+        
         private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
         private int _currentScore;
         
         private const float _timeoutDelay = 5f;
->>>>>>> Stashed changes:Assets/Scripts/Games/ButtonHero.cs
+
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -54,22 +44,10 @@ namespace Scripts.Games
             for (var i = buttons.Count - 1; i >= 0; i--)
             {
                 // just pool all the objects into a list
-<<<<<<< Updated upstream:Assets/_Scripts/Games/ButtonHero.cs
-                GameObject button = Instantiate(buttons[i].gameObject);
-<<<<<<< HEAD:Assets/Scripts/Games/ButtonHero.cs
-                TextMeshPro buttonText = button.GetComponent<TextMeshPro>();
-                button.GetComponent<BasePressElement>().Button = keys.All[i].Input;
-                _spawnedButtons.Add(buttonText);
-=======
-                TextMeshPro buttonRenderer = button.GetComponent<TextMeshPro>();
-                _spawnedButtons.Add(buttonRenderer);
-=======
                 var button = Instantiate(buttons[i].gameObject);
                 var buttonText = button.GetComponent<TextMeshPro>();
                 button.GetComponent<BasePressElement>().Button = keys.All[i].Input;
                 _spawnedButtons.Add(buttonText);
->>>>>>> Stashed changes:Assets/Scripts/Games/ButtonHero.cs
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/ButtonHero.cs
                 button.SetActive(false);
             }
         }
@@ -92,18 +70,7 @@ namespace Scripts.Games
                 var milliseconds = Mathf.Floor((_timer - seconds) * 1000f); 
                 var timeText = $"{seconds:00}:{milliseconds:00}";
                 timerTextMesh.text = timeText;
-<<<<<<< HEAD:Assets/Scripts/Games/ButtonHero.cs
-                if (_timer >= _timeoutDelay)
-                {
-                    _maxFails--;
-                    _previousButton.gameObject.SetActive(false);
-                    ResetTimer();
-                    if (_maxFails <= 0)
-                    {
-                        _maxFails = 3;
-=======
-<<<<<<< Updated upstream:Assets/_Scripts/Games/ButtonHero.cs
-=======
+
                 if (_timer >= _timeoutDelay)
                 {
                     _remainingLives--;
@@ -112,15 +79,9 @@ namespace Scripts.Games
                     if (_remainingLives <= 0)
                     {
                         _remainingLives = 3;
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/ButtonHero.cs
                         base.Lose();
                     }
                 }
-               
-<<<<<<< HEAD:Assets/Scripts/Games/ButtonHero.cs
-=======
->>>>>>> Stashed changes:Assets/Scripts/Games/ButtonHero.cs
->>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/ButtonHero.cs
             }
         }
 

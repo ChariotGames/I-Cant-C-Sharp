@@ -32,8 +32,6 @@ namespace Scripts.Games
         private int _healthPoints = 3;
         private int _numObstacles;
         private int _currentScore;
-
-        private int _currentScore;
         
         private const int _scoreToWin = 10;
 
