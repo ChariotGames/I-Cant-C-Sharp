@@ -639,64 +639,6 @@ PrefabInstance:
       objectReference: {fileID: 567562164}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd3022b129af2d745a5e33d7587757c8, type: 3}
---- !u!1 &955007524
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 955007526}
-  - component: {fileID: 955007525}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &955007525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955007524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093213cc36fa51241bf8935f582df995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDifficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-  bouncingBalls: []
-  guessedNumber: {fileID: 0}
-  balls: {fileID: 0}
-  guessingOverlay: {fileID: 0}
-  groundMaterial: {fileID: 0}
-  infoText: {fileID: 0}
-  correctAnswer: {fileID: 0}
-  wrongAnswer: {fileID: 0}
---- !u!4 &955007526
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955007524}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1040364592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1090,3 +1032,76 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37dda47af0efb0346a8934b3441bffd5, type: 3}
+--- !u!1001 &7127801451731413025
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2457666724134857590, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_text
+      value: Submit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4806056181111874323, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5307354073733101283, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632389, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_Name
+      value: BouncingBalls
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632389, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127801452119632391, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}

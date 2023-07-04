@@ -73,7 +73,7 @@ namespace Scripts.Games
         private void Update()
         {
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >= 3 && infoText.gameObject.activeSelf)
+            if (_elapsedTime >= 2 && infoText.gameObject.activeSelf)
             {
                 infoText.gameObject.SetActive(false);
             }
@@ -153,10 +153,6 @@ namespace Scripts.Games
             StartCoroutine(StartNewRound());
         }
         
-        private IEnumerator WaitForSecondsCoroutine(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-        }
         
         private void IncreaseGuessingNumber(InputAction.CallbackContext ctx)
         {
@@ -196,6 +192,7 @@ namespace Scripts.Games
                     ball.gravityScale = randomGravity;
                 }
                 var randomDelay = Random.Range(0f, 1.5f);
+                Debug.Log(randomDelay);
                 yield return new WaitForSeconds(randomDelay);
                 ball.isKinematic = false;
                 ball.gameObject.SetActive(true);
