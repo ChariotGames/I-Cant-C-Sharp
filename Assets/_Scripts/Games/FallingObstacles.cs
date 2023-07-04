@@ -30,6 +30,12 @@ namespace _Scripts.Games
         private float _spawnDelay;
         private int _healthPoints = 3;
         private int _numObstacles;
+<<<<<<< Updated upstream:Assets/_Scripts/Games/FallingObstacles.cs
+=======
+        private int _currentScore;
+        
+        private const int _scoreToWin = 10;
+>>>>>>> Stashed changes:Assets/Scripts/Games/FallingObstacles.cs
 
         #endregion Fields
 
@@ -86,6 +92,19 @@ namespace _Scripts.Games
 
         #region Game Mechanics / Methods
 
+<<<<<<< Updated upstream:Assets/_Scripts/Games/FallingObstacles.cs
+=======
+
+        public void IncreasePoints()
+        {
+            _currentScore++;
+            if (_currentScore >= _scoreToWin)
+            {
+                _currentScore = 0;
+                base.Win();
+            }
+        }
+>>>>>>> Stashed changes:Assets/Scripts/Games/FallingObstacles.cs
         /// <summary>
         /// Is called via an event when an obstacle hits the ground.
         /// </summary>
@@ -106,9 +125,9 @@ namespace _Scripts.Games
         /// <returns></returns>
         private IEnumerator HorizontalMovementCoroutine(Bounds cannonBounds)
         {
-            float targetXPos = cannon.transform.position.x;
-            float minX = _cameraViewportBounds.min.x + cannonBounds.extents.x;
-            float maxX = _cameraViewportBounds.max.x - cannonBounds.extents.x;
+            var targetXPos = cannon.transform.position.x;
+            var minX = _cameraViewportBounds.min.x + cannonBounds.extents.x;
+            var maxX = _cameraViewportBounds.max.x - cannonBounds.extents.x;
 
             while (true)
             {
@@ -125,7 +144,7 @@ namespace _Scripts.Games
                     cannonMovementSpeed *= -1f;
                 }
 
-                Vector3 position = cannon.transform.position;
+                var position = cannon.transform.position;
                 position = new Vector3(targetXPos, position.y, position.z);
                 cannon.transform.position = position;
 

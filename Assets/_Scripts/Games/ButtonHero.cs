@@ -25,7 +25,16 @@ namespace _Scripts.Games
         private Bounds _cameraViewportBounds;
         private readonly List<TextMeshPro> _spawnedButtons = new ();
         private static float _timer;
+<<<<<<< Updated upstream:Assets/_Scripts/Games/ButtonHero.cs
 
+=======
+        private int _remainingLives = 3;
+        private float _elapsedTime;
+        private float _timeoutStemp;
+        private int _currentScore;
+        
+        private const float _timeoutDelay = 5f;
+>>>>>>> Stashed changes:Assets/Scripts/Games/ButtonHero.cs
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -36,9 +45,16 @@ namespace _Scripts.Games
             for (var i = buttons.Count - 1; i >= 0; i--)
             {
                 // just pool all the objects into a list
+<<<<<<< Updated upstream:Assets/_Scripts/Games/ButtonHero.cs
                 GameObject button = Instantiate(buttons[i].gameObject);
                 TextMeshPro buttonRenderer = button.GetComponent<TextMeshPro>();
                 _spawnedButtons.Add(buttonRenderer);
+=======
+                var button = Instantiate(buttons[i].gameObject);
+                var buttonText = button.GetComponent<TextMeshPro>();
+                button.GetComponent<BasePressElement>().Button = keys.All[i].Input;
+                _spawnedButtons.Add(buttonText);
+>>>>>>> Stashed changes:Assets/Scripts/Games/ButtonHero.cs
                 button.SetActive(false);
             }
         }
@@ -61,6 +77,21 @@ namespace _Scripts.Games
 
                 var timeText = $"{seconds:00}:{milliseconds:00}";
                 timerTextMesh.text = timeText;
+<<<<<<< Updated upstream:Assets/_Scripts/Games/ButtonHero.cs
+=======
+                if (_timer >= _timeoutDelay)
+                {
+                    _remainingLives--;
+                    _previousButton.gameObject.SetActive(false);
+                    ResetTimer();
+                    if (_remainingLives <= 0)
+                    {
+                        _remainingLives = 3;
+                        base.Lose();
+                    }
+                }
+               
+>>>>>>> Stashed changes:Assets/Scripts/Games/ButtonHero.cs
             }
         }
 
