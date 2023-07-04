@@ -1,12 +1,27 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
+<<<<<<< HEAD:Assets/Scripts/Games/HumanCalculator.cs
 using Scripts.Games;
+=======
+<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
+using _Scripts.Games;
+=======
+>>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
+>>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/HumanCalculator.cs
 using TMPro;
 using UnityEngine;
+using Scripts.Models;
 using Random = UnityEngine.Random;
 
+<<<<<<< HEAD:Assets/Scripts/Games/HumanCalculator.cs
 namespace Scripts.Models
+=======
+<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
+namespace _Scripts.Models
+=======
+namespace Scripts.Games
+>>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
+>>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/HumanCalculator.cs
 {
     public class HumanCalculator : BaseGame
     {
@@ -18,12 +33,21 @@ namespace Scripts.Models
 
         private int _missingNumber;
         private int _equationResult;
-        private int _maxFails = 3;
+        private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
         private bool _isAnswerScreen;
+<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
         private float _timeoutDelay = 15f;
+<<<<<<< HEAD:Assets/Scripts/Games/HumanCalculator.cs
         private int _currentScore;
+=======
+=======
+        private int _currentScore;
+        
+        private const float _timeoutDelay = 15f;
+>>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
+>>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/HumanCalculator.cs
 
         #endregion Fields
 
@@ -191,12 +215,28 @@ namespace Scripts.Models
             else
             {
                 Debug.Log("Wrong");
+<<<<<<< HEAD:Assets/Scripts/Games/HumanCalculator.cs
                 _maxFails--;
+=======
+<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
+                _maxFails -= 1;
+>>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/HumanCalculator.cs
                 GenerateNewEquation();
                 if (_maxFails <= 0)
                 {
                     Debug.Log("GAME LOST");
+<<<<<<< HEAD:Assets/Scripts/Games/HumanCalculator.cs
                     _maxFails = 3;
+=======
+=======
+                _remainingLives--;
+                GenerateNewEquation();
+                if (_remainingLives <= 0)
+                {
+                    Debug.Log("GAME LOST");
+                    _remainingLives = 3;
+>>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
+>>>>>>> parent of 9fee4ce (Revert "Update"):Assets/_Scripts/Games/HumanCalculator.cs
                     base.Lose();
                 }
             }
