@@ -1,19 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
-<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
 using _Scripts.Games;
-=======
->>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
 using TMPro;
 using UnityEngine;
-using Scripts.Models;
 using Random = UnityEngine.Random;
 
-<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
 namespace _Scripts.Models
-=======
-namespace Scripts.Games
->>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
 {
     public class HumanCalculator : BaseGame
     {
@@ -25,17 +18,11 @@ namespace Scripts.Games
 
         private int _missingNumber;
         private int _equationResult;
-        private int _remainingLives = 3;
+        private int _maxFails = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
         private bool _isAnswerScreen;
-<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
         private float _timeoutDelay = 15f;
-=======
-        private int _currentScore;
-        
-        private const float _timeoutDelay = 15f;
->>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
 
         #endregion Fields
 
@@ -190,20 +177,11 @@ namespace Scripts.Games
             else
             {
                 Debug.Log("Wrong");
-<<<<<<< Updated upstream:Assets/_Scripts/Games/HumanCalculator.cs
                 _maxFails -= 1;
                 GenerateNewEquation();
                 if (_maxFails == 0)
                 {
                     Debug.Log("GAME LOST");
-=======
-                _remainingLives--;
-                GenerateNewEquation();
-                if (_remainingLives <= 0)
-                {
-                    Debug.Log("GAME LOST");
-                    _remainingLives = 3;
->>>>>>> Stashed changes:Assets/Scripts/Games/HumanCalculator.cs
                     base.Lose();
                 }
             }
