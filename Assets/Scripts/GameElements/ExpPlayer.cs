@@ -9,7 +9,7 @@ namespace Scripts.Games
     public class ExpPlayer : BaseGame
     {
         [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private InputActionReference[] _buttons;
+        [SerializeField] public InputActionReference stick;
 
         public Rigidbody2D rb;
         public Vector2 knockback = new(0, 0);
@@ -22,7 +22,7 @@ namespace Scripts.Games
 
         private void move()
         {
-            Vector2 input = new Vector2(InputHandler.StickLeft.x, InputHandler.StickLeft.y).normalized;
+            Vector2 input = new Vector2(stick.action.ReadValue<Vector2>().x, stick.action.ReadValue<Vector2>().y).normalized;
             Vector2 move = input * movementSpeed;
             move += knockback;
             rb.velocity = move;

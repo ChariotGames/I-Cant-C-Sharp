@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using Scripts._Input;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace Scripts.Games
         #endregion Serialized Fields
 
         #region Fields
-
+        public InputActionReference stick;
 
 
         #endregion Fields
@@ -32,7 +33,7 @@ namespace Scripts.Games
         void Update()
         {
             
-            gameObject.transform.Translate(InputHandler.StickLeft * Time.deltaTime * speed);
+            gameObject.transform.Translate(stick.action.ReadValue<Vector2>() * Time.deltaTime * speed);
             //SendMessage("PlayerMoved",transform.position);
             //RotatePlayer();
             //transform.rotation = Quaternion.RotateTowards(transform.position, InputHandler.LeftStickDelta, 1, 1);
@@ -53,7 +54,7 @@ namespace Scripts.Games
 
         public void RotatePlayer()
         {
-            var inputDelta = InputHandler.StickLeft;
+            var inputDelta = stick.action.ReadValue<Vector2>();
             // calculate the angle to rotate the barrel
             var angle = Mathf.Atan2(inputDelta.y, inputDelta.x);
 

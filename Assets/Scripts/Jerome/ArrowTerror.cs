@@ -26,6 +26,7 @@ namespace Scripts.Games
         private void Awake()
         {
             base.SetUp();
+            player.GetComponent<ArrowPlayer>().stick = keys.One.Input;
         }
 
         void Start()

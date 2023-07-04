@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: Evade
   m_EditorClassIdentifier: 
-  assetID: 12293
   description: 
-  complexity: 3
   difficulty: 1
   genre: 6
-  keys: 2
-  orientation: 3
+  keysLeft:
+    one: {fileID: 11400000, guid: 5b68a930ae7af724b80502d9028d70e4, type: 2}
+    two: {fileID: 0}
+    three: {fileID: 0}
+    four: {fileID: 0}
+  keysRight:
+    one: {fileID: 11400000, guid: 16ed777c82665e244875991db5a0d31f, type: 2}
+    two: {fileID: 0}
+    three: {fileID: 0}
+    four: {fileID: 0}
   prefab: {fileID: 6074431469413734331, guid: e2bb4576bd41e2f43a82bd6adf6fc16a, type: 3}
   preview: {fileID: 0}

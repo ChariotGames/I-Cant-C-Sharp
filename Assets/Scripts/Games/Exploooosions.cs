@@ -20,6 +20,7 @@ namespace Scripts.Games
         private void Awake()
         {
             base.SetUp();
+            player.GetComponent<ExpPlayer>().stick = keys.One.Input;
         }
 
         void Start()
