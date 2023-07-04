@@ -484,6 +484,11 @@ MonoBehaviour:
   displayPattern: 
   guessPattern: 
   infoPattern: 
+  inputTexts:
+  - {fileID: 3923420841757164548}
+  - {fileID: 3923420841613081708}
+  - {fileID: 3923420840428119226}
+  - {fileID: 3923420841216393779}
   buttonsContainer: {fileID: 3923420841571965842}
   inputOverlay: {fileID: 3619042334536100596}
   infoOverlay: {fileID: 8236597517906972022}

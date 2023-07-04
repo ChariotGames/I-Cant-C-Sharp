@@ -51,18 +51,6 @@ namespace Scripts.Games
             guessPattern.Clear();
             infoPattern.Clear();
 
-            // Set keys
-            blue.GetComponent<BasePressElement>().Button = keys.One.Input;
-            red.GetComponent<BasePressElement>().Button = keys.Two.Input;
-            yellow.GetComponent<BasePressElement>().Button = keys.Three.Input;
-            green.GetComponent<BasePressElement>().Button = keys.Four.Input;
-
-            // Set Icons
-            inputTexts[0].text = keys.One.Icon;
-            inputTexts[1].text = keys.Two.Icon;
-            inputTexts[2].text = keys.Three.Icon;
-            inputTexts[3].text = keys.Four.Icon;
-
             // Initialize game
             _buttonObjects = new();
             _buttonObjects.Add(Colors.BLUE, blue);
@@ -79,6 +67,18 @@ namespace Scripts.Games
             StartCoroutine(ActivateButtons(BLINK_TIME));
             GeneratePattern(MIN_LENGTH);
             StartCoroutine(AnimateButtons(_animationTime * 2, _animationTime));
+
+            // Set keys
+            blue.GetComponent<BasePressElement>().Button = keys.One.Input;
+            red.GetComponent<BasePressElement>().Button = keys.Two.Input;
+            yellow.GetComponent<BasePressElement>().Button = keys.Three.Input;
+            green.GetComponent<BasePressElement>().Button = keys.Four.Input;
+
+            // Set Icons
+            inputTexts[0].text = keys.One.Icon;
+            inputTexts[1].text = keys.Two.Icon;
+            inputTexts[2].text = keys.Three.Icon;
+            inputTexts[3].text = keys.Four.Icon;
         }
 
         #endregion
