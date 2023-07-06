@@ -25,7 +25,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            base.SetUp();
+            //base.SetUp();
             player.GetComponent<ArrowPlayer>().stick = keys.One.Input;
         }
 
@@ -54,6 +54,8 @@ namespace Scripts.Games
                 winCounter = 0;
                 base.Win();
             }
+
+            Debug.Log(base.playarea.Contains(player.transform.position));
         }
 
         internal void UpdateEnemyPositions(Vector3 position)

@@ -76,10 +76,10 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        void Awake()
-        {
-            base.SetUp();
-        }
+        //void Awake()
+        //{
+        //    base.SetUp();
+        //}
         void Start()
         {
             StartCoroutine(GameCoroutine());

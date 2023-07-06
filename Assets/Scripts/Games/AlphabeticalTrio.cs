@@ -1,14 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using Scripts._Input;
 using Scripts.Models;
 using TMPro;
 using UnityEngine.InputSystem;
-using Debug = UnityEngine.Debug;
-using Random = UnityEngine.Random;
 
 namespace Scripts.Games
 {
@@ -32,16 +26,16 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-            private void Awake()
-            {
-                SetUp();
-            }
+            //private void Awake()
+            //{
+            //    SetUp();
+            //}
         
             void Start()
             {
-                StartCoroutine(GameCoroutine());
                 buttonYes.text = keys.One.Icon;
                 buttonNo.text = keys.Two.Icon;
+                StartCoroutine(GameCoroutine());
             }
 
             #endregion Built-Ins / MonoBehaviours

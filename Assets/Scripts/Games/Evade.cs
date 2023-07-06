@@ -21,7 +21,7 @@ namespace Scripts.Games
         // Start is called before the first frame update
         private void Awake()
         {
-            base.SetUp();
+            //base.SetUp();
             player.GetComponent<EvadePlayer>().stick = keys.One.Input;
         }
         void Start()

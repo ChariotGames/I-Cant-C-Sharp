@@ -1,21 +1,29 @@
+using Scripts.Models;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Scripts.Models;
-using TMPro;
 
 namespace Scripts.Controllers
 {
-    public class HeartManager : MonoBehaviour
+    public class UI_Manager : MonoBehaviour
     {
         [SerializeField] private Settings settings;
         [SerializeField] private Image[] hearts;
-        [SerializeField] private TMP_Text heartCounter;
-
-        [SerializeField] private Sprite fullHeart;
-        [SerializeField] private Sprite emptyHeart;
-
+        [SerializeField] private Sprite fullHeart, emptyHeart;
+        [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
+        [SerializeField] private GameObject gameOverPanel;
 
 
+        private int _score = 0;
+        private float _time = 0;
+        private bool _timerOn;
+
+
+        private void Start()
+        {
+            _timerOn = true;
+        }
 
         // Update is called once per frame
         void Update()
@@ -45,7 +53,25 @@ namespace Scripts.Controllers
                     hearts[i].sprite = fullHeart;
                 }
             }
-            
+
+            if (settings.Lives <= 0)
+            {
+                _timerOn = false;
+                gameOverPanel.SetActive(true);
+            }
+
+            if (_timerOn)
+            {
+                _time += Time.deltaTime;
+                TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
+                timeCounter.text = timePlaying.ToString("mm':'ss");
+            }
+        }
+
+        public void ScoreUpdate(int change)
+        {
+            _score+= change;
+            scoreCounter.text = _score.ToString("D3");
         }
     }
 

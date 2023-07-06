@@ -32,10 +32,10 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        private void Awake()
-        {
-            SetUp();
-        }
+        //private void Awake()
+        //{
+        //    SetUp();
+        //}
         
         void Start()
         {

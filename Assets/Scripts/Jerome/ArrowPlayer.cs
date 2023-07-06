@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Scripts.Games
 {
-    public class ArrowPlayer : BaseGame
+    public class ArrowPlayer : MonoBehaviour
     {
         #region Serialized Fields
         [SerializeField] ArrowTerror MainGame;

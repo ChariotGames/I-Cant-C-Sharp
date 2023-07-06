@@ -24,10 +24,10 @@ namespace Scripts.Games
         private bool _isYes, _isNo;
 
 
-        private void Awake()
-        {
-            SetUp();
-        }
+        //private void Awake()
+        //{
+        //    SetUp();
+        //}
 
         void Start()
         {

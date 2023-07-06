@@ -31,10 +31,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5064793300634688470}
-  - {fileID: 6707827418453113018}
+  - {fileID: 411477512151206885}
   - {fileID: 8420430536241138870}
-  - {fileID: 2825956107917368136}
-  - {fileID: 427280543943923183}
+  - {fileID: 4249387610943860996}
+  - {fileID: 8753078612844624505}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,9 +51,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
-  spawnLeft: {fileID: 6707827418453113018}
-  spawnRight: {fileID: 2825956107917368136}
-  spawnCenter: {fileID: 427280543943923183}
+  spawnLeft: {fileID: 411477512151206885}
+  spawnRight: {fileID: 4249387610943860996}
+  spawnCenter: {fileID: 8753078612844624505}
+  GameOverPanel: {fileID: 0}
+  point: {fileID: 0}
+  scoreCounter: {fileID: 0}
+  timeCounter: {fileID: 0}
 --- !u!114 &8275405802908632855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,7 +78,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2825956107917368136}
+  - component: {fileID: 4249387610943860996}
   m_Layer: 0
   m_Name: ContainerRight
   m_TagString: Untagged
@@ -82,21 +86,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2825956107917368136
-Transform:
+--- !u!224 &4249387610943860996
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5897317456820109985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5897317456580356394}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3.75, y: 0}
+  m_SizeDelta: {x: 7, y: 7}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5897317456894251579
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +114,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6707827418453113018}
+  - component: {fileID: 411477512151206885}
   m_Layer: 0
   m_Name: ContainerLeft
   m_TagString: Untagged
@@ -113,21 +122,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6707827418453113018
-Transform:
+--- !u!224 &411477512151206885
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5897317456894251579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5897317456580356394}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -3.75, y: 0}
+  m_SizeDelta: {x: 7, y: 7}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5897317456917386128
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +212,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 427280543943923183}
+  - component: {fileID: 8753078612844624505}
   m_Layer: 0
   m_Name: ContainerCenter
   m_TagString: Untagged
@@ -206,8 +220,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &427280543943923183
-Transform:
+--- !u!224 &8753078612844624505
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -221,3 +235,8 @@ Transform:
   m_Father: {fileID: 5897317456580356394}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 7, y: 7}
+  m_Pivot: {x: 0.5, y: 0.5}

@@ -7,7 +7,7 @@ namespace Scripts.Models
     /// Contains the game's individual action descriptions for each key.
     /// </summary>
     [Serializable]
-    public struct ActionName
+    public struct ActionNames
     {
         [SerializeField] private string one, two, three, four;
         public string One { get => one; }

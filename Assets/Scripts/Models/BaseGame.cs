@@ -13,31 +13,38 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] protected Difficulty currentDifficulty = Difficulty.EASY;
-        [SerializeField] protected ActionName actionNames;
-        
+        [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
+        [SerializeField] protected ActionNames actionNames;
 
         #endregion Serialized Fields
 
         #region Fields
 
-        protected Bounds bounds;
         protected KeyMap keys;
-        protected MinigameManager manager;
+        protected Rect playarea;
+        private MinigameManager manager;
 
         #endregion Fields
 
-        #region Built-Ins
+        #region Methods
 
-        
-        protected void SetUp()
+        public void SetUp(MinigameManager manager, Difficulty difficulty, KeyMap keys, Rect area)
         {
-            manager = GameObject.Find(nameof(MinigameManager)).GetComponent<MinigameManager>();
+            this.difficulty = difficulty;
+            this.manager = manager;
+            this.keys = keys;
+            this.playarea = area;
         }
 
-        #endregion
+        protected void ScoreDown()
+        {
+            manager.ScoreUpdate(-(int)difficulty);
+        }
 
-        #region Methods
+        protected void ScoreUp()
+        {
+            manager.ScoreUpdate((int)difficulty);
+        }
 
         /// <summary>
         /// Informs the BaseGame Controller, that the game triggered a win condition
@@ -60,7 +67,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            Manager.SetDifficulty(gameObject, currentDifficulty - 1);
+            Manager.SetDifficulty(gameObject, difficulty - 1);
         }
 
         /// <summary>
@@ -68,7 +75,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            Manager.SetDifficulty(gameObject, currentDifficulty + 1);
+            Manager.SetDifficulty(gameObject, difficulty + 1);
         }
 
         #endregion  Methods
@@ -80,8 +87,8 @@ namespace Scripts.Games
         /// </summary>
         public Difficulty Difficulty
         {
-            get => currentDifficulty;
-            set => currentDifficulty = value;
+            get => difficulty;
+            set => difficulty = value;
         }
 
         /// <summary>
@@ -105,10 +112,10 @@ namespace Scripts.Games
         /// <summary>
         ///  The minigame's inner bounds, set by the manager.
         /// </summary>
-        public Bounds Bounds
+        public Rect Playarea
         {
             //get => bounds;
-            set => bounds = value;
+            set => playarea = value;
         }
 
         #endregion GetSets

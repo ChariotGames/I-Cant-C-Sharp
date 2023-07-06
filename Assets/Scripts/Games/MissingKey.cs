@@ -23,7 +23,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            SetUp();
+            //SetUp();
             _mainCamera = Camera.main;
             for (int i = 0; i < buttons.Count; i++)
             {

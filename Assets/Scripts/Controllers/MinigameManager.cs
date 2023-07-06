@@ -1,12 +1,3 @@
-//using Scripts.Games;
-//using Scripts.Models;
-//using System.Collections.Generic;
-//using TMPro;
-//using UnityEngine;
-//using System;
-//using System.Collections;
-
-
 using System.Collections;
 using TMPro;
 using Scripts.Games;
@@ -27,15 +18,12 @@ namespace Scripts.Controllers
 
         [SerializeField] private Settings settings;
         [SerializeField] private Transform spawnLeft, spawnRight, spawnCenter;
+        [SerializeField] private UI_Manager uiManager;
 
-        [SerializeField] private GameObject GameOverPanel;
-        [SerializeField] private TMP_Text scoreCounter;
-        [SerializeField] private TMP_Text timeCounter;
         #endregion
 
         #region Fields
 
-        private Camera _mainCamera;
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
         private Minigame loadedLeft, loadedRight, currentGame, otherGame;
@@ -44,9 +32,9 @@ namespace Scripts.Controllers
         private const int MAX_QUE = 5;
         private int loadedTimes = 0;
 
-        private int score = 0;
-        private float _time = 0;
-        private bool timerOn;
+        //private int score = 0;
+        //private float _time = 0;
+        //private bool timerOn;
 
         #endregion
 
@@ -54,8 +42,6 @@ namespace Scripts.Controllers
 
         void Awake()
         {
-            if (_mainCamera == null) _mainCamera = Camera.main;
-
             _mixGames = new List<Minigame>(settings.Games);
             _soloGames = new List<Minigame>(settings.SoloGames);
             _previous = new(MAX_QUE);
@@ -63,15 +49,12 @@ namespace Scripts.Controllers
 
         void Start()
         {
-            BeginTimer();
-
-            
             if (settings.SelectedGame != null)
             {
                 LoadGame(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter);
                 return;
             }
-                
+
             loadedLeft = PickGame(new List<Minigame>(_mixGames));
             loadedRight = PickGame(new List<Minigame>(_mixGames));
         }
@@ -151,9 +134,7 @@ namespace Scripts.Controllers
             game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame baseGame = obj.GetComponent<BaseGame>();
-            baseGame.Difficulty = game.Difficulty;
-            baseGame.Keys = keys;
-            baseGame.Bounds = SetBounds(parent.position, _soloGames.Contains(game));
+            baseGame.SetUp(this, game.Difficulty, keys, parent.GetComponent<RectTransform>().rect);
             obj.SetActive(true);
             loadedTimes++;
             return true; // Successfully loaded
@@ -263,82 +244,57 @@ namespace Scripts.Controllers
 
         #region Game Mechanics
 
-        public void WinCondition(/*AssetID id,*/ GameObject game)
+        public void ScoreUpdate(int score)
+        {
+            uiManager.ScoreUpdate(score);
+        }
+
+        public void WinCondition(GameObject game)
         {
             Debug.Log($"Win from {game.name}");
-            score++;
 
-            //TODO: check if score can get over 100? Maybe take different approach
-            if(score <10)
-            {
-                scoreCounter.text = "00" + score.ToString();
-            } else if(score <100)
-            {
-                scoreCounter.text = "0" + score.ToString();
-            } else scoreCounter.text = score.ToString();
-            
-            //TODO: temporary
+            //score++;
+            //scoreCounter.text = score.ToString("D3");
+
             RemoveGame(game);
         }
 
-        public void LoseCondition(/*AssetID id,*/ GameObject game)
+        public void LoseCondition(GameObject game)
         {
             Debug.Log($"Lose from {game.name}");
             settings.Lives--;
             Debug.Log($"Lives left: {settings.Lives}");
-            if (settings.Lives <= 0)
-            {
-                //TODO: temporary fix for RemoveGame()
-                EndTimer();
-                GameOverPanel.SetActive(true);
-                //SceneChanger.ChangeScene(0);
-
-            }
             RemoveGame(game);
         }
 
-        public void SetDifficulty(/*AssetID id,*/ GameObject game, Difficulty difficulty)
+        public void SetDifficulty(GameObject game, Difficulty difficulty)
         {
-            settings.Games.Find(obj => /*obj.AssetID == id*/obj.Prefab == game).Difficulty = difficulty;
-        }
-
-        /// <summary>
-        /// Sets the game's bounds, to fit the current spawn position.
-        /// <param name="centerPoint">The point to set to.</param>
-        /// <param name="isFullscreen">Only needed for fullscreen games.</param>
-        /// </summary>
-        private Bounds SetBounds(Vector3 centerPoint, bool isFullscreen)
-        {
-            Vector3 size = _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero);
-
-            if (isFullscreen) return new Bounds(_mainCamera.transform.position, size);
-
-            return new Bounds(centerPoint, size);
-        }
-
-        private void BeginTimer()
-        {
-            timerOn = true;
-            StartCoroutine(RunTimer());
-            
-        }
-
-        private void EndTimer()
-        {
-            timerOn = false;
-        }
-
-        private IEnumerator RunTimer()
-        {
-            while(timerOn)
-            {
-                _time += Time.deltaTime;
-                TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
-                timeCounter.text = timePlaying.ToString("mm':'ss");
-                yield return null;
-            }
+            settings.Games.Find(obj => obj.Prefab == game).Difficulty = difficulty;
         }
 
         #endregion
+
+        #region Gizmos
+
+        private void OnDrawGizmos()
+        {
+            if (spawnLeft.gameObject.activeInHierarchy)
+            {
+                Gizmos.color = new Color(0, 1, 0, 0.2f);
+                Gizmos.DrawCube(spawnLeft.position, spawnLeft.GetComponent<RectTransform>().rect.size);
+            }
+            if (spawnRight.gameObject.activeInHierarchy)
+            {
+                Gizmos.color = new Color(1, 0, 0, 0.2f);
+                Gizmos.DrawCube(spawnRight.position, spawnRight.GetComponent<RectTransform>().rect.size);
+            }
+            if (spawnCenter.gameObject.activeInHierarchy)
+            {
+                Gizmos.color = new Color(1, 0, 1, 0.2f);
+                Gizmos.DrawCube(spawnCenter.position, spawnCenter.GetComponent<RectTransform>().rect.size);
+            }
+        }
+
+        #endregion Gizmos
     }
 }

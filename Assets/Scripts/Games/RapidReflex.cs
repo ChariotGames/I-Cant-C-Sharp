@@ -47,22 +47,22 @@ namespace Scripts.Games
 
     #region Built-Ins / MonoBehaviours
         
-        private void Awake()
-        {
-            SetUp();
-        }
+        //private void Awake()
+        //{
+        //    SetUp();
+        //}
     
     void Start()
-        {
-            flashColor.Add(lightRed);
-            flashColor.Add(lightGreen);
-            _backgroundSprite = background.GetComponent<SpriteRenderer>();
-            _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
-            _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
-            StartCoroutine(GameCoroutine());
-        }
+    {
+        flashColor.Add(lightRed);
+        flashColor.Add(lightGreen);
+        _backgroundSprite = background.GetComponent<SpriteRenderer>();
+        _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
+        _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
+        StartCoroutine(GameCoroutine());
+    }
 
-        #endregion Built-Ins / MonoBehaviours
+    #endregion Built-Ins / MonoBehaviours
 
     #region GetSets / Properties
 
