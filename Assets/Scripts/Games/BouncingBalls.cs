@@ -1,14 +1,10 @@
-using System;
-using Scripts._Input;
 using Scripts.GameElements;
 using Scripts.Models;
-
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Input = UnityEngine.Windows.Input;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -46,7 +42,6 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            //base.SetUp();
             switch (Difficulty)
             {
                 case Difficulty.EASY:

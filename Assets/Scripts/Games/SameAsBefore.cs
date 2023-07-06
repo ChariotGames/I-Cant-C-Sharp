@@ -1,4 +1,3 @@
-using Scripts._Input;
 using Scripts.Models;
 using System;
 using System.Collections;
@@ -22,12 +21,6 @@ namespace Scripts.Games
         private const string _stepsText = "Steps: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
-
-
-        //private void Awake()
-        //{
-        //    SetUp();
-        //}
 
         void Start()
         {

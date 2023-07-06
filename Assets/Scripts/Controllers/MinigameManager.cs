@@ -1,10 +1,8 @@
-using System.Collections;
-using TMPro;
 using Scripts.Games;
 using Scripts.Models;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Controllers
@@ -18,23 +16,20 @@ namespace Scripts.Controllers
 
         [SerializeField] private Settings settings;
         [SerializeField] private Transform spawnLeft, spawnRight, spawnCenter;
-        [SerializeField] private UI_Manager uiManager;
 
         #endregion
 
         #region Fields
 
+        public static event Action<int> OnUpdateUIScore;
+
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
-        private Minigame loadedLeft, loadedRight, currentGame, otherGame;
-        private KeyMap keys, otherKeys;
-        private Transform parent;
+        private Minigame _loadedLeft, _loadedRight, _currentGame, _otherGame;
+        private KeyMap _keys, _otherKeys;
+        private Transform _parent;
         private const int MAX_QUE = 5;
-        private int loadedTimes = 0;
-
-        //private int score = 0;
-        //private float _time = 0;
-        //private bool timerOn;
+        private int _loadedTimes = 0;
 
         #endregion
 
@@ -49,16 +44,28 @@ namespace Scripts.Controllers
 
         void Start()
         {
+            BaseGame.OnLose += LoseCondition;
+            BaseGame.OnWin += RemoveGame;
+            BaseGame.OnUpdateDifficulty += UpdateDifficulty;
+            BaseGame.OnScoreUpdate += UpdateScore;
+
             if (settings.SelectedGame != null)
             {
                 LoadGame(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter);
                 return;
             }
 
-            loadedLeft = PickGame(new List<Minigame>(_mixGames));
-            loadedRight = PickGame(new List<Minigame>(_mixGames));
+            _loadedLeft = PickGame(new List<Minigame>(_mixGames));
+            _loadedRight = PickGame(new List<Minigame>(_mixGames));
         }
 
+        private void OnDisable()
+        {
+            BaseGame.OnLose -= LoseCondition;
+            BaseGame.OnWin -= RemoveGame;
+            BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
+            BaseGame.OnScoreUpdate -= UpdateScore;
+        }
 
         #endregion
 
@@ -74,15 +81,15 @@ namespace Scripts.Controllers
             GetNext(gameList);
 
             // Find the fitting game
-            while (CheckGenre(currentGame, otherGame) && CheckKeys(keys, otherKeys))
+            while (CheckGenre(_currentGame, _otherGame) && CheckKeys(_keys, _otherKeys))
             {
                 if (gameList.Count == 0) return null;
 
-                gameList.Remove(currentGame);
+                gameList.Remove(_currentGame);
                 GetNext(gameList);
             }
 
-            if (LoadGame(currentGame, keys, parent)) return currentGame;
+            if (LoadGame(_currentGame, _keys, _parent)) return _currentGame;
 
             return null;
         }
@@ -93,25 +100,25 @@ namespace Scripts.Controllers
         /// <param name="gameList">A game list to pick from.</param>
         private void GetNext(List<Minigame> gameList)
         {
-            currentGame = gameList[Random.Range(0, gameList.Count)];
+            _currentGame = gameList[Random.Range(0, gameList.Count)];
             if (spawnLeft.childCount == 0)
             {
-                parent = spawnLeft;
-                keys = currentGame.KeysLeft;
+                _parent = spawnLeft;
+                _keys = _currentGame.KeysLeft;
                 if (spawnRight.childCount != 0)
                 {
-                    otherGame = loadedRight;
-                    otherKeys = spawnRight.GetChild(0).GetComponent<BaseGame>().Keys;
+                    _otherGame = _loadedRight;
+                    _otherKeys = spawnRight.GetChild(0).GetComponent<BaseGame>().Keys;
                 }
             }
             else
             {
-                parent = spawnRight;
-                keys = currentGame.KeysRight;
+                _parent = spawnRight;
+                _keys = _currentGame.KeysRight;
                 if (spawnLeft.childCount == 0)
                 {
-                    otherGame = loadedLeft;
-                    otherKeys = spawnLeft.GetChild(0).GetComponent<BaseGame>().Keys;
+                    _otherGame = _loadedLeft;
+                    _otherKeys = spawnLeft.GetChild(0).GetComponent<BaseGame>().Keys;
                 }
             }
         }
@@ -134,9 +141,10 @@ namespace Scripts.Controllers
             game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame baseGame = obj.GetComponent<BaseGame>();
-            baseGame.SetUp(this, game.Difficulty, keys, parent.GetComponent<RectTransform>().rect);
+            baseGame.SetUp(game.Difficulty, keys, parent.GetComponent<RectTransform>().rect);
             obj.SetActive(true);
-            loadedTimes++;
+            
+            _loadedTimes++;
             return true; // Successfully loaded
         }
 
@@ -151,7 +159,7 @@ namespace Scripts.Controllers
                 return;
             }
             
-            if(loadedTimes == MAX_QUE)
+            if(_loadedTimes == MAX_QUE)
             {
                 RemoveAllGames();
                 List<Minigame> gameList = new(_soloGames);
@@ -163,24 +171,24 @@ namespace Scripts.Controllers
             if (spawnLeft.childCount != 0 && spawnLeft.GetChild(0).gameObject == game)
             {
                 Destroy(spawnLeft.GetChild(0).gameObject);
-                loadedLeft = null;
-                loadedLeft = PickGame(new List<Minigame>(_mixGames));
+                _loadedLeft = null;
+                _loadedLeft = PickGame(new List<Minigame>(_mixGames));
                 return;
             }
 
             if (spawnRight.childCount != 0 && spawnRight.GetChild(0).gameObject == game)
             {
                 Destroy(spawnRight.GetChild(0).gameObject);
-                loadedRight = null;
-                loadedRight = PickGame(new List<Minigame>(_mixGames));
+                _loadedRight = null;
+                _loadedRight = PickGame(new List<Minigame>(_mixGames));
                 return;
             }
 
             if (spawnCenter.childCount != 0 && spawnCenter.GetChild(0).gameObject == game)
             {
                 Destroy(spawnCenter.GetChild(0).gameObject);
-                loadedLeft = PickGame(new List<Minigame>(_mixGames));
-                loadedRight = PickGame(new List<Minigame>(_mixGames));
+                _loadedLeft = PickGame(new List<Minigame>(_mixGames));
+                _loadedRight = PickGame(new List<Minigame>(_mixGames));
                 return;
             }
         }
@@ -193,20 +201,20 @@ namespace Scripts.Controllers
             if (spawnLeft.childCount != 0)
             {
                 Destroy(spawnLeft.GetChild(0).gameObject);
-                loadedLeft = null;
+                _loadedLeft = null;
             }
 
             if (spawnRight.childCount != 0)
             {
                 Destroy(spawnRight.GetChild(0).gameObject);
-                loadedRight = null;
+                _loadedRight = null;
             }
 
             if (spawnCenter.childCount != 0)
             {
                 Destroy(spawnCenter.GetChild(0).gameObject);
             }
-            loadedTimes = 0;
+            _loadedTimes = 0;
         }
 
         #endregion Instance Management
@@ -244,17 +252,9 @@ namespace Scripts.Controllers
 
         #region Game Mechanics
 
-        public void ScoreUpdate(int score)
-        {
-            uiManager.ScoreUpdate(score);
-        }
-
         public void WinCondition(GameObject game)
         {
             Debug.Log($"Win from {game.name}");
-
-            //score++;
-            //scoreCounter.text = score.ToString("D3");
 
             RemoveGame(game);
         }
@@ -267,9 +267,13 @@ namespace Scripts.Controllers
             RemoveGame(game);
         }
 
-        public void SetDifficulty(GameObject game, Difficulty difficulty)
+        public void UpdateDifficulty(GameObject game, Difficulty difficulty)
         {
             settings.Games.Find(obj => obj.Prefab == game).Difficulty = difficulty;
+        }
+        public void UpdateScore(int change)
+        {
+            OnUpdateUIScore?.Invoke(change);
         }
 
         #endregion

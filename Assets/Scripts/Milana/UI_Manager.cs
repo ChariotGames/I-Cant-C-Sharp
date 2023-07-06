@@ -23,6 +23,12 @@ namespace Scripts.Controllers
         private void Start()
         {
             _timerOn = true;
+            MinigameManager.OnUpdateUIScore += ScoreDisplay;
+        }
+
+        private void OnDisable()
+        {
+            MinigameManager.OnUpdateUIScore -= ScoreDisplay;
         }
 
         // Update is called once per frame
@@ -68,9 +74,9 @@ namespace Scripts.Controllers
             }
         }
 
-        public void ScoreUpdate(int change)
+        public void ScoreDisplay(int change)
         {
-            _score+= change;
+            _score = Mathf.Clamp(_score += change, 0, 999);
             scoreCounter.text = _score.ToString("D3");
         }
     }

@@ -41,7 +41,6 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            //base.SetUp();
             _mainCamera = Camera.main;
         }
 

@@ -1,16 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Scripts._Input;
 using Scripts.Models;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -75,11 +67,6 @@ namespace Scripts.Games
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
-
-        //void Awake()
-        //{
-        //    base.SetUp();
-        //}
         void Start()
         {
             StartCoroutine(GameCoroutine());

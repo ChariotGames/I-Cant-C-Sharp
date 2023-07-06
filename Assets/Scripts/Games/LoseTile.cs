@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Scripts._Input;
 using Scripts.Models;
 
 namespace Scripts.Games
@@ -31,12 +28,6 @@ namespace Scripts.Games
             remainingTiles = ammountOfTiles;
             SetGrid();
         }
-
-        void Update()
-        {
-            
-        }
-
 
         #endregion Built-Ins / MonoBehaviours
 

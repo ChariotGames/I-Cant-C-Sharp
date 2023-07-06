@@ -32,11 +32,6 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        //private void Awake()
-        //{
-        //    SetUp();
-        //}
-        
         void Start()
         {
             StartCoroutine(GameCoroutine());

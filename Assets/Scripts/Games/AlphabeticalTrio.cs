@@ -26,11 +26,6 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-            //private void Awake()
-            //{
-            //    SetUp();
-            //}
-        
             void Start()
             {
                 buttonYes.text = keys.One.Icon;

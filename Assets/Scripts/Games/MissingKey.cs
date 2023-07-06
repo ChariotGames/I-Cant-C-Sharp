@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Scripts._Input;
 using UnityEngine.InputSystem;
 
 namespace Scripts.Games
@@ -23,13 +22,11 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            //SetUp();
             _mainCamera = Camera.main;
             for (int i = 0; i < buttons.Count; i++)
             {
                 BasePressElement bpe = buttons[i].GetComponent<BasePressElement>();
                 buttons[i].GetComponent<BasePressElement>().Button = keys.All[i].Input;
-
             }
         }
 

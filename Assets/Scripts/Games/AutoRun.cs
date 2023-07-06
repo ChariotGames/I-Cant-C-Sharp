@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,10 +34,7 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        //void Awake()
-        //{
-        //    base.SetUp();
-        //}
+
 
         #endregion Built-Ins / MonoBehaviours
         

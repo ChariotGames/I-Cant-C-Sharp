@@ -1,5 +1,6 @@
 using Scripts.Controllers;
 using Scripts.Models;
+using System;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -20,30 +21,32 @@ namespace Scripts.Games
 
         #region Fields
 
+        public static event Action<GameObject> OnWin, OnLose;
+        public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
+        public static event Action<int> OnScoreUpdate;
+
         protected KeyMap keys;
         protected Rect playarea;
-        private MinigameManager manager;
 
         #endregion Fields
 
         #region Methods
 
-        public void SetUp(MinigameManager manager, Difficulty difficulty, KeyMap keys, Rect area)
+        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area)
         {
             this.difficulty = difficulty;
-            this.manager = manager;
             this.keys = keys;
             this.playarea = area;
         }
 
         protected void ScoreDown()
         {
-            manager.ScoreUpdate(-(int)difficulty);
+            OnScoreUpdate?.Invoke(-(int)difficulty);
         }
 
         protected void ScoreUp()
         {
-            manager.ScoreUpdate((int)difficulty);
+            OnScoreUpdate?.Invoke((int)difficulty);
         }
 
         /// <summary>
@@ -51,7 +54,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Win()
         {
-            Manager.WinCondition(gameObject);
+            OnWin?.Invoke(gameObject);
         }
 
         /// <summary>
@@ -59,7 +62,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Lose()
         {
-            Manager.LoseCondition(gameObject);
+            OnLose?.Invoke(gameObject);
         }
 
         /// <summary>
@@ -67,7 +70,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            Manager.SetDifficulty(gameObject, difficulty - 1);
+            OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
         }
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            Manager.SetDifficulty(gameObject, difficulty + 1);
+            OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
         }
 
         #endregion  Methods
@@ -101,20 +104,11 @@ namespace Scripts.Games
         }
 
         /// <summary>
-        /// The Minigame Manager handling game controlls.
-        /// </summary>
-        public MinigameManager Manager
-        {
-            get => manager;
-            //set => manager = value;
-        }
-
-        /// <summary>
         ///  The minigame's inner bounds, set by the manager.
         /// </summary>
         public Rect Playarea
         {
-            //get => bounds;
+            get => playarea;
             set => playarea = value;
         }
 

@@ -1,13 +1,9 @@
 using Scripts.Models;
-using Scripts._Input;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -46,11 +42,6 @@ namespace Scripts.Games
     #endregion Fields
 
     #region Built-Ins / MonoBehaviours
-        
-        //private void Awake()
-        //{
-        //    SetUp();
-        //}
     
     void Start()
     {
@@ -188,6 +179,8 @@ namespace Scripts.Games
             yield return new WaitForSeconds(0.2f);
             background.SetActive(false);
         }
+
+        public void Test(GameObject obj) { }
 
         private void GameWon()
         {
