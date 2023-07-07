@@ -28,6 +28,7 @@ namespace Scripts.Games
         [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
         [SerializeField] [Range(0.25f, 1)] private float timeToAnswer;
+        [SerializeField] private int successesToLevelUp;
 
         #endregion Serialized Fields
 
@@ -37,7 +38,7 @@ namespace Scripts.Games
         private float _timeElapsed = 0, _randomDelay = 0;
         private bool _isButtonPressed = false;
         private SpriteRenderer _backgroundSprite;
-        
+        private int difficultyTracker;
 
     #endregion Fields
 
@@ -50,6 +51,7 @@ namespace Scripts.Games
         _backgroundSprite = background.GetComponent<SpriteRenderer>();
         _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
         _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
+        difficultyTracker = successesToLevelUp;
         StartCoroutine(GameCoroutine());
     }
 
@@ -144,18 +146,16 @@ namespace Scripts.Games
             if (_timeElapsed < timeToAnswer && _timeElapsed >= 0)
             {
                 gameState.text = "Rapid Reflex: " + (int)(_timeElapsed * 1000) + " ms";
-                yield return new WaitForSeconds(1);
                 GameWon();
             }
             else
             {
                 gameState.text = _timeElapsed > 0 ? "Too slow!" : "Too Early!";
-                yield return new WaitForSeconds(1);
                 GameLost();
             }
-            yield return new WaitForSeconds(2);
-            Debug.Log("Test");
+            yield return new WaitForSeconds(1);
             overlayContainer.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
         }
         
         private IEnumerator RandomDistraction()
@@ -184,12 +184,32 @@ namespace Scripts.Games
 
         private void GameWon()
         {
-            base.Win();
+            ScoreUp();
+            successesToWin--;
+            difficultyTracker--;
+            if (difficultyTracker <= 0)
+            {
+                difficultyTracker = successesToLevelUp;
+                Harder();
+            }
+            if (successesToWin <= 0)
+            {
+                Win(); 
+            }
         }
         
         private void GameLost()
         {
-            base.Lose();
+            failsToLose--;
+            difficultyTracker = successesToLevelUp;
+            if (failsToLose <= 0)
+            {
+                if (difficulty != Difficulty.EASY)
+                {
+                    Easier();   
+                }
+                Lose();
+            }
         }
 
         private void UpdateRandomDelay()

@@ -14,16 +14,20 @@ namespace Scripts.Games
     {
         [SerializeField] private List<GameObject> options;
         [SerializeField] private GameObject startText, gamestateWin, gamestateLose;
-        [SerializeField] private TMP_Text stepBackText;
-        [SerializeField] private int maxStepsBack, timeToAnswer;
+        [SerializeField] private TMP_Text stepBackText,  buttonYes, buttonNo;
+        [SerializeField] private int maxStepsBack, timeToAnswer, successesToLevelUp;
 
         private LinkedList<int> _lastIndices = new();
         private const string _stepsText = "Steps: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
+        private int difficultyTracker;
 
         void Start()
         {
+            difficultyTracker = successesToLevelUp;
+            buttonYes.text = _keys.One.Icon;
+            buttonNo.text = _keys.Two.Icon;
             StartCoroutine(GameStartCoroutine());
         }
 
@@ -83,6 +87,7 @@ namespace Scripts.Games
 
         private IEnumerator SpawnCoroutine()
         {
+            yield return new WaitForSeconds(1);
             while (true)
             {
                 if (options[0].activeSelf || options[1].activeSelf)
@@ -95,26 +100,25 @@ namespace Scripts.Games
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         gamestateWin.SetActive(true);
-                        yield return new WaitForSeconds(1);
-                        Win();
+                        GameWon();
                     }
                     else
                     {
                         gamestateLose.SetActive(true);
-                        yield return new WaitForSeconds(1);
-                        Lose();
+                        GameLost();
                     }
+                    yield return new WaitForSeconds(1);
                     options[_index].SetActive(false);
                     _isYes = false;
                     _isNo = false;
                     _lastIndices.AddFirst(_index);
                     if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
+                    gamestateWin.SetActive(false);
+                    gamestateLose.SetActive(false);
+                    yield return new WaitForSeconds(0.5f);
                 }
                 else
                 {
-                    yield return new WaitForSeconds(1);
-                    gamestateWin.SetActive(false);
-                    gamestateLose.SetActive(false);
                     SpawnSymbol();
                     UpdateSteps();
                     UpdateStepBackText();
@@ -123,6 +127,36 @@ namespace Scripts.Games
         }
 
 
+        private void GameWon()
+        {
+            ScoreUp();
+            successesToWin--;
+            difficultyTracker--;
+            if (difficultyTracker <= 0)
+            {
+                difficultyTracker = successesToLevelUp;
+                Harder();
+            }
+            if (successesToWin <= 0)
+            {
+                Win(); 
+            }
+        }
+        
+        private void GameLost()
+        {
+            failsToLose--;
+            difficultyTracker = successesToLevelUp;
+            if (failsToLose <= 0)
+            {
+                if (difficulty != Difficulty.EASY)
+                {
+                    Easier();   
+                }
+                Lose();
+            }
+        }
+        
         private void OnEnable()
         {
             _keys.One.Input.action.performed += YesButtonPressed;

@@ -12,15 +12,16 @@ namespace Scripts.Games
 
             [SerializeField] private TMP_Text letters, buttonYes, buttonNo;
             [SerializeField] private GameObject letterContainer, gamestateWin, gamestateLose;
-            [SerializeField] private int timeout;
+            [SerializeField] private int timeout, successesToLevelUp;
 
-        #endregion Serialized Fields
+            #endregion Serialized Fields
 
         #region Fields
 
             private bool _isYes;
             private bool _isNo;
             private float _timeElapsed;
+            private int difficultyTracker;
 
         #endregion Fields
 
@@ -30,6 +31,7 @@ namespace Scripts.Games
             {
                 buttonYes.text = _keys.One.Icon;
                 buttonNo.text = _keys.Two.Icon;
+                difficultyTracker = successesToLevelUp;
                 StartCoroutine(GameCoroutine());
             }
 
@@ -73,28 +75,46 @@ namespace Scripts.Games
                 if (_timeElapsed < timeout && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
                 {
                     gamestateWin.SetActive(true);
-                    yield return new WaitForSeconds(1);
                     GameWon();
                 }
                 else
                 {
                     gamestateLose.SetActive(true);
-                    yield return new WaitForSeconds(1);
                     GameLost();
                 }
                 yield return new WaitForSeconds(1);
                 SceneReset();
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.5f);
             }
             
             private void GameWon()
             {
-                Win();
+                ScoreUp();
+                successesToWin--;
+                difficultyTracker--;
+                if (difficultyTracker <= 0)
+                {
+                    difficultyTracker = successesToLevelUp;
+                    Harder();
+                }
+                if (successesToWin <= 0)
+                {
+                    Win(); 
+                }
             }
         
             private void GameLost()
             {
-                Lose();
+                failsToLose--;
+                difficultyTracker = successesToLevelUp;
+                if (failsToLose <= 0)
+                {
+                    if (difficulty != Difficulty.EASY)
+                    {
+                        Easier();   
+                    }
+                    Lose();
+                }
             }
         
             private void ShowLetters(bool isTrio)

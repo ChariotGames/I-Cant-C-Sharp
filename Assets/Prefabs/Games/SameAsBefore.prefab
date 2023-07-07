@@ -203,7 +203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0.85}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3719244390162793684
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 3269314109351382301}
   - component: {fileID: 6127280654838312319}
   m_Layer: 0
-  m_Name: LeftShoulder
+  m_Name: NoButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -818,7 +818,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3698711568559123564
 Transform:
   m_ObjectHideFlags: 0
@@ -848,12 +848,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57412bd615561314380c787509c752ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   options:
   - {fileID: 888037505940594430}
   - {fileID: 5097884201152601589}
@@ -861,8 +863,11 @@ MonoBehaviour:
   gamestateWin: {fileID: 785116450869764771}
   gamestateLose: {fileID: 2565170812290554746}
   stepBackText: {fileID: 5389326188143829006}
+  buttonYes: {fileID: 6764466576565259624}
+  buttonNo: {fileID: 6127280654838312319}
   maxStepsBack: 3
-  timeToAnswer: 10
+  timeToAnswer: 15
+  successesToLevelUp: 4
 --- !u!1 &4280459632320140389
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0.85}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8659447008042520112
@@ -972,7 +977,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1305,7 +1310,7 @@ GameObject:
   - component: {fileID: 7831611915118078806}
   - component: {fileID: 6764466576565259624}
   m_Layer: 0
-  m_Name: RightShoulder
+  m_Name: YesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

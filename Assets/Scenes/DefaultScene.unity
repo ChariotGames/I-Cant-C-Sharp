@@ -2529,6 +2529,10 @@ PrefabInstance:
       propertyPath: container.center
       value: 
       objectReference: {fileID: 1893183607}
+    - target: {fileID: 5897317456894251579, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5897317456917386128, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: m_IsActive
       value: 0

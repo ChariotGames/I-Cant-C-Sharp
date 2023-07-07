@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Exploooosions
   m_EditorClassIdentifier: 
   description: 
-  difficulty: 0
+  difficulty: 1
   genre: 0
   keysLeft:
     one: {fileID: 11400000, guid: 5b68a930ae7af724b80502d9028d70e4, type: 2}

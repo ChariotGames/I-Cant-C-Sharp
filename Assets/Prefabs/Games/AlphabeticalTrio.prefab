@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8687728356415758770
 Transform:
   m_ObjectHideFlags: 0
@@ -130,19 +130,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5a482551a211b43b74c9efcf82088e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   letters: {fileID: 8687728356737068271}
   buttonYes: {fileID: 8687728357216914494}
   buttonNo: {fileID: 8687728357371829093}
   letterContainer: {fileID: 8687728357638743890}
   gamestateWin: {fileID: 8687728356390974817}
   gamestateLose: {fileID: 8687728356552654445}
-  timeout: 60
+  timeout: 15
+  successesToLevelUp: 4
 --- !u!1 &8687728356552654445
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,7 +850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0.85}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8687728357486250623
@@ -921,7 +924,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1051,7 +1054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0.85}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8687728357847877631
@@ -1125,7 +1128,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RomanNumbers
   m_EditorClassIdentifier: 
   description: 
-  difficulty: 1
+  difficulty: 2
   genre: 4
   keysLeft:
     one: {fileID: 11400000, guid: 890a9bb1fef2d554084cbdd6d1dca441, type: 2}

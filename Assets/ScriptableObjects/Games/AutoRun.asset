@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AutoRun
   m_EditorClassIdentifier: 
   description: 
-  difficulty: 3
+  difficulty: 1
   genre: 2
   keysLeft:
     one: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
