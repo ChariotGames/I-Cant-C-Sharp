@@ -238,6 +238,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1607797501}
     - target: {fileID: 3143910709494245598, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
+    - target: {fileID: 3143910709494245598, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
       propertyPath: selectionChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -417,6 +421,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4094033868323039361, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
     - target: {fileID: 4094033868323039361, guid: 175a273a76b0d644c8cead26cf77e495, type: 3}
       propertyPath: mainCamera
       value: 

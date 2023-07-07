@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc314360ec506c742abb62bb8d739b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
   preview: {fileID: 4094033869222866271}
   title: {fileID: 4094033868703253569}
 --- !u!1 &3143910709888700346
@@ -5659,7 +5659,7 @@ MonoBehaviour:
   optionLives: {fileID: 4094033868329204879}
   startButton: {fileID: 4094033869345768355}
   defaultSettings: {fileID: 11400000, guid: 65dcec6c5cbe3474cb38f18418f92669, type: 2}
-  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
   livesText: {fileID: 4094033868329204881}
   difficultyText: {fileID: 4094033868553140713}
 --- !u!1 &4094033868329204879

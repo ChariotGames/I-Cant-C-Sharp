@@ -103,10 +103,10 @@ namespace Scripts.Controllers
         private void GetNext(List<Minigame> gameList)
         {
             _currentGame = gameList[Random.Range(0, gameList.Count)];
-            if (spawnLeft.childCount == 0)
+            if (_loadedLeft == null)
             {
                 _keys = _currentGame.KeysLeft;
-                if (spawnRight.childCount != 0)
+                if (_loadedRight != null/*spawnRight.childCount != 0*/)
                 {
                     _otherGame = _loadedRight;
                     _otherKeys = spawnRight.GetChild(0).GetComponent<BaseGame>().Keys;
@@ -115,7 +115,7 @@ namespace Scripts.Controllers
             else
             {
                 _keys = _currentGame.KeysRight;
-                if (spawnLeft.childCount == 0)
+                if (_loadedLeft != null/*spawnLeft.childCount == 0*/)
                 {
                     _otherGame = _loadedLeft;
                     _otherKeys = spawnLeft.GetChild(0).GetComponent<BaseGame>().Keys;
@@ -154,12 +154,12 @@ namespace Scripts.Controllers
         /// </summary>
         private void RemoveGame(GameObject game)
         {
-            //if (settings.SelectedGame != null)
-            //{
-            //    return;
-            //}
-            
-            if(_loadedTimes == MAX_QUE)
+            if (settings.SelectedGame != null)
+            {
+                return;
+            }
+
+            if (_loadedTimes == MAX_QUE)
             {
                 RemoveAllGames();
                 List<Minigame> gameList = new(_soloGames);
