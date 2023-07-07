@@ -88,17 +88,17 @@ namespace Scripts.Games
         private void OnEnable()
         {
             BounceGround.HitGround += IncreaseBounceCounter;
-            keys.One.Input.action.performed += IncreaseGuessingNumber;
-            keys.Two.Input.action.performed += DecreaseGuessingNumber;
-            keys.Three.Input.action.performed += SubmitGuess;
+            _keys.One.Input.action.performed += IncreaseGuessingNumber;
+            _keys.Two.Input.action.performed += DecreaseGuessingNumber;
+            _keys.Three.Input.action.performed += SubmitGuess;
         }
 
         private void OnDisable()
         {
             BounceGround.HitGround -= IncreaseBounceCounter;
-            keys.One.Input.action.performed -= IncreaseGuessingNumber;
-            keys.Two.Input.action.performed -= DecreaseGuessingNumber;
-            keys.Three.Input.action.performed -= SubmitGuess;
+            _keys.One.Input.action.performed -= IncreaseGuessingNumber;
+            _keys.Two.Input.action.performed -= DecreaseGuessingNumber;
+            _keys.Three.Input.action.performed -= SubmitGuess;
         }
 
         #endregion Built-Ins / MonoBehaviours

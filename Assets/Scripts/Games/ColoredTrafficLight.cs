@@ -153,20 +153,20 @@ namespace Scripts.Games
         #region Inputs
         private void EnableInputs()
         {
-            keys.One.Input.action.performed += ButtonPressR;
-            keys.Two.Input.action.performed += ButtonPressL;
+            _keys.One.Input.action.performed += ButtonPressR;
+            _keys.Two.Input.action.performed += ButtonPressL;
         }
 
         private void DisableInputs()
         {
-            keys.One.Input.action.performed -= ButtonPressR;
-            keys.Two.Input.action.performed -= ButtonPressL;
+            _keys.One.Input.action.performed -= ButtonPressR;
+            _keys.Two.Input.action.performed -= ButtonPressL;
         }
 
         private void OnDisable()
         {
-            keys.One.Input.action.performed -= ButtonPressR;
-            keys.Two.Input.action.performed -= ButtonPressL;
+            _keys.One.Input.action.performed -= ButtonPressR;
+            _keys.Two.Input.action.performed -= ButtonPressL;
         }
         
         public void ButtonPressL(InputAction.CallbackContext ctx)

@@ -26,7 +26,7 @@ namespace Scripts.Games
             for (int i = 0; i < buttons.Count; i++)
             {
                 BasePressElement bpe = buttons[i].GetComponent<BasePressElement>();
-                buttons[i].GetComponent<BasePressElement>().Button = keys.All[i].Input;
+                buttons[i].GetComponent<BasePressElement>().Button = _keys.All[i].Input;
             }
         }
 
@@ -71,10 +71,10 @@ namespace Scripts.Games
         // Subscribes to playerPress()
         private void OnEnable()
         {
-            keys.One.Input.action.performed += PlayerPress;
-            keys.Two.Input.action.performed += PlayerPress;
-            keys.Three.Input.action.performed += PlayerPress;
-            keys.Four.Input.action.performed += PlayerPress;
+            _keys.One.Input.action.performed += PlayerPress;
+            _keys.Two.Input.action.performed += PlayerPress;
+            _keys.Three.Input.action.performed += PlayerPress;
+            _keys.Four.Input.action.performed += PlayerPress;
             //InputHandler.ArrowRight += PlayerPress;
             //InputHandler.ArrowLeft += PlayerPress;
             //InputHandler.ArrowUp += PlayerPress;
@@ -83,10 +83,10 @@ namespace Scripts.Games
 
         private void OnDisable()
         {
-            keys.One.Input.action.performed -= PlayerPress;
-            keys.Two.Input.action.performed -= PlayerPress;
-            keys.Three.Input.action.performed -= PlayerPress;
-            keys.Four.Input.action.performed -= PlayerPress;
+            _keys.One.Input.action.performed -= PlayerPress;
+            _keys.Two.Input.action.performed -= PlayerPress;
+            _keys.Three.Input.action.performed -= PlayerPress;
+            _keys.Four.Input.action.performed -= PlayerPress;
         }
 
         // Creates a new random pattern 

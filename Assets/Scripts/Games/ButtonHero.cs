@@ -56,7 +56,7 @@ namespace Scripts.Games
                 // just pool all the objects into a list
                 var button = Instantiate(buttons[i].gameObject);
                 var buttonText = button.GetComponent<TextMeshPro>();
-                button.GetComponent<BasePressElement>().Button = keys.All[i].Input;
+                button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;
                 _spawnedButtons.Add(buttonText);
                 button.SetActive(false);
             }
@@ -141,10 +141,10 @@ namespace Scripts.Games
             var preferredHeight = preferredValues.y;
 
             // Calculate the maximum allowed positions within the play area bounds
-            var minX = playarea.xMin + (preferredWidth * 0.5f);
-            var maxX = playarea.xMax - (preferredWidth * 0.5f);
-            var minY = playarea.yMin + (preferredHeight * 0.5f);
-            var maxY = playarea.yMax - (preferredHeight * 0.5f);
+            var minX = _playarea.xMin + (preferredWidth * 0.5f);
+            var maxX = _playarea.xMax - (preferredWidth * 0.5f);
+            var minY = _playarea.yMin + (preferredHeight * 0.5f);
+            var maxY = _playarea.yMax - (preferredHeight * 0.5f);
 
             // Calculate the random world position within the play area bounds
             var randomX = Random.Range(minX, maxX);

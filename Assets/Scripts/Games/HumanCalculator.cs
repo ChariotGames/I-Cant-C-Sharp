@@ -36,8 +36,8 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            leftAnswer.GetComponent<BasePressElement>().Button = keys.Two.Input;
-            rightAnswer.GetComponent<BasePressElement>().Button = keys.One.Input;
+            leftAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
+            rightAnswer.GetComponent<BasePressElement>().Button = _keys.One.Input;
         }
 
         private void Start()

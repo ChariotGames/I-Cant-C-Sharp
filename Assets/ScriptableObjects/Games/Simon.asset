@@ -17,7 +17,7 @@ MonoBehaviour:
     number of colors to the\r existing pattern.\r\n\r\n- Level 1, each color is added
     once.\r\n- Level 2, there is a chance for a color to be added twice.\r\n- Level
     3, a color is displayed but has to be skipped in guessing."
-  difficulty: 1
+  difficulty: 2
   genre: 1
   keysLeft:
     one: {fileID: 11400000, guid: abe13787bccab0e4082a39711884202c, type: 2}

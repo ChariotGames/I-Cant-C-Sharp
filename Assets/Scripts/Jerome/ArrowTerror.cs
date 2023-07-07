@@ -26,13 +26,13 @@ namespace Scripts.Games
         private void Awake()
         {
             //base.SetUp();
-            player.GetComponent<ArrowPlayer>().stick = keys.One.Input;
         }
 
         void Start()
         {
             allObjects = new();
             allObjects.Add(player);
+            player.GetComponent<ArrowPlayer>().stick = _keys.One.Input;
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
             SpawnObjects(enemy, enemyContainer, ammountEnemies);
             SpawnObjects(goal, Container, 1);
@@ -55,7 +55,7 @@ namespace Scripts.Games
                 base.Win();
             }
 
-            Debug.Log(base.playarea.Contains(player.transform.position));
+            Debug.Log(base._playarea.Contains(player.transform.position));
         }
 
         internal void UpdateEnemyPositions(Vector3 position)

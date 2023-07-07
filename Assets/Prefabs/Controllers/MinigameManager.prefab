@@ -50,14 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc79b1fc0f3eb64a83079d3ba06e23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
   spawnLeft: {fileID: 411477512151206885}
   spawnRight: {fileID: 4249387610943860996}
   spawnCenter: {fileID: 8753078612844624505}
-  GameOverPanel: {fileID: 0}
-  point: {fileID: 0}
-  scoreCounter: {fileID: 0}
-  timeCounter: {fileID: 0}
 --- !u!114 &8275405802908632855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5064793300634688470
 Transform:
   m_ObjectHideFlags: 0
@@ -188,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8420430536241138870
 Transform:
   m_ObjectHideFlags: 0
