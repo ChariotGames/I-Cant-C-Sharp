@@ -32,6 +32,12 @@ namespace Scripts.Games
 
         #region Methods
 
+        /// <summary>
+        /// Called by the game manager to set relevant data.
+        /// </summary>
+        /// <param name="difficulty">The difficulty loaded with.</param>
+        /// <param name="keys">The keymap used.</param>
+        /// <param name="area">The rect area defining the playfield.</param>
         public void SetUp(Difficulty difficulty, KeyMap keys, Rect area)
         {
             this.difficulty = difficulty;
@@ -39,14 +45,38 @@ namespace Scripts.Games
             this.playarea = area;
         }
 
+        /// <summary>
+        /// Decreases the score by 1-3 = difficulty.
+        /// </summary>
         protected void ScoreDown()
         {
             OnScoreUpdate?.Invoke(-(int)difficulty);
         }
 
+        /// <summary>
+        /// Decreases the score by a given value.
+        /// </summary>
+        /// <param name="value">The value to decrease.</param>
+        protected void ScoreDown(int value)
+        {
+            OnScoreUpdate?.Invoke(-Mathf.Abs(value));
+        }
+
+        /// <summary>
+        /// Increases the score by 1-3 = difficulty.
+        /// </summary>
         protected void ScoreUp()
         {
             OnScoreUpdate?.Invoke((int)difficulty);
+        }
+
+        /// <summary>
+        /// Increases the score by a given value.
+        /// </summary>
+        /// <param name="value">The value to increase.</param>
+        protected void ScoreUp(int value)
+        {
+            OnScoreUpdate?.Invoke(Mathf.Abs(value));
         }
 
         /// <summary>
