@@ -33,7 +33,7 @@ namespace Scripts.Games
         private int _numObstacles;
         private int _currentScore;
         
-        private const int _scoreToWin = 10;
+        private const int _scoreToWin = 15;
 
         #endregion Fields
 
@@ -95,7 +95,8 @@ namespace Scripts.Games
         public void IncreasePoints()
         {
             _currentScore++;
-
+            base.ScoreUp();
+            
             if (_currentScore >= _scoreToWin)
             {
                 _currentScore = 0;
@@ -109,6 +110,7 @@ namespace Scripts.Games
         private void TakeDamage()
         {
             _healthPoints--;
+            base.ScoreDown();
             if (_healthPoints <= 0)
             {
                 _healthPoints = 3;

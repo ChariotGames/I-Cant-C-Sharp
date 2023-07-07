@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts.GameElements;
 using TMPro;
 using UnityEngine;
+using Scripts.Models;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -20,26 +21,36 @@ namespace Scripts.Games
 
         #region Fields
 
-        private Camera _mainCamera;
         private TextMeshPro _previousButton;
-        private Bounds _cameraViewportBounds;
-        private readonly List<TextMeshPro> _spawnedButtons = new ();
+        private readonly List<TextMeshPro> _spawnedButtons = new();
         private static float _timer;
-        
+
         private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
         private int _currentScore;
-        
-        private const float _timeoutDelay = 5f;
+
+        private float _timeoutDelay;
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
-        
+
         private void Awake()
         {
-            _mainCamera = Camera.main;
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    _timeoutDelay = 3;
+                    break;
+                case Difficulty.MEDIUM:
+                    _timeoutDelay = 2;
+                    break;
+                case Difficulty.HARD:
+                    _timeoutDelay = 1;
+                    break;
+            }
+
             for (var i = buttons.Count - 1; i >= 0; i--)
             {
                 // just pool all the objects into a list
@@ -52,54 +63,63 @@ namespace Scripts.Games
         }
 
         private void Start()
-        {            
-            // Calculate the camera's viewport bounds
-            _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
-
+        {
             StartCoroutine(SpawnCoroutine());
         }
 
         private void Update()
         {
-
-            if (_previousButton && _previousButton.gameObject.activeSelf)
-            {
-                _timer += Time.deltaTime;
-                var seconds = Mathf.Floor(_timer);
-                var milliseconds = Mathf.Floor((_timer - seconds) * 1000f); 
-                var timeText = $"{seconds:00}:{milliseconds:00}";
-                timerTextMesh.text = timeText;
-
-                if (_timer >= _timeoutDelay)
-                {
-                    _remainingLives--;
-                    _previousButton.gameObject.SetActive(false);
-                    ResetTimer();
-                    if (_remainingLives <= 0)
-                    {
-                        _remainingLives = 3;
-                        base.Lose();
-                    }
-                }
-            }
+            HandleTimer();
         }
 
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
 
-            
-
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-        
+
+        private void HandleTimer()
+        {
+            if (_previousButton && _previousButton.gameObject.activeSelf)
+            {
+                _timer += Time.deltaTime;
+                var remainingTime = _timeoutDelay - _timer;
+                var remainingSeconds = Mathf.Floor(remainingTime);
+                var remainingMilliseconds = Mathf.Floor((remainingTime - remainingSeconds) * 1000f);
+    
+                var remainingText = $"{remainingSeconds:00}:{remainingMilliseconds:00}";
+                if (remainingTime >= 0)
+                {
+                    timerTextMesh.text = remainingText;
+                }
+
+                if (_timer >= _timeoutDelay)
+                {
+                    HandleScoreChange();
+                
+                }
+            }
+        }
+
+        private void HandleScoreChange()
+        {
+            _remainingLives--;
+            base.ScoreDown();
+            _previousButton.gameObject.SetActive(false);
+            ResetTimer();
+            if (_remainingLives <= 0)
+            {
+                _remainingLives = 3;
+                base.Lose();
+            }
+        }
 
         public void ResetTimer()
         {
             Debug.Log("It took " + _timer + " to react");
             _timer = 0;
-
         }
 
         #endregion Game Mechanics / Methods
@@ -120,13 +140,13 @@ namespace Scripts.Games
             var preferredWidth = preferredValues.x;
             var preferredHeight = preferredValues.y;
 
-            // Calculate the maximum allowed positions within the camera viewport bounds
-            var minX = _cameraViewportBounds.min.x + (preferredWidth * 0.5f);
-            var maxX = _cameraViewportBounds.max.x - (preferredWidth * 0.5f);
-            var minY = _cameraViewportBounds.min.y + (preferredHeight * 0.5f);
-            var maxY = _cameraViewportBounds.max.y - (preferredHeight * 0.5f);
+            // Calculate the maximum allowed positions within the play area bounds
+            var minX = playarea.xMin + (preferredWidth * 0.5f);
+            var maxX = playarea.xMax - (preferredWidth * 0.5f);
+            var minY = playarea.yMin + (preferredHeight * 0.5f);
+            var maxY = playarea.yMax - (preferredHeight * 0.5f);
 
-            // Calculate the random world position within the camera viewport bounds
+            // Calculate the random world position within the play area bounds
             var randomX = Random.Range(minX, maxX);
             var randomY = Random.Range(minY, maxY);
 
@@ -138,6 +158,7 @@ namespace Scripts.Games
             _previousButton = randomButton;
         }
 
+
         private IEnumerator SpawnCoroutine()
         {
             while (true)
@@ -145,6 +166,7 @@ namespace Scripts.Games
                 var randomDelay = Random.Range(spawnTimeLowerBounds, spawnTimeUpperBounds);
                 ActivateObjectAtRandomPos();
                 yield return new WaitForSeconds(randomDelay);
+                
             }
         }
 
@@ -153,6 +175,11 @@ namespace Scripts.Games
         public void IncreaseScore()
         {
             _currentScore++;
+            if (_currentScore % 5 == 0)
+            {
+                base.ScoreUp();
+            }
+
             if (_currentScore >= 10)
             {
                 _currentScore = 0;

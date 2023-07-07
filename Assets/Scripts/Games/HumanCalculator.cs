@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -15,6 +16,8 @@ namespace Scripts.Games
         [SerializeField] private TextMeshPro equationText;
         [SerializeField] private TextMeshPro leftAnswer;
         [SerializeField] private TextMeshPro rightAnswer;
+        [SerializeField] private SpriteRenderer correctAnswer;
+        [SerializeField] private SpriteRenderer wrongAnswer;
 
         private int _missingNumber;
         private int _equationResult;
@@ -39,7 +42,7 @@ namespace Scripts.Games
 
         private void Start()
         {
-            GenerateNewEquation();
+            StartCoroutine(GenerateNewEquation());
         }
 
         private void Update()
@@ -58,8 +61,13 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
-        public void GenerateNewEquation()
+        public IEnumerator GenerateNewEquation()
         {
+            yield return new WaitForSeconds(1f);
+            
+            wrongAnswer.gameObject.SetActive(false);
+            correctAnswer.gameObject.SetActive(false);
+            
             switch (Difficulty)
             {
                 case Difficulty.EASY:
@@ -181,7 +189,9 @@ namespace Scripts.Games
             if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
+                correctAnswer.gameObject.SetActive(true);
                 _currentScore++;
+                base.ScoreUp();
                 if (_currentScore >= 5)
                 {
                     _currentScore = 0;
@@ -192,7 +202,8 @@ namespace Scripts.Games
             else {
                 Debug.Log("Wrong");
                 _remainingLives--;
-                
+                wrongAnswer.gameObject.SetActive(true);
+                base.ScoreDown();
                 if (_remainingLives <= 0)
                 {
                     Debug.Log("GAME LOST");
@@ -201,7 +212,7 @@ namespace Scripts.Games
                 }
                 
             }
-            GenerateNewEquation();
+            StartCoroutine(GenerateNewEquation());
         }
 
         #endregion Game Mechanics / Methods

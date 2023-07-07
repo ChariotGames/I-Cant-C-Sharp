@@ -120,6 +120,7 @@ namespace Scripts.Games
                 _currentScore = 0;
                 base.Win();
             }
+            base.ScoreUp();
         }
         private void SubmitGuess(InputAction.CallbackContext ctx)
         {
