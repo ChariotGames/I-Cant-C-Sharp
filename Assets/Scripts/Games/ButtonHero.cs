@@ -175,11 +175,7 @@ namespace Scripts.Games
         public void IncreaseScore()
         {
             _currentScore++;
-            if (_currentScore % 5 == 0)
-            {
-                base.ScoreUp();
-            }
-
+            base.ScoreUp();
             if (_currentScore >= 10)
             {
                 _currentScore = 0;
