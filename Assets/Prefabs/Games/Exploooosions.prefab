@@ -77,12 +77,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d75bfac91a16ec49aaa9951476cbb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -316,12 +318,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d75bfac91a16ec49aaa9951476cbb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -445,12 +449,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1550a09f7adcb3645bb7f0329cea2e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 3
+  difficulty: 1
   actionNames:
-    one: 
+    one: Move
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   bombBase: {fileID: 2641797602970142051}
   bombDonut: {fileID: 2641797603801668330}
   bombCross: {fileID: 2641797602288821860}
@@ -555,12 +561,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0645fa001318104fbf6f7c58c136dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   movementSpeed: 10
   stick: {fileID: 0}
   rb: {fileID: 0}
@@ -658,12 +666,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d75bfac91a16ec49aaa9951476cbb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}

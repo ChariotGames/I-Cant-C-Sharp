@@ -11,7 +11,6 @@ namespace Scripts.Games
 {
     public class BouncingBalls : BaseGame
     {
-
         #region Fields
 
         [SerializeField] private List<Rigidbody2D> bouncingBalls;
@@ -22,7 +21,8 @@ namespace Scripts.Games
         [SerializeField] private TextMeshPro infoText;
         [SerializeField] private SpriteRenderer correctAnswer;
         [SerializeField] private SpriteRenderer wrongAnswer;
-        
+        [SerializeField] private TextMeshPro resultText;
+
         private int _bounceCounter;
         private bool _guessingStage;
         private int _currentGuessNumber;
@@ -32,10 +32,11 @@ namespace Scripts.Games
 
         private int _currentScore;
         private bool hasRandomGravity;
-        
+
         private const float _timeoutDelay = 10f;
         private const float _maxRoundTime = 10;
         private const int _scoreToWin = 3;
+
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -71,7 +72,7 @@ namespace Scripts.Games
             {
                 infoText.gameObject.SetActive(false);
             }
-            
+
             if (_elapsedTime >= _maxRoundTime && !_guessingStage)
             {
                 ActivateGuessingOverlay();
@@ -80,11 +81,10 @@ namespace Scripts.Games
             if (_elapsedTime >= _timeoutStemp + _timeoutDelay && _guessingStage)
             {
                 SubmitGuess(new InputAction.CallbackContext());
-                _guessingStage = false;
             }
         }
 
-        
+
         private void OnEnable()
         {
             BounceGround.HitGround += IncreaseBounceCounter;
@@ -104,14 +104,11 @@ namespace Scripts.Games
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
-        
-        
 
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
-        
-        
+
         private void IncreaseScore()
         {
             _currentScore++;
@@ -121,36 +118,44 @@ namespace Scripts.Games
                 base.Harder();
                 base.Win();
             }
+
             base.ScoreUp();
         }
+
         private void SubmitGuess(InputAction.CallbackContext ctx)
         {
             if (!_guessingStage) return;
+
+            resultText.text = "You're " + Mathf.Abs(_currentGuessNumber - _bounceCounter) + " bounces off";
+
             if (_bounceCounter == _currentGuessNumber)
             {
                 IncreaseScore();
                 Debug.Log("Correct Answer");
                 correctAnswer.gameObject.SetActive(true);
-                
             }
             else
             {
-                Debug.Log("You´re " + (_currentGuessNumber - _bounceCounter) + " Bounces off");
                 _remainingLives--;
+
                 if (_remainingLives == 0)
                 {
                     _remainingLives = 3;
                     base.Easier();
+                    guessingOverlay.gameObject.SetActive(false);
+                    Debug.Log("You lost all your lives in this game");
                     Lose();
-                    Debug.Log("You lost all your lives in this Game");
                 }
+                
+                guessingOverlay.gameObject.SetActive(false);
+                resultText.gameObject.SetActive(true);
                 wrongAnswer.gameObject.SetActive(true);
             }
 
             StartCoroutine(StartNewRound());
         }
-        
-        
+
+
         private void IncreaseGuessingNumber(InputAction.CallbackContext ctx)
         {
             if (!_guessingStage) return;
@@ -166,7 +171,7 @@ namespace Scripts.Games
             _currentGuessNumber--;
             guessedNumber.text = _currentGuessNumber.ToString();
         }
-        
+
         private void ActivateGuessingOverlay()
         {
             _guessingStage = true;
@@ -181,6 +186,7 @@ namespace Scripts.Games
 
         private IEnumerator ReleaseBallsAfterDelay()
         {
+            resultText.gameObject.SetActive(false);
             foreach (var ball in bouncingBalls)
             {
                 if (hasRandomGravity)
@@ -188,6 +194,7 @@ namespace Scripts.Games
                     var randomGravity = Random.Range(1.5f, 2.6f);
                     ball.gravityScale = randomGravity;
                 }
+
                 var randomDelay = Random.Range(0f, 1.5f);
                 Debug.Log(randomDelay);
                 yield return new WaitForSeconds(randomDelay);
@@ -200,16 +207,16 @@ namespace Scripts.Games
         {
             if (_guessingStage)
             {
+                _guessingStage = false;
                 _bounceCounter = 0;
                 _currentGuessNumber = 0;
-                _elapsedTime = 0;
-                _guessingStage = false;
+                _elapsedTime = 0f;
                 guessingOverlay.gameObject.SetActive(false);
-                yield return new WaitForSeconds(1); // adjust time for how long the correct/wrong Icon will be shown before spawning new Round
+                yield return new WaitForSeconds(2f); // Adjust the duration as needed
+
+                resultText.gameObject.SetActive(false);
                 correctAnswer.gameObject.SetActive(false);
                 wrongAnswer.gameObject.SetActive(false);
-                infoText.gameObject.SetActive(true);
-                
 
                 foreach (var ball in bouncingBalls)
                 {
@@ -218,8 +225,11 @@ namespace Scripts.Games
                     ball.transform.position = transformPosition;
                     ball.isKinematic = true;
                 }
+                _elapsedTime = 0f;
                 balls.gameObject.SetActive(true);
+                infoText.gameObject.SetActive(true);
                 
+
                 StartCoroutine(ReleaseBallsAfterDelay());
             }
         }
@@ -229,12 +239,9 @@ namespace Scripts.Games
             _bounceCounter++;
         }
 
-
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers
-        
-        
 
         #endregion Overarching Methods / Helpers
     }
