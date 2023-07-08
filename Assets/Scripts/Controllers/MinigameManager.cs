@@ -141,7 +141,14 @@ namespace Scripts.Controllers
             game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame baseGame = obj.GetComponent<BaseGame>();
-            baseGame.SetUp(game.Difficulty, keys, parent.GetComponent<RectTransform>().rect);
+            Difficulty difficulty = settings.BaseDifficulty;
+
+            if (settings.BaseDifficulty == Difficulty.VARYING)
+            {
+                difficulty = game.Difficulty;
+            }
+
+            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect);
             obj.SetActive(true);
             
             _loadedTimes++;
@@ -269,7 +276,17 @@ namespace Scripts.Controllers
 
         public void UpdateDifficulty(GameObject game, Difficulty difficulty)
         {
-            settings.Games.Find(obj => obj.Prefab == game).Difficulty = difficulty;
+            List<Minigame> all = new();
+            all.AddRange(settings.Games);
+            all.AddRange(settings.SoloGames);
+
+            Minigame found = all.Find(obj => game.name.Contains(obj.Prefab.name));
+
+            if (found != null)
+            {
+                found.Difficulty = difficulty;
+                return;
+            }
         }
         public void UpdateScore(int change)
         {
