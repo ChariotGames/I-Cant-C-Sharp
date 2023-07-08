@@ -42,21 +42,22 @@ namespace Scripts.Games
         #region Game Mechanics / Methods
 
         public InputAction getJumpInput()
-        {
-            return Keys.One.Input.action;
+        { 
+            return Keys.Three.Input.action; // Up
+            
         }
-        public InputAction getBraceBlueInput()
+        public InputAction getBraceLeftInput()
         {
-            return Keys.Two.Input.action;
+            return Keys.Two.Input.action; // left
         }
         
-        public InputAction getBraceYellowInput()
+        public InputAction getBraceRightInput()
         {
-            return Keys.Three.Input.action;
+            return Keys.Four.Input.action; // right
         }
         public InputAction getDuckInput()
         {
-            return Keys.Four.Input.action;
+            return Keys.One.Input.action; // down
         }
         
         public void winCondition()
@@ -67,6 +68,11 @@ namespace Scripts.Games
         public void loseCondition()
         {
             base.Lose();
+        }
+
+        public void Score()
+        {
+            base.ScoreUp(1);
         }
 
         #endregion Game Mechanics / Methods
