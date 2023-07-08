@@ -16,13 +16,13 @@ MonoBehaviour:
   difficulty: 1
   genre: 6
   keysLeft:
-    one: {fileID: 0}
-    two: {fileID: 0}
+    one: {fileID: 11400000, guid: 5b68a930ae7af724b80502d9028d70e4, type: 2}
+    two: {fileID: 11400000, guid: 9c00c3b0b6af2594eac9f1465554be0e, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
   keysRight:
-    one: {fileID: 0}
-    two: {fileID: 0}
+    one: {fileID: 11400000, guid: 5b68a930ae7af724b80502d9028d70e4, type: 2}
+    two: {fileID: 11400000, guid: 9c00c3b0b6af2594eac9f1465554be0e, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
   prefab: {fileID: 6926883230700997361, guid: 37dda47af0efb0346a8934b3441bffd5, type: 3}

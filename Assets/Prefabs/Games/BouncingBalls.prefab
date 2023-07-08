@@ -1523,9 +1523,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   actionNames:
-    one: 
-    two: 
-    three: 
+    one: Increase
+    two: Decrease
+    three: Submit
     four: 
   successesToWin: 5
   failsToLose: 3
