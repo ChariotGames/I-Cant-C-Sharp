@@ -45,11 +45,11 @@ namespace Scripts.Controllers
             {
                 game = input;
 
-            //string gameName = game.Prefab.name;
-            //string sTemp = Regex.Replace(gameName, "([A-Z][a-z])", " $1", RegexOptions.Compiled).Trim();
+
+            string sTemp = Regex.Replace(game.Prefab.name, "([A-Z][a-z])", " $1", RegexOptions.Compiled).Trim();
 
 
-            title.text = game.Prefab.name;//Regex.Replace(sTemp, "([A-Z][A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower();
+            title.text = Regex.Replace(sTemp, "([A-Z][A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower();
                 if (game.Preview != null) preview.sprite = game.Preview;
             }
 
