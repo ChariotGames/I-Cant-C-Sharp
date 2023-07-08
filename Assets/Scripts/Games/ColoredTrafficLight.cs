@@ -51,6 +51,8 @@ namespace Scripts.Games
         private int trafficLightAmount = 3;
         private int selectorIndex;
         private bool gameVariant;
+        private bool playerCanUseInputs = false;
+        private bool playerHasSubmitted = false;
         
         private struct trafficLight
         {
@@ -81,10 +83,10 @@ namespace Scripts.Games
                 yield return new WaitForSeconds(delaySecondWave);
                 SecondWave();
                 yield return new WaitForSeconds(timeToSelectLight);
-                DisableInputs();
-                ShowResults();
-                yield return new WaitForSeconds(2);
-                CheckSelector();
+                if (!playerHasSubmitted)
+                {
+                    EndOfRound();
+                }
                 Reset();
             }
             
@@ -119,6 +121,16 @@ namespace Scripts.Games
             selector_ref.transform.Translate(0,-1.2f,0);
             selector_ref.SetActive(true);
             EnableInputs();
+            
+        }
+
+        private void EndOfRound()
+        {
+            DisableInputs();
+            ShowResults(); 
+            new WaitForSeconds(2);
+            CheckSelector();
+            
         }
 
         private void Reset()
@@ -133,20 +145,8 @@ namespace Scripts.Games
             {
                 Destroy(trafficLights[i]);
             }
-            
-            
-            
-            /*for (int i = owner_ref.transform.GetChild(0).transform.childCount-1; i > 0; i--)
-            {
-                GameObject obj = owner_ref.transform.GetChild(0).transform.GetChild(i).gameObject;
-                for (int j = obj.transform.childCount-1; j > 0; j--)
-                {
-                    Destroy(obj.transform.GetChild(i).gameObject);
-                }
-                Destroy(obj);
-            }*/
-
-            
+            DisableInputs();
+            playerHasSubmitted = false;
         }
         
 
@@ -155,18 +155,23 @@ namespace Scripts.Games
         {
             _keys.One.Input.action.performed += ButtonPressR;
             _keys.Two.Input.action.performed += ButtonPressL;
+            _keys.Three.Input.action.performed += ButtonPressSubmit;
+            playerCanUseInputs = true;
         }
 
         private void DisableInputs()
         {
             _keys.One.Input.action.performed -= ButtonPressR;
             _keys.Two.Input.action.performed -= ButtonPressL;
+            _keys.Three.Input.action.performed -= ButtonPressSubmit;
+            playerCanUseInputs = false;
         }
 
         private void OnDisable()
         {
             _keys.One.Input.action.performed -= ButtonPressR;
             _keys.Two.Input.action.performed -= ButtonPressL;
+            _keys.Three.Input.action.performed -= ButtonPressSubmit;
         }
         
         public void ButtonPressL(InputAction.CallbackContext ctx)
@@ -190,6 +195,16 @@ namespace Scripts.Games
                 selector_ref.transform.Translate(0,-1.2f,0);
             }
         }
+
+        public void ButtonPressSubmit(InputAction.CallbackContext ctx)
+        {
+            if (playerCanUseInputs)
+            {
+                playerHasSubmitted = true;
+                EndOfRound();
+            }
+        }
+        
         #endregion Inputs
         
 
@@ -256,10 +271,12 @@ namespace Scripts.Games
         {
             if (correctColors.Contains(secondWaveColors[selectorIndex]))
             {
+                base.ScoreUp(5);
                 base.Win();
             }
             else
             {
+                base.ScoreDown(5);
                 base.Lose();
             }
         }
