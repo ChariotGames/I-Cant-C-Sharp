@@ -125,8 +125,8 @@ namespace Scripts.Games
 
         private void OnEnable()
         {
-            keys.One.Input.action.performed += YesButtonPressed;
-            keys.Two.Input.action.performed += NoButtonPressed;
+            _keys.One.Input.action.performed += YesButtonPressed;
+            _keys.Two.Input.action.performed += NoButtonPressed;
         }
 
         public void YesButtonPressed(InputAction.CallbackContext ctx)
@@ -141,8 +141,8 @@ namespace Scripts.Games
 
         private void OnDisable()
         {
-            keys.One.Input.action.performed -= YesButtonPressed;
-            keys.Two.Input.action.performed -= NoButtonPressed;
+            _keys.One.Input.action.performed -= YesButtonPressed;
+            _keys.Two.Input.action.performed -= NoButtonPressed;
         }
     }
 }

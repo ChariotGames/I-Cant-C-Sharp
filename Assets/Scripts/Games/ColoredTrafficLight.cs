@@ -153,26 +153,25 @@ namespace Scripts.Games
         #region Inputs
         private void EnableInputs()
         {
-            keys.One.Input.action.performed += ButtonPressR;
-            keys.Two.Input.action.performed += ButtonPressL;
-            keys.Three.Input.action.performed += ButtonPressSubmit;
+            _keys.One.Input.action.performed += ButtonPressR;
+            _keys.Two.Input.action.performed += ButtonPressL;
+            _keys.Three.Input.action.performed += ButtonPressSubmit;
             playerCanUseInputs = true;
         }
 
         private void DisableInputs()
         {
-            keys.One.Input.action.performed -= ButtonPressR;
-            keys.Two.Input.action.performed -= ButtonPressL;
-            keys.Three.Input.action.performed -= ButtonPressSubmit;
+            _keys.One.Input.action.performed -= ButtonPressR;
+            _keys.Two.Input.action.performed -= ButtonPressL;
+            _keys.Three.Input.action.performed -= ButtonPressSubmit;
             playerCanUseInputs = false;
         }
 
         private void OnDisable()
         {
-            keys.One.Input.action.performed -= ButtonPressR;
-            keys.Two.Input.action.performed -= ButtonPressL;
-            keys.Three.Input.action.performed -= ButtonPressSubmit;
-            
+            _keys.One.Input.action.performed -= ButtonPressR;
+            _keys.Two.Input.action.performed -= ButtonPressL;
+            _keys.Three.Input.action.performed -= ButtonPressSubmit;
         }
         
         public void ButtonPressL(InputAction.CallbackContext ctx)

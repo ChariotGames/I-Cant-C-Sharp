@@ -36,8 +36,8 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            leftAnswer.GetComponent<BasePressElement>().Button = keys.Two.Input;
-            rightAnswer.GetComponent<BasePressElement>().Button = keys.One.Input;
+            leftAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
+            rightAnswer.GetComponent<BasePressElement>().Button = _keys.One.Input;
         }
 
         private void Start()
@@ -195,6 +195,7 @@ namespace Scripts.Games
                 if (_currentScore >= 5)
                 {
                     _currentScore = 0;
+                    base.Harder();
                     base.Win();
                 }
                 
@@ -208,6 +209,7 @@ namespace Scripts.Games
                 {
                     Debug.Log("GAME LOST");
                     _remainingLives = 3;
+                    base.Easier();
                     base.Lose();
                 }
                 

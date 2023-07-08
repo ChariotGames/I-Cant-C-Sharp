@@ -157,7 +157,7 @@ RectTransform:
   m_GameObject: {fileID: 3534996337712372485}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3923420840596175641}
@@ -245,7 +245,7 @@ Transform:
   m_GameObject: {fileID: 3619042334536100596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3923420841757164603}
@@ -475,12 +475,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceceaaccb4d8fb747a41c29c2058bcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   displayPattern: 
   guessPattern: 
   infoPattern: 
@@ -904,7 +906,7 @@ Transform:
   m_GameObject: {fileID: 3923420841571965842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3923420841840725214}

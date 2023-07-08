@@ -54,7 +54,7 @@ namespace Scripts.Games
             // Calculate the camera's viewport bounds
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             
-            lifeCounter.text = _healthPoints.ToString();
+            lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
             
             _obstacleExtents = obstacle.GetComponent<Renderer>().bounds.extents;
 
@@ -100,6 +100,7 @@ namespace Scripts.Games
             if (_currentScore >= _scoreToWin)
             {
                 _currentScore = 0;
+                base.Harder();
                 base.Win();
             }
         }
@@ -114,9 +115,10 @@ namespace Scripts.Games
             if (_healthPoints <= 0)
             {
                 _healthPoints = 3;
+                base.Easier();
                 base.Lose();
             }
-            lifeCounter.text = _healthPoints.ToString();
+            lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
         }
         
         /// <summary>

@@ -1,4 +1,3 @@
-using Scripts.Controllers;
 using Scripts.Models;
 using System;
 using UnityEngine;
@@ -16,6 +15,8 @@ namespace Scripts.Games
 
         [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
         [SerializeField] protected ActionNames actionNames;
+        [SerializeField] protected int successesToWin = 5;
+        [SerializeField] protected int failsToLose = 3;
 
         #endregion Serialized Fields
 
@@ -25,8 +26,9 @@ namespace Scripts.Games
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
 
-        protected KeyMap keys;
-        protected Rect playarea;
+        protected KeyMap _keys;
+        protected Rect _playarea;
+        protected int _successes = 0, _fails = 0;
 
         #endregion Fields
 
@@ -41,8 +43,8 @@ namespace Scripts.Games
         public void SetUp(Difficulty difficulty, KeyMap keys, Rect area)
         {
             this.difficulty = difficulty;
-            this.keys = keys;
-            this.playarea = area;
+            _keys = keys;
+            _playarea = area;
         }
 
         /// <summary>
@@ -129,8 +131,8 @@ namespace Scripts.Games
         /// </summary>
         public KeyMap Keys
         {
-            get => keys;
-            set => keys = value;
+            get => _keys;
+            set => _keys = value;
         }
 
         /// <summary>
@@ -138,8 +140,8 @@ namespace Scripts.Games
         /// </summary>
         public Rect Playarea
         {
-            get => playarea;
-            set => playarea = value;
+            get => _playarea;
+            set => _playarea = value;
         }
 
         #endregion GetSets
