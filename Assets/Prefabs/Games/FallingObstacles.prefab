@@ -1170,8 +1170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   actionNames:
-    one: 
-    two: 
+    one: Aim
+    two: Shoot
     three: 
     four: 
   successesToWin: 5

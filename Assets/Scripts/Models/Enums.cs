@@ -18,7 +18,7 @@ namespace Scripts.Models
     /// </summary>
     public enum Difficulty
     {
-        TUTORIAL, EASY, MEDIUM, HARD
+        TUTORIAL, EASY, MEDIUM, HARD, VARYING
     }
 
     /// <summary>

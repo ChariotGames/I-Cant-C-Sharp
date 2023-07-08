@@ -30,7 +30,8 @@ namespace Scripts.Games
         private float _elapsedTime;
         private float _timeoutStemp;
         private int _currentScore;
-
+        private float _buttonWidth;
+        
         private float _timeoutDelay;
 
         #endregion Fields
@@ -55,8 +56,9 @@ namespace Scripts.Games
             for (var i = buttons.Count - 1; i >= 0; i--)
             {
                 // just pool all the objects into a list
-                var button = Instantiate(buttons[i].gameObject);
+                var button = Instantiate(buttons[i].gameObject, transform.parent);
                 var buttonText = button.GetComponent<TextMeshPro>();
+                buttonText.text = _keys.All[i].Icon;
                 button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;
                 _spawnedButtons.Add(buttonText);
                 button.SetActive(false);
@@ -65,6 +67,8 @@ namespace Scripts.Games
 
         private void Start()
         {
+            _buttonWidth = buttons[0].gameObject.GetComponent<RectTransform>().rect.width * 0.5f;
+            
             StartCoroutine(SpawnCoroutine());
         }
 
@@ -109,13 +113,14 @@ namespace Scripts.Games
             _remainingLives--;
             base.ScoreDown();
             _previousButton.gameObject.SetActive(false);
-            var damageIconGo = Instantiate(damageTakenSprite.gameObject);
+            var damageIconGo = Instantiate(damageTakenSprite.gameObject, transform.parent);
             damageIconGo.SetActive(true);
             Destroy(damageIconGo, 1);
             ResetTimer();
             if (_remainingLives <= 0)
             {
                 _remainingLives = 3;
+                base.Easier();
                 base.Lose();
             }
         }
@@ -139,16 +144,13 @@ namespace Scripts.Games
             var randomIndex = Random.Range(0, _spawnedButtons.Count);
             var randomButton = _spawnedButtons[randomIndex];
 
-            // Calculate the preferred values of the text
-            var preferredValues = randomButton.GetPreferredValues();
-            var preferredWidth = preferredValues.x;
-            var preferredHeight = preferredValues.y;
-
+            
             // Calculate the maximum allowed positions within the play area bounds
-            var minX = _playarea.xMin + (preferredWidth * 0.5f);
-            var maxX = _playarea.xMax - (preferredWidth * 0.5f);
-            var minY = _playarea.yMin + (preferredHeight * 0.5f);
-            var maxY = _playarea.yMax - (preferredHeight * 0.5f);
+            var minX = _playarea.xMin + (_buttonWidth);
+            var maxX = _playarea.xMax - (_buttonWidth);
+            var minY = _playarea.yMin + (_buttonWidth);
+            var maxY = _playarea.yMax - (_buttonWidth);
+            
 
             // Calculate the random world position within the play area bounds
             var randomX = Random.Range(minX, maxX);
@@ -156,7 +158,7 @@ namespace Scripts.Games
 
             var randomWorldPos = new Vector3(randomX, randomY, randomButton.transform.position.z);
 
-            randomButton.transform.position = randomWorldPos;
+            randomButton.transform.localPosition = randomWorldPos;
             randomButton.gameObject.SetActive(true);
 
             _previousButton = randomButton;
@@ -184,6 +186,7 @@ namespace Scripts.Games
             if (_currentScore >= 10)
             {
                 _currentScore = 0;
+                base.Harder();
                 base.Win();
             }
         }

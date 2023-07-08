@@ -118,6 +118,7 @@ namespace Scripts.Games
             if (_currentScore >= _scoreToWin)
             {
                 _currentScore = 0;
+                base.Harder();
                 base.Win();
             }
             base.ScoreUp();
@@ -139,6 +140,7 @@ namespace Scripts.Games
                 if (_remainingLives == 0)
                 {
                     _remainingLives = 3;
+                    base.Easier();
                     Lose();
                     Debug.Log("You lost all your lives in this Game");
                 }

@@ -195,6 +195,7 @@ namespace Scripts.Games
                 if (_currentScore >= 5)
                 {
                     _currentScore = 0;
+                    base.Harder();
                     base.Win();
                 }
                 
@@ -208,6 +209,7 @@ namespace Scripts.Games
                 {
                     Debug.Log("GAME LOST");
                     _remainingLives = 3;
+                    base.Easier();
                     base.Lose();
                 }
                 

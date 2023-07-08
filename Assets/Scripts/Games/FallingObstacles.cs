@@ -100,6 +100,7 @@ namespace Scripts.Games
             if (_currentScore >= _scoreToWin)
             {
                 _currentScore = 0;
+                base.Harder();
                 base.Win();
             }
         }
@@ -114,6 +115,7 @@ namespace Scripts.Games
             if (_healthPoints <= 0)
             {
                 _healthPoints = 3;
+                base.Easier();
                 base.Lose();
             }
             lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
