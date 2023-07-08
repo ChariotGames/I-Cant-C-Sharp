@@ -16,6 +16,7 @@ namespace Scripts.Games
         [SerializeField] private float spawnTimeUpperBounds;
         [SerializeField] private float spawnTimeLowerBounds;
         [SerializeField] private TextMeshPro timerTextMesh;
+        [SerializeField] private SpriteRenderer damageTakenSprite;
 
         #endregion Serialized Fields
 
@@ -108,6 +109,9 @@ namespace Scripts.Games
             _remainingLives--;
             base.ScoreDown();
             _previousButton.gameObject.SetActive(false);
+            var damageIconGo = Instantiate(damageTakenSprite.gameObject);
+            damageIconGo.SetActive(true);
+            Destroy(damageIconGo, 1);
             ResetTimer();
             if (_remainingLives <= 0)
             {
@@ -164,8 +168,9 @@ namespace Scripts.Games
             while (true)
             {
                 var randomDelay = Random.Range(spawnTimeLowerBounds, spawnTimeUpperBounds);
-                ActivateObjectAtRandomPos();
                 yield return new WaitForSeconds(randomDelay);
+                ActivateObjectAtRandomPos();
+                
                 
             }
         }
