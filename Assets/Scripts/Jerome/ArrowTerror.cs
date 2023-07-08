@@ -52,6 +52,7 @@ namespace Scripts.Games
            if (winCounter == 5)
             {
                 winCounter = 0;
+                base.Harder();
                 base.Win();
             }
 
@@ -88,7 +89,7 @@ namespace Scripts.Games
                     checkpointsCollected++;
                     break;
                 case ElementType.ENEMY:
-                        
+                        base.Easier();
                         base.Lose();
                     break;
                 case ElementType.GOAL:
