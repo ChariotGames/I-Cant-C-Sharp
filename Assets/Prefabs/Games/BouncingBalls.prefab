@@ -111,8 +111,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4292551086
+  m_fontColor: {r: 0, g: 0.84705883, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -283,8 +283,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4292551086
+  m_fontColor: {r: 0, g: 0.84705883, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1521,12 +1521,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093213cc36fa51241bf8935f582df995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   bouncingBalls:
   - {fileID: 4321193698007213356}
   - {fileID: 7122114902973186427}
@@ -1647,8 +1649,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4292551086
+  m_fontColor: {r: 0, g: 0.84705883, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
