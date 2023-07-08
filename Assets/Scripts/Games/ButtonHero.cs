@@ -58,6 +58,7 @@ namespace Scripts.Games
                 // just pool all the objects into a list
                 var button = Instantiate(buttons[i].gameObject, transform.parent);
                 var buttonText = button.GetComponent<TextMeshPro>();
+                buttonText.text = _keys.All[i].Icon;
                 button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;
                 _spawnedButtons.Add(buttonText);
                 button.SetActive(false);
@@ -156,7 +157,7 @@ namespace Scripts.Games
 
             var randomWorldPos = new Vector3(randomX, randomY, randomButton.transform.position.z);
 
-            randomButton.transform.position = randomWorldPos;
+            randomButton.transform.localPosition = randomWorldPos;
             randomButton.gameObject.SetActive(true);
 
             _previousButton = randomButton;
