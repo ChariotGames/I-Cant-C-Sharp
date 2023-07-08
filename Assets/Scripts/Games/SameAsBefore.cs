@@ -21,11 +21,12 @@ namespace Scripts.Games
         private const string _stepsText = "Steps: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
-        private int difficultyTracker;
+        private int difficultyTracker, defaultFailsToLose;
 
         void Start()
         {
             difficultyTracker = successesToLevelUp;
+            defaultFailsToLose = failsToLose;
             buttonYes.text = _keys.One.Icon;
             buttonNo.text = _keys.Two.Icon;
             StartCoroutine(GameStartCoroutine());
@@ -149,6 +150,7 @@ namespace Scripts.Games
             difficultyTracker = successesToLevelUp;
             if (failsToLose <= 0)
             {
+                failsToLose = defaultFailsToLose;
                 if (difficulty != Difficulty.EASY)
                 {
                     Easier();   

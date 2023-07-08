@@ -21,7 +21,7 @@ namespace Scripts.Games
             private bool _isYes;
             private bool _isNo;
             private float _timeElapsed;
-            private int difficultyTracker;
+            private int difficultyTracker, defaultFailsToLose;
 
         #endregion Fields
 
@@ -31,6 +31,7 @@ namespace Scripts.Games
             {
                 buttonYes.text = _keys.One.Icon;
                 buttonNo.text = _keys.Two.Icon;
+                defaultFailsToLose = failsToLose;
                 difficultyTracker = successesToLevelUp;
                 StartCoroutine(GameCoroutine());
             }
@@ -106,13 +107,11 @@ namespace Scripts.Games
             private void GameLost()
             {
                 failsToLose--;
-                difficultyTracker = successesToLevelUp;
+                difficultyTracker++;
                 if (failsToLose <= 0)
                 {
-                    if (difficulty != Difficulty.EASY)
-                    {
-                        Easier();   
-                    }
+                    failsToLose = defaultFailsToLose;
+                    Easier();
                     Lose();
                 }
             }

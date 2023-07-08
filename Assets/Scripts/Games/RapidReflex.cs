@@ -38,7 +38,7 @@ namespace Scripts.Games
         private float _timeElapsed = 0, _randomDelay = 0;
         private bool _isButtonPressed = false;
         private SpriteRenderer _backgroundSprite;
-        private int difficultyTracker;
+        private int difficultyTracker, defaultFailsToLose;
 
     #endregion Fields
 
@@ -51,6 +51,7 @@ namespace Scripts.Games
         _backgroundSprite = background.GetComponent<SpriteRenderer>();
         _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
         _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
+        defaultFailsToLose = failsToLose;
         difficultyTracker = successesToLevelUp;
         StartCoroutine(GameCoroutine());
     }
@@ -201,9 +202,10 @@ namespace Scripts.Games
         private void GameLost()
         {
             failsToLose--;
-            difficultyTracker = successesToLevelUp;
+            difficultyTracker++;
             if (failsToLose <= 0)
             {
+                failsToLose = defaultFailsToLose;
                 if (difficulty != Difficulty.EASY)
                 {
                     Easier();   
