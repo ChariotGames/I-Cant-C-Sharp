@@ -3971,7 +3971,7 @@ MonoBehaviour:
   optionLives: {fileID: 6704509845438664361}
   startButton: {fileID: 6704509846580949381}
   defaultSettings: {fileID: 11400000, guid: 65dcec6c5cbe3474cb38f18418f92669, type: 2}
-  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
   livesText: {fileID: 6704509845438664375}
   difficultyText: {fileID: 6704509845796686799}
 --- !u!1 &6704509845494297723
@@ -15368,7 +15368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc314360ec506c742abb62bb8d739b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
   preview: {fileID: 7339699926845392524}
   title: {fileID: 7339699926605260327}
 --- !u!1 &7339699927587842082
