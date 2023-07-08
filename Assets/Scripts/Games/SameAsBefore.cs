@@ -26,6 +26,7 @@ namespace Scripts.Games
         void Start()
         {
             difficultyTracker = successesToLevelUp;
+            _fails = failsToLose;
             defaultFailsToLose = failsToLose;
             buttonYes.text = _keys.One.Icon;
             buttonNo.text = _keys.Two.Icon;
@@ -131,14 +132,14 @@ namespace Scripts.Games
         private void GameWon()
         {
             ScoreUp();
-            successesToWin--;
+            _successes++;
             difficultyTracker--;
             if (difficultyTracker <= 0)
             {
                 difficultyTracker = successesToLevelUp;
                 Harder();
             }
-            if (successesToWin <= 0)
+            if (_successes >= successesToWin)
             {
                 Win(); 
             }
@@ -146,15 +147,12 @@ namespace Scripts.Games
         
         private void GameLost()
         {
-            failsToLose--;
-            difficultyTracker = successesToLevelUp;
-            if (failsToLose <= 0)
+            _fails--;
+            difficultyTracker++;
+            if (_fails <= 0)
             {
-                failsToLose = defaultFailsToLose;
-                if (difficulty != Difficulty.EASY)
-                {
-                    Easier();   
-                }
+                _fails = failsToLose;
+                Easier();
                 Lose();
             }
         }

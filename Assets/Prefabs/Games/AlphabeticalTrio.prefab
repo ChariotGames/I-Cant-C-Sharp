@@ -137,7 +137,7 @@ MonoBehaviour:
     three: 
     four: 
   successesToWin: 5
-  failsToLose: 3
+  failsToLose: 1
   letters: {fileID: 8687728356737068271}
   buttonYes: {fileID: 8687728357216914494}
   buttonNo: {fileID: 8687728357371829093}

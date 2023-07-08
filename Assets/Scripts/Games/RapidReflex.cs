@@ -51,8 +51,8 @@ namespace Scripts.Games
         _backgroundSprite = background.GetComponent<SpriteRenderer>();
         _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
         _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
-        defaultFailsToLose = failsToLose;
         difficultyTracker = successesToLevelUp;
+        _fails = failsToLose;
         StartCoroutine(GameCoroutine());
     }
 
@@ -186,14 +186,14 @@ namespace Scripts.Games
         private void GameWon()
         {
             ScoreUp();
-            successesToWin--;
+            _successes++;
             difficultyTracker--;
             if (difficultyTracker <= 0)
             {
                 difficultyTracker = successesToLevelUp;
                 Harder();
             }
-            if (successesToWin <= 0)
+            if (_successes >= successesToWin)
             {
                 Win(); 
             }
@@ -201,15 +201,12 @@ namespace Scripts.Games
         
         private void GameLost()
         {
-            failsToLose--;
+            _fails--;
             difficultyTracker++;
-            if (failsToLose <= 0)
+            if (_fails <= 0)
             {
-                failsToLose = defaultFailsToLose;
-                if (difficulty != Difficulty.EASY)
-                {
-                    Easier();   
-                }
+                _fails = failsToLose;
+                Easier();
                 Lose();
             }
         }
