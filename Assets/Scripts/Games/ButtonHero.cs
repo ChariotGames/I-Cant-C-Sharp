@@ -120,6 +120,7 @@ namespace Scripts.Games
             if (_remainingLives <= 0)
             {
                 _remainingLives = 3;
+                base.Easier();
                 base.Lose();
             }
         }
@@ -185,6 +186,7 @@ namespace Scripts.Games
             if (_currentScore >= 10)
             {
                 _currentScore = 0;
+                base.Harder();
                 base.Win();
             }
         }
