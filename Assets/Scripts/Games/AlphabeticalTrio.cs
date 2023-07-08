@@ -28,8 +28,8 @@ namespace Scripts.Games
 
             void Start()
             {
-                buttonYes.text = keys.One.Icon;
-                buttonNo.text = keys.Two.Icon;
+                buttonYes.text = _keys.One.Icon;
+                buttonNo.text = _keys.Two.Icon;
                 StartCoroutine(GameCoroutine());
             }
 
@@ -173,8 +173,8 @@ namespace Scripts.Games
         
             private void OnEnable()
             {
-                keys.One.Input.action.performed += YesButtonPressed;
-                keys.Two.Input.action.performed += NoButtonPressed;
+                _keys.One.Input.action.performed += YesButtonPressed;
+                _keys.Two.Input.action.performed += NoButtonPressed;
             }
 
             public void YesButtonPressed(InputAction.CallbackContext ctx)
@@ -189,8 +189,8 @@ namespace Scripts.Games
 
             private void OnDisable()
             {
-                keys.One.Input.action.performed -= YesButtonPressed;
-                keys.Two.Input.action.performed -= NoButtonPressed;
+                _keys.One.Input.action.performed -= YesButtonPressed;
+                _keys.Two.Input.action.performed -= NoButtonPressed;
             }
 
         #endregion Overarching Methods / Helpers

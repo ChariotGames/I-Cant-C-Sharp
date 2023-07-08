@@ -88,17 +88,17 @@ namespace Scripts.Games
         private void OnEnable()
         {
             BounceGround.HitGround += IncreaseBounceCounter;
-            keys.One.Input.action.performed += IncreaseGuessingNumber;
-            keys.Two.Input.action.performed += DecreaseGuessingNumber;
-            keys.Three.Input.action.performed += SubmitGuess;
+            _keys.One.Input.action.performed += IncreaseGuessingNumber;
+            _keys.Two.Input.action.performed += DecreaseGuessingNumber;
+            _keys.Three.Input.action.performed += SubmitGuess;
         }
 
         private void OnDisable()
         {
             BounceGround.HitGround -= IncreaseBounceCounter;
-            keys.One.Input.action.performed -= IncreaseGuessingNumber;
-            keys.Two.Input.action.performed -= DecreaseGuessingNumber;
-            keys.Three.Input.action.performed -= SubmitGuess;
+            _keys.One.Input.action.performed -= IncreaseGuessingNumber;
+            _keys.Two.Input.action.performed -= DecreaseGuessingNumber;
+            _keys.Three.Input.action.performed -= SubmitGuess;
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -118,6 +118,7 @@ namespace Scripts.Games
             if (_currentScore >= _scoreToWin)
             {
                 _currentScore = 0;
+                base.Harder();
                 base.Win();
             }
             base.ScoreUp();
@@ -139,6 +140,7 @@ namespace Scripts.Games
                 if (_remainingLives == 0)
                 {
                     _remainingLives = 3;
+                    base.Easier();
                     Lose();
                     Debug.Log("You lost all your lives in this Game");
                 }

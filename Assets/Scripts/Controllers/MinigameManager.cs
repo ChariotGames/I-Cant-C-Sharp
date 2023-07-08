@@ -55,7 +55,9 @@ namespace Scripts.Controllers
                 return;
             }
 
+            _parent = spawnLeft;
             _loadedLeft = PickGame(new List<Minigame>(_mixGames));
+            _parent = spawnRight;
             _loadedRight = PickGame(new List<Minigame>(_mixGames));
         }
 
@@ -101,11 +103,10 @@ namespace Scripts.Controllers
         private void GetNext(List<Minigame> gameList)
         {
             _currentGame = gameList[Random.Range(0, gameList.Count)];
-            if (spawnLeft.childCount == 0)
+            if (_loadedLeft == null)
             {
-                _parent = spawnLeft;
                 _keys = _currentGame.KeysLeft;
-                if (spawnRight.childCount != 0)
+                if (_loadedRight != null/*spawnRight.childCount != 0*/)
                 {
                     _otherGame = _loadedRight;
                     _otherKeys = spawnRight.GetChild(0).GetComponent<BaseGame>().Keys;
@@ -113,9 +114,8 @@ namespace Scripts.Controllers
             }
             else
             {
-                _parent = spawnRight;
                 _keys = _currentGame.KeysRight;
-                if (spawnLeft.childCount == 0)
+                if (_loadedLeft != null/*spawnLeft.childCount == 0*/)
                 {
                     _otherGame = _loadedLeft;
                     _otherKeys = spawnLeft.GetChild(0).GetComponent<BaseGame>().Keys;
@@ -141,7 +141,14 @@ namespace Scripts.Controllers
             game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
             BaseGame baseGame = obj.GetComponent<BaseGame>();
-            baseGame.SetUp(game.Difficulty, keys, parent.GetComponent<RectTransform>().rect);
+            Difficulty difficulty = settings.BaseDifficulty;
+
+            if (settings.BaseDifficulty == Difficulty.VARYING)
+            {
+                difficulty = game.Difficulty;
+            }
+
+            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect);
             obj.SetActive(true);
             
             _loadedTimes++;
@@ -158,18 +165,19 @@ namespace Scripts.Controllers
             {
                 return;
             }
-            
-            if(_loadedTimes == MAX_QUE)
+
+            if (_loadedTimes == MAX_QUE)
             {
                 RemoveAllGames();
                 List<Minigame> gameList = new(_soloGames);
                 Minigame bossGame = gameList[Random.Range(0, gameList.Count)];
-                LoadGame(bossGame, bossGame.KeysLeft, spawnCenter);
+                LoadGame(bossGame, bossGame.KeysRight, spawnCenter);
                 return;
             }
 
             if (spawnLeft.childCount != 0 && spawnLeft.GetChild(0).gameObject == game)
             {
+                _parent = spawnLeft;
                 Destroy(spawnLeft.GetChild(0).gameObject);
                 _loadedLeft = null;
                 _loadedLeft = PickGame(new List<Minigame>(_mixGames));
@@ -178,6 +186,7 @@ namespace Scripts.Controllers
 
             if (spawnRight.childCount != 0 && spawnRight.GetChild(0).gameObject == game)
             {
+                _parent = spawnRight;
                 Destroy(spawnRight.GetChild(0).gameObject);
                 _loadedRight = null;
                 _loadedRight = PickGame(new List<Minigame>(_mixGames));
@@ -187,7 +196,9 @@ namespace Scripts.Controllers
             if (spawnCenter.childCount != 0 && spawnCenter.GetChild(0).gameObject == game)
             {
                 Destroy(spawnCenter.GetChild(0).gameObject);
+                _parent = spawnLeft;
                 _loadedLeft = PickGame(new List<Minigame>(_mixGames));
+                _parent = spawnRight;
                 _loadedRight = PickGame(new List<Minigame>(_mixGames));
                 return;
             }
@@ -269,7 +280,17 @@ namespace Scripts.Controllers
 
         public void UpdateDifficulty(GameObject game, Difficulty difficulty)
         {
-            settings.Games.Find(obj => obj.Prefab == game).Difficulty = difficulty;
+            List<Minigame> all = new();
+            all.AddRange(settings.Games);
+            all.AddRange(settings.SoloGames);
+
+            Minigame found = all.Find(obj => game.name.Contains(obj.Prefab.name));
+
+            if (found != null)
+            {
+                found.Difficulty = difficulty;
+                return;
+            }
         }
         public void UpdateScore(int change)
         {

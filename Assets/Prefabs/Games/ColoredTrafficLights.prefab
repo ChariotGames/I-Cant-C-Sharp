@@ -132,11 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209e024bf920aa74c9a54e6f89835efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
-    one: 
-    two: 
-    three: 
+    one: Right
+    two: Left
+    three: Submit
     four: 
   trafficLightPrefab: {fileID: 6244205913135684408, guid: 191d15b78c8698c489a961ece84981a4, type: 3}
   owner_ref: {fileID: 989249342879803052}

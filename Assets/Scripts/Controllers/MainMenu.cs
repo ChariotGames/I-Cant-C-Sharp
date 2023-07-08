@@ -116,7 +116,7 @@ namespace Scripts.Controllers
         public void SetDifficulty(int change)
         {
             int current = (int)settings.BaseDifficulty + change;
-            settings.BaseDifficulty = (Difficulty)Mathf.Clamp(current, (int)Difficulty.EASY, (int)Difficulty.HARD);
+            settings.BaseDifficulty = (Difficulty)Mathf.Clamp(current, (int)Difficulty.EASY, (int)Difficulty.VARYING);
             difficultyText.text = settings.BaseDifficulty.ToString();
         }
 

@@ -11,8 +11,9 @@ namespace Scripts.Pascal
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var damageIcon = Instantiate(damageTakenIcon, other.transform.position, Quaternion.identity);
-            Destroy(damageIcon, 1);
+            var damageIconGo = Instantiate(damageTakenIcon, other.transform.position, Quaternion.identity);
+            damageIconGo.gameObject.SetActive(true);
+            Destroy(damageIconGo.gameObject, 1);
             Destroy(other.gameObject);
             DamageTaken?.Invoke();
         }

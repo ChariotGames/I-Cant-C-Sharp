@@ -1711,7 +1711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0acdb9f4be8ab47831481df1fc3ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
   hearts:
   - {fileID: 423005811}
   - {fileID: 552458559}
@@ -2485,6 +2485,10 @@ PrefabInstance:
       propertyPath: point
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
     - target: {fileID: 5897317456580356395, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: spawnLeft
       value: 
@@ -3481,7 +3485,7 @@ MonoBehaviour:
   playerInput: {fileID: -944628639613478452, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   restartButton: {fileID: 6730086987097988497}
   defaultSettings: {fileID: 11400000, guid: 65dcec6c5cbe3474cb38f18418f92669, type: 2}
-  settings: {fileID: 11400000, guid: b61fb849ca4beb64aa8467acd0b19ec4, type: 2}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
   score: {fileID: 530300936}
   timer: {fileID: 1554103829}
   scoreText: {fileID: 529547796}

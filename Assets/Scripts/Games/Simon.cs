@@ -39,7 +39,7 @@ namespace Scripts.Games
         private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
         private const int MIN_LENGTH = 1, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
         private float _animationTime;
-        private int _checkingIndex = 0, _correctGuesses = 0, _wrongGuesses = 0;
+        private int _checkingIndex = 0;
 
         #endregion
 
@@ -69,16 +69,16 @@ namespace Scripts.Games
             StartCoroutine(AnimateButtons(_animationTime * 2, _animationTime));
 
             // Set keys
-            blue.GetComponent<BasePressElement>().Button = keys.One.Input;
-            red.GetComponent<BasePressElement>().Button = keys.Two.Input;
-            yellow.GetComponent<BasePressElement>().Button = keys.Three.Input;
-            green.GetComponent<BasePressElement>().Button = keys.Four.Input;
+            blue.GetComponent<BasePressElement>().Button = _keys.One.Input;
+            red.GetComponent<BasePressElement>().Button = _keys.Two.Input;
+            yellow.GetComponent<BasePressElement>().Button = _keys.Three.Input;
+            green.GetComponent<BasePressElement>().Button = _keys.Four.Input;
 
             // Set Icons
-            inputTexts[0].text = keys.One.Icon;
-            inputTexts[1].text = keys.Two.Icon;
-            inputTexts[2].text = keys.Three.Icon;
-            inputTexts[3].text = keys.Four.Icon;
+            inputTexts[0].text = _keys.One.Icon;
+            inputTexts[1].text = _keys.Two.Icon;
+            inputTexts[2].text = _keys.Three.Icon;
+            inputTexts[3].text = _keys.Four.Icon;
         }
 
         #endregion
@@ -111,7 +111,7 @@ namespace Scripts.Games
                 base.Harder();
             }
 
-            _correctGuesses %= LVL_CHANGE;
+            //_successes %= LVL_CHANGE;
         }
 
         #endregion
@@ -297,12 +297,12 @@ namespace Scripts.Games
         /// </summary>
         private void WrongColor()
         {
-            _wrongGuesses++;
-            if (_wrongGuesses == 3) base.Lose();
+            failsToLose++;
+            if (failsToLose <= 0) base.Lose();
 
             nothing.Animate();
 
-            _correctGuesses -= (int)base.Difficulty + 1;
+            successesToWin = Mathf.Clamp((successesToWin -= (int)base.Difficulty), 0, 9);
             ResetTurn();
             StartCoroutine(AnimateButtons(_animationTime, BLINK_TIME));
         }
@@ -313,9 +313,9 @@ namespace Scripts.Games
         /// </summary>
         private void GuessingDone()
         {
-            _correctGuesses++;
-            UpdateDifficulty(_correctGuesses);
-            if (_correctGuesses == 0)
+            successesToWin--;
+            UpdateDifficulty(successesToWin);
+            if (successesToWin <= 0)
             {
                 base.Win();
                 return;

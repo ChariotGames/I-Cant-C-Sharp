@@ -37,7 +37,7 @@ namespace Scripts.Games
 
         void Start()
         {
-            ringButtons = keys.All;
+            ringButtons = _keys.All;
             Invoke(nameof(SpawnRings), startTimeout);
         }
 

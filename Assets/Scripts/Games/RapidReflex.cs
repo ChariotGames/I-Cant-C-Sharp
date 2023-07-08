@@ -208,7 +208,7 @@ namespace Scripts.Games
 
         private void OnEnable()
         {
-            keys.One.Input.action.started += EastButtonPressed;
+            _keys.One.Input.action.started += EastButtonPressed;
         }
 
         public void EastButtonPressed(InputAction.CallbackContext ctx)
@@ -219,7 +219,7 @@ namespace Scripts.Games
         
         private void OnDisable()
         {
-            keys.One.Input.action.started -= EastButtonPressed;
+            _keys.One.Input.action.started -= EastButtonPressed;
         }
 
     #endregion Overarching Methods / Helpers
