@@ -28,7 +28,6 @@ namespace Scripts.Games
 
         protected KeyMap _keys;
         protected Rect _playarea;
-        protected int _successes = 0, _fails = 0;
 
         #endregion Fields
 
