@@ -43,7 +43,7 @@ namespace Scripts.Games
             }
 
             GameObject bomb = Instantiate(bombs[chance], gameObject.transform.position, Quaternion.identity, bombContainer.transform);
-            bomb.transform.position = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), transform.position.z);
+            bomb.transform.localPosition = new Vector3(Random.Range(_playarea.xMin, _playarea.xMax), Random.Range(_playarea.yMin, _playarea.yMax), transform.localPosition.z);
             bomb.SetActive(true);
 
             timer = Random.Range(1, 4);
@@ -74,7 +74,7 @@ namespace Scripts.Games
                 base.Harder();
                 base.Win();
             }
-            if (loseCounter == 0)
+            if (loseCounter == 3)
             {
                 Debug.Log("Snake? SNAKE? SNAAAAAACKE!!!");
                 loseCounter = 0;
