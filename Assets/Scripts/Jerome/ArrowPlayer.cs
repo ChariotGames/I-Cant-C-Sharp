@@ -10,8 +10,8 @@ namespace Scripts.Games
     public class ArrowPlayer : MonoBehaviour
     {
         #region Serialized Fields
-        [SerializeField] ArrowTerror MainGame;
-        [SerializeField] float speed = 5f;
+        [SerializeField] ArrowTerror parent;
+        [SerializeField] float movementSpeed = 5f;
         [SerializeField] private float maxRotationSpeed = 2.5f;
         [SerializeField] private float maxRotation = 180f;
 
@@ -19,6 +19,7 @@ namespace Scripts.Games
 
         #region Fields
         public InputActionReference stick;
+        public Rigidbody2D rb;
 
 
         #endregion Fields
@@ -27,30 +28,44 @@ namespace Scripts.Games
 
         void Start()
         {
-            
+            rb = gameObject.GetComponent<Rigidbody2D>();
         }
 
         void Update()
         {
+            //transform.rotation = Quaternion.Euler(stick.action.ReadValue<Vector2>().x, stick.action.ReadValue<Vector2>().y, 0);
+            //transform.Translate(stick.action.ReadValue<Vector2>() * Time.deltaTime * speed);
+            var input = stick.action.ReadValue<Vector2>().normalized;
+            if (input.magnitude > 0.1f) {
+                float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg - 90f;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            move();
             
-            gameObject.transform.Translate(stick.action.ReadValue<Vector2>() * Time.deltaTime * speed);
             //SendMessage("PlayerMoved",transform.position);
             //RotatePlayer();
             //transform.rotation = Quaternion.RotateTowards(transform.position, InputHandler.LeftStickDelta, 1, 1);
-            MainGame.UpdateEnemyPositions(transform.position);      
+            parent.UpdateEnemyPositions(transform.position);      
+        }
+
+        private void move()
+        {
+            Vector2 input = new Vector2(stick.action.ReadValue<Vector2>().x, stick.action.ReadValue<Vector2>().y).normalized;
+            Vector2 move = input * movementSpeed;
+            rb.velocity = move;
         }
 
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
 
-            
+
 
         #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
 
-            
+
 
         public void RotatePlayer()
         {

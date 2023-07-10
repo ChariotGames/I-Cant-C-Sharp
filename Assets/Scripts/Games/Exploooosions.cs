@@ -43,7 +43,7 @@ namespace Scripts.Games
             }
 
             GameObject bomb = Instantiate(bombs[chance], gameObject.transform.position, Quaternion.identity, bombContainer.transform);
-            bomb.transform.position = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), transform.position.z);
+            bomb.transform.localPosition = new Vector3(Random.Range(_playarea.xMin, _playarea.xMax), Random.Range(_playarea.yMin, _playarea.yMax), transform.localPosition.z);
             bomb.SetActive(true);
 
             timer = Random.Range(1, 4);
@@ -56,19 +56,22 @@ namespace Scripts.Games
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 loseCounter++;
+                //failsToLose--;
                 player.GetComponent<ExpPlayer>().knockback = player.GetComponent<Rigidbody2D>().position - new Vector2(obj.transform.position.x, obj.transform.position.y);
                 // Does not work why?
             }
             else
             {
+                //successesToWin++;
                 winCounter++;
             }
 
-            if (winCounter == 25)
+            if (winCounter == 20)
             {
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
                 winCounter = 0;
                 active = false;
+                base.Harder();
                 base.Win();
             }
             if (loseCounter == 3)
@@ -76,6 +79,7 @@ namespace Scripts.Games
                 Debug.Log("Snake? SNAKE? SNAAAAAACKE!!!");
                 loseCounter = 0;
                 active = false;
+                base.Easier();
                 base.Lose();
             }
         }

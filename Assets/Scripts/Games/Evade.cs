@@ -77,12 +77,14 @@ namespace Scripts.Games
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 //active = false;
+                base.Easier();
                 base.Lose();
             }
             else if (col1.IsTouching(col2))
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 //active = false;
+                base.Easier();
                 base.Lose();
             }
             else
@@ -95,6 +97,7 @@ namespace Scripts.Games
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
                 winCounter = 0;
                 //active = false;
+                base.Harder();
                 base.Win();
             }
         }
