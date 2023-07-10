@@ -24,10 +24,12 @@ namespace Scripts.Controllers
         public static event Action<int> OnUpdateUIScore;
 
         private List<Minigame> _mixGames, _soloGames;
+        private Queue<Minigame> _previous;
         private Genre _otherGenre;
         private KeyMap _otherKeys;
         private Transform _parent;
-        private int _winCounter = 5;
+        private const int MAX_QUE = 5;
+        private int _winCounter = MAX_QUE;
 
         #endregion
 
@@ -35,6 +37,7 @@ namespace Scripts.Controllers
 
         void Awake()
         {
+            _previous = new();
             ResetGames();
         }
 
@@ -150,6 +153,8 @@ namespace Scripts.Controllers
             if (game == null) return;
 
             _mixGames.Remove(game);
+            if (_previous.Count == MAX_QUE) _mixGames.Add(_previous.Dequeue());
+            _previous.Enqueue(game);
 
             game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
@@ -201,7 +206,7 @@ namespace Scripts.Controllers
             if (spawnCenter.childCount != 0)
                 Destroy(spawnCenter.GetChild(0).gameObject);
 
-            _winCounter = 5;
+            _winCounter = MAX_QUE;
         }
 
         /// <summary>
