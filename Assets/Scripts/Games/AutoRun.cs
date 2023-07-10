@@ -59,7 +59,17 @@ namespace Scripts.Games
         {
             return Keys.One.Input.action; // down
         }
-        
+
+        public void easier()
+        {
+            base.Easier();
+            
+        }
+
+        public void harder()
+        {
+            base.Harder();
+        }
         public void winCondition()
         {
             base.Win();

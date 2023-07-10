@@ -272,11 +272,13 @@ namespace Scripts.Games
             if (correctColors.Contains(secondWaveColors[selectorIndex]))
             {
                 base.ScoreUp(5);
+                base.Harder();
                 base.Win();
             }
             else
             {
                 base.ScoreDown(5);
+                base.Easier();
                 base.Lose();
             }
         }
