@@ -261,7 +261,7 @@ namespace Scripts.Controllers
         public void LoseCondition(GameObject game)
         {
             settings.Lives--;
-            _winCounter--;
+            //_winCounter--;
             RemoveGame(game);
         }
 
