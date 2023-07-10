@@ -848,12 +848,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57412bd615561314380c787509c752ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   options:
   - {fileID: 888037505940594430}
   - {fileID: 5097884201152601589}
@@ -862,7 +864,7 @@ MonoBehaviour:
   gamestateLose: {fileID: 2565170812290554746}
   stepBackText: {fileID: 5389326188143829006}
   maxStepsBack: 3
-  timeToAnswer: 10
+  timeToAnswer: 5
 --- !u!1 &4280459632320140389
 GameObject:
   m_ObjectHideFlags: 0

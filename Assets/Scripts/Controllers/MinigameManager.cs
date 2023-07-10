@@ -24,12 +24,10 @@ namespace Scripts.Controllers
         public static event Action<int> OnUpdateUIScore;
 
         private List<Minigame> _mixGames, _soloGames;
-        private Queue<Minigame> _previous;
-        private Minigame _loadedLeft, _loadedRight, _currentGame, _otherGame;
-        private KeyMap _keys, _otherKeys;
+        private Genre _otherGenre;
+        private KeyMap _otherKeys;
         private Transform _parent;
-        private const int MAX_QUE = 5;
-        private int _loadedTimes = 0;
+        private int _winCounter = 5;
 
         #endregion
 
@@ -37,9 +35,7 @@ namespace Scripts.Controllers
 
         void Awake()
         {
-            _mixGames = new List<Minigame>(settings.Games);
-            _soloGames = new List<Minigame>(settings.SoloGames);
-            _previous = new(MAX_QUE);
+            ResetGames();
         }
 
         void Start()
@@ -55,10 +51,21 @@ namespace Scripts.Controllers
                 return;
             }
 
-            _parent = spawnLeft;
-            _loadedLeft = PickGame(new List<Minigame>(_mixGames));
-            _parent = spawnRight;
-            _loadedRight = PickGame(new List<Minigame>(_mixGames));
+            SpawnSides();
+        }
+
+        void Update()
+        {
+            if (_mixGames.Count <= 1 || _soloGames.Count <= 1)
+                ResetGames();
+
+            if (_winCounter <= 0)
+            {
+                if (spawnLeft.childCount != 0 || spawnRight.childCount != 0 || spawnCenter.childCount != 0) return;
+                List<Minigame> gameList = new(_soloGames);
+                Minigame bossGame = gameList[Random.Range(0, gameList.Count)];
+                LoadGame(bossGame, bossGame.KeysRight, spawnCenter);
+            }
         }
 
         private void OnDisable()
@@ -73,54 +80,63 @@ namespace Scripts.Controllers
 
         #region Instance Management
 
+        private void SpawnSides()
+        {
+            _parent = spawnLeft;
+            PickGame(new List<Minigame>(_mixGames));
+            _parent = spawnRight;
+            PickGame(new List<Minigame>(_mixGames));
+        }
+
         /// <summary>
         /// Picks a random game from the BaseGame list.
         /// </summary>
         /// <param name="gameList">A game list to pick from.</param>
         /// <returns>The picked game asset.</returns>
-        private Minigame PickGame(List<Minigame> gameList)
+        private void PickGame(List<Minigame> gameList)
         {
-            GetNext(gameList);
+            Minigame thisGame = GetNext(gameList);
 
             // Find the fitting game
-            while (CheckGenre(_currentGame, _otherGame) && CheckKeys(_keys, _otherKeys))
+            while (CheckGenre(thisGame.Genre, _otherGenre) && CheckKeys(thisGame.SelectedKeys, _otherKeys))
             {
-                if (gameList.Count == 0) return null;
-
-                gameList.Remove(_currentGame);
-                GetNext(gameList);
+                gameList.Remove(thisGame);
+                thisGame = GetNext(gameList);
             }
 
-            if (LoadGame(_currentGame, _keys, _parent)) return _currentGame;
-
-            return null;
+            LoadGame(thisGame, thisGame.SelectedKeys, _parent);
         }
 
         /// <summary>
         /// Gets the next game in a list to set checking properties.
         /// </summary>
         /// <param name="gameList">A game list to pick from.</param>
-        private void GetNext(List<Minigame> gameList)
+        /// <returns>The selected game.</returns>
+        private Minigame GetNext(List<Minigame> gameList)
         {
-            _currentGame = gameList[Random.Range(0, gameList.Count)];
-            if (_loadedLeft == null)
+            Minigame thisGame = gameList[Random.Range(0, gameList.Count)];
+            BaseGame other = null;
+
+            if (_parent == spawnLeft)
             {
-                _keys = _currentGame.KeysLeft;
-                if (_loadedRight != null/*spawnRight.childCount != 0*/)
-                {
-                    _otherGame = _loadedRight;
-                    _otherKeys = spawnRight.GetChild(0).GetComponent<BaseGame>().Keys;
-                }
+                thisGame.SelectedKeys = thisGame.KeysLeft;
+                if (spawnRight.childCount == 0) return thisGame;
+                other = spawnRight.GetChild(0).GetComponent<BaseGame>();
             }
-            else
+
+            if (_parent == spawnRight)
             {
-                _keys = _currentGame.KeysRight;
-                if (_loadedLeft != null/*spawnLeft.childCount == 0*/)
-                {
-                    _otherGame = _loadedLeft;
-                    _otherKeys = spawnLeft.GetChild(0).GetComponent<BaseGame>().Keys;
-                }
+                thisGame.SelectedKeys = thisGame.KeysRight;
+                if (spawnLeft.childCount == 0) return thisGame;
+                other = spawnLeft.GetChild(0).GetComponent<BaseGame>();
             }
+
+            if (other == null) return thisGame;
+
+            _otherGenre = other.Genre;
+            _otherKeys = other.Keys;
+
+            return thisGame;
         }
 
         /// <summary>
@@ -129,14 +145,11 @@ namespace Scripts.Controllers
         /// <param name="game">The game asset to load from.</param>
         /// <param name="keys">The keymap to use.</param>
         /// <param name="parent">The parent to load it into.</param>
-        /// <returns>The successfully loaded game object.</returns>
-        private bool LoadGame(Minigame game, KeyMap keys, Transform parent)
+        private void LoadGame(Minigame game, KeyMap keys, Transform parent)
         {
-            if (game == null) return false;
+            if (game == null) return;
 
             _mixGames.Remove(game);
-            if (_previous.Count == MAX_QUE) _mixGames.Add(_previous.Dequeue());
-            _previous.Enqueue(game);
 
             game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
@@ -150,9 +163,6 @@ namespace Scripts.Controllers
 
             baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect);
             obj.SetActive(true);
-            
-            _loadedTimes++;
-            return true; // Successfully loaded
         }
 
         /// <summary>
@@ -161,47 +171,20 @@ namespace Scripts.Controllers
         /// </summary>
         private void RemoveGame(GameObject game)
         {
-            if (settings.SelectedGame != null)
-            {
-                return;
-            }
+            if (settings.SelectedGame != null) return;
 
-            if (_loadedTimes == MAX_QUE)
+            _parent = game.transform.parent;
+
+            if (_parent == spawnCenter)
             {
                 RemoveAllGames();
-                List<Minigame> gameList = new(_soloGames);
-                Minigame bossGame = gameList[Random.Range(0, gameList.Count)];
-                LoadGame(bossGame, bossGame.KeysRight, spawnCenter);
+                SpawnSides();
                 return;
             }
 
-            if (spawnLeft.childCount != 0 && spawnLeft.GetChild(0).gameObject == game)
-            {
-                _parent = spawnLeft;
-                Destroy(spawnLeft.GetChild(0).gameObject);
-                _loadedLeft = null;
-                _loadedLeft = PickGame(new List<Minigame>(_mixGames));
-                return;
-            }
-
-            if (spawnRight.childCount != 0 && spawnRight.GetChild(0).gameObject == game)
-            {
-                _parent = spawnRight;
-                Destroy(spawnRight.GetChild(0).gameObject);
-                _loadedRight = null;
-                _loadedRight = PickGame(new List<Minigame>(_mixGames));
-                return;
-            }
-
-            if (spawnCenter.childCount != 0 && spawnCenter.GetChild(0).gameObject == game)
-            {
-                Destroy(spawnCenter.GetChild(0).gameObject);
-                _parent = spawnLeft;
-                _loadedLeft = PickGame(new List<Minigame>(_mixGames));
-                _parent = spawnRight;
-                _loadedRight = PickGame(new List<Minigame>(_mixGames));
-                return;
-            }
+            Destroy(game);
+            if (_winCounter > 0)
+                PickGame(new List<Minigame>(_mixGames));
         }
 
         /// <summary>
@@ -210,22 +193,24 @@ namespace Scripts.Controllers
         private void RemoveAllGames()
         {
             if (spawnLeft.childCount != 0)
-            {
                 Destroy(spawnLeft.GetChild(0).gameObject);
-                _loadedLeft = null;
-            }
 
             if (spawnRight.childCount != 0)
-            {
                 Destroy(spawnRight.GetChild(0).gameObject);
-                _loadedRight = null;
-            }
 
             if (spawnCenter.childCount != 0)
-            {
                 Destroy(spawnCenter.GetChild(0).gameObject);
-            }
-            _loadedTimes = 0;
+
+            _winCounter = 5;
+        }
+
+        /// <summary>
+        /// Copies the lists of games from settings.
+        /// </summary>
+        private void ResetGames()
+        {
+            _mixGames = new List<Minigame>(settings.Games);
+            _soloGames = new List<Minigame>(settings.SoloGames);
         }
 
         #endregion Instance Management
@@ -238,10 +223,9 @@ namespace Scripts.Controllers
         /// <param name="game">The game to load.</param>
         /// <param name="other">The still running game on screen.</param>
         /// <returns>False if no overlaps are found.</returns>
-        private bool CheckGenre(Minigame game, Minigame other)
+        private bool CheckGenre(Genre game, Genre other)
         {
-            if (other == null) return false;
-            return (game.Genre & other.Genre) != 0;
+            return (game & other) != 0;
         }
 
         private bool CheckKeys(KeyMap game, KeyMap other)
@@ -265,16 +249,14 @@ namespace Scripts.Controllers
 
         public void WinCondition(GameObject game)
         {
-            Debug.Log($"Win from {game.name}");
-
+            _winCounter--;
             RemoveGame(game);
         }
 
         public void LoseCondition(GameObject game)
         {
-            Debug.Log($"Lose from {game.name}");
             settings.Lives--;
-            Debug.Log($"Lives left: {settings.Lives}");
+            _winCounter--;
             RemoveGame(game);
         }
 

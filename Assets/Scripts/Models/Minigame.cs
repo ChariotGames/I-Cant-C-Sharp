@@ -24,6 +24,12 @@ namespace Scripts.Models
 
         #endregion Serialized Fields
 
+        #region Fields
+
+        private KeyMap selectedKeys;
+
+        #endregion
+
         #region GetSets
 
         /// <summary>
@@ -121,6 +127,15 @@ namespace Scripts.Models
         public Sprite Preview
         {
             get => preview;
+        }
+
+        /// <summary>
+        /// The keys selected for load by GameManager.
+        /// </summary>
+        public KeyMap SelectedKeys
+        {
+            get => selectedKeys;
+            set => selectedKeys = value;
         }
 
         #endregion GetSets

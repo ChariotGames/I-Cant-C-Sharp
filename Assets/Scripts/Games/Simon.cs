@@ -278,7 +278,7 @@ namespace Scripts.Games
         /// <param name="color">The color to check.</param>
         public void CheckColor(Colors color)
         {
-            if (!(guessPattern[_checkingIndex] == color))
+            if ((guessPattern[_checkingIndex] != color))
             {
                 WrongColor();
                 return;
@@ -297,7 +297,7 @@ namespace Scripts.Games
         /// </summary>
         private void WrongColor()
         {
-            failsToLose++;
+            failsToLose--;
             if (failsToLose <= 0) base.Lose();
 
             nothing.Animate();
