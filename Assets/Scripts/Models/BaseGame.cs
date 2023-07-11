@@ -29,6 +29,7 @@ namespace Scripts.Games
         protected KeyMap _keys;
         protected Rect _playarea;
         protected int _successes, _fails;
+        protected Genre _genre;
 
         #endregion Fields
 
@@ -142,6 +143,15 @@ namespace Scripts.Games
         {
             get => _playarea;
             set => _playarea = value;
+        }
+
+        /// <summary>
+        /// The minigame's genre;
+        /// </summary>
+        public Genre Genre
+        {
+            get => _genre;
+            set => _genre = value;
         }
 
         #endregion GetSets
