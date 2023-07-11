@@ -793,10 +793,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoseTile
       objectReference: {fileID: 0}
+    - target: {fileID: 4735582854936708376, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735582854936708377, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: m_Size.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735582854936708377, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: m_Size.y
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 465909528}
+    - target: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: gridSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: successesToWin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4735582856177503584, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -804,6 +824,10 @@ PrefabInstance:
     - target: {fileID: 4735582856177503588, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735582856177503591, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4735582854936708380, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
