@@ -13,6 +13,10 @@ namespace Scripts.Models
         [SerializeField] private Minigame selectedGame = null;
         [SerializeField] private List<Minigame> games = new(), soloGames = new();
 
+        [SerializeField] private float _time;
+        [SerializeField] private int _score;
+        
+
         #endregion
 
         #region GetSets
@@ -66,6 +70,17 @@ namespace Scripts.Models
         }
         public Difficulty BaseDifficulty { get => baseDifficulty; set => baseDifficulty = value; }
 
+        public float Time
+        {
+            get => _time;
+            set => _time = value;
+        }
+
+        public int Score
+        {
+            get => _score;
+            set => _score = value;
+        }
         #endregion
     }
 }

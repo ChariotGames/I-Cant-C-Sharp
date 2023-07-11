@@ -14,9 +14,7 @@ namespace Scripts.Controllers
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private GameObject gameOverPanel;
 
-
-        private int _score = 0;
-        private float _time = 0;
+        
         private bool _timerOn;
 
 
@@ -63,21 +61,21 @@ namespace Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 _timerOn = false;
-                gameOverPanel.SetActive(true);
+                SceneChanger.ChangeScene(2);
             }
 
             if (_timerOn)
             {
-                _time += Time.deltaTime;
-                TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
+                settings.Time += Time.deltaTime;
+                TimeSpan timePlaying = TimeSpan.FromSeconds(settings.Time);
                 timeCounter.text = timePlaying.ToString("mm':'ss");
             }
         }
 
         public void ScoreDisplay(int change)
         {
-            _score = Mathf.Clamp(_score += change, 0, 999);
-            scoreCounter.text = _score.ToString("D3");
+            settings.Score = Mathf.Clamp(settings.Score += change, 0, 999);
+            scoreCounter.text = settings.Score.ToString("D3");
         }
     }
 
