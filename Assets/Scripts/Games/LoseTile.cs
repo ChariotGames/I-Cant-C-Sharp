@@ -92,25 +92,26 @@ namespace Scripts.Games
 
         private void SetGrid()
         {
-            int PlayerX = Random.Range(0, gridSize);
-            int PlayerY = Random.Range(0, gridSize);
+            int gridHalf = gridSize / 2;
 
             remainingTiles = ammountOfTiles;
-            for (int x = -gridSize/2; x <= gridSize/2; x++)
+            
+            for (int x = -gridHalf; x <= gridHalf; x++)
             {
-                for (int y = -gridSize/2; y <= gridSize/2; y++)
+                for (int y = -gridHalf; y <= gridHalf; y++)
                 {
 
                     GameObject obj = Instantiate(tile, container);
                     obj.transform.Translate(x * space, y * space, 0);
-                    if (PlayerX == x + gridSize/ 2 && PlayerY == y + gridSize/ 2)
-                    {
-                        player.transform.Translate((PlayerX - gridSize / 2) * space, (PlayerY - gridSize / 2) * space, 0);
-
-                    }
+                    
+                   
                 }
                 //GameObject obj = Instantiate(tile, container);
-                //obj.transform.SetParent(container, true); 
+                //obj.transform.SetParent(container, true);
+                int PlayerX = Random.Range(-gridHalf, +gridHalf);
+                int PlayerY = Random.Range(-gridHalf, +gridHalf);
+                player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);
+
             }
         }
 

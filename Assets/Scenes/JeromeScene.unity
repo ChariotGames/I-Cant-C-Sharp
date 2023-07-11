@@ -155,6 +155,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &465909528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4735582856177503587, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+  m_PrefabInstance: {fileID: 4735582854265454274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +590,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 1444490109}
   player: {fileID: 837513218}
-  colors: []
+  colors:
+  - {r: 0.065871, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.25162184, b: 0.1273585, a: 1}
   timer: 1
   box: {fileID: 1644510391}
   type: 3
@@ -785,6 +792,14 @@ PrefabInstance:
     - target: {fileID: 4008171063056925954, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
       propertyPath: m_Name
       value: LoseTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 465909528}
+    - target: {fileID: 4735582856177503584, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4735582856177503588, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
       propertyPath: m_SortingOrder
