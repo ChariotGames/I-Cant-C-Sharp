@@ -41,6 +41,8 @@ namespace Scripts.Controllers
             gameButtons = new();
             livesText.text = settings.Lives.ToString();
             difficultyText.text = settings.BaseDifficulty.ToString();
+            settings.Time = 0;
+            settings.Score = 0;
         }
 
         #endregion Built-Ins / MonoBehaviours
