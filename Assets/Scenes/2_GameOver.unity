@@ -213,7 +213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time:'
+  m_text: 'Time: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
   m_sharedMaterial: {fileID: -7160962544614530396, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score:'
+  m_text: 'Score: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
   m_sharedMaterial: {fileID: -7160962544614530396, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
@@ -2814,7 +2814,7 @@ MonoBehaviour:
   restartButton: {fileID: 91935781}
   defaultSettings: {fileID: 11400000, guid: 65dcec6c5cbe3474cb38f18418f92669, type: 2}
   settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
-  score: {fileID: 529547796}
-  timer: {fileID: 67354614}
+  score: 0
+  timer: 0
   scoreText: {fileID: 529547796}
   timerText: {fileID: 67354614}
