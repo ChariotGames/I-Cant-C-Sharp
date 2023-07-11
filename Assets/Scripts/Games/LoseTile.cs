@@ -53,9 +53,10 @@ namespace Scripts.Games
                 case ElementType.CHECKPOINT:
                     //Destroy(obj);
                     remainingTiles--;
-                    if (remainingTiles == ammountOfTiles - 1)
+                    if (remainingTiles == 1)
                     {
                         successesToWin--;
+                        clearGrid();
                         SetGrid();
 
                         //if (successesToWin == 0)
@@ -86,6 +87,14 @@ namespace Scripts.Games
             }
         }
 
+        private void clearGrid()
+        {
+            for (int i = 0; i < container.childCount; i++)
+            {
+                Destroy(container.GetChild(i).gameObject);
+            }
+        }
+
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers
@@ -100,21 +109,19 @@ namespace Scripts.Games
             {
                 for (int y = -gridHalf; y <= gridHalf; y++)
                 {
-
                     GameObject obj = Instantiate(tile, container);
                     obj.transform.Translate(x * space, y * space, 0);
-                    
-                   
+                
                 }
                 //GameObject obj = Instantiate(tile, container);
                 //obj.transform.SetParent(container, true);
-                int PlayerX = Random.Range(-gridHalf, +gridHalf);
-                int PlayerY = Random.Range(-gridHalf, +gridHalf);
-                player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);
+                
 
             }
+            int PlayerX = Random.Range(-gridHalf, +gridHalf);
+            int PlayerY = Random.Range(-gridHalf, +gridHalf);
+            player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);
         }
-
         
 
         #endregion Overarching Methods / Helpers
