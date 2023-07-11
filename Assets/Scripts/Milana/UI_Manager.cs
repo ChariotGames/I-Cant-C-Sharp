@@ -2,6 +2,7 @@ using Scripts.Models;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Scripts.Controllers
@@ -12,7 +13,6 @@ namespace Scripts.Controllers
         [SerializeField] private Image[] hearts;
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
-        [SerializeField] private GameObject gameOverPanel;
 
 
         private int _score = 0;
@@ -63,7 +63,7 @@ namespace Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 _timerOn = false;
-                gameOverPanel.SetActive(true);
+                SceneManager.LoadScene(2);
             }
 
             if (_timerOn)
