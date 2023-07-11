@@ -17,6 +17,7 @@ namespace Scripts.Games
         [SerializeField] private float spawnTimeLowerBounds;
         [SerializeField] private TextMeshPro timerTextMesh;
         [SerializeField] private SpriteRenderer damageTakenSprite;
+        [SerializeField] private Transform container;
 
         #endregion Serialized Fields
 
@@ -56,7 +57,7 @@ namespace Scripts.Games
             for (var i = buttons.Count - 1; i >= 0; i--)
             {
                 // just pool all the objects into a list
-                var button = Instantiate(buttons[i].gameObject, transform.parent);
+                var button = Instantiate(buttons[i].gameObject, container);
                 var buttonText = button.GetComponent<TextMeshPro>();
                 buttonText.text = _keys.All[i].Icon;
                 button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;

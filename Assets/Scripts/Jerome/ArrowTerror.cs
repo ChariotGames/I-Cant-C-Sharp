@@ -9,7 +9,7 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] [Range(0,10)] private int ammountEnemies = 0, ammountCheckpoints = 0, lives = 3; 
+        //[SerializeField] [Range(0, 10)] private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
         [SerializeField] private GameObject player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
 
         #endregion Serialized Fields
@@ -18,6 +18,7 @@ namespace Scripts.Games
 
         private int checkpointsCollected = 0;
         private int winCounter = 0;
+        private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
         private List<GameObject> allObjects;
         #endregion Fields
 
@@ -26,36 +27,64 @@ namespace Scripts.Games
         private void Awake()
         {
             //base.SetUp();
+            player.GetComponent<ArrowPlayer>().stick = _keys.One.Input;
         }
 
         void Start()
         {
             allObjects = new();
             allObjects.Add(player);
-            player.GetComponent<ArrowPlayer>().stick = _keys.One.Input;
+
+
+            if (Difficulty == Models.Difficulty.EASY)
+            {
+                ammountCheckpoints = UnityEngine.Random.Range(1, 2);
+            }
+            if (Difficulty == Models.Difficulty.HARD)
+            {
+                ammountEnemies = UnityEngine.Random.Range(3, 5);
+            }
+            if (Difficulty != Models.Difficulty.EASY)
+            {
+                ammountCheckpoints = UnityEngine.Random.Range(2, 4);
+                SpawnObjects(enemy, enemyContainer, ammountEnemies);
+            }
+
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
-            SpawnObjects(enemy, enemyContainer, ammountEnemies);
             SpawnObjects(goal, Container, 1);
-            
         }
 
         private void Restart()
         {
             allObjects.Add(player);
+            if (Difficulty == Models.Difficulty.EASY)
+            {
+                ammountCheckpoints = UnityEngine.Random.Range(1, 2);
+            }
+            if (Difficulty == Models.Difficulty.HARD)
+            {
+                ammountEnemies = UnityEngine.Random.Range(3, 5);
+            }
+            if (Difficulty != Models.Difficulty.EASY)
+            {
+                ammountCheckpoints = UnityEngine.Random.Range(2, 5);
+                SpawnObjects(enemy, enemyContainer, ammountEnemies);
+            }
+
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
-            SpawnObjects(enemy, enemyContainer, ammountEnemies);
             SpawnObjects(goal, Container, 1);
         }
 
         void Update()
         {
-           if (winCounter == 5)
+           if (winCounter == 3)
             {
                 winCounter = 0;
+                base.Harder();
                 base.Win();
             }
 
-            Debug.Log(base._playarea.Contains(player.transform.position));
+            //Debug.Log(base._playarea.Contains(player.transform.position));
         }
 
         internal void UpdateEnemyPositions(Vector3 position)
@@ -88,7 +117,7 @@ namespace Scripts.Games
                     checkpointsCollected++;
                     break;
                 case ElementType.ENEMY:
-                        
+                        base.Easier();
                         base.Lose();
                     break;
                 case ElementType.GOAL:
@@ -108,39 +137,15 @@ namespace Scripts.Games
 
         private void SpawnObjects(GameObject type, GameObject parent, int ammount)
         {
+            
             for (int i = 0; i < ammount; i++)
             {
                 GameObject obj = Instantiate(type, parent.transform);
                 allObjects.Add(obj);
 
-                Vector3 newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
-     
-                foreach (GameObject element in allObjects)
-                {
-                    if (element.GetComponent<ArrowPlayer>() != null) continue;
-                   
-                    float minDistance = 0;
-                    switch (element.GetComponent<ArrowObject>().type)
-                    {
-                        case ElementType.CHECKPOINT:
-                            minDistance = 6;
-                            break;
+                Vector3 newPosition = new Vector3(UnityEngine.Random.Range(_playarea.xMin, _playarea.xMax), UnityEngine.Random.Range( _playarea.yMin, _playarea.yMax), 0);
 
-                        case ElementType.ENEMY:
-                            minDistance = 8;
-                            break;
-
-                        case ElementType.GOAL:
-                            minDistance = 6;
-                            break;
-                    }
-                    //Debug.Log(Vector3.Distance(element.transform.position, newPosition));
-                    while (Vector3.Distance(element.transform.position, newPosition) < minDistance)
-                    {
-                        newPosition = new Vector3(UnityEngine.Random.Range(-8f, 8f), UnityEngine.Random.Range(-4.5f, 4.5f), 0);
-                    }
-                    obj.transform.position = newPosition; 
-                }
+                obj.transform.localPosition = newPosition;
             }
         }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Scripts.Controllers
 {
@@ -42,7 +44,12 @@ namespace Scripts.Controllers
             public void SetupButton(Minigame input)
             {
                 game = input;
-                title.text = game.Prefab.name;
+
+
+            string sTemp = Regex.Replace(game.Prefab.name, "([A-Z][a-z])", " $1", RegexOptions.Compiled).Trim();
+
+
+            title.text = Regex.Replace(sTemp, "([A-Z][A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower();
                 if (game.Preview != null) preview.sprite = game.Preview;
             }
 
@@ -51,6 +58,24 @@ namespace Scripts.Controllers
                 //Debug.Log("new Selection");
                 selectionChanged?.Invoke();
             }
+
+        //private String separateCamelCase()
+        //{
+        //    return "";
+        //}
+
+        //private string SplitCamelCase(this string str)
+        //{
+        //    return Regex.Replace(
+        //    Regex.Replace(
+        //    str,
+        //    @"(\P{Ll})(\P{Ll}\p{Ll})",
+        //    "$1 $2"
+        //    ),
+        //    @"(\p{Ll})(\P{Ll})",
+        //    "$1 $2"
+        //    );
+        //}
 
         #endregion Game Mechanics / Methods
     }

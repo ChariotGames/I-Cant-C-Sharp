@@ -104,7 +104,11 @@ namespace Scripts.Games
                 StartCoroutine(AnimateColor(circleRenderer, Color.blue, Color.green, 0.25f));
                 _correctGuesses++;
 
-                if (_correctGuesses == 5) base.Win();
+                if (_correctGuesses == 5)
+                {
+                    base.Harder();
+                    base.Win();
+                }
             }
             else
             {
@@ -114,6 +118,7 @@ namespace Scripts.Games
                 if (_wrongGuesses == 3)
                 {
                     stop = true;
+                    base.Easier();
                     base.Lose();
                 }
             }
