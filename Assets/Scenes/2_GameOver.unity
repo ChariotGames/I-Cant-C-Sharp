@@ -2564,7 +2564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 91935781}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1695267416
@@ -2811,10 +2811,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: -944628639613478452, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  restartButton: {fileID: 0}
+  restartButton: {fileID: 91935781}
   defaultSettings: {fileID: 11400000, guid: 65dcec6c5cbe3474cb38f18418f92669, type: 2}
   settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
-  score: {fileID: 0}
-  timer: {fileID: 0}
+  score: {fileID: 529547796}
+  timer: {fileID: 67354614}
   scoreText: {fileID: 529547796}
   timerText: {fileID: 67354614}

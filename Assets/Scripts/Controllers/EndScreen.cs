@@ -17,8 +17,8 @@ namespace Scripts.Controllers
         [SerializeField] private GameObject restartButton;
         [SerializeField] private Settings defaultSettings, settings;
 
-        [SerializeField] private TMP_Text score;
-        [SerializeField] private TMP_Text timer;
+        [SerializeField] private int score;
+        [SerializeField] private int timer;
         [SerializeField] private TMP_Text scoreText;
         [SerializeField] private TMP_Text timerText;
 
@@ -35,8 +35,8 @@ namespace Scripts.Controllers
 
         private void Awake()
         {
-            scoreText.text = "Score: " + score.text;
-            timerText.text = "Time: " + timer.text;
+            scoreText.text += timer.ToString("mm':'ss");
+            timerText.text += score.ToString("D3");
 
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];
