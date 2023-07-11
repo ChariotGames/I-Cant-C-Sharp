@@ -1,4 +1,4 @@
-using System;
+//using System;
 using UnityEngine;
 using Scripts.Models;
 
@@ -24,9 +24,12 @@ namespace Scripts.Games
 
         void Start()
         {
+            successesToWin = 3;
+            failsToLose = 1;
             ammountOfTiles = gridSize * gridSize;
-            remainingTiles = ammountOfTiles;
+            
             SetGrid();
+
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -43,7 +46,7 @@ namespace Scripts.Games
 
         public void PlayerTouched(GameObject obj)
         {
-            ElementType type = obj.GetComponent<LoseTileTile>().type;
+            ElementType type = obj.GetComponent<LoseTileField>().type;
 
             switch (type)
             {
@@ -52,15 +55,27 @@ namespace Scripts.Games
                     remainingTiles--;
                     if (remainingTiles == ammountOfTiles - 1)
                     {
-                        base.Win();
+                        successesToWin--;
+                        SetGrid();
+
+                        //if (successesToWin == 0)
+                        //{
+                        //    Debug.Log("you win");
+                        //    base.Win();
+                        //}
                     }
                     break;
                 case ElementType.ENEMY:
-                    lives--;
-                    if (lives == 0)
-                    {
-                        base.Lose();
-                    }
+                   
+                        failsToLose--;
+                        if (failsToLose == 0)
+                        {
+                            Debug.Log("you lose");
+                            base.Lose();
+                        }
+
+                        
+                    
                     break;
                 case ElementType.GOAL:
                     //if (remainingTiles == ammountOfTiles -1)
@@ -77,13 +92,22 @@ namespace Scripts.Games
 
         private void SetGrid()
         {
-            for (int x = -gridSize/2; x <= gridSize/2; x++)
+            int PlayerX = Random.Range(0, gridSize);
+            int PlayerY = Random.Range(0, gridSize);
 
+            remainingTiles = ammountOfTiles;
+            for (int x = -gridSize/2; x <= gridSize/2; x++)
             {
                 for (int y = -gridSize/2; y <= gridSize/2; y++)
                 {
+
                     GameObject obj = Instantiate(tile, container);
                     obj.transform.Translate(x * space, y * space, 0);
+                    if (PlayerX == x + gridSize/ 2 && PlayerY == y + gridSize/ 2)
+                    {
+                        player.transform.Translate((PlayerX - gridSize / 2) * space, (PlayerY - gridSize / 2) * space, 0);
+
+                    }
                 }
                 //GameObject obj = Instantiate(tile, container);
                 //obj.transform.SetParent(container, true); 

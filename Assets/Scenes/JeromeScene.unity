@@ -484,6 +484,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!58 &837513218 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4735582856177503591, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+  m_PrefabInstance: {fileID: 4735582854265454274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1144248352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -545,6 +550,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4571502578e7854a9c9d78759e9b10e, type: 3}
+--- !u!114 &1444490109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+  m_PrefabInstance: {fileID: 4735582854265454274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313fb1c4bd0fc49b1834999808289cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1644510389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4735582854936708376, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+  m_PrefabInstance: {fileID: 4735582854265454274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1644510391 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4735582854936708377, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+  m_PrefabInstance: {fileID: 4735582854265454274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1644510394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644510389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645d1d61bc7ec4e049adb00ecda50387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 1444490109}
+  player: {fileID: 837513218}
+  colors: []
+  timer: 1
+  box: {fileID: 1644510391}
+  type: 3
 --- !u!1 &1695267413
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +790,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4735582854936708380, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
 --- !u!1001 &5092499206969048940
 PrefabInstance:
