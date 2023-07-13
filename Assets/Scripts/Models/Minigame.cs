@@ -18,6 +18,7 @@ namespace Scripts.Models
         [SerializeField] private Genre genre;
         //[SerializeField] private Keys keysFirst, keysSecond;
         [SerializeField] private KeyMap keysLeft, keysRight;
+        [SerializeField] protected ActionNames actionNames;
         //[SerializeField] private Orientation orientation;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Sprite preview;
@@ -103,6 +104,15 @@ namespace Scripts.Models
         public KeyMap KeysRight
         {
             get => keysRight;
+        }
+
+        /// <summary>
+        /// Actions associated with this particular game.
+        /// </summary>
+        public ActionNames ActionNames
+        {
+            get => actionNames;
+            set => actionNames = value;
         }
 
         /// <summary>

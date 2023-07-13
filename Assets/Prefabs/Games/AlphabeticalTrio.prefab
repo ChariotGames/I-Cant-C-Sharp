@@ -97,7 +97,7 @@ GameObject:
   m_Layer: 0
   m_Name: AlphabeticalTrio
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
     two: 
     three: 
     four: 
+    other: 
   successesToWin: 5
   failsToLose: 3
   letters: {fileID: 8687728356737068271}
@@ -145,6 +146,7 @@ MonoBehaviour:
   gamestateWin: {fileID: 8687728356390974817}
   gamestateLose: {fileID: 8687728356552654445}
   timeout: 5
+  successesToLevelUp: 0
 --- !u!1 &8687728356552654445
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8687728357216914465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -658,7 +660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8687728357371829092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -923,7 +925,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1127,7 +1129,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

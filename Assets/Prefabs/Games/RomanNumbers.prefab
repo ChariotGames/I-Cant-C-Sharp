@@ -84,7 +84,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302581165475920260
 RectTransform:
   m_ObjectHideFlags: 0
@@ -685,7 +685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302581166398017434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1026,10 +1026,10 @@ GameObject:
   m_Layer: 0
   m_Name: RomanNumbers
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1302581166809503855
 Transform:
   m_ObjectHideFlags: 0
@@ -1065,6 +1065,7 @@ MonoBehaviour:
     two: 
     three: 
     four: 
+    other: 
   successesToWin: 5
   failsToLose: 3
   task: {fileID: 1302581166482144823}

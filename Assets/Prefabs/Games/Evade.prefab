@@ -732,6 +732,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae5825e892b1f24a83b995af4d48c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 1
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
+  successesToWin: 5
+  failsToLose: 3
   movementSpeed: 5
   stick: {fileID: 0}
 --- !u!61 &6074431469293827244
@@ -905,7 +913,7 @@ GameObject:
   m_Layer: 0
   m_Name: Evade
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0

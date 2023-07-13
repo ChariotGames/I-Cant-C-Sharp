@@ -25,5 +25,11 @@ MonoBehaviour:
     two: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
     three: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
     four: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
+    other: Missing Key
   prefab: {fileID: 5632558065659418744, guid: 09e6db1aec319474999a76c025b7f77c, type: 3}
   preview: {fileID: 0}

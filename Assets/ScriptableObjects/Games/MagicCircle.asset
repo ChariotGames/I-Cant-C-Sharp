@@ -27,14 +27,19 @@ MonoBehaviour:
   difficulty: 1
   genre: 10
   keysLeft:
-    one: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
-    two: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
+    one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
+    two: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
   keysRight:
-    one: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
-    two: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
+    one: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
+    two: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
+  actionNames:
+    one: Blue
+    two: Red
+    three: 
+    four: 
   prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
   preview: {fileID: 0}

@@ -25,5 +25,10 @@ MonoBehaviour:
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
+  actionNames:
+    one: Move
+    two: 
+    three: 
+    four: 
   prefab: {fileID: 2641797603570688775, guid: 4d11411b7f5448840a8ee753eb2be32e, type: 3}
   preview: {fileID: 0}

@@ -25,5 +25,10 @@ MonoBehaviour:
     two: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
     three: {fileID: 11400000, guid: a4600da8be593ac44ad0fc8718a077f2, type: 2}
     four: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
+  actionNames:
+    one: Duck
+    two: Blue
+    three: Jump
+    four: Red
   prefab: {fileID: 5920264850204584917, guid: 031a16bd02a52994bbc5b50358c6626e, type: 3}
   preview: {fileID: 0}

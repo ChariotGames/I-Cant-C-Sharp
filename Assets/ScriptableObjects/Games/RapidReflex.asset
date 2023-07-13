@@ -28,5 +28,11 @@ MonoBehaviour:
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
+  actionNames:
+    one: React
+    two: 
+    three: 
+    four: 
+    other: 
   prefab: {fileID: 1887571883485080397, guid: 62e95bc5bd41cdc45ab5d5c25ab44dfe, type: 3}
   preview: {fileID: 0}

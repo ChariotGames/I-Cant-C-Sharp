@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TriggerLeft
   m_EditorClassIdentifier: 
   input: {fileID: -6316003147358869082, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  icon: j
+  icon: l

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ShoulderLeft
   m_EditorClassIdentifier: 
   input: {fileID: 5314527531634765380, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  icon: d
+  icon: g

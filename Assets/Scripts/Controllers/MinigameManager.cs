@@ -22,6 +22,8 @@ namespace Scripts.Controllers
         #region Fields
 
         public static event Action<int> OnUpdateUIScore;
+        public static event Action<string, KeyMap, ActionNames> OnSetKeys;
+        public static event Action<string> OnClearKeys;
 
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
@@ -167,18 +169,19 @@ namespace Scripts.Controllers
             }
 
             baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect);
+            OnSetKeys?.Invoke(parent.name, keys, game.ActionNames);
             obj.SetActive(true);
         }
 
         /// <summary>
         /// Removes the game instance from the scene.
-        /// Messy code...
         /// </summary>
         private void RemoveGame(GameObject game)
         {
             if (settings.SelectedGame != null) return;
 
             _parent = game.transform.parent;
+            OnClearKeys?.Invoke(_parent.name);
 
             if (_parent == spawnCenter)
             {

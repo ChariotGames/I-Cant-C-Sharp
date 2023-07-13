@@ -1239,7 +1239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6704509844687254388, guid: 6c012f0c9f6bb45ef9a541d3234df04f, type: 3}
       propertyPath: m_Padding.m_Bottom
-      value: 200
+      value: 425
       objectReference: {fileID: 0}
     - target: {fileID: 6704509844687254389, guid: 6c012f0c9f6bb45ef9a541d3234df04f, type: 3}
       propertyPath: m_AnchorMin.y

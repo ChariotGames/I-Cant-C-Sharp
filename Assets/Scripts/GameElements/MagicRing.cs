@@ -7,12 +7,14 @@ namespace Scripts.Games
     /// <summary>
     /// Represents a single magic ring of the MagicCircle minigame.
     /// </summary>
-    public class MagicRing : BaseGame
+    public class MagicRing : MonoBehaviour
     {
         #region Serialized Fields
 
         [SerializeField] private MagicCircle parent;
         [SerializeField] private LineRenderer line;
+        [SerializeField] [Range(0, 4)] private float radius = 3f;
+        [SerializeField] [Range(0, 1)] private float failRadius = 0.25f;
         [SerializeField] [Range(0, 1)] private float timer = 0.5f;
         [SerializeField] [Range(64, 128)] private int lineSegments = 64;
 
@@ -23,7 +25,6 @@ namespace Scripts.Games
         private InputActionReference[] _buttons;
         private Color _ringColor;
         private Vector3 _offset;
-        private float _radius = 4f;
 
         #endregion Fields
 
@@ -31,12 +32,12 @@ namespace Scripts.Games
 
         void Update()
         {
-            if (_radius < 0.25)
+            if (radius < failRadius)
             {
                 parent.EvaluateResult(gameObject, false);
             }
 
-            DrawRing(lineSegments, _radius -= Time.deltaTime * timer);
+            DrawRing(lineSegments, radius -= Time.deltaTime * timer);
         }
 
         private void OnDisable()
@@ -99,7 +100,7 @@ namespace Scripts.Games
         /// <param name="ctx">Input event binding information.</param>
         private void ButtonPressed(InputAction.CallbackContext ctx)
         {
-            parent.EvaluateResult(gameObject, ctx.action == _buttons[0].action && _radius <= 0.75 && _radius >= 0.25);
+            parent.EvaluateResult(gameObject, ctx.action == _buttons[0].action && radius <= (1-failRadius) && radius >= failRadius);
         }
 
         /// <summary>

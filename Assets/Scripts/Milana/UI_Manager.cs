@@ -13,6 +13,8 @@ namespace Scripts.Controllers
         [SerializeField] private Image[] hearts;
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
+        [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
+        [SerializeField] private GameObject templateKeys;
 
 
         private int _score = 0;
@@ -23,12 +25,19 @@ namespace Scripts.Controllers
         private void Start()
         {
             _timerOn = true;
+        }
+        private void OnEnable()
+        {
             MinigameManager.OnUpdateUIScore += ScoreDisplay;
+            MinigameManager.OnSetKeys += DisplayKeys;
+            MinigameManager.OnClearKeys += ClearKeys;
         }
 
         private void OnDisable()
         {
             MinigameManager.OnUpdateUIScore -= ScoreDisplay;
+            MinigameManager.OnSetKeys -= DisplayKeys;
+            MinigameManager.OnClearKeys -= ClearKeys;
         }
 
         // Update is called once per frame
@@ -78,6 +87,48 @@ namespace Scripts.Controllers
         {
             _score = Mathf.Clamp(_score += change, 0, 999);
             scoreCounter.text = _score.ToString("D3");
+        }
+
+        private void DisplayKeys(string side, KeyMap keys, ActionNames actions)
+        {
+            Transform parent = leftKeys;
+            if (side.Contains("Right")) parent = rightKeys;
+            if (side.Contains("Center")) parent = centerKeys;
+
+            if (!actions.Other.Equals(""))
+            {
+                GameObject k = Instantiate(templateKeys, parent);
+                TMP_Text[] texts = k.transform.GetComponentsInChildren<TMP_Text>();
+                texts[1].text = actions.Other;
+                k.SetActive(true);
+                return;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (keys.All[i] == null || actions.All[i].Equals("")) return;
+
+                GameObject k = Instantiate(templateKeys, parent);
+                TMP_Text[] texts = k.transform.GetComponentsInChildren<TMP_Text>();
+                texts[0].text = keys.All[i].Icon;
+                texts[1].text = actions.All[i];
+                k.SetActive(true);
+            }
+        }
+
+        private void ClearKeys(string side)
+        {
+            if (side.Contains("Left")) RemoveKeys(leftKeys);
+            if (side.Contains("Right")) RemoveKeys(rightKeys);
+            if (side.Contains("Center")) RemoveKeys(centerKeys);
+        }
+
+        private void RemoveKeys(Transform parent)
+        {
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                Destroy(parent.GetChild(i).gameObject);
+            }
         }
     }
 

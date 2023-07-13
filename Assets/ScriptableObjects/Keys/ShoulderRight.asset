@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ShoulderRight
   m_EditorClassIdentifier: 
   input: {fileID: -6621357789243663484, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
-  icon: ''''
+  icon: x
