@@ -9,7 +9,7 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] [Range(3, 5)] private int gridSize = 3;
-        [SerializeField] [Range(1, 2)] private float space = 1;
+        [SerializeField] [Range(1.5f, 2)] private float space = 1;
         [SerializeField] private GameObject tile, player;
         [SerializeField] private Transform container;
 
@@ -24,13 +24,16 @@ namespace Scripts.Games
 
         void Start()
         {
+            successesToWin = 3;
+            failsToLose = 1;
+            ammountOfTiles = gridSize * gridSize;
             ResetGame();
 
         }
 
         private void Update()
         {
-            Debug.Log(remainingTiles.ToString());
+            //Debug.Log(remainingTiles.ToString());
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -60,11 +63,11 @@ namespace Scripts.Games
                         successesToWin--;
                         ResetGame();
 
-                        //if (successesToWin == 0)
-                        //{
-                        //    Debug.Log("you win");
-                        //    base.Win();
-                        //}
+                        if (successesToWin == 0)
+                        {
+                            Debug.Log("you win");
+                            base.Win();
+                        }
                     }
                     break;
                 case ElementType.ENEMY:
@@ -124,9 +127,6 @@ namespace Scripts.Games
 
         private void ResetGame()
         {
-            successesToWin = 3;
-            failsToLose = 1;
-            ammountOfTiles = gridSize * gridSize;
             remainingTiles = ammountOfTiles;
             if (container.childCount > 0) ClearGrid();
             SetGrid();

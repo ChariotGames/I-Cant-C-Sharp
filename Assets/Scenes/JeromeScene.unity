@@ -592,7 +592,7 @@ MonoBehaviour:
   player: {fileID: 837513218}
   colors:
   - {r: 0.065871, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.25162184, b: 0.1273585, a: 1}
+  - {r: 1, g: 0.12549019, b: 0.58168685, a: 1}
   timer: 1
   box: {fileID: 1644510391}
   type: 3
@@ -811,7 +811,11 @@ PrefabInstance:
       objectReference: {fileID: 465909528}
     - target: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
       propertyPath: gridSize
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
+      propertyPath: failsToLose
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4735582855614246449, guid: 9b7117413568b4327be1c1a317fa7153, type: 3}
       propertyPath: successesToWin
