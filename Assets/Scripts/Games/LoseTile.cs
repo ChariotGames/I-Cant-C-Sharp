@@ -1,4 +1,4 @@
-using System;
+//using System;
 using UnityEngine;
 using Scripts.Models;
 
@@ -8,8 +8,8 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField][Range(3,5)] private int gridSize = 3;
-        [SerializeField][Range(1,2)] private float space = 1;
+        [SerializeField] [Range(3, 5)] private int gridSize = 3;
+        [SerializeField] [Range(1, 2)] private float space = 1.2f;
         [SerializeField] private GameObject tile, player;
         [SerializeField] private Transform container;
 
@@ -17,16 +17,23 @@ namespace Scripts.Games
 
         #region Fields
 
-        [SerializeField]private int remainingTiles = 0, ammountOfTiles = 0, lives = 3;
+        [SerializeField] private int remainingTiles = 0, ammountOfTiles = 0, lives = 3;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
         void Start()
         {
+            successesToWin = 3;
+            failsToLose = 1;
             ammountOfTiles = gridSize * gridSize;
-            remainingTiles = ammountOfTiles;
-            SetGrid();
+            ResetGame();
+
+        }
+
+        private void Update()
+        {
+            //Debug.Log(remainingTiles.ToString());
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -43,24 +50,37 @@ namespace Scripts.Games
 
         public void PlayerTouched(GameObject obj)
         {
-            ElementType type = obj.GetComponent<LoseTileTile>().type;
+            ElementType type = obj.GetComponent<LoseTileField>().type;
 
             switch (type)
             {
                 case ElementType.CHECKPOINT:
                     //Destroy(obj);
                     remainingTiles--;
-                    if (remainingTiles == ammountOfTiles - 1)
+
+                    if (remainingTiles == 0)
                     {
-                        base.Win();
+                        successesToWin--;
+                        ResetGame();
+
+                        if (successesToWin == 0)
+                        {
+                            Debug.Log("you win");
+                            base.Win();
+                        }
                     }
                     break;
                 case ElementType.ENEMY:
-                    lives--;
-                    if (lives == 0)
+
+                    failsToLose--;
+                    if (failsToLose == 0)
                     {
+                        Debug.Log("you lose");
                         base.Lose();
                     }
+
+
+
                     break;
                 case ElementType.GOAL:
                     //if (remainingTiles == ammountOfTiles -1)
@@ -71,26 +91,46 @@ namespace Scripts.Games
             }
         }
 
+        private void ClearGrid()
+        {
+            for (int i = 0; i < container.childCount; i++)
+            {
+                GameObject obj = container.GetChild(i).gameObject;
+                Destroy(obj);
+            }
+        }
+
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers
 
         private void SetGrid()
         {
-            for (int x = -gridSize/2; x <= gridSize/2; x++)
+            int gridHalf = gridSize / 2;
 
+            for (int x = -gridHalf; x <= gridHalf; x++)
             {
-                for (int y = -gridSize/2; y <= gridSize/2; y++)
+                for (int y = -gridHalf; y <= gridHalf; y++)
                 {
+
                     GameObject obj = Instantiate(tile, container);
                     obj.transform.Translate(x * space, y * space, 0);
+                    obj.SetActive(true);
                 }
                 //GameObject obj = Instantiate(tile, container);
-                //obj.transform.SetParent(container, true); 
+                //obj.transform.SetParent(container, true);
             }
+            int PlayerX = Random.Range(-gridHalf, +gridHalf);
+            int PlayerY = Random.Range(-gridHalf, +gridHalf);
+            player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);
         }
 
-        
+        private void ResetGame()
+        {
+            remainingTiles = ammountOfTiles;
+            if (container.childCount > 0) ClearGrid();
+            SetGrid();
+        }
 
         #endregion Overarching Methods / Helpers
     }
