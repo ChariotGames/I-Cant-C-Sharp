@@ -37,11 +37,27 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_292ef40901eb4d0ba64d4821d019ccdf_Texture_1:
+        m_Texture: {fileID: 2800000, guid: c6373c6e64a44d148aa140d109a34e86, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_77687663a5e34289aa6465442131e352_Texture_1:
+        m_Texture: {fileID: 2800000, guid: cb4023df2c5c0a042907c5b6db647ccd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d2973fbb21434d4f9e9446a72060d26a_Texture_1:
+        m_Texture: {fileID: 2800000, guid: c6373c6e64a44d148aa140d109a34e86, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TransitionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Clipping: 1
+    - _Clipping: 0.357
     - _Dissolve: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
