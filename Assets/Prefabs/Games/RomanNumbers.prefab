@@ -349,7 +349,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1029,7 +1029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1302581166809503855
 Transform:
   m_ObjectHideFlags: 0
@@ -1068,9 +1068,12 @@ MonoBehaviour:
   successesToWin: 5
   failsToLose: 3
   task: {fileID: 1302581166482144823}
+  buttonYes: {fileID: 1302581165475920263}
+  buttonNo: {fileID: 1302581166398017445}
   gamestateWin: {fileID: 1302581165769300767}
   gamestateLose: {fileID: 1302581166891597149}
   timeout: 5
+  successesToLevelUp: 0
 --- !u!1 &1302581166891597149
 GameObject:
   m_ObjectHideFlags: 0
