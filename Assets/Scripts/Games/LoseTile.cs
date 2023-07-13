@@ -9,7 +9,7 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] [Range(3, 5)] private int gridSize = 3;
-        [SerializeField] [Range(1.5f, 2)] private float space = 1;
+        [SerializeField] [Range(1, 2)] private float space = 1.2f;
         [SerializeField] private GameObject tile, player;
         [SerializeField] private Transform container;
 
