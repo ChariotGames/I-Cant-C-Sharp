@@ -49,16 +49,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313fb1c4bd0fc49b1834999808289cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  difficulty: 1
   actionNames:
     one: 
     two: 
     three: 
     four: 
+  successesToWin: 5
+  failsToLose: 3
   gridSize: 5
   space: 1.6
   tile: {fileID: 4735582854936708376}
-  player: {fileID: 0}
+  player: {fileID: 4735582856177503587}
   container: {fileID: 4735582854429965526}
   remainingTiles: 0
   ammountOfTiles: 0
@@ -587,5 +589,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4a5f40be6d7490cba27d99851d01ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainGame: {fileID: 0}
+  MainGame: {fileID: 4735582855614246449}
   speed: 5
