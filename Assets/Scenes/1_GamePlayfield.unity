@@ -1249,7 +1249,6 @@ MonoBehaviour:
   heartCounter: {fileID: 820830843}
   scoreCounter: {fileID: 530300936}
   timeCounter: {fileID: 1554103829}
-  gameOverPanel: {fileID: 0}
 --- !u!1 &820830841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,7 +1913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1819797254}
   m_Layer: 5
-  m_Name: Canvasas
+  m_Name: Canvass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2057,10 +2056,6 @@ PrefabInstance:
       propertyPath: container.center
       value: 
       objectReference: {fileID: 1893183607}
-    - target: {fileID: 5897317456894251579, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5897317456917386128, guid: 04e0fe28e96764f4ba9399f18591386b, type: 3}
       propertyPath: m_IsActive
       value: 0

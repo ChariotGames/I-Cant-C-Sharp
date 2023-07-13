@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts.Models;
@@ -13,11 +12,13 @@ namespace Scripts.Controllers
     public class EndScreen : MonoBehaviour
     {
         #region Serialized Fields
-        
+
         [SerializeField] private InputActionAsset playerInput;
         [SerializeField] private GameObject restartButton;
         [SerializeField] private Settings defaultSettings, settings;
-        
+
+        [SerializeField] private int score;
+        [SerializeField] private int timer;
         [SerializeField] private TMP_Text scoreText;
         [SerializeField] private TMP_Text timerText;
 
@@ -34,16 +35,13 @@ namespace Scripts.Controllers
 
         private void Awake()
         {
-            TimeSpan timePlaying = TimeSpan.FromSeconds(settings.Time);
-            scoreText.text = "Score: " + settings.Score;
-            timerText.text = "Time: " + timePlaying.ToString("mm':'ss");
-            
-            settings.Time = 0;
-            settings.Score = 0;
+            scoreText.text += timer.ToString("mm':'ss");
+            timerText.text += score.ToString("D3");
 
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];
             uiMap.Enable();
+
         }
 
         void Start()
@@ -58,9 +56,7 @@ namespace Scripts.Controllers
         public void Restart()
         {
             settings.Lives = defaultSettings.Lives;
-            settings.Time = 0;
-            settings.Score = 0;
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void GoToMenu()
