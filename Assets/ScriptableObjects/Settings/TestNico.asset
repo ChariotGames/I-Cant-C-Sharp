@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c7d25ff481bef40a1752f5911b8c02, type: 3}
   m_Name: TestNico
   m_EditorClassIdentifier: 
-  lives: 1
+  lives: 5
   players: 1
   baseDifficulty: 1
   selectedGame: {fileID: 11400000, guid: ab65f45f24b010741ae49bb8d1f237b0, type: 2}
