@@ -14,8 +14,8 @@ namespace Scripts.Controllers
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
-        [SerializeField] private GameObject templateKeys;
-
+        [SerializeField] private GameObject templateKeys, leftTimer, rightTimer;
+        [SerializeField] private Image leftTime, rightTime;
 
         private int _score = 0;
         private float _time = 0;

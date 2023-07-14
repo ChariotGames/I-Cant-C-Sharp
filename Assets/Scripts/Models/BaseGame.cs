@@ -53,7 +53,7 @@ namespace Scripts.Games
         /// </summary>
         protected void ScoreDown()
         {
-            OnScoreUpdate?.Invoke(-(int)difficulty);
+            ScoreDown((int)difficulty);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Scripts.Games
         /// </summary>
         protected void ScoreUp()
         {
-            OnScoreUpdate?.Invoke((int)difficulty);
+            ScoreUp((int)difficulty);
         }
 
         /// <summary>
