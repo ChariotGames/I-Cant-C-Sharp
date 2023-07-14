@@ -16,6 +16,7 @@ namespace Scripts.Controllers
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
         [SerializeField] private GameObject templateKeys, leftTimer, rightTimer;
         [SerializeField] private Image leftTime, rightTime;
+        [SerializeField] private GameObject leftAnim, rightAnim;
 
         private int _score = 0;
         private float _time = 0;
