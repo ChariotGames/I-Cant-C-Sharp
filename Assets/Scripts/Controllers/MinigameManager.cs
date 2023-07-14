@@ -1,6 +1,7 @@
 using Scripts.Games;
 using Scripts.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -186,13 +187,17 @@ namespace Scripts.Controllers
             if (_parent == spawnCenter)
             {
                 RemoveAllGames();
+                StartCoroutine(Wait(3f));
                 SpawnSides();
                 return;
             }
 
             Destroy(game);
             if (_winCounter > 0)
+            {
+                StartCoroutine(Wait(3f));
                 PickGame(new List<Minigame>(_mixGames));
+            }
         }
 
         /// <summary>
@@ -285,6 +290,11 @@ namespace Scripts.Controllers
         public void UpdateScore(int change)
         {
             OnUpdateUIScore?.Invoke(change);
+        }
+
+        private IEnumerator Wait(float time)
+        {
+            yield return new WaitForSeconds(time);
         }
 
         #endregion

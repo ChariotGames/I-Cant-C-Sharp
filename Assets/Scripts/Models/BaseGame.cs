@@ -83,6 +83,23 @@ namespace Scripts.Games
         }
 
         /// <summary>
+        /// Triggers when 
+        /// </summary>
+        protected void Success()
+        {
+            successesToWin--;
+            ScoreUp();
+            if (successesToWin <= 0) Win();
+        }
+
+        protected void Fail()
+        {
+            failsToLose--;
+            //ScoreDown();
+            if (failsToLose <= 0) Lose();
+        }
+
+        /// <summary>
         /// Informs the BaseGame Controller, that the game triggered a win condition
         /// </summary>
         protected void Win()
@@ -112,6 +129,24 @@ namespace Scripts.Games
         protected void Harder()
         {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
+        }
+
+        /// <summary>
+        /// Animates the score going up.
+        /// </summary>
+        private void AnimateScore(int value)
+        {
+
+        }
+
+        private void AnimateSuccess()
+        {
+
+        }
+
+        private void AnimateFail()
+        {
+
         }
 
         #endregion  Methods
