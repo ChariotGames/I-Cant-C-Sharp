@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -27,7 +28,6 @@ namespace Scripts.Games
         [SerializeField] private List<Color> flashColor;
         [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
-        [SerializeField] [Range(0.25f, 1)] private float timeToAnswer;
         [SerializeField] private int successesToLevelUp;
 
         #endregion Serialized Fields
@@ -35,7 +35,7 @@ namespace Scripts.Games
     #region Fields
 
         private const int NUMBER_LIGHTS = 5;
-        private float _timeElapsed = 0, _randomDelay = 0;
+        private float _timeElapsed = 0, _randomDelay = 0, _timeToAnswer;
         private bool _isButtonPressed = false;
         private SpriteRenderer _backgroundSprite;
         private int difficultyTracker, defaultFailsToLose;
@@ -137,14 +137,14 @@ namespace Scripts.Games
             _timeElapsed = -1;
             if (CheckForEarlyLose()) yield break; 
             float timer = Time.time;
-            yield return new WaitUntil(() => _isButtonPressed || Time.time - timer > timeToAnswer);
+            yield return new WaitUntil(() => _isButtonPressed || Time.time - timer > _timeToAnswer);
             _timeElapsed = Time.time - timer;
         }
 
         private IEnumerator DetermineGamestate()
         {
             overlayContainer.SetActive(true);
-            if (_timeElapsed < timeToAnswer && _timeElapsed >= 0)
+            if (_timeElapsed < _timeToAnswer && _timeElapsed >= 0)
             {
                 gameState.text = "Rapid Reflex: " + (int)(_timeElapsed * 1000) + " ms";
                 GameWon();
@@ -227,6 +227,8 @@ namespace Scripts.Games
 
         private void OnEnable()
         {
+            _timeToAnswer = 1.33f - (int)difficulty * 0.33f;
+            Debug.Log("AnswerTime: " + _timeToAnswer);
             _keys.One.Input.action.started += EastButtonPressed;
         }
 

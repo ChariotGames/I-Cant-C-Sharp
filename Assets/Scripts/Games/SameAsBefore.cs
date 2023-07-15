@@ -18,7 +18,7 @@ namespace Scripts.Games
         [SerializeField] private int maxStepsBack, timeToAnswer, successesToLevelUp;
 
         private LinkedList<int> _lastIndices = new();
-        private const string _stepsText = "Steps: ";
+        private const string _stepsText = "steps: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
         private int difficultyTracker, defaultFailsToLose;

@@ -126,14 +126,14 @@ namespace Scripts.Games
                 switch (isTrio)
                 {
                     case true:
-                        letter = Random.Range(66, 90);
+                        letter = Random.Range('b', 'z');      // Upper Case: 66 - 90 -> B - Z
                         newLetters = new []{(char)(letter - 1), (char)letter, (char)(letter + 1)};
                         break;
                     case false:
-                        letter = Random.Range(66, 90);
-                        int random = letter == 66 ? 0 : letter == 89 ? 1 : Random.Range(0, 2);
-                        int shift1 = random == 0 ? 1 : Random.Range(2, letter - 65);
-                        int shift2 = random == 1 ? 1 : Random.Range(2, 90 - letter + 1);
+                        letter = Random.Range('b', 'z');
+                        int random = letter == 'b' ? 0 : letter == 'z' - 1 ? 1 : Random.Range(0, 2);
+                        int shift1 = random == 0 ? 1 : Random.Range(2, letter - 'a');
+                        int shift2 = random == 1 ? 1 : Random.Range(2, 'b' - letter + 1);
                         //Debug.Log(letter + " : " + shift1 + " , " + shift2);
                         newLetters = new[]
                         {

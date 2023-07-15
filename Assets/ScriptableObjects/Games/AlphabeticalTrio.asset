@@ -30,5 +30,6 @@ MonoBehaviour:
     two: No
     three: 
     four: 
+    other: 
   prefab: {fileID: 8687728356415758773, guid: c2f1532ce82970b4789fde496fdb026c, type: 3}
   preview: {fileID: 0}

@@ -130,25 +130,25 @@ namespace Scripts.Games
                     ...
                  */
                 
-                while (value >= 1000) { value -= 1000; res += "M"; }
-                if (value >= 900) { value -= 900; res += "CM"; }
+                while (value >= 1000) { value -= 1000; res += "m"; }
+                if (value >= 900) { value -= 900; res += "cm"; }
 
-                while (value >= 500) { value -= 500; res += "D"; }
-                if (value >= 400) { value -= 400; res += "CD"; }
+                while (value >= 500) { value -= 500; res += "d"; }
+                if (value >= 400) { value -= 400; res += "cd"; }
 
-                while (value >= 100) { value -= 100; res += "C"; }
-                if (value >= 90) { value -= 90; res += "XC"; }
+                while (value >= 100) { value -= 100; res += "c"; }
+                if (value >= 90) { value -= 90; res += "xc"; }
 
-                while (value >= 50) { value -= 50; res += "L"; }
-                if (value >= 40) { value -= 40; res += "XL"; }
+                while (value >= 50) { value -= 50; res += "l"; }
+                if (value >= 40) { value -= 40; res += "xl"; }
 
-                while (value >= 10) { value -= 10; res += "X"; }
-                if (value >= 9) { value -= 9; res += "IX"; }
+                while (value >= 10) { value -= 10; res += "x"; }
+                if (value >= 9) { value -= 9; res += "ix"; }
 
-                while (value >= 5) { value -= 5; res += "V"; }
-                if (value >= 4) { value -= 4; res += "IV"; }
+                while (value >= 5) { value -= 5; res += "v"; }
+                if (value >= 4) { value -= 4; res += "iv"; }
 
-                while (value >= 1) { value -= 1; res += "I"; }
+                while (value >= 1) { value -= 1; res += "i"; }
                 
                 return res;
             }
