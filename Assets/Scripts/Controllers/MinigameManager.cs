@@ -25,6 +25,7 @@ namespace Scripts.Controllers
         public static event Action<int> OnUpdateUIScore;
         public static event Action<string, KeyMap, ActionNames> OnSetKeys;
         public static event Action<string> OnClearKeys;
+        public static event Action<(string parent, int score, float timer, int toWin, int toLose)> OnSetAnimations;
 
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
@@ -50,6 +51,7 @@ namespace Scripts.Controllers
             BaseGame.OnWin += RemoveGame;
             BaseGame.OnUpdateDifficulty += UpdateDifficulty;
             BaseGame.OnScoreUpdate += UpdateScore;
+            BaseGame.OnSetVariables += SetAnimationVariables;
 
             if (settings.SelectedGame != null)
             {
@@ -80,6 +82,7 @@ namespace Scripts.Controllers
             BaseGame.OnWin -= RemoveGame;
             BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
             BaseGame.OnScoreUpdate -= UpdateScore;
+            BaseGame.OnSetVariables -= SetAnimationVariables;
         }
 
         #endregion
@@ -287,9 +290,15 @@ namespace Scripts.Controllers
                 return;
             }
         }
-        public void UpdateScore(int change)
+
+        private  void UpdateScore(int change)
         {
             OnUpdateUIScore?.Invoke(change);
+        }
+
+        private void SetAnimationVariables((string parent, int score, float timer, int toWin, int toLose) vars)
+        {
+            OnSetAnimations?.Invoke(vars);
         }
 
         private IEnumerator Wait(float time)

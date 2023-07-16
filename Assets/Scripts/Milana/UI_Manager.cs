@@ -14,7 +14,7 @@ namespace Scripts.Controllers
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
-        [SerializeField] private GameObject templateKeys, leftTimer, rightTimer;
+        [SerializeField] private GameObject templateKeys;
         [SerializeField] private Image leftTime, rightTime;
         [SerializeField] private GameObject leftAnim, rightAnim;
 
@@ -32,6 +32,7 @@ namespace Scripts.Controllers
             MinigameManager.OnUpdateUIScore += ScoreDisplay;
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
+            MinigameManager.OnSetAnimations += SetAnimations;
         }
 
         private void OnDisable()
@@ -39,6 +40,7 @@ namespace Scripts.Controllers
             MinigameManager.OnUpdateUIScore -= ScoreDisplay;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
+            MinigameManager.OnSetAnimations -= SetAnimations;
         }
 
         // Update is called once per frame
@@ -122,6 +124,11 @@ namespace Scripts.Controllers
             if (side.Contains("Left")) RemoveKeys(leftKeys);
             if (side.Contains("Right")) RemoveKeys(rightKeys);
             if (side.Contains("Center")) RemoveKeys(centerKeys);
+        }
+
+        private void SetAnimations((string parent, int score, float timer, int toWin, int toLose) vars)
+        {
+
         }
 
         private void RemoveKeys(Transform parent)

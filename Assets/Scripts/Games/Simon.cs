@@ -297,12 +297,11 @@ namespace Scripts.Games
         /// </summary>
         private void WrongColor()
         {
-            failsToLose--;
-            if (failsToLose <= 0) base.Lose();
+            Fail();
 
             nothing.Animate();
 
-            successesToWin = Mathf.Clamp((successesToWin -= (int)base.Difficulty), 0, 9);
+            _successes = Mathf.Clamp((successesToWin -= (int)base.Difficulty), 0, 9);
             ResetTurn();
             StartCoroutine(AnimateButtons(_animationTime, BLINK_TIME));
         }
@@ -313,13 +312,10 @@ namespace Scripts.Games
         /// </summary>
         private void GuessingDone()
         {
-            successesToWin--;
-            UpdateDifficulty(successesToWin);
-            if (successesToWin <= 0)
-            {
-                base.Win();
-                return;
-            }
+            UpdateDifficulty(_successes);
+            
+            Success();
+
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);

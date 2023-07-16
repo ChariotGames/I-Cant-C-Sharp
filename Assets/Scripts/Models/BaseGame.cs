@@ -25,6 +25,7 @@ namespace Scripts.Games
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
+        public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
 
         protected KeyMap _keys;
         protected Rect _playarea;
@@ -46,6 +47,15 @@ namespace Scripts.Games
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
+        }
+
+        /// <summary>
+        /// Sets the relevant variables to the UI.
+        /// </summary>
+        /// <param name="time">The timer value used for this game.</param>
+        protected void UpdateUIvariables(float time)
+        {
+            OnSetVariables?.Invoke((gameObject.transform.parent.name, (int)difficulty, time, successesToWin, failsToLose));
         }
 
         /// <summary>
@@ -83,20 +93,25 @@ namespace Scripts.Games
         }
 
         /// <summary>
-        /// Triggers when 
+        /// Trigger ths when you achieved a success.
+        /// It counts and manages everything else.
         /// </summary>
         protected void Success()
         {
-            successesToWin--;
+            _successes++;
             ScoreUp();
-            if (successesToWin <= 0) Win();
+            if (_successes >= successesToWin) Win();
         }
 
+        /// <summary>
+        /// Use this when you made a mistake.
+        /// It counts and manages everything else.
+        /// </summary>
         protected void Fail()
         {
-            failsToLose--;
-            //ScoreDown();
-            if (failsToLose <= 0) Lose();
+            _fails++;
+            ScoreDown();
+            if (_fails >= failsToLose) Lose();
         }
 
         /// <summary>
@@ -129,24 +144,6 @@ namespace Scripts.Games
         protected void Harder()
         {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
-        }
-
-        /// <summary>
-        /// Animates the score going up.
-        /// </summary>
-        private void AnimateScore(int value)
-        {
-
-        }
-
-        private void AnimateSuccess()
-        {
-
-        }
-
-        private void AnimateFail()
-        {
-
         }
 
         #endregion  Methods
