@@ -1,6 +1,6 @@
 ICON			CHARACTER
 
-Thumbstick Any			`
+Thumbstick Any			#
 Thumbstick Down			1
 Thumbstick Right		2
 Thumbstick Up			3
