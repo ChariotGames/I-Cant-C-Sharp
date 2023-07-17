@@ -1,6 +1,6 @@
 ICON			CHARACTER
 
-Thumbstick Any			#
+Thumbstick Any			` //in Milana Font -> #
 Thumbstick Down			1
 Thumbstick Right		2
 Thumbstick Up			3
@@ -50,7 +50,7 @@ Switch Right Trigger		m
 
 Face Button Bottom		,
 Face Button Right		.
-Face Button Top			/
+Face Button Top			/    // in Milana Font -> X
 Face Button Left		Q
 Face Button Bottom & Right	W
 Face Button Right & Top		E
@@ -73,7 +73,9 @@ Left Mouse Button		J
 Middle Mouse Button		K
 Right Mouse Button		L
 Mouse Scroll Up			Z
-Mouse Scroll Both		X
+
+Mouse Scroll Both		X //gibt es in Milana Font nicht mehr
+
 Mouse Scroll Down		C
 
 Start Button			V
