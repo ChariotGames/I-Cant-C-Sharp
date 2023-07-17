@@ -43,7 +43,7 @@ public class AnimPlayer : MonoBehaviour
             StartCoroutine(FillImage(anim, fails, failsMax));
         }
 
-        anim.SetActive(false);
+        //anim.SetActive(false);
     }
 
     private IEnumerator FillImage(GameObject anim, float part, float total)
@@ -56,6 +56,6 @@ public class AnimPlayer : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(1);
-        //anim.SetActive(false);
+        anim.SetActive(false);
     }
 }
