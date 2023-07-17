@@ -159,7 +159,7 @@ namespace Scripts.Controllers
             }
 
             timer.Run();
-            animPlayer.Run(anim);
+            StartCoroutine(animPlayer.Run(anim));
         }
 
         private void RemoveKeys(Transform parent)
