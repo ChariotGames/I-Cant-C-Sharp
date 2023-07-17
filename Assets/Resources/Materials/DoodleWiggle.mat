@@ -40,7 +40,7 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Intensity: 1
+    - _Intensity: 8.4
     - _Noise: 2.18
     - _Speed: 8.55
     m_Colors: []

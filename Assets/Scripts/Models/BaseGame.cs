@@ -26,6 +26,7 @@ namespace Scripts.Games
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
         public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
+        public static event Action<string, AnimType> OnPlayAnimations;
 
         protected KeyMap _keys;
         protected Rect _playarea;
@@ -100,7 +101,12 @@ namespace Scripts.Games
         {
             _successes++;
             ScoreUp();
-            if (_successes >= successesToWin) Win();
+            if (_successes >= successesToWin)
+            {
+                Win();
+                return;
+            }
+            OnPlayAnimations?.Invoke(gameObject.transform.parent.name, AnimType.Win);
         }
 
         /// <summary>
@@ -111,7 +117,12 @@ namespace Scripts.Games
         {
             _fails++;
             ScoreDown();
-            if (_fails >= failsToLose) Lose();
+            if (_fails >= failsToLose)
+            {
+                Lose();
+                return;
+            }
+            OnPlayAnimations?.Invoke(gameObject.transform.parent.name, AnimType.Lose);
         }
 
         /// <summary>

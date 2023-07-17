@@ -15,8 +15,8 @@ namespace Scripts.Controllers
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
         [SerializeField] private GameObject templateKeys;
-        [SerializeField] private Image leftTime, rightTime;
-        [SerializeField] private GameObject leftAnim, rightAnim;
+        [SerializeField] private Timer leftTimer, rightTimer;
+        [SerializeField] private AnimPlayer leftAnim, rightAnim;
 
         private int _score = 0;
         private float _time = 0;
@@ -33,6 +33,7 @@ namespace Scripts.Controllers
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
             MinigameManager.OnSetAnimations += SetAnimations;
+            MinigameManager.OnPlayAnimations += PlayAnimations;
         }
 
         private void OnDisable()
@@ -41,6 +42,7 @@ namespace Scripts.Controllers
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
             MinigameManager.OnSetAnimations -= SetAnimations;
+            MinigameManager.OnPlayAnimations -= PlayAnimations;
         }
 
         // Update is called once per frame
@@ -128,7 +130,36 @@ namespace Scripts.Controllers
 
         private void SetAnimations((string parent, int score, float timer, int toWin, int toLose) vars)
         {
+            if (vars.parent.Contains("Left") || vars.parent.Contains("Center"))
+            {
+                leftTimer.Duration = vars.timer;
+                if (vars.timer <= 0) leftTimer.gameObject.SetActive(false);
+                leftAnim.Count = vars.score;
+                leftAnim.WinsMax = vars.toWin;
+                leftAnim.FailsMax = vars.toLose;
+            }
+            else
+            {
+                rightTimer.Duration = vars.timer;
+                if (vars.timer <= 0) rightTimer.gameObject.SetActive(false);
+                rightAnim.Count = vars.score;
+                rightAnim.WinsMax = vars.toWin;
+                rightAnim.FailsMax = vars.toLose;
+            }
+        }
 
+        private void PlayAnimations(string parent, AnimType anim)
+        {
+            Timer timer = leftTimer;
+            AnimPlayer animPlayer = leftAnim;
+            if (parent.Contains("Right"))
+            {
+                timer = rightTimer;
+                animPlayer = rightAnim;
+            }
+
+            timer.Run();
+            animPlayer.Run(anim);
         }
 
         private void RemoveKeys(Transform parent)

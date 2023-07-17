@@ -79,6 +79,8 @@ namespace Scripts.Games
             inputTexts[1].text = _keys.Two.Icon;
             inputTexts[2].text = _keys.Three.Icon;
             inputTexts[3].text = _keys.Four.Icon;
+
+            UpdateUIvariables(TURN_TIME);
         }
 
         #endregion
@@ -101,15 +103,9 @@ namespace Scripts.Games
         /// </summary>
         private void UpdateDifficulty(int rounds)
         {
-            if (rounds <= 0)
-            {
-                base.Easier();
-            }
+            if (rounds <= 0) Easier();
 
-            if (rounds >= LVL_CHANGE)
-            {
-                base.Harder();
-            }
+            if (rounds >= LVL_CHANGE) Harder();
 
             //_successes %= LVL_CHANGE;
         }
@@ -301,7 +297,7 @@ namespace Scripts.Games
 
             nothing.Animate();
 
-            _successes = Mathf.Clamp((successesToWin -= (int)base.Difficulty), 0, 9);
+            _successes = Mathf.Clamp((successesToWin -= (int)Difficulty), 0, 9);
             ResetTurn();
             StartCoroutine(AnimateButtons(_animationTime, BLINK_TIME));
         }

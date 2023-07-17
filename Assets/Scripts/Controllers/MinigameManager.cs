@@ -26,6 +26,8 @@ namespace Scripts.Controllers
         public static event Action<string, KeyMap, ActionNames> OnSetKeys;
         public static event Action<string> OnClearKeys;
         public static event Action<(string parent, int score, float timer, int toWin, int toLose)> OnSetAnimations;
+        public static event Action<string, AnimType> OnPlayAnimations;
+
 
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
@@ -52,6 +54,7 @@ namespace Scripts.Controllers
             BaseGame.OnUpdateDifficulty += UpdateDifficulty;
             BaseGame.OnScoreUpdate += UpdateScore;
             BaseGame.OnSetVariables += SetAnimationVariables;
+            BaseGame.OnPlayAnimations += PlayAnimations;
 
             if (settings.SelectedGame != null)
             {
@@ -83,6 +86,7 @@ namespace Scripts.Controllers
             BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
             BaseGame.OnScoreUpdate -= UpdateScore;
             BaseGame.OnSetVariables -= SetAnimationVariables;
+            BaseGame.OnPlayAnimations -= PlayAnimations;
         }
 
         #endregion
@@ -299,6 +303,11 @@ namespace Scripts.Controllers
         private void SetAnimationVariables((string parent, int score, float timer, int toWin, int toLose) vars)
         {
             OnSetAnimations?.Invoke(vars);
+        }
+
+        private void PlayAnimations(string parent, AnimType anim)
+        {
+            OnPlayAnimations?.Invoke(parent, anim);
         }
 
         private IEnumerator Wait(float time)
