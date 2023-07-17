@@ -83,6 +83,7 @@ MonoBehaviour:
     two: 
     three: 
     four: 
+    other: 
   successesToWin: 5
   failsToLose: 3
   colors:
@@ -324,6 +325,7 @@ MonoBehaviour:
     two: 
     three: 
     four: 
+    other: 
   successesToWin: 5
   failsToLose: 3
   colors:
@@ -455,6 +457,7 @@ MonoBehaviour:
     two: 
     three: 
     four: 
+    other: 
   successesToWin: 5
   failsToLose: 3
   bombBase: {fileID: 2641797602970142051}
@@ -567,6 +570,7 @@ MonoBehaviour:
     two: 
     three: 
     four: 
+    other: 
   successesToWin: 5
   failsToLose: 3
   movementSpeed: 10
@@ -672,6 +676,7 @@ MonoBehaviour:
     two: 
     three: 
     four: 
+    other: 
   successesToWin: 5
   failsToLose: 3
   colors:

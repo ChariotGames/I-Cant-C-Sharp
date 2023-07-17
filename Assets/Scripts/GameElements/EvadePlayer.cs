@@ -18,7 +18,7 @@ namespace Scripts.Games
             float playerPos = transform.localPosition.x;
             
             float moveAmount = stick.action.ReadValue<Vector2>().x * movementSpeed * Time.deltaTime;
-            float newPos = Mathf.Clamp(playerPos + moveAmount, -3f, 3f);
+            float newPos = Mathf.Clamp(playerPos + moveAmount, -2.3f, 2.3f);
             transform.localPosition = new Vector3(newPos, transform.localPosition.y, transform.localPosition.z);
         }
 

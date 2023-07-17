@@ -37,8 +37,19 @@ namespace Scripts.Games
             //transform.Translate(stick.action.ReadValue<Vector2>() * Time.deltaTime * speed);
             var input = stick.action.ReadValue<Vector2>().normalized;
             if (input.magnitude > 0.1f) {
-                float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg - 90f;
+                float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg; //  - 90f
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                gameObject.GetComponent<SpriteRenderer>().flipY = false;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipY = false;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+                if (input.x < 0)
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipY = true;
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipY = true;
+                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+                }
             }
             move();
             
