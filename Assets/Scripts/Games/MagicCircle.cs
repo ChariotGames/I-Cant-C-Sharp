@@ -101,8 +101,9 @@ namespace Scripts.Games
 
             if (isWin)
             {
-                StartCoroutine(AnimateColor(circleRenderer, Color.blue, Color.green, 0.25f));
+                StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.green, 0.25f));
                 _correctGuesses++;
+                base.ScoreUp();
 
                 if (_correctGuesses == 5)
                 {
@@ -112,7 +113,7 @@ namespace Scripts.Games
             }
             else
             {
-                StartCoroutine(AnimateColor(circleRenderer, Color.blue, Color.red, 0.25f));
+                StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.red, 0.25f));
                 _wrongGuesses++;
 
                 if (_wrongGuesses == 3)
