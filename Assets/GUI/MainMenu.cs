@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Scripts.Models;
+using UnityEngine.SceneManagement;
 
 namespace Scripts.Controllers
 {
@@ -75,6 +76,11 @@ namespace Scripts.Controllers
             }
 
             EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
+        }
+
+        public void Run()
+        {
+            SceneManager.LoadScene(1);
         }
 
         /// <summary>
