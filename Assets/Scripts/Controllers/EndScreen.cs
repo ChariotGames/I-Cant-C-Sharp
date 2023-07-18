@@ -64,7 +64,7 @@ namespace Scripts.Controllers
         public void GoToMenu()
         {
             uiMap.Disable();
-            SceneChanger.ChangeScene(0);
+            SceneManager.LoadScene("0_GameMenu");
         }
 
         public void QuitGame()

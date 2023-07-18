@@ -5,6 +5,7 @@ using Scripts._Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace Scripts.Controllers
@@ -85,7 +86,7 @@ namespace Scripts.Controllers
                 Time.timeScale = 1;
                 uiMap.Disable();
                 playerMap.Enable();
-                SceneChanger.ChangeScene(0);
+                SceneManager.LoadScene("0_GameMenu");
             }
 
             public void QuitGame()
