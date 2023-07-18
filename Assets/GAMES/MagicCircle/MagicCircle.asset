@@ -24,7 +24,7 @@ MonoBehaviour:
 
     Hard: Rings can be thicker. Hold a button according
     to the length of the ring.'
-  difficulty: 1
+  difficulty: 3
   genre: 10
   keysLeft:
     one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
@@ -41,5 +41,6 @@ MonoBehaviour:
     two: Red
     three: 
     four: 
+    other: 
   prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
-  preview: {fileID: 0}
+  preview: {fileID: 21300000, guid: 83d35fc3b307b10498b4cd30a4f8afdc, type: 3}

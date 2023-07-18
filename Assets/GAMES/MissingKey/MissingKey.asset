@@ -32,4 +32,4 @@ MonoBehaviour:
     four: 
     other: Missing Key
   prefab: {fileID: 5632558065659418744, guid: 09e6db1aec319474999a76c025b7f77c, type: 3}
-  preview: {fileID: 0}
+  preview: {fileID: 21300000, guid: 5cf6fa03d06097b44b56b3d680fc7f39, type: 3}

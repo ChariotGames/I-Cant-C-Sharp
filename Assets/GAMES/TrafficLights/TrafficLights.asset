@@ -30,5 +30,6 @@ MonoBehaviour:
     two: Left
     three: Submit
     four: 
+    other: 
   prefab: {fileID: 989249342879803052, guid: 5a0d9ad56754df7418125be6d6ff9d47, type: 3}
   preview: {fileID: 0}
