@@ -35,8 +35,8 @@ namespace Scripts.Controllers
 
         private void Awake()
         {
-            scoreText.text += timer.ToString("mm':'ss");
-            timerText.text += score.ToString("D3");
+            scoreText.text += score.ToString("D3");
+            timerText.text +=  timer.ToString("mm':'ss");
 
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];
@@ -44,9 +44,10 @@ namespace Scripts.Controllers
 
         }
 
-        void Start()
+        private void OnEnable()
         {
-
+            playerMap.Disable();
+            EventSystem.current.SetSelectedGameObject(restartButton);
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -56,7 +57,8 @@ namespace Scripts.Controllers
         public void Restart()
         {
             settings.Lives = defaultSettings.Lives;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            string t = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene("1_GamePlayfield");
         }
 
         public void GoToMenu()
@@ -74,20 +76,5 @@ namespace Scripts.Controllers
         }
 
         #endregion Game Mechanics / Methods
-
-        #region Overarching Methods / Helpers
-
-        private void OnEnable()
-        {
-            playerMap.Disable();
-            EventSystem.current.SetSelectedGameObject(restartButton);
-        }
-
-        private void OnDisable()
-        {
-
-        }
-
-        #endregion Overarching Methods / Helpers
     }
 }

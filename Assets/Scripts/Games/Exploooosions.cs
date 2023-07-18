@@ -24,10 +24,10 @@ namespace Scripts.Games
             borders[2] = new Vector2(_playarea.xMax, _playarea.yMax);
             borders[3] = new Vector2(_playarea.xMax, _playarea.yMin);
             borders[4] = new Vector2(_playarea.xMin, _playarea.yMin);
-            for (int i = 0; i < borders.Length; i++)
-            {
-                border.GetComponent<EdgeCollider2D>().points = borders;
-            }
+            //for (int i = 0; i < borders.Length; i++)
+            //{
+            border.GetComponent<EdgeCollider2D>().points = borders;
+            //}
         }
 
         void Start()
