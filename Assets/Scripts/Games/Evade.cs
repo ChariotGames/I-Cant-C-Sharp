@@ -37,16 +37,20 @@ namespace Scripts.Games
             chance = Random.value;
 
             Indicators[firstRandom].GetComponent<EvadeIndicator>().SetUp();
+            Indicators[secondRandom].transform.GetChild(1).gameObject.SetActive(true);
+            Indicators[thirdRandom].transform.GetChild(1).gameObject.SetActive(true);
 
-            if(Difficulty != Difficulty.EASY && chance >= 0.33f)
+            if (Difficulty != Difficulty.EASY && chance >= 0.33f)
             {
                 Indicators[secondRandom].GetComponent<EvadeIndicator>().SetUp();
+                Indicators[secondRandom].transform.GetChild(1).gameObject.SetActive(false);
             }
             if (Difficulty == Difficulty.HARD && chance >= 0.66f)
             {
                 Indicators[thirdRandom].GetComponent<EvadeIndicator>().SetUp();
+                Indicators[thirdRandom].transform.GetChild(1).gameObject.SetActive(false);
                 obstacle.SetActive(true);
-                obstacle.transform.position = Lanes[thirdRandom].transform.position + Vector3.back + Vector3.up;
+                obstacle.transform.position = Lanes[thirdRandom].transform.position + Vector3.back;
             }
 
             if (active) Invoke(nameof(SetOfLane), 3);
@@ -58,7 +62,9 @@ namespace Scripts.Games
 
             StartCoroutine(AnimateColor(Lanes[firstRandom].GetComponent<SpriteRenderer>(), Color.white, Color.red, 0.4f));
             Indicators[firstRandom].GetComponent<EvadeIndicator>().SetDefault();
-                
+            Indicators[secondRandom].transform.GetChild(1).gameObject.SetActive(false);
+            Indicators[thirdRandom].transform.GetChild(1).gameObject.SetActive(false);
+
             if (Difficulty != Difficulty.EASY && chance >= 0.33f)
             {
                 StartCoroutine(AnimateColor(Lanes[secondRandom].GetComponent<SpriteRenderer>(), Color.white, Color.red, 0.4f));
@@ -90,6 +96,7 @@ namespace Scripts.Games
             else
             {
                 winCounter++;
+                base.ScoreUp();
             }
 
             if (winCounter == 5)

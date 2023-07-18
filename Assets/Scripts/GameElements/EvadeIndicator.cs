@@ -14,12 +14,14 @@ namespace Scripts.Games
         {
             gameObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", colors[0]);
             active = true;
+            transform.GetChild(0).gameObject.SetActive(true);
             InvokeRepeating(nameof(LoopAnimation), 0, 1);
         }
 
         public void SetDefault()
         {
             active = false;
+            transform.GetChild(0).gameObject.SetActive(false);
         }
 
         private void LoopAnimation()

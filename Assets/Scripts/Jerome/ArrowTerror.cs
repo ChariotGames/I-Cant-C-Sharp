@@ -10,7 +10,7 @@ namespace Scripts.Games
         #region Serialized Fields
 
         //[SerializeField] [Range(0, 10)] private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
-        [SerializeField] private GameObject player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
+        [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
 
         #endregion Serialized Fields
 
@@ -20,6 +20,7 @@ namespace Scripts.Games
         private int winCounter = 0;
         private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
         private List<GameObject> allObjects;
+        private bool invul = false;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -28,6 +29,16 @@ namespace Scripts.Games
         {
             //base.SetUp();
             player.GetComponent<ArrowPlayer>().stick = _keys.One.Input;
+            Vector2[] borders = border.GetComponent<EdgeCollider2D>().points;
+            borders[0] = new Vector2(_playarea.xMin, _playarea.yMin);
+            borders[1] = new Vector2(_playarea.xMin, _playarea.yMax);
+            borders[2] = new Vector2(_playarea.xMax, _playarea.yMax);
+            borders[3] = new Vector2(_playarea.xMax, _playarea.yMin);
+            borders[4] = new Vector2(_playarea.xMin, _playarea.yMin);
+            for (int i = 0; i < borders.Length; i++)
+            {
+                border.GetComponent<EdgeCollider2D>().points = borders;
+            }
         }
 
         void Start()
@@ -106,6 +117,11 @@ namespace Scripts.Games
 
         #region Game Mechanics / Public Methods
 
+        private void switchState()
+        {
+            invul = false;
+        }
+
         public void PlayerTouched(GameObject obj)
         {
             ElementType type = obj.GetComponent<ArrowObject>().type;
@@ -117,14 +133,24 @@ namespace Scripts.Games
                     checkpointsCollected++;
                     break;
                 case ElementType.ENEMY:
+                    if (invul)
+                    {
+                        // Do nothing.
+                    }
+                    else
+                    {
+                        invul = true;
+                        Invoke(nameof(switchState), 2);
                         base.Easier();
                         base.Lose();
+                    } 
                     break;
                 case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
                         checkpointsCollected = 0;
                         winCounter++;
+                        base.ScoreUp();
                         DestroyObjects();
                     }
                     break;
