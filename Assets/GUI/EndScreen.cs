@@ -58,13 +58,13 @@ namespace Scripts.Controllers
         {
             settings.Lives = defaultSettings.Lives;
             string t = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene("1_GamePlayfield");
+            SceneManager.LoadScene((int)SceneNr.PlayField);
         }
 
         public void GoToMenu()
         {
             uiMap.Disable();
-            SceneManager.LoadScene("0_GameMenu");
+            SceneManager.LoadScene((int)SceneNr.MainMenu);
         }
 
         public void QuitGame()

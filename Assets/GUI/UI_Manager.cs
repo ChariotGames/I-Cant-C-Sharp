@@ -73,7 +73,7 @@ namespace Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 _timerOn = false;
-                SceneManager.LoadScene("EndScreen");
+                SceneManager.LoadScene((int)SceneNr.GameOver);
             }
 
             if (_timerOn)

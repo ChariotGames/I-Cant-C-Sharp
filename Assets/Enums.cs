@@ -38,6 +38,11 @@ namespace Scripts.Models
         NONE, PLAYER, ENEMY, CHECKPOINT, GOAL
     }
 
+    public enum SceneNr
+    {
+        MainMenu, PlayField, GameOver
+    }
+
     #endregion
 
     #region Flags

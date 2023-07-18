@@ -93,11 +93,5 @@ namespace Scripts.Games
                 base.Lose();
             }
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

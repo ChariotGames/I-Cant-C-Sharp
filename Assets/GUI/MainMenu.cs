@@ -80,7 +80,7 @@ namespace Scripts.Controllers
 
         public void Run()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene((int)SceneNr.PlayField);
         }
 
         /// <summary>

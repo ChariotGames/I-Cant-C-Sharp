@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts._Input;
+using Scripts.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -86,7 +87,7 @@ namespace Scripts.Controllers
                 Time.timeScale = 1;
                 uiMap.Disable();
                 playerMap.Enable();
-                SceneManager.LoadScene("0_GameMenu");
+                SceneManager.LoadScene((int)SceneNr.MainMenu);
             }
 
             public void QuitGame()
