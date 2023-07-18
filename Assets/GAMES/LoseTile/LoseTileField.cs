@@ -12,14 +12,13 @@ namespace Scripts.Games
 
         [SerializeField] private LoseTile game;
         [SerializeField] private CircleCollider2D player;
+        [SerializeField] private SpriteRenderer outline;
         [SerializeField] private Color[] colors;
         [SerializeField][Range(1,3)] private float timer = 1f;
         [SerializeField] private BoxCollider2D box;
 
-
-
-
         #endregion Serialized Fields
+
         #region Fields
 
         public ElementType type = ElementType.CHECKPOINT;
@@ -28,17 +27,6 @@ namespace Scripts.Games
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
-
-        void Start()
-        {
-            
-        }
-
-        void Update()
-        {
-            
-        }
-
     
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -51,8 +39,6 @@ namespace Scripts.Games
                 game.PlayerTouched(gameObject);
 
             }
-
-   
         }
 
         private void OnTriggerStay2D(Collider2D collision)
@@ -62,15 +48,7 @@ namespace Scripts.Games
                 game.PlayerTouched(gameObject);
                 //Destroy(gameObject,timer * 2f);
                 box.isTrigger = false;
-
             }
-            
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-           
-
         }
         #endregion Built-Ins / MonoBehaviours
 
@@ -112,6 +90,7 @@ namespace Scripts.Games
             }
             yield return new WaitForSeconds(1f);
             sprite.color = Color.clear;
+            outline.enabled = false;
             type = ElementType.ENEMY;
             
         }

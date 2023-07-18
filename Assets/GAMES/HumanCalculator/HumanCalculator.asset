@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HumanCalculator
   m_EditorClassIdentifier: 
   description: Find the missing Number
-  difficulty: 1
+  difficulty: 2
   genre: 4
   keysLeft:
     one: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
@@ -30,5 +30,6 @@ MonoBehaviour:
     two: Left
     three: 
     four: 
+    other: 
   prefab: {fileID: 2918756866687947654, guid: 2384a027b088f15418e1ad147b84cdfa, type: 3}
-  preview: {fileID: 21300000, guid: c4ce98547b13a044ea551e1f1655ac3b, type: 3}
+  preview: {fileID: 21300000, guid: 3fb68af4760b87f46af5b3ba6aa53ca4, type: 3}

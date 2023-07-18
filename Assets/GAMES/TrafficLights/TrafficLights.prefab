@@ -135,15 +135,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   actionNames:
-    one: Right
-    two: Left
-    three: Submit
+    one: 
+    two: 
+    three: 
     four: 
     other: 
   successesToWin: 5
   failsToLose: 3
   trafficLightPrefab: {fileID: 6244205913135684408, guid: 191d15b78c8698c489a961ece84981a4, type: 3}
-  owner_ref: {fileID: 989249342879803052}
+  owner_ref: {fileID: 989249343711807651}
   selector_ref: {fileID: 989249343899018306}
   trafficLights: []
   simonNot_ref: {fileID: 989249343446961647}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 989249343711807650}
   - component: {fileID: 989249343711807649}
   m_Layer: 0
-  m_Name: HorizontalLayout
+  m_Name: LightsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

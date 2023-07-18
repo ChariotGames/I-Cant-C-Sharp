@@ -32,4 +32,4 @@ MonoBehaviour:
     four: 
     other: 
   prefab: {fileID: 6926883230700997361, guid: 37dda47af0efb0346a8934b3441bffd5, type: 3}
-  preview: {fileID: 21300000, guid: 1fb1868045fb06c4893aa0021512a89c, type: 3}
+  preview: {fileID: 21300000, guid: 698405ea5b61e824a960cd07bee90425, type: 3}

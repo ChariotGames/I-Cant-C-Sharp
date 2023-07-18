@@ -8,6 +8,7 @@ public class ExpBomb : BaseGame
     [SerializeField] private Color[] colors;
     [SerializeField] private Exploooosions parent;
     [SerializeField] private float size;
+    [SerializeField] private SpriteRenderer sprite;
 
     private bool active = false;
     private bool danger = false;
@@ -23,6 +24,7 @@ public class ExpBomb : BaseGame
     public void SetDefault()
     {
         active = false;
+        sprite.enabled = true;
     }
 
     private void LoopAnimation()
@@ -45,6 +47,7 @@ public class ExpBomb : BaseGame
 
     private void SetOff()
     {
+        sprite.enabled = false;
         parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>(), gameObject);
         Destroy(gameObject);
     }
