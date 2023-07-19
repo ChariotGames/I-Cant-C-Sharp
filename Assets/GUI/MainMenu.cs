@@ -121,12 +121,14 @@ namespace Scripts.Controllers
         /// Sets the base difficulty for all games.
         /// </summary>
         /// <param name="change">The difference to set to.</param>
-        public void SetDifficulty(int change)
+        public void SetDifficulty(int value)
         {
-            int current = (int)settings.BaseDifficulty + change;
+            int current = value + 1;
             settings.BaseDifficulty = (Difficulty)Mathf.Clamp(current, (int)Difficulty.EASY, (int)Difficulty.VARYING);
-            difficultyText.text = settings.BaseDifficulty.ToString();
+            //difficultyText.text = settings.BaseDifficulty.ToString();
         }
+
+       
 
         /// <summary>
         /// Sets the number of player.

@@ -929,7 +929,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6926883230700997367
 Transform:
   m_ObjectHideFlags: 0
@@ -961,12 +961,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: Aim
-    two: Shoot
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   cannon: {fileID: 5616315245221226170}
