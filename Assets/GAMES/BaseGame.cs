@@ -14,7 +14,7 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
-        [SerializeField] protected ActionNames actionNames;
+        //[SerializeField] protected ActionNames actionNames;
         [SerializeField] protected int successesToWin = 5;
         [SerializeField] protected int failsToLose = 3;
 
@@ -54,53 +54,52 @@ namespace Scripts.Games
         /// Sets the relevant variables to the UI.
         /// </summary>
         /// <param name="time">The timer value used for this game.</param>
-        protected void UpdateUIvariables(float time)
-        {
+        protected void UpdateUIvariables(float time) =>
             OnSetVariables?.Invoke((gameObject.transform.parent.name, (int)difficulty, time, successesToWin, failsToLose));
-        }
 
         /// <summary>
         /// Decreases the score by 1-3 = difficulty.
         /// </summary>
-        protected void ScoreDown()
-        {
+        protected void ScoreDown() =>
             ScoreDown((int)difficulty);
-        }
 
         /// <summary>
         /// Decreases the score by a given value.
         /// </summary>
         /// <param name="value">The value to decrease.</param>
-        protected void ScoreDown(int value)
-        {
+        protected void ScoreDown(int value) =>
             OnScoreUpdate?.Invoke(-Mathf.Abs(value));
-        }
 
         /// <summary>
         /// Increases the score by 1-3 = difficulty.
         /// </summary>
-        protected void ScoreUp()
-        {
+        protected void ScoreUp() =>
             ScoreUp((int)difficulty);
-        }
 
         /// <summary>
         /// Increases the score by a given value.
         /// </summary>
         /// <param name="value">The value to increase.</param>
-        protected void ScoreUp(int value)
-        {
+        protected void ScoreUp(int value) =>
             OnScoreUpdate?.Invoke(Mathf.Abs(value));
-        }
 
         /// <summary>
         /// Trigger ths when you achieved a success.
         /// It counts and manages everything else.
         /// </summary>
-        protected void Success()
+        protected void Success() =>
+            Success((int)difficulty);
+
+        /// <summary>
+        /// Overload method.
+        /// Trigger ths when you achieved a success.
+        /// It counts and manages everything else.
+        /// </summary>
+        /// <param name="score">Pass a different score.</param>
+        protected void Success(int score)
         {
             _successes++;
-            ScoreUp();
+            ScoreUp(score);
             if (_successes >= successesToWin)
             {
                 Win();
@@ -113,7 +112,9 @@ namespace Scripts.Games
         /// Use this when you made a mistake.
         /// It counts and manages everything else.
         /// </summary>
-        protected void Fail()
+        protected void Fail() => Fail((int)difficulty);
+
+        protected void Fail(int score)
         {
             _fails++;
             ScoreDown();
@@ -128,34 +129,26 @@ namespace Scripts.Games
         /// <summary>
         /// Informs the BaseGame Controller, that the game triggered a win condition
         /// </summary>
-        protected void Win()
-        {
+        protected void Win() =>
             OnWin?.Invoke(gameObject);
-        }
 
         /// <summary>
         /// Informs the BaseGame Controller, that the game triggered a lose condition
         /// </summary>
-        protected void Lose()
-        {
+        protected void Lose() =>
             OnLose?.Invoke(gameObject);
-        }
 
         /// <summary>
         /// Makes the current game easier next time it's played.
         /// </summary>
-        protected void Easier()
-        {
+        protected void Easier() =>
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
-        }
 
         /// <summary>
         /// Makes the current game harder next time it's played.
         /// </summary>
-        protected void Harder()
-        {
+        protected void Harder() =>
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
-        }
 
         #endregion  Methods
 

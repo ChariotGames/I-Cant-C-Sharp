@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using Scripts._Input;
 using UnityEngine;
 
 namespace Scripts.Games
 {
-    public class EvadePlayer : BaseGame
+    public class EvadePlayer : MonoBehaviour
     {
 
         [SerializeField] private float movementSpeed = 10f;
