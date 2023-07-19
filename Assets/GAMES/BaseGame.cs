@@ -14,7 +14,6 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
-        //[SerializeField] protected ActionNames actionNames;
         [SerializeField] protected int successesToWin = 5;
         [SerializeField] protected int failsToLose = 3;
 
@@ -25,7 +24,7 @@ namespace Scripts.Games
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
-        public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
+        //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
         public static event Action<string, AnimType> OnPlayAnimations;
 
         protected KeyMap _keys;
@@ -49,13 +48,6 @@ namespace Scripts.Games
             _keys = keys;
             _playarea = area;
         }
-
-        /// <summary>
-        /// Sets the relevant variables to the UI.
-        /// </summary>
-        /// <param name="time">The timer value used for this game.</param>
-        protected void UpdateUIvariables(float time) =>
-            OnSetVariables?.Invoke((gameObject.transform.parent.name, (int)difficulty, time, successesToWin, failsToLose));
 
         /// <summary>
         /// Decreases the score by 1-3 = difficulty.

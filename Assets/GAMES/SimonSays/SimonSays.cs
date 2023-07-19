@@ -79,8 +79,6 @@ namespace Scripts.Games
             inputTexts[1].text = _keys.Two.Icon;
             inputTexts[2].text = _keys.Three.Icon;
             inputTexts[3].text = _keys.Four.Icon;
-
-            UpdateUIvariables(TURN_TIME);
         }
 
         #endregion

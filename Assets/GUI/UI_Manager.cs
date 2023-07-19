@@ -1,3 +1,4 @@
+using Scripts.Games;
 using Scripts.Models;
 using System;
 using TMPro;
@@ -29,20 +30,18 @@ namespace Scripts.Controllers
         }
         private void OnEnable()
         {
-            MinigameManager.OnUpdateUIScore += ScoreDisplay;
+            BaseGame.OnPlayAnimations += PlayAnimations;
+            BaseGame.OnScoreUpdate += ScoreDisplay;
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
-            MinigameManager.OnSetAnimations += SetAnimations;
-            MinigameManager.OnPlayAnimations += PlayAnimations;
         }
 
         private void OnDisable()
         {
-            MinigameManager.OnUpdateUIScore -= ScoreDisplay;
+            BaseGame.OnPlayAnimations -= PlayAnimations;
+            BaseGame.OnScoreUpdate -= ScoreDisplay;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
-            MinigameManager.OnSetAnimations -= SetAnimations;
-            MinigameManager.OnPlayAnimations -= PlayAnimations;
         }
 
         // Update is called once per frame
