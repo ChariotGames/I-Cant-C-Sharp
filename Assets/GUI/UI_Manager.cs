@@ -16,8 +16,8 @@ namespace Scripts.Controllers
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
         [SerializeField] private GameObject templateKeys;
-        [SerializeField] private Timer leftTimer, rightTimer;
-        [SerializeField] private AnimPlayer leftAnim, rightAnim;
+        [SerializeField] private Image leftTimer, rightTimer;
+        [SerializeField] private AnimtionPlayer leftAnim, rightAnim;
 
         private int _score = 0;
         private float _time = 0;
@@ -32,6 +32,7 @@ namespace Scripts.Controllers
         {
             BaseGame.OnPlayAnimations += PlayAnimations;
             BaseGame.OnScoreUpdate += ScoreDisplay;
+            BaseGame.OnTimerUpdate += UpdateTimer;
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
         }
@@ -40,6 +41,7 @@ namespace Scripts.Controllers
         {
             BaseGame.OnPlayAnimations -= PlayAnimations;
             BaseGame.OnScoreUpdate -= ScoreDisplay;
+            BaseGame.OnTimerUpdate -= UpdateTimer;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
         }
@@ -127,38 +129,45 @@ namespace Scripts.Controllers
             if (side.Contains("Center")) RemoveKeys(centerKeys);
         }
 
-        private void SetAnimations((string parent, int score, float timer, int toWin, int toLose) vars)
-        {
-            if (vars.parent.Contains("Left") || vars.parent.Contains("Center"))
-            {
-                leftTimer.Duration = vars.timer;
-                if (vars.timer <= 0) leftTimer.gameObject.SetActive(false);
-                leftAnim.Count = vars.score;
-                leftAnim.WinsMax = vars.toWin;
-                leftAnim.FailsMax = vars.toLose;
-            }
-            else
-            {
-                rightTimer.Duration = vars.timer;
-                if (vars.timer <= 0) rightTimer.gameObject.SetActive(false);
-                rightAnim.Count = vars.score;
-                rightAnim.WinsMax = vars.toWin;
-                rightAnim.FailsMax = vars.toLose;
-            }
-        }
+        //private void SetAnimations((string parent, int score, float timer, int toWin, int toLose) vars)
+        //{
+        //    if (vars.parent.Contains("Left") || vars.parent.Contains("Center"))
+        //    {
+        //        leftTimer.Duration = vars.timer;
+        //        if (vars.timer <= 0) leftTimer.gameObject.SetActive(false);
+        //        leftAnim.Count = vars.score;
+        //        leftAnim.WinsMax = vars.toWin;
+        //        leftAnim.FailsMax = vars.toLose;
+        //    }
+        //    else
+        //    {
+        //        rightTimer.Duration = vars.timer;
+        //        if (vars.timer <= 0) rightTimer.gameObject.SetActive(false);
+        //        rightAnim.Count = vars.score;
+        //        rightAnim.WinsMax = vars.toWin;
+        //        rightAnim.FailsMax = vars.toLose;
+        //    }
+        //}
 
-        private void PlayAnimations(string parent, AnimType anim)
+        private void PlayAnimations(string parent, AnimType anim, int count, float fraction)
         {
-            Timer timer = leftTimer;
-            AnimPlayer animPlayer = leftAnim;
+            AnimtionPlayer animPlayer = leftAnim;
             if (parent.Contains("Right"))
             {
-                timer = rightTimer;
                 animPlayer = rightAnim;
             }
 
-            timer.Run();
-            StartCoroutine(animPlayer.Run(anim));
+            StartCoroutine(animPlayer.Run(anim, count, fraction));
+        }
+
+        private void UpdateTimer(string side, float fraction)
+        {
+            Image timer = leftTimer;
+            if (!timer.gameObject.activeInHierarchy) timer.gameObject.SetActive(true);
+            if (side.Contains("Right")) timer = rightTimer;
+
+            timer.fillAmount += fraction;
+            if(timer.fillAmount >=1) timer.gameObject.SetActive(false);
         }
 
         private void RemoveKeys(Transform parent)

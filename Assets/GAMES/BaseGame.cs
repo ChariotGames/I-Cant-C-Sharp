@@ -1,5 +1,6 @@
 using Scripts.Models;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -24,13 +25,17 @@ namespace Scripts.Games
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
+        public static event Action<string, float> OnTimerUpdate;
         //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
-        public static event Action<string, AnimType> OnPlayAnimations;
+        public static event Action<string, AnimType, int, float> OnPlayAnimations;
 
         protected KeyMap _keys;
         protected Rect _playarea;
-        protected int _successes, _fails;
         protected Genre _genre;
+        protected int _successes, _fails;
+        protected float _timer;
+
+        private string _parent;
 
         #endregion Fields
 
@@ -47,20 +52,21 @@ namespace Scripts.Games
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
+            _parent = transform.parent.name;
         }
 
         /// <summary>
         /// Decreases the score by 1-3 = difficulty.
         /// </summary>
         protected void ScoreDown() =>
-            ScoreDown((int)difficulty);
+            ScoreUp(-(int)difficulty);
 
         /// <summary>
         /// Decreases the score by a given value.
         /// </summary>
         /// <param name="value">The value to decrease.</param>
         protected void ScoreDown(int value) =>
-            OnScoreUpdate?.Invoke(-Mathf.Abs(value));
+            ScoreUp(-Mathf.Abs(value));
 
         /// <summary>
         /// Increases the score by 1-3 = difficulty.
@@ -97,7 +103,7 @@ namespace Scripts.Games
                 Win();
                 return;
             }
-            OnPlayAnimations?.Invoke(gameObject.transform.parent.name, AnimType.Win);
+            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, 1.0f * _successes / successesToWin);
         }
 
         /// <summary>
@@ -106,16 +112,22 @@ namespace Scripts.Games
         /// </summary>
         protected void Fail() => Fail((int)difficulty);
 
+        /// <summary>
+        /// Overload Method.
+        /// Use this when you made a mistake.
+        /// It counts and manages everything else.
+        /// </summary>
+        /// <param name="score">The score to reduce on fail.</param>
         protected void Fail(int score)
         {
             _fails++;
-            ScoreDown();
+            ScoreUp(score);
             if (_fails >= failsToLose)
             {
                 Lose();
                 return;
             }
-            OnPlayAnimations?.Invoke(gameObject.transform.parent.name, AnimType.Lose);
+            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, 1.0f * _fails / failsToLose);
         }
 
         /// <summary>
@@ -141,6 +153,39 @@ namespace Scripts.Games
         /// </summary>
         protected void Harder() =>
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
+
+        /// <summary>
+        /// Runs the timer and updates the UI.
+        /// </summary>
+        protected void RunTimer() => RunTimer(_timer);
+
+        /// <summary>
+        /// Overload method.
+        /// Runs the timer and updates the UI.
+        /// </summary>
+        /// <param name="time">The time of the timer.</param>
+        protected void RunTimer(float time)
+        {
+            if (time <= 0) return;
+
+            StartCoroutine(TimerAnimation(time));
+        }
+
+        /// <summary>
+        /// Runs the timer as a coroutine.
+        /// </summary>
+        /// <param name="duration">The duration of the timer.</param>
+        /// <returns></returns>
+        private IEnumerator TimerAnimation(float duration)
+        {
+            float elapsedTime = 0f;
+            while (elapsedTime < duration)
+            {
+                float progress = elapsedTime / duration;
+                OnTimerUpdate?.Invoke(transform.parent.name, Mathf.Clamp01(progress));
+                yield return null;
+            }
+        }
 
         #endregion  Methods
 

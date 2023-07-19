@@ -84,6 +84,8 @@ namespace Scripts.Games
         public void Animate()
         {
             StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, duration));
+            if(spriteRenderer.transform.childCount == 1)
+                StartCoroutine(AnimateColor(spriteRenderer.transform.GetChild(0).GetComponent<SpriteRenderer>(), originalColor, targetColor, duration));
         }
 
         #endregion Animations

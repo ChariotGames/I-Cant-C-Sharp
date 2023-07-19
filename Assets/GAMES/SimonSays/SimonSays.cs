@@ -29,7 +29,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay, middle;
         [SerializeField] private SimonElement blue, red, yellow, green;
         [SerializeField] private SimonElement twice, nothing, ok;
-        [SerializeField] private Image timer;
+        //[SerializeField] private Image timer;
 
         #endregion
 
@@ -57,6 +57,8 @@ namespace Scripts.Games
             _buttonObjects.Add(Colors.RED, red);
             _buttonObjects.Add(Colors.YELLOW, yellow);
             _buttonObjects.Add(Colors.GREEN, green);
+
+            _timer = TURN_TIME;
         }
 
         // Start is called before the first frame update
@@ -92,7 +94,7 @@ namespace Scripts.Games
         {
             StopAllCoroutines();
             _checkingIndex = 0;
-            timer.fillAmount = 0f;
+            //timer.fillAmount = 0f;
             PlayerTurn(false);
         }
 
@@ -237,7 +239,9 @@ namespace Scripts.Games
             }
 
             PlayerTurn(true);
-            StartCoroutine(AnimateTimer(TURN_TIME));
+            RunTimer(_timer);
+            yield return new WaitForSeconds(_timer);
+            WrongColor();
         }
 
 
@@ -246,20 +250,20 @@ namespace Scripts.Games
         /// </summary>
         /// <param name="duration">The duration of timer.</param>
         /// <returns></returns>
-        private IEnumerator AnimateTimer(float duration)
-        {
-            float elapsedTime = 0f;
-            while (elapsedTime < duration)
-            {
-                float progress = elapsedTime / duration;
-                timer.fillAmount = Mathf.Clamp01(progress);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+        //private IEnumerator AnimateTimer(float duration)
+        //{
+        //    float elapsedTime = 0f;
+        //    while (elapsedTime < duration)
+        //    {
+        //        float progress = elapsedTime / duration;
+        //        timer.fillAmount = Mathf.Clamp01(progress);
+        //        elapsedTime += Time.deltaTime;
+        //        yield return null;
+        //    }
 
-            timer.fillAmount = 1f;
-            WrongColor();
-        }
+        //    timer.fillAmount = 1f;
+        //    WrongColor();
+        //}
 
         #endregion
 
