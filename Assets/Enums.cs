@@ -4,7 +4,7 @@ namespace Scripts.Models
 {
     #region Enums
 
-    public enum AnimType { Win, Lose };
+    public enum AnimType { Win, Lose, ScoreUp, ScoreDown, Fill };
 
     /// <summary>
     /// Represents a color key to set and check.

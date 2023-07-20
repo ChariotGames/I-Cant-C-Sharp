@@ -129,8 +129,8 @@ namespace Scripts.Games
         private IEnumerator HorizontalMovementCoroutine(Bounds cannonBounds)
         {
             var targetXPos = cannon.transform.position.x;
-            var minX = _cameraViewportBounds.min.x + cannonBounds.extents.x;
-            var maxX = _cameraViewportBounds.max.x - cannonBounds.extents.x;
+            var minX = _playarea.min.x + cannonBounds.extents.x;
+            var maxX = _playarea.max.x - cannonBounds.extents.x;
 
             while (true)
             {

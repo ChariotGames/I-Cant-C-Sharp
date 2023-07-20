@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using Scripts._Input;
 using UnityEngine;
 
 namespace Scripts.Games
 {
-    public class ExpPlayer : BaseGame
+    public class ExpPlayer : MonoBehaviour
     {
         [SerializeField] private float movementSpeed = 5f;
         [SerializeField] public InputActionReference stick;

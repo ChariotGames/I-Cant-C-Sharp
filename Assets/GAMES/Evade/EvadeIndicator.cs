@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Games
 {
-    public class EvadeIndicator : BaseGame
+    public class EvadeIndicator : MonoBehaviour
     {
         [SerializeField] private Color[] colors;
 

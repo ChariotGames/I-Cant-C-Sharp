@@ -961,12 +961,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: Aim
-    two: Shoot
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   cannon: {fileID: 5616315245221226170}

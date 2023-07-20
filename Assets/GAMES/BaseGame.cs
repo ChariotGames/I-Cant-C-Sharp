@@ -1,5 +1,6 @@
 using Scripts.Models;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -14,7 +15,6 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
-        [SerializeField] protected ActionNames actionNames;
         [SerializeField] protected int successesToWin = 5;
         [SerializeField] protected int failsToLose = 3;
 
@@ -25,13 +25,17 @@ namespace Scripts.Games
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
-        public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
-        public static event Action<string, AnimType> OnPlayAnimations;
+        public static event Action<string, float> OnTimerUpdate;
+        //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
+        public static event Action<string, AnimType, int, float> OnPlayAnimations;
 
         protected KeyMap _keys;
         protected Rect _playarea;
-        protected int _successes, _fails;
         protected Genre _genre;
+        protected int _successes, _fails;
+        protected float _timer;
+
+        private string _parent;
 
         #endregion Fields
 
@@ -48,113 +52,139 @@ namespace Scripts.Games
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
-        }
-
-        /// <summary>
-        /// Sets the relevant variables to the UI.
-        /// </summary>
-        /// <param name="time">The timer value used for this game.</param>
-        protected void UpdateUIvariables(float time)
-        {
-            OnSetVariables?.Invoke((gameObject.transform.parent.name, (int)difficulty, time, successesToWin, failsToLose));
+            _parent = transform.parent.name;
         }
 
         /// <summary>
         /// Decreases the score by 1-3 = difficulty.
         /// </summary>
-        protected void ScoreDown()
-        {
-            ScoreDown((int)difficulty);
-        }
+        protected void ScoreDown() =>
+            ScoreUp(-(int)difficulty);
 
         /// <summary>
         /// Decreases the score by a given value.
         /// </summary>
         /// <param name="value">The value to decrease.</param>
-        protected void ScoreDown(int value)
-        {
-            OnScoreUpdate?.Invoke(-Mathf.Abs(value));
-        }
+        protected void ScoreDown(int value) =>
+            ScoreUp(-Mathf.Abs(value));
 
         /// <summary>
         /// Increases the score by 1-3 = difficulty.
         /// </summary>
-        protected void ScoreUp()
-        {
+        protected void ScoreUp() =>
             ScoreUp((int)difficulty);
-        }
 
         /// <summary>
         /// Increases the score by a given value.
         /// </summary>
         /// <param name="value">The value to increase.</param>
-        protected void ScoreUp(int value)
-        {
+        protected void ScoreUp(int value) =>
             OnScoreUpdate?.Invoke(Mathf.Abs(value));
-        }
 
         /// <summary>
         /// Trigger ths when you achieved a success.
         /// It counts and manages everything else.
         /// </summary>
-        protected void Success()
+        protected void Success() =>
+            Success((int)difficulty);
+
+        /// <summary>
+        /// Overload method.
+        /// Trigger ths when you achieved a success.
+        /// It counts and manages everything else.
+        /// </summary>
+        /// <param name="score">Pass a different score.</param>
+        protected void Success(int score)
         {
             _successes++;
-            ScoreUp();
+            ScoreUp(score);
             if (_successes >= successesToWin)
             {
                 Win();
                 return;
             }
-            OnPlayAnimations?.Invoke(gameObject.transform.parent.name, AnimType.Win);
+            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, 1.0f * _successes / successesToWin);
         }
 
         /// <summary>
         /// Use this when you made a mistake.
         /// It counts and manages everything else.
         /// </summary>
-        protected void Fail()
+        protected void Fail() => Fail((int)difficulty);
+
+        /// <summary>
+        /// Overload Method.
+        /// Use this when you made a mistake.
+        /// It counts and manages everything else.
+        /// </summary>
+        /// <param name="score">The score to reduce on fail.</param>
+        protected void Fail(int score)
         {
             _fails++;
-            ScoreDown();
+            ScoreUp(score);
             if (_fails >= failsToLose)
             {
                 Lose();
                 return;
             }
-            OnPlayAnimations?.Invoke(gameObject.transform.parent.name, AnimType.Lose);
+            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, 1.0f * _fails / failsToLose);
         }
 
         /// <summary>
         /// Informs the BaseGame Controller, that the game triggered a win condition
         /// </summary>
-        protected void Win()
-        {
+        protected void Win() =>
             OnWin?.Invoke(gameObject);
-        }
 
         /// <summary>
         /// Informs the BaseGame Controller, that the game triggered a lose condition
         /// </summary>
-        protected void Lose()
-        {
+        protected void Lose() =>
             OnLose?.Invoke(gameObject);
-        }
 
         /// <summary>
         /// Makes the current game easier next time it's played.
         /// </summary>
-        protected void Easier()
-        {
+        protected void Easier() =>
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
-        }
 
         /// <summary>
         /// Makes the current game harder next time it's played.
         /// </summary>
-        protected void Harder()
-        {
+        protected void Harder() =>
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
+
+        /// <summary>
+        /// Runs the timer and updates the UI.
+        /// </summary>
+        protected void RunTimer() => RunTimer(_timer);
+
+        /// <summary>
+        /// Overload method.
+        /// Runs the timer and updates the UI.
+        /// </summary>
+        /// <param name="time">The time of the timer.</param>
+        protected void RunTimer(float time)
+        {
+            if (time <= 0) return;
+
+            StartCoroutine(TimerAnimation(time));
+        }
+
+        /// <summary>
+        /// Runs the timer as a coroutine.
+        /// </summary>
+        /// <param name="duration">The duration of the timer.</param>
+        /// <returns></returns>
+        private IEnumerator TimerAnimation(float duration)
+        {
+            float elapsedTime = 0f;
+            while (elapsedTime < duration)
+            {
+                float progress = elapsedTime / duration;
+                OnTimerUpdate?.Invoke(transform.parent.name, Mathf.Clamp01(progress));
+                yield return null;
+            }
         }
 
         #endregion  Methods

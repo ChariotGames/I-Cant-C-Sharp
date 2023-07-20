@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Scripts.Games;
 using UnityEngine;
 
-public class ExpBomb : BaseGame
+public class ExpBomb : MonoBehaviour
 {
     [SerializeField] private Color[] colors;
     [SerializeField] private Exploooosions parent;
