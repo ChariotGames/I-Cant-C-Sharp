@@ -47,7 +47,7 @@ public class ExpBomb : BaseGame
 
     private void SetOff()
     {
-        sprite.enabled = false;
+        
         parent.CheckWinCondition(parent.player.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>(), gameObject);
         Destroy(gameObject);
     }
@@ -74,6 +74,7 @@ public class ExpBomb : BaseGame
 
     private IEnumerator AnimateSize(Vector3 original, Vector3 target, float duration)
     {
+        sprite.enabled = false;
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
