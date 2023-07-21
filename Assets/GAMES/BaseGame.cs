@@ -27,7 +27,7 @@ namespace Scripts.Games
         public static event Action<int> OnScoreUpdate;
         public static event Action<string, float> OnTimerUpdate;
         //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
-        public static event Action<string, AnimType, int, float> OnPlayAnimations;
+        public static event Action<string, AnimType, int, float, float> OnPlayAnimations;
 
         protected KeyMap _keys;
         protected Rect _playarea;
@@ -96,14 +96,17 @@ namespace Scripts.Games
         /// <param name="score">Pass a different score.</param>
         protected void Success(int score)
         {
+            float from = 1.0f * _successes / successesToWin;
             _successes++;
+            float to = 1.0f * _successes / successesToWin;
             ScoreUp(score);
+            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, from, to);
             if (_successes >= successesToWin)
             {
+                _successes = 0;
                 Win();
                 return;
             }
-            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, 1.0f * _successes / successesToWin);
         }
 
         /// <summary>
@@ -120,14 +123,17 @@ namespace Scripts.Games
         /// <param name="score">The score to reduce on fail.</param>
         protected void Fail(int score)
         {
+            float from = 1.0f * _fails / failsToLose;
             _fails++;
+            float to = 1.0f * _fails / failsToLose;
             ScoreUp(score);
+            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, from, to);
             if (_fails >= failsToLose)
             {
+                _fails = 0;
                 Lose();
                 return;
             }
-            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, 1.0f * _fails / failsToLose);
         }
 
         /// <summary>

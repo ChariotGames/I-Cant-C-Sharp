@@ -17,7 +17,8 @@ namespace Scripts.Controllers
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
         [SerializeField] private GameObject templateKeys;
         [SerializeField] private Image leftTimer, rightTimer;
-        [SerializeField] private AnimtionPlayer leftAnim, rightAnim;
+        [SerializeField] private Transform leftAnim, rightAnim;
+        [SerializeField] private AnimationPack tempWin, tempLose;
 
         private int _score = 0;
         private float _time = 0;
@@ -152,15 +153,19 @@ namespace Scripts.Controllers
         //    }
         //}
 
-        private void PlayAnimations(string parent, AnimType anim, int count, float fraction)
+        private void PlayAnimations(string parent, AnimType anim, int count, float from, float to)
         {
-            AnimtionPlayer animPlayer = leftAnim;
+            AnimationPack pack = tempWin;
+            if (anim == AnimType.Lose) pack = tempLose;
+
+            Transform pos = leftAnim;
             if (parent.Contains("Right"))
             {
-                animPlayer = rightAnim;
+                pos = rightAnim;
             }
 
-            StartCoroutine(animPlayer.Run(anim, count, fraction));
+            pack = Instantiate(pack, pos);
+            StartCoroutine(pack.Run(count, from, to));
         }
 
         private void UpdateTimer(string side, float fraction)
