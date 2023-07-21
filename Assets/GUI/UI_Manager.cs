@@ -78,6 +78,9 @@ namespace Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 _timerOn = false;
+                PlayerPrefs.SetString("Score",_score.ToString("D3"));
+                TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
+                PlayerPrefs.SetString("Time",timePlaying.ToString("mm':'ss"));
                 SceneManager.LoadScene((int)SceneNr.GameOver);
             }
 
