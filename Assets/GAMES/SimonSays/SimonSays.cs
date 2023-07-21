@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Scripts.Games
 {
@@ -66,7 +65,7 @@ namespace Scripts.Games
         {
             _animationTime = BLINK_TIME * COLORS;
             infoOverlay.SetActive(true);
-            StartCoroutine(ActivateButtons(BLINK_TIME));
+            StartCoroutine(ActivateButtons(BLINK_TIME/2.0f));
             GeneratePattern(MIN_LENGTH);
             StartCoroutine(AnimateButtons(_animationTime * 2, _animationTime));
 

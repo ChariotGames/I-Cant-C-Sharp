@@ -17,10 +17,7 @@ namespace Scripts.Controllers
         [SerializeField] private GameObject restartButton;
         [SerializeField] private Settings defaultSettings, settings;
 
-        private string score;
-        private string timer;
-        [SerializeField] private TMP_Text scoreText;
-        [SerializeField] private TMP_Text timerText;
+        [SerializeField] private TMP_Text scoreText, timerText;
 
 
         #endregion Serialized Fields
@@ -35,22 +32,17 @@ namespace Scripts.Controllers
 
         private void Awake()
         {
-
-            //scoreText.text += score.ToString("D3");
-            //timerText.text +=  timer.ToString("mm':'ss");
-
-            scoreText.text = "score: " + PlayerPrefs.GetString("Score");
-            timerText.text = "time: " + PlayerPrefs.GetString("Time");
+            scoreText.text = PlayerPrefs.GetString("Score");
+            timerText.text = PlayerPrefs.GetString("Time");
 
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];
-            uiMap.Enable();
-
         }
 
         private void OnEnable()
         {
             playerMap.Disable();
+            uiMap.Enable();
             EventSystem.current.SetSelectedGameObject(restartButton);
         }
 
@@ -61,7 +53,7 @@ namespace Scripts.Controllers
         public void Restart()
         {
             settings.Lives = defaultSettings.Lives;
-            string t = SceneManager.GetActiveScene().name;
+            //string t = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene((int)SceneNr.PlayField);
         }
 
