@@ -7254,12 +7254,7 @@ MonoBehaviour:
   audioSource: {fileID: 1451305631}
   particles: {fileID: 1451305630}
   animator: {fileID: 1451305628}
-  anim: {fileID: 1451305637}
   emojiFace: {fileID: 1451305632}
-  animationOrder:
-  - UI_FadeIn
-  - UI_Win
-  - UI_FadeOut
 --- !u!111 &1451305637
 Animation:
   m_ObjectHideFlags: 0
@@ -7333,7 +7328,7 @@ Animator:
   m_GameObject: {fileID: 1494697921}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c9baf5f8d261b1b4a8b23eed0fd11694, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6c3b2b2d8edd8394ab9fb70650fae056, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12348,12 +12343,7 @@ MonoBehaviour:
   audioSource: {fileID: 1494697927}
   particles: {fileID: 1494697926}
   animator: {fileID: 1494697924}
-  anim: {fileID: 1494697930}
   emojiFace: {fileID: 1494697928}
-  animationOrder:
-  - UI_FadeIn
-  - UI_Lose
-  - UI_FadeOut
 --- !u!1 &1519074400
 GameObject:
   m_ObjectHideFlags: 0
