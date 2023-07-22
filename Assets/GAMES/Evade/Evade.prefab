@@ -85,6 +85,90 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1929064255982685253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3715097368492933496}
+  - component: {fileID: 4232170930920841343}
+  m_Layer: 0
+  m_Name: annoyed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3715097368492933496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929064255982685253}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.59, y: 3.79, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6074431469293827241}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &4232170930920841343
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929064255982685253}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 12
+  m_Sprite: {fileID: 21300000, guid: 428e2d03a7cee49db9530552231a4079, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 4.43, y: 3.92}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2233219802666707322
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,15 +773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0aa714842e2efc4c9ff3acb63ef4f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
-  successesToWin: 5
-  failsToLose: 3
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -1025,15 +1100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0aa714842e2efc4c9ff3acb63ef4f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
-  successesToWin: 5
-  failsToLose: 3
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -1137,15 +1203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0aa714842e2efc4c9ff3acb63ef4f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
-  successesToWin: 5
-  failsToLose: 3
   colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -1267,6 +1324,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1475065909983884113}
+  - {fileID: 3715097368492933496}
   m_Father: {fileID: 6074431469413734333}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1334,15 +1392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae5825e892b1f24a83b995af4d48c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
-  successesToWin: 5
-  failsToLose: 3
   movementSpeed: 5
   stick: {fileID: 0}
 --- !u!61 &6074431469293827244
@@ -1468,7 +1517,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d49c94a7b96f4fda88295dfe68620ac, type: 3}
-  m_Color: {r: 0.8778247, g: 1, b: 0.43867922, a: 1}
+  m_Color: {r: 0.8596014, g: 1, b: 0.43921566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1554,12 +1603,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: Move
-    two: 
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   indLeft: {fileID: 6074431468874699804}

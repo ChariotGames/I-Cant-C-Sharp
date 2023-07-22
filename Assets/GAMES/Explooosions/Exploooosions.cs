@@ -57,7 +57,7 @@ namespace Scripts.Games
                 Debug.Log("Chuckles... I'm in danger.");
                 loseCounter++;
                 //failsToLose--;
-                StartCoroutine(player.GetComponent<ExpPlayer>().AnimateColor(player.GetComponent<SpriteRenderer>(), Color.white, Color.black, 0.5f));
+                StartCoroutine(player.GetComponent<ExpPlayer>().AnimateColor(player.GetComponent<SpriteRenderer>(), Color.white, new Color(0.3f, 0.3f, 0.3f), 0.5f));
                 player.GetComponent<ExpPlayer>().knockback = player.GetComponent<Rigidbody2D>().position - new Vector2(obj.transform.position.x, obj.transform.position.y);
                 // Does not work why?
             }

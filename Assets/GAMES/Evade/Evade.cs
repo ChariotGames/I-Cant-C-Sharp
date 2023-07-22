@@ -17,11 +17,13 @@ namespace Scripts.Games
         private int thirdRandom;
         private float chance;
         private int winCounter = 0;
+        private Color color;
 
         // Start is called before the first frame update
         private void Awake()
         {
             player.GetComponent<EvadePlayer>().stick = _keys.One.Input;
+            color = laneLeft.GetComponent<SpriteRenderer>().color;
         }
         void Start()
         {
@@ -60,14 +62,14 @@ namespace Scripts.Games
         {
             BoxCollider2D playerCollider = player.GetComponent<BoxCollider2D>();
 
-            StartCoroutine(AnimateColor(Lanes[firstRandom].GetComponent<SpriteRenderer>(), Color.white, Color.red, 0.4f));
+            StartCoroutine(AnimateColor(Lanes[firstRandom].GetComponent<SpriteRenderer>(), color, Color.red, 0.4f));
             Indicators[firstRandom].GetComponent<EvadeIndicator>().SetDefault();
             Indicators[secondRandom].transform.GetChild(1).gameObject.SetActive(false);
             Indicators[thirdRandom].transform.GetChild(1).gameObject.SetActive(false);
 
             if (Difficulty != Difficulty.EASY && chance >= 0.33f)
             {
-                StartCoroutine(AnimateColor(Lanes[secondRandom].GetComponent<SpriteRenderer>(), Color.white, Color.red, 0.4f));
+                StartCoroutine(AnimateColor(Lanes[secondRandom].GetComponent<SpriteRenderer>(), color, Color.red, 0.4f));
                 Indicators[secondRandom].GetComponent<EvadeIndicator>().SetDefault();
                 Indicators[thirdRandom].GetComponent<EvadeIndicator>().SetDefault();
             }
@@ -83,6 +85,8 @@ namespace Scripts.Games
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 //active = false;
+                player.transform.GetChild(1).gameObject.SetActive(true);
+                Invoke(nameof(calm), 0.5f);
                 base.Easier();
                 base.Lose();
             }
@@ -117,6 +121,11 @@ namespace Scripts.Games
             secondRandom = vc[Random.Range(0, vc.Count)];
             vc.Remove(secondRandom);
             thirdRandom = vc[0]; 
+        }
+
+        private void calm()
+        {
+            player.transform.GetChild(1).gameObject.SetActive(false);
         }
 
         private IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)

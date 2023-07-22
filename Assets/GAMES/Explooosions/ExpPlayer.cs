@@ -11,7 +11,7 @@ namespace Scripts.Games
         [SerializeField] Exploooosions parent;
 
         public Rigidbody2D rb;
-        public Vector2 knockback = new(0, 0);
+        public Vector2 knockback = new(10, 10);
         private float knockbackDamp = 1.2f;
 
         private void Start()
@@ -34,6 +34,7 @@ namespace Scripts.Games
 
         public IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)
         {
+            transform.GetChild(1).gameObject.SetActive(true);
             float elapsedTime = 0f;
             while (elapsedTime < duration)
             {
@@ -50,6 +51,7 @@ namespace Scripts.Games
                 yield return null;
             }
             sprite.color = original;
+            transform.GetChild(1).gameObject.SetActive(false);
         }
 
         // Update is called once per frame
