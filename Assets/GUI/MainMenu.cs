@@ -105,6 +105,7 @@ namespace Scripts.Controllers
             settings.SelectedGame = defaultSettings.SelectedGame;
             settings.Games = defaultSettings.Games;
             settings.SoloGames = defaultSettings.SoloGames;
+            settings.BaseDifficulty = defaultSettings.BaseDifficulty;
         }
 
         /// <summary>
