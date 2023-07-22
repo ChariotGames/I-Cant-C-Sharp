@@ -97,42 +97,14 @@ namespace Scripts.Games
         /// <param name="score">Pass a different score.</param>
         protected void Success(int score)
         {
-            float from = 1.0f * _successes / successesToWin;
-            _successes++;
-            float to = 1.0f * _successes / successesToWin;
             ScoreUp(score);
-            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, from, to);
+            AnimateWin(_successes, successesToWin);
             if (_successes >= successesToWin)
             {
                 _successes = 0;
                 Win();
                 return;
             }
-        }
-
-        /// <summary>
-        /// Runs the Win animation.
-        /// </summary>
-        /// <param name="successes">Current increasing count of successes achieved (or their equivalent in your game).</param>
-        /// <param name="successesToWin">The max number of successes to win (or their equivalent in your game).</param>
-        protected void AnimateWin(float successes, float successesToWin)
-        {
-            float from = (successes - 1) / successesToWin;
-            float to = successes / successesToWin;
-            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, from, to);
-        }
-
-
-        /// <summary>
-        /// Runs the Lose animation.
-        /// </summary>
-        /// <param name="fails">Current decreasing count of fails left (or their equivalent in your game).</param>
-        /// <param name="failsToLose">The max number of fails to lose (or their equivalent in your game).</param>
-        protected void AnimateLose(float fails, float failsToLose)
-        {
-            float from = (failsToLose - fails - 1) / failsToLose;
-            float to = (failsToLose - fails) / failsToLose;
-            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, from, to); 
         }
 
         /// <summary>
@@ -149,11 +121,8 @@ namespace Scripts.Games
         /// <param name="score">The score to reduce on fail.</param>
         protected void Fail(int score)
         {
-            float from = 1.0f * (failsToLose - _fails) / failsToLose;
-            _fails--;
-            float to = 1.0f * (failsToLose - _fails) / failsToLose;
-            ScoreUp(score);
-            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, from, to);
+            ScoreDown(score);
+            AnimateLose(_fails, failsToLose);
             if (_fails <= 0)
             {
                 _fails = failsToLose;
@@ -173,6 +142,29 @@ namespace Scripts.Games
         /// </summary>
         protected void Lose() =>
             OnLose?.Invoke(gameObject);
+
+
+
+        /// <summary>
+        /// Runs the Win animation.
+        /// </summary>
+        /// <param name="successes">Current increasing count of successes achieved (or their equivalent in your game).</param>
+        /// <param name="successesToWin">The max number of successes to win (or their equivalent in your game).</param>
+        protected void AnimateWin(int successes, int successesToWin)
+        {
+            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, (float)successes, (float)successesToWin);
+        }
+
+
+        /// <summary>
+        /// Runs the Lose animation.
+        /// </summary>
+        /// <param name="fails">Current decreasing count of fails left (or their equivalent in your game).</param>
+        /// <param name="failsToLose">The max number of fails to lose (or their equivalent in your game).</param>
+        protected void AnimateLose(int fails, int failsToLose)
+        {
+            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, (float)(failsToLose - fails), (float)failsToLose);
+        }
 
         /// <summary>
         /// Makes the current game easier next time it's played.
