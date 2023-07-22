@@ -165,7 +165,7 @@ namespace Scripts.Controllers
             }
 
             pack = Instantiate(pack, pos);
-            StartCoroutine(pack.Run(count, from, to));
+            pack.Run(count, from, to, anim.ToString());
         }
 
         private void UpdateTimer(string side, float fraction)
