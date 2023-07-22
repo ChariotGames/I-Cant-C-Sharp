@@ -192,7 +192,7 @@ namespace Scripts.Games
                 correctAnswer.gameObject.SetActive(true);
                 _currentScore++;
                 base.ScoreUp();
-                base.AnimateWin(_currentScore, 5);
+                base.AnimateFail(_currentScore, 5);
                 if (_currentScore >= 5)
                 {
                     _currentScore = 0;
@@ -206,7 +206,7 @@ namespace Scripts.Games
                 _remainingLives--;
                 wrongAnswer.gameObject.SetActive(true);
                 base.ScoreDown();
-                base.AnimateLose(_remainingLives , 3);
+                base.AnimateFail(_remainingLives , 3);
                 if (_remainingLives <= 0)
                 {
                     Debug.Log("GAME LOST");

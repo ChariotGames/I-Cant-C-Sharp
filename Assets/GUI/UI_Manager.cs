@@ -161,16 +161,14 @@ namespace Scripts.Controllers
         /// <param name="count">The number of stars.</param>
         /// <param name="numerator">The portion to fill.</param>
         /// <param name="denominator">The number of portions total.</param>
-        private void PlayAnimations(string parent, AnimType anim, int count, float numerator, float denominator)
+        private void PlayAnimations(Transform parent, AnimType anim, int count, float numerator, float denominator)
         {
             AnimationPack pack = tempWin;
             if (anim == AnimType.Lose) pack = tempLose;
 
-            Transform pos = leftAnim;
-            if (parent.Contains("Right"))
-            {
-                pos = rightAnim;
-            }
+            Transform pos = parent;
+            if (parent.name.Contains("Right")) pos = rightAnim;
+            if (parent.name.Contains("Left") || parent.name.Contains("Center")) pos = leftAnim;
 
             pack = Instantiate(pack, pos);
             pack.Run(count, numerator, denominator, anim.ToString());

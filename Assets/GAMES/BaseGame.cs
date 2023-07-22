@@ -27,7 +27,7 @@ namespace Scripts.Games
         public static event Action<int> OnScoreUpdate;
         public static event Action<string, float> OnTimerUpdate;
         //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
-        public static event Action<string, AnimType, int, float, float> OnPlayAnimations;
+        public static event Action<Transform, AnimType, int, float, float> OnPlayAnimations;
 
         protected KeyMap _keys;
         protected Rect _playarea;
@@ -35,7 +35,7 @@ namespace Scripts.Games
         protected int _successes, _fails;
         protected float _timer;
 
-        private string _parent;
+        private Transform _parent;
 
         #endregion Fields
 
@@ -52,7 +52,7 @@ namespace Scripts.Games
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
-            _parent = transform.parent.name;
+            _parent = transform.parent;
             _fails = failsToLose;
         }
 
@@ -60,14 +60,14 @@ namespace Scripts.Games
         /// Decreases the score by 1-3 = difficulty.
         /// </summary>
         protected void ScoreDown() =>
-            ScoreUp(-(int)difficulty);
+            ScoreDown(-(int)difficulty);
 
         /// <summary>
         /// Decreases the score by a given value.
         /// </summary>
         /// <param name="value">The value to decrease.</param>
         protected void ScoreDown(int value) =>
-            ScoreUp(-Mathf.Abs(value));
+            ScoreUpdate(-Mathf.Abs(value));
 
         /// <summary>
         /// Increases the score by 1-3 = difficulty.
@@ -80,7 +80,14 @@ namespace Scripts.Games
         /// </summary>
         /// <param name="value">The value to increase.</param>
         protected void ScoreUp(int value) =>
-            OnScoreUpdate?.Invoke(Mathf.Abs(value));
+            ScoreUpdate(value);
+
+        /// <summary>
+        /// The actual method setting the score!
+        /// </summary>
+        /// <param name="value">The value to increase or decrease.</param>
+        private void ScoreUpdate(int value) =>
+            OnScoreUpdate?.Invoke(value);
 
         /// <summary>
         /// Trigger ths when you achieved a success.
@@ -98,7 +105,7 @@ namespace Scripts.Games
         protected void Success(int score)
         {
             ScoreUp(score);
-            AnimateWin(_successes, successesToWin);
+            AnimateFail(_successes, successesToWin);
             if (_successes >= successesToWin)
             {
                 _successes = 0;
@@ -122,7 +129,7 @@ namespace Scripts.Games
         protected void Fail(int score)
         {
             ScoreDown(score);
-            AnimateLose(_fails, failsToLose);
+            AnimateFail(_fails, failsToLose);
             if (_fails <= 0)
             {
                 _fails = failsToLose;
@@ -143,27 +150,48 @@ namespace Scripts.Games
         protected void Lose() =>
             OnLose?.Invoke(gameObject);
 
-
+        /// <summary>
+        /// Runs the Win animation at a given parent position.
+        /// </summary>
+        /// <param name="parent">The parent object to attatch and play the animation at.</param>
+        /// <param name="successes">Current increasing count of successes achieved (or their equivalent in your game).</param>
+        /// <param name="successesToWin">The max number of successes to win (or their equivalent in your game).</param>
+        protected void AnimateSuccess(Transform parent, int successes, int successesToWin)
+        {
+            OnPlayAnimations?.Invoke(parent, AnimType.Win, (int)difficulty, (float)successes, (float)successesToWin);
+        }
 
         /// <summary>
+        /// Overload method.
         /// Runs the Win animation.
         /// </summary>
         /// <param name="successes">Current increasing count of successes achieved (or their equivalent in your game).</param>
         /// <param name="successesToWin">The max number of successes to win (or their equivalent in your game).</param>
-        protected void AnimateWin(int successes, int successesToWin)
+        protected void AnimateSuccess(int successes, int successesToWin)
         {
-            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, (float)successes, (float)successesToWin);
+            AnimateSuccess(_parent, successes, successesToWin);
         }
 
+        /// <summary>
+        /// Runs the Lose animation at a given parent position.
+        /// </summary>
+        /// <param name="parent">The parent object to attatch and play the animation at.</param>
+        /// <param name="fails">Current decreasing count of fails left (or their equivalent in your game).</param>
+        /// <param name="failsToLose">The max number of fails to lose (or their equivalent in your game).</param>
+        protected void AnimateFail(Transform parent, int fails, int failsToLose)
+        {
+            OnPlayAnimations?.Invoke(parent, AnimType.Lose, (int)difficulty, (float)(failsToLose - fails), (float)failsToLose);
+        }
 
         /// <summary>
+        /// Overload method.
         /// Runs the Lose animation.
         /// </summary>
         /// <param name="fails">Current decreasing count of fails left (or their equivalent in your game).</param>
         /// <param name="failsToLose">The max number of fails to lose (or their equivalent in your game).</param>
-        protected void AnimateLose(int fails, int failsToLose)
+        protected void AnimateFail(int fails, int failsToLose)
         {
-            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, (float)(failsToLose - fails), (float)failsToLose);
+            AnimateFail(_parent, fails, failsToLose);
         }
 
         /// <summary>
