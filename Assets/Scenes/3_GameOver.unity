@@ -783,7 +783,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1903515380}
         m_TargetAssemblyTypeName: Scripts.Controllers.EndScreen, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1903515380}
         m_TargetAssemblyTypeName: Scripts.Controllers.EndScreen, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1903515380}
         m_TargetAssemblyTypeName: Scripts.Controllers.EndScreen, Assembly-CSharp
         m_MethodName: GoToMenu
         m_Mode: 1

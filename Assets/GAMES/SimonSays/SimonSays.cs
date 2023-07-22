@@ -67,7 +67,7 @@ namespace Scripts.Games
             infoOverlay.SetActive(true);
             StartCoroutine(ActivateButtons(BLINK_TIME/2.0f));
             GeneratePattern(MIN_LENGTH);
-            StartCoroutine(AnimateButtons(_animationTime * 2, _animationTime));
+            StartCoroutine(AnimateButtons(_animationTime, _animationTime));
 
             // Set keys
             blue.GetComponent<BasePressElement>().Button = _keys.One.Input;
