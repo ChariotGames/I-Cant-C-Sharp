@@ -7,7 +7,8 @@ public class ExpBomb : MonoBehaviour
     [SerializeField] private Color[] colors;
     [SerializeField] private Exploooosions parent;
     [SerializeField] private float size;
-    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private SpriteRenderer spriteBomb;
+    [SerializeField] private SpriteRenderer spriteBase;
 
     private bool active = false;
     private bool danger = false;
@@ -23,7 +24,8 @@ public class ExpBomb : MonoBehaviour
     public void SetDefault()
     {
         active = false;
-        sprite.enabled = true;
+        spriteBomb.enabled = true;
+        spriteBase.enabled = true;
     }
 
     private void LoopAnimation()
@@ -35,12 +37,14 @@ public class ExpBomb : MonoBehaviour
             Vector3 newSize = new(size, size, transform.position.z);
             StartCoroutine(AnimateSize(gameObject.transform.localScale, newSize, 0.1f));
             StartCoroutine(AnimateColor(gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));
+            StartCoroutine(AnimateColor(gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));
             Invoke(nameof(SetOff), 0.45f);
             
         }
         else
         {
             StartCoroutine(AnimateColor(gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));
+            StartCoroutine(AnimateColor(gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));
         }
     }
 
@@ -73,7 +77,8 @@ public class ExpBomb : MonoBehaviour
 
     private IEnumerator AnimateSize(Vector3 original, Vector3 target, float duration)
     {
-        sprite.enabled = false;
+        spriteBomb.enabled = false;
+        spriteBase.enabled = false;
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {

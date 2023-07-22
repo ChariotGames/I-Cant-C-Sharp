@@ -64,6 +64,11 @@ namespace Scripts.Games
             Vector2 input = new Vector2(stick.action.ReadValue<Vector2>().x, stick.action.ReadValue<Vector2>().y).normalized;
             Vector2 move = input * movementSpeed;
             rb.velocity = move;
+
+            if (transform.position.x >= parent.Playarea.xMax) transform.position = new Vector2(parent.Playarea.xMax, transform.position.y);
+            if (transform.position.x <= parent.Playarea.xMin) transform.position = new Vector2(parent.Playarea.xMin, transform.position.y);
+            if (transform.position.y >= parent.Playarea.yMax) transform.position = new Vector2(transform.position.x, parent.Playarea.yMax);
+            if (transform.position.y <= parent.Playarea.yMin) transform.position = new Vector2(transform.position.x, parent.Playarea.yMin);
         }
 
         #endregion Built-Ins / MonoBehaviours

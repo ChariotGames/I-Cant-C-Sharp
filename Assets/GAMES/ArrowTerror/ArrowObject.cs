@@ -6,7 +6,7 @@ namespace Scripts.Games
     public class ArrowObject : MonoBehaviour
     {
         [SerializeField] private ArrowTerror game;
-        [SerializeField] private PolygonCollider2D player;
+        [SerializeField] private Collider2D player;
         [SerializeField] [Range(0.25f, 1f)] private float EnemySpeed = 0.1f;
 
         public ElementType type;

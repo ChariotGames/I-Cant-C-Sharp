@@ -4,7 +4,7 @@ namespace Scripts.Games
 {
     public class Exploooosions : BaseGame
     {
-        [SerializeField] private GameObject border, bombBase, bombDonut, bombCross, bombContainer;
+        [SerializeField] private GameObject bombBase, bombDonut, bombCross, bombContainer;
 
         public GameObject player;
 
@@ -18,16 +18,6 @@ namespace Scripts.Games
         private void Awake()
         {
             player.GetComponent<ExpPlayer>().stick = _keys.One.Input;
-            Vector2[] borders = border.GetComponent<EdgeCollider2D>().points;
-            borders[0] = new Vector2(_playarea.xMin, _playarea.yMin);
-            borders[1] = new Vector2(_playarea.xMin, _playarea.yMax);
-            borders[2] = new Vector2(_playarea.xMax, _playarea.yMax);
-            borders[3] = new Vector2(_playarea.xMax, _playarea.yMin);
-            borders[4] = new Vector2(_playarea.xMin, _playarea.yMin);
-            //for (int i = 0; i < borders.Length; i++)
-            //{
-            border.GetComponent<EdgeCollider2D>().points = borders;
-            //}
         }
 
         void Start()
@@ -67,6 +57,7 @@ namespace Scripts.Games
                 Debug.Log("Chuckles... I'm in danger.");
                 loseCounter++;
                 //failsToLose--;
+                StartCoroutine(player.GetComponent<ExpPlayer>().AnimateColor(player.GetComponent<SpriteRenderer>(), Color.white, Color.black, 0.5f));
                 player.GetComponent<ExpPlayer>().knockback = player.GetComponent<Rigidbody2D>().position - new Vector2(obj.transform.position.x, obj.transform.position.y);
                 // Does not work why?
             }

@@ -1,5 +1,4 @@
 using Scripts.Models;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,8 @@ namespace Scripts.Games
 
         //[SerializeField] [Range(0, 10)] private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
         [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
+        [SerializeField] private AudioSource sound;
+        [SerializeField] private AudioClip[] clips;
 
         #endregion Serialized Fields
 
@@ -95,6 +96,11 @@ namespace Scripts.Games
                 base.Win();
             }
 
+           if (checkpointsCollected == ammountCheckpoints)
+            {
+                Container.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                Container.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            }
             //Debug.Log(base._playarea.Contains(player.transform.position));
         }
 
@@ -129,6 +135,9 @@ namespace Scripts.Games
             switch (type)
             {
                 case ElementType.CHECKPOINT:
+                    sound.time = 0.8f;
+                    sound.clip = clips[Random.Range(0, clips.Length)];
+                    sound.Play();
                     Destroy(obj);
                     checkpointsCollected++;
                     break;
