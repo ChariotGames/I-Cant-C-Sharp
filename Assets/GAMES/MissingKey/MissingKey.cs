@@ -1,16 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Scripts.Models;
+using System.Collections;
 
 namespace Scripts.Games
 {
     public class MissingKey : BaseGame
     {
         [SerializeField] private List<GameObject> buttons, pattern;
-        [SerializeField] private int count = 3;
+        [SerializeField] private SpriteRenderer spriteWin;
+        [SerializeField] private SpriteRenderer spriteLose;
+        private int count = 3;
 
         //private GameObject answer;
-        [SerializeField] private GameObject loseDisplay, buttonContainer;
+        [SerializeField] private GameObject buttonContainer;
         private bool _playerPressed = false;
         private float _playfieldWidth;
         private const float ROUND_TIME = 5.0f;
@@ -18,11 +22,30 @@ namespace Scripts.Games
         private Camera _mainCamera;
         private float _time = 0;
         private bool timerEnded;
+        private int winCounter = 0;
+        private int loseCounter = 0;
 
 
         private void Awake()
         {
             _mainCamera = Camera.main;
+
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    count = 3;
+                    break;
+                case Difficulty.MEDIUM:
+                    count = 6;
+                    break;
+                case Difficulty.HARD:
+                    count = 9;
+                    break;
+                default:
+                    count = 3;
+                    break;
+            }
+
             for (int i = 0; i < buttons.Count; i++)
             {
                 BasePressElement bpe = buttons[i].GetComponent<BasePressElement>();
@@ -34,12 +57,13 @@ namespace Scripts.Games
         void Start()
         {
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
-            
+
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
-            _playfieldWidth = _cameraViewportBounds.size.x/2;
+            _playfieldWidth = _cameraViewportBounds.size.x / 2;
             //Debug.Log(_cameraViewportBounds.max.x);
             GeneratePattern();
             DisplayPattern();
+
         }
 
         // Update is called once per frame
@@ -48,18 +72,33 @@ namespace Scripts.Games
             _time += Time.deltaTime;
             if (_time >= ROUND_TIME)
             {
-                //timerEnded = true;
-                TimerEnded();
-            }
+                Debug.Log("Time is up!");
+                timerEnded = true;
 
-            NextRound();
+                //TimerEnded();
+
+            }
+            CheckWin();
+
         }
 
         private void TimerEnded()
         {
+
             _time = 0;
-            Lose();
-            
+
+            if (loseCounter >= failsToLose)
+            {
+                base.Harder();
+                Lose();
+            }
+            else
+            {
+                spriteLose.gameObject.SetActive(true);
+                NextRound();
+            }
+
+
             //loseDisplay.SetActive(true);
             //DeleteAll();
             //InputHandler.ArrowRight -= PlayerPress;
@@ -145,7 +184,7 @@ namespace Scripts.Games
             for (int i = 0; i < count; i++)
             {
 
-               // float buttonPosX = pattern[i].transform.localScale.x - 1 + step * (i + 1) - _playfieldWidth / 2;
+                // float buttonPosX = pattern[i].transform.localScale.x - 1 + step * (i + 1) - _playfieldWidth / 2;
 
                 //Vector3 newPosition = ButtonContainer.transform.position + new Vector3(step * (count + 1) - playfieldWidth / 2, 0, 0);
                 //float offset = pattern[i].transform.localScale.x  + startPoint * i;
@@ -155,7 +194,7 @@ namespace Scripts.Games
             }
         }
 
-        private bool CheckWin()
+        private bool Won()
         {
             //go through each button and check if one was deactivated
             for (int i = 0; i < buttonContainer.transform.childCount; i++)
@@ -182,37 +221,100 @@ namespace Scripts.Games
 
         private void PlayerPress(InputAction.CallbackContext ctx)
         {
+            //Debug.Log("Clicked!");
             _playerPressed = true;
             _time = 0;
+
+            DeleteAll();
         }
 
-        private void NextRound()
+        private IEnumerator NextRound()
+        {
+            yield return new WaitForSeconds(1);
+            spriteWin.gameObject.SetActive(false);
+            spriteLose.gameObject.SetActive(false);
+
+            if (buttonContainer.transform.childCount == 0)
+            {
+                GeneratePattern();
+                DisplayPattern();
+            }
+
+
+        }
+
+        private void ScoreOneUp()
+        {
+            //so oft gewonnen, neues Spiel und difficulty hochsetzen (?)
+            if (winCounter >= successesToWin)
+            {
+                Debug.Log("You won the game!");
+                winCounter = 0;
+                base.Harder();
+                Win();
+            }
+            base.ScoreUp();
+        }
+
+        private void CheckWin()
         {
             if (_playerPressed)
             {
-                DeleteAll();
-                if (CheckWin())
-                {
 
-                    Win();
-                    GeneratePattern();
-                    DisplayPattern();
+                //To the person reading my code:
+                //do NOT get a heart stroke by how badly this method is refactored
+                //thanks <3
+
+                if (!Won())
+                {
+                    winCounter = 0;
+                    loseCounter++;
+                    Debug.Log("loseCounter: " + loseCounter);
+
+
+                    spriteLose.gameObject.SetActive(true);
+
+                    if (loseCounter >= failsToLose)
+                    {
+                        Debug.Log("Lost a heart!");
+                        loseCounter = 0;
+                        base.Easier();
+                        Lose();
+                    }
+
                 }
                 else
                 {
-                    Lose();
-                    GeneratePattern();
-                    DisplayPattern();
-                    //loseDisplay.SetActive(true);
-                    //InputHandler.ArrowRight -= PlayerPress;
-                    //InputHandler.ArrowLeft -= PlayerPress;
-                    //InputHandler.ArrowUp -= PlayerPress;
-                    //InputHandler.ArrowDown -= PlayerPress;
-                   
-                    
+
+                    winCounter++;
+                    Debug.Log("winCounter: " + winCounter);
+                    ScoreOneUp();
+                    spriteWin.gameObject.SetActive(true);
+
                 }
+                StartCoroutine(NextRound());
+                _playerPressed = false;
             }
-            _playerPressed = false;
+            else if (timerEnded)
+            {
+                timerEnded = false;
+                _time = 0;
+                winCounter = 0;
+                loseCounter++;
+                Debug.Log("loseCounter: " + loseCounter);
+
+                DeleteAll();
+                spriteLose.gameObject.SetActive(true);
+
+                if (loseCounter >= failsToLose)
+                {
+                    Debug.Log("Lost a heart!");
+                    loseCounter = 0;
+                    base.Easier();
+                    Lose();
+                }
+                StartCoroutine(NextRound());
+            }
         }
     }
 }
