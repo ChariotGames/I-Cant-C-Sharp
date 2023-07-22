@@ -94,7 +94,7 @@ namespace Scripts.Games
             //StopAllCoroutines();
             _checkingIndex = 0;
             StopTimer();
-            //StopAllCoroutines();
+            StopAllCoroutines();
             PlayerTurn(false);
         }
 
@@ -233,9 +233,9 @@ namespace Scripts.Games
                 if (info == Modifier.NONE) nothing.Animate();
                 yield return new WaitForSeconds(duration);
             }
-            RunTimer(_timer);
             yield return new WaitForSeconds(duration);
 
+            RunTimer(_timer);
             PlayerTurn(true);
 
             yield return new WaitForSeconds(_timer);
