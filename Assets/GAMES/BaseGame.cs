@@ -21,7 +21,7 @@ namespace Scripts.Games
         #endregion Serialized Fields
 
         #region Fields
-
+        
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
@@ -189,6 +189,11 @@ namespace Scripts.Games
             if (time <= 0) return;
 
             StartCoroutine(TimerAnimation(time));
+        }
+
+        protected void StopTimer()
+        {
+            // TODO : Implement TimerOff Action
         }
 
         /// <summary>

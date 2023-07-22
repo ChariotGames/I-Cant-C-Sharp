@@ -133,7 +133,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 8
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -628,12 +628,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   buttons:
