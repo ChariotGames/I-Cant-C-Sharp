@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour
     public void Run()
     {
         if (duration <= 0) return; 
+        ToggleOnOff(true);
         StartCoroutine(AnimateTimer(duration));
     }
 
@@ -33,9 +34,10 @@ public class Timer : MonoBehaviour
             float progress = elapsedTime / duration;
             timer.fillAmount = Mathf.Clamp01(progress);
             elapsedTime += Time.deltaTime;
-            yield return null;
+            yield return new WaitForSeconds(Time.deltaTime);
         }
 
         timer.fillAmount = 1f;
+        ToggleOnOff(false);
     }
 }

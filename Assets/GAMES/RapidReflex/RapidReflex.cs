@@ -146,12 +146,12 @@ namespace Scripts.Games
             overlayContainer.SetActive(true);
             if (_timeElapsed < _timeToAnswer && _timeElapsed >= 0)
             {
-                gameState.text = "Rapid Reflex: " + (int)(_timeElapsed * 1000) + " ms";
+                gameState.text = "rapid reflex: " + (int)(_timeElapsed * 1000) + " ms";
                 GameWon();
             }
             else
             {
-                gameState.text = _timeElapsed > 0 ? "Too slow!" : "Too Early!";
+                gameState.text = _timeElapsed > 0 ? "too slow!" : "too early!";
                 GameLost();
             }
             yield return new WaitForSeconds(1);

@@ -16,19 +16,19 @@ MonoBehaviour:
   difficulty: 1
   genre: 4
   keysLeft:
-    one: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
-    two: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
-    three: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
+    one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
+    two: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
+    three: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
     four: {fileID: 0}
   keysRight:
-    one: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
-    two: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
-    three: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
+    one: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
+    two: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
+    three: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
     four: {fileID: 0}
   actionNames:
-    one: Increase
-    two: Decrease
-    three: Submit
+    one: Decrease
+    two: Submit
+    three: Increase
     four: 
     other: 
   prefab: {fileID: 7127801452119632389, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}

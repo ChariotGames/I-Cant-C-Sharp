@@ -16,18 +16,18 @@ MonoBehaviour:
   difficulty: 2
   genre: 4
   keysLeft:
-    one: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
-    two: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
+    one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
+    two: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
   keysRight:
-    one: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
-    two: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
+    one: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
+    two: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
   actionNames:
-    one: Right
-    two: Left
+    one: Left
+    two: Right
     three: 
     four: 
     other: 

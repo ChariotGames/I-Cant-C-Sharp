@@ -21,7 +21,7 @@ namespace Scripts.Games
         #endregion Serialized Fields
 
         #region Fields
-
+        
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
@@ -109,6 +109,20 @@ namespace Scripts.Games
             }
         }
 
+        protected void AnimateWin(float successes, float successesToWin)
+        {
+            float from = (successes - 1) / successesToWin;
+            float to = successes / successesToWin;
+            OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, from, to);
+        }
+        
+        protected void AnimateLose(float fails, float failsToLose)
+        {
+            float from = (failsToLose - fails - 1) / failsToLose;
+            float to = (failsToLose - fails) / failsToLose;
+            OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, from, to); 
+        }
+
         /// <summary>
         /// Use this when you made a mistake.
         /// It counts and manages everything else.
@@ -175,6 +189,11 @@ namespace Scripts.Games
             if (time <= 0) return;
 
             StartCoroutine(TimerAnimation(time));
+        }
+
+        protected void StopTimer()
+        {
+            // TODO : Implement TimerOff Action
         }
 
         /// <summary>
