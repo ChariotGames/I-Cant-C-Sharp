@@ -30,7 +30,7 @@ namespace Scripts.Controllers
         private Genre _otherGenre;
         private KeyMap _otherKeys;
         private Transform _parent;
-        private const int MAX_QUE = 5;
+        private const int MAX_QUE = 10;
         private int _winCounter = MAX_QUE;
 
         #endregion
