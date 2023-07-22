@@ -175,7 +175,7 @@ namespace Scripts.Controllers
             if (side.Contains("Right")) timer = rightTimer;
 
             timer.fillAmount += fraction;
-            if(timer.fillAmount >=1) timer.gameObject.SetActive(false);
+            if(timer.fillAmount >= 1) timer.gameObject.SetActive(false);
         }
 
         private void RemoveKeys(Transform parent)
