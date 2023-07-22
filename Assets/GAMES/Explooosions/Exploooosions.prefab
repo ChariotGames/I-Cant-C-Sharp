@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 2641797602288821863}
   - component: {fileID: 2641797602288821864}
   - component: {fileID: 2641797602288821865}
+  - component: {fileID: 986116707138422993}
   m_Layer: 0
   m_Name: BombCross
   m_TagString: Untagged
@@ -473,6 +474,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &986116707138422993
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641797602288821860}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 35.97, y: 36.005157}
+    newSize: {x: 0.2, y: 0.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -17.09146, y: -17.942225}
+      - {x: -0.014884666, y: -0.66820526}
+      - {x: 17.242073, y: -17.844353}
+      - {x: 17.809324, y: -17.173864}
+      - {x: 0.6852989, y: -0.014918089}
+      - {x: 17.818026, y: 17.16271}
+      - {x: 17.181393, y: 17.839981}
+      - {x: 0.017543793, y: 0.7546196}
+      - {x: -17.161606, y: 17.861933}
+      - {x: -17.796684, y: 17.19187}
+      - {x: -0.6935711, y: 0.0017704964}
+      - {x: -17.829308, y: -17.15635}
 --- !u!1 &2641797602970142051
 GameObject:
   m_ObjectHideFlags: 0
