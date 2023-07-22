@@ -66,7 +66,7 @@ namespace Scripts.Games
         private IEnumerator AnimationStartText(float distance)
         {
             float offset = 0;
-            float delta = 0.005f;
+            float delta = Time.deltaTime;
             while (offset < distance)
             {
                 startText.transform.Translate(0, delta, 0, Space.Self);
