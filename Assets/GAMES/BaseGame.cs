@@ -111,15 +111,15 @@ namespace Scripts.Games
 
         protected void AnimateWin(float successes, float successesToWin)
         {
-            float from = 1.0f * (successes - 1) / successesToWin;
-            float to = 1.0f * successes / successesToWin;
+            float from = (successes - 1) / successesToWin;
+            float to = successes / successesToWin;
             OnPlayAnimations?.Invoke(_parent, AnimType.Win, (int)difficulty, from, to);
         }
         
         protected void AnimateLose(float fails, float failsToLose)
         {
-            float from = 1.0f * (failsToLose - fails - 1) / failsToLose;
-            float to = 1.0f * (fails - 1)/ failsToLose;
+            float from = (failsToLose - fails - 1) / failsToLose;
+            float to = (failsToLose - fails) / failsToLose;
             OnPlayAnimations?.Invoke(_parent, AnimType.Lose, (int)difficulty, from, to); 
         }
 
