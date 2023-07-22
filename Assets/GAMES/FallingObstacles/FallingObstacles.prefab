@@ -329,8 +329,8 @@ GameObject:
   - component: {fileID: 1243858307624139116}
   - component: {fileID: 1243858307624139107}
   - component: {fileID: 1243858307624139106}
-  - component: {fileID: 9037170954820958771}
   - component: {fileID: 8684241066842169142}
+  - component: {fileID: 1978798561124308631}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -426,22 +426,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &9037170954820958771
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243858307624139105}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &8684241066842169142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +439,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallingObstacles: {fileID: 6926883230700997366}
+--- !u!61 &1978798561124308631
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243858307624139105}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.10792157, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1 &4928510789893346696
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +657,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.01400277, y: 0.0060014725}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -658,7 +668,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8679736, y: 0.77995586}
   m_EdgeRadius: 0
 --- !u!1 &5106472984098117548
 GameObject:
@@ -929,7 +939,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6926883230700997367
 Transform:
   m_ObjectHideFlags: 0
