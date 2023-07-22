@@ -26,10 +26,10 @@ namespace Scripts.Games
             move += knockback;
             rb.velocity = move;
 
-            if (transform.position.x >= parent.Playarea.xMax) transform.position = new Vector2(parent.Playarea.xMax, transform.position.y);
-            if (transform.position.x <= parent.Playarea.xMin) transform.position = new Vector2(parent.Playarea.xMin, transform.position.y);
-            if (transform.position.y >= parent.Playarea.yMax) transform.position = new Vector2(transform.position.x, parent.Playarea.yMax);
-            if (transform.position.y <= parent.Playarea.yMin) transform.position = new Vector2(transform.position.x, parent.Playarea.yMin);
+            if (transform.localPosition.x >= parent.Playarea.xMax) transform.localPosition = new Vector2(parent.Playarea.xMax, transform.localPosition.y);
+            if (transform.localPosition.x <= parent.Playarea.xMin) transform.localPosition = new Vector2(parent.Playarea.xMin, transform.localPosition.y);
+            if (transform.localPosition.y >= parent.Playarea.yMax) transform.localPosition = new Vector2(transform.localPosition.x, parent.Playarea.yMax);
+            if (transform.localPosition.y <= parent.Playarea.yMin) transform.localPosition = new Vector2(transform.localPosition.x, parent.Playarea.yMin);
         }
 
         public IEnumerator AnimateColor(SpriteRenderer sprite, Color original, Color target, float duration)
