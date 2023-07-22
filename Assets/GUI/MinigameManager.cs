@@ -188,7 +188,9 @@ namespace Scripts.Controllers
                 return;
             }
 
+            OnClearKeys?.Invoke(_parent.name);
             Destroy(game);
+
             if (_winCounter > 0)
             {
                 StartCoroutine(Wait(3f));
