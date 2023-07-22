@@ -107,6 +107,7 @@ namespace Scripts.Games
 
                 if (_correctGuesses == 5)
                 {
+                    _correctGuesses = 0;
                     base.Harder();
                     base.Win();
                 }
@@ -118,7 +119,8 @@ namespace Scripts.Games
 
                 if (_wrongGuesses == 3)
                 {
-                    stop = true;
+                    //stop = true;
+                    _wrongGuesses = 0;
                     base.Easier();
                     base.Lose();
                 }
