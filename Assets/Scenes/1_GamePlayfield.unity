@@ -1267,7 +1267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358f37eeac685bb42a10f598ec7adbc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
   timer: {fileID: 619629607}
 --- !u!1 &650444151
 GameObject:
@@ -1793,8 +1792,8 @@ MonoBehaviour:
   rightKeys: {fileID: 1355222601}
   centerKeys: {fileID: 1544768302}
   templateKeys: {fileID: 1645911721}
-  leftTimer: {fileID: 619629607}
-  rightTimer: {fileID: 1393324007}
+  leftTimer: {fileID: 619629609}
+  rightTimer: {fileID: 1393324009}
   leftAnim: {fileID: 1752284393}
   rightAnim: {fileID: 1960766537}
   tempWin: {fileID: 1451305636}
@@ -2370,7 +2369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358f37eeac685bb42a10f598ec7adbc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
   timer: {fileID: 1393324007}
 --- !u!1 &1451305625
 GameObject:

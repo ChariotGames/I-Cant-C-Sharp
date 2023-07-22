@@ -4,22 +4,34 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private float duration = 1f;
     [SerializeField] private Image timer;
+    private float duration = 0f;
+    private Coroutine routine;
 
     public float Duration { get => duration; set => duration = value; }
 
+    /// <summary>
+    /// Runs the respective timer.
+    /// </summary>
     public void Run()
     {
         if (duration <= 0) return; 
         ToggleOnOff(true);
-        StartCoroutine(AnimateTimer(duration));
+        routine = StartCoroutine(AnimateTimer(duration));
     }
 
-    public void ToggleOnOff(bool state)
+    /// <summary>
+    /// Stops the respective timer.
+    /// </summary>
+    public void Stop()
     {
-        gameObject.SetActive(state);
+        StopCoroutine(routine);
+        timer.fillAmount = 0;
+        ToggleOnOff(false);
     }
+
+    public void ToggleOnOff(bool state) =>
+        gameObject.SetActive(state);
 
     /// <summary>
     /// Animates the circular progess bar aka. timer.
@@ -29,6 +41,7 @@ public class Timer : MonoBehaviour
     private IEnumerator AnimateTimer(float duration)
     {
         float elapsedTime = 0f;
+
         while (elapsedTime < duration)
         {
             float progress = elapsedTime / duration;
@@ -36,8 +49,8 @@ public class Timer : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        Debug.Log(elapsedTime);
 
-        timer.fillAmount = 1f;
-        ToggleOnOff(false);
+        Stop();
     }
 }

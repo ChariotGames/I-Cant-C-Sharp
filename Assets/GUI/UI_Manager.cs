@@ -16,7 +16,7 @@ namespace Scripts.Controllers
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
         [SerializeField] private GameObject templateKeys;
-        [SerializeField] private Image leftTimer, rightTimer;
+        [SerializeField] private Timer leftTimer, rightTimer;
         [SerializeField] private Transform leftAnim, rightAnim;
         [SerializeField] private AnimationPack tempWin, tempLose;
 
@@ -33,7 +33,8 @@ namespace Scripts.Controllers
         {
             BaseGame.OnPlayAnimations += PlayAnimations;
             BaseGame.OnScoreUpdate += ScoreDisplay;
-            BaseGame.OnTimerUpdate += UpdateTimer;
+            BaseGame.OnTimerUpdate += PlayTimer;
+            BaseGame.OnTimerStop += StopTimer;
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
         }
@@ -42,7 +43,8 @@ namespace Scripts.Controllers
         {
             BaseGame.OnPlayAnimations -= PlayAnimations;
             BaseGame.OnScoreUpdate -= ScoreDisplay;
-            BaseGame.OnTimerUpdate -= UpdateTimer;
+            BaseGame.OnTimerUpdate -= PlayTimer;
+            BaseGame.OnTimerStop -= StopTimer;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
         }
@@ -71,9 +73,7 @@ namespace Scripts.Controllers
 
                 //depending on the health size, the amount of hearts will be filled
                 for (int i = 0; i < settings.Lives; i++)
-                {
                     hearts[i].sprite = fullHeart;
-                }
             }
 
             if (settings.Lives <= 0)
@@ -133,26 +133,6 @@ namespace Scripts.Controllers
             if (side.Contains("Center")) RemoveKeys(centerKeys);
         }
 
-        //private void SetAnimations((string parent, int score, float timer, int toWin, int toLose) vars)
-        //{
-        //    if (vars.parent.Contains("Left") || vars.parent.Contains("Center"))
-        //    {
-        //        leftTimer.Duration = vars.timer;
-        //        if (vars.timer <= 0) leftTimer.gameObject.SetActive(false);
-        //        leftAnim.Count = vars.score;
-        //        leftAnim.WinsMax = vars.toWin;
-        //        leftAnim.FailsMax = vars.toLose;
-        //    }
-        //    else
-        //    {
-        //        rightTimer.Duration = vars.timer;
-        //        if (vars.timer <= 0) rightTimer.gameObject.SetActive(false);
-        //        rightAnim.Count = vars.score;
-        //        rightAnim.WinsMax = vars.toWin;
-        //        rightAnim.FailsMax = vars.toLose;
-        //    }
-        //}
-
         /// <summary>
         /// Plays an animation of a certain type and in a certain position.
         /// </summary>
@@ -174,22 +154,25 @@ namespace Scripts.Controllers
             pack.Run(count, numerator, denominator, anim.ToString());
         }
 
-        private void UpdateTimer(string side, float fraction)
+        private void PlayTimer(string side, float duration)
         {
-            Image timer = leftTimer;
-            if (!timer.gameObject.activeInHierarchy) timer.gameObject.SetActive(true);
+            Timer timer = leftTimer;
             if (side.Contains("Right")) timer = rightTimer;
+            timer.Duration = duration;
+            timer.Run();
+        }
 
-            timer.fillAmount += fraction;
-            if(timer.fillAmount >= 1) timer.gameObject.SetActive(false);
+        private void StopTimer(string side)
+        {
+            Timer timer = leftTimer;
+            if (side.Contains("Right")) timer = rightTimer;
+            timer.Stop();
         }
 
         private void RemoveKeys(Transform parent)
         {
             for (int i = 0; i < parent.childCount; i++)
-            {
                 Destroy(parent.GetChild(i).gameObject);
-            }
         }
     }
 

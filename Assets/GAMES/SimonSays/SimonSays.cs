@@ -67,7 +67,7 @@ namespace Scripts.Games
             infoOverlay.SetActive(true);
             StartCoroutine(ActivateButtons(BLINK_TIME/2.0f));
             GeneratePattern(MIN_LENGTH);
-            StartCoroutine(AnimateButtons(_animationTime, _animationTime));
+            //StartCoroutine(AnimateButtons(_animationTime * 2f, _animationTime));
 
             // Set keys
             blue.GetComponent<BasePressElement>().Button = _keys.One.Input;
@@ -91,9 +91,10 @@ namespace Scripts.Games
         /// </summary>
         private void ResetTurn()
         {
-            StopAllCoroutines();
+            //StopAllCoroutines();
             _checkingIndex = 0;
-            //timer.fillAmount = 0f;
+            StopTimer();
+            //StopAllCoroutines();
             PlayerTurn(false);
         }
 
@@ -123,10 +124,12 @@ namespace Scripts.Games
             Colors randomColor;
             while (displayPattern.Count < length)
             {
-                randomColor = (Colors)UnityEngine.Random.Range(0, COLORS) + 1;
+                randomColor = (Colors)Random.Range(0, COLORS) + 1;
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
+
+            StartCoroutine(AnimateButtons(_animationTime, _animationTime));
         }
 
         /// <summary>
@@ -145,7 +148,7 @@ namespace Scripts.Games
                 return;
             }
 
-            int chance = UnityEngine.Random.Range(0, CHANCE);
+            int chance = Random.Range(0, CHANCE);
 
             if (base.Difficulty == Difficulty.HARD && chance < 1)
             {
@@ -170,12 +173,8 @@ namespace Scripts.Games
         /// </summary>
         private void ClearInfoPattern()
         {
-            ok.Animate();
-
             for (int i = 0; i < infoPattern.Count; i++)
-            {
                 infoPattern[i] = Modifier.NORMAL;
-            }
         }
 
         /// <summary>
@@ -186,9 +185,7 @@ namespace Scripts.Games
         private void PlayerTurn(bool isPlayersTurn)
         {
             foreach (SimonElement button in _buttonObjects.Values)
-            {
                 button.ToggleInput(isPlayersTurn);
-            }
 
             inputOverlay.SetActive(isPlayersTurn);
         }
@@ -236,9 +233,11 @@ namespace Scripts.Games
                 if (info == Modifier.NONE) nothing.Animate();
                 yield return new WaitForSeconds(duration);
             }
+            RunTimer(_timer);
+            yield return new WaitForSeconds(duration);
 
             PlayerTurn(true);
-            RunTimer(_timer);
+
             yield return new WaitForSeconds(_timer);
             WrongColor();
         }
@@ -296,7 +295,7 @@ namespace Scripts.Games
         {
             Fail();
 
-            nothing.Animate();
+            //nothing.Animate();
 
             _successes = Mathf.Clamp((successesToWin -= (int)Difficulty), 0, 9);
             ResetTurn();
@@ -312,11 +311,11 @@ namespace Scripts.Games
             UpdateDifficulty(_successes);
             
             Success();
+            //ok.Animate();
 
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
-            StartCoroutine(AnimateButtons(_animationTime, _animationTime));
         }
 
         #endregion

@@ -26,6 +26,7 @@ namespace Scripts.Games
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
         public static event Action<string, float> OnTimerUpdate;
+        public static event Action<string> OnTimerStop;
         //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
         public static event Action<Transform, AnimType, int, float, float> OnPlayAnimations;
 
@@ -90,22 +91,42 @@ namespace Scripts.Games
             OnScoreUpdate?.Invoke(value);
 
         /// <summary>
-        /// Trigger ths when you achieved a success.
+        /// Trigger this when you achieved a success.
         /// It counts and manages everything else.
         /// </summary>
         protected void Success() =>
-            Success((int)difficulty);
+            Success(_parent, (int)difficulty);
 
         /// <summary>
         /// Overload method.
-        /// Trigger ths when you achieved a success.
+        /// Trigger this when you achieved a success.
+        /// It counts and manages everything else.
+        /// <param name="parent">The place to play the animation.</param>
+        /// </summary>
+        protected void Success(Transform parent) =>
+            Success(parent, (int)difficulty);
+
+        /// <summary>
+        /// Overload method.
+        /// Trigger this when you achieved a success.
         /// It counts and manages everything else.
         /// </summary>
         /// <param name="score">Pass a different score.</param>
-        protected void Success(int score)
+        protected void Success(int score) =>
+            Success(_parent, score);
+
+        /// <summary>
+        /// Overload method.
+        /// Trigger this when you achieved a success.
+        /// It counts and manages everything else.
+        /// </summary>
+        /// <param name="parent">The place to play the animation.</param>
+        /// <param name="score">Pass a different score.</param>
+        protected void Success(Transform parent, int score)
         {
+            _successes++;
             ScoreUp(score);
-            AnimateFail(_successes, successesToWin);
+            AnimateSuccess(parent, _successes, successesToWin);
             if (_successes >= successesToWin)
             {
                 _successes = 0;
@@ -118,7 +139,7 @@ namespace Scripts.Games
         /// Use this when you made a mistake.
         /// It counts and manages everything else.
         /// </summary>
-        protected void Fail() => Fail((int)difficulty);
+        protected void Fail() => Fail(_parent, (int)difficulty);
 
         /// <summary>
         /// Overload Method.
@@ -126,10 +147,30 @@ namespace Scripts.Games
         /// It counts and manages everything else.
         /// </summary>
         /// <param name="score">The score to reduce on fail.</param>
-        protected void Fail(int score)
+        protected void Fail(int score) =>
+            Fail(_parent, score);
+
+        /// <summary>
+        /// Overload Method.
+        /// Use this when you made a mistake.
+        /// It counts and manages everything else.
+        /// </summary>
+        /// <param name="parent">The place to play the animation.</param>
+        protected void Fail(Transform parent) =>
+            Fail(parent, (int)difficulty);
+
+        /// <summary>
+        /// Overload Method.
+        /// Use this when you made a mistake.
+        /// It counts and manages everything else.
+        /// </summary>
+        /// <param name="parent">The place to play the animation.</param>
+        /// <param name="score">The score to reduce on fail.</param>
+        protected void Fail(Transform parent, int score)
         {
+            _fails--;
             ScoreDown(score);
-            AnimateFail(_fails, failsToLose);
+            AnimateFail(parent, _fails, failsToLose);
             if (_fails <= 0)
             {
                 _fails = failsToLose;
@@ -151,6 +192,7 @@ namespace Scripts.Games
             OnLose?.Invoke(gameObject);
 
         /// <summary>
+        /// Overload method.
         /// Runs the Win animation at a given parent position.
         /// </summary>
         /// <param name="parent">The parent object to attatch and play the animation at.</param>
@@ -162,7 +204,6 @@ namespace Scripts.Games
         }
 
         /// <summary>
-        /// Overload method.
         /// Runs the Win animation.
         /// </summary>
         /// <param name="successes">Current increasing count of successes achieved (or their equivalent in your game).</param>
@@ -173,6 +214,7 @@ namespace Scripts.Games
         }
 
         /// <summary>
+        /// Overload method.
         /// Runs the Lose animation at a given parent position.
         /// </summary>
         /// <param name="parent">The parent object to attatch and play the animation at.</param>
@@ -184,7 +226,6 @@ namespace Scripts.Games
         }
 
         /// <summary>
-        /// Overload method.
         /// Runs the Lose animation.
         /// </summary>
         /// <param name="fails">Current decreasing count of fails left (or their equivalent in your game).</param>
@@ -220,28 +261,12 @@ namespace Scripts.Games
         {
             if (time <= 0) return;
 
-            StartCoroutine(TimerAnimation(time));
+            OnTimerUpdate?.Invoke(transform.parent.name, time);
         }
 
         protected void StopTimer()
         {
-            // TODO : Implement TimerOff Action
-        }
-
-        /// <summary>
-        /// Runs the timer as a coroutine.
-        /// </summary>
-        /// <param name="duration">The duration of the timer.</param>
-        /// <returns></returns>
-        private IEnumerator TimerAnimation(float duration)
-        {
-            float elapsedTime = 0f;
-            while (elapsedTime < duration)
-            {
-                float progress = elapsedTime / duration;
-                OnTimerUpdate?.Invoke(transform.parent.name, Mathf.Clamp01(progress));
-                yield return null;
-            }
+            OnTimerStop?.Invoke(transform.parent.name);
         }
 
         #endregion  Methods
