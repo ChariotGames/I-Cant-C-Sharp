@@ -153,7 +153,15 @@ namespace Scripts.Controllers
         //    }
         //}
 
-        private void PlayAnimations(string parent, AnimType anim, int count, float from, float to)
+        /// <summary>
+        /// Plays an animation of a certain type and in a certain position.
+        /// </summary>
+        /// <param name="parent">Where to spawn the animation.</param>
+        /// <param name="anim">The animation type.</param>
+        /// <param name="count">The number of stars.</param>
+        /// <param name="numerator">The portion to fill.</param>
+        /// <param name="denominator">The number of portions total.</param>
+        private void PlayAnimations(string parent, AnimType anim, int count, float numerator, float denominator)
         {
             AnimationPack pack = tempWin;
             if (anim == AnimType.Lose) pack = tempLose;
@@ -165,7 +173,7 @@ namespace Scripts.Controllers
             }
 
             pack = Instantiate(pack, pos);
-            pack.Run(count, from, to, anim.ToString());
+            pack.Run(count, numerator, denominator, anim.ToString());
         }
 
         private void UpdateTimer(string side, float fraction)
