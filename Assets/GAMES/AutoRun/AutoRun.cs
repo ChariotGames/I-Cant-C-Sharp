@@ -38,26 +38,23 @@ namespace Scripts.Games
 
         #endregion Built-Ins / MonoBehaviours
         
-
         #region Game Mechanics / Methods
 
         public InputAction getJumpInput()
         { 
-            return Keys.Three.Input.action; // Up
-            
-        }
-        public InputAction getBraceLeftInput()
-        {
-            return Keys.Two.Input.action; // left
-        }
-        
-        public InputAction getBraceRightInput()
-        {
-            return Keys.Four.Input.action; // right
+            return Keys.One.Input.action; // Up
         }
         public InputAction getDuckInput()
         {
-            return Keys.One.Input.action; // down
+            return Keys.Two.Input.action; // down
+        }
+        public InputAction getBraceLeftInput()
+        {
+            return Keys.Three.Input.action; // left
+        }
+        public InputAction getBraceRightInput()
+        {
+            return Keys.Four.Input.action; // right
         }
 
         public void easier()

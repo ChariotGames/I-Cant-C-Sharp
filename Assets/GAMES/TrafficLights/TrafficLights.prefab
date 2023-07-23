@@ -134,16 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   trafficLightPrefab: {fileID: 6244205913135684408, guid: 191d15b78c8698c489a961ece84981a4, type: 3}
-  owner_ref: {fileID: 989249343711807651}
   selector_ref: {fileID: 989249343899018306}
   trafficLights: []
   simonNot_ref: {fileID: 989249343446961647}
