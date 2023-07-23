@@ -16,6 +16,7 @@ MonoBehaviour:
   players: 1
   baseDifficulty: 4
   selectedGame: {fileID: 0}
+  selectedCharacter: {fileID: 0}
   games:
   - {fileID: 11400000, guid: 788e14c7f0f55c448aa1c48a5453fb6e, type: 2}
   - {fileID: 11400000, guid: 9f149fbd8369e4531a5b9bba0ceb12d8, type: 2}
@@ -35,5 +36,12 @@ MonoBehaviour:
   soloGames:
   - {fileID: 11400000, guid: e0d657ac69fa6a64a93954f7e8f6cb06, type: 2}
   - {fileID: 11400000, guid: ab65f45f24b010741ae49bb8d1f237b0, type: 2}
+  characters:
+  - {fileID: 11400000, guid: 42d26efae5c4bc74ca9d61de32bb6d2f, type: 2}
+  - {fileID: 11400000, guid: 885c033a72ffe714e8bb2a6179200c85, type: 2}
+  - {fileID: 11400000, guid: 88d49130f19298240a9d2bffc88c1895, type: 2}
+  - {fileID: 11400000, guid: cff11a11437da2f4b85c6c309abc75e7, type: 2}
+  - {fileID: 11400000, guid: 3030e855a97e32742b19d2771bf6b6b1, type: 2}
+  - {fileID: 11400000, guid: afdfb8b7ca5001d4da3500ffceb9ae3a, type: 2}
   _time: 0
   _score: 0

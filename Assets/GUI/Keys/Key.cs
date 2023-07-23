@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 /// It contains the input event bound to it.
 /// Also the string related to the input font icon.
 /// </summary>
-[CreateAssetMenu(fileName = "Key", menuName = "ScriptableObjects/Key", order = 1)]
+[CreateAssetMenu(fileName = "Key", menuName = "ScriptableObjects/Key")]
 public class Key : ScriptableObject
 {
     #region Serialized Fields

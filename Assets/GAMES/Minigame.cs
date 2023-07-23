@@ -6,7 +6,7 @@ namespace Scripts.Models
     /// Represents a package containing all relevant information
     /// of a single Minigame as a scriptable Object.
     /// </summary>
-    [CreateAssetMenu(fileName = "Minigame", menuName = "ScriptableObjects/Minigame", order = 1)]
+    [CreateAssetMenu(fileName = "Minigame", menuName = "ScriptableObjects/Minigame")]
     public class Minigame : ScriptableObject
     {
         #region Serialized Fields

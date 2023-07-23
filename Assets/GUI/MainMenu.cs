@@ -17,7 +17,7 @@ namespace Scripts.Controllers
 
         [SerializeField] private Camera mainCamera;
         [SerializeField] private CanvasScaler canvasScaler;
-        [SerializeField] private GameObject gamesContainer, templateGameButton, optionLives, startButton;
+        [SerializeField] private GameObject gamesContainer, templateGameButton, characterContainer, templateCharacterButton;
         [SerializeField] private Settings defaultSettings, settings;
         [SerializeField] private TMP_Text livesText, difficultyText;
 
@@ -37,7 +37,6 @@ namespace Scripts.Controllers
             if (mainCamera) mainCamera = Camera.main;
 
             ResetSettings();
-            SetSelected(startButton);
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             gameButtons = new();
             livesText.text = settings.Lives.ToString();
@@ -65,17 +64,35 @@ namespace Scripts.Controllers
             {
                 GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
                 button.GetComponent<MainMenuGame>().SetupButton(game);
-                gameButtons.Add(button);
+                //gameButtons.Add(button);
             }
 
             foreach (Minigame game in settings.SoloGames)
             {
                 GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
                 button.GetComponent<MainMenuGame>().SetupButton(game);
-                gameButtons.Add(button);
+                //gameButtons.Add(button);
             }
 
             EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
+        }
+
+        /// <summary>
+        /// Fills the character page with char assets on the first run.
+        /// </summary>
+        public void FillCharacterContainer()
+        {
+            if (characterContainer.transform.childCount == 0)
+            {
+                foreach (Character character in settings.Characters)
+                {
+                    GameObject button = Instantiate(templateCharacterButton, characterContainer.transform);
+                    button.GetComponent<MainMenuCharacter>().SetupButton(character);
+                    //gameButtons.Add(button);
+                }
+            }
+
+            EventSystem.current.SetSelectedGameObject(characterContainer.transform.GetChild(0).gameObject);
         }
 
         public void Run()
@@ -105,6 +122,7 @@ namespace Scripts.Controllers
             settings.SelectedGame = defaultSettings.SelectedGame;
             settings.Games = defaultSettings.Games;
             settings.SoloGames = defaultSettings.SoloGames;
+            settings.Characters = defaultSettings.Characters;
             settings.BaseDifficulty = defaultSettings.BaseDifficulty;
         }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Models
 {
-    [CreateAssetMenu(fileName = "Settings", menuName = "ScriptableObjects/Settings", order = 2)]
+    [CreateAssetMenu(fileName = "Settings", menuName = "ScriptableObjects/Settings")]
     public class Settings : ScriptableObject
     {
         #region Fields
@@ -11,7 +11,9 @@ namespace Scripts.Models
         [SerializeField] private int lives = 3, players = 1;
         [SerializeField] private Difficulty baseDifficulty;
         [SerializeField] private Minigame selectedGame = null;
-        [SerializeField] private List<Minigame> games = new(), soloGames = new();
+        [SerializeField] private Character selectedCharacter = null;
+        [SerializeField] private List<Minigame> games, soloGames;
+        [SerializeField] private List<Character> characters;
 
         [SerializeField] private float _time;
         [SerializeField] private int _score;
@@ -68,14 +70,44 @@ namespace Scripts.Models
             get => soloGames;
             set => soloGames = value;
         }
-        public Difficulty BaseDifficulty { get => baseDifficulty; set => baseDifficulty = value; }
 
+        /// <summary>
+        /// The list of Characters to pick.
+        /// </summary>
+        public List<Character> Characters
+        {
+            get => characters;
+            set => characters = value;
+        }
+
+        /// <summary>
+        /// The selected character to play as.
+        /// </summary>
+        public Character SelectedCharacter
+        {
+            get => selectedCharacter;
+            set => selectedCharacter = value;
+        }
+
+        // The base difficulty of the whole game.
+        public Difficulty BaseDifficulty
+        {
+            get => baseDifficulty;
+            set => baseDifficulty = value;
+        }
+
+        /// <summary>
+        /// The play time.
+        /// </summary>
         public float Time
         {
             get => _time;
             set => _time = value;
         }
 
+        /// <summary>
+        /// The score of the game.
+        /// </summary>
         public int Score
         {
             get => _score;
