@@ -203,8 +203,8 @@ namespace Scripts.Games
             
             private void OnEnable()
             {
-                _keys.One.Input.action.performed += YesButtonPressed;
-                _keys.Two.Input.action.performed += NoButtonPressed;
+                _keys.Two.Input.action.performed += YesButtonPressed;
+                _keys.One.Input.action.performed += NoButtonPressed;
             }
 
             public void YesButtonPressed(InputAction.CallbackContext ctx)
@@ -219,8 +219,8 @@ namespace Scripts.Games
 
             private void OnDisable()
             {
-                _keys.One.Input.action.performed -= YesButtonPressed;
-                _keys.Two.Input.action.performed -= NoButtonPressed;
+                _keys.Two.Input.action.performed -= YesButtonPressed;
+                _keys.One.Input.action.performed -= NoButtonPressed;
             }
 
         #endregion Overarching Methods / Helpers
