@@ -67,10 +67,8 @@ namespace Scripts.Games
             {
                 _timeElapsed = -1;
                 float timer = Time.time;
-                //Debug.Log(timeout);
                 RunTimer(timeout);
                 yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
-                //Debug.Log(timer);
                 StopTimer();
                 _timeElapsed = Time.time - timer;
             }
@@ -144,9 +142,9 @@ namespace Scripts.Games
                         break;
                     case false:
                         letter = Random.Range('b', 'z');
-                        int random = letter == 'b' ? 0 : letter == 'z' - 1 ? 1 : Random.Range(0, 2);
+                        int random = letter == 'b' ? 0 : letter == 'y' ? 1 : Random.Range(0, 2);
                         int shift1 = random == 0 ? 1 : Random.Range(2, letter - 'a');
-                        int shift2 = random == 1 ? 1 : Random.Range(2, 'b' - letter + 1);
+                        int shift2 = random == 1 ? 1 : Random.Range(2, 'z' - letter + 1);
                         Debug.Log(letter + " : " + shift1 + " , " + shift2);
                         newLetters = new[]
                         {
@@ -195,7 +193,6 @@ namespace Scripts.Games
 
             private void SceneReset()
             {
-                //Debug.Log("Reset!");
                 _isYes = false;
                 _isNo = false;
                 letterContainer.SetActive(false);
@@ -205,8 +202,8 @@ namespace Scripts.Games
         
             private void OnEnable()
             {
-                _keys.One.Input.action.performed += YesButtonPressed;
-                _keys.Two.Input.action.performed += NoButtonPressed;
+                _keys.Two.Input.action.performed += YesButtonPressed;
+                _keys.One.Input.action.performed += NoButtonPressed;
             }
 
             public void YesButtonPressed(InputAction.CallbackContext ctx)
@@ -221,8 +218,8 @@ namespace Scripts.Games
 
             private void OnDisable()
             {
-                _keys.One.Input.action.performed -= YesButtonPressed;
-                _keys.Two.Input.action.performed -= NoButtonPressed;
+                _keys.Two.Input.action.performed -= YesButtonPressed;
+                _keys.One.Input.action.performed -= NoButtonPressed;
             }
 
         #endregion Overarching Methods / Helpers
