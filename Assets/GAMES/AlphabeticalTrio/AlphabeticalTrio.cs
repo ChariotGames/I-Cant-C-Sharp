@@ -66,11 +66,11 @@ namespace Scripts.Games
             private IEnumerator MeasureTime()
             {
                 _timeElapsed = -1;
-                float timer = 0;//Time.time;
-                Debug.Log(timeout);
+                float timer = Time.time;
+                //Debug.Log(timeout);
                 RunTimer(timeout);
-                yield return new WaitUntil(() => _isYes || _isNo || /*Time.time -*/ (timer += Time.deltaTime) > timeout);
-                Debug.Log(timer);
+                yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
+                //Debug.Log(timer);
                 StopTimer();
                 _timeElapsed = Time.time - timer;
             }
@@ -147,7 +147,7 @@ namespace Scripts.Games
                         int random = letter == 'b' ? 0 : letter == 'z' - 1 ? 1 : Random.Range(0, 2);
                         int shift1 = random == 0 ? 1 : Random.Range(2, letter - 'a');
                         int shift2 = random == 1 ? 1 : Random.Range(2, 'b' - letter + 1);
-                        //Debug.Log(letter + " : " + shift1 + " , " + shift2);
+                        Debug.Log(letter + " : " + shift1 + " , " + shift2);
                         newLetters = new[]
                         {
                             (char)(letter - shift1), 
