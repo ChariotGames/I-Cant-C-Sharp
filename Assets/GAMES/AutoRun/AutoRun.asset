@@ -16,19 +16,20 @@ MonoBehaviour:
   difficulty: 1
   genre: 2
   keysLeft:
-    one: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
-    two: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
-    three: {fileID: 11400000, guid: abe13787bccab0e4082a39711884202c, type: 2}
+    one: {fileID: 11400000, guid: abe13787bccab0e4082a39711884202c, type: 2}
+    two: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
+    three: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
     four: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
   keysRight:
-    one: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
-    two: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
-    three: {fileID: 11400000, guid: a4600da8be593ac44ad0fc8718a077f2, type: 2}
+    one: {fileID: 11400000, guid: a4600da8be593ac44ad0fc8718a077f2, type: 2}
+    two: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
+    three: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
     four: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
   actionNames:
-    one: Duck
-    two: Blue
-    three: Jump
+    one: Jump
+    two: Duck
+    three: Blue
     four: Red
+    other: 
   prefab: {fileID: 5920264850204584917, guid: 031a16bd02a52994bbc5b50358c6626e, type: 3}
   preview: {fileID: 0}

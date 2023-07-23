@@ -29,12 +29,13 @@ namespace Scripts.Games
         ///Any 2 buttons to resemble left & right: Dpad left right, face left right, shoulderbuttons, trigger.
         ///    Genre / Type
         ///    memory
-
-
+        
         /// </summary>
+        ///
+        
         #region Serialized Fields
         
-        [SerializeField] private GameObject trafficLightPrefab, owner_ref,selector_ref;
+        [SerializeField] private GameObject trafficLightPrefab,selector_ref;
         [SerializeField] private List<GameObject> trafficLights;
         [SerializeField] private GameObject simonNot_ref;
         [SerializeField] private GameObject simonOk_ref;
@@ -51,7 +52,6 @@ namespace Scripts.Games
         private int trafficLightAmount = 3;
         private int selectorIndex;
         private bool gameVariant;
-        private bool playerCanUseInputs = false;
         private bool playerHasSubmitted = false;
         
         private struct trafficLight
@@ -69,6 +69,8 @@ namespace Scripts.Games
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
+        
+        
         void Start()
         {
             StartCoroutine(GameCoroutine());
@@ -82,11 +84,13 @@ namespace Scripts.Games
                 FirstWave();
                 yield return new WaitForSeconds(delaySecondWave);
                 SecondWave();
+                base.RunTimer(timeToSelectLight-2);
                 yield return new WaitForSeconds(timeToSelectLight);
-                if (!playerHasSubmitted)
+                if(!playerHasSubmitted)
                 {
-                    EndOfRound();
+                    EndOfRound(); 
                 }
+                yield return new WaitForSeconds(1);
                 Reset();
             }
             
@@ -118,7 +122,7 @@ namespace Scripts.Games
             SetLightColors(trafficLights, secondWaveColors, false);
             selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
             selector_ref.transform.position = selector_ref.transform.parent.transform.position;
-            selector_ref.transform.Translate(0,-1.2f,0);
+            selector_ref.transform.Translate(0,1.2f,0);
             selector_ref.SetActive(true);
             EnableInputs();
             
@@ -126,19 +130,18 @@ namespace Scripts.Games
 
         private void EndOfRound()
         {
+            base.StopTimer();
             DisableInputs();
-            ShowResults(); 
-            new WaitForSeconds(2);
-            CheckSelector();
-            
+            ShowResults();
         }
 
         private void Reset()
         {
-            GameObject selector = Instantiate(selector_ref, owner_ref.transform);
+            CheckSelector();
+            GameObject selector = Instantiate(selector_ref, gameObject.transform);
             selector_ref = selector;
             //Destroy(owner_ref.transform.GetChild(0));
-            GameObject horizontalLayout = owner_ref.transform.GetChild(0).gameObject;
+            GameObject horizontalLayout = gameObject.transform.GetChild(0).gameObject;
             int count = horizontalLayout.transform.childCount;
             horizontalLayout.transform.DetachChildren();
             for (int i = 0; i < count; ++i)
@@ -149,29 +152,28 @@ namespace Scripts.Games
             playerHasSubmitted = false;
         }
         
-
+        #endregion Built-Ins / MonoBehaviours
+        
         #region Inputs
         private void EnableInputs()
         {
-            _keys.One.Input.action.performed += ButtonPressR;
-            _keys.Two.Input.action.performed += ButtonPressL;
-            _keys.Three.Input.action.performed += ButtonPressSubmit;
-            playerCanUseInputs = true;
+            _keys.One.Input.action.performed += ButtonPressL;
+            _keys.Two.Input.action.performed += ButtonPressSubmit;
+            _keys.Three.Input.action.performed += ButtonPressR;
         }
 
         private void DisableInputs()
         {
-            _keys.One.Input.action.performed -= ButtonPressR;
-            _keys.Two.Input.action.performed -= ButtonPressL;
-            _keys.Three.Input.action.performed -= ButtonPressSubmit;
-            playerCanUseInputs = false;
+            _keys.One.Input.action.performed -= ButtonPressL;
+            _keys.Two.Input.action.performed -= ButtonPressSubmit;
+            _keys.Three.Input.action.performed -= ButtonPressR;
         }
 
         private void OnDisable()
         {
-            _keys.One.Input.action.performed -= ButtonPressR;
-            _keys.Two.Input.action.performed -= ButtonPressL;
-            _keys.Three.Input.action.performed -= ButtonPressSubmit;
+            _keys.One.Input.action.performed -= ButtonPressL;
+            _keys.Two.Input.action.performed -= ButtonPressSubmit;
+            _keys.Three.Input.action.performed -= ButtonPressR;
         }
         
         public void ButtonPressL(InputAction.CallbackContext ctx)
@@ -181,7 +183,7 @@ namespace Scripts.Games
                 --selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
                 selector_ref.transform.position = selector_ref.transform.parent.transform.position;
-                selector_ref.transform.Translate(0,-1.2f,0);
+                selector_ref.transform.Translate(0,1.2f,0);
             }
         }
         
@@ -192,23 +194,17 @@ namespace Scripts.Games
                 ++selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
                 selector_ref.transform.position = selector_ref.transform.parent.transform.position;
-                selector_ref.transform.Translate(0,-1.2f,0);
+                selector_ref.transform.Translate(0,1.2f,0);
             }
         }
 
         public void ButtonPressSubmit(InputAction.CallbackContext ctx)
         {
-            if (playerCanUseInputs)
-            {
-                playerHasSubmitted = true;
-                EndOfRound();
+            playerHasSubmitted = true;
+            EndOfRound();
             }
-        }
         
         #endregion Inputs
-        
-
-        #endregion Built-Ins / MonoBehaviours
 
         #region Game Mechanics / Methods
         
@@ -261,7 +257,7 @@ namespace Scripts.Games
             trafficLights = new List<GameObject>();
             for (int i = 0; i < amountToSpawn ; i++)
             {
-                GameObject trafficLight = Instantiate(trafficLightPrefab, owner_ref.transform.GetChild(0).transform);
+                GameObject trafficLight = Instantiate(trafficLightPrefab, gameObject.transform.GetChild(0).transform);
                 trafficLights.Add(trafficLight);
             }
         }
