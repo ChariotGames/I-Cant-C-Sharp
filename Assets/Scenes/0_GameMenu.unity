@@ -1246,10 +1246,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoodleMainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2378644646197465620, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 8937833939725789133, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 349483481}
+    - target: {fileID: 8937833940068799084, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 8937833940068799086, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
       propertyPath: eventSystem
       value: 

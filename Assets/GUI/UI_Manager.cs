@@ -81,9 +81,18 @@ namespace Scripts.Controllers
             if (settings.Lives <= 0)
             {
                 _timerOn = false;
-                PlayerPrefs.SetString("Score",_score.ToString("D3"));
+                PlayerPrefs.SetString("Score", _score.ToString("D3"));
+                settings.Score = _score;
+
+                if (_score > settings.Highscore)
+                {
+                    settings.Highscore = _score;
+                    // TODO: set highscores
+                }
+
                 TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
-                PlayerPrefs.SetString("Time",timePlaying.ToString("mm':'ss"));
+                PlayerPrefs.SetString("Time", timePlaying.ToString("mm':'ss"));
+                settings.Time = _time;
                 SceneManager.LoadScene((int)SceneNr.GameOver);
             }
 

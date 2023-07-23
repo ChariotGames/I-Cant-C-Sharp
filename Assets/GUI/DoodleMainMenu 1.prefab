@@ -7774,7 +7774,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 100
-    m_Bottom: 150
+    m_Bottom: 125
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
@@ -10606,7 +10606,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 100
-    m_Bottom: 150
+    m_Bottom: 125
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0

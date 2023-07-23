@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9a2adea311bcb4fb5d8e7579d0f7b2, type: 3}
   m_Name: Cat
   m_EditorClassIdentifier: 
-  charName: Sailor Cat
+  charName: Sailor Moewn
   preview: {fileID: 21300000, guid: bbe2796483e770b4f86c3c758227cf6b, type: 3}
   icon: {fileID: 21300000, guid: 70f8cc6d20c09ee41a3b654480ea0af4, type: 3}

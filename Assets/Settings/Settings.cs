@@ -16,7 +16,7 @@ namespace Scripts.Models
         [SerializeField] private List<Character> characters;
 
         [SerializeField] private float _time;
-        [SerializeField] private int _score;
+        [SerializeField] private int _score, _highscore;
         
 
         #endregion
@@ -113,6 +113,16 @@ namespace Scripts.Models
             get => _score;
             set => _score = value;
         }
+
+        /// <summary>
+        /// The score of the game.
+        /// </summary>
+        public int Highscore
+        {
+            get => _highscore;
+            set => _highscore = value;
+        }
+
         #endregion
     }
 }
