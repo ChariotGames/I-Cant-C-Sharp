@@ -108,7 +108,6 @@ namespace Scripts.Controllers
 
             private void PauseButtonPressed(InputAction.CallbackContext ctx)
             {
-                Debug.Log("Input Registered");
                 if (_isPaused)
                 {
                     ResumeGame();

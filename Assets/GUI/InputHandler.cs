@@ -113,13 +113,11 @@ namespace Scripts._Input
         public void OnOptionButtonStart(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) OptionButtonStart?.Invoke();
-            Debug.Log("ButtonStart");
         }
         
         public void OnOptionButtonSelect(InputAction.CallbackContext ctx)
         {
             if (ctx.performed) OptionButtonSelect?.Invoke();
-            Debug.Log("ButtonSelect");
         }
 
         #endregion

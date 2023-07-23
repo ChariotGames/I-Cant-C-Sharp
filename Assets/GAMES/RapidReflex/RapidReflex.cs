@@ -125,7 +125,7 @@ namespace Scripts.Games
                 yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && Difficulty != Difficulty.EASY ? _randomDelay : 0));
                 if (CheckForEarlyLose()) yield break; 
             }
-            UnityEngine.Debug.Log("Delay: " + (_randomDelay + _randomDelay) + " s");
+            //Debug.Log("Delay: " + (_randomDelay + _randomDelay) + " s");
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
                 UpdateLightColor(_bulbsSpriteBottom[i], lightGreen);
@@ -137,9 +137,10 @@ namespace Scripts.Games
             _timeElapsed = -1;
             if (CheckForEarlyLose()) yield break; 
             float timer = Time.time;
-            RunTimer(_timeToAnswer);
+            //Debug.Log(_timeToAnswer);
+            //RunTimer(_timeToAnswer);
             yield return new WaitUntil(() => _isButtonPressed || Time.time - timer > _timeToAnswer);
-            StopTimer();
+            //StopTimer();
             _timeElapsed = Time.time - timer;
         }
 
@@ -174,13 +175,13 @@ namespace Scripts.Games
         {
             if (Random.Range(0f, 1f) > 0.5f)
             {
-                UnityEngine.Debug.Log("No Distraction");
+                //Debug.Log("No Distraction");
                 yield break;
             }
 
             float delay = Random.Range(0.5f, lightTimer + _randomDelay / 3);
             yield return new WaitForSeconds(delay);
-            UnityEngine.Debug.Log("Flashdelay: " + delay);
+            //Debug.Log("Flashdelay: " + delay);
             StartCoroutine(FlashBackground());
         }
 
@@ -246,7 +247,6 @@ namespace Scripts.Games
         public void EastButtonPressed(InputAction.CallbackContext ctx)
         {
             _isButtonPressed = true;
-            UnityEngine.Debug.Log(ctx.canceled);
         }
         
         private void OnDisable()
