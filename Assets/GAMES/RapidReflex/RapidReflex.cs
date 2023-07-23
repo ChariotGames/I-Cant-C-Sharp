@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -188,9 +186,10 @@ namespace Scripts.Games
         private IEnumerator FlashBackground()
         {
             _backgroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
-            background.SetActive(true);
+            //background.SetActive(true);
             yield return new WaitForSeconds(0.2f);
-            background.SetActive(false);
+            //background.SetActive(false);
+            _backgroundSprite.color = Color.white;
         }
 
         public void Test(GameObject obj) { }
