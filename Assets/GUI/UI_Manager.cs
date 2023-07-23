@@ -12,6 +12,7 @@ namespace Scripts.Controllers
     {
         [SerializeField] private Settings settings;
         [SerializeField] private Image[] hearts;
+        [SerializeField] private Image characterImage;
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
@@ -28,6 +29,7 @@ namespace Scripts.Controllers
         private void Start()
         {
             _timerOn = true;
+            characterImage.sprite = settings.SelectedCharacter.Icon;
         }
         private void OnEnable()
         {
