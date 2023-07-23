@@ -169,7 +169,7 @@ namespace Scripts.Games
         protected void Fail(Transform parent, int score)
         {
             _fails--;
-            ScoreDown(score);
+            //ScoreDown(score);
             AnimateFail(parent, _fails, failsToLose);
             if (_fails <= 0)
             {
