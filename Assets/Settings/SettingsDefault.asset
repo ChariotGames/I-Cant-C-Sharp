@@ -37,10 +37,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e0d657ac69fa6a64a93954f7e8f6cb06, type: 2}
   - {fileID: 11400000, guid: ab65f45f24b010741ae49bb8d1f237b0, type: 2}
   characters:
+  - {fileID: 11400000, guid: 1ab22dae615ac45469442ea9130ef65b, type: 2}
   - {fileID: 11400000, guid: 42d26efae5c4bc74ca9d61de32bb6d2f, type: 2}
+  - {fileID: 11400000, guid: 9e5dba75021359a42845df8ecdcb9689, type: 2}
   - {fileID: 11400000, guid: 885c033a72ffe714e8bb2a6179200c85, type: 2}
   - {fileID: 11400000, guid: 88d49130f19298240a9d2bffc88c1895, type: 2}
   - {fileID: 11400000, guid: cff11a11437da2f4b85c6c309abc75e7, type: 2}
+  - {fileID: 11400000, guid: d1d595c02f0e06e4a8ca3bde89c522fc, type: 2}
   - {fileID: 11400000, guid: 3030e855a97e32742b19d2771bf6b6b1, type: 2}
   - {fileID: 11400000, guid: afdfb8b7ca5001d4da3500ffceb9ae3a, type: 2}
   _time: 0

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Scripts.Controllers
 {
-    public class MainMenuCharacter : MonoBehaviour
+    public class MainMenuCharacter : MonoBehaviour, ISelectHandler
     {
         #region Serialized Fields
 
@@ -22,6 +22,7 @@ namespace Scripts.Controllers
 
         #region Fields
 
+            public static event Action selectionChanged;
             private Character _character;
 
         #endregion Fields
@@ -31,7 +32,7 @@ namespace Scripts.Controllers
             /// <summary>
             /// Sets the chosen game to play at start.
             /// </summary>
-            public void SetCharavter()
+            public void SetCharacter()
             {
                 settings.SelectedCharacter = _character;
             }
@@ -48,6 +49,12 @@ namespace Scripts.Controllers
 
                 title.text = Regex.Replace(sTemp, "([A-Z][A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower();
                 if (_character.Preview != null) preview.sprite = _character.Preview;
+            }
+
+            public void OnSelect(BaseEventData eventData)
+            {
+                //Debug.Log("new Selection");
+                selectionChanged?.Invoke();
             }
         #endregion Game Mechanics / Methods
     }

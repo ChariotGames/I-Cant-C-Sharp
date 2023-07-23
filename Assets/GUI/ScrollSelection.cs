@@ -70,6 +70,7 @@ namespace Scripts.Controllers
             private void OnEnable()
             {
                 MainMenuGame.selectionChanged += SelectionChanged;
+                MainMenuCharacter.selectionChanged += SelectionChanged;
             }
 
             private void SelectionChanged()
@@ -81,7 +82,9 @@ namespace Scripts.Controllers
             private void OnDisable()
             {
                 MainMenuGame.selectionChanged -= SelectionChanged;
-            }
+                MainMenuCharacter.selectionChanged -= SelectionChanged;
+
+        }
 
         #endregion Overarching Methods / Helpers
     }

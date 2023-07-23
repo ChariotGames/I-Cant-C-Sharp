@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Jelly
   m_EditorClassIdentifier: 
   charName: Nerdy Jelly
-  preview: {fileID: 21300000, guid: 7fb99555b8e764a27ad65236eb93cd43, type: 3}
+  preview: {fileID: 21300000, guid: 7b328b3612048e449a66b8b68f669de8, type: 3}
+  icon: {fileID: 21300000, guid: ceaafec223fb69949b9307811ee5f23a, type: 3}

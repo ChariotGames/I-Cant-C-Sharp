@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Toaster
   m_EditorClassIdentifier: 
   charName: Blue Toaster
-  preview: {fileID: 21300000, guid: f799c3e51850d4753b3d13aeffc91e62, type: 3}
+  preview: {fileID: 21300000, guid: eb33eef236d59974b90148c91749c87e, type: 3}
+  icon: {fileID: 21300000, guid: 54930ec651f52f5449a5895f12d181ea, type: 3}

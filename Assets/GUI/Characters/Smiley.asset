@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e9a2adea311bcb4fb5d8e7579d0f7b2, type: 3}
-  m_Name: Toast
+  m_Name: Smiley
   m_EditorClassIdentifier: 
-  charName: Evil Toast
-  preview: {fileID: 21300000, guid: f7bc1bf3e06ec9240a89f27fae1b0d09, type: 3}
-  icon: {fileID: 21300000, guid: 5c4cf7ee3fef43e4290c3a14dc997dd4, type: 3}
+  charName: Smiley
+  preview: {fileID: 21300000, guid: 46ebe6d7496a03246902dae8bfb584a8, type: 3}
+  icon: {fileID: 21300000, guid: 31173d0c3df4ba54e9e358231b686753, type: 3}

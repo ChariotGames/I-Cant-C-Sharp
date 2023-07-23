@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Penguin
   m_EditorClassIdentifier: 
   charName: Slidey Penguin
-  preview: {fileID: 21300000, guid: 87fd043607bdc48a183e796d47a523b9, type: 3}
+  preview: {fileID: 21300000, guid: cd82cc3b84802d64f8a3903792773ec2, type: 3}
+  icon: {fileID: 21300000, guid: 51e68eb9feab1944a9a33541a31b8990, type: 3}

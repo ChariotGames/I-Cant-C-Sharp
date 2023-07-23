@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Piranha
   m_EditorClassIdentifier: 
   charName: Hungry Piranha
-  preview: {fileID: 21300000, guid: 00cfa0edb43754808a742b76f2044565, type: 3}
+  preview: {fileID: 21300000, guid: f502e6cd1e8bd644eb5a28099a28b1b6, type: 3}
+  icon: {fileID: 21300000, guid: 334ed9dadc35f9942bba1d6227358e20, type: 3}
