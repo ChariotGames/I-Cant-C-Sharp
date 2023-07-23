@@ -46,7 +46,7 @@ public class Timer : MonoBehaviour
         {
             float progress = elapsedTime / duration;
             timer.fillAmount = Mathf.Clamp01(progress);
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
             elapsedTime += Time.deltaTime;
         }
         Debug.Log(elapsedTime);
