@@ -7,6 +7,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Scripts.Games
 {
@@ -15,7 +16,9 @@ namespace Scripts.Games
         [SerializeField] private List<GameObject> options;
         [SerializeField] private GameObject startText, gamestateWin, gamestateLose;
         [SerializeField] private TMP_Text stepBackText,  buttonYes, buttonNo;
-        [SerializeField] private int maxStepsBack, timeToAnswer, successesToLevelUp;
+        [SerializeField] private int maxStepsBack;
+        [SerializeField] private int timeout;
+        [SerializeField] private int successesToLevelUp;
 
         private LinkedList<int> _lastIndices = new();
         private const string _stepsText = "steps: ";
@@ -98,16 +101,26 @@ namespace Scripts.Games
                     Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tsteps: " + (_steps + 1));
 
                     float timer = Time.time;
-                    yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeToAnswer);
+                    RunTimer(timeout);
+                    yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
+                    StopTimer();
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         gamestateWin.SetActive(true);
-                        GameWon();
+                        //GameWon();
+                        if (difficultyTracker <= 0)
+                        {
+                            difficultyTracker = successesToLevelUp;
+                            Harder();
+                        }
+                        Success();
                     }
                     else
                     {
                         gamestateLose.SetActive(true);
-                        GameLost();
+                        //GameLost();
+                        difficultyTracker++;
+                        Fail();
                     }
                     yield return new WaitForSeconds(1);
                     options[_index].SetActive(false);

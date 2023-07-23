@@ -1145,12 +1145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   task: {fileID: 1302581166482144823}
@@ -1158,8 +1152,8 @@ MonoBehaviour:
   buttonNo: {fileID: 1302581166398017445}
   gamestateWin: {fileID: 1302581165769300767}
   gamestateLose: {fileID: 1302581166891597149}
-  timeout: 5
-  successesToLevelUp: 0
+  timeout: 10
+  successesToLevelUp: 4
 --- !u!1 &1302581166891597149
 GameObject:
   m_ObjectHideFlags: 0

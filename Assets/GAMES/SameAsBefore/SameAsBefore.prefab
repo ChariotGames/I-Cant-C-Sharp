@@ -312,7 +312,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -7160962544614530396, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_text: No
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -7160962544614530396, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -943,7 +943,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2305245934235114337, guid: 7f4d402bd660e914883965ec4756219e, type: 2}
+  - {fileID: 5306111078320877437, guid: 795a2fe6ad1a24ab2a13cb97631887a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -988,7 +988,7 @@ MonoBehaviour:
   m_text: d
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 795a2fe6ad1a24ab2a13cb97631887a6, type: 2}
-  m_sharedMaterial: {fileID: -2305245934235114337, guid: 7f4d402bd660e914883965ec4756219e, type: 2}
+  m_sharedMaterial: {fileID: 5306111078320877437, guid: 795a2fe6ad1a24ab2a13cb97631887a6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 15.6
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1116,8 +1116,8 @@ MonoBehaviour:
   buttonYes: {fileID: 6764466576565259624}
   buttonNo: {fileID: 6127280654838312319}
   maxStepsBack: 3
-  timeToAnswer: 5
-  successesToLevelUp: 0
+  timeout: 10
+  successesToLevelUp: 4
 --- !u!1 &4214680525931484550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1190,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a1e8d58e993d8404da22cb5987b571de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

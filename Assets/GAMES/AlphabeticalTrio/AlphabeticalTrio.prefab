@@ -300,12 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   letters: {fileID: 8687728356737068271}
@@ -314,8 +308,8 @@ MonoBehaviour:
   letterContainer: {fileID: 8687728357638743890}
   gamestateWin: {fileID: 8687728356390974817}
   gamestateLose: {fileID: 8687728356552654445}
-  timeout: 5
-  successesToLevelUp: 0
+  timeout: 10
+  successesToLevelUp: 4
 --- !u!1 &8687728356552654445
 GameObject:
   m_ObjectHideFlags: 0

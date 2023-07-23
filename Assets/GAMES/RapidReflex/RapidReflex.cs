@@ -137,7 +137,9 @@ namespace Scripts.Games
             _timeElapsed = -1;
             if (CheckForEarlyLose()) yield break; 
             float timer = Time.time;
+            RunTimer(_timeToAnswer);
             yield return new WaitUntil(() => _isButtonPressed || Time.time - timer > _timeToAnswer);
+            StopTimer();
             _timeElapsed = Time.time - timer;
         }
 
@@ -147,12 +149,21 @@ namespace Scripts.Games
             if (_timeElapsed < _timeToAnswer && _timeElapsed >= 0)
             {
                 gameState.text = "rapid reflex: " + (int)(_timeElapsed * 1000) + " ms";
-                GameWon();
+                //GameWon();
+                difficultyTracker--;
+                if (difficultyTracker <= 0)
+                {
+                    difficultyTracker = successesToLevelUp;
+                    Harder();
+                }
+                Success();
             }
             else
             {
                 gameState.text = _timeElapsed > 0 ? "too slow!" : "too early!";
-                GameLost();
+                //GameLost();
+                difficultyTracker++;
+                Fail();
             }
             yield return new WaitForSeconds(1);
             overlayContainer.SetActive(false);

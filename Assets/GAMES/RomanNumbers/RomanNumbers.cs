@@ -74,7 +74,9 @@ namespace Scripts.Games
             {
                 _timeElapsed = -1;
                 float timer = Time.time;
+                RunTimer(timeout);
                 yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
+                StopTimer();
                 _timeElapsed = Time.time - timer;
             }
 
@@ -83,12 +85,21 @@ namespace Scripts.Games
                 if (_timeElapsed < timeout && (_decimalNumber < _romanNumber && _isYes && !_isNo) || (_decimalNumber >= _romanNumber && !_isYes && _isNo))
                 {
                     gamestateWin.SetActive(true);
-                    GameWon();
+                    //GameWon();
+                    difficultyTracker--;
+                    if (difficultyTracker <= 0)
+                    {
+                        difficultyTracker = successesToLevelUp;
+                        Harder();
+                    }
+                    Success();
                 }
                 else
                 {
                     gamestateLose.SetActive(true);
-                    GameLost();
+                    //GameLost();
+                    difficultyTracker++;
+                    Fail();
                 }
                 yield return new WaitForSeconds(1);
                 SceneReset();

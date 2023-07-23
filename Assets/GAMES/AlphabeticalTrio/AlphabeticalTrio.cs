@@ -66,8 +66,12 @@ namespace Scripts.Games
             private IEnumerator MeasureTime()
             {
                 _timeElapsed = -1;
-                float timer = Time.time;
-                yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
+                float timer = 0;//Time.time;
+                Debug.Log(timeout);
+                RunTimer(timeout);
+                yield return new WaitUntil(() => _isYes || _isNo || /*Time.time -*/ (timer += Time.deltaTime) > timeout);
+                Debug.Log(timer);
+                StopTimer();
                 _timeElapsed = Time.time - timer;
             }
             
@@ -76,12 +80,21 @@ namespace Scripts.Games
                 if (_timeElapsed < timeout && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
                 {
                     gamestateWin.SetActive(true);
-                    GameWon();
+                    //GameWon();
+                    difficultyTracker--;
+                    if (difficultyTracker <= 0)
+                    {
+                        difficultyTracker = successesToLevelUp;
+                        Harder();
+                    }
+                    Success();
                 }
                 else
                 {
                     gamestateLose.SetActive(true);
-                    GameLost();
+                    //GameLost();
+                    difficultyTracker++;
+                    Fail();
                 }
                 yield return new WaitForSeconds(1);
                 SceneReset();
