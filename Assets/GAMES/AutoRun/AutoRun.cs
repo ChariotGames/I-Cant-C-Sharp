@@ -1,3 +1,6 @@
+using Scripts.Models;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,25 +21,11 @@ namespace Scripts.Games
     
     public class AutoRun : BaseGame
     {
-        #region Serialized Fields
 
         [SerializeField] private InputAction test1;
+        [SerializeField] private int successToWin = 10;
+        int successCounter = 0;
 
-        private InputAction test2;
-
-        #endregion Serialized Fields
-
-        #region Fields
-        
-        
-
-        #endregion Fields
-
-        #region Built-Ins / MonoBehaviours
-
-
-
-        #endregion Built-Ins / MonoBehaviours
         
         #region Game Mechanics / Methods
 
@@ -80,6 +69,13 @@ namespace Scripts.Games
         public void Score()
         {
             base.ScoreUp(1);
+            ++successCounter;
+            base.AnimateSuccess(gameObject.transform,successCounter, successToWin );
+        }
+
+        public void getCharacter()
+        {
+            //return Settings.SelectedCharacter;
         }
 
         #endregion Game Mechanics / Methods
