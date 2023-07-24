@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts.Models;
@@ -32,8 +33,8 @@ namespace Scripts.Controllers
 
         private void Awake()
         {
-            scoreText.text = PlayerPrefs.GetString("Score");
-            timerText.text = PlayerPrefs.GetString("Time");
+            scoreText.text = settings.Score.ToString("D3");
+            timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
 
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];
@@ -61,6 +62,11 @@ namespace Scripts.Controllers
         {
             uiMap.Disable();
             SceneManager.LoadScene((int)SceneNr.MainMenu);
+        }
+
+        public void ShowScoretable()
+        {
+            // TODO: Implement code
         }
 
         public void QuitGame()

@@ -49,7 +49,7 @@ public class Timer : MonoBehaviour
             yield return null;
             elapsedTime += Time.deltaTime;
         }
-        Debug.Log(elapsedTime);
+        //Debug.Log(elapsedTime);
 
         Stop();
     }

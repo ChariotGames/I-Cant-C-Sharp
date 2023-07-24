@@ -36,7 +36,7 @@ namespace Scripts.Controllers
         {
             if (mainCamera) mainCamera = Camera.main;
 
-            ResetSettings();
+            //ResetSettings();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             gameButtons = new();
             livesText.text = settings.Lives.ToString();
@@ -124,6 +124,7 @@ namespace Scripts.Controllers
             settings.SoloGames = defaultSettings.SoloGames;
             settings.Characters = defaultSettings.Characters;
             settings.BaseDifficulty = defaultSettings.BaseDifficulty;
+            settings.Highscore = PlayerPrefs.GetInt("Highscore");
         }
 
         /// <summary>
