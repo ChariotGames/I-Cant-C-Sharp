@@ -11,6 +11,10 @@ namespace Scripts.Games
         #region Serialized Fields
         [SerializeField] LoseTile MainGame;
         [SerializeField] float speed = 5f;
+        [SerializeField][Range (3f, 3.6f)] float x = 3.3f;
+        [SerializeField][Range (3f, 3.6f)] float y = 3.3f;
+
+
 
 
         #endregion Serialized Fields
@@ -30,8 +34,13 @@ namespace Scripts.Games
 
         void Update()
         {
+            
             gameObject.transform.Translate(InputHandler.StickLeft * Time.deltaTime * speed);
-           
+
+            if (transform.localPosition.x >= x) transform.localPosition = new Vector2(x, transform.localPosition.y);
+            if (transform.localPosition.x <= -x) transform.localPosition = new Vector2(-x, transform.localPosition.y);
+            if (transform.localPosition.y >= y) transform.localPosition = new Vector2(transform.localPosition.x, y);
+            if (transform.localPosition.y <= -y) transform.localPosition = new Vector2(transform.localPosition.x, -y);
         }
 
         #endregion Built-Ins / MonoBehaviours

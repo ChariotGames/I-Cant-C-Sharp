@@ -75,6 +75,7 @@ namespace Scripts.Games
                     failsToLose--;
                     if (failsToLose == 0)
                     {
+                        failsToLose = 1;
                         Debug.Log("you lose");
                         base.Lose();
                     }
