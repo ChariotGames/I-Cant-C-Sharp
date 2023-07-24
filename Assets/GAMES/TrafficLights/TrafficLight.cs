@@ -41,6 +41,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject simonOk_ref;
         [SerializeField] private int delaySecondWave = 5;
         [SerializeField] private int timeToSelectLight = 5;
+        [SerializeField] private int successToWin = 5;
 
         #endregion Serialized Fields
 
@@ -53,7 +54,8 @@ namespace Scripts.Games
         private int selectorIndex;
         private bool gameVariant;
         private bool playerHasSubmitted = false;
-        
+        private int successCounter = 0;
+
         private struct trafficLight
         {
             public Colors colorTop;
@@ -84,7 +86,7 @@ namespace Scripts.Games
                 FirstWave();
                 yield return new WaitForSeconds(delaySecondWave);
                 SecondWave();
-                base.RunTimer(timeToSelectLight-2);
+                base.RunTimer(timeToSelectLight);
                 yield return new WaitForSeconds(timeToSelectLight);
                 if(!playerHasSubmitted)
                 {
@@ -268,12 +270,13 @@ namespace Scripts.Games
             if (correctColors.Contains(secondWaveColors[selectorIndex]))
             {
                 base.ScoreUp(5);
+                ++successCounter;
+                base.AnimateSuccess(gameObject.transform,successCounter, successToWin );
                 base.Harder();
                 base.Win();
             }
             else
             {
-                base.ScoreDown(5);
                 base.Easier();
                 base.Lose();
             }
