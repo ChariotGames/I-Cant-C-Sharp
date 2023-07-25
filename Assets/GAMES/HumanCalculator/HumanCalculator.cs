@@ -64,7 +64,7 @@ namespace Scripts.Games
 
         public IEnumerator GenerateNewEquation()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
             
             wrongAnswer.gameObject.SetActive(false);
             correctAnswer.gameObject.SetActive(false);
