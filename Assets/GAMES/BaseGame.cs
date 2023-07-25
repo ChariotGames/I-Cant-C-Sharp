@@ -266,8 +266,6 @@ namespace Scripts.Games
 
         protected void StopTimer()
         {
-            if (_timer <= 0) return;
-            
             OnTimerStop?.Invoke(transform.parent.name);
         }
 
