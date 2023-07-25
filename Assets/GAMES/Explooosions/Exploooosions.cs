@@ -56,6 +56,7 @@ namespace Scripts.Games
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 loseCounter++;
+                base.AnimateFail(player.transform, 1, 3);
                 //failsToLose--;
                 StartCoroutine(player.GetComponent<ExpPlayer>().AnimateColor(player.GetComponent<SpriteRenderer>(), Color.white, new Color(0.3f, 0.3f, 0.3f), 0.5f));
                 player.GetComponent<ExpPlayer>().knockback = player.GetComponent<Rigidbody2D>().position - new Vector2(obj.transform.position.x, obj.transform.position.y);
@@ -64,6 +65,7 @@ namespace Scripts.Games
             else
             {
                 //successesToWin++;
+                base.AnimateSuccess(player.transform, 1, 20);
                 winCounter++;
             }
 

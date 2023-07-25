@@ -103,6 +103,7 @@ namespace Scripts.Games
             {
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.green, 0.25f));
                 _correctGuesses++;
+                base.AnimateSuccess(circle.transform, 1, 5);
                 base.ScoreUp();
 
                 if (_correctGuesses == 5)
@@ -116,6 +117,7 @@ namespace Scripts.Games
             {
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.red, 0.25f));
                 _wrongGuesses++;
+                base.AnimateFail(circle.transform, 1, 3);
 
                 if (_wrongGuesses == 3)
                 {

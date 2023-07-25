@@ -22,6 +22,8 @@ namespace Scripts.Games
         private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
         private List<GameObject> allObjects;
         private bool invul = false;
+        private float _time = 0;
+        private bool timerEnded;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -40,6 +42,7 @@ namespace Scripts.Games
             {
                 border.GetComponent<EdgeCollider2D>().points = borders;
             }
+            
         }
 
         void Start()
@@ -64,6 +67,7 @@ namespace Scripts.Games
 
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
             SpawnObjects(goal, Container, 1);
+            base.RunTimer(30.0f);
         }
 
         private void Restart()
@@ -85,6 +89,7 @@ namespace Scripts.Games
 
             SpawnObjects(checkpoint, checkpointContainer, ammountCheckpoints);
             SpawnObjects(goal, Container, 1);
+            base.RunTimer(30.0f);
         }
 
         void Update()
@@ -92,6 +97,7 @@ namespace Scripts.Games
            if (winCounter == 3)
             {
                 winCounter = 0;
+                
                 base.Harder();
                 base.Win();
             }
@@ -102,6 +108,18 @@ namespace Scripts.Games
                 Container.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(true);
             }
             //Debug.Log(base._playarea.Contains(player.transform.position));
+
+            _time += Time.deltaTime;
+            if (_time >= 30.0f)
+            {
+                Debug.Log("Time is up!");
+                timerEnded = true;
+                base.Easier();
+                base.Lose();
+                checkpointsCollected = 0;
+                _time = 0;
+                DestroyObjects();
+            }
         }
 
         internal void UpdateEnemyPositions(Vector3 position)
@@ -150,6 +168,7 @@ namespace Scripts.Games
                     {
                         invul = true;
                         Invoke(nameof(switchState), 2);
+                        base.AnimateFail(player.transform, 1, 1);
                         base.Easier();
                         base.Lose();
                     } 
@@ -158,7 +177,9 @@ namespace Scripts.Games
                     if (checkpointsCollected == ammountCheckpoints)
                     {
                         checkpointsCollected = 0;
+                        _time = 0;
                         winCounter++;
+                        base.AnimateSuccess(player.transform, 1, 3);
                         base.ScoreUp();
                         DestroyObjects();
                     }

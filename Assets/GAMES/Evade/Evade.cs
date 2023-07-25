@@ -87,6 +87,7 @@ namespace Scripts.Games
                 //active = false;
                 player.transform.GetChild(1).gameObject.SetActive(true);
                 Invoke(nameof(calm), 0.5f);
+                base.AnimateFail(player.transform, 1, 1);
                 base.Easier();
                 base.Lose();
             }
@@ -94,12 +95,14 @@ namespace Scripts.Games
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 //active = false;
+                base.AnimateFail(player.transform, 1, 1);
                 base.Easier();
                 base.Lose();
             }
             else
             {
                 winCounter++;
+                base.AnimateSuccess(player.transform, 1, 5);
                 base.ScoreUp();
             }
 
