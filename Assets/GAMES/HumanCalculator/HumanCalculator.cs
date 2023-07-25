@@ -21,12 +21,12 @@ namespace Scripts.Games
 
         private int _missingNumber;
         private int _equationResult;
-        private int _remainingLives = 3;
+        //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
         private bool _isAnswerScreen;
-        private int _currentScore;
-        private int _scoreToWin = 5;
+        //private int _currentScore;
+        //private int _scoreToWin = 5;
         
         private const float _maxRoundTime = 15f;
 
@@ -192,28 +192,30 @@ namespace Scripts.Games
             {
                 Debug.Log("Correct");
                 correctAnswer.gameObject.SetActive(true);
-                _currentScore++;
-                base.ScoreUp();
-                base.AnimateSuccess(_currentScore, _scoreToWin);
-                if (_currentScore >= _scoreToWin)
+               // _currentScore++;
+                //base.ScoreUp();
+                //base.AnimateSuccess(_currentScore, _scoreToWin);
+                base.Success();
+                if (base._successes >= base.successesToWin)
                 {
-                    _currentScore = 0;
+                    //_currentScore = 0;
                     base.Harder();
-                    base.Win();
+                    //base.Win();
                 }
                 
             }
             else {
                 Debug.Log("Wrong");
-                _remainingLives--;
+                //_remainingLives--;
                 wrongAnswer.gameObject.SetActive(true);
-                base.AnimateFail(_remainingLives , 3);
-                if (_remainingLives <= 0)
+                //base.AnimateFail(_remainingLives , 3);
+                base.Fail();
+                if (base._fails <= 0)
                 {
                     Debug.Log("GAME LOST");
-                    _remainingLives = 3;
+                    //_remainingLives = 3;
                     base.Easier();
-                    base.Lose();
+                    //base.Lose();
                 }
                 
             }

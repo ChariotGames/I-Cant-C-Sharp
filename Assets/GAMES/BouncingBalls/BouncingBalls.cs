@@ -26,16 +26,16 @@ namespace Scripts.Games
         private int _bounceCounter;
         private bool _guessingStage;
         private int _currentGuessNumber;
-        private int _remainingLives = 3;
+        //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
 
-        private int _currentScore;
+        //private int _currentScore;
         private bool hasRandomGravity;
 
         private const float _timeoutDelay = 10f;
         private const float _maxRoundTime = 10;
-        private const int _scoreToWin = 3;
+       // private const int _scoreToWin = 3;
 
         #endregion Fields
 
@@ -111,14 +111,15 @@ namespace Scripts.Games
 
         private void IncreaseScore()
         {
-            _currentScore++;
-            base.AnimateSuccess(_currentScore, _scoreToWin);
-            base.ScoreUp();
-            if (_currentScore >= _scoreToWin)
+            //_currentScore++;
+            //base.AnimateSuccess(_currentScore, _scoreToWin);
+           // base.ScoreUp();
+           base.Success();
+            if (base._successes >= base.successesToWin)
             {
                 //_currentScore = 0;
                 base.Harder();
-                base.Win();
+                //base.Win();
             }
 
            
@@ -138,15 +139,16 @@ namespace Scripts.Games
             }
             else
             {
-                _remainingLives--;
-                base.AnimateFail(_remainingLives , 3);
-                if (_remainingLives <= 0)
+                //_remainingLives--;
+                //base.AnimateFail(_remainingLives , 3);
+                Fail();
+                if (base._fails <= 0)
                 {
-                    _remainingLives = 3;
+                    //_remainingLives = 3;
                     base.Easier();
                     guessingOverlay.gameObject.SetActive(false);
                     Debug.Log("You lost all your lives in this game");
-                    Lose();
+                    //Lose();
                 }
                 
                 guessingOverlay.gameObject.SetActive(false);

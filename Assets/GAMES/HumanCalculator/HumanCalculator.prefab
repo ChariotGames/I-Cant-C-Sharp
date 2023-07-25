@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  successesToWin: 5
+  successesToWin: 3
   failsToLose: 3
   equationText: {fileID: 2918756865153322556}
   leftAnswer: {fileID: 2918756866870625413}

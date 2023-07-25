@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  successesToWin: 5
+  successesToWin: 3
   failsToLose: 3
   bouncingBalls:
   - {fileID: 4321193698007213356}
