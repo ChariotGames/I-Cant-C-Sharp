@@ -971,12 +971,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  successesToWin: 5
+  successesToWin: 15
   failsToLose: 3
   cannon: {fileID: 5616315245221226170}
   obstacle: {fileID: 5092726858402455563}
   obstacleContainer: {fileID: 198560678043567502}
-  lifeCounter: {fileID: 8085712630760458323}
   cannonMovementSpeed: 2
 --- !u!1 &7170151253682928243
 GameObject:

@@ -17,7 +17,7 @@ namespace Scripts.Games
 
         [SerializeField] private Cannon cannon;
         [SerializeField] private GameObject obstacle, obstacleContainer;
-        [SerializeField] private TextMeshPro lifeCounter;
+        //[SerializeField] private TextMeshPro lifeCounter;
         [SerializeField] private float cannonMovementSpeed;
         
 
@@ -29,11 +29,11 @@ namespace Scripts.Games
         private Bounds _cameraViewportBounds;
         private Vector3 _obstacleExtents;
         private float _spawnDelay;
-        private int _healthPoints = 3;
+        //private int _healthPoints = 3;
         private int _numObstacles;
-        private int _currentScore;
+        //private int _currentScore;
 
-        private const int _scoreToWin = 15;
+        //private const int _scoreToWin = 15;
 
         #endregion Fields
 
@@ -54,7 +54,7 @@ namespace Scripts.Games
             // Calculate the camera's viewport bounds
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             
-            lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
+           // lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
             
             _obstacleExtents = obstacle.GetComponent<Renderer>().bounds.extents;
 
@@ -94,15 +94,16 @@ namespace Scripts.Games
 
         public void IncreasePoints()
         {
-            _currentScore++;
-            base.AnimateSuccess(_currentScore, _scoreToWin);
-            base.ScoreUp();
+           // _currentScore++;
+           // base.AnimateSuccess(_currentScore, _scoreToWin);
+           // base.ScoreUp();
+           Success();
             
-            if (_currentScore >= _scoreToWin)
+            if (base._successes >= base.successesToWin)
             {
-                _currentScore = 0;
+                //_currentScore = 0;
                 base.Harder();
-                base.Win();
+                //base.Win();
             }
         }
 
@@ -111,15 +112,16 @@ namespace Scripts.Games
         /// </summary>
         private void TakeDamage()
         {
-            _healthPoints--;
-            base.AnimateFail(_healthPoints, 3);
-            if (_healthPoints <= 0)
+            //_healthPoints--;
+            //base.AnimateFail(_healthPoints, 3);
+            base.Fail();
+            if (base._fails <= 0)
             {
-                _healthPoints = 3;
+                //_healthPoints = 3;
                 base.Easier();
-                base.Lose();
+               // base.Lose();
             }
-            lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
+            //lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
         }
         
         /// <summary>
