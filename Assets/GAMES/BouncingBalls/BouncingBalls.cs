@@ -23,6 +23,7 @@ namespace Scripts.Games
         [SerializeField] private SpriteRenderer wrongAnswer;
         [SerializeField] private TextMeshPro resultText;
 
+        private AudioSource _audio;
         private int _bounceCounter;
         private bool _guessingStage;
         private int _currentGuessNumber;
@@ -43,6 +44,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
+            _audio = GetComponent<AudioSource>();
             switch (Difficulty)
             {
                 case Difficulty.EASY:
@@ -242,6 +244,8 @@ namespace Scripts.Games
         private void IncreaseBounceCounter()
         {
             _bounceCounter++;
+            _audio.Play();
+            
         }
 
         #endregion Game Mechanics / Methods
