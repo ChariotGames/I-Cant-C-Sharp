@@ -26,8 +26,9 @@ namespace Scripts.Games
         private float _timeoutStemp;
         private bool _isAnswerScreen;
         private int _currentScore;
+        private int _scoreToWin = 5;
         
-        private const float _timeoutDelay = 15f;
+        private const float _maxRoundTime = 15f;
 
 
         #endregion Fields
@@ -48,7 +49,7 @@ namespace Scripts.Games
         private void Update()
         {
             _elapsedTime += Time.deltaTime;
-            if (_isAnswerScreen && _elapsedTime >= _timeoutStemp + _timeoutDelay)
+            if (_isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
             {
                 _isAnswerScreen = false;
                 CheckAnswer("");
@@ -172,6 +173,7 @@ namespace Scripts.Games
             var randomNumOffset = Random.Range(1, 21);
             _isAnswerScreen = true;
             _timeoutStemp = _elapsedTime;
+            base.RunTimer(_maxRoundTime);
             if (randomCorrectPos == 0)
             {
                 leftAnswer.text = _missingNumber.ToString();
@@ -192,8 +194,8 @@ namespace Scripts.Games
                 correctAnswer.gameObject.SetActive(true);
                 _currentScore++;
                 base.ScoreUp();
-                base.AnimateFail(_currentScore, 5);
-                if (_currentScore >= 5)
+                base.AnimateSuccess(_currentScore, _scoreToWin);
+                if (_currentScore >= _scoreToWin)
                 {
                     _currentScore = 0;
                     base.Harder();
@@ -205,7 +207,6 @@ namespace Scripts.Games
                 Debug.Log("Wrong");
                 _remainingLives--;
                 wrongAnswer.gameObject.SetActive(true);
-                base.ScoreDown();
                 base.AnimateFail(_remainingLives , 3);
                 if (_remainingLives <= 0)
                 {

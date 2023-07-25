@@ -52,7 +52,7 @@ namespace Scripts.Games
                     groundMaterial.bounciness = 1f;
                     break;
                 case Difficulty.HARD:
-                    groundMaterial.bounciness = 0.925f;
+                    groundMaterial.bounciness = 0.975f;
                     hasRandomGravity = true;
                     break;
             }
@@ -112,14 +112,16 @@ namespace Scripts.Games
         private void IncreaseScore()
         {
             _currentScore++;
+            base.AnimateSuccess(_currentScore, _scoreToWin);
+            base.ScoreUp();
             if (_currentScore >= _scoreToWin)
             {
-                _currentScore = 0;
+                //_currentScore = 0;
                 base.Harder();
                 base.Win();
             }
 
-            base.ScoreUp();
+           
         }
 
         private void SubmitGuess(InputAction.CallbackContext ctx)
@@ -137,8 +139,8 @@ namespace Scripts.Games
             else
             {
                 _remainingLives--;
-
-                if (_remainingLives == 0)
+                base.AnimateFail(_remainingLives , 3);
+                if (_remainingLives <= 0)
                 {
                     _remainingLives = 3;
                     base.Easier();
@@ -192,7 +194,7 @@ namespace Scripts.Games
             {
                 if (hasRandomGravity)
                 {
-                    var randomGravity = Random.Range(1.5f, 2.6f);
+                    var randomGravity = Random.Range(1.5f, 2f);
                     ball.gravityScale = randomGravity;
                 }
 
