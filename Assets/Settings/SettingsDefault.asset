@@ -16,7 +16,7 @@ MonoBehaviour:
   players: 1
   baseDifficulty: 4
   selectedGame: {fileID: 0}
-  selectedCharacter: {fileID: 11400000, guid: d1d595c02f0e06e4a8ca3bde89c522fc, type: 2}
+  selectedCharacter: {fileID: 11400000, guid: 42d26efae5c4bc74ca9d61de32bb6d2f, type: 2}
   games:
   - {fileID: 11400000, guid: 788e14c7f0f55c448aa1c48a5453fb6e, type: 2}
   - {fileID: 11400000, guid: 9f149fbd8369e4531a5b9bba0ceb12d8, type: 2}

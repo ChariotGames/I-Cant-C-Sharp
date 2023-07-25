@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TrafficLights
   m_EditorClassIdentifier: 
   description: 
-  difficulty: 2
+  difficulty: 1
   genre: 1
   keysLeft:
     one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}

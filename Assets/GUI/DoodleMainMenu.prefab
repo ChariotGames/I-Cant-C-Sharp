@@ -9642,6 +9642,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2044554352787311851}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5438847232692274416
 GameObject:
   m_ObjectHideFlags: 0
@@ -12588,7 +12600,7 @@ RectTransform:
   m_GameObject: {fileID: 8937833940056921914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8937833941477244886}
@@ -14203,42 +14215,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2378644645388778439}
-        m_TargetAssemblyTypeName: Scripts.Controllers.MainMenu, Assembly-CSharp
-        m_MethodName: ToggleSubMenu
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2378644645331604852}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2378644645388778439}
-        m_TargetAssemblyTypeName: Scripts.Controllers.MainMenu, Assembly-CSharp
-        m_MethodName: ToggleSubMenu
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2378644645238818276}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2378644645388778439}
-        m_TargetAssemblyTypeName: Scripts.Controllers.MainMenu, Assembly-CSharp
-        m_MethodName: SetSelected
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1860631712273584385}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8937833941164345185}
         m_TargetAssemblyTypeName: Scripts.Controllers.MainMenuCharacter, Assembly-CSharp
         m_MethodName: SetCharacter
@@ -14250,6 +14226,42 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2378644645331604852}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2378644644219232483}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7880556874323757781}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &8937833941164345185
 MonoBehaviour:
@@ -15507,12 +15519,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2378644644219232483}
     - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 2434961074399328354}
+    - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Selectable, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8457386994271353472, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -15597,6 +15629,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2479546411595681897, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
   m_PrefabInstance: {fileID: 3232500500696354496}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2044554352787311851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+  m_PrefabInstance: {fileID: 3232500500696354496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2739935770741571212 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 781958398071058508, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}

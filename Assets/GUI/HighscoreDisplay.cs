@@ -10,6 +10,11 @@ namespace Scripts.Controllers
         [SerializeField] private GameObject templateName, templateScore;
         [SerializeField] private Settings settings;
 
+        private void OnEnable()
+        {
+            DisplayHighscores();
+        }
+
         public void DisplayHighscores()
         {
             GameObject name = Instantiate(templateName, namesContainer);

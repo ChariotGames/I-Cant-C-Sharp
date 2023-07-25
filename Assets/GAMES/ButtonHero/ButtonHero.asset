@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ButtonHero
   m_EditorClassIdentifier: 
   description: 
-  difficulty: 2
+  difficulty: 1
   genre: 2
   keysLeft:
     one: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}

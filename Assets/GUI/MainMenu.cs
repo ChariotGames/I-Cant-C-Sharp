@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Scripts.Models;
 using UnityEngine.SceneManagement;
+using Scripts.Games;
 
 namespace Scripts.Controllers
 {
@@ -120,10 +121,13 @@ namespace Scripts.Controllers
             SetLives(0); // Updates the menu text
             settings.Players = defaultSettings.Players;
             settings.SelectedGame = defaultSettings.SelectedGame;
-            settings.Games = defaultSettings.Games;
-            settings.SoloGames = defaultSettings.SoloGames;
+            settings.Games = new List<Minigame>(defaultSettings.Games);
+            settings.SoloGames = new List<Minigame>(defaultSettings.SoloGames);
+            ResetDifficulties();
             settings.Characters = defaultSettings.Characters;
             settings.BaseDifficulty = defaultSettings.BaseDifficulty;
+            settings.Time = defaultSettings.Time;
+            settings.Score = defaultSettings.Score;
             settings.Highscore = PlayerPrefs.GetInt("Highscore");
         }
 
@@ -177,6 +181,24 @@ namespace Scripts.Controllers
             menu.SetActive(!menu.activeInHierarchy);
         }
 
+        /// <summary>
+        /// Resets the difficulty of all games back to easy.
+        /// Just in case! But you lose all progress!
+        /// </summary>
+        public void ResetDifficulties()
+        {
+            foreach (Minigame game in settings.Games)
+            {
+                game.Difficulty = Difficulty.EASY;
+                game.Prefab.GetComponent<BaseGame>().Difficulty = Difficulty.EASY;
+            }
+
+            foreach (Minigame game in settings.SoloGames)
+            {
+                game.Difficulty = Difficulty.EASY;
+                game.Prefab.GetComponent<BaseGame>().Difficulty = Difficulty.EASY;
+            }
+        }
         #endregion Game Mechanics / Methods
     }
 }
