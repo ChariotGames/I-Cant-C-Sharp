@@ -48,9 +48,9 @@ namespace Scripts.Games
 
 
 
-        public void PlayerTouched(GameObject obj)
+        public void PlayerTouched(ElementType type)
         {
-            ElementType type = obj.GetComponent<LoseTileField>().type;
+            //ElementType type = obj.GetComponent<LoseTileField>().type;
 
             switch (type)
             {
@@ -60,27 +60,28 @@ namespace Scripts.Games
 
                     if (remainingTiles == 0)
                     {
-                        successesToWin--;
+                        //successesToWin--;
+                        Success();
                         ResetGame();
 
-                        if (successesToWin == 0)
-                        {
-                            Debug.Log("you win");
-                            base.Win();
-                        }
+                        //if (successesToWin == 0)
+                        //{
+                        //    Debug.Log("you win");
+                        //    base.Win();
+                        //}
                     }
                     break;
                 case ElementType.ENEMY:
 
-                    failsToLose--;
-                    if (failsToLose == 0)
-                    {
-                        failsToLose = 1;
-                        Debug.Log("you lose");
-                        base.Lose();
-                    }
+                    //failsToLose--;
+                    //if (failsToLose == 0)
+                    //{
+                    //    Debug.Log("you lose");
+                    //    base.Lose();
+                    //}
 
-
+                    Fail();
+                    ResetGame();
 
                     break;
                 case ElementType.GOAL:
