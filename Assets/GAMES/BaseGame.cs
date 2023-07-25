@@ -132,7 +132,6 @@ namespace Scripts.Games
             {
                 _successes = 0;
                 Win();
-                return;
             }
         }
 
@@ -177,7 +176,6 @@ namespace Scripts.Games
             {
                 _fails = failsToLose;
                 Lose();
-                return;
             }
         }
 
@@ -268,6 +266,8 @@ namespace Scripts.Games
 
         protected void StopTimer()
         {
+            if (_timer <= 0) return;
+            
             OnTimerStop?.Invoke(transform.parent.name);
         }
 
