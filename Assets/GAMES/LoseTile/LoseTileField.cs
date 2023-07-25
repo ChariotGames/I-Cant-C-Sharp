@@ -13,7 +13,7 @@ namespace Scripts.Games
         [SerializeField] private CircleCollider2D player;
         [SerializeField] private SpriteRenderer outline;
         [SerializeField] private Color[] colors;
-        [SerializeField][Range(1,3)] private float timer = 1f;
+        [SerializeField] [Range(1, 3)] private float timer = 1f;
         [SerializeField] private BoxCollider2D box;
 
         #endregion Serialized Fields
@@ -26,29 +26,24 @@ namespace Scripts.Games
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
-    
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.Equals(player)&& !visited)
+            if (collision.Equals(player) && !visited)
             {
                 visited = true;
-            
-                StartCoroutine(AnimateTimes(3));
-  
-                game.PlayerTouched(gameObject);
 
+                StartCoroutine(AnimateTimes(3));
             }
+
+            EvaluateHurt(collision.Equals(player));
         }
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.Equals(player) && visited && type == ElementType.ENEMY)
-            {
-                game.PlayerTouched(gameObject);
-                //Destroy(gameObject,timer * 2f);
-                box.isTrigger = false;
-            }
+            EvaluateHurt(collision.Equals(player));
         }
+
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
@@ -74,24 +69,33 @@ namespace Scripts.Games
 
         }
 
-
         private IEnumerator AnimateTimes(int times)
         {
             SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
 
             for (int i = 0; i < times; i++)
             {
-                StartCoroutine(AnimateColor(sprite, colors[0], colors[1], timer/2.0f));
-                yield return new WaitForSeconds(timer/2.0f);
-                StartCoroutine(AnimateColor(sprite, colors[1], colors[0], timer/2.0f));
-                yield return new WaitForSeconds(timer/2.0f);
+                StartCoroutine(AnimateColor(sprite, colors[0], colors[1], timer / 2.0f));
+                yield return new WaitForSeconds(timer / 2.0f);
+                StartCoroutine(AnimateColor(sprite, colors[1], colors[0], timer / 2.0f));
+                yield return new WaitForSeconds(timer / 2.0f);
 
             }
             yield return new WaitForSeconds(1f);
             sprite.color = Color.clear;
             outline.enabled = false;
             type = ElementType.ENEMY;
-            
+        }
+
+        private void EvaluateHurt(bool collisionOccured)
+        {
+            if (collisionOccured && visited && type == ElementType.ENEMY)
+            {
+                game.PlayerTouched(type);
+                //Destroy(gameObject,timer * 2f);
+                box.isTrigger = false;
+            }
+
         }
         #endregion Overarching Methods / Helpers
     }
