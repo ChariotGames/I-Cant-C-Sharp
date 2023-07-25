@@ -32,7 +32,8 @@ namespace Scripts.Games
         private float _timeoutStemp;
         private int _currentScore;
         private float _buttonWidth;
-        
+        private const int _scoreToWin = 10;
+
         private float _timeoutDelay;
 
         #endregion Fields
@@ -112,7 +113,7 @@ namespace Scripts.Games
         private void HandleScoreChange()
         {
             _remainingLives--;
-            base.ScoreDown();
+            base.AnimateFail(_remainingLives , 3);
             _previousButton.gameObject.SetActive(false);
             var damageIconGo = Instantiate(damageTakenSprite.gameObject, transform.parent);
             damageIconGo.SetActive(true);
@@ -183,10 +184,11 @@ namespace Scripts.Games
         public void IncreaseScore()
         {
             _currentScore++;
+            base.AnimateSuccess(_currentScore, _scoreToWin);
             base.ScoreUp();
-            if (_currentScore >= 10)
+            if (_currentScore >= _scoreToWin)
             {
-                _currentScore = 0;
+                //_currentScore = 0;
                 base.Harder();
                 base.Win();
             }

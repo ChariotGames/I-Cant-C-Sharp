@@ -112,14 +112,16 @@ namespace Scripts.Games
         private void IncreaseScore()
         {
             _currentScore++;
+            base.AnimateSuccess(_currentScore, _scoreToWin);
+            base.ScoreUp();
             if (_currentScore >= _scoreToWin)
             {
-                _currentScore = 0;
+                //_currentScore = 0;
                 base.Harder();
                 base.Win();
             }
 
-            base.ScoreUp();
+           
         }
 
         private void SubmitGuess(InputAction.CallbackContext ctx)
@@ -137,8 +139,8 @@ namespace Scripts.Games
             else
             {
                 _remainingLives--;
-
-                if (_remainingLives == 0)
+                base.AnimateFail(_remainingLives , 3);
+                if (_remainingLives <= 0)
                 {
                     _remainingLives = 3;
                     base.Easier();

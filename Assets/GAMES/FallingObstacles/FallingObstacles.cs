@@ -32,7 +32,7 @@ namespace Scripts.Games
         private int _healthPoints = 3;
         private int _numObstacles;
         private int _currentScore;
-        
+
         private const int _scoreToWin = 15;
 
         #endregion Fields
@@ -95,6 +95,7 @@ namespace Scripts.Games
         public void IncreasePoints()
         {
             _currentScore++;
+            base.AnimateSuccess(_currentScore, _scoreToWin);
             base.ScoreUp();
             
             if (_currentScore >= _scoreToWin)
@@ -111,7 +112,7 @@ namespace Scripts.Games
         private void TakeDamage()
         {
             _healthPoints--;
-            base.ScoreDown();
+            base.AnimateFail(_healthPoints, 3);
             if (_healthPoints <= 0)
             {
                 _healthPoints = 3;
