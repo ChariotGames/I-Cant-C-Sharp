@@ -25,9 +25,11 @@ public class Timer : MonoBehaviour
     /// </summary>
     public void Stop()
     {
-        StopCoroutine(routine);
-        timer.fillAmount = 0;
-        ToggleOnOff(false);
+        if(routine != null) {
+            StopCoroutine(routine);
+            timer.fillAmount = 0;
+            ToggleOnOff(false);
+        }
     }
 
     public void ToggleOnOff(bool state) =>

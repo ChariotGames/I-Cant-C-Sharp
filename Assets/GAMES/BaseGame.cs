@@ -132,7 +132,6 @@ namespace Scripts.Games
             {
                 _successes = 0;
                 Win();
-                return;
             }
         }
 
@@ -177,7 +176,6 @@ namespace Scripts.Games
             {
                 _fails = failsToLose;
                 Lose();
-                return;
             }
         }
 
