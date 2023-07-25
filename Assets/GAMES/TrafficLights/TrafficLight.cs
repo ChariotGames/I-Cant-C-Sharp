@@ -286,16 +286,16 @@ namespace Scripts.Games
         {
             for (int i = 0; i < trafficLights.Count; i++)
             {
+                GameObject icon;
                 if (correctColors.Contains(secondWaveColors[i]))
-                {
-                    Instantiate(simonOk_ref, trafficLights[i].transform);
-                    trafficLights[i].transform.GetChild(trafficLights[i].transform.childCount-1).gameObject.SetActive(true);
-                }
+                    icon = Instantiate(simonOk_ref, trafficLights[i].transform);
+                    //trafficLights[i].transform.GetChild(trafficLights[i].transform.childCount-1).gameObject.SetActive(true);
+
                 else
-                {
-                    Instantiate(simonNot_ref, trafficLights[i].transform);
-                    trafficLights[i].transform.GetChild(trafficLights[i].transform.childCount-1).gameObject.SetActive(true);
-                }
+                    icon = Instantiate(simonNot_ref, trafficLights[i].transform);
+                    //trafficLights[i].transform.GetChild(trafficLights[i].transform.childCount-1).gameObject.SetActive(true);
+
+                icon.SetActive(true);
             }
         }
         
@@ -372,12 +372,14 @@ namespace Scripts.Games
 
             for (int i = start; i < end; i++)
             {
-                for (int j = 1; j < 7; j++)
+                for (int j = 1; j < 6; j++)
                 {
-                    lights[i].transform.GetChild(j).gameObject.SetActive((false));
+                    GameObject one = lights[i].transform.GetChild(1).gameObject;
+                    GameObject two = lights[i].transform.GetChild(1).GetChild(j).gameObject;
+                    lights[i].transform.GetChild(1).GetChild(j).gameObject.SetActive((false));
                 }
-                lights[i].transform.GetChild((int)colors[colorI].colorTop).gameObject.SetActive((true));
-                lights[i].transform.GetChild((int)colors[colorI].colorBottom+3).gameObject.SetActive((true));
+                lights[i].transform.GetChild(1).transform.GetChild((int)colors[colorI].colorTop).gameObject.SetActive((true));
+                lights[i].transform.GetChild(1).transform.GetChild((int)colors[colorI].colorBottom+3).gameObject.SetActive((true));
                 colorI++;
             }
         }
