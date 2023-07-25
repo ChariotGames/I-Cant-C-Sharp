@@ -52,7 +52,7 @@ namespace Scripts.Games
                     groundMaterial.bounciness = 1f;
                     break;
                 case Difficulty.HARD:
-                    groundMaterial.bounciness = 0.925f;
+                    groundMaterial.bounciness = 0.975f;
                     hasRandomGravity = true;
                     break;
             }
