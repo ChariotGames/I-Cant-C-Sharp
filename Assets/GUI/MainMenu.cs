@@ -36,7 +36,7 @@ namespace Scripts.Controllers
         {
             if (mainCamera) mainCamera = Camera.main;
 
-            //ResetSettings();
+            ResetSettings();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             gameButtons = new();
             livesText.text = settings.Lives.ToString();

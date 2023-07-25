@@ -15,7 +15,7 @@ namespace Scripts.Games
 
         [SerializeField] private Color originalColor, targetColor;
         [SerializeField] private Colors colorEnum;
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer spriteRenderer, outline;
         [SerializeField] [Range(0.1f, 1)] private float duration = 0.30f;
 
         #endregion Serialized Fields
@@ -84,8 +84,8 @@ namespace Scripts.Games
         public void Animate()
         {
             StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, duration));
-            if(spriteRenderer.transform.childCount == 1)
-                StartCoroutine(AnimateColor(spriteRenderer.transform.GetChild(0).GetComponent<SpriteRenderer>(), originalColor, targetColor, duration));
+            if(outline != null)
+                StartCoroutine(AnimateColor(outline, originalColor, targetColor, duration));
         }
 
         #endregion Animations
