@@ -103,7 +103,6 @@ namespace Scripts.Games
                     float timer = Time.time;
                     RunTimer(timeout);
                     yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
-                    StopTimer();
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         gamestateWin.SetActive(true);
