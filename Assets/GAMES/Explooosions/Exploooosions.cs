@@ -66,6 +66,7 @@ namespace Scripts.Games
             {
                 //successesToWin++;
                 base.AnimateSuccess(player.transform, 1, 20);
+                base.ScoreUp();
                 winCounter++;
             }
 
