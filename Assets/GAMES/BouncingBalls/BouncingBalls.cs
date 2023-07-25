@@ -194,7 +194,7 @@ namespace Scripts.Games
             {
                 if (hasRandomGravity)
                 {
-                    var randomGravity = Random.Range(1.5f, 2.6f);
+                    var randomGravity = Random.Range(1.5f, 2f);
                     ball.gravityScale = randomGravity;
                 }
 
