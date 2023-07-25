@@ -124,7 +124,7 @@ namespace Scripts.Games
             SetLightColors(trafficLights, secondWaveColors, false);
             selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
             selector_ref.transform.position = selector_ref.transform.parent.transform.position;
-            selector_ref.transform.Translate(0, 1.5f, 0);
+            selector_ref.transform.Translate(0, 1.8f, 0);
             selector_ref.SetActive(true);
             EnableInputs();
 
