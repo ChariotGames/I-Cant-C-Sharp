@@ -35,13 +35,12 @@ namespace Scripts.Games
 
         #region Serialized Fields
 
-        [SerializeField] private GameObject trafficLightPrefab, selector_ref;
+        [SerializeField] private GameObject trafficLightPrefab,selector_ref,simonNot_ref, simonOk_ref, text_ref;
         [SerializeField] private List<GameObject> trafficLights;
-        [SerializeField] private GameObject simonNot_ref;
-        [SerializeField] private GameObject simonOk_ref;
         [SerializeField] private int delaySecondWave = 5;
         [SerializeField] private int timeToSelectLight = 5;
         [SerializeField] private int successToWin = 5;
+        [SerializeField] private Vector3 SelectorPos = new Vector3(0, 1.8f, 0);
 
         #endregion Serialized Fields
 
@@ -118,13 +117,14 @@ namespace Scripts.Games
 
         private void SecondWave()
         {
+            text_ref.SetActive(false);
             //Mix correct colors with random generated ones and set them.
             secondWaveColors = MixCorrectColorsIntoWrongOnes(
                 GenLightColors(trafficLightAmount, correctColors), correctColors);
             SetLightColors(trafficLights, secondWaveColors, false);
             selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
             selector_ref.transform.position = selector_ref.transform.parent.transform.position;
-            selector_ref.transform.Translate(0, 1.8f, 0);
+            selector_ref.transform.Translate(SelectorPos);
             selector_ref.SetActive(true);
             EnableInputs();
 
@@ -152,6 +152,7 @@ namespace Scripts.Games
             }
             DisableInputs();
             playerHasSubmitted = false;
+            text_ref.SetActive(true);
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -185,7 +186,8 @@ namespace Scripts.Games
                 --selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
                 selector_ref.transform.position = selector_ref.transform.parent.transform.position;
-                selector_ref.transform.Translate(0, 1.2f, 0);
+                selector_ref.transform.Translate(SelectorPos);
+                GetComponent<AudioSource>().Play();
             }
         }
 
@@ -196,7 +198,8 @@ namespace Scripts.Games
                 ++selectorIndex;
                 selector_ref.transform.SetParent(trafficLights[selectorIndex].transform);
                 selector_ref.transform.position = selector_ref.transform.parent.transform.position;
-                selector_ref.transform.Translate(0, 1.2f, 0);
+                selector_ref.transform.Translate(SelectorPos);
+                GetComponent<AudioSource>().Play();
             }
         }
 
@@ -204,6 +207,7 @@ namespace Scripts.Games
         {
             playerHasSubmitted = true;
             EndOfRound();
+            GetComponent<AudioSource>().Play();
         }
 
         #endregion Inputs
