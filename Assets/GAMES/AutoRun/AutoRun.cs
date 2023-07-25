@@ -21,9 +21,7 @@ namespace Scripts.Games
     
     public class AutoRun : BaseGame
     {
-
-        [SerializeField] private InputAction test1;
-        [SerializeField] private int successToWin = 10;
+        [SerializeField] private Settings settings;
         int successCounter = 0;
 
         
@@ -70,12 +68,17 @@ namespace Scripts.Games
         {
             base.ScoreUp(1);
             ++successCounter;
-            base.AnimateSuccess(gameObject.transform,successCounter, successToWin );
+            base.AnimateSuccess(gameObject.transform,successCounter, successesToWin );
         }
 
-        public void getCharacter()
+        public Sprite getCharacter()
         {
-            //return Settings.SelectedCharacter;
+            return settings.SelectedCharacter.Preview;
+        }
+
+        public int getSuccessToWin()
+        {
+            return successesToWin;
         }
 
         #endregion Game Mechanics / Methods
