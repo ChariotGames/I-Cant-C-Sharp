@@ -126,6 +126,7 @@ namespace Scripts.Games
         {
             _successes++;
             ScoreUp(score);
+            StopTimer();
             AnimateSuccess(parent, _successes, successesToWin);
             if (_successes >= successesToWin)
             {
@@ -170,6 +171,7 @@ namespace Scripts.Games
         {
             _fails--;
             //ScoreDown(score);
+            StopTimer();
             AnimateFail(parent, _fails, failsToLose);
             if (_fails <= 0)
             {

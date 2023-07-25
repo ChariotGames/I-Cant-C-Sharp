@@ -458,7 +458,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2918756866687947648
 Transform:
   m_ObjectHideFlags: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  successesToWin: 5
+  successesToWin: 3
   failsToLose: 3
   equationText: {fileID: 2918756865153322556}
   leftAnswer: {fileID: 2918756866870625413}

@@ -69,7 +69,6 @@ namespace Scripts.Games
                 float timer = Time.time;
                 RunTimer(timeout);
                 yield return new WaitUntil(() => _isYes || _isNo || Time.time - timer > timeout);
-                StopTimer();
                 _timeElapsed = Time.time - timer;
             }
             

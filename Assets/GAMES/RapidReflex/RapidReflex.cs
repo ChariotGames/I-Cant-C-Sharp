@@ -140,7 +140,6 @@ namespace Scripts.Games
             //Debug.Log(_timeToAnswer);
             //RunTimer(_timeToAnswer);
             yield return new WaitUntil(() => _isButtonPressed || Time.time - timer > _timeToAnswer);
-            //StopTimer();
             _timeElapsed = Time.time - timer;
         }
 

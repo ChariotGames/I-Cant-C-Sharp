@@ -27,7 +27,7 @@ namespace Scripts.Games
         private readonly List<TextMeshPro> _spawnedButtons = new();
         private static float _timer;
 
-        private int _remainingLives = 3;
+        //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
         private int _currentScore;
@@ -112,18 +112,16 @@ namespace Scripts.Games
 
         private void HandleScoreChange()
         {
-            _remainingLives--;
-            base.AnimateFail(_remainingLives , 3);
+            //base.AnimateFail(failsToLose , 3);
             _previousButton.gameObject.SetActive(false);
             var damageIconGo = Instantiate(damageTakenSprite.gameObject, transform.parent);
             damageIconGo.SetActive(true);
             Destroy(damageIconGo, 1);
             ResetTimer();
-            if (_remainingLives <= 0)
+            Fail();
+            if (base._fails <= 0)
             {
-                _remainingLives = 3;
                 base.Easier();
-                base.Lose();
             }
         }
 
@@ -183,14 +181,14 @@ namespace Scripts.Games
 
         public void IncreaseScore()
         {
-            _currentScore++;
-            base.AnimateSuccess(_currentScore, _scoreToWin);
-            base.ScoreUp();
-            if (_currentScore >= _scoreToWin)
+            //base.AnimateSuccess(_currentScore, _scoreToWin);
+            //base.ScoreUp();
+            Success();
+            if (_currentScore >= base.successesToWin)
             {
                 //_currentScore = 0;
                 base.Harder();
-                base.Win();
+                //base.Win();
             }
         }
     }
