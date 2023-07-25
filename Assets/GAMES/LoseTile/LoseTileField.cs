@@ -34,16 +34,21 @@ namespace Scripts.Games
                 visited = true;
 
                 StartCoroutine(AnimateTimes(3));
-            }
 
-            EvaluateHurt(collision.Equals(player));
+                game.PlayerTouched(type);
+
+            }
         }
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            EvaluateHurt(collision.Equals(player));
+            if (collision.Equals(player) && visited && type == ElementType.ENEMY)
+            {
+                game.PlayerTouched(type);
+                //Destroy(gameObject,timer * 2f);
+                box.isTrigger = false;
+            }
         }
-
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
@@ -69,6 +74,7 @@ namespace Scripts.Games
 
         }
 
+
         private IEnumerator AnimateTimes(int times)
         {
             SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
@@ -85,16 +91,6 @@ namespace Scripts.Games
             sprite.color = Color.clear;
             outline.enabled = false;
             type = ElementType.ENEMY;
-        }
-
-        private void EvaluateHurt(bool collisionOccured)
-        {
-            if (collisionOccured && visited && type == ElementType.ENEMY)
-            {
-                game.PlayerTouched(type);
-                //Destroy(gameObject,timer * 2f);
-                box.isTrigger = false;
-            }
 
         }
         #endregion Overarching Methods / Helpers
