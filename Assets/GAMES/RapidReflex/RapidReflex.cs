@@ -20,9 +20,11 @@ namespace Scripts.Games
     {
     #region Serialized Fields
         
-        [SerializeField] private GameObject lightsTop, lightsBottom, lightTemplate, overlayContainer, background;
-        [SerializeField] private SpriteRenderer[] _bulbsSpriteTop, _bulbsSpriteBottom;
-        [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen;
+        [SerializeField] private GameObject lightTemplate, overlayContainer;
+        [SerializeField] private Transform lightsTop, lightsBottom;
+        [SerializeField] private SpriteRenderer[] bulbsSpriteTop, bulbsSpriteBottom;
+        [SerializeField] private SpriteRenderer backgroundSprite;
+        [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen, backroundColor;
         [SerializeField] private List<Color> flashColor;
         [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
@@ -35,7 +37,6 @@ namespace Scripts.Games
         private const int NUMBER_LIGHTS = 5;
         private float _timeElapsed = 0, _randomDelay = 0, _timeToAnswer;
         private bool _isButtonPressed = false;
-        private SpriteRenderer _backgroundSprite;
         private int difficultyTracker, defaultFailsToLose;
 
     #endregion Fields
@@ -44,11 +45,12 @@ namespace Scripts.Games
     
     void Start()
     {
+        backgroundSprite.color = backroundColor;
         flashColor.Add(lightRed);
         flashColor.Add(lightGreen);
-        _backgroundSprite = background.GetComponent<SpriteRenderer>();
-        _bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop.transform);
-        _bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom.transform);
+        //backgroundSprite = background.GetComponent<SpriteRenderer>();
+        bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop);
+        bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom);
         difficultyTracker = successesToLevelUp;
         _fails = failsToLose;
         StartCoroutine(GameCoroutine());
@@ -107,8 +109,8 @@ namespace Scripts.Games
         {
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
-                UpdateLightColor(_bulbsSpriteTop[i], darkRed);
-                UpdateLightColor(_bulbsSpriteBottom[i], darkGreen);
+                UpdateLightColor(bulbsSpriteTop[i], darkRed);
+                UpdateLightColor(bulbsSpriteBottom[i], darkGreen);
             }
         }
 
@@ -118,7 +120,7 @@ namespace Scripts.Games
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
                 if (CheckForEarlyLose()) yield break; 
-                UpdateLightColor(_bulbsSpriteTop[i], lightRed);
+                UpdateLightColor(bulbsSpriteTop[i], lightRed);
                 if (Difficulty == Difficulty.HARD && i == NUMBER_LIGHTS-1) StartCoroutine(RandomDistraction());
                 yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && Difficulty != Difficulty.EASY ? _randomDelay : 0));
                 if (CheckForEarlyLose()) yield break; 
@@ -126,7 +128,7 @@ namespace Scripts.Games
             //Debug.Log("Delay: " + (_randomDelay + _randomDelay) + " s");
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
-                UpdateLightColor(_bulbsSpriteBottom[i], lightGreen);
+                UpdateLightColor(bulbsSpriteBottom[i], lightGreen);
             }
         }
 
@@ -185,11 +187,11 @@ namespace Scripts.Games
 
         private IEnumerator FlashBackground()
         {
-            _backgroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
+            backgroundSprite.color = flashColor[Random.Range(0, flashColor.Count)];
             //background.SetActive(true);
             yield return new WaitForSeconds(0.2f);
             //background.SetActive(false);
-            _backgroundSprite.color = Color.white;
+            backgroundSprite.color = backroundColor;
         }
 
         public void Test(GameObject obj) { }
