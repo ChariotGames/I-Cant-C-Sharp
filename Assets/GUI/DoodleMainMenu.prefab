@@ -1738,7 +1738,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 110
-    m_Bottom: 0
+    m_Bottom: 50
   m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -1803,8 +1803,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 100
-    m_Bottom: 0
+    m_Top: 110
+    m_Bottom: 50
   m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -2038,7 +2038,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 110
-    m_Bottom: 0
+    m_Bottom: 50
   m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -6266,6 +6266,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2378644645388778488}
     m_Modifications:
+    - target: {fileID: 384097277752735656, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+      propertyPath: m_Spacing
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 781958398071058509, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
