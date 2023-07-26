@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e9a2adea311bcb4fb5d8e7579d0f7b2, type: 3}
-  m_Name: Cat
+  m_Name: RedRidingHood
   m_EditorClassIdentifier: 
-  charName: Sailor Moew
-  preview: {fileID: 21300000, guid: bbe2796483e770b4f86c3c758227cf6b, type: 3}
-  icon: {fileID: 21300000, guid: 70f8cc6d20c09ee41a3b654480ea0af4, type: 3}
+  charName: Red Riding Hood
+  preview: {fileID: 21300000, guid: 37376bfeb7d51b4478e7f2ded300ddba, type: 3}
+  icon: {fileID: 21300000, guid: 10cc54cd111d324468b8cc237dc4a111, type: 3}
