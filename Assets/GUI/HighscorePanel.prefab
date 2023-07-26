@@ -58,7 +58,7 @@ MonoBehaviour:
   scoresContainer: {fileID: 8457386995499444838}
   templateName: {fileID: 8457386996046746337}
   templateScore: {fileID: 8457386995673060129}
-  settings: {fileID: 0}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
 --- !u!222 &4482620384258405548
 CanvasRenderer:
   m_ObjectHideFlags: 0
