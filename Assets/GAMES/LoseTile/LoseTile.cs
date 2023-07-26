@@ -25,8 +25,8 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            successesToWin = 3;
-            failsToLose = 1;
+            //successesToWin = 3;
+            //failsToLose = 1;
             ammountOfTiles = gridSize * gridSize;
             player.Stick = _keys.One.Input;
         }
