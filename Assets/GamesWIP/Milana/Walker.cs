@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scripts._Input;
 using Scripts.Games;
+using Random = UnityEngine.Random;
 
 namespace Scripts.GamesWIP
 {
@@ -23,10 +24,12 @@ namespace Scripts.GamesWIP
         private float rightBound;
         private bool buttonPressed = false;
         private bool lost = false;
-        private List<GameObject> buttons = new List<GameObject>();
-        private float instantiationDelay = 0.5f;
-        private float delayBetweenRhythm = 0.2f;
+        private List<GameObject> buttons = new();
+        private float instantiationDelay = 1f;
+        private float delayBetweenRhythm = 0.5f;
         private int instantiationCount = 0;
+        private float _time = 0;
+        private List<float> rhythmDelay = new(); 
 
         #endregion Fields
 
@@ -34,11 +37,12 @@ namespace Scripts.GamesWIP
 
         private void Awake()
         {
+            //button.GetComponent<BasePressElement>().Button = Keys.One.Input;
             //Physics2D.gravity = new Vector2(-9.8f, 0);
 
             //Get coords of activation region
-            float regionSizeX = GameObject.Find("ActivationRegion").gameObject.GetComponent<Collider2D>().bounds.size.x;
-            float regionPosX = GameObject.Find("ActivationRegion").gameObject.transform.position.x;
+            float regionSizeX = GameObject.Find("ActivationRegion").GetComponent<Collider2D>().bounds.size.x;
+            float regionPosX = GameObject.Find("ActivationRegion").transform.position.x;
 
             leftBound = regionPosX - regionSizeX / 2;
             rightBound = regionPosX + regionSizeX / 2;
@@ -46,7 +50,7 @@ namespace Scripts.GamesWIP
 
         private void OnEnable()
         {
-            InputHandler.ArrowLeft += ButtonPress;
+            InputHandler.ArrowDown += ButtonPress;
         }
 
         void Start()
@@ -59,9 +63,10 @@ namespace Scripts.GamesWIP
 
         void Update()
         {
+            _time += Time.deltaTime;
             //if (!lost)
             //{
-                CheckWin();
+            CheckWin();
             //}
             //TODO wird nach ein mal lose immer noch aufgerufen
         }
@@ -127,7 +132,7 @@ namespace Scripts.GamesWIP
                     removeClickedButton(i);
                     var loseSprite = Instantiate(spriteLose.gameObject, transform.parent);
                     loseSprite.SetActive(true);
-                    Destroy(loseSprite, 1);
+                    Destroy(loseSprite, 0.5f);
                     
                     
                     //StopGame();
@@ -142,7 +147,7 @@ namespace Scripts.GamesWIP
 
                     var winSprite = Instantiate(spriteWin.gameObject, transform.parent);
                     winSprite.SetActive(true);
-                    Destroy(winSprite, 1);
+                    Destroy(winSprite, 0.5f);
                 }
             }
         }
@@ -170,24 +175,35 @@ namespace Scripts.GamesWIP
 
         private IEnumerator InstantiateButtonsWithDelay()
         {
+            createRhythm();
+            int counter = 0;
             while (true)
             {
-                if (instantiationCount == 4)
+                if (instantiationCount == 8)
                 {
-                    yield return new WaitForSeconds(delayBetweenRhythm);
+                    //yield return new WaitForSeconds(delayBetweenRhythm);
+                    createRhythm();
                     instantiationCount = 0;
                 }
                 GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
 
                 buttons.Add(newButton);
                 instantiationCount++;
-                yield return new WaitForSeconds(instantiationDelay);
+
+                
+                yield return new WaitForSeconds(rhythmDelay[counter]);
+                counter++;
+                if (counter >= 4) counter = 0;
             }
         }
 
         private void createRhythm()
         {
-            
+            rhythmDelay.Clear();
+            for (int i = 0; i < 4; i++)
+            {
+                rhythmDelay.Add(Random.Range(0.5f, 2.0f));
+            }
         }
 
         #endregion Game Mechanics / Methods
