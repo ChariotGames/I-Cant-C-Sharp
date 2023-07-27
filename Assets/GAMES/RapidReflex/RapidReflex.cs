@@ -23,7 +23,7 @@ namespace Scripts.Games
         [Space]
         [Header("Game Specific Stuff")]
         [SerializeField] private TMP_Text gameState;
-        [SerializeField] private GameObject lightTemplate, overlayContainer;
+        [SerializeField] private GameObject lightTemplate, overlayContainer, lightContainer;
         [SerializeField] private Transform lightsTop, lightsBottom;
         [SerializeField] private SpriteRenderer[] bulbsSpriteTop, bulbsSpriteBottom;
         [SerializeField] private SpriteRenderer backgroundSprite;
@@ -70,7 +70,8 @@ namespace Scripts.Games
 
         private IEnumerator GameCoroutine()
         {
-            yield return new WaitForSeconds(1);
+            yield return StartCoroutine(AnimateInstruction());
+            lightContainer.SetActive(true);
             while (true)
             {
                 UpdateRandomDelay();

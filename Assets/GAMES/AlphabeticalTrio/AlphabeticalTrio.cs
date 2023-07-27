@@ -50,7 +50,7 @@ namespace Scripts.Games
         
             private IEnumerator GameCoroutine()
             {
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(AnimateInstruction());
                 while (true)
                 {
                     bool isTrio = Random.Range(0f, 1f) > 0.48f;

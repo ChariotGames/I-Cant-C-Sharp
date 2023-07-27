@@ -52,7 +52,7 @@ namespace Scripts.Games
         
             private IEnumerator GameCoroutine()
             {
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(AnimateInstruction());
                 while (true)
                 {
                     GenerateRandomNumber();
