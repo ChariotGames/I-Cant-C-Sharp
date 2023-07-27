@@ -219,6 +219,8 @@ namespace Scripts.Games
                 }
                 
             }
+
+            _isAnswerScreen = false;
             StartCoroutine(GenerateNewEquation());
         }
 
