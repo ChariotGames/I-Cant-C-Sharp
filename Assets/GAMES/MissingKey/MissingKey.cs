@@ -25,6 +25,7 @@ namespace Scripts.Games
         private bool timerEnded;
         private int winCounter = 0;
         private int loseCounter = 0;
+        private bool _isAnswerScreen;
 
 
         private void Awake()
@@ -193,6 +194,8 @@ namespace Scripts.Games
                 obj.GetComponent<BasePressElement>().Button = pattern[i].GetComponent<BasePressElement>().Button;
                 obj.SetActive(true);
             }
+
+            _isAnswerScreen = true;
         }
 
         private bool Won()
@@ -222,12 +225,15 @@ namespace Scripts.Games
 
         private void PlayerPress(InputAction.CallbackContext ctx)
         {
-            //Debug.Log("Clicked!");
-            _playerPressed = true;
-            _time = 0;
-            sound.time = 0.7f;
-            sound.Play();
-            DeleteAll();
+            if(_isAnswerScreen) {
+                //Debug.Log("Clicked!");
+                _playerPressed = true;
+                _time = 0;
+                sound.time = 0.7f;
+                sound.Play();
+                DeleteAll();
+                _isAnswerScreen = false;
+            }
         }
 
         private IEnumerator NextRound()

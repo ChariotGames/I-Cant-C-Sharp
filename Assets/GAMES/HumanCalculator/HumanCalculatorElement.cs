@@ -23,7 +23,10 @@ namespace Scripts.GameElements
 
             public override void ButtonPressed(InputAction.CallbackContext ctx)
             {
-                _game.CheckAnswer(_textMeshPro.text);
+                if ((_game._isAnswerScreen))
+                {
+                     _game.CheckAnswer(_textMeshPro.text);
+                }
                 _game.GenerateNewEquation();
             }
         

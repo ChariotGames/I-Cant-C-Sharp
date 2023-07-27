@@ -24,7 +24,7 @@ namespace Scripts.Games
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
-        private bool _isAnswerScreen;
+        public bool _isAnswerScreen;
         //private int _currentScore;
         //private int _scoreToWin = 5;
         
