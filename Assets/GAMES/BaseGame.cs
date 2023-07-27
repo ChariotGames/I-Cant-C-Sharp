@@ -324,6 +324,7 @@ namespace Scripts.Games
         protected IEnumerator AnimateInstruction(GameObject container, float distance)
         {
             GameObject obj = Instantiate(container, transform.position, Quaternion.identity, transform);
+            obj.SetActive(true);
 
             float offset = 0;
             while (offset < distance)
