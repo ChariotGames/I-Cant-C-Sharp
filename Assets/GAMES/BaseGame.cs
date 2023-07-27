@@ -324,7 +324,6 @@ namespace Scripts.Games
         protected IEnumerator AnimateInstruction(GameObject container, float distance)
         {
             GameObject obj = Instantiate(container, transform.position, Quaternion.identity, transform);
-
             obj.SetActive(true);
             TMP_Text tmp = obj.GetComponent<TMP_Text>();
 
@@ -337,13 +336,13 @@ namespace Scripts.Games
                 yield return new WaitForSeconds(Time.deltaTime);
             }
 
-            float countdown = 3.1f;
+            float countdown = 3.0f;
             tmp.text = countdown.ToString();
             yield return new WaitForSeconds(Time.deltaTime);
             while (0 < countdown)
             {
                 countdown -= Time.deltaTime;
-                tmp.text = ((int)countdown).ToString();
+                tmp.text = ((int)countdown+1).ToString();
                 yield return new WaitForSeconds(Time.deltaTime);
             }
             obj.SetActive(false);
