@@ -16,8 +16,8 @@ namespace Scripts.Games
         [SerializeField] private TextMeshPro equationText;
         [SerializeField] private TextMeshPro leftAnswer;
         [SerializeField] private TextMeshPro rightAnswer;
-        [SerializeField] private SpriteRenderer correctAnswer;
-        [SerializeField] private SpriteRenderer wrongAnswer;
+        //[SerializeField] private SpriteRenderer correctAnswer;
+        //[SerializeField] private SpriteRenderer wrongAnswer;
 
         private int _missingNumber;
         private int _equationResult;
@@ -67,8 +67,8 @@ namespace Scripts.Games
         {
             yield return new WaitForSeconds(1.5f);
             
-            wrongAnswer.gameObject.SetActive(false);
-            correctAnswer.gameObject.SetActive(false);
+            //wrongAnswer.gameObject.SetActive(false);
+            //correctAnswer.gameObject.SetActive(false);
             
             switch (Difficulty)
             {
@@ -192,7 +192,7 @@ namespace Scripts.Games
             if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
-                correctAnswer.gameObject.SetActive(true);
+                //correctAnswer.gameObject.SetActive(true);
                // _currentScore++;
                 //base.ScoreUp();
                 //base.AnimateSuccess(_currentScore, _scoreToWin);
@@ -208,7 +208,7 @@ namespace Scripts.Games
             else {
                 Debug.Log("Wrong");
                 //_remainingLives--;
-                wrongAnswer.gameObject.SetActive(true);
+                //wrongAnswer.gameObject.SetActive(true);
                 //base.AnimateFail(_remainingLives , 3);
                 base.Fail();
                 if (base._fails <= 0)

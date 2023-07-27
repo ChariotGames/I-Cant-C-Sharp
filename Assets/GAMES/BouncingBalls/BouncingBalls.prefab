@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2483405328368715939}
   - component: {fileID: 5795129178731659981}
   m_Layer: 0
-  m_Name: Task-Info
+  m_Name: InfoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1694,8 +1694,6 @@ MonoBehaviour:
   guessingOverlay: {fileID: 5307354073733101283}
   groundMaterial: {fileID: 6200000, guid: e6f6803ad269fa049bbc2a4e72f58d7a, type: 2}
   infoText: {fileID: 5795129178731659981}
-  correctAnswer: {fileID: 3073107851689656327}
-  wrongAnswer: {fileID: 2158228648834113086}
   resultText: {fileID: 8104434513277550652}
 --- !u!82 &8247213196729409848
 AudioSource:

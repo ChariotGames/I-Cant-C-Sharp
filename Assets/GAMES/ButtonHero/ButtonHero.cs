@@ -71,6 +71,7 @@ namespace Scripts.Games
 
         private void Start()
         {
+            infoText.gameObject.SetActive(true);
             _buttonWidth = buttons[0].gameObject.GetComponent<RectTransform>().rect.width * 0.5f;
             
             StartCoroutine(SpawnCoroutine());
@@ -78,6 +79,12 @@ namespace Scripts.Games
 
         private void Update()
         {
+            _elapsedTime += Time.deltaTime;
+            if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
+            {
+                infoText.gameObject.SetActive(false);
+            }
+            
             HandleTimer();
         }
 
@@ -91,12 +98,6 @@ namespace Scripts.Games
 
         private void HandleTimer()
         {
-            _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >=  3)
-            {
-                infoText.gameObject.SetActive(false);
-            }
-            
             if (_previousButton && _previousButton.gameObject.activeSelf)
             {
                 _timerIntern += Time.deltaTime;

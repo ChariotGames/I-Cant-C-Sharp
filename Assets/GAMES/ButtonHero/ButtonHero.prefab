@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.27}
+  m_AnchoredPosition: {x: 0, y: 2.5}
   m_SizeDelta: {x: 7, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4483566329648542364
@@ -636,7 +636,6 @@ MonoBehaviour:
   - {fileID: 1337406851848505851}
   spawnTimeUpperBounds: 3
   spawnTimeLowerBounds: 1
-  damageTakenSprite: {fileID: 6267281831289054599}
   container: {fileID: 3609616839327676248}
   infoText: {fileID: 3013708546982272707}
 --- !u!1 &5451325514124523726
