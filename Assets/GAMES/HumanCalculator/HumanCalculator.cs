@@ -13,6 +13,8 @@ namespace Scripts.Games
     {
         #region Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private TextMeshPro equationText;
         [SerializeField] private TextMeshPro leftAnswer;
         [SerializeField] private TextMeshPro rightAnswer;

@@ -13,6 +13,8 @@ namespace Scripts.Games
 {
     public class SameAsBefore : BaseGame
     {
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<GameObject> options;
         [SerializeField] private GameObject startText, gamestateWin, gamestateLose;
         [SerializeField] private TMP_Text stepBackText,  buttonYes, buttonNo;

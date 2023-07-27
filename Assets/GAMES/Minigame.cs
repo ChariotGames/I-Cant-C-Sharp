@@ -10,18 +10,22 @@ namespace Scripts.Models
     public class Minigame : ScriptableObject
     {
         #region Serialized Fields
-
+        [Header("General Values")]
         //[SerializeField] private AssetID assetID;
         [SerializeField] [TextArea(3, 10)] private string description;
         //[SerializeField] private Complexity complexity;
         [SerializeField] private Difficulty difficulty;
         [SerializeField] private Genre genre;
         //[SerializeField] private Keys keysFirst, keysSecond;
-        [SerializeField] private KeyMap keysLeft, keysRight;
+        [Space]
+        [Header("Input Related")]
         [SerializeField] protected ActionNames actionNames;
+        [SerializeField] private KeyMap keysLeft, keysRight;
         //[SerializeField] private Orientation orientation;
+        [Header("Play Related Stuff")]
         [SerializeField] private GameObject prefab;
         [SerializeField] private Sprite preview;
+        [SerializeField] private string instructionText;
 
         #endregion Serialized Fields
 
@@ -146,6 +150,14 @@ namespace Scripts.Models
         {
             get => selectedKeys;
             set => selectedKeys = value;
+        }
+
+        /// <summary>
+        /// The text to display at game start.
+        /// </summary>
+        public string InstructionText
+        {
+            get => instructionText;
         }
 
         #endregion GetSets
