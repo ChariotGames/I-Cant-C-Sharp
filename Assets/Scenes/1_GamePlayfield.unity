@@ -1868,8 +1868,19 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6059558779101728038, guid: 4b55c29f99a8f93489474ba1bc05be90, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4b55c29f99a8f93489474ba1bc05be90, type: 3}
+--- !u!1 &681150481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3355251647010233338, guid: 4b55c29f99a8f93489474ba1bc05be90, type: 3}
+  m_PrefabInstance: {fileID: 681150480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &681150482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6059558779101728032, guid: 4b55c29f99a8f93489474ba1bc05be90, type: 3}
+  m_PrefabInstance: {fileID: 681150480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &725693027
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,6 +2032,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811362495}
   - component: {fileID: 811362498}
+  - component: {fileID: 811362499}
   m_Layer: 5
   m_Name: MinigameOverlay
   m_TagString: Untagged
@@ -2090,6 +2102,22 @@ MonoBehaviour:
   rightAnim: {fileID: 1960766537}
   tempWin: {fileID: 1451305636}
   tempLose: {fileID: 1494697931}
+--- !u!114 &811362499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811362490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ff3735ad2c4e9498297655e72afa15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: -944628639613478452, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
+  pauseMenu: {fileID: 681150482}
+  resumeButton: {fileID: 681150481}
+  button: {fileID: 3700162912877907380, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
 --- !u!1 &820830841
 GameObject:
   m_ObjectHideFlags: 0
