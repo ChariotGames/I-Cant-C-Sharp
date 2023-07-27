@@ -19,18 +19,20 @@ namespace Scripts.Games
     public class RapidReflex : BaseGame
     {
     #region Serialized Fields
-        
+
+        [Space]
+        [Header("Game Specific Stuff")]
+        [SerializeField] private TMP_Text gameState;
         [SerializeField] private GameObject lightTemplate, overlayContainer;
         [SerializeField] private Transform lightsTop, lightsBottom;
         [SerializeField] private SpriteRenderer[] bulbsSpriteTop, bulbsSpriteBottom;
         [SerializeField] private SpriteRenderer backgroundSprite;
         [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen, backroundColor;
         [SerializeField] private List<Color> flashColor;
-        [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
         [SerializeField] private int successesToLevelUp;
 
-        #endregion Serialized Fields
+    #endregion Serialized Fields
 
     #region Fields
 

@@ -13,6 +13,8 @@ namespace Scripts.Games
     {
         #region Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<Rigidbody2D> bouncingBalls;
         [SerializeField] private TextMeshPro guessedNumber;
         [SerializeField] private GameObject balls;

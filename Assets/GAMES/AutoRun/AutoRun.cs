@@ -21,6 +21,8 @@ namespace Scripts.Games
     
     public class AutoRun : BaseGame
     {
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private Settings settings;
         int successCounter = 0;
 

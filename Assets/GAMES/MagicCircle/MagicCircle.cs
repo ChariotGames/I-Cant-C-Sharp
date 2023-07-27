@@ -16,6 +16,8 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private Color[] ringColors;
         [SerializeField] private Key[] ringButtons;
         [SerializeField] private GameObject ringContainer, ring, circle;

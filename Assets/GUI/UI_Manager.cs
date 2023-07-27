@@ -116,15 +116,6 @@ namespace Scripts.Controllers
             if (side.Contains("Right")) parent = rightKeys;
             if (side.Contains("Center")) parent = centerKeys;
 
-            if (!actions.Other.Equals(""))
-            {
-                GameObject k = Instantiate(templateKeys, parent);
-                TMP_Text[] texts = k.transform.GetComponentsInChildren<TMP_Text>();
-                texts[1].text = actions.Other;
-                k.SetActive(true);
-                return;
-            }
-
             for (int i = 0; i < 4; i++)
             {
                 if (keys.All[i] == null || actions.All[i].Equals("")) return;

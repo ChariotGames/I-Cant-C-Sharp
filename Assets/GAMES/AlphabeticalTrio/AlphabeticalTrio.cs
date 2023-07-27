@@ -9,12 +9,14 @@ namespace Scripts.Games
     public class AlphabeticalTrio : BaseGame
     {
         #region Serialized Fields
-
-            [SerializeField] private TMP_Text letters, buttonYes, buttonNo;
+            [Space]
+            [Header("Game Specific Stuff")]
+            [SerializeField] private TMP_Text letters;
+            [SerializeField] private TMP_Text buttonYes, buttonNo;
             [SerializeField] private GameObject letterContainer, gamestateWin, gamestateLose;
             [SerializeField] private int timeout, successesToLevelUp;
 
-            #endregion Serialized Fields
+        #endregion Serialized Fields
 
         #region Fields
 

@@ -16,6 +16,8 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private Cannon cannon;
         [SerializeField] private GameObject obstacle, obstacleContainer;
         //[SerializeField] private TextMeshPro lifeCounter;

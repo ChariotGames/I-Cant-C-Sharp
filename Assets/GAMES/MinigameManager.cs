@@ -17,6 +17,8 @@ namespace Scripts.Controllers
 
         [SerializeField] private Settings settings;
         [SerializeField] private Transform spawnLeft, spawnRight, spawnCenter;
+        [SerializeField] private GameObject instructionPrefab;
+        [SerializeField] [Range(0.0f, 2.0f)] private float instructionDistance = 2.0f;
 
         #endregion
 
@@ -167,6 +169,7 @@ namespace Scripts.Controllers
             }
 
             baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect);
+            baseGame.SetInstructions(instructionPrefab, game.InstructionText, instructionDistance);
             OnSetKeys?.Invoke(parent.name, keys, game.ActionNames);
             obj.SetActive(true);
         }
