@@ -89,7 +89,7 @@ namespace Scripts.Controllers
         private void PauseGame()
             {
                 _isPaused = true;
-                pauseMenu.SetActive(_isPaused);
+                pauseMenu.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(resumeButton);
                 Time.timeScale = 0;
                 playerMap.Disable();
@@ -98,7 +98,7 @@ namespace Scripts.Controllers
             public void ResumeGame()
             {
                 _isPaused = false;
-                pauseMenu.SetActive(_isPaused);
+                pauseMenu.SetActive(false);
                 Time.timeScale = 1;
                 playerMap.Enable();
             }
