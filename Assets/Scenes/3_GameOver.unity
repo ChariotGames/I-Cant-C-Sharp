@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 3298398823706137872}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1222205901
@@ -437,6 +437,11 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &1258305013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4551348460938428206, guid: f3533ff5ca2071e4898c5b79cb016612, type: 3}
+  m_PrefabInstance: {fileID: 3298398823706137871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1309159928 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3298398824813962487, guid: f3533ff5ca2071e4898c5b79cb016612, type: 3}
@@ -1947,6 +1952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3533ff5ca2071e4898c5b79cb016612, type: 3}
+--- !u!1 &3298398823706137872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4564669689536771630, guid: f3533ff5ca2071e4898c5b79cb016612, type: 3}
+  m_PrefabInstance: {fileID: 3298398823706137871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6040387833688097546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,13 +2424,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1222205900}
     - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 3495797498916274731, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1258305013}
     - target: {fileID: 8457386994271353472, guid: 1749912e6be1bc74db956a68c099fd2d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
