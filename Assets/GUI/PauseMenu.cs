@@ -16,6 +16,7 @@ namespace Scripts.Controllers
 
         #region Serialized Fields
 
+        [SerializeField] private Settings settings;
         [SerializeField] private InputActionAsset playerInput;
         [SerializeField] private GameObject pauseMenu, resumeButton;
         [SerializeField] private InputActionReference button;
@@ -101,6 +102,14 @@ namespace Scripts.Controllers
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1;
                 playerMap.Enable();
+            }
+            
+            public void EndRun()
+            {
+                uiMap.Disable();
+                playerMap.Enable();
+                settings.Lives = 0;
+                Time.timeScale = 1;
             }
 
             public void GoToMenu()
