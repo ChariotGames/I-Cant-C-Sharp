@@ -56,19 +56,40 @@ namespace Scripts.Controllers
         }
 
         void Start()
-            {
-                _isPaused = false;
-            }
+        {
+            _isPaused = false;
+        }
+        private void OnEnable()
+        {
+            button.action.performed += PauseButtonPressed;
+        }
+
+        private void OnDisable()
+        {
+            button.action.performed -= PauseButtonPressed;
+        }
 
         #endregion Built-Ins / MonoBehaviours
 
 
         #region Game Mechanics / Methods
 
-            private void PauseGame()
+        private void PauseButtonPressed(InputAction.CallbackContext ctx)
+        {
+            if (_isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+
+        private void PauseGame()
             {
                 _isPaused = true;
-                pauseMenu.SetActive(true);
+                pauseMenu.SetActive(_isPaused);
                 EventSystem.current.SetSelectedGameObject(resumeButton);
                 Time.timeScale = 0;
                 playerMap.Disable();
@@ -77,7 +98,7 @@ namespace Scripts.Controllers
             public void ResumeGame()
             {
                 _isPaused = false;
-                pauseMenu.SetActive(false);
+                pauseMenu.SetActive(_isPaused);
                 Time.timeScale = 1;
                 playerMap.Enable();
             }
@@ -99,30 +120,5 @@ namespace Scripts.Controllers
             }
             
         #endregion Game Mechanics / Methods
-        
-        #region Overarching Methods / Helpers
-            private void OnEnable()
-            {
-                button.action.performed += PauseButtonPressed;
-            }
-
-            private void PauseButtonPressed(InputAction.CallbackContext ctx)
-            {
-                if (_isPaused)
-                {
-                    ResumeGame();
-                }
-                else
-                {
-                    PauseGame();
-                }
-            }
-            
-            private void OnDisable()
-            {
-                button.action.performed -= PauseButtonPressed;
-            }
-        
-        #endregion Overarching Methods / Helpers
     }
 }
