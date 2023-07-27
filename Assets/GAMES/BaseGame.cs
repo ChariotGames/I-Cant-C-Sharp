@@ -324,7 +324,9 @@ namespace Scripts.Games
         protected IEnumerator AnimateInstruction(GameObject container, float distance)
         {
             GameObject obj = Instantiate(container, transform.position, Quaternion.identity, transform);
+
             obj.SetActive(true);
+            TMP_Text tmp = obj.GetComponent<TMP_Text>();
 
             float offset = 0;
             while (offset < distance)
@@ -334,7 +336,17 @@ namespace Scripts.Games
                 offset += delta;
                 yield return new WaitForSeconds(Time.deltaTime);
             }
-            container.SetActive(false);
+
+            float countdown = 3.1f;
+            tmp.text = countdown.ToString();
+            yield return new WaitForSeconds(Time.deltaTime);
+            while (0 < countdown)
+            {
+                countdown -= Time.deltaTime;
+                tmp.text = ((int)countdown).ToString();
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            obj.SetActive(false);
         }
 
         #endregion  Methods
