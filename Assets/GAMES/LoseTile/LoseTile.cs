@@ -9,8 +9,9 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [SerializeField] [Range(3, 5)] private int gridSize = 3;
-        [SerializeField] [Range(1, 2)] private float space = 1.2f;
-        [SerializeField] private GameObject tile, player;
+        [SerializeField] [Range(1, 2)] private float space = 1.1f;
+        [SerializeField] private GameObject tile;
+        [SerializeField] private LoseTilePlayer player;
         [SerializeField] private Transform container;
 
         #endregion Serialized Fields
@@ -22,27 +23,20 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        void Start()
+        private void Awake()
         {
             successesToWin = 3;
             failsToLose = 1;
             ammountOfTiles = gridSize * gridSize;
-            ResetGame();
-
+            player.Stick = _keys.One.Input;
         }
 
-        private void Update()
+        void Start()
         {
-            //Debug.Log(remainingTiles.ToString());
+            ResetGame();
         }
 
         #endregion Built-Ins / MonoBehaviours
-
-        #region GetSets / Properties
-
-
-
-        #endregion GetSets / Properties
 
         #region Game Mechanics / Methods
 
@@ -122,6 +116,7 @@ namespace Scripts.Games
                 //GameObject obj = Instantiate(tile, container);
                 //obj.transform.SetParent(container, true);
             }
+
             int PlayerX = Random.Range(-gridHalf, +gridHalf);
             int PlayerY = Random.Range(-gridHalf, +gridHalf);
             player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);

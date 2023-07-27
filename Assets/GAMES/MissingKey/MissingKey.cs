@@ -11,6 +11,7 @@ namespace Scripts.Games
         [SerializeField] private List<GameObject> buttons, pattern;
         [SerializeField] private SpriteRenderer spriteWin;
         [SerializeField] private SpriteRenderer spriteLose;
+        [SerializeField] private AudioSource sound;
         private int count = 3;
 
         //private GameObject answer;
@@ -162,7 +163,7 @@ namespace Scripts.Games
             int x, y;
             x = pattern.Count / 2;
             y = pattern.Count - x;
-
+            base.RunTimer(ROUND_TIME);
             //for (int c = 0; c < count; c++)
             //{
 
@@ -224,7 +225,8 @@ namespace Scripts.Games
             //Debug.Log("Clicked!");
             _playerPressed = true;
             _time = 0;
-
+            sound.time = 0.7f;
+            sound.Play();
             DeleteAll();
         }
 
@@ -246,24 +248,22 @@ namespace Scripts.Games
         private void ScoreOneUp()
         {
             //so oft gewonnen, neues Spiel und difficulty hochsetzen (?)
-            if (winCounter >= successesToWin)
+            if (base._successes >= successesToWin)
             {
-                Debug.Log("You won the game!");
+              /**  Debug.Log("You won the game!");
                 winCounter = 0;
                 base.Harder();
-                Win();
+                Win();*/
+              base.Harder();
             }
-            base.ScoreUp();
+            //base.ScoreUp();
+            base.Success();
         }
 
         private void CheckWin()
         {
             if (_playerPressed)
             {
-
-                //To the person reading my code:
-                //do NOT get a heart stroke by how badly this method is refactored
-                //thanks <3
 
                 if (!Won())
                 {
@@ -273,15 +273,18 @@ namespace Scripts.Games
 
 
                     spriteLose.gameObject.SetActive(true);
-
-                    if (loseCounter >= failsToLose)
+                    Fail();
+                    
+                    if (base._fails <= 0)
                     {
                         Debug.Log("Lost a heart!");
                         loseCounter = 0;
                         base.Easier();
-                        Lose();
-                    }
+                        //Lose();
+                        
 
+                    }
+                    
                 }
                 else
                 {
@@ -289,7 +292,9 @@ namespace Scripts.Games
                     winCounter++;
                     Debug.Log("winCounter: " + winCounter);
                     ScoreOneUp();
+
                     spriteWin.gameObject.SetActive(true);
+                    //Success();
 
                 }
                 StartCoroutine(NextRound());
@@ -305,14 +310,16 @@ namespace Scripts.Games
 
                 DeleteAll();
                 spriteLose.gameObject.SetActive(true);
-
-                if (loseCounter >= failsToLose)
+                Fail();
+                
+                if (base._fails <= 0)
                 {
                     Debug.Log("Lost a heart!");
                     loseCounter = 0;
                     base.Easier();
-                    Lose();
+                    
                 }
+                
                 StartCoroutine(NextRound());
             }
         }

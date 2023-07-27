@@ -44,7 +44,7 @@ namespace Scripts.Controllers
             //Debug.Log("Game Index: " + gameIndex);
             int rownumber = gameIndex / ROWCOUNT;
             //Debug.Log("Row number: " + rownumber);
-            float scrollPosition = (float) rownumber / (float) (childCount/ROWCOUNT);
+            float scrollPosition = (float) rownumber / ((float)childCount/ROWCOUNT - 1);
             //Debug.Log("Scroll position: " + scrollPosition);
             scrollRect.verticalNormalizedPosition = 1 - scrollPosition;
         }

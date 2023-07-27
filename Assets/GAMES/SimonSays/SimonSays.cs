@@ -35,8 +35,8 @@ namespace Scripts.Games
         #region Fields
 
         private Dictionary<Colors, SimonElement> _buttonObjects;
-        private const float BLINK_TIME = 0.50f, TURN_TIME = 5.0f;
-        private const int MIN_LENGTH = 1, CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
+        private const float BLINK_TIME = 0.50f, TURN_TIME = 1.0f, MODIFIER = 1.5f;
+        private const int CHANCE = 3, LVL_CHANGE = 5, COLORS = 4;
         private float _animationTime;
         private int _checkingIndex = 0;
 
@@ -56,18 +56,16 @@ namespace Scripts.Games
             _buttonObjects.Add(Colors.RED, red);
             _buttonObjects.Add(Colors.YELLOW, yellow);
             _buttonObjects.Add(Colors.GREEN, green);
-
-            _timer = TURN_TIME;
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            _animationTime = BLINK_TIME * COLORS;
+            _animationTime = BLINK_TIME * COLORS / MODIFIER;
             infoOverlay.SetActive(true);
-            StartCoroutine(ActivateButtons(BLINK_TIME/2.0f));
-            GeneratePattern(MIN_LENGTH);
-            //StartCoroutine(AnimateButtons(_animationTime * 2f, _animationTime));
+            StartCoroutine(ActivateButtons(BLINK_TIME/ (MODIFIER *2)));
+            GeneratePattern(displayPattern.Count + 1);
+            StartCoroutine(AnimateButtons(_animationTime * MODIFIER, _animationTime));
 
             // Set keys
             blue.GetComponent<BasePressElement>().Button = _keys.One.Input;
@@ -128,8 +126,7 @@ namespace Scripts.Games
                 displayPattern.Add(randomColor);
                 SetGuessPattern(randomColor);
             }
-
-            StartCoroutine(AnimateButtons(_animationTime, _animationTime));
+            _timer = TURN_TIME + displayPattern.Count;
         }
 
         /// <summary>
@@ -140,7 +137,7 @@ namespace Scripts.Games
         /// <param name="color">Enum of the color to add to the pattern.</param>
         private void SetGuessPattern(Colors color)
         {
-            if (displayPattern.Count <= MIN_LENGTH)
+            if (displayPattern.Count <= (int)Difficulty)
             {
                 // Only do the extra difficulty after the 3rd round!
                 infoPattern.Add(Modifier.NORMAL);
@@ -233,11 +230,11 @@ namespace Scripts.Games
                 if (info == Modifier.NONE) nothing.Animate();
                 yield return new WaitForSeconds(duration);
             }
-            yield return new WaitForSeconds(duration);
+            //yield return new WaitForSeconds(duration);
 
-            RunTimer(_timer);
             PlayerTurn(true);
 
+            RunTimer(_timer);
             yield return new WaitForSeconds(_timer);
             WrongColor();
         }
@@ -316,6 +313,7 @@ namespace Scripts.Games
             ResetTurn();
             ClearInfoPattern();
             GeneratePattern(displayPattern.Count + 1);
+            StartCoroutine(AnimateButtons(_animationTime, _animationTime));
         }
 
         #endregion

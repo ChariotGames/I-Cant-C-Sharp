@@ -30,10 +30,10 @@ MonoBehaviour:
     three: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
     four: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
   actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: Correct Key
+    one: Blue
+    two: Red
+    three: Yellow
+    four: Green
+    other: 
   prefab: {fileID: 3923420840596175640, guid: d59161f1ad86e6b4f956afd22b4e1bbd, type: 3}
   preview: {fileID: 21300000, guid: c239536b97b5f984ea393ed79ce30df3, type: 3}

@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Scripts._Input;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Games
 {
@@ -11,31 +9,25 @@ namespace Scripts.Games
         #region Serialized Fields
         [SerializeField] LoseTile MainGame;
         [SerializeField] float speed = 5f;
-        [SerializeField][Range (3f, 3.6f)] float x = 3.3f;
-        [SerializeField][Range (3f, 3.6f)] float y = 3.3f;
-
-
-
+        [SerializeField][Range (2f, 4f)] float x = 2.5f;
+        [SerializeField][Range (2f, 4f)] float y = 2.5f;
+        [SerializeField] Rigidbody2D body;
 
         #endregion Serialized Fields
 
         #region Fields
 
-
+        private InputActionReference stick;
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
-        void Start()
-        {
-            
-        }
-
         void Update()
         {
-            
-            gameObject.transform.Translate(InputHandler.StickLeft * Time.deltaTime * speed);
+            Vector2 input = stick.action.ReadValue<Vector2>().normalized;
+
+            gameObject.transform.Translate(speed * Time.deltaTime * input);
 
             if (transform.localPosition.x >= x) transform.localPosition = new Vector2(x, transform.localPosition.y);
             if (transform.localPosition.x <= -x) transform.localPosition = new Vector2(-x, transform.localPosition.y);
@@ -46,26 +38,9 @@ namespace Scripts.Games
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
-        
-        
+
+        public InputActionReference Stick { get => stick; set => stick = value; }
 
         #endregion GetSets / Properties
-
-        #region Game Mechanics / Methods
-        
-        
-
-        public void TemplateMethod(bool param)
-        {
-            
-        }
-
-        #endregion Game Mechanics / Methods
-
-        #region Overarching Methods / Helpers
-        
-        
-
-        #endregion Overarching Methods / Helpers
     }
 }

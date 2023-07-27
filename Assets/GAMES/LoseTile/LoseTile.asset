@@ -21,12 +21,12 @@ MonoBehaviour:
     three: {fileID: 0}
     four: {fileID: 0}
   keysRight:
-    one: {fileID: 0}
+    one: {fileID: 11400000, guid: 16ed777c82665e244875991db5a0d31f, type: 2}
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
   actionNames:
-    one: 
+    one: Move
     two: 
     three: 
     four: 

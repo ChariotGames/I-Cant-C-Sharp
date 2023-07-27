@@ -31,7 +31,7 @@ namespace Scripts.Controllers
         private KeyMap _otherKeys;
         private Transform _parent;
         private const int MAX_QUE = 10;
-        private int _winCounter = MAX_QUE;
+        private int _winCounter = MAX_QUE/2;
 
         #endregion
 

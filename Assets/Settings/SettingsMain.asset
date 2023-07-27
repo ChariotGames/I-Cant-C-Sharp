@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c7d25ff481bef40a1752f5911b8c02, type: 3}
   m_Name: SettingsMain
   m_EditorClassIdentifier: 
-  lives: 0
+  lives: 3
   players: 1
   baseDifficulty: 4
   selectedGame: {fileID: 0}
@@ -46,6 +46,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1d595c02f0e06e4a8ca3bde89c522fc, type: 2}
   - {fileID: 11400000, guid: 3030e855a97e32742b19d2771bf6b6b1, type: 2}
   - {fileID: 11400000, guid: afdfb8b7ca5001d4da3500ffceb9ae3a, type: 2}
-  _time: 442.18646
-  _score: 17
-  _highscore: 17
+  _time: 0
+  _score: 0
+  _highscore: 2
