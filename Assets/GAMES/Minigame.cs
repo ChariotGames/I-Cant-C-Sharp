@@ -25,7 +25,7 @@ namespace Scripts.Models
         [Header("Play Related Stuff")]
         [SerializeField] private GameObject prefab;
         [SerializeField] private Sprite preview;
-        [SerializeField] private string instructionText;
+        [SerializeField] [TextArea(2, 2)] private string instructionText;
 
         #endregion Serialized Fields
 
