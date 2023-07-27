@@ -24,7 +24,8 @@ namespace Scripts.Games
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
-        public bool _isAnswerScreen;
+        
+        public bool isAnswerScreen;
         //private int _currentScore;
         //private int _scoreToWin = 5;
         
@@ -49,9 +50,9 @@ namespace Scripts.Games
         private void Update()
         {
             _elapsedTime += Time.deltaTime;
-            if (_isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
+            if (isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
             {
-                _isAnswerScreen = false;
+                isAnswerScreen = false;
                 CheckAnswer("");
                 
             }
@@ -171,7 +172,7 @@ namespace Scripts.Games
         {
             var randomCorrectPos = Random.Range(0, 2);
             var randomNumOffset = Random.Range(1, 21);
-            _isAnswerScreen = true;
+            isAnswerScreen = true;
             _timeoutStemp = _elapsedTime;
             base.RunTimer(_maxRoundTime);
             if (randomCorrectPos == 0)
@@ -220,7 +221,7 @@ namespace Scripts.Games
                 
             }
 
-            _isAnswerScreen = false;
+            isAnswerScreen = false;
             StartCoroutine(GenerateNewEquation());
         }
 
