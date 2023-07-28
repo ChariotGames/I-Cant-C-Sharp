@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 62577a27fc293462bb02160dd4041ba7, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -217,17 +217,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  actionNames:
-    one: Blue
-    two: Red
-    three: 
-    four: 
-    other: 
   successesToWin: 5
   failsToLose: 3
   ringColors:
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.6666667, b: 1, a: 0.9019608}
+  - {r: 0.8078432, g: 0.25882354, b: 0.24705884, a: 0.9019608}
   ringButtons:
   - {fileID: 0}
   - {fileID: 0}

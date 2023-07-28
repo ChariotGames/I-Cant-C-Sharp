@@ -9,9 +9,11 @@ namespace Scripts.Games
         #region Serialized Fields
 
         //[SerializeField] [Range(0, 10)] private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
-        [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private AudioSource sound;
         [SerializeField] private AudioClip[] clips;
+        [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
 
         #endregion Serialized Fields
 

@@ -4,9 +4,11 @@ namespace Scripts.Games
 {
     public class Exploooosions : BaseGame
     {
+        [Space]
+        [Header("Game Specific Stuff")]
+        public GameObject player;
         [SerializeField] private GameObject bombBase, bombDonut, bombCross, bombContainer;
 
-        public GameObject player;
 
         private bool active = false;
         private GameObject[] bombs;

@@ -53,6 +53,8 @@ MonoBehaviour:
   spawnLeft: {fileID: 411477512151206885}
   spawnRight: {fileID: 4249387610943860996}
   spawnCenter: {fileID: 8753078612844624505}
+  instructionPrefab: {fileID: 8214483718813569474, guid: 4f894f8d805ca7d40afbb7d36dd1ceac, type: 3}
+  instructionDistance: 2
 --- !u!1 &5897317456820109985
 GameObject:
   m_ObjectHideFlags: 0

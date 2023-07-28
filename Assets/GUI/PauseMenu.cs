@@ -16,6 +16,7 @@ namespace Scripts.Controllers
 
         #region Serialized Fields
 
+        [SerializeField] private Settings settings;
         [SerializeField] private InputActionAsset playerInput;
         [SerializeField] private GameObject pauseMenu, resumeButton;
         [SerializeField] private InputActionReference button;
@@ -56,16 +57,37 @@ namespace Scripts.Controllers
         }
 
         void Start()
-            {
-                _isPaused = false;
-            }
+        {
+            _isPaused = false;
+        }
+        private void OnEnable()
+        {
+            button.action.performed += PauseButtonPressed;
+        }
+
+        private void OnDisable()
+        {
+            button.action.performed -= PauseButtonPressed;
+        }
 
         #endregion Built-Ins / MonoBehaviours
 
 
         #region Game Mechanics / Methods
 
-            private void PauseGame()
+        private void PauseButtonPressed(InputAction.CallbackContext ctx)
+        {
+            if (_isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+
+        private void PauseGame()
             {
                 _isPaused = true;
                 pauseMenu.SetActive(true);
@@ -80,6 +102,14 @@ namespace Scripts.Controllers
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1;
                 playerMap.Enable();
+            }
+            
+            public void EndRun()
+            {
+                uiMap.Disable();
+                playerMap.Enable();
+                settings.Lives = 0;
+                Time.timeScale = 1;
             }
 
             public void GoToMenu()
@@ -99,30 +129,5 @@ namespace Scripts.Controllers
             }
             
         #endregion Game Mechanics / Methods
-        
-        #region Overarching Methods / Helpers
-            private void OnEnable()
-            {
-                button.action.performed += PauseButtonPressed;
-            }
-
-            private void PauseButtonPressed(InputAction.CallbackContext ctx)
-            {
-                if (_isPaused)
-                {
-                    ResumeGame();
-                }
-                else
-                {
-                    PauseGame();
-                }
-            }
-            
-            private void OnDisable()
-            {
-                button.action.performed -= PauseButtonPressed;
-            }
-        
-        #endregion Overarching Methods / Helpers
     }
 }

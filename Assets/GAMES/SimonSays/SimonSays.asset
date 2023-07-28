@@ -19,6 +19,11 @@ MonoBehaviour:
     3, a color is displayed but has to be skipped in guessing."
   difficulty: 1
   genre: 1
+  actionNames:
+    one: Blue
+    two: Red
+    three: Yellow
+    four: Green
   keysLeft:
     one: {fileID: 11400000, guid: abe13787bccab0e4082a39711884202c, type: 2}
     two: {fileID: 11400000, guid: a60d567538cee3349a022822f5a1883a, type: 2}
@@ -29,11 +34,8 @@ MonoBehaviour:
     two: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
     three: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
     four: {fileID: 11400000, guid: 533d7dd6b538b204bb2359b863bfb84b, type: 2}
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: Correct Key
   prefab: {fileID: 3923420840596175640, guid: d59161f1ad86e6b4f956afd22b4e1bbd, type: 3}
   preview: {fileID: 21300000, guid: c239536b97b5f984ea393ed79ce30df3, type: 3}
+  instructionText: 'Memorize
+
+    & Replay'

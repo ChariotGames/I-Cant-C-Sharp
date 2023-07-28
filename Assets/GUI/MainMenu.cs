@@ -20,13 +20,13 @@ namespace Scripts.Controllers
         [SerializeField] private CanvasScaler canvasScaler;
         [SerializeField] private GameObject gamesContainer, templateGameButton, characterContainer, templateCharacterButton;
         [SerializeField] private Settings defaultSettings, settings;
-        [SerializeField] private TMP_Text livesText, difficultyText;
+        [SerializeField] private TMP_Text livesText;
+        [SerializeField] private TMP_Dropdown difficulty;
 
         #endregion Serialized Fields
 
         #region Fields
 
-        private List<GameObject> gameButtons;
         private const float REFERENCE_WIDTH = 1920f;
 
         #endregion Fields
@@ -39,11 +39,8 @@ namespace Scripts.Controllers
 
             ResetSettings();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
-            gameButtons = new();
             livesText.text = settings.Lives.ToString();
-            difficultyText.text = settings.BaseDifficulty.ToString();
-            settings.Time = 0;
-            settings.Score = 0;
+            difficulty.value = (int)settings.BaseDifficulty;
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -96,7 +93,7 @@ namespace Scripts.Controllers
             EventSystem.current.SetSelectedGameObject(characterContainer.transform.GetChild(0).gameObject);
         }
 
-        public void Run()
+        public void RunEndless()
         {
             SceneManager.LoadScene((int)SceneNr.PlayField);
         }
@@ -128,7 +125,6 @@ namespace Scripts.Controllers
             settings.BaseDifficulty = defaultSettings.BaseDifficulty;
             settings.Time = defaultSettings.Time;
             settings.Score = defaultSettings.Score;
-            settings.Highscore = PlayerPrefs.GetInt("Highscore");
         }
 
         /// <summary>
@@ -138,6 +134,7 @@ namespace Scripts.Controllers
         public void SetLives(int change)
         {
             settings.Lives += change;
+            settings.MaxLives += change;
             livesText.text = settings.Lives.ToString();
         }
 
@@ -152,7 +149,28 @@ namespace Scripts.Controllers
             //difficultyText.text = settings.BaseDifficulty.ToString();
         }
 
-       
+
+
+        /// <summary>
+        /// Resets the difficulty of all games back to easy.
+        /// Just in case! But you lose all progress!
+        /// </summary>
+        private void ResetDifficulties()
+        {
+            foreach (Minigame game in settings.Games)
+            {
+                game.Difficulty = Difficulty.EASY;
+                game.Prefab.GetComponent<BaseGame>().Difficulty = Difficulty.EASY;
+            }
+
+            foreach (Minigame game in settings.SoloGames)
+            {
+                game.Difficulty = Difficulty.EASY;
+                game.Prefab.GetComponent<BaseGame>().Difficulty = Difficulty.EASY;
+            }
+        }
+
+        // Obsolete Codes, just in case.
 
         /// <summary>
         /// Sets the number of player.
@@ -179,25 +197,6 @@ namespace Scripts.Controllers
         public void ToggleSubMenu(GameObject menu)
         {
             menu.SetActive(!menu.activeInHierarchy);
-        }
-
-        /// <summary>
-        /// Resets the difficulty of all games back to easy.
-        /// Just in case! But you lose all progress!
-        /// </summary>
-        public void ResetDifficulties()
-        {
-            foreach (Minigame game in settings.Games)
-            {
-                game.Difficulty = Difficulty.EASY;
-                game.Prefab.GetComponent<BaseGame>().Difficulty = Difficulty.EASY;
-            }
-
-            foreach (Minigame game in settings.SoloGames)
-            {
-                game.Difficulty = Difficulty.EASY;
-                game.Prefab.GetComponent<BaseGame>().Difficulty = Difficulty.EASY;
-            }
         }
         #endregion Game Mechanics / Methods
     }

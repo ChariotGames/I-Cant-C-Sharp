@@ -13,6 +13,8 @@ namespace Scripts.Games
 {
     public class SameAsBefore : BaseGame
     {
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<GameObject> options;
         [SerializeField] private GameObject startText, gamestateWin, gamestateLose;
         [SerializeField] private TMP_Text stepBackText,  buttonYes, buttonNo;
@@ -74,14 +76,14 @@ namespace Scripts.Games
                 float delta = Time.deltaTime * 2;
                 startText.transform.Translate(0, delta, 0, Space.Self);
                 offset += delta;
-                yield return new WaitForSeconds(0.001f);
+                yield return new WaitForSeconds(Time.deltaTime);
             }
             startText.SetActive(false);
         }
 
         private IEnumerator GameStartCoroutine()
         {
-            yield return StartCoroutine(AnimationStartText(2.1f));
+            yield return StartCoroutine(AnimateInstruction());
             SpawnSymbol();
             _lastIndices.AddFirst(_index);
             if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }

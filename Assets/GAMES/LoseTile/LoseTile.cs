@@ -8,6 +8,8 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] [Range(3, 5)] private int gridSize = 3;
         [SerializeField] [Range(1, 2)] private float space = 1.1f;
         [SerializeField] private GameObject tile;

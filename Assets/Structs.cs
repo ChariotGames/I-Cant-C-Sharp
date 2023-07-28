@@ -9,13 +9,12 @@ namespace Scripts.Models
     [Serializable]
     public struct ActionNames
     {
-        [SerializeField] private string one, two, three, four, other;
+        [SerializeField] private string one, two, three, four;
         public string One { get => one; }
         public string Two { get => two; }
         public string Three { get => three; }
         public string Four { get => four; }
-        public string Other { get => other; }
-        public string[] All { get => new[] { one, two, three, four, other }; }
+        public string[] All { get => new[] { one, two, three, four }; }
     }
 
     /// <summary>

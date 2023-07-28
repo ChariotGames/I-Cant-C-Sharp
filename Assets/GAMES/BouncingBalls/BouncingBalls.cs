@@ -13,14 +13,16 @@ namespace Scripts.Games
     {
         #region Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<Rigidbody2D> bouncingBalls;
         [SerializeField] private TextMeshPro guessedNumber;
         [SerializeField] private GameObject balls;
         [SerializeField] private GameObject guessingOverlay;
         [SerializeField] private PhysicsMaterial2D groundMaterial;
         [SerializeField] private TextMeshPro infoText;
-        [SerializeField] private SpriteRenderer correctAnswer;
-        [SerializeField] private SpriteRenderer wrongAnswer;
+        //[SerializeField] private SpriteRenderer correctAnswer;
+        //[SerializeField] private SpriteRenderer wrongAnswer;
         [SerializeField] private TextMeshPro resultText;
 
         private AudioSource _audio;
@@ -70,7 +72,7 @@ namespace Scripts.Games
         private void Update()
         {
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >= 2 && infoText.gameObject.activeSelf)
+            if (_elapsedTime >= 3 && infoText.gameObject.activeSelf)
             {
                 infoText.gameObject.SetActive(false);
             }
@@ -137,7 +139,7 @@ namespace Scripts.Games
             {
                 IncreaseScore();
                 Debug.Log("Correct Answer");
-                correctAnswer.gameObject.SetActive(true);
+                //correctAnswer.gameObject.SetActive(true);
             }
             else
             {
@@ -155,7 +157,7 @@ namespace Scripts.Games
                 
                 guessingOverlay.gameObject.SetActive(false);
                 resultText.gameObject.SetActive(true);
-                wrongAnswer.gameObject.SetActive(true);
+                //wrongAnswer.gameObject.SetActive(true);
             }
 
             StartCoroutine(StartNewRound());
@@ -222,8 +224,8 @@ namespace Scripts.Games
                 yield return new WaitForSeconds(2f); // Adjust the duration as needed
 
                 resultText.gameObject.SetActive(false);
-                correctAnswer.gameObject.SetActive(false);
-                wrongAnswer.gameObject.SetActive(false);
+                //correctAnswer.gameObject.SetActive(false);
+                //wrongAnswer.gameObject.SetActive(false);
 
                 foreach (var ball in bouncingBalls)
                 {
@@ -234,7 +236,7 @@ namespace Scripts.Games
                 }
                 _elapsedTime = 0f;
                 balls.gameObject.SetActive(true);
-                infoText.gameObject.SetActive(true);
+                //infoText.gameObject.SetActive(true);
                 
 
                 StartCoroutine(ReleaseBallsAfterDelay());

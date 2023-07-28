@@ -1,3 +1,4 @@
+using System;
 using Scripts.Models;
 using Scripts.Pascal;
 using System.Collections;
@@ -15,10 +16,13 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private Cannon cannon;
         [SerializeField] private GameObject obstacle, obstacleContainer;
         //[SerializeField] private TextMeshPro lifeCounter;
         [SerializeField] private float cannonMovementSpeed;
+        [SerializeField] private TextMeshPro infoText;
         
 
         #endregion Serialized Fields
@@ -31,6 +35,7 @@ namespace Scripts.Games
         private float _spawnDelay;
         //private int _healthPoints = 3;
         private int _numObstacles;
+        private float _elapsedTime;
         //private int _currentScore;
 
         //private const int _scoreToWin = 15;
@@ -51,6 +56,7 @@ namespace Scripts.Games
 
         private void Start()
         {
+            infoText.gameObject.SetActive(true);
             // Calculate the camera's viewport bounds
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             
@@ -79,6 +85,15 @@ namespace Scripts.Games
             }
 
             StartCoroutine(SpawnCoroutine());
+        }
+
+        private void Update()
+        {
+            _elapsedTime += Time.deltaTime;
+            if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
+            {
+                infoText.gameObject.SetActive(false);
+            }
         }
 
         private void OnDisable()

@@ -19,18 +19,20 @@ namespace Scripts.Games
     public class RapidReflex : BaseGame
     {
     #region Serialized Fields
-        
-        [SerializeField] private GameObject lightTemplate, overlayContainer;
+
+        [Space]
+        [Header("Game Specific Stuff")]
+        [SerializeField] private TMP_Text gameState;
+        [SerializeField] private GameObject lightTemplate, overlayContainer, lightContainer;
         [SerializeField] private Transform lightsTop, lightsBottom;
         [SerializeField] private SpriteRenderer[] bulbsSpriteTop, bulbsSpriteBottom;
         [SerializeField] private SpriteRenderer backgroundSprite;
         [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen, backroundColor;
         [SerializeField] private List<Color> flashColor;
-        [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
         [SerializeField] private int successesToLevelUp;
 
-        #endregion Serialized Fields
+    #endregion Serialized Fields
 
     #region Fields
 
@@ -68,7 +70,8 @@ namespace Scripts.Games
 
         private IEnumerator GameCoroutine()
         {
-            yield return new WaitForSeconds(1);
+            yield return StartCoroutine(AnimateInstruction());
+            lightContainer.SetActive(true);
             while (true)
             {
                 UpdateRandomDelay();
