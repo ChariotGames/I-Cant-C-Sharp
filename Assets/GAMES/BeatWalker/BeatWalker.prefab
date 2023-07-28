@@ -456,7 +456,7 @@ GameObject:
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2351859287407049709
 Transform:
   m_ObjectHideFlags: 0
@@ -496,6 +496,7 @@ MonoBehaviour:
   buttonContainer: {fileID: 2351859286943156194}
   spriteWin: {fileID: 2351859287293921843}
   spriteLose: {fileID: 2351859286759309348}
+  settings: {fileID: 11400000, guid: 34ad02f776f05cf40ab940cf2fe883ea, type: 2}
 --- !u!1 &2351859288167036301
 GameObject:
   m_ObjectHideFlags: 0

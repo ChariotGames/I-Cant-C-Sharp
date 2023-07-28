@@ -9,7 +9,7 @@ public class WalkerButton : MonoBehaviour
 
     private void Awake()
     {
-        speed = 7f;//PlayerPrefs.GetFloat("speed"); //TODO wieder um?ndern!
+        speed = PlayerPrefs.GetFloat("speed"); 
     }
 
     // Start is called before the first frame update

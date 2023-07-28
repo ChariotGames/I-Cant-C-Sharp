@@ -141,15 +141,7 @@ namespace Scripts.Games
                 usedButtons.Add(buttons[randomIndex]);
             }
 
-            /**
-            for(int i=0; i<buttons.Count; i++)
-            {
-                if(!usedButtons.Contains(buttons[i]))
-                {
-                    answer = buttons[i];
-                }
-            }
-            */
+            
             for (int i = 0; i < count; i++)
             {
                 int randomIndex = Random.Range(0, usedButtons.Count);
@@ -159,37 +151,15 @@ namespace Scripts.Games
 
         private void DisplayPattern()
         {
-            //float canvasWidth = 1920;
+            
             int count = pattern.Count;
             int x, y;
-            x = pattern.Count / 2;
-            y = pattern.Count - x;
+            //x = pattern.Count / 2;
+            //y = pattern.Count - x;
             base.RunTimer(ROUND_TIME);
-            //for (int c = 0; c < count; c++)
-            //{
-
-            //    GameObject obj = Instantiate(pattern[c], buttonContainer.transform);
-
-            //    for (int i = -x; i <= x; i++)
-            //    {
-            //        for (int j = -y; j <= y; j++)
-            //        {
-            //            //float buttonPosX = pattern[i].transform.localScale.x - 1 + x * (i + 1) - _playfieldWidth / 2;
-
-
-            //            obj.transform.Translate(x * 1.5f, y * 1.5f, 0);
-            //        }
-            //    }
-            //}
-
-            //float step = _playfieldWidth / (count + 1); // Schrittlänge
+           
             for (int i = 0; i < count; i++)
             {
-
-                // float buttonPosX = pattern[i].transform.localScale.x - 1 + step * (i + 1) - _playfieldWidth / 2;
-
-                //Vector3 newPosition = ButtonContainer.transform.position + new Vector3(step * (count + 1) - playfieldWidth / 2, 0, 0);
-                //float offset = pattern[i].transform.localScale.x  + startPoint * i;
                 GameObject obj = Instantiate(pattern[i], new Vector3(0, 0, 0), Quaternion.identity, buttonContainer.transform);
                 obj.GetComponent<BasePressElement>().Button = pattern[i].GetComponent<BasePressElement>().Button;
                 obj.SetActive(true);
@@ -273,33 +243,20 @@ namespace Scripts.Games
 
                 if (!Won())
                 {
-                    winCounter = 0;
-                    loseCounter++;
-                    Debug.Log("loseCounter: " + loseCounter);
+                    //winCounter = 0;
+                    //loseCounter++;
+                    //Debug.Log("loseCounter: " + loseCounter);
 
 
-                    spriteLose.gameObject.SetActive(true);
-                    Fail();
-                    
-                    if (base._fails <= 0)
-                    {
-                        Debug.Log("Lost a heart!");
-                        loseCounter = 0;
-                        base.Easier();
-                        //Lose();
-                        
-
-                    }
+                    failed();
                     
                 }
                 else
                 {
 
-                    winCounter++;
-                    Debug.Log("winCounter: " + winCounter);
-                    ScoreOneUp();
-
-                    spriteWin.gameObject.SetActive(true);
+                    //winCounter++;
+                    //Debug.Log("winCounter: " + winCounter);
+                    won();
                     //Success();
 
                 }
@@ -310,23 +267,40 @@ namespace Scripts.Games
             {
                 timerEnded = false;
                 _time = 0;
-                winCounter = 0;
-                loseCounter++;
-                Debug.Log("loseCounter: " + loseCounter);
+                //winCounter = 0;
+                //loseCounter++;
+                //Debug.Log("loseCounter: " + loseCounter);
 
                 DeleteAll();
-                spriteLose.gameObject.SetActive(true);
-                Fail();
-                
-                if (base._fails <= 0)
-                {
-                    Debug.Log("Lost a heart!");
-                    loseCounter = 0;
-                    base.Easier();
-                    
-                }
+                failed();
                 
                 StartCoroutine(NextRound());
+            }
+
+            
+        }
+
+        private void won()
+        {
+            ScoreOneUp();
+
+            spriteWin.gameObject.SetActive(true);
+        }
+
+        private void failed()
+        {
+            spriteLose.gameObject.SetActive(true);
+            base._successes = 0;
+            Fail();
+
+            if (base._fails <= 0)
+            {
+                Debug.Log("Lost a heart!");
+                loseCounter = 0;
+                base.Easier();
+                //Lose();
+
+
             }
         }
     }

@@ -17,6 +17,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject buttonContainer;
         [SerializeField] private SpriteRenderer spriteWin;
         [SerializeField] private SpriteRenderer spriteLose;
+        [SerializeField] private Settings settings;
 
 
         #endregion Serialized Fields
@@ -32,6 +33,7 @@ namespace Scripts.Games
         private int instantiationCount = 0;
         private float _time = 0;
         private List<float> rhythmDelay = new();
+        private int repeatNumber; //number of times the rhythm is being repeated
         private float minRange;
         private float maxRange;
 
@@ -58,20 +60,23 @@ namespace Scripts.Games
                 {
                     case Difficulty.EASY:
                         PlayerPrefs.SetFloat("speed", 3f);
+                        repeatNumber = 2;
                         minRange = 0.5f;
                         maxRange = 2.0f;
                         //speed = 3f;
                         break;
                     case Difficulty.MEDIUM:
-                        PlayerPrefs.SetFloat("speed", 7f);
-                        minRange = 0.25f;
-                        maxRange = 1.5f;
+                        PlayerPrefs.SetFloat("speed", 10f);
+                        repeatNumber = 4;
+                        minRange = 0.1f;
+                        maxRange = 0.5f;
                         //speed = 10f;
                         break;
                     case Difficulty.HARD:
-                        PlayerPrefs.SetFloat("speed", 10f);
-                        minRange = 0.1f;
-                        maxRange = 1.0f;
+                        PlayerPrefs.SetFloat("speed", 15f);
+                    repeatNumber = 8;
+                        minRange = 0.0f;
+                        maxRange = 0.2f;
                         //speed = 15f;
                         break;
                     default:
@@ -178,7 +183,7 @@ namespace Scripts.Games
             {
                 base.Easier();
             }
-
+            base._successes = 0;
             Debug.Log("Lose");
             lost = true;
             Fail();
@@ -190,12 +195,13 @@ namespace Scripts.Games
         private void won()
         {
 
-            if(base._successes >= successesToWin)
+            if(base._successes >= 32) 
             {
                 base.Harder();
             }
             Debug.Log("Win");
             lost = false;
+            Success();
             var winSprite = Instantiate(spriteWin.gameObject, transform.parent);
             winSprite.SetActive(true);
             Destroy(winSprite, 0.5f);
@@ -216,13 +222,15 @@ namespace Scripts.Games
             int counter = 0;
             while (true)
             {
-                if (instantiationCount == 8)
+                if (instantiationCount == 4 * repeatNumber)
                 {
                     //yield return new WaitForSeconds(delayBetweenRhythm);
                     createRhythm();
                     instantiationCount = 0;
                 }
                 GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
+                newButton.GetComponent<SpriteRenderer>().sprite = settings.SelectedCharacter.Preview;
+                newButton.GetComponent<SpriteRenderer>().flipX = true;
                 //newButton.GetComponent<BasePressElement>().Button = button.GetComponent<BasePressElement>().Button;
                 newButton.SetActive(true);
 
