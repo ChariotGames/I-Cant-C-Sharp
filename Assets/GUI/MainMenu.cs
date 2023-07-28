@@ -149,7 +149,10 @@ namespace Scripts.Controllers
             //difficultyText.text = settings.BaseDifficulty.ToString();
         }
 
-
+        public void ClearHighscores()
+        {
+            PlayerPrefs.DeleteKey("HighscoreList");
+        }
 
         /// <summary>
         /// Resets the difficulty of all games back to easy.
