@@ -8,15 +8,13 @@ namespace Scripts.Models
     {
         #region Fields
 
-        [SerializeField] private int lives = 3, players = 1;
+        [SerializeField] private int lives = 3, maxLives = 3, players = 1;
         [SerializeField] private Difficulty baseDifficulty;
         [SerializeField] private Minigame selectedGame = null;
         [SerializeField] private Character selectedCharacter = null;
         [SerializeField] private List<Minigame> games, soloGames;
         [SerializeField] private List<Character> characters;
-
-        [SerializeField] private int _highscore, _score, _time;
-        
+        [SerializeField] private int  _score, _time;
 
         #endregion
 
@@ -30,6 +28,15 @@ namespace Scripts.Models
         {
             get => lives;
             set => lives = Mathf.Clamp(value, 0, 9);
+        }
+
+        /// <summary>
+        /// The set maximum of lives.
+        /// </summary>
+        public int MaxLives
+        {
+            get => maxLives;
+            set => maxLives = Mathf.Clamp(value, 0, 9);
         }
 
         /// <summary>
@@ -111,15 +118,6 @@ namespace Scripts.Models
         {
             get => _score;
             set => _score = value;
-        }
-
-        /// <summary>
-        /// The score of the game.
-        /// </summary>
-        public int Highscore
-        {
-            get => _highscore;
-            set => _highscore = value;
         }
 
         #endregion

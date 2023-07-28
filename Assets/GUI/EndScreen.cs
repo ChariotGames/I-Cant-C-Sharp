@@ -16,7 +16,7 @@ namespace Scripts.Controllers
 
         [SerializeField] private InputActionAsset playerInput;
         [SerializeField] private GameObject restartButton;
-        [SerializeField] private Settings defaultSettings, settings;
+        [SerializeField] private Settings settings;
 
         [SerializeField] private TMP_Text scoreText, timerText;
 
@@ -35,6 +35,7 @@ namespace Scripts.Controllers
         {
             scoreText.text = settings.Score.ToString("D3");
             timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
+            //HighscoreDisplay.AddScore();
 
             playerMap = playerInput.actionMaps[0];
             uiMap = playerInput.actionMaps[1];
@@ -53,7 +54,7 @@ namespace Scripts.Controllers
 
         public void Restart()
         {
-            settings.Lives = defaultSettings.Lives;
+            settings.Lives = settings.MaxLives;
             //string t = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene((int)SceneNr.PlayField);
         }

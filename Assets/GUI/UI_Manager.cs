@@ -84,11 +84,11 @@ namespace Scripts.Controllers
                 //PlayerPrefs.SetString("Score", _score.ToString("D3"));
                 settings.Score = _score;
 
-                if (_score > settings.Highscore)
-                {
-                    settings.Highscore = _score;
-                    PlayerPrefs.SetInt("Highscore", _score);
-                }
+                //if (_score > settings.Highscore)
+                //{
+                //    settings.Highscore = _score;
+                //    PlayerPrefs.SetInt("Highscore", _score);
+                //}
 
                 //TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 //PlayerPrefs.SetString("Time", timePlaying.ToString("mm':'ss"));

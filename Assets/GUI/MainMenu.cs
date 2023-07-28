@@ -125,7 +125,6 @@ namespace Scripts.Controllers
             settings.BaseDifficulty = defaultSettings.BaseDifficulty;
             settings.Time = defaultSettings.Time;
             settings.Score = defaultSettings.Score;
-            settings.Highscore = PlayerPrefs.GetInt("Highscore");
         }
 
         /// <summary>
@@ -135,6 +134,7 @@ namespace Scripts.Controllers
         public void SetLives(int change)
         {
             settings.Lives += change;
+            settings.MaxLives += change;
             livesText.text = settings.Lives.ToString();
         }
 
