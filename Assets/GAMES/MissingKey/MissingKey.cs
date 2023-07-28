@@ -17,13 +17,11 @@ namespace Scripts.Games
         //private GameObject answer;
         [SerializeField] private GameObject buttonContainer;
         private bool _playerPressed = false;
-        private float _playfieldWidth;
         private const float ROUND_TIME = 5.0f;
         private Bounds _cameraViewportBounds;
         private Camera _mainCamera;
         private float _time = 0;
         private bool timerEnded;
-        private int winCounter = 0;
         private int loseCounter = 0;
         private bool _isAnswerScreen;
 
@@ -60,8 +58,8 @@ namespace Scripts.Games
         {
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
 
-            _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
-            _playfieldWidth = _cameraViewportBounds.size.x / 2;
+           // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+            //_playfieldWidth = _cameraViewportBounds.size.x / 2;
             //Debug.Log(_cameraViewportBounds.max.x);
             GeneratePattern();
             DisplayPattern();
@@ -101,12 +99,6 @@ namespace Scripts.Games
             }
 
 
-            //loseDisplay.SetActive(true);
-            //DeleteAll();
-            //InputHandler.ArrowRight -= PlayerPress;
-            //InputHandler.ArrowLeft -= PlayerPress;
-            //InputHandler.ArrowUp -= PlayerPress;
-            //InputHandler.ArrowDown -= PlayerPress;
         }
 
         // Subscribes to playerPress()
@@ -116,10 +108,7 @@ namespace Scripts.Games
             _keys.Two.Input.action.performed += PlayerPress;
             _keys.Three.Input.action.performed += PlayerPress;
             _keys.Four.Input.action.performed += PlayerPress;
-            //InputHandler.ArrowRight += PlayerPress;
-            //InputHandler.ArrowLeft += PlayerPress;
-            //InputHandler.ArrowUp += PlayerPress;
-            //InputHandler.ArrowDown += PlayerPress;
+           
         }
 
         private void OnDisable()
@@ -223,16 +212,13 @@ namespace Scripts.Games
 
         private void ScoreOneUp()
         {
-            //so oft gewonnen, neues Spiel und difficulty hochsetzen (?)
+            
             if (base._successes >= successesToWin)
             {
-              /**  Debug.Log("You won the game!");
-                winCounter = 0;
-                base.Harder();
-                Win();*/
+             
               base.Harder();
             }
-            //base.ScoreUp();
+            
             base.Success();
         }
 
@@ -243,22 +229,11 @@ namespace Scripts.Games
 
                 if (!Won())
                 {
-                    //winCounter = 0;
-                    //loseCounter++;
-                    //Debug.Log("loseCounter: " + loseCounter);
-
-
                     failed();
-                    
                 }
                 else
                 {
-
-                    //winCounter++;
-                    //Debug.Log("winCounter: " + winCounter);
                     won();
-                    //Success();
-
                 }
                 StartCoroutine(NextRound());
                 _playerPressed = false;
@@ -267,10 +242,7 @@ namespace Scripts.Games
             {
                 timerEnded = false;
                 _time = 0;
-                //winCounter = 0;
-                //loseCounter++;
-                //Debug.Log("loseCounter: " + loseCounter);
-
+                
                 DeleteAll();
                 failed();
                 
@@ -298,9 +270,6 @@ namespace Scripts.Games
                 Debug.Log("Lost a heart!");
                 loseCounter = 0;
                 base.Easier();
-                //Lose();
-
-
             }
         }
     }

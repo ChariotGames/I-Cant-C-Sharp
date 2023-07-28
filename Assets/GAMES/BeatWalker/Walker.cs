@@ -36,12 +36,14 @@ namespace Scripts.Games
         private int repeatNumber; //number of times the rhythm is being repeated
         private float minRange;
         private float maxRange;
+        
+        
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
-        
+
 
         private void Awake()
         {
@@ -63,27 +65,27 @@ namespace Scripts.Games
                         repeatNumber = 2;
                         minRange = 0.5f;
                         maxRange = 2.0f;
-                        //speed = 3f;
+                        
                         break;
                     case Difficulty.MEDIUM:
                         PlayerPrefs.SetFloat("speed", 10f);
                         repeatNumber = 4;
                         minRange = 0.1f;
                         maxRange = 0.5f;
-                        //speed = 10f;
+                        
                         break;
                     case Difficulty.HARD:
                         PlayerPrefs.SetFloat("speed", 15f);
                     repeatNumber = 8;
                         minRange = 0.0f;
                         maxRange = 0.2f;
-                        //speed = 15f;
+                        
                         break;
                     default:
                         PlayerPrefs.SetFloat("speed", 3f);
                         minRange = 0.5f;
                         maxRange = 2.0f;
-                        //speed = 3f;
+                        
                         break;
                 }
           
@@ -187,7 +189,7 @@ namespace Scripts.Games
             Debug.Log("Lose");
             lost = true;
             Fail();
-            var loseSprite = Instantiate(spriteLose.gameObject, transform.parent);
+            var loseSprite = Instantiate(spriteLose.gameObject, GameObject.Find("ActivationRegion").transform.position, Quaternion.identity, transform.parent);// Instantiate(spriteLose.gameObject, newButton.transform.position, Quaternion.identity, transform.parent);
             loseSprite.SetActive(true);
             Destroy(loseSprite, 1);
         }
@@ -202,7 +204,7 @@ namespace Scripts.Games
             Debug.Log("Win");
             lost = false;
             Success();
-            var winSprite = Instantiate(spriteWin.gameObject, transform.parent);
+            var winSprite = Instantiate(spriteWin.gameObject, GameObject.Find("ActivationRegion").transform.position, Quaternion.identity, transform.parent);
             winSprite.SetActive(true);
             Destroy(winSprite, 0.5f);
         }
