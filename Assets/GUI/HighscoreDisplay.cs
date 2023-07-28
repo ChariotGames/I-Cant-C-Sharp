@@ -18,6 +18,11 @@ namespace Scripts.Controllers
             SaveScores();
         }
 
+        public void triggerAwake()
+        {
+            Awake();
+        }
+
         private void LoadScores()
         {
             string oneLine = PlayerPrefs.GetString(KEY_WORD);

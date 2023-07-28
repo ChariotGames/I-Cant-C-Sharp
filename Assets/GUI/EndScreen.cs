@@ -35,7 +35,7 @@ namespace Scripts.Controllers
         {
             scoreText.text = settings.Score.ToString("D3");
             timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
-            highscorePanel.SetActive(false);
+            highscorePanel.GetComponent<HighscoreDisplay>().triggerAwake();
             //HighscoreDisplay.AddScore();
 
             playerMap = playerInput.actionMaps[0];
