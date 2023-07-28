@@ -6,8 +6,7 @@ namespace Scripts.Controllers
 {
     public class HighscoreDisplay : MonoBehaviour
     {
-        [SerializeField] private Transform namesContainer, scoresContainer, timesContainer;
-        [SerializeField] private GameObject templateName, templateScore, templateTime;
+        [SerializeField] private HighscoreEntry[] entries;
         [SerializeField] private Settings settings;
 
         private const int COUNT = 5;
@@ -32,8 +31,7 @@ namespace Scripts.Controllers
         {
             for(int i = 0; i < COUNT; i++)
             {
-                Destroy(namesContainer.GetChild(i).gameObject);
-                Destroy(scoresContainer.GetChild(i).gameObject);
+                
             }
         }
 
@@ -43,10 +41,7 @@ namespace Scripts.Controllers
             {
 
             }
-            GameObject name = Instantiate(templateName, namesContainer);
-            name.GetComponent<TMP_Text>().text = settings.SelectedCharacter.Name;
-            GameObject score = Instantiate(templateScore, scoresContainer);
-            score.GetComponent<TMP_Text>().text = settings.Highscore.ToString("D3");
+            
         }
     }
 }

@@ -15,8 +15,7 @@ namespace Scripts.Models
         [SerializeField] private List<Minigame> games, soloGames;
         [SerializeField] private List<Character> characters;
 
-        [SerializeField] private float _time;
-        [SerializeField] private int _score, _highscore;
+        [SerializeField] private int _highscore, _score, _time;
         
 
         #endregion
@@ -99,7 +98,7 @@ namespace Scripts.Models
         /// <summary>
         /// The play time.
         /// </summary>
-        public float Time
+        public int Time
         {
             get => _time;
             set => _time = value;

@@ -92,7 +92,7 @@ namespace Scripts.Controllers
 
                 //TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 //PlayerPrefs.SetString("Time", timePlaying.ToString("mm':'ss"));
-                settings.Time = _time;
+                settings.Time = (int)_time;
                 SceneManager.LoadScene((int)SceneNr.GameOver);
             }
 
