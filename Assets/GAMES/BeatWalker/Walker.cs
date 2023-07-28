@@ -1,12 +1,14 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts._Input;
 using Scripts.Games;
+using Scripts.Models;
 using Random = UnityEngine.Random;
+using UnityEngine.InputSystem;
 
-namespace Scripts.GamesWIP
+namespace Scripts.Games
 {
     public class Walker : BaseGame
     {
@@ -29,11 +31,15 @@ namespace Scripts.GamesWIP
         private float delayBetweenRhythm = 0.5f;
         private int instantiationCount = 0;
         private float _time = 0;
-        private List<float> rhythmDelay = new(); 
+        private List<float> rhythmDelay = new();
+        private float minRange;
+        private float maxRange;
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
+
+        
 
         private void Awake()
         {
@@ -46,11 +52,42 @@ namespace Scripts.GamesWIP
 
             leftBound = regionPosX - regionSizeX / 2;
             rightBound = regionPosX + regionSizeX / 2;
+            //button.GetComponent<BasePressElement>().Button = _keys.One.Input;
+            
+            switch(Difficulty)
+                {
+                    case Difficulty.EASY:
+                        PlayerPrefs.SetFloat("speed", 3f);
+                        minRange = 0.5f;
+                        maxRange = 2.0f;
+                        //speed = 3f;
+                        break;
+                    case Difficulty.MEDIUM:
+                        PlayerPrefs.SetFloat("speed", 7f);
+                        minRange = 0.25f;
+                        maxRange = 1.5f;
+                        //speed = 10f;
+                        break;
+                    case Difficulty.HARD:
+                        PlayerPrefs.SetFloat("speed", 10f);
+                        minRange = 0.1f;
+                        maxRange = 1.0f;
+                        //speed = 15f;
+                        break;
+                    default:
+                        PlayerPrefs.SetFloat("speed", 3f);
+                        minRange = 0.5f;
+                        maxRange = 2.0f;
+                        //speed = 3f;
+                        break;
+                }
+          
         }
 
         private void OnEnable()
         {
-            InputHandler.ArrowDown += ButtonPress;
+            //InputHandler.ArrowDown += ButtonPress;
+            _keys.One.Input.action.performed += ButtonPress;
         }
 
         void Start()
@@ -89,11 +126,7 @@ namespace Scripts.GamesWIP
 
         #region Game Mechanics / Methods
 
-        private void ButtonPress()
-        {
-            buttonPressed = true;
-            Debug.Log("clicked!");
-        }
+        
 
         private void instantiateButton()
         {
@@ -102,6 +135,7 @@ namespace Scripts.GamesWIP
 
         }
 
+        
         private void CheckWin()
         {
 
@@ -111,46 +145,62 @@ namespace Scripts.GamesWIP
 
                 if (buttonPosX < leftBound)
                 {
-                    Debug.Log("Lose");
-                    lost = true;
-                    //buttons.RemoveAt(i);
-                    //DestroyAll();
+                    
                     removeClickedButton(i);
-                    var loseSprite = Instantiate(spriteLose.gameObject, transform.parent);
-                    loseSprite.SetActive(true);
-                    Destroy(loseSprite, 1);
+                    failed();
 
-                    //StopGame();
                 }
                 else if (buttonPosX > rightBound && buttonPressed)
                 {
-                    Debug.Log("Lose");
-                    lost = true;
-                    //Destroy(buttons[i].gameObject);
-                    //buttons.RemoveAt(i);
-                    //DestroyAll();
                     removeClickedButton(i);
-                    var loseSprite = Instantiate(spriteLose.gameObject, transform.parent);
-                    loseSprite.SetActive(true);
-                    Destroy(loseSprite, 0.5f);
+                    failed();
                     
-                    
-                    //StopGame();
-
                 }
                 else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
                 {
-                    Debug.Log("Win");
-                    lost = false;
-
                     removeClickedButton(i);
-
-                    var winSprite = Instantiate(spriteWin.gameObject, transform.parent);
-                    winSprite.SetActive(true);
-                    Destroy(winSprite, 0.5f);
+                    won();
+                    
                 }
             }
         }
+
+        private void ButtonPress(InputAction.CallbackContext ctx)
+        {
+            buttonPressed = true;
+            Debug.Log("clicked!");
+        }
+
+        private void failed()
+        {
+
+            if(base._fails <= 0)
+            {
+                base.Easier();
+            }
+
+            Debug.Log("Lose");
+            lost = true;
+            Fail();
+            var loseSprite = Instantiate(spriteLose.gameObject, transform.parent);
+            loseSprite.SetActive(true);
+            Destroy(loseSprite, 1);
+        }
+
+        private void won()
+        {
+
+            if(base._successes >= successesToWin)
+            {
+                base.Harder();
+            }
+            Debug.Log("Win");
+            lost = false;
+            var winSprite = Instantiate(spriteWin.gameObject, transform.parent);
+            winSprite.SetActive(true);
+            Destroy(winSprite, 0.5f);
+        }
+
 
         void removeClickedButton(int i)
         {
@@ -159,20 +209,7 @@ namespace Scripts.GamesWIP
             buttonPressed = false;
         }
 
-        void StopGame()
-        {
-            Time.timeScale = 0;
-        }
-
-        private void DestroyAll()
-        {
-            for (int i = 0; i < buttons.Count; i++)
-            {
-                Destroy(buttons[i].gameObject);
-                buttons.RemoveAt(i);
-            }
-        }
-
+        
         private IEnumerator InstantiateButtonsWithDelay()
         {
             createRhythm();
@@ -186,6 +223,9 @@ namespace Scripts.GamesWIP
                     instantiationCount = 0;
                 }
                 GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
+                //newButton.GetComponent<BasePressElement>().Button = button.GetComponent<BasePressElement>().Button;
+                newButton.SetActive(true);
+
 
                 buttons.Add(newButton);
                 instantiationCount++;
@@ -202,7 +242,7 @@ namespace Scripts.GamesWIP
             rhythmDelay.Clear();
             for (int i = 0; i < 4; i++)
             {
-                rhythmDelay.Add(Random.Range(0.5f, 2.0f));
+                rhythmDelay.Add(Random.Range(0.25f, 1.5f));
             }
         }
 
@@ -210,6 +250,19 @@ namespace Scripts.GamesWIP
 
         #region Overarching Methods / Helpers
 
+        void StopGame()
+        {
+            Time.timeScale = 0;
+        }
+
+        private void DestroyAll()
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                Destroy(buttons[i].gameObject);
+                buttons.RemoveAt(i);
+            }
+        }
 
 
         #endregion Overarching Methods / Helpers

@@ -33,6 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 446f458191f1ac34e95c486bd6f10a23, type: 2}
   - {fileID: 11400000, guid: f2ce0483e2a25e74bad44748d727df58, type: 2}
   - {fileID: 11400000, guid: 62f7db64b1df7924a823e7848427b3f8, type: 2}
+  - {fileID: 11400000, guid: 478115dca80f147aebfef8387ea811e0, type: 2}
   soloGames:
   - {fileID: 11400000, guid: e0d657ac69fa6a64a93954f7e8f6cb06, type: 2}
   - {fileID: 11400000, guid: ab65f45f24b010741ae49bb8d1f237b0, type: 2}
