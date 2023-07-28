@@ -10,7 +10,7 @@ public class AnimationPack : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
     [SerializeField] ParticleSystem particles;
-    [SerializeField] Animator animator;
+    [SerializeField] public Animator animator;
     [SerializeField] Image emojiFace;
     
     /// <summary>
