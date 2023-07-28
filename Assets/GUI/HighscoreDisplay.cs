@@ -1,5 +1,4 @@
 using Scripts.Models;
-using System;
 using UnityEngine;
 
 namespace Scripts.Controllers
@@ -11,20 +10,11 @@ namespace Scripts.Controllers
 
         private const string VALUE_SPLIT = "_", ENTRY_SPLIT = ";", KEY_WORD = "HighscoreList";
 
-        private void Awake()
-        {
-            LoadScores();
-        }
+        private void Awake() => LoadScores();
 
-        private void OnEnable()
-        {
-            UpdateScores();
-        }
+        private void OnEnable() => UpdateScores();
 
-        private void OnDisable()
-        {
-            SaveScores();
-        }
+        private void OnDisable() => SaveScores();
 
         private void LoadScores()
         {
@@ -37,7 +27,7 @@ namespace Scripts.Controllers
             for (int i = 0; i < entries.Length; i++)
             {
                 string[] stats = allScores[i].Split(VALUE_SPLIT);
-                Debug.Log(allScores[i]);
+
                 entries[i].Icon = settings.Characters[int.Parse(stats[0])].Icon;
                 entries[i].Name = stats[1];
                 entries[i].Score = stats[2];
@@ -45,7 +35,7 @@ namespace Scripts.Controllers
             }
         }
 
-        public void UpdateScores()
+        private void UpdateScores()
         {
             if (settings.Score < int.Parse(entries[^1].Score)) return;
             HighscoreEntry incoming = new(settings.SelectedCharacter.Icon, settings.SelectedCharacter.Name, settings.Score, settings.Time);
@@ -73,7 +63,7 @@ namespace Scripts.Controllers
                 result += ENTRY_SPLIT;
             }
             result = result[0..^1];
-            Debug.Log("Saved: " + result);
+
             PlayerPrefs.SetString(KEY_WORD, result);
             PlayerPrefs.Save();
         }
@@ -81,9 +71,8 @@ namespace Scripts.Controllers
         private string FindCharIndex(Sprite icon)
         {
             for (int i = 0; i < settings.Characters.Count; i++)
-            {
                 if (settings.Characters[i].Icon.Equals(icon)) return i.ToString();
-            }
+
             return null;
         }
     }
