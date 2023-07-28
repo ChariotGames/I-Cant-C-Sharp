@@ -25,10 +25,10 @@ namespace Scripts.Games
         #region Fields
 
         private GameObject button;
-        private Camera _mainCamera;
+        //private Camera _mainCamera;
         
-        private Bounds _cameraViewportBounds;
-        private float _speed = 5f, _width, _instantiationDelay; //= .5f;
+        //private Bounds _cameraViewportBounds;
+        private float _speed = 5f, _instantiationDelay; //= .5f;
         private bool _lose;
         private List<GameObject> _instantiatedButtons = new();
 
@@ -38,9 +38,9 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            _mainCamera = Camera.main;
-            _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
-            _width = _cameraViewportBounds.size.x;
+            //_mainCamera = Camera.main;
+            //_cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+            //_width = _cameraViewportBounds.size.x;
             _lose = false;
         }
 
@@ -79,7 +79,7 @@ namespace Scripts.Games
                 GameObject b = _instantiatedButtons[i];
                 b.transform.Translate(_speed * Time.deltaTime * Vector3.left);
 
-                if (b.transform.position.x < -_width / 2)
+                if (b.transform.position.x < - base._playarea.width / 2)
                 {
                     Destroy(b);
                     _instantiatedButtons.RemoveAt(i);
@@ -104,7 +104,7 @@ namespace Scripts.Games
 
         private IEnumerator InstantiateButtonsWithDelay()
         {
-            Vector3 spawnPos = new(transform.position.x + _width / 2, transform.position.y, 0f);
+            Vector3 spawnPos = new(transform.position.x + base._playarea.width / 2, transform.position.y, 0f);
             while (_lose == false)
             {
                 button = Instantiate(buttonPrefab, spawnPos, Quaternion.identity);
