@@ -35,8 +35,10 @@ namespace Scripts.Games
 
         #region Serialized Fields
 
-        [SerializeField] private GameObject trafficLightPrefab,selector_ref,simonNot_ref, simonOk_ref, text_ref;
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<GameObject> trafficLights;
+        [SerializeField] private GameObject trafficLightPrefab,selector_ref,simonNot_ref, simonOk_ref, text_ref;
         [SerializeField] private int delaySecondWave = 5;
         [SerializeField] private int timeToSelectLight = 5;
         [SerializeField] private int successToWin = 5;

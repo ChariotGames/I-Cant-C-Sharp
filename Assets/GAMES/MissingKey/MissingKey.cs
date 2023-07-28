@@ -8,14 +8,16 @@ namespace Scripts.Games
 {
     public class MissingKey : BaseGame
     {
+        [Space]
+        [Header("Game Specific Stuff")]
+        [SerializeField] private GameObject buttonContainer;
         [SerializeField] private List<GameObject> buttons, pattern;
         [SerializeField] private SpriteRenderer spriteWin;
         [SerializeField] private SpriteRenderer spriteLose;
         [SerializeField] private AudioSource sound;
-        private int count = 3;
 
         //private GameObject answer;
-        [SerializeField] private GameObject buttonContainer;
+        private int count = 3;
         private bool _playerPressed = false;
         private const float ROUND_TIME = 5.0f;
         private Bounds _cameraViewportBounds;

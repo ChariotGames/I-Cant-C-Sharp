@@ -12,6 +12,8 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<ButtonHeroElement> buttons;
         [SerializeField] private float spawnTimeUpperBounds;
         [SerializeField] private float spawnTimeLowerBounds;

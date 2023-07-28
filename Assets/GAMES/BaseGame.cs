@@ -1,6 +1,7 @@
 using Scripts.Models;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -14,6 +15,7 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
+        [Header("Game Values")]
         [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
         [SerializeField] protected int successesToWin = 5;
         [SerializeField] protected int failsToLose = 3;
@@ -21,7 +23,7 @@ namespace Scripts.Games
         #endregion Serialized Fields
 
         #region Fields
-        
+
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
@@ -37,6 +39,8 @@ namespace Scripts.Games
         protected float _timer;
 
         private Transform _parent;
+        private GameObject _instructionPrefab;
+        private float _instructionSpeed;
 
         #endregion Fields
 
@@ -55,6 +59,19 @@ namespace Scripts.Games
             _playarea = area;
             _parent = transform.parent;
             _fails = failsToLose;
+        }
+
+        /// <summary>
+        /// Called to setup the Instruction text object.
+        /// </summary>
+        /// <param name="prefab">The Prefab itself.</param>
+        /// <param name="message">The Message from the Minigame.</param>
+        /// <param name="duration">How far up the object should move.</param>
+        public void SetInstructions(GameObject prefab, string message, float duration)
+        {
+            _instructionPrefab = prefab;
+            _instructionPrefab.GetComponent<TMP_Text>().text = message;
+            _instructionSpeed = duration;
         }
 
         /// <summary>
@@ -264,9 +281,71 @@ namespace Scripts.Games
             OnTimerUpdate?.Invoke(transform.parent.name, time);
         }
 
+        /// <summary>
+        /// Stops the currently displayed timer.
+        /// </summary>
         protected void StopTimer()
         {
             OnTimerStop?.Invoke(transform.parent.name);
+        }
+
+        /// <summary>
+        /// Animates the inital game instruction.
+        /// </summary>
+        protected IEnumerator AnimateInstruction()
+        {
+            yield return StartCoroutine(AnimateInstruction(_instructionPrefab, _instructionSpeed));
+        }
+
+        /// <summary>
+        /// Animates the inital game instruction in a GameObject.
+        /// </summary>
+        /// <param name="container">The TMP_Text to animate.</param>
+        protected IEnumerator AnimateInstruction(GameObject container)
+        {
+            yield return StartCoroutine(AnimateInstruction(container, _instructionSpeed));
+        }
+
+        /// <summary>
+        /// Animates the inital game instruction in a GameObject.
+        /// </summary>
+        /// <param name="distance">How far to move.</param>
+        protected IEnumerator AnimateInstruction(float distance)
+        {
+            yield return StartCoroutine(AnimateInstruction(_instructionPrefab, distance));
+        }
+
+        /// <summary>
+        /// Does the actual animation.
+        /// </summary>
+        /// <param name="container">The GameObject holding the TMP_Text.</param>
+        /// <param name="distance">How far to move.</param>
+        /// <returns></returns>
+        protected IEnumerator AnimateInstruction(GameObject container, float distance)
+        {
+            GameObject obj = Instantiate(container, transform.position, Quaternion.identity, transform);
+            obj.SetActive(true);
+            TMP_Text tmp = obj.GetComponent<TMP_Text>();
+
+            float offset = 0;
+            while (offset < distance)
+            {
+                float delta = Time.deltaTime * _instructionSpeed;
+                obj.transform.Translate(0, delta, 0, Space.Self);
+                offset += delta;
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+
+            float countdown = 3.0f;
+            tmp.text = countdown.ToString();
+            yield return new WaitForSeconds(Time.deltaTime);
+            while (0 < countdown)
+            {
+                countdown -= Time.deltaTime;
+                tmp.text = ((int)countdown+1).ToString();
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            obj.SetActive(false);
         }
 
         #endregion  Methods

@@ -1,9 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using Scripts._Input;
 using Scripts.Models;
 using TMPro;
 using UnityEngine;
@@ -15,8 +10,10 @@ namespace Scripts.Games
     public class RomanNumbers : BaseGame
     {
         #region Serialized Fields
-
-            [SerializeField] private TMP_Text task, buttonYes, buttonNo;
+            [Space]
+            [Header("Game Specific Stuff")]
+            [SerializeField] private TMP_Text task;
+            [SerializeField] private TMP_Text buttonYes, buttonNo;
             [SerializeField] private GameObject gamestateWin, gamestateLose;
             [SerializeField] private int timeout, successesToLevelUp;
 
@@ -55,7 +52,7 @@ namespace Scripts.Games
         
             private IEnumerator GameCoroutine()
             {
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(AnimateInstruction());
                 while (true)
                 {
                     GenerateRandomNumber();

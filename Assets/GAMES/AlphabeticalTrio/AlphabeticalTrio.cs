@@ -9,12 +9,14 @@ namespace Scripts.Games
     public class AlphabeticalTrio : BaseGame
     {
         #region Serialized Fields
-
-            [SerializeField] private TMP_Text letters, buttonYes, buttonNo;
+            [Space]
+            [Header("Game Specific Stuff")]
+            [SerializeField] private TMP_Text letters;
+            [SerializeField] private TMP_Text buttonYes, buttonNo;
             [SerializeField] private GameObject letterContainer, gamestateWin, gamestateLose;
             [SerializeField] private int timeout, successesToLevelUp;
 
-            #endregion Serialized Fields
+        #endregion Serialized Fields
 
         #region Fields
 
@@ -48,7 +50,7 @@ namespace Scripts.Games
         
             private IEnumerator GameCoroutine()
             {
-                yield return new WaitForSeconds(1);
+                yield return StartCoroutine(AnimateInstruction());
                 while (true)
                 {
                     bool isTrio = Random.Range(0f, 1f) > 0.48f;

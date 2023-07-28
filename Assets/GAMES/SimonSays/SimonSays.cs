@@ -1,7 +1,6 @@
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -22,10 +21,11 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] private List<Colors> displayPattern, guessPattern;
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<Modifier> infoPattern;
-        [SerializeField] private List<TMP_Text> inputTexts;
-        [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay, middle;
+        [SerializeField] private List<Colors> displayPattern, guessPattern;
+        [SerializeField] private GameObject buttonsContainer, infoOverlay, middle;
         [SerializeField] private SimonElement blue, red, yellow, green;
         [SerializeField] private SimonElement twice, nothing, ok;
         //[SerializeField] private Image timer;
@@ -59,10 +59,12 @@ namespace Scripts.Games
         }
 
         // Start is called before the first frame update
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+
             _animationTime = BLINK_TIME * COLORS / MODIFIER;
-            infoOverlay.SetActive(true);
+            //infoOverlay.SetActive(true);
             StartCoroutine(ActivateButtons(BLINK_TIME/ (MODIFIER *2)));
             GeneratePattern(displayPattern.Count + 1);
             StartCoroutine(AnimateButtons(_animationTime * MODIFIER, _animationTime));
@@ -72,12 +74,6 @@ namespace Scripts.Games
             red.GetComponent<BasePressElement>().Button = _keys.Two.Input;
             yellow.GetComponent<BasePressElement>().Button = _keys.Three.Input;
             green.GetComponent<BasePressElement>().Button = _keys.Four.Input;
-
-            // Set Icons
-            inputTexts[0].text = _keys.One.Icon;
-            inputTexts[1].text = _keys.Two.Icon;
-            inputTexts[2].text = _keys.Three.Icon;
-            inputTexts[3].text = _keys.Four.Icon;
         }
 
         #endregion
@@ -183,8 +179,6 @@ namespace Scripts.Games
         {
             foreach (SimonElement button in _buttonObjects.Values)
                 button.ToggleInput(isPlayersTurn);
-
-            inputOverlay.SetActive(isPlayersTurn);
         }
 
         #endregion

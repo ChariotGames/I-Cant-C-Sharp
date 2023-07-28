@@ -7,7 +7,10 @@ namespace Scripts.Games
 {
     public class Evade : BaseGame
     {
-        [SerializeField] private GameObject indLeft, indMid, indRight, laneLeft, laneMid, laneRight, player, obstacle;
+        [Space]
+        [Header("Game Specific Stuff")]
+        [SerializeField] private GameObject player;
+        [SerializeField] private GameObject indLeft, indMid, indRight, laneLeft, laneMid, laneRight, obstacle;
 
         private bool active = false;
         private GameObject[] Indicators;
