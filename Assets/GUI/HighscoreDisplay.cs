@@ -11,11 +11,12 @@ namespace Scripts.Controllers
 
         private const string VALUE_SPLIT = "_", ENTRY_SPLIT = ";", KEY_WORD = "HighscoreList";
 
-        private void Awake() => LoadScores();
-
-        private void OnEnable() => UpdateScores();
-
-        private void OnDisable() => SaveScores();
+        private void Awake()
+        {
+            LoadScores();
+            UpdateScores();
+            SaveScores();
+        }
 
         private void LoadScores()
         {

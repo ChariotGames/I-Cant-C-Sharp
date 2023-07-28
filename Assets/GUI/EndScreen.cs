@@ -15,7 +15,7 @@ namespace Scripts.Controllers
         #region Serialized Fields
 
         [SerializeField] private InputActionAsset playerInput;
-        [SerializeField] private GameObject restartButton;
+        [SerializeField] private GameObject restartButton, highscorePanel;
         [SerializeField] private Settings settings;
 
         [SerializeField] private TMP_Text scoreText, timerText;
@@ -35,6 +35,7 @@ namespace Scripts.Controllers
         {
             scoreText.text = settings.Score.ToString("D3");
             timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
+            highscorePanel.SetActive(false);
             //HighscoreDisplay.AddScore();
 
             playerMap = playerInput.actionMaps[0];
