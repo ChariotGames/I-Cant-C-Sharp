@@ -1928,6 +1928,7 @@ MonoBehaviour:
   - {fileID: 268403507}
   - {fileID: 502769409}
   - {fileID: 1618934930}
+  heartColor: {r: 0.7372549, g: 0.09019608, b: 0, a: 0.9019608}
   characterImage: {fileID: 458715613}
   fullHeart: {fileID: 21300000, guid: 8f6e4f05885e9464684cb5fc77b4abdd, type: 3}
   emptyHeart: {fileID: 21300000, guid: 04c9cdbfa7dc94564b5522bee24ef3e6, type: 3}
@@ -2490,7 +2491,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 5
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1

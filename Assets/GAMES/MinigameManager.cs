@@ -26,6 +26,7 @@ namespace Scripts.Controllers
 
         public static event Action<string, KeyMap, ActionNames> OnSetKeys;
         public static event Action<string> OnClearKeys;
+        public static event Action OnLoseLife;
 
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
@@ -270,6 +271,7 @@ namespace Scripts.Controllers
         public void LoseCondition(GameObject game)
         {
             settings.Lives--;
+            OnLoseLife?.Invoke();
             //_winCounter--;
             RemoveGame(game);
         }
