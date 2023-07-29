@@ -109,20 +109,24 @@ namespace Scripts.Games
             }
             else
             {
+                if (_successes == successesToWin - 1)
+                {
+                    base.Harder();
+                }
                 //_successes++;
                 //base.AnimateSuccess(player.transform, 1, 5);
                 //base.ScoreUp();
                 base.Success();
             }
 
-            if (_successes == successesToWin)
+            /*if (_successes == successesToWin)
             {
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
                 //_successes = 0;
                 //active = false;
                 base.Harder();
                 //base.Win();
-            }
+            }*/
         }
 
         private void GenerateRandoms()

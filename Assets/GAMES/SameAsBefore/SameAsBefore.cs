@@ -100,7 +100,7 @@ namespace Scripts.Games
                 if (options[0].activeSelf || options[1].activeSelf)
                 {
                     //Debug.Log(lastIndices.Count);
-                    Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tthink back: " + (_steps + 1));
+                    //Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tthink back: " + (_steps + 1));
 
                     float timer = Time.time;
                     RunTimer(timeout);
@@ -108,6 +108,7 @@ namespace Scripts.Games
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         gamestateWin.SetActive(true);
+                        difficultyTracker--;
                         //GameWon();
                         if (difficultyTracker <= 0)
                         {
@@ -121,6 +122,7 @@ namespace Scripts.Games
                         gamestateLose.SetActive(true);
                         //GameLost();
                         difficultyTracker++;
+                        if(_fails <= 1) Easier();
                         Fail();
                     }
                     yield return new WaitForSeconds(1);

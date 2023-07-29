@@ -215,7 +215,7 @@ namespace Scripts.Games
         private void ScoreOneUp()
         {
             
-            if (base._successes >= successesToWin)
+            if (base._successes >= successesToWin - 1)
             {
              
               base.Harder();
@@ -265,14 +265,13 @@ namespace Scripts.Games
         {
             spriteLose.gameObject.SetActive(true);
             base._successes = 0;
-            Fail();
-
-            if (base._fails <= 0)
+            if (base._fails <= 1)
             {
                 Debug.Log("Lost a heart!");
                 loseCounter = 0;
                 base.Easier();
             }
+            Fail();
         }
     }
 }

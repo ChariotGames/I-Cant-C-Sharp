@@ -109,29 +109,29 @@ namespace Scripts.Games
                 //_correctGuesses++;
                 //base.AnimateSuccess(circle.transform, 1, 5);
                 //base.ScoreUp();
-                base.Success();
-
-                if (_successes == successesToWin)
+                
+                if (_successes >= successesToWin - 1)
                 {
                     //_correctGuesses = 0;
                     base.Harder();
                     //base.Win();
                 }
+                base.Success();
             }
             else
             {
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.red, 0.25f));
                 //_fails++;
                 //base.AnimateFail(circle.transform, 1, 3);
-                base.Fail();
 
-                if (_fails == 0)
+                if (_fails <= 1)
                 {
                     //stop = true;
                     //_fails = 0;
                     base.Easier();
                     //base.Lose();
                 }
+                base.Fail();
             }
         }
 

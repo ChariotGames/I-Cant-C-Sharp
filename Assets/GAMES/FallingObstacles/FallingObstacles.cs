@@ -115,14 +115,13 @@ namespace Scripts.Games
            // _currentScore++;
            // base.AnimateSuccess(_currentScore, _scoreToWin);
            // base.ScoreUp();
+           if (base._successes >= base.successesToWin - 1)
+           {
+               //_currentScore = 0;
+               base.Harder();
+               //base.Win();
+           }
            Success();
-            
-            if (base._successes >= base.successesToWin)
-            {
-                //_currentScore = 0;
-                base.Harder();
-                //base.Win();
-            }
         }
 
         /// <summary>
@@ -132,13 +131,13 @@ namespace Scripts.Games
         {
             //_healthPoints--;
             //base.AnimateFail(_healthPoints, 3);
-            base.Fail();
-            if (base._fails <= 0)
+            if (base._fails <= 1)
             {
                 //_healthPoints = 3;
                 base.Easier();
                // base.Lose();
             }
+            base.Fail();
             //lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
         }
         

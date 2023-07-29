@@ -186,7 +186,7 @@ namespace Scripts.Games
         private void failed()
         {
 
-            if(base._fails <= 0)
+            if(base._fails <= 1)
             {
                 base.Easier();
             }
@@ -202,7 +202,7 @@ namespace Scripts.Games
         private void won()
         {
 
-            if(base._successes >= 32) 
+            if(base._successes >= successesToWin - 1) 
             {
                 base.Harder();
             }

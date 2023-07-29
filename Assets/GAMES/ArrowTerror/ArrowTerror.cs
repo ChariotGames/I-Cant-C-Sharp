@@ -104,13 +104,13 @@ namespace Scripts.Games
 
         void Update()
         {
-           if (_successes == successesToWin)
+           /*if (_successes == successesToWin)
             {
                 //_successes = 0;
                 
                 base.Harder();
                 //base.Win();
-            }
+            }*/
 
            if (checkpointsCollected == ammountCheckpoints)
             {
@@ -188,6 +188,11 @@ namespace Scripts.Games
                 case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
+                        if (_successes == successesToWin - 1)
+                        {
+                            base.Harder();
+                        }
+                        
                         checkpointsCollected = 0;
                         _time = 0;
                         //_successes++;

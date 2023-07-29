@@ -59,6 +59,10 @@ namespace Scripts.Games
         {
             if (col1.IsTouching(col2))
             {
+                if (_fails == 1)
+                {
+                    base.Easier();
+                }
                 Debug.Log("Chuckles... I'm in danger.");
                 //_fails++;
                 base.Fail();
@@ -69,13 +73,19 @@ namespace Scripts.Games
             }
             else
             {
+                if (_successes == successesToWin - 1)
+                {
+                    base.Harder();
+                }
                 base.Success();
                 //base.AnimateSuccess(1, 10);
                 //base.ScoreUp();
                 //_successes++;
             }
 
-            if (_successes == successesToWin)
+            active = false;
+            
+            /*if (_successes == successesToWin)
             {
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
                 //_successes = 0;
@@ -90,7 +100,7 @@ namespace Scripts.Games
                 active = false;
                 base.Easier();
                 //base.Lose();
-            }
+            }*/
         }
     }
 }
