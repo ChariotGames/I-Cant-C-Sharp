@@ -1,4 +1,5 @@
 using Scripts.Models;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,12 +48,14 @@ namespace Scripts.Games
             
         }
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+
             allObjects = new();
             allObjects.Add(player);
             invul = true;
-            Invoke(nameof(switchState), 2);
+            Invoke(nameof(switchState), 1);
 
 
             if (Difficulty == Models.Difficulty.EASY)

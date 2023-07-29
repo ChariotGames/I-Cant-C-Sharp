@@ -37,8 +37,9 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
             ringButtons = _keys.All;
             Invoke(nameof(SpawnRings), startTimeout);
         }
