@@ -45,7 +45,7 @@ namespace Scripts.Controllers
                 //display three empty hearts
                 foreach (Image img in hearts)
                 {
-                    //img.gameObject.SetActive(true);
+                    img.gameObject.SetActive(true);
                     img.color = Color.clear;
                 }
 
@@ -71,7 +71,7 @@ namespace Scripts.Controllers
             BaseGame.OnScoreUpdate -= ScoreDisplay;
             BaseGame.OnTimerUpdate -= PlayTimer;
             BaseGame.OnTimerStop -= StopTimer;
-            MinigameManager.OnLoseLife -= UpdateHearts;
+            MinigameManager.OnLoseLife += UpdateHearts;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
         }
@@ -83,7 +83,7 @@ namespace Scripts.Controllers
             {
                 _timerOn = false;
                 //PlayerPrefs.SetString("Score", _score.ToString("D3"));
-                settings.Score = _score;
+                
 
                 //if (_score > settings.Highscore)
                 //{
@@ -93,7 +93,12 @@ namespace Scripts.Controllers
 
                 //TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 //PlayerPrefs.SetString("Time", timePlaying.ToString("mm':'ss"));
-                settings.Time = (int)_time;
+                
+                if(settings.BaseDifficulty != Difficulty.TUTORIAL)
+                {
+                    settings.Score = _score;
+                    settings.Time = (int)_time;
+                }
                 SceneManager.LoadScene((int)SceneNr.GameOver);
             }
 
@@ -138,11 +143,11 @@ namespace Scripts.Controllers
             {
                 if (keys.All[i] == null || actions.All[i].Equals("")) return;
 
-                GameObject k = Instantiate(templateKeys, parent);
-                TMP_Text[] texts = k.transform.GetComponentsInChildren<TMP_Text>();
+                GameObject key = Instantiate(templateKeys, parent);
+                TMP_Text[] texts = key.transform.GetComponentsInChildren<TMP_Text>();
                 texts[0].text = keys.All[i].Icon;
                 texts[1].text = actions.All[i];
-                k.SetActive(true);
+                key.SetActive(true);
             }
         }
 
@@ -171,13 +176,7 @@ namespace Scripts.Controllers
             if (parent.name.Contains("Left") || parent.name.Contains("Center")) pos = leftAnim;
 
             pack = Instantiate(pack, pos);
-            //if(settings.SelectedGame != null) pack.Run(count, 1, 1, anim.ToString()); 
-            if (settings.SelectedGame != null)
-            {
-                pack.EmojiFace.fillAmount = 1;
-                pack.Run(count, 2, 1, anim.ToString());
-            }
-            else pack.Run(count, numerator, denominator, anim.ToString());
+            pack.Run(count, numerator, denominator, anim.ToString());
         }
 
         private void PlayTimer(string side, float duration)
@@ -201,6 +200,5 @@ namespace Scripts.Controllers
                 Destroy(parent.GetChild(i).gameObject);
         }
     }
-
 }
 
