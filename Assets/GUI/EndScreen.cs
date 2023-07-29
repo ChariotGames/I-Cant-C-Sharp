@@ -34,6 +34,7 @@ namespace Scripts.Controllers
             scoreText.text = settings.Score.ToString("D3");
             timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
             highscorePanel.DisplayScores();
+            animator.ResetTrigger("CameraIn");
             //HighscoreDisplay.AddScore();
 
             playerMap = playerInput.actionMaps[0];
@@ -60,8 +61,7 @@ namespace Scripts.Controllers
         public void GoToMenu()
         {
             uiMap.Disable();
-            animator.SetTrigger("EndOut");
-            animator.ResetTrigger("EndIn");
+            animator.SetTrigger("CameraIn");
             StartCoroutine(AnimateToMenu());
         }
 
@@ -75,7 +75,7 @@ namespace Scripts.Controllers
 
         private IEnumerator AnimateToMenu()
         {
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(2.0f);
             SceneManager.LoadScene((int)SceneNr.MainMenu);
         }
 
