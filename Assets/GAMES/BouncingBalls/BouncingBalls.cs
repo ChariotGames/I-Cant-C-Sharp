@@ -20,7 +20,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject balls;
         [SerializeField] private GameObject guessingOverlay;
         [SerializeField] private PhysicsMaterial2D groundMaterial;
-        [SerializeField] private TextMeshPro infoText;
+        //[SerializeField] private TextMeshPro infoText;
         //[SerializeField] private SpriteRenderer correctAnswer;
         //[SerializeField] private SpriteRenderer wrongAnswer;
         [SerializeField] private TextMeshPro resultText;
@@ -32,6 +32,7 @@ namespace Scripts.Games
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
+        private bool _gameStarted;
 
         //private int _currentScore;
         private bool hasRandomGravity;
@@ -62,20 +63,23 @@ namespace Scripts.Games
             }
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            _gameStarted = true;
             //groundMaterial = new PhysicsMaterial2D();
             StartCoroutine(ReleaseBallsAfterDelay());
-            infoText.gameObject.SetActive(true);
+            //infoText.gameObject.SetActive(true);
         }
 
         private void Update()
         {
+            if (!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >= 3 && infoText.gameObject.activeSelf)
+            /*if (_elapsedTime >= 3 && infoText.gameObject.activeSelf)
             {
                 infoText.gameObject.SetActive(false);
-            }
+            }*/
 
             if (_elapsedTime >= _maxRoundTime && !_guessingStage)
             {

@@ -26,6 +26,7 @@ namespace Scripts.Games
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
+        private bool _gameStarted;
         
         public bool isAnswerScreen;
         //private int _currentScore;
@@ -44,13 +45,16 @@ namespace Scripts.Games
             rightAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(base.AnimateInstruction());
+            _gameStarted = true;
             StartCoroutine(GenerateNewEquation());
         }
 
         private void Update()
         {
+            if(!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
             if (isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
             {

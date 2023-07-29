@@ -183,7 +183,7 @@ namespace Scripts.Controllers
             if (settings.SelectedGame != null) return;
 
             _parent = game.transform.parent;
-
+            OnClearKeys?.Invoke(_parent.name);
             if (_parent == spawnCenter)
             {
                 RemoveAllGames();
@@ -192,7 +192,7 @@ namespace Scripts.Controllers
                 return;
             }
 
-            OnClearKeys?.Invoke(_parent.name);
+            
             Destroy(game);
 
             if (_winCounter > 0)

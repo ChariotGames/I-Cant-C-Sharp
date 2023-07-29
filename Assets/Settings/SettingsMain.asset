@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SettingsMain
   m_EditorClassIdentifier: 
   lives: 2
-  maxLives: 2
+  maxLives: 9
   players: 1
   baseDifficulty: 4
-  selectedGame: {fileID: 11400000, guid: 4fee8be33465f2e49aaee7bccfb1c232, type: 2}
+  selectedGame: {fileID: 11400000, guid: 478115dca80f147aebfef8387ea811e0, type: 2}
   selectedCharacter: {fileID: 11400000, guid: 9e5dba75021359a42845df8ecdcb9689, type: 2}
   games:
   - {fileID: 11400000, guid: 788e14c7f0f55c448aa1c48a5453fb6e, type: 2}
