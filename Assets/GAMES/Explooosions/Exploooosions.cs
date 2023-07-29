@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -22,8 +23,9 @@ namespace Scripts.Games
             player.GetComponent<ExpPlayer>().stick = _keys.One.Input;
         }
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
             active = true;
             bombs = new GameObject[] { bombBase, bombDonut, bombCross };
             Invoke(nameof(SpawnBombs), 3);

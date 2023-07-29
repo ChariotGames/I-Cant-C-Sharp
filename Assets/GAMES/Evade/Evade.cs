@@ -29,8 +29,9 @@ namespace Scripts.Games
             player.GetComponent<EvadePlayer>().stick = _keys.One.Input;
             color = laneLeft.GetComponent<SpriteRenderer>().color;
         }
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
             active = true;
             Indicators = new GameObject[] { indLeft, indMid, indRight };
             Lanes = new GameObject[] { laneLeft, laneMid, laneRight };
