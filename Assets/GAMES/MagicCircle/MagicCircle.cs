@@ -20,7 +20,7 @@ namespace Scripts.Games
         [Header("Game Specific Stuff")]
         [SerializeField] private Color[] ringColors;
         [SerializeField] private Key[] ringButtons;
-        [SerializeField] private GameObject ringContainer, ring, circle;
+        [SerializeField] private GameObject ringContainer, ring, circle, MainContainer;
         [SerializeField] private SpriteRenderer circleRenderer;
         [SerializeField] private Vector3 rotationDirection = Vector3.forward;
         [SerializeField] [Range(1, 5)] private float startTimeout = 3, spawnDelay;
@@ -40,6 +40,7 @@ namespace Scripts.Games
         IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
+            MainContainer.SetActive(true);
             ringButtons = _keys.All;
             Invoke(nameof(SpawnRings), startTimeout);
         }

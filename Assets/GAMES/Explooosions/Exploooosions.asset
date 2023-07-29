@@ -32,4 +32,4 @@ MonoBehaviour:
     four: {fileID: 0}
   prefab: {fileID: 2641797603570688775, guid: 4d11411b7f5448840a8ee753eb2be32e, type: 3}
   preview: {fileID: 21300000, guid: 2f869471e09fa94418b05d7d6131fe06, type: 3}
-  instructionText: Dodge the explosions...
+  instructionText: "Dodge the \nexplosions..."

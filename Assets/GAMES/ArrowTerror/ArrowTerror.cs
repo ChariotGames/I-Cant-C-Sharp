@@ -14,7 +14,7 @@ namespace Scripts.Games
         [Header("Game Specific Stuff")]
         [SerializeField] private AudioSource sound;
         [SerializeField] private AudioClip[] clips;
-        [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
+        [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container, MainContainer;
 
         #endregion Serialized Fields
 
@@ -51,6 +51,7 @@ namespace Scripts.Games
         IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
+            MainContainer.SetActive(true);
 
             allObjects = new();
             allObjects.Add(player);

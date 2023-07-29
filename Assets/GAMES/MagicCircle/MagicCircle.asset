@@ -43,4 +43,4 @@ MonoBehaviour:
     four: {fileID: 0}
   prefab: {fileID: 5756814134303572315, guid: a3a9fe95081fefd47a1bbaa5cd496004, type: 3}
   preview: {fileID: 21300000, guid: 83d35fc3b307b10498b4cd30a4f8afdc, type: 3}
-  instructionText: Destroy rings on contact!
+  instructionText: "Destroy rings \non contact!"

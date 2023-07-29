@@ -10,7 +10,7 @@ namespace Scripts.Games
         [Space]
         [Header("Game Specific Stuff")]
         [SerializeField] private GameObject player;
-        [SerializeField] private GameObject indLeft, indMid, indRight, laneLeft, laneMid, laneRight, obstacle;
+        [SerializeField] private GameObject indLeft, indMid, indRight, laneLeft, laneMid, laneRight, obstacle, MainContainer;
         [SerializeField] private AudioClip[] clips;
 
         private bool active = false;
@@ -32,6 +32,7 @@ namespace Scripts.Games
         IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
+            MainContainer.SetActive(true);
             active = true;
             Indicators = new GameObject[] { indLeft, indMid, indRight };
             Lanes = new GameObject[] { laneLeft, laneMid, laneRight };
