@@ -69,7 +69,7 @@ namespace Scripts.Games
         /// <param name="duration">How far up the object should move.</param>
         public void SetInstructions(GameObject prefab, string message, float duration)
         {
-            _instructionPrefab = prefab;
+            _instructionPrefab = Instantiate(prefab, transform);
             _instructionPrefab.GetComponent<TMP_Text>().text = message;
             _instructionSpeed = duration;
         }
