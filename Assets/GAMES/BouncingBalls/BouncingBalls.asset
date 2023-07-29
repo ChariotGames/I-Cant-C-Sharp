@@ -32,4 +32,4 @@ MonoBehaviour:
     four: {fileID: 0}
   prefab: {fileID: 7127801452119632389, guid: d4a5cd9a2a610e44885815a21f8a41f3, type: 3}
   preview: {fileID: 21300000, guid: a424a415918b4d546921f2f78e316461, type: 3}
-  instructionText: Count the Number of Bounces
+  instructionText: "Count the \nNumber of Bounces"
