@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  successesToWin: 5
+  successesToWin: 10
   failsToLose: 3
   ringColors:
   - {r: 0, g: 0.6666667, b: 1, a: 0.9019608}

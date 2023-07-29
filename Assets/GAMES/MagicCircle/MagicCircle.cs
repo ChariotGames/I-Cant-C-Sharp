@@ -31,7 +31,7 @@ namespace Scripts.Games
 
         #region Fields
 
-        private int _correctGuesses = 0, _wrongGuesses = 0;
+        //private int _successes = 0, _fails = 0;
 
         #endregion Fields
 
@@ -106,29 +106,31 @@ namespace Scripts.Games
             if (isWin)
             {
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.green, 0.25f));
-                _correctGuesses++;
-                base.AnimateSuccess(circle.transform, 1, 5);
-                base.ScoreUp();
+                //_correctGuesses++;
+                //base.AnimateSuccess(circle.transform, 1, 5);
+                //base.ScoreUp();
+                base.Success();
 
-                if (_correctGuesses == 5)
+                if (_successes == successesToWin)
                 {
-                    _correctGuesses = 0;
+                    //_correctGuesses = 0;
                     base.Harder();
-                    base.Win();
+                    //base.Win();
                 }
             }
             else
             {
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.red, 0.25f));
-                _wrongGuesses++;
-                base.AnimateFail(circle.transform, 1, 3);
+                //_fails++;
+                //base.AnimateFail(circle.transform, 1, 3);
+                base.Fail();
 
-                if (_wrongGuesses == 3)
+                if (_fails == 0)
                 {
                     //stop = true;
-                    _wrongGuesses = 0;
+                    //_fails = 0;
                     base.Easier();
-                    base.Lose();
+                    //base.Lose();
                 }
             }
         }

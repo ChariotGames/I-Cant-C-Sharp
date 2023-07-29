@@ -171,7 +171,13 @@ namespace Scripts.Controllers
             if (parent.name.Contains("Left") || parent.name.Contains("Center")) pos = leftAnim;
 
             pack = Instantiate(pack, pos);
-            pack.Run(count, numerator, denominator, anim.ToString());
+            //if(settings.SelectedGame != null) pack.Run(count, 1, 1, anim.ToString()); 
+            if (settings.SelectedGame != null)
+            {
+                pack.EmojiFace.fillAmount = 1;
+                pack.Run(count, 2, 1, anim.ToString());
+            }
+            else pack.Run(count, numerator, denominator, anim.ToString());
         }
 
         private void PlayTimer(string side, float duration)
