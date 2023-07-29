@@ -45,7 +45,7 @@ namespace Scripts.Controllers
                 //display three empty hearts
                 foreach (Image img in hearts)
                 {
-                    img.gameObject.SetActive(true);
+                    //img.gameObject.SetActive(true);
                     img.color = Color.clear;
                 }
 
@@ -71,7 +71,7 @@ namespace Scripts.Controllers
             BaseGame.OnScoreUpdate -= ScoreDisplay;
             BaseGame.OnTimerUpdate -= PlayTimer;
             BaseGame.OnTimerStop -= StopTimer;
-            MinigameManager.OnLoseLife += UpdateHearts;
+            MinigameManager.OnLoseLife -= UpdateHearts;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
         }
