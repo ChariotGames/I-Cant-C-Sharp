@@ -51,6 +51,8 @@ namespace Scripts.Games
         {
             allObjects = new();
             allObjects.Add(player);
+            invul = true;
+            Invoke(nameof(switchState), 2);
 
 
             if (Difficulty == Models.Difficulty.EASY)
@@ -75,6 +77,8 @@ namespace Scripts.Games
         private void Restart()
         {
             allObjects.Add(player);
+            invul = true;
+            Invoke(nameof(switchState), 2);
             if (Difficulty == Models.Difficulty.EASY)
             {
                 ammountCheckpoints = UnityEngine.Random.Range(1, 2);

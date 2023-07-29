@@ -11,6 +11,7 @@ namespace Scripts.Games
         [Header("Game Specific Stuff")]
         [SerializeField] private GameObject player;
         [SerializeField] private GameObject indLeft, indMid, indRight, laneLeft, laneMid, laneRight, obstacle;
+        [SerializeField] private AudioClip[] clips;
 
         private bool active = false;
         private GameObject[] Indicators;
