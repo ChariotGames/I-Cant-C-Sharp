@@ -32,4 +32,4 @@ MonoBehaviour:
     four: {fileID: 11400000, guid: a4600da8be593ac44ad0fc8718a077f2, type: 2}
   prefab: {fileID: 4665578903984628120, guid: fd3022b129af2d745a5e33d7587757c8, type: 3}
   preview: {fileID: 21300000, guid: 3fcd2b59b87426d4eb29c1b7a4ee531f, type: 3}
-  instructionText: Press the button in time
+  instructionText: Press the shown Button fast

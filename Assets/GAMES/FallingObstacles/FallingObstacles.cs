@@ -22,7 +22,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject obstacle, obstacleContainer;
         //[SerializeField] private TextMeshPro lifeCounter;
         [SerializeField] private float cannonMovementSpeed;
-        [SerializeField] private TextMeshPro infoText;
+        //[SerializeField] private TextMeshPro infoText;
         
 
         #endregion Serialized Fields
@@ -36,6 +36,7 @@ namespace Scripts.Games
         //private int _healthPoints = 3;
         private int _numObstacles;
         private float _elapsedTime;
+        private bool _gameStarted;
         //private int _currentScore;
 
         //private const int _scoreToWin = 15;
@@ -54,9 +55,10 @@ namespace Scripts.Games
             BottomBounds.DamageTaken += TakeDamage;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            infoText.gameObject.SetActive(true);
+            yield return StartCoroutine(base.AnimateInstruction());
+            //infoText.gameObject.SetActive(true);
             // Calculate the camera's viewport bounds
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             
@@ -89,11 +91,12 @@ namespace Scripts.Games
 
         private void Update()
         {
+            if (!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
+            /*if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
             {
                 infoText.gameObject.SetActive(false);
-            }
+            }*/
         }
 
         private void OnDisable()

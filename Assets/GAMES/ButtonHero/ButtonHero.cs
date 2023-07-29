@@ -37,6 +37,7 @@ namespace Scripts.Games
         private int _currentScore;
         private float _buttonWidth;
         private const int _scoreToWin = 10;
+        private bool _gameStarted;
 
         private float _maxRoundTime;
 
@@ -74,6 +75,7 @@ namespace Scripts.Games
         private IEnumerator Start()
         {
             yield return StartCoroutine(base.AnimateInstruction());
+            _gameStarted = true;
             //infoText.gameObject.SetActive(true);
             _buttonWidth = buttons[0].gameObject.GetComponent<RectTransform>().rect.width * 0.5f;
             
@@ -82,6 +84,7 @@ namespace Scripts.Games
 
         private void Update()
         {
+            if (!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
             /*if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
             {
