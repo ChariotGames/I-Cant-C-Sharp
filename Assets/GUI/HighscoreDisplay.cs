@@ -11,16 +11,11 @@ namespace Scripts.Controllers
 
         private const string VALUE_SPLIT = "_", ENTRY_SPLIT = ";", KEY_WORD = "HighscoreList";
 
-        private void Awake()
+        public void DisplayScores()
         {
             LoadScores();
             UpdateScores();
             SaveScores();
-        }
-
-        public void triggerAwake()
-        {
-            Awake();
         }
 
         private void LoadScores()
@@ -53,9 +48,6 @@ namespace Scripts.Controllers
             {
                 if (settings.Score < int.Parse(entries[i].Score)) continue;
                 //swap
-                //HighscoreEntry temp = entries[i];
-                //entries[i] = incoming;
-                //incoming = temp;
                 temp.CopyValues(entries[i]);
                 entries[i].CopyValues(incoming);
                 incoming.CopyValues(temp);

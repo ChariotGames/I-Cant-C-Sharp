@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Scripts.Models;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +12,7 @@ namespace Scripts.Controllers
         #region Serialized Fields
 
         [SerializeField] private InputActionAsset playerInput;
-        [SerializeField] private GameObject restartButton, highscorePanel;
+        [SerializeField] private HighscoreDisplay highscorePanel;
         [SerializeField] private Settings settings;
 
         [SerializeField] private TMP_Text scoreText, timerText;
@@ -35,7 +32,7 @@ namespace Scripts.Controllers
         {
             scoreText.text = settings.Score.ToString("D3");
             timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
-            highscorePanel.GetComponent<HighscoreDisplay>().triggerAwake();
+            highscorePanel.DisplayScores();
             //HighscoreDisplay.AddScore();
 
             playerMap = playerInput.actionMaps[0];
@@ -46,7 +43,6 @@ namespace Scripts.Controllers
         {
             playerMap.Disable();
             uiMap.Enable();
-            EventSystem.current.SetSelectedGameObject(restartButton);
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -64,11 +60,6 @@ namespace Scripts.Controllers
         {
             uiMap.Disable();
             SceneManager.LoadScene((int)SceneNr.MainMenu);
-        }
-
-        public void ShowScoretable()
-        {
-            // TODO: Implement code
         }
 
         public void QuitGame()
