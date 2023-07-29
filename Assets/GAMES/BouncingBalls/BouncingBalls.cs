@@ -62,8 +62,9 @@ namespace Scripts.Games
             }
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
             //groundMaterial = new PhysicsMaterial2D();
             StartCoroutine(ReleaseBallsAfterDelay());
             infoText.gameObject.SetActive(true);

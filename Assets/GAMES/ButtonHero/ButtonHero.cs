@@ -20,7 +20,7 @@ namespace Scripts.Games
         //[SerializeField] private TextMeshPro timerTextMesh;
         //[SerializeField] private SpriteRenderer damageTakenSprite;
         [SerializeField] private Transform container;
-        [SerializeField] private TextMeshPro infoText;
+        //[SerializeField] private TextMeshPro infoText;
 
         #endregion Serialized Fields
 
@@ -71,9 +71,10 @@ namespace Scripts.Games
             }
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            infoText.gameObject.SetActive(true);
+            yield return StartCoroutine(base.AnimateInstruction());
+            //infoText.gameObject.SetActive(true);
             _buttonWidth = buttons[0].gameObject.GetComponent<RectTransform>().rect.width * 0.5f;
             
             StartCoroutine(SpawnCoroutine());
@@ -82,11 +83,11 @@ namespace Scripts.Games
         private void Update()
         {
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
+            /*if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
             {
                 infoText.gameObject.SetActive(false);
             }
-            
+            */
             HandleTimer();
         }
 
