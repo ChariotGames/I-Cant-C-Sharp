@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Scripts.Models;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Scripts.Controllers
         [SerializeField] private InputActionAsset playerInput;
         [SerializeField] private HighscoreDisplay highscorePanel;
         [SerializeField] private Settings settings;
-
+        [SerializeField] private Animator animator;
         [SerializeField] private TMP_Text scoreText, timerText;
 
 
@@ -59,7 +60,9 @@ namespace Scripts.Controllers
         public void GoToMenu()
         {
             uiMap.Disable();
-            SceneManager.LoadScene((int)SceneNr.MainMenu);
+            animator.SetTrigger("EndOut");
+            animator.ResetTrigger("EndIn");
+            StartCoroutine(AnimateToMenu());
         }
 
         public void QuitGame()
@@ -68,6 +71,12 @@ namespace Scripts.Controllers
                 UnityEditor.EditorApplication.isPlaying = false;
             #endif
                 Application.Quit();
+        }
+
+        private IEnumerator AnimateToMenu()
+        {
+            yield return new WaitForSeconds(3.0f);
+            SceneManager.LoadScene((int)SceneNr.MainMenu);
         }
 
         #endregion Game Mechanics / Methods
