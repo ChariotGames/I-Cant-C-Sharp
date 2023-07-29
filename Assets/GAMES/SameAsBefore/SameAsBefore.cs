@@ -23,7 +23,7 @@ namespace Scripts.Games
         [SerializeField] private int successesToLevelUp;
 
         private LinkedList<int> _lastIndices = new();
-        private const string _stepsText = "steps: ";
+        private const string _stepsText = "think back: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
         private int difficultyTracker, defaultFailsToLose;
@@ -33,8 +33,8 @@ namespace Scripts.Games
             difficultyTracker = successesToLevelUp;
             _fails = failsToLose;
             defaultFailsToLose = failsToLose;
-            buttonYes.text = _keys.One.Icon;
-            buttonNo.text = _keys.Two.Icon;
+            //buttonYes.text = _keys.One.Icon;
+            //buttonNo.text = _keys.Two.Icon;
             StartCoroutine(GameStartCoroutine());
         }
 
@@ -100,7 +100,7 @@ namespace Scripts.Games
                 if (options[0].activeSelf || options[1].activeSelf)
                 {
                     //Debug.Log(lastIndices.Count);
-                    Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tsteps: " + (_steps + 1));
+                    Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tthink back: " + (_steps + 1));
 
                     float timer = Time.time;
                     RunTimer(timeout);
