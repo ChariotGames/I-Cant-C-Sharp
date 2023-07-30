@@ -71,7 +71,7 @@ namespace Scripts.Controllers
             BaseGame.OnScoreUpdate -= ScoreDisplay;
             BaseGame.OnTimerUpdate -= PlayTimer;
             BaseGame.OnTimerStop -= StopTimer;
-            MinigameManager.OnLoseLife += UpdateHearts;
+            MinigameManager.OnLoseLife -= UpdateHearts;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
         }
