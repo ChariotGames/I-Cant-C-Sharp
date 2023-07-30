@@ -1,23 +1,24 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Scripts.Games
 {
-    public class #SCRIPTNAME#PressElement : BasePressElement
+    public class KonamiButton : BasePressElement
     {
         #region Fields
 
-        private #SCRIPTNAME# _game;
+        [SerializeField] private KonamiCode _game;
 
         #endregion Fields
 
         void Awake()
         {
-            _game = (#SCRIPTNAME#)parent;
+            
         }
 
         public override void ButtonPressed(InputAction.CallbackContext ctx)
         {
-            // YOUR CODE HERE
+            _game.CheckInput(ctx.action.ToString());
         }
     }
 }
