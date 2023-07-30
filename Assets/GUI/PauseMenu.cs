@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Scripts._Input;
 using Scripts.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace Scripts.Controllers
 {

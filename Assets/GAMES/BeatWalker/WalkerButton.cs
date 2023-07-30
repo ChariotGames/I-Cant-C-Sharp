@@ -21,6 +21,6 @@ public class WalkerButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
+        transform.position -= transform.up * (speed * Time.deltaTime);
     }
 }

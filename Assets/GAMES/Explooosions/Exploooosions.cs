@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -7,23 +8,25 @@ namespace Scripts.Games
         [Space]
         [Header("Game Specific Stuff")]
         public GameObject player;
-        [SerializeField] private GameObject bombBase, bombDonut, bombCross, bombContainer;
+        [SerializeField] private GameObject bombBase, bombDonut, bombCross, bombContainer, mainContainer;
 
 
         private bool active = false;
         private GameObject[] bombs;
         private int chance;
         private int timer;
-        private int winCounter = 0;
-        private int loseCounter = 0;
+        //private int _successes = 0;
+        //private int _fails = 0;
 
         private void Awake()
         {
             player.GetComponent<ExpPlayer>().stick = _keys.One.Input;
         }
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            mainContainer.SetActive(true);
             active = true;
             bombs = new GameObject[] { bombBase, bombDonut, bombCross };
             Invoke(nameof(SpawnBombs), 3);
@@ -56,38 +59,48 @@ namespace Scripts.Games
         {
             if (col1.IsTouching(col2))
             {
+                if (_fails == 1)
+                {
+                    base.Easier();
+                }
                 Debug.Log("Chuckles... I'm in danger.");
-                loseCounter++;
-                base.AnimateFail(player.transform, 1, 3);
-                //failsToLose--;
+                //_fails++;
+                base.Fail();
+                //base.AnimateFail(1, 3);
                 StartCoroutine(player.GetComponent<ExpPlayer>().AnimateColor(player.GetComponent<SpriteRenderer>(), Color.white, new Color(0.3f, 0.3f, 0.3f), 0.5f));
                 player.GetComponent<ExpPlayer>().knockback = player.GetComponent<Rigidbody2D>().position - new Vector2(obj.transform.position.x, obj.transform.position.y);
                 // Does not work why?
             }
             else
             {
-                //successesToWin++;
-                base.AnimateSuccess(player.transform, 1, 20);
-                base.ScoreUp();
-                winCounter++;
+                if (_successes == successesToWin - 1)
+                {
+                    base.Harder();
+                }
+                base.Success();
+                //base.AnimateSuccess(1, 10);
+                //base.ScoreUp();
+                //_successes++;
             }
 
-            if (winCounter == 20)
+            active = false;
+            
+            /*if (_successes == successesToWin)
             {
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
-                winCounter = 0;
+                //_successes = 0;
                 active = false;
                 base.Harder();
-                base.Win();
+                //base.Win();
             }
-            if (loseCounter == 3)
+            if (_fails == 0)
             {
                 Debug.Log("Snake? SNAKE? SNAAAAAACKE!!!");
-                loseCounter = 0;
+                //loseCounter = 0;
                 active = false;
                 base.Easier();
-                base.Lose();
-            }
+                //base.Lose();
+            }*/
         }
     }
 }

@@ -25,7 +25,8 @@ namespace Scripts.Games
         private float _time = 0;
         private bool timerEnded;
         private int loseCounter = 0;
-        private bool _isAnswerScreen;
+        private bool _isAnswerScreen, startGame;
+
 
 
         private void Awake()
@@ -56,11 +57,13 @@ namespace Scripts.Games
         }
 
         // Start is called before the first frame update
-        void Start()
+         private IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            startGame = true;
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
 
-           // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+            // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             //_playfieldWidth = _cameraViewportBounds.size.x / 2;
             //Debug.Log(_cameraViewportBounds.max.x);
             GeneratePattern();
@@ -71,6 +74,7 @@ namespace Scripts.Games
         // Update is called once per frame
         void Update()
         {
+            if (!startGame) return;
             _time += Time.deltaTime;
             if (_time >= ROUND_TIME)
             {
@@ -215,7 +219,7 @@ namespace Scripts.Games
         private void ScoreOneUp()
         {
             
-            if (base._successes >= successesToWin)
+            if (base._successes >= successesToWin - 1)
             {
              
               base.Harder();
@@ -265,14 +269,13 @@ namespace Scripts.Games
         {
             spriteLose.gameObject.SetActive(true);
             base._successes = 0;
-            Fail();
-
-            if (base._fails <= 0)
+            if (base._fails <= 1)
             {
                 Debug.Log("Lost a heart!");
                 loseCounter = 0;
                 base.Easier();
             }
+            Fail();
         }
     }
 }

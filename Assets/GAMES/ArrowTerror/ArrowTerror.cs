@@ -1,4 +1,5 @@
 using Scripts.Models;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,14 +14,14 @@ namespace Scripts.Games
         [Header("Game Specific Stuff")]
         [SerializeField] private AudioSource sound;
         [SerializeField] private AudioClip[] clips;
-        [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container;
+        [SerializeField] private GameObject border, player, goal, checkpoint, enemy, checkpointContainer, enemyContainer, Container, MainContainer;
 
         #endregion Serialized Fields
 
         #region Fields
 
         private int checkpointsCollected = 0;
-        private int winCounter = 0;
+        //private int _successes = 0;
         private int ammountEnemies = 2, ammountCheckpoints = 2, lives = 3;
         private List<GameObject> allObjects;
         private bool invul = false;
@@ -47,10 +48,15 @@ namespace Scripts.Games
             
         }
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            MainContainer.SetActive(true);
+
             allObjects = new();
             allObjects.Add(player);
+            invul = true;
+            Invoke(nameof(switchState), 1);
 
 
             if (Difficulty == Models.Difficulty.EASY)
@@ -75,6 +81,8 @@ namespace Scripts.Games
         private void Restart()
         {
             allObjects.Add(player);
+            invul = true;
+            Invoke(nameof(switchState), 2);
             if (Difficulty == Models.Difficulty.EASY)
             {
                 ammountCheckpoints = UnityEngine.Random.Range(1, 2);
@@ -96,13 +104,13 @@ namespace Scripts.Games
 
         void Update()
         {
-           if (winCounter == 3)
+           /*if (_successes == successesToWin)
             {
-                winCounter = 0;
+                //_successes = 0;
                 
                 base.Harder();
-                base.Win();
-            }
+                //base.Win();
+            }*/
 
            if (checkpointsCollected == ammountCheckpoints)
             {
@@ -117,7 +125,8 @@ namespace Scripts.Games
                 Debug.Log("Time is up!");
                 timerEnded = true;
                 base.Easier();
-                base.Lose();
+                //base.Lose();
+                base.Fail();
                 checkpointsCollected = 0;
                 _time = 0;
                 DestroyObjects();
@@ -170,19 +179,26 @@ namespace Scripts.Games
                     {
                         invul = true;
                         Invoke(nameof(switchState), 2);
-                        base.AnimateFail(player.transform, 1, 1);
+                        //base.AnimateFail(player.transform, 1, 1);
                         base.Easier();
-                        base.Lose();
+                        //base.Lose();
+                        base.Fail();
                     } 
                     break;
                 case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
+                        if (_successes == successesToWin - 1)
+                        {
+                            base.Harder();
+                        }
+                        
                         checkpointsCollected = 0;
                         _time = 0;
-                        winCounter++;
-                        base.AnimateSuccess(player.transform, 1, 3);
-                        base.ScoreUp();
+                        //_successes++;
+                        //base.AnimateSuccess(player.transform, 1, 3);
+                        //base.ScoreUp();
+                        base.Success();
                         DestroyObjects();
                     }
                     break;

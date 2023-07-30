@@ -12,6 +12,7 @@ namespace Scripts.Controllers
     {
         [SerializeField] private Settings settings;
         [SerializeField] private Image[] hearts;
+        [SerializeField] private Color heartColor;
         [SerializeField] private Image characterImage;
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
@@ -30,6 +31,28 @@ namespace Scripts.Controllers
         {
             _timerOn = true;
             characterImage.sprite = settings.SelectedCharacter.Icon;
+            if (settings.Lives > 3)
+            {
+                hearts[0].sprite = fullHeart;
+                hearts[1].gameObject.SetActive(false);
+                hearts[2].gameObject.SetActive(false);
+                heartCounter.text = settings.Lives.ToString();
+                heartCounter.gameObject.SetActive(true);
+            }
+            else
+            {
+                heartCounter.gameObject.SetActive(false);
+                //display three empty hearts
+                foreach (Image img in hearts)
+                {
+                    img.gameObject.SetActive(true);
+                    img.color = Color.clear;
+                }
+
+                //depending on the health size, the amount of hearts will be filled
+                for (int i = 0; i < settings.Lives; i++)
+                    hearts[i].color = heartColor;
+            }
         }
         private void OnEnable()
         {
@@ -37,6 +60,7 @@ namespace Scripts.Controllers
             BaseGame.OnScoreUpdate += ScoreDisplay;
             BaseGame.OnTimerUpdate += PlayTimer;
             BaseGame.OnTimerStop += StopTimer;
+            MinigameManager.OnLoseLife += UpdateHearts;
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
         }
@@ -47,6 +71,7 @@ namespace Scripts.Controllers
             BaseGame.OnScoreUpdate -= ScoreDisplay;
             BaseGame.OnTimerUpdate -= PlayTimer;
             BaseGame.OnTimerStop -= StopTimer;
+            MinigameManager.OnLoseLife -= UpdateHearts;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
         }
@@ -54,35 +79,11 @@ namespace Scripts.Controllers
         // Update is called once per frame
         void Update()
         {
-            //if the lives are higher than three,
-            //there is only one heart with the number of lives next to it displayed
-            if(settings.Lives > 3)
-            {
-                hearts[0].sprite = fullHeart;
-                hearts[1].gameObject.SetActive(false);
-                hearts[2].gameObject.SetActive(false);
-                heartCounter.text = settings.Lives.ToString();
-                heartCounter.gameObject.SetActive(true);
-            } else
-            {
-                heartCounter.gameObject.SetActive(false);
-                //display three empty hearts
-                foreach (Image img in hearts)
-                {
-                    img.gameObject.SetActive(true);
-                    img.sprite = emptyHeart;
-                }
-
-                //depending on the health size, the amount of hearts will be filled
-                for (int i = 0; i < settings.Lives; i++)
-                    hearts[i].sprite = fullHeart;
-            }
-
             if (settings.Lives <= 0)
             {
                 _timerOn = false;
                 //PlayerPrefs.SetString("Score", _score.ToString("D3"));
-                settings.Score = _score;
+                
 
                 //if (_score > settings.Highscore)
                 //{
@@ -92,7 +93,12 @@ namespace Scripts.Controllers
 
                 //TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 //PlayerPrefs.SetString("Time", timePlaying.ToString("mm':'ss"));
-                settings.Time = (int)_time;
+                
+                if(settings.BaseDifficulty != Difficulty.TUTORIAL)
+                {
+                    settings.Score = _score;
+                    settings.Time = (int)_time;
+                }
                 SceneManager.LoadScene((int)SceneNr.GameOver);
             }
 
@@ -102,6 +108,23 @@ namespace Scripts.Controllers
                 TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 timeCounter.text = timePlaying.ToString("mm':'ss");
             }
+        }
+
+        private void UpdateHearts()
+        {
+            //if the lives are higher than three,
+            //there is only one heart with the number of lives next to it displayed
+            if (settings.Lives > 3)
+                heartCounter.text = settings.Lives.ToString();
+
+            else if (settings.Lives == 3)
+            {
+                heartCounter.gameObject.SetActive(false);
+                hearts[1].gameObject.SetActive(true);
+                hearts[2].gameObject.SetActive(true);
+            }
+            else
+                hearts[settings.Lives].color = Color.clear;
         }
 
         public void ScoreDisplay(int change)
@@ -120,11 +143,11 @@ namespace Scripts.Controllers
             {
                 if (keys.All[i] == null || actions.All[i].Equals("")) return;
 
-                GameObject k = Instantiate(templateKeys, parent);
-                TMP_Text[] texts = k.transform.GetComponentsInChildren<TMP_Text>();
+                GameObject key = Instantiate(templateKeys, parent);
+                TMP_Text[] texts = key.transform.GetComponentsInChildren<TMP_Text>();
                 texts[0].text = keys.All[i].Icon;
                 texts[1].text = actions.All[i];
-                k.SetActive(true);
+                key.SetActive(true);
             }
         }
 
@@ -177,6 +200,5 @@ namespace Scripts.Controllers
                 Destroy(parent.GetChild(i).gameObject);
         }
     }
-
 }
 

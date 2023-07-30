@@ -133,8 +133,8 @@ namespace Scripts.Controllers
         /// <param name="change">The difference to set to.</param>
         public void SetLives(int change)
         {
-            settings.Lives += change;
-            settings.MaxLives += change;
+            settings.Lives = Mathf.Clamp(settings.Lives + change, 1, 9);
+            settings.MaxLives = Mathf.Clamp(settings.MaxLives + change, 1, 9);
             livesText.text = settings.Lives.ToString();
         }
 
@@ -149,7 +149,10 @@ namespace Scripts.Controllers
             //difficultyText.text = settings.BaseDifficulty.ToString();
         }
 
-
+        public void ClearHighscores()
+        {
+            PlayerPrefs.DeleteKey("HighscoreList");
+        }
 
         /// <summary>
         /// Resets the difficulty of all games back to easy.

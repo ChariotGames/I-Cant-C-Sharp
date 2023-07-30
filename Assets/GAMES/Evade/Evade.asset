@@ -15,6 +15,11 @@ MonoBehaviour:
   description: 
   difficulty: 1
   genre: 6
+  actionNames:
+    one: Move
+    two: 
+    three: 
+    four: 
   keysLeft:
     one: {fileID: 11400000, guid: 5b68a930ae7af724b80502d9028d70e4, type: 2}
     two: {fileID: 0}
@@ -25,11 +30,6 @@ MonoBehaviour:
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
-  actionNames:
-    one: Move
-    two: 
-    three: 
-    four: 
-    other: 
   prefab: {fileID: 6074431469413734331, guid: e2bb4576bd41e2f43a82bd6adf6fc16a, type: 3}
   preview: {fileID: 21300000, guid: 633aa31b5cd0aac48871673f0d9312d4, type: 3}
+  instructionText: "Evade the \nbad grades!"

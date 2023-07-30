@@ -6,15 +6,17 @@ namespace Scripts.Controllers
     public class HighscoreDisplay : MonoBehaviour
     {
         [SerializeField] private HighscoreEntry[] entries;
+        [SerializeField] private HighscoreEntry incoming, temp;
         [SerializeField] private Settings settings;
 
         private const string VALUE_SPLIT = "_", ENTRY_SPLIT = ";", KEY_WORD = "HighscoreList";
 
-        private void Awake() => LoadScores();
-
-        private void OnEnable() => UpdateScores();
-
-        private void OnDisable() => SaveScores();
+        public void DisplayScores()
+        {
+            LoadScores();
+            UpdateScores();
+            SaveScores();
+        }
 
         private void LoadScores()
         {
@@ -38,15 +40,16 @@ namespace Scripts.Controllers
         private void UpdateScores()
         {
             if (settings.Score < int.Parse(entries[^1].Score)) return;
-            HighscoreEntry incoming = new(settings.SelectedCharacter.Icon, settings.SelectedCharacter.Name, settings.Score, settings.Time);
+
+            incoming.SetValues(settings.SelectedCharacter.Icon, settings.SelectedCharacter.Name, settings.Score, settings.Time);
 
             for (int i = 0; i < entries.Length; i++)
             {
                 if (settings.Score < int.Parse(entries[i].Score)) continue;
                 //swap
-                HighscoreEntry temp = entries[i];
-                entries[i] = incoming;
-                incoming = temp;
+                temp.CopyValues(entries[i]);
+                entries[i].CopyValues(incoming);
+                incoming.CopyValues(temp);
             }
         }
 

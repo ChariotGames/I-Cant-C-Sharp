@@ -18,7 +18,7 @@ namespace Scripts.Controllers
             [SerializeField] private ScrollRect scrollRect;
             [SerializeField] private EventSystem eventSystem;
 
-            #endregion Serialized Fields
+        #endregion Serialized Fields
 
 
         #region Fields
@@ -44,7 +44,7 @@ namespace Scripts.Controllers
             //Debug.Log("Game Index: " + gameIndex);
             int rownumber = gameIndex / ROWCOUNT;
             //Debug.Log("Row number: " + rownumber);
-            float scrollPosition = (float) rownumber / ((float)childCount/ROWCOUNT - 1);
+            float scrollPosition = rownumber / ((float)childCount/ROWCOUNT - 1.2f);
             //Debug.Log("Scroll position: " + scrollPosition);
             scrollRect.verticalNormalizedPosition = 1 - scrollPosition;
         }

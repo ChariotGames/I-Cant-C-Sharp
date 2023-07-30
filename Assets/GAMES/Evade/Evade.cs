@@ -10,7 +10,8 @@ namespace Scripts.Games
         [Space]
         [Header("Game Specific Stuff")]
         [SerializeField] private GameObject player;
-        [SerializeField] private GameObject indLeft, indMid, indRight, laneLeft, laneMid, laneRight, obstacle;
+        [SerializeField] private GameObject indLeft, indMid, indRight, laneLeft, laneMid, laneRight, obstacle, MainContainer;
+        [SerializeField] private AudioClip[] clips;
 
         private bool active = false;
         private GameObject[] Indicators;
@@ -19,7 +20,7 @@ namespace Scripts.Games
         private int secondRandom;
         private int thirdRandom;
         private float chance;
-        private int winCounter = 0;
+        //private int _successes = 0;
         private Color color;
 
         // Start is called before the first frame update
@@ -28,8 +29,10 @@ namespace Scripts.Games
             player.GetComponent<EvadePlayer>().stick = _keys.One.Input;
             color = laneLeft.GetComponent<SpriteRenderer>().color;
         }
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            MainContainer.SetActive(true);
             active = true;
             Indicators = new GameObject[] { indLeft, indMid, indRight };
             Lanes = new GameObject[] { laneLeft, laneMid, laneRight };
@@ -90,33 +93,40 @@ namespace Scripts.Games
                 //active = false;
                 player.transform.GetChild(1).gameObject.SetActive(true);
                 Invoke(nameof(calm), 0.5f);
-                base.AnimateFail(player.transform, 1, 1);
+                //base.AnimateFail(player.transform, 1, 1);
                 base.Easier();
-                base.Lose();
+                //base.Lose();
+                base.Fail();
             }
             else if (col1.IsTouching(col2))
             {
                 Debug.Log("Chuckles... I'm in danger.");
                 //active = false;
-                base.AnimateFail(player.transform, 1, 1);
+                //base.AnimateFail(player.transform, 1, 1);
                 base.Easier();
-                base.Lose();
+                //base.Lose();
+                base.Fail();
             }
             else
             {
-                winCounter++;
-                base.AnimateSuccess(player.transform, 1, 5);
-                base.ScoreUp();
+                if (_successes == successesToWin - 1)
+                {
+                    base.Harder();
+                }
+                //_successes++;
+                //base.AnimateSuccess(player.transform, 1, 5);
+                //base.ScoreUp();
+                base.Success();
             }
 
-            if (winCounter == 5)
+            /*if (_successes == successesToWin)
             {
                 Debug.Log("You passed this quest my son. Now go forth into the world and prove them that you are a real hero of the people! Aka get some Pizza.");
-                winCounter = 0;
+                //_successes = 0;
                 //active = false;
                 base.Harder();
-                base.Win();
-            }
+                //base.Win();
+            }*/
         }
 
         private void GenerateRandoms()

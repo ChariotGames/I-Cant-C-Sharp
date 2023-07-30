@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SettingsDefault
   m_EditorClassIdentifier: 
   lives: 3
+  maxLives: 3
   players: 1
   baseDifficulty: 4
   selectedGame: {fileID: 0}
@@ -47,6 +48,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 81a9624f98f43ce4caceeb93cc07b3d9, type: 2}
   - {fileID: 11400000, guid: 3030e855a97e32742b19d2771bf6b6b1, type: 2}
   - {fileID: 11400000, guid: afdfb8b7ca5001d4da3500ffceb9ae3a, type: 2}
-  _time: 0
   _score: 0
-  _highscore: 0
+  _time: 0

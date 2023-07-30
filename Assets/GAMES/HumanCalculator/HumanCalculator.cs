@@ -26,6 +26,7 @@ namespace Scripts.Games
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
+        private bool _gameStarted;
         
         public bool isAnswerScreen;
         //private int _currentScore;
@@ -44,13 +45,16 @@ namespace Scripts.Games
             rightAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(base.AnimateInstruction());
+            _gameStarted = true;
             StartCoroutine(GenerateNewEquation());
         }
 
         private void Update()
         {
+            if(!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
             if (isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
             {
@@ -198,29 +202,27 @@ namespace Scripts.Games
                // _currentScore++;
                 //base.ScoreUp();
                 //base.AnimateSuccess(_currentScore, _scoreToWin);
-                base.Success();
-                if (base._successes >= base.successesToWin)
+                if (base._successes >= base.successesToWin - 1)
                 {
                     //_currentScore = 0;
                     base.Harder();
                     //base.Win();
                 }
-                
+                base.Success();
             }
             else {
                 Debug.Log("Wrong");
                 //_remainingLives--;
                 //wrongAnswer.gameObject.SetActive(true);
                 //base.AnimateFail(_remainingLives , 3);
-                base.Fail();
-                if (base._fails <= 0)
+                if (base._fails <= 1)
                 {
                     Debug.Log("GAME LOST");
                     //_remainingLives = 3;
                     base.Easier();
                     //base.Lose();
                 }
-                
+                base.Fail();
             }
 
             isAnswerScreen = false;
