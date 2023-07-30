@@ -51,8 +51,8 @@ namespace Scripts.Controllers
         public void GoToMenu()
         {
             uiMap.Disable();
-            animator.SetTrigger("CameraIn");
             StartCoroutine(AnimateToMenu());
+            animator.SetTrigger("CameraIn");
         }
 
         public void QuitGame()
@@ -65,9 +65,8 @@ namespace Scripts.Controllers
 
         private IEnumerator AnimateToMenu()
         {
-            //yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
             SceneManager.LoadScene((int)SceneNr.MainMenu);
-            yield return null;
         }
 
         #endregion Game Mechanics / Methods
