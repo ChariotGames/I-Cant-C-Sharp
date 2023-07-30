@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 3
+  successesToLevelUp: 3
   failsToLose: 1
   gridSize: 5
   space: 1.1

@@ -1007,6 +1007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 10
+  successesToLevelUp: 9
   failsToLose: 3
   player: {fileID: 2641797603571765169}
   bombBase: {fileID: 2641797602970142051}

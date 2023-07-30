@@ -1,4 +1,5 @@
 using System.Collections;
+using Scripts.Controllers;
 using Scripts.Models;
 using TMPro;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace Scripts.Games
             [SerializeField] private TMP_Text task;
             [SerializeField] private TMP_Text buttonYes, buttonNo;
             [SerializeField] private GameObject gamestateWin, gamestateLose;
-            [SerializeField] private int timeout, successesToLevelUp;
+            [SerializeField] private int timeout;
 
         #endregion Serialized Fields
 
@@ -24,7 +25,6 @@ namespace Scripts.Games
             private int _decimalNumber, _romanNumber;
             private bool _isYes, _isNo;
             private float _timeElapsed;
-            private int difficultyTracker, defaultFailsToLose;
 
         #endregion Fields
 
@@ -32,9 +32,6 @@ namespace Scripts.Games
 
         void Start()
         {
-            difficultyTracker = successesToLevelUp;
-            _fails = failsToLose;
-            defaultFailsToLose = failsToLose;
             buttonYes.text = _keys.One.Icon;
             buttonNo.text = _keys.Two.Icon;
             StartCoroutine(GameCoroutine());
@@ -81,20 +78,11 @@ namespace Scripts.Games
                 if (_timeElapsed < timeout && (_decimalNumber < _romanNumber && _isYes && !_isNo) || (_decimalNumber >= _romanNumber && !_isYes && _isNo))
                 {
                     gamestateWin.SetActive(true);
-                    //GameWon();
-                    difficultyTracker--;
-                    if (difficultyTracker <= 0)
-                    {
-                        difficultyTracker = successesToLevelUp;
-                        Harder();
-                    }
                     Success();
                 }
                 else
                 {
                     gamestateLose.SetActive(true);
-                    //GameLost();
-                    difficultyTracker++;
                     Fail();
                 }
                 yield return new WaitForSeconds(1);
@@ -168,39 +156,17 @@ namespace Scripts.Games
                 gamestateWin.SetActive(false);
                 gamestateLose.SetActive(false);
             }
-
-            private void GameWon()
-            {
-                ScoreUp();
-                _successes++;
-                difficultyTracker--;
-                if (difficultyTracker <= 0)
-                {
-                    difficultyTracker = successesToLevelUp;
-                    Harder();
-                }
-                if (_successes >= successesToWin)
-                {
-                    Win(); 
-                }
-            }
-        
-            private void GameLost()
-            {
-                _fails--;
-                difficultyTracker++;
-                if (_fails <= 0)
-                {
-                    _fails = failsToLose;
-                    Easier();
-                    Lose();
-                }
-            }
             
+            private void UpdateDifficulty(Difficulty difficulty)
+            {
+                base.Difficulty = difficulty;
+            }
+
             private void OnEnable()
             {
                 _keys.Two.Input.action.performed += YesButtonPressed;
                 _keys.One.Input.action.performed += NoButtonPressed;
+                MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
             }
 
             public void YesButtonPressed(InputAction.CallbackContext ctx)
@@ -217,6 +183,7 @@ namespace Scripts.Games
             {
                 _keys.Two.Input.action.performed -= YesButtonPressed;
                 _keys.One.Input.action.performed -= NoButtonPressed;
+                MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
             }
 
         #endregion Overarching Methods / Helpers

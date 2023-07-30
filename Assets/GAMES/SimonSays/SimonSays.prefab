@@ -418,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 5
+  successesToLevelUp: 4
   failsToLose: 3
   infoPattern: 
   displayPattern: 

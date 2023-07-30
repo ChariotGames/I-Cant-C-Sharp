@@ -972,6 +972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 15
+  successesToLevelUp: 14
   failsToLose: 3
   cannon: {fileID: 5616315245221226170}
   obstacle: {fileID: 5092726858402455563}

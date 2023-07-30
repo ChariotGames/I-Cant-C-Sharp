@@ -17,7 +17,7 @@ namespace Scripts.Games
 
         [Header("Game Values")]
         [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
-        [SerializeField] protected int successesToWin = 5;
+        [SerializeField] protected int successesToWin = 5, successesToLevelUp;
         [SerializeField] protected int failsToLose = 3;
 
         #endregion Serialized Fields
@@ -41,6 +41,7 @@ namespace Scripts.Games
         private Transform _parent;
         private GameObject _instructionPrefab;
         private float _instructionSpeed;
+        private int difficultyTracker;
 
         #endregion Fields
 
@@ -59,6 +60,7 @@ namespace Scripts.Games
             _playarea = area;
             _parent = transform.parent;
             _fails = failsToLose;
+            difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
         }
 
         /// <summary>
@@ -145,9 +147,18 @@ namespace Scripts.Games
             ScoreUp(score);
             StopTimer();
             AnimateSuccess(parent, _successes, successesToWin);
+            
+            difficultyTracker--;
+            if (difficultyTracker <= 0)
+            {
+                difficultyTracker = successesToLevelUp;
+                Harder();
+            }
+            
             if (_successes >= successesToWin)
             {
                 _successes = 0;
+                _fails = failsToLose;
                 Win();
             }
         }
@@ -189,9 +200,14 @@ namespace Scripts.Games
             //ScoreDown(score);
             StopTimer();
             AnimateFail(parent, _fails, failsToLose);
+            
+            difficultyTracker++;
+
             if (_fails <= 0)
             {
+                _successes = 0;
                 _fails = failsToLose;
+                Easier();
                 Lose();
             }
         }

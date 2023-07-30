@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
+  Button: {fileID: 0}
 --- !u!1 &1687247259344187253
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
+  Button: {fileID: 0}
 --- !u!1 &4665578903984628120
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 10
+  successesToLevelUp: 9
   failsToLose: 3
   buttons:
   - {fileID: 837412508216833830}
@@ -819,6 +822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
+  Button: {fileID: 0}
 --- !u!1 &8835876818757651961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,3 +1009,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4665578903984628121}
+  Button: {fileID: 0}

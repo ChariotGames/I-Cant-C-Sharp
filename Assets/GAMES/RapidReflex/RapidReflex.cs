@@ -1,6 +1,7 @@
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,7 +31,6 @@ namespace Scripts.Games
         [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen, backroundColor;
         [SerializeField] private List<Color> flashColor;
         [SerializeField] private float lightTimer;
-        [SerializeField] private int successesToLevelUp;
 
     #endregion Serialized Fields
 
@@ -39,7 +39,6 @@ namespace Scripts.Games
         private const int NUMBER_LIGHTS = 5;
         private float _timeElapsed = 0, _randomDelay = 0, _timeToAnswer;
         private bool _isButtonPressed = false;
-        private int difficultyTracker, defaultFailsToLose;
 
     #endregion Fields
 
@@ -53,8 +52,6 @@ namespace Scripts.Games
         //backgroundSprite = background.GetComponent<SpriteRenderer>();
         bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop);
         bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom);
-        difficultyTracker = successesToLevelUp;
-        _fails = failsToLose;
         StartCoroutine(GameCoroutine());
     }
 
@@ -152,20 +149,11 @@ namespace Scripts.Games
             if (_timeElapsed < _timeToAnswer && _timeElapsed >= 0)
             {
                 gameState.text = "rapid reflex: " + (int)(_timeElapsed * 1000) + " ms";
-                //GameWon();
-                difficultyTracker--;
-                if (difficultyTracker <= 0)
-                {
-                    difficultyTracker = successesToLevelUp;
-                    Harder();
-                }
                 Success();
             }
             else
             {
                 gameState.text = _timeElapsed > 0 ? "too slow!" : "too early!";
-                //GameLost();
-                difficultyTracker++;
                 Fail();
             }
             yield return new WaitForSeconds(1);
@@ -183,7 +171,6 @@ namespace Scripts.Games
 
             float delay = Random.Range(0.5f, lightTimer + _randomDelay / 3);
             yield return new WaitForSeconds(delay);
-            //Debug.Log("Flashdelay: " + delay);
             StartCoroutine(FlashBackground());
         }
 
@@ -194,36 +181,6 @@ namespace Scripts.Games
             yield return new WaitForSeconds(0.2f);
             //background.SetActive(false);
             backgroundSprite.color = backroundColor;
-        }
-
-        public void Test(GameObject obj) { }
-
-        private void GameWon()
-        {
-            ScoreUp();
-            _successes++;
-            difficultyTracker--;
-            if (difficultyTracker <= 0)
-            {
-                difficultyTracker = successesToLevelUp;
-                Harder();
-            }
-            if (_successes >= successesToWin)
-            {
-                Win(); 
-            }
-        }
-        
-        private void GameLost()
-        {
-            _fails--;
-            difficultyTracker++;
-            if (_fails <= 0)
-            {
-                _fails = failsToLose;
-                Easier();
-                Lose();
-            }
         }
 
         private void UpdateRandomDelay()
@@ -239,12 +196,18 @@ namespace Scripts.Games
             }
             return false;
         }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+            _timeToAnswer = 1.33f - (int)difficulty * 0.33f;
+        }
 
         private void OnEnable()
         {
             _timeToAnswer = 1.33f - (int)difficulty * 0.33f;
-            Debug.Log("AnswerTime: " + _timeToAnswer);
             _keys.One.Input.action.started += EastButtonPressed;
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         public void EastButtonPressed(InputAction.CallbackContext ctx)
@@ -255,6 +218,7 @@ namespace Scripts.Games
         private void OnDisable()
         {
             _keys.One.Input.action.started -= EastButtonPressed;
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
     #endregion Overarching Methods / Helpers

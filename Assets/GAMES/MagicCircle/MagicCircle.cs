@@ -1,6 +1,7 @@
 using System;
 using Scripts.Models;
 using System.Collections;
+using Scripts.Controllers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,6 +38,16 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
+        private void OnEnable()
+        {
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
+        }
+
+        private void OnDisable()
+        {
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
+        }
+
         IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
@@ -60,6 +71,11 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+        }
+        
         /// <summary>
         /// Spawns rings randomly forever.
         /// </summary>
@@ -110,12 +126,6 @@ namespace Scripts.Games
                 //base.AnimateSuccess(circle.transform, 1, 5);
                 //base.ScoreUp();
                 
-                if (_successes >= successesToWin - 1)
-                {
-                    //_correctGuesses = 0;
-                    base.Harder();
-                    //base.Win();
-                }
                 base.Success();
             }
             else
@@ -123,14 +133,7 @@ namespace Scripts.Games
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.red, 0.25f));
                 //_fails++;
                 //base.AnimateFail(circle.transform, 1, 3);
-
-                if (_fails <= 1)
-                {
-                    //stop = true;
-                    //_fails = 0;
-                    base.Easier();
-                    //base.Lose();
-                }
+                
                 base.Fail();
             }
         }

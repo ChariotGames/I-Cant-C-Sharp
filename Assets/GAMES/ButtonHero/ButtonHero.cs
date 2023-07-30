@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using Scripts.GameElements;
 using TMPro;
 using UnityEngine;
@@ -47,6 +49,32 @@ namespace Scripts.Games
 
         private void Awake()
         {
+            SetDifficulty();
+            
+            for (var i = buttons.Count - 1; i >= 0; i--)
+            {
+                // just pool all the objects into a list
+                var button = Instantiate(buttons[i].gameObject, container);
+                var buttonText = button.GetComponent<TextMeshPro>();
+                buttonText.text = _keys.All[i].Icon;
+                button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;
+                _spawnedButtons.Add(buttonText);
+                button.SetActive(false);
+            }
+        }
+
+        private void OnEnable()
+        {
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty;
+        }
+
+        private void OnDisable()
+        {
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty;
+        }
+
+        private void SetDifficulty()
+        {
             switch (Difficulty)
             {
                 case Difficulty.EASY:
@@ -59,17 +87,12 @@ namespace Scripts.Games
                     _maxRoundTime = 1;
                     break;
             }
+        }
 
-            for (var i = buttons.Count - 1; i >= 0; i--)
-            {
-                // just pool all the objects into a list
-                var button = Instantiate(buttons[i].gameObject, container);
-                var buttonText = button.GetComponent<TextMeshPro>();
-                buttonText.text = _keys.All[i].Icon;
-                button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;
-                _spawnedButtons.Add(buttonText);
-                button.SetActive(false);
-            }
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+            SetDifficulty();
         }
 
         private IEnumerator Start()
@@ -135,10 +158,6 @@ namespace Scripts.Games
             //Destroy(damageIconGo, 1);
             ResetTimer();
             Fail();
-            if (base._fails <= 0)
-            {
-                base.Easier();
-            }
         }
 
         public void ResetTimer()
@@ -201,12 +220,6 @@ namespace Scripts.Games
             //base.AnimateSuccess(_currentScore, _scoreToWin);
             //base.ScoreUp();
             Success();
-            if (_currentScore >= base.successesToWin)
-            {
-                //_currentScore = 0;
-                base.Harder();
-                //base.Win();
-            }
         }
     }
 }

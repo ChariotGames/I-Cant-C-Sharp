@@ -3,6 +3,7 @@ using Scripts.Models;
 using Scripts.Pascal;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -53,6 +54,7 @@ namespace Scripts.Games
         private void OnEnable()
         {
             BottomBounds.DamageTaken += TakeDamage;
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         private IEnumerator Start()
@@ -69,22 +71,7 @@ namespace Scripts.Games
             cannon.gameObject.SetActive(true);
 
             // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
-            switch (Difficulty)
-            {
-                case Difficulty.EASY:
-                    _numObstacles = 1;
-                    _spawnDelay = 1.5f;
-                    break;
-                case Difficulty.MEDIUM:
-                    _numObstacles = 2;
-                    _spawnDelay = 2f;
-                    break;
-                case Difficulty.HARD:
-                    _numObstacles = 2;
-                    _spawnDelay = 2f;
-                    ActivateHorizontalMovement();
-                    break;
-            }
+            SetDifficulty();
 
             StartCoroutine(SpawnCoroutine());
         }
@@ -102,25 +89,44 @@ namespace Scripts.Games
         private void OnDisable()
         {
             BottomBounds.DamageTaken -= TakeDamage;
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
         #endregion Built-Ins / MonoBehaviours
 
         #region Game Mechanics / Methods
 
-
+        private void SetDifficulty()
+        {
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    _numObstacles = 1;
+                    _spawnDelay = 1.5f;
+                    break;
+                case Difficulty.MEDIUM:
+                    _numObstacles = 2;
+                    _spawnDelay = 2f;
+                    break;
+                case Difficulty.HARD:
+                    _numObstacles = 2;
+                    _spawnDelay = 2f;
+                    ActivateHorizontalMovement();
+                    break;
+            }
+        }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+            SetDifficulty();
+        }
 
         public void IncreasePoints()
         {
            // _currentScore++;
            // base.AnimateSuccess(_currentScore, _scoreToWin);
            // base.ScoreUp();
-           if (base._successes >= base.successesToWin - 1)
-           {
-               //_currentScore = 0;
-               base.Harder();
-               //base.Win();
-           }
            Success();
         }
 
@@ -131,12 +137,6 @@ namespace Scripts.Games
         {
             //_healthPoints--;
             //base.AnimateFail(_healthPoints, 3);
-            if (base._fails <= 1)
-            {
-                //_healthPoints = 3;
-                base.Easier();
-               // base.Lose();
-            }
             base.Fail();
             //lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
         }

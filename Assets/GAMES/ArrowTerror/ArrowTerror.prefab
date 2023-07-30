@@ -905,7 +905,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 5
-  failsToLose: 1
+  successesToLevelUp: 4
+  failsToLose: 2
   sound: {fileID: 4907860675227133321}
   clips:
   - {fileID: 8300000, guid: fe6bb70433500eb42bfd4303fb73fad5, type: 3}

@@ -2,6 +2,7 @@ using Scripts.GameElements;
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -48,19 +49,7 @@ namespace Scripts.Games
         private void Awake()
         {
             _audio = GetComponent<AudioSource>();
-            switch (Difficulty)
-            {
-                case Difficulty.EASY:
-                    groundMaterial.bounciness = 1.05f;
-                    break;
-                case Difficulty.MEDIUM:
-                    groundMaterial.bounciness = 1f;
-                    break;
-                case Difficulty.HARD:
-                    groundMaterial.bounciness = 0.975f;
-                    hasRandomGravity = true;
-                    break;
-            }
+            SetDifficulty();
         }
 
         private IEnumerator Start()
@@ -99,6 +88,7 @@ namespace Scripts.Games
             _keys.One.Input.action.performed += DecreaseGuessingNumber;
             _keys.Two.Input.action.performed += SubmitGuess;
             _keys.Three.Input.action.performed += IncreaseGuessingNumber;
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         private void OnDisable()
@@ -107,6 +97,7 @@ namespace Scripts.Games
             _keys.One.Input.action.performed -= DecreaseGuessingNumber;
             _keys.Two.Input.action.performed -= SubmitGuess;
             _keys.Three.Input.action.performed -= IncreaseGuessingNumber;
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -117,20 +108,35 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+            SetDifficulty();
+        }
+        
+        private void SetDifficulty()
+        {
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    groundMaterial.bounciness = 1.05f;
+                    break;
+                case Difficulty.MEDIUM:
+                    groundMaterial.bounciness = 1f;
+                    break;
+                case Difficulty.HARD:
+                    groundMaterial.bounciness = 0.975f;
+                    hasRandomGravity = true;
+                    break;
+            }
+        }
+        
         private void IncreaseScore()
         {
             //_currentScore++;
             //base.AnimateSuccess(_currentScore, _scoreToWin);
            // base.ScoreUp();
            base.Success();
-            if (base._successes >= base.successesToWin)
-            {
-                //_currentScore = 0;
-                base.Harder();
-                //base.Win();
-            }
-
-           
         }
 
         private void SubmitGuess(InputAction.CallbackContext ctx)
@@ -150,15 +156,7 @@ namespace Scripts.Games
                 //_remainingLives--;
                 //base.AnimateFail(_remainingLives , 3);
                 Fail();
-                if (base._fails <= 0)
-                {
-                    //_remainingLives = 3;
-                    base.Easier();
-                    guessingOverlay.gameObject.SetActive(false);
-                    Debug.Log("You lost all your lives in this game");
-                    //Lose();
-                }
-                
+
                 guessingOverlay.gameObject.SetActive(false);
                 resultText.gameObject.SetActive(true);
                 //wrongAnswer.gameObject.SetActive(true);

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using Scripts.Models;
+using Random = UnityEngine.Random;
 
 
 namespace Scripts.Games
@@ -45,6 +48,16 @@ namespace Scripts.Games
             rightAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
         }
 
+        private void OnEnable()
+        {
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
+        }
+
+        private void OnDisable()
+        {
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
+        }
+
         private IEnumerator Start()
         {
             yield return StartCoroutine(base.AnimateInstruction());
@@ -69,6 +82,11 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+        }
+        
         public IEnumerator GenerateNewEquation()
         {
             yield return new WaitForSeconds(1.5f);
@@ -202,12 +220,6 @@ namespace Scripts.Games
                // _currentScore++;
                 //base.ScoreUp();
                 //base.AnimateSuccess(_currentScore, _scoreToWin);
-                if (base._successes >= base.successesToWin - 1)
-                {
-                    //_currentScore = 0;
-                    base.Harder();
-                    //base.Win();
-                }
                 base.Success();
             }
             else {
@@ -215,13 +227,6 @@ namespace Scripts.Games
                 //_remainingLives--;
                 //wrongAnswer.gameObject.SetActive(true);
                 //base.AnimateFail(_remainingLives , 3);
-                if (base._fails <= 1)
-                {
-                    Debug.Log("GAME LOST");
-                    //_remainingLives = 3;
-                    base.Easier();
-                    //base.Lose();
-                }
                 base.Fail();
             }
 

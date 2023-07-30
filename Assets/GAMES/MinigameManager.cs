@@ -29,6 +29,8 @@ namespace Scripts.Controllers
         public static event Action<string> OnClearKeys;
         public static event Action OnLoseLife;
 
+        public static event Action<Difficulty> OnDifficultyChanged;
+
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
         private Genre _otherGenre;
@@ -294,6 +296,12 @@ namespace Scripts.Controllers
             if (found != null)
             {
                 found.Difficulty = difficulty;
+            }
+
+            if (settings.SelectedGame != null)
+            {
+                if(difficulty == Difficulty.VARYING || difficulty == Difficulty.TUTORIAL) return;
+                OnDifficultyChanged?.Invoke(difficulty);
             }
         }
 

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using Scripts.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,7 +57,6 @@ namespace Scripts.Games
         private int selectorIndex;
         private bool gameVariant;
         private bool playerHasSubmitted = false;
-        private int successCounter = 0;
 
         private struct trafficLight
         {
@@ -174,11 +175,20 @@ namespace Scripts.Games
             _keys.Three.Input.action.performed -= ButtonPressR;
         }
 
+        private void OnEnable()
+        {
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
+        }
+
         private void OnDisable()
         {
-            _keys.One.Input.action.performed -= ButtonPressL;
-            _keys.Two.Input.action.performed -= ButtonPressSubmit;
-            _keys.Three.Input.action.performed -= ButtonPressR;
+            DisableInputs();
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
+        }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
         }
 
         public void ButtonPressL(InputAction.CallbackContext ctx)
@@ -275,16 +285,11 @@ namespace Scripts.Games
         {
             if (correctColors.Contains(secondWaveColors[selectorIndex]))
             {
-                base.ScoreUp(5);
-                ++successCounter;
-                base.AnimateSuccess(gameObject.transform, successCounter, successToWin);
-                base.Harder();
-                base.Win();
+                Success();
             }
             else
             {
-                base.Easier();
-                base.Lose();
+                Fail();
             }
         }
 

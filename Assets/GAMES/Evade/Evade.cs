@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using UnityEngine;
 using Scripts.Models;
+using Random = UnityEngine.Random;
 
 namespace Scripts.Games
 {
@@ -29,6 +32,17 @@ namespace Scripts.Games
             player.GetComponent<EvadePlayer>().stick = _keys.One.Input;
             color = laneLeft.GetComponent<SpriteRenderer>().color;
         }
+
+        private void OnEnable()
+        {
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
+        }
+
+        private void OnDisable()
+        {
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
+        }
+
         IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
@@ -37,6 +51,11 @@ namespace Scripts.Games
             Indicators = new GameObject[] { indLeft, indMid, indRight };
             Lanes = new GameObject[] { laneLeft, laneMid, laneRight };
             Invoke(nameof(ActivateIndicators), 3);
+        }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
         }
 
         private void ActivateIndicators()
@@ -94,7 +113,6 @@ namespace Scripts.Games
                 player.transform.GetChild(1).gameObject.SetActive(true);
                 Invoke(nameof(calm), 0.5f);
                 //base.AnimateFail(player.transform, 1, 1);
-                base.Easier();
                 //base.Lose();
                 base.Fail();
             }
@@ -103,16 +121,11 @@ namespace Scripts.Games
                 Debug.Log("Chuckles... I'm in danger.");
                 //active = false;
                 //base.AnimateFail(player.transform, 1, 1);
-                base.Easier();
                 //base.Lose();
                 base.Fail();
             }
             else
             {
-                if (_successes == successesToWin - 1)
-                {
-                    base.Harder();
-                }
                 //_successes++;
                 //base.AnimateSuccess(player.transform, 1, 5);
                 //base.ScoreUp();

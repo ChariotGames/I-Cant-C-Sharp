@@ -412,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 16
+  successesToLevelUp: 15
   failsToLose: 4
   button: {fileID: 772639466455137530, guid: ad8f0f8464d5b46e8ac0655f6f814b72, type: 3}
   buttonContainer: {fileID: 2351859286943156194}

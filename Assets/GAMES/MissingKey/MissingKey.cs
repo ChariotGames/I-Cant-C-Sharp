@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Scripts.Models;
 using System.Collections;
+using Scripts.Controllers;
 
 namespace Scripts.Games
 {
@@ -33,21 +34,7 @@ namespace Scripts.Games
         {
             _mainCamera = Camera.main;
 
-            switch (Difficulty)
-            {
-                case Difficulty.EASY:
-                    count = 3;
-                    break;
-                case Difficulty.MEDIUM:
-                    count = 6;
-                    break;
-                case Difficulty.HARD:
-                    count = 9;
-                    break;
-                default:
-                    count = 3;
-                    break;
-            }
+            SetDifficulty();
 
             for (int i = 0; i < buttons.Count; i++)
             {
@@ -87,7 +74,8 @@ namespace Scripts.Games
             CheckWin();
 
         }
-
+        
+        /*
         private void TimerEnded()
         {
 
@@ -106,6 +94,7 @@ namespace Scripts.Games
 
 
         }
+        */
 
         // Subscribes to playerPress()
         private void OnEnable()
@@ -114,7 +103,7 @@ namespace Scripts.Games
             _keys.Two.Input.action.performed += PlayerPress;
             _keys.Three.Input.action.performed += PlayerPress;
             _keys.Four.Input.action.performed += PlayerPress;
-           
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         private void OnDisable()
@@ -123,8 +112,34 @@ namespace Scripts.Games
             _keys.Two.Input.action.performed -= PlayerPress;
             _keys.Three.Input.action.performed -= PlayerPress;
             _keys.Four.Input.action.performed -= PlayerPress;
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
+        private void SetDifficulty()
+        {
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    count = 3;
+                    break;
+                case Difficulty.MEDIUM:
+                    count = 6;
+                    break;
+                case Difficulty.HARD:
+                    count = 9;
+                    break;
+                default:
+                    count = 3;
+                    break;
+            }
+        }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+            SetDifficulty();
+        }
+        
         // Creates a new random pattern 
         private void GeneratePattern()
         {
@@ -218,13 +233,6 @@ namespace Scripts.Games
 
         private void ScoreOneUp()
         {
-            
-            if (base._successes >= successesToWin - 1)
-            {
-             
-              base.Harder();
-            }
-            
             base.Success();
         }
 
@@ -268,13 +276,6 @@ namespace Scripts.Games
         private void failed()
         {
             spriteLose.gameObject.SetActive(true);
-            base._successes = 0;
-            if (base._fails <= 1)
-            {
-                Debug.Log("Lost a heart!");
-                loseCounter = 0;
-                base.Easier();
-            }
             Fail();
         }
     }

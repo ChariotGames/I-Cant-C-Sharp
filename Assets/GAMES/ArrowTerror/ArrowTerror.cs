@@ -1,7 +1,10 @@
+using System;
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts.Games
 {
@@ -46,6 +49,16 @@ namespace Scripts.Games
                 border.GetComponent<EdgeCollider2D>().points = borders;
             }
             
+        }
+        
+        private void OnEnable()
+        {
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
+        }
+
+        private void OnDisable()
+        {
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty;
         }
 
         IEnumerator Start()
@@ -124,13 +137,17 @@ namespace Scripts.Games
             {
                 Debug.Log("Time is up!");
                 timerEnded = true;
-                base.Easier();
                 //base.Lose();
                 base.Fail();
                 checkpointsCollected = 0;
                 _time = 0;
                 DestroyObjects();
             }
+        }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
         }
 
         internal void UpdateEnemyPositions(Vector3 position)
@@ -180,7 +197,6 @@ namespace Scripts.Games
                         invul = true;
                         Invoke(nameof(switchState), 2);
                         //base.AnimateFail(player.transform, 1, 1);
-                        base.Easier();
                         //base.Lose();
                         base.Fail();
                     } 
@@ -188,11 +204,6 @@ namespace Scripts.Games
                 case ElementType.GOAL:
                     if (checkpointsCollected == ammountCheckpoints)
                     {
-                        if (_successes == successesToWin - 1)
-                        {
-                            base.Harder();
-                        }
-                        
                         checkpointsCollected = 0;
                         _time = 0;
                         //_successes++;

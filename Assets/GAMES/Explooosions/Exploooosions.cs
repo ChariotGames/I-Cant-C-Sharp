@@ -1,5 +1,9 @@
+using System;
 using System.Collections;
+using Scripts.Controllers;
+using Scripts.Models;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts.Games
 {
@@ -21,6 +25,16 @@ namespace Scripts.Games
         private void Awake()
         {
             player.GetComponent<ExpPlayer>().stick = _keys.One.Input;
+        }
+
+        private void OnEnable()
+        {
+            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
+        }
+
+        private void OnDisable()
+        {
+            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
         IEnumerator Start()
@@ -59,10 +73,6 @@ namespace Scripts.Games
         {
             if (col1.IsTouching(col2))
             {
-                if (_fails == 1)
-                {
-                    base.Easier();
-                }
                 Debug.Log("Chuckles... I'm in danger.");
                 //_fails++;
                 base.Fail();
@@ -73,10 +83,6 @@ namespace Scripts.Games
             }
             else
             {
-                if (_successes == successesToWin - 1)
-                {
-                    base.Harder();
-                }
                 base.Success();
                 //base.AnimateSuccess(1, 10);
                 //base.ScoreUp();
@@ -101,6 +107,11 @@ namespace Scripts.Games
                 base.Easier();
                 //base.Lose();
             }*/
+        }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
         }
     }
 }

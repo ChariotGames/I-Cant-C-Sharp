@@ -137,13 +137,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 5
+  successesToLevelUp: 4
   failsToLose: 3
+  trafficLights: []
   trafficLightPrefab: {fileID: 6244205913135684408, guid: 191d15b78c8698c489a961ece84981a4, type: 3}
   selector_ref: {fileID: 989249343899018306}
   simonNot_ref: {fileID: 989249343446961647}
   simonOk_ref: {fileID: 989249342118284167}
   text_ref: {fileID: 5018185978756097023}
-  trafficLights: []
   delaySecondWave: 5
   timeToSelectLight: 5
   successToWin: 5

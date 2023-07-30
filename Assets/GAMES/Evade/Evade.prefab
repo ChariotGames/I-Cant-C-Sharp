@@ -1637,7 +1637,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 5
-  failsToLose: 1
+  successesToLevelUp: 4
+  failsToLose: 2
   player: {fileID: 6074431469293827240}
   indLeft: {fileID: 6074431468874699804}
   indMid: {fileID: 6074431468176991242}
