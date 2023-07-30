@@ -65,8 +65,9 @@ namespace Scripts.Controllers
 
         private IEnumerator AnimateToMenu()
         {
-            yield return new WaitForSeconds(2.0f);
+            //yield return new WaitForSeconds(2.0f);
             SceneManager.LoadScene((int)SceneNr.MainMenu);
+            yield return null;
         }
 
         #endregion Game Mechanics / Methods
