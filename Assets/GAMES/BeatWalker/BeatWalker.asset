@@ -32,4 +32,4 @@ MonoBehaviour:
     four: {fileID: 0}
   prefab: {fileID: 2351859287407049683, guid: a215d3234a3d549d99773e17adb082c4, type: 3}
   preview: {fileID: 0}
-  instructionText: press button on time!
+  instructionText: "press button \non time!"

@@ -25,7 +25,8 @@ namespace Scripts.Games
         private float _time = 0;
         private bool timerEnded;
         private int loseCounter = 0;
-        private bool _isAnswerScreen;
+        private bool _isAnswerScreen, startGame;
+
 
 
         private void Awake()
@@ -59,6 +60,7 @@ namespace Scripts.Games
          private IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
+            startGame = true;
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
 
             // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
@@ -72,6 +74,7 @@ namespace Scripts.Games
         // Update is called once per frame
         void Update()
         {
+            if (!startGame) return;
             _time += Time.deltaTime;
             if (_time >= ROUND_TIME)
             {
