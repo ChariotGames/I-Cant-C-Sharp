@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Scripts.Games
 {
@@ -11,6 +10,8 @@ namespace Scripts.Games
 
         [SerializeField] private InputActionReference[] allowedButtons;
         [SerializeField] private string code = "UUDDLRLRWN";
+        [SerializeField] private Animator camImator, konamiMator;
+        [SerializeField] private Button backButton;
 
         #endregion Serialized Fields
 
@@ -41,6 +42,12 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
+        private void Restart()
+        {
+            _index = 0;
+            codes = code.Split();
+        }
+
         private void ButtonPressed(InputAction.CallbackContext ctx)
         {
             
@@ -48,13 +55,21 @@ namespace Scripts.Games
             
             _index++;
 
-            if (_index >= codes.Length) gameObject.SetActive(false);
-        }
+            if (_index >= codes.Length)
+            {
+                camImator.SetTrigger("KonamIN");
+                camImator.ResetTrigger("KonamOUT");
 
-        private void Restart()
-        {
-            _index = 0;
-            codes = code.Split();
+                konamiMator.SetTrigger("Alex");
+                konamiMator.SetTrigger("Enno");
+                konamiMator.SetTrigger("Jannis");
+                konamiMator.SetTrigger("Jerome");
+                konamiMator.SetTrigger("Milana");
+                konamiMator.SetTrigger("Nermin");
+                konamiMator.SetTrigger("Pascal");
+
+                backButton.enabled = true;
+            }
         }
 
         #endregion Game Mechanics / Methods
