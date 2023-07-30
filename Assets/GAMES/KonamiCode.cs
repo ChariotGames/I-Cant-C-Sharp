@@ -10,7 +10,7 @@ namespace Scripts.Games
 
         [SerializeField] private InputActionReference[] allowedButtons;
         [SerializeField] private string code = "UUDDLRLRWN";
-        [SerializeField] private Animator camImator, konamiMator;
+        [SerializeField] private Animator camImator, konamiMator, endAnimator;
         [SerializeField] private Button backButton;
 
         #endregion Serialized Fields
@@ -62,7 +62,8 @@ namespace Scripts.Games
             {
                 camImator.SetTrigger("KonamIN");
                 camImator.ResetTrigger("KonamOUT");
-
+                endAnimator.SetTrigger("EndOut");
+                endAnimator.ResetTrigger("EndIn");
                 konamiMator.SetTrigger("KonamIN");
                 _index = 0;
                 backButton.enabled = true;
