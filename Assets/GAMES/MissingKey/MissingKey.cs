@@ -56,11 +56,12 @@ namespace Scripts.Games
         }
 
         // Start is called before the first frame update
-        void Start()
+         private IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
 
-           // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+            // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             //_playfieldWidth = _cameraViewportBounds.size.x / 2;
             //Debug.Log(_cameraViewportBounds.max.x);
             GeneratePattern();

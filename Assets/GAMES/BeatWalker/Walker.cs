@@ -23,8 +23,8 @@ namespace Scripts.Games
         #endregion Serialized Fields
 
         #region Fields
-        private float lowerBound;
-        private float upperBound;
+        private float leftBound;
+        private float rightBound;
         private bool buttonPressed = false;
         private bool lost = false;
         private List<GameObject> buttons = new();
@@ -51,64 +51,59 @@ namespace Scripts.Games
             //Physics2D.gravity = new Vector2(-9.8f, 0);
 
             //Get coords of activation region
-            float regionSizeY = GameObject.Find("ActivationRegion").GetComponent<Collider2D>().bounds.size.y;
-            float regionPosY = GameObject.Find("ActivationRegion").transform.position.y;
+            float regionSizeX = GameObject.Find("ActivationRegion").GetComponent<Collider2D>().bounds.size.x;
+            float regionPosX = GameObject.Find("ActivationRegion").transform.position.x;
 
-            lowerBound = regionPosY - regionSizeY / 2;
-            upperBound = regionPosY + regionSizeY / 2;
+            leftBound = regionPosX - regionSizeX / 2;
+            rightBound = regionPosX + regionSizeX / 2;
             //button.GetComponent<BasePressElement>().Button = _keys.One.Input;
             
             switch(Difficulty)
-            {
-                case Difficulty.EASY:
-                    PlayerPrefs.SetFloat("speed", 3f);
-                    repeatNumber = 2;
-                    minRange = 0.5f;
-                    maxRange = 2.0f;
-                    
-                    break;
-                case Difficulty.MEDIUM:
-                    PlayerPrefs.SetFloat("speed", 10f);
-                    repeatNumber = 4;
-                    minRange = 0.1f;
-                    maxRange = 0.5f;
-                    
-                    break;
-                case Difficulty.HARD:
-                    PlayerPrefs.SetFloat("speed", 15f);
+                {
+                    case Difficulty.EASY:
+                        PlayerPrefs.SetFloat("speed", 3f);
+                        repeatNumber = 2;
+                        minRange = 0.5f;
+                        maxRange = 2.0f;
+                        
+                        break;
+                    case Difficulty.MEDIUM:
+                        PlayerPrefs.SetFloat("speed", 10f);
+                        repeatNumber = 4;
+                        minRange = 0.1f;
+                        maxRange = 0.5f;
+                        
+                        break;
+                    case Difficulty.HARD:
+                        PlayerPrefs.SetFloat("speed", 15f);
                     repeatNumber = 8;
-                    minRange = 0.0f;
-                    maxRange = 0.2f;
-                    
-                    break;
-                default:
-                    PlayerPrefs.SetFloat("speed", 3f);
-                    minRange = 0.5f;
-                    maxRange = 2.0f;
-                    
-                    break;
-            }
+                        minRange = 0.0f;
+                        maxRange = 0.2f;
+                        
+                        break;
+                    default:
+                        PlayerPrefs.SetFloat("speed", 3f);
+                        minRange = 0.5f;
+                        maxRange = 2.0f;
+                        
+                        break;
+                }
+          
         }
 
         private void OnEnable()
         {
             //InputHandler.ArrowDown += ButtonPress;
             _keys.One.Input.action.performed += ButtonPress;
-            DestroyArea.OnDestroy += removeClickedButton;
-            DestroyArea.OnFail += failed;
-        }
-        
-        private void OnDisable()
-        {
-            _keys.One.Input.action.performed -= ButtonPress;
-            DestroyArea.OnDestroy -= removeClickedButton;
-            DestroyArea.OnFail -= failed;
         }
 
-        void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
             //instantiateButton();
             StartCoroutine(InstantiateButtonsWithDelay());
+           
+
         }
 
         void Update()
@@ -145,6 +140,7 @@ namespace Scripts.Games
         {
             GameObject newButton = Instantiate(button, buttonContainer.transform.position, Quaternion.identity, buttonContainer.transform);
             buttons.Add(newButton);
+
         }
 
         
@@ -153,22 +149,22 @@ namespace Scripts.Games
 
             for (int i = 0; i < buttons.Count; i++)
             {
-                float buttonPosY = buttonContainer.transform.GetChild(i).gameObject.transform.position.y;
+                float buttonPosX = buttonContainer.transform.GetChild(i).gameObject.transform.position.x;
 
-                if (buttonPosY < lowerBound)
+                if (buttonPosX < leftBound)
                 {
                     
                     removeClickedButton(i);
                     failed();
 
                 }
-                else if (buttonPosY > upperBound && buttonPressed)
+                else if (buttonPosX > rightBound && buttonPressed)
                 {
                     removeClickedButton(i);
                     failed();
                     
                 }
-                else if (buttonPosY > lowerBound && buttonPosY < upperBound && buttonPressed)
+                else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
                 {
                     removeClickedButton(i);
                     won();
@@ -186,7 +182,7 @@ namespace Scripts.Games
         private void failed()
         {
 
-            if(base._fails <= 1)
+            if(base._fails <= 0)
             {
                 base.Easier();
             }
@@ -202,7 +198,7 @@ namespace Scripts.Games
         private void won()
         {
 
-            if(base._successes >= successesToWin - 1) 
+            if(base._successes >= 32) 
             {
                 base.Harder();
             }
