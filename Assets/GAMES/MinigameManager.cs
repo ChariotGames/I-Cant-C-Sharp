@@ -294,7 +294,6 @@ namespace Scripts.Controllers
             if (found != null)
             {
                 found.Difficulty = difficulty;
-                return;
             }
         }
 

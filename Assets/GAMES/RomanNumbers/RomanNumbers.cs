@@ -129,7 +129,7 @@ namespace Scripts.Games
             private string DecimalToRoman(int value)
             {
                 if ((value < 1) || (value >= 4999)) { return ""; }
-                string res = "";
+                string romanNumber = "";
                 
                 /*
                     res += new StringBuilder().Insert(0, "M", value / 1000).ToString();
@@ -137,27 +137,27 @@ namespace Scripts.Games
                     ...
                  */
                 
-                while (value >= 1000) { value -= 1000; res += "m"; }
-                if (value >= 900) { value -= 900; res += "cm"; }
+                while (value >= 1000) { value -= 1000; romanNumber += "m"; }
+                if (value >= 900) { value -= 900; romanNumber += "cm"; }
 
-                while (value >= 500) { value -= 500; res += "d"; }
-                if (value >= 400) { value -= 400; res += "cd"; }
+                while (value >= 500) { value -= 500; romanNumber += "d"; }
+                if (value >= 400) { value -= 400; romanNumber += "cd"; }
 
-                while (value >= 100) { value -= 100; res += "c"; }
-                if (value >= 90) { value -= 90; res += "xc"; }
+                while (value >= 100) { value -= 100; romanNumber += "c"; }
+                if (value >= 90) { value -= 90; romanNumber += "xc"; }
 
-                while (value >= 50) { value -= 50; res += "l"; }
-                if (value >= 40) { value -= 40; res += "xl"; }
+                while (value >= 50) { value -= 50; romanNumber += "l"; }
+                if (value >= 40) { value -= 40; romanNumber += "xl"; }
 
-                while (value >= 10) { value -= 10; res += "x"; }
-                if (value >= 9) { value -= 9; res += "ix"; }
+                while (value >= 10) { value -= 10; romanNumber += "x"; }
+                if (value >= 9) { value -= 9; romanNumber += "ix"; }
 
-                while (value >= 5) { value -= 5; res += "v"; }
-                if (value >= 4) { value -= 4; res += "iv"; }
+                while (value >= 5) { value -= 5; romanNumber += "v"; }
+                if (value >= 4) { value -= 4; romanNumber += "iv"; }
 
-                while (value >= 1) { value -= 1; res += "i"; }
+                while (value >= 1) { value -= 1; romanNumber += "i"; }
                 
-                return res;
+                return romanNumber;
             }
             
             private void SceneReset()
