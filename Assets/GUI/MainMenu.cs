@@ -37,7 +37,7 @@ namespace Scripts.Controllers
         {
             if (mainCamera) mainCamera = Camera.main;
 
-            ResetSettings();
+            //ResetSettings();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             livesText.text = settings.Lives.ToString();
             difficulty.value = (int)settings.BaseDifficulty;
@@ -134,6 +134,7 @@ namespace Scripts.Controllers
         public void SetLives(int change)
         {
             settings.Lives = Mathf.Clamp(settings.Lives + change, 1, 9);
+            PlayerPrefs.SetInt("lives",settings.Lives);
             settings.MaxLives = Mathf.Clamp(settings.MaxLives + change, 1, 9);
             livesText.text = settings.Lives.ToString();
         }

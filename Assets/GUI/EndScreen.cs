@@ -40,7 +40,7 @@ namespace Scripts.Controllers
 
         public void Restart()
         {
-            settings.Lives = settings.MaxLives;
+            settings.Lives = PlayerPrefs.GetInt("lives");
             //string t = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene((int)SceneNr.PlayField);
         }
