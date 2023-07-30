@@ -16,7 +16,7 @@ namespace Scripts.Games
 
         [SerializeField] protected BaseGame parent;
 
-        public InputActionReference Button { get; set; }
+        public InputActionReference Button;
 
         #endregion Serialized Fields
 

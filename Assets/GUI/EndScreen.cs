@@ -35,16 +35,6 @@ namespace Scripts.Controllers
             timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
             highscorePanel.DisplayScores();
             animator.ResetTrigger("CameraIn");
-            //HighscoreDisplay.AddScore();
-
-            playerMap = playerInput.actionMaps[0];
-            uiMap = playerInput.actionMaps[1];
-        }
-
-        private void OnEnable()
-        {
-            playerMap.Disable();
-            uiMap.Enable();
         }
 
         #endregion Built-Ins / MonoBehaviours
