@@ -17,7 +17,7 @@ namespace Scripts.Games
 
         #region Fields
 
-        private string[] codes;
+        private char[] codes;
         private int _index;
 
         #endregion Fields
@@ -45,13 +45,16 @@ namespace Scripts.Games
         private void Restart()
         {
             _index = 0;
-            codes = code.Split();
+            codes = code.ToCharArray();
         }
 
         private void ButtonPressed(InputAction.CallbackContext ctx)
         {
-            
-            if (!ctx.action.name.Contains(codes[_index])) Restart();
+            if (!ctx.action.name.Contains(codes[_index]))
+            {
+                Restart();
+                return;
+            }
             
             _index++;
 
@@ -60,14 +63,8 @@ namespace Scripts.Games
                 camImator.SetTrigger("KonamIN");
                 camImator.ResetTrigger("KonamOUT");
 
-                konamiMator.SetTrigger("Alex");
-                konamiMator.SetTrigger("Enno");
-                konamiMator.SetTrigger("Jannis");
-                konamiMator.SetTrigger("Jerome");
-                konamiMator.SetTrigger("Milana");
-                konamiMator.SetTrigger("Nermin");
-                konamiMator.SetTrigger("Pascal");
-
+                konamiMator.SetTrigger("KonamIN");
+                _index = 0;
                 backButton.enabled = true;
             }
         }

@@ -436,6 +436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 519494466}
+  - component: {fileID: 519494467}
   m_Layer: 5
   m_Name: Pictures
   m_TagString: Untagged
@@ -465,6 +466,27 @@ Transform:
   m_Father: {fileID: 1777191722}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &519494467
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519494465}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a73d75a09d120324cb95900c24813d3e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &555049472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,6 +2689,7 @@ GameObject:
   - component: {fileID: 1533554181}
   - component: {fileID: 1533554180}
   - component: {fileID: 1533554182}
+  - component: {fileID: 1533554183}
   m_Layer: 0
   m_Name: chariot
   m_TagString: Untagged
@@ -2775,7 +2798,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1533554180}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1097922777}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: KonamOUT
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1222205900}
+        m_TargetAssemblyTypeName: UnityEngine.EventSystems.EventSystem, UnityEngine.UI
+        m_MethodName: SetSelectedGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2028744352}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1533554183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533554178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4664b1185aca5154eb261706e6f40211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573353320
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,7 +3463,6 @@ GameObject:
   - component: {fileID: 1777191719}
   - component: {fileID: 1777191718}
   - component: {fileID: 1777191717}
-  - component: {fileID: 1777191724}
   m_Layer: 0
   m_Name: KonamiDesk
   m_TagString: Untagged
@@ -3554,29 +3612,8 @@ MonoBehaviour:
   - {fileID: -1683647997006288176, guid: 25ff31b13c1d3cf459a550e24612fd75, type: 3}
   code: UUDDLRLRWN
   camImator: {fileID: 1097922777}
-  konamiMator: {fileID: 1777191724}
+  konamiMator: {fileID: 519494467}
   backButton: {fileID: 1533554182}
---- !u!95 &1777191724
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1777191716}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a73d75a09d120324cb95900c24813d3e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1818702005
 GameObject:
   m_ObjectHideFlags: 0
