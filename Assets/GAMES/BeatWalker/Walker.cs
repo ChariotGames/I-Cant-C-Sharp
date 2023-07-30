@@ -49,9 +49,7 @@ namespace Scripts.Games
         {
             //button.GetComponent<BasePressElement>().Button = Keys.One.Input;
             //Physics2D.gravity = new Vector2(-9.8f, 0);
-
-            successesToWin = 16;
-            failsToLose = 4;
+            
             //Get coords of activation region
             float regionSizeY = GameObject.Find("ActivationRegion").GetComponent<Collider2D>().bounds.size.y;
             float regionPosY = GameObject.Find("ActivationRegion").transform.position.y;
