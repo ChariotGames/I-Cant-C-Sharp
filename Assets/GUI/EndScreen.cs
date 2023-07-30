@@ -11,19 +11,16 @@ namespace Scripts.Controllers
     public class EndScreen : MonoBehaviour
     {
         #region Serialized Fields
-
-        [SerializeField] private InputActionAsset playerInput;
+        
         [SerializeField] private HighscoreDisplay highscorePanel;
         [SerializeField] private Settings settings;
         [SerializeField] private Animator animator;
         [SerializeField] private TMP_Text scoreText, timerText;
 
-
         #endregion Serialized Fields
 
         #region Fields
-
-        private InputActionMap playerMap, uiMap;
+        
 
         #endregion Fields
 
@@ -50,7 +47,6 @@ namespace Scripts.Controllers
 
         public void GoToMenu()
         {
-            uiMap.Disable();
             StartCoroutine(AnimateToMenu());
             animator.SetTrigger("CameraIn");
         }
