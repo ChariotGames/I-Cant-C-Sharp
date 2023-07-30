@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MissingKey
   m_EditorClassIdentifier: 
   description: 
-  difficulty: 1
+  difficulty: 3
   genre: 4
   actionNames:
     one: Up
@@ -32,4 +32,4 @@ MonoBehaviour:
     four: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
   prefab: {fileID: 5632558065659418744, guid: 09e6db1aec319474999a76c025b7f77c, type: 3}
   preview: {fileID: 21300000, guid: 5cf6fa03d06097b44b56b3d680fc7f39, type: 3}
-  instructionText: press a missing button!
+  instructionText: "press a \nmissing button!"
