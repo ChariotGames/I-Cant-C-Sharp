@@ -50,16 +50,6 @@ namespace Scripts.Games
             }
             
         }
-        
-        private void OnEnable()
-        {
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
-        }
-
-        private void OnDisable()
-        {
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty;
-        }
 
         IEnumerator Start()
         {
@@ -143,11 +133,6 @@ namespace Scripts.Games
                 _time = 0;
                 DestroyObjects();
             }
-        }
-        
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
         }
 
         internal void UpdateEnemyPositions(Vector3 position)

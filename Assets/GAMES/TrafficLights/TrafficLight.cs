@@ -130,7 +130,6 @@ namespace Scripts.Games
             selector_ref.transform.Translate(SelectorPos);
             selector_ref.SetActive(true);
             EnableInputs();
-
         }
 
         private void EndOfRound()
@@ -175,20 +174,9 @@ namespace Scripts.Games
             _keys.Three.Input.action.performed -= ButtonPressR;
         }
 
-        private void OnEnable()
-        {
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
-        }
-
         private void OnDisable()
         {
             DisableInputs();
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
-        }
-        
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
         }
 
         public void ButtonPressL(InputAction.CallbackContext ctx)

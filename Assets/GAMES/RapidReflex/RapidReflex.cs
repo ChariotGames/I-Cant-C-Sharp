@@ -197,17 +197,15 @@ namespace Scripts.Games
             return false;
         }
         
-        private void UpdateDifficulty(Difficulty difficulty)
+        private protected override void SetDifficulty()
         {
-            base.Difficulty = difficulty;
             _timeToAnswer = 1.33f - (int)difficulty * 0.33f;
         }
 
         private void OnEnable()
         {
-            _timeToAnswer = 1.33f - (int)difficulty * 0.33f;
+            SetDifficulty();
             _keys.One.Input.action.started += EastButtonPressed;
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         public void EastButtonPressed(InputAction.CallbackContext ctx)
@@ -218,7 +216,6 @@ namespace Scripts.Games
         private void OnDisable()
         {
             _keys.One.Input.action.started -= EastButtonPressed;
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
     #endregion Overarching Methods / Helpers

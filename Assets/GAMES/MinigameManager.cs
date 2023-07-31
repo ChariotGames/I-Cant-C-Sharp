@@ -28,8 +28,7 @@ namespace Scripts.Controllers
         public static event Action<string, KeyMap, ActionNames> OnSetKeys;
         public static event Action<string> OnClearKeys;
         public static event Action OnLoseLife;
-
-        public static event Action<Difficulty> OnDifficultyChanged;
+        
 
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
@@ -88,7 +87,7 @@ namespace Scripts.Controllers
             centerPaper.SetTrigger("CenterIn");
             centerPaper.ResetTrigger("CenterOut");
             yield return StartCoroutine(Wait(1.0f));
-            LoadGame(game, keys, parent);
+            LoadGame(game, keys, parent, GameType.Center);
         }
 
         private void SpawnSides()
@@ -115,7 +114,7 @@ namespace Scripts.Controllers
                 thisGame = GetNext(gameList);
             }
 
-            LoadGame(thisGame, thisGame.SelectedKeys, _parent);
+            LoadGame(thisGame, thisGame.SelectedKeys, _parent, GameType.Side);
         }
 
         /// <summary>
@@ -156,7 +155,7 @@ namespace Scripts.Controllers
         /// <param name="game">The game asset to load from.</param>
         /// <param name="keys">The keymap to use.</param>
         /// <param name="parent">The parent to load it into.</param>
-        private void LoadGame(Minigame game, KeyMap keys, Transform parent)
+        private void LoadGame(Minigame game, KeyMap keys, Transform parent, GameType type)
         {
             if (game == null) return;
 
@@ -174,7 +173,7 @@ namespace Scripts.Controllers
                 difficulty = game.Difficulty;
             }
 
-            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect);
+            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect, type);
             baseGame.SetInstructions(instructionPrefab, game.InstructionText, instructionDistance);
             OnSetKeys?.Invoke(parent.name, keys, game.ActionNames);
             obj.SetActive(true);
@@ -299,12 +298,6 @@ namespace Scripts.Controllers
             if (found != null)
             {
                 found.Difficulty = difficulty;
-            }
-
-            if (settings.SelectedGame != null)
-            {
-                if(difficulty == Difficulty.VARYING || difficulty == Difficulty.TUTORIAL) return;
-                OnDifficultyChanged?.Invoke(difficulty);
             }
         }
 

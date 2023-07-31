@@ -67,13 +67,11 @@ namespace Scripts.Games
         {
             //InputHandler.ArrowDown += ButtonPress;
             _keys.One.Input.action.performed += ButtonPress;
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         private void OnDisable()
         {
             _keys.One.Input.action.performed -= ButtonPress;
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
         private IEnumerator Start()
@@ -92,14 +90,8 @@ namespace Scripts.Games
             //}
             //TODO wird nach ein mal lose immer noch aufgerufen
         }
-        
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
-            SetDifficulty();
-        }
-        
-        private void SetDifficulty()
+
+        private protected override void SetDifficulty()
         {
             switch(Difficulty)
             {

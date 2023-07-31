@@ -88,7 +88,6 @@ namespace Scripts.Games
             _keys.One.Input.action.performed += DecreaseGuessingNumber;
             _keys.Two.Input.action.performed += SubmitGuess;
             _keys.Three.Input.action.performed += IncreaseGuessingNumber;
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         private void OnDisable()
@@ -97,7 +96,6 @@ namespace Scripts.Games
             _keys.One.Input.action.performed -= DecreaseGuessingNumber;
             _keys.Two.Input.action.performed -= SubmitGuess;
             _keys.Three.Input.action.performed -= IncreaseGuessingNumber;
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -108,13 +106,7 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
-            SetDifficulty();
-        }
-        
-        private void SetDifficulty()
+        private protected override void SetDifficulty()
         {
             switch (Difficulty)
             {

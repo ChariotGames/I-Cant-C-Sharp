@@ -38,16 +38,6 @@ namespace Scripts.Games
 
         #region Built-Ins / MonoBehaviours
 
-        private void OnEnable()
-        {
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
-        }
-
-        private void OnDisable()
-        {
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
-        }
-
         IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
@@ -71,11 +61,6 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
-        }
-        
         /// <summary>
         /// Spawns rings randomly forever.
         /// </summary>

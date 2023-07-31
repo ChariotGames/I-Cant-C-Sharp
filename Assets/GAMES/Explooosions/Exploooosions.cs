@@ -27,16 +27,6 @@ namespace Scripts.Games
             player.GetComponent<ExpPlayer>().stick = _keys.One.Input;
         }
 
-        private void OnEnable()
-        {
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
-        }
-
-        private void OnDisable()
-        {
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
-        }
-
         IEnumerator Start()
         {
             yield return StartCoroutine(AnimateInstruction());
@@ -107,11 +97,6 @@ namespace Scripts.Games
                 base.Easier();
                 //base.Lose();
             }*/
-        }
-        
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
         }
     }
 }

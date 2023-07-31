@@ -163,16 +163,11 @@ namespace Scripts.Games
                 gamestateLose.SetActive(false);
             }
             
-            private void UpdateDifficulty(Difficulty difficulty)
-            {
-                base.Difficulty = difficulty;
-            }
         
             private void OnEnable()
             {
                 _keys.Two.Input.action.performed += YesButtonPressed;
                 _keys.One.Input.action.performed += NoButtonPressed;
-                MinigameManager.OnDifficultyChanged += UpdateDifficulty;
             }
 
             public void YesButtonPressed(InputAction.CallbackContext ctx)
@@ -189,7 +184,6 @@ namespace Scripts.Games
             {
                 _keys.Two.Input.action.performed -= YesButtonPressed;
                 _keys.One.Input.action.performed -= NoButtonPressed;
-                MinigameManager.OnDifficultyChanged -= UpdateDifficulty;
             }
 
         #endregion Overarching Methods / Helpers

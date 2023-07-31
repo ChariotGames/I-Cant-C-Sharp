@@ -103,7 +103,6 @@ namespace Scripts.Games
             _keys.Two.Input.action.performed += PlayerPress;
             _keys.Three.Input.action.performed += PlayerPress;
             _keys.Four.Input.action.performed += PlayerPress;
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         private void OnDisable()
@@ -112,10 +111,9 @@ namespace Scripts.Games
             _keys.Two.Input.action.performed -= PlayerPress;
             _keys.Three.Input.action.performed -= PlayerPress;
             _keys.Four.Input.action.performed -= PlayerPress;
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
-        private void SetDifficulty()
+        private protected override void SetDifficulty()
         {
             switch (Difficulty)
             {

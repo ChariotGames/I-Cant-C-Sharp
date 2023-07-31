@@ -34,6 +34,7 @@ namespace Scripts.Games
 
         protected KeyMap _keys;
         protected Rect _playarea;
+        protected GameType _gameType;
         protected Genre _genre;
         protected int _successes, _fails;
         protected float _timer;
@@ -53,11 +54,12 @@ namespace Scripts.Games
         /// <param name="difficulty">The difficulty loaded with.</param>
         /// <param name="keys">The keymap used.</param>
         /// <param name="area">The rect area defining the playfield.</param>
-        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area)
+        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area, GameType type)
         {
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
+            _gameType = type;
             _parent = transform.parent;
             _fails = failsToLose;
             difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
@@ -271,14 +273,38 @@ namespace Scripts.Games
         /// <summary>
         /// Makes the current game easier next time it's played.
         /// </summary>
-        protected void Easier() =>
+        protected void Easier()
+        {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
+            
+            if (_gameType == GameType.Side) return;
+            
+            difficulty = (Difficulty)Mathf.Clamp((int)--difficulty, (int)Difficulty.EASY, (int)Difficulty.HARD);
+            SetDifficulty();
+        }
+            
 
         /// <summary>
         /// Makes the current game harder next time it's played.
         /// </summary>
-        protected void Harder() =>
+        protected void Harder()
+        {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
+            
+            if (_gameType == GameType.Side) return;
+            
+            difficulty = (Difficulty)Mathf.Clamp((int)++difficulty, (int)Difficulty.EASY, (int)Difficulty.HARD);
+            SetDifficulty();
+        }
+
+        /// <summary>
+        /// Override Method, you need to override if you check Difficulty in your Game ONCE.
+        /// </summary>
+        private protected virtual void SetDifficulty()
+        {
+            
+        }
+            
 
         /// <summary>
         /// Runs the timer and updates the UI.

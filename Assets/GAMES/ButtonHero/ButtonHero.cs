@@ -63,17 +63,7 @@ namespace Scripts.Games
             }
         }
 
-        private void OnEnable()
-        {
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty;
-        }
-
-        private void OnDisable()
-        {
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty;
-        }
-
-        private void SetDifficulty()
+        private protected override void SetDifficulty()
         {
             switch (Difficulty)
             {
@@ -87,12 +77,6 @@ namespace Scripts.Games
                     _maxRoundTime = 1;
                     break;
             }
-        }
-
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
-            SetDifficulty();
         }
 
         private IEnumerator Start()

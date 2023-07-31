@@ -48,16 +48,6 @@ namespace Scripts.Games
             rightAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
         }
 
-        private void OnEnable()
-        {
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
-        }
-
-        private void OnDisable()
-        {
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
-        }
-
         private IEnumerator Start()
         {
             yield return StartCoroutine(base.AnimateInstruction());
@@ -82,11 +72,6 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
-        private void UpdateDifficulty(Difficulty difficulty)
-        {
-            base.Difficulty = difficulty;
-        }
-        
         public IEnumerator GenerateNewEquation()
         {
             yield return new WaitForSeconds(1.5f);

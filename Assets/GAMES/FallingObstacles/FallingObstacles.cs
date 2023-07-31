@@ -54,7 +54,6 @@ namespace Scripts.Games
         private void OnEnable()
         {
             BottomBounds.DamageTaken += TakeDamage;
-            MinigameManager.OnDifficultyChanged += UpdateDifficulty; 
         }
 
         private IEnumerator Start()
@@ -89,14 +88,13 @@ namespace Scripts.Games
         private void OnDisable()
         {
             BottomBounds.DamageTaken -= TakeDamage;
-            MinigameManager.OnDifficultyChanged -= UpdateDifficulty; 
         }
 
         #endregion Built-Ins / MonoBehaviours
 
         #region Game Mechanics / Methods
 
-        private void SetDifficulty()
+        private protected override void SetDifficulty()
         {
             switch (Difficulty)
             {
