@@ -64,20 +64,26 @@ namespace Scripts.Games
         }
         public void winCondition()
         {
-            base.Win();
+            base.Success();
         }
 
         public void loseCondition()
         {
-            base.Lose();
+            base.Fail();
         }
 
         public void Score()
         {
-            base.ScoreUp(1);
-            ++successCounter;
-            base.AnimateSuccess(successCounter, successesToWin );
+            //base.ScoreUp(1);
+            //++successCounter;
+            //base.AnimateSuccess(gameObject.transform,successCounter, successesToWin );
+            Success();
         }
+
+        //private protected override void SetDifficulty()
+        //{
+            
+       // }
 
         public Sprite getCharacter()
         {
