@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Scripts.Models;
 using System.Collections;
+using Scripts.Controllers;
 
 namespace Scripts.Games
 {
@@ -25,28 +26,15 @@ namespace Scripts.Games
         private float _time = 0;
         private bool timerEnded;
         private int loseCounter = 0;
-        private bool _isAnswerScreen;
+        private bool _isAnswerScreen, startGame;
+
 
 
         private void Awake()
         {
             _mainCamera = Camera.main;
 
-            switch (Difficulty)
-            {
-                case Difficulty.EASY:
-                    count = 3;
-                    break;
-                case Difficulty.MEDIUM:
-                    count = 6;
-                    break;
-                case Difficulty.HARD:
-                    count = 9;
-                    break;
-                default:
-                    count = 3;
-                    break;
-            }
+            SetDifficulty();
 
             for (int i = 0; i < buttons.Count; i++)
             {
@@ -56,11 +44,13 @@ namespace Scripts.Games
         }
 
         // Start is called before the first frame update
-        void Start()
+         private IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            startGame = true;
             //playfieldWidth = transform.GetComponentInChildren<RectTransform>().rect.width;
 
-           // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
+            // _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             //_playfieldWidth = _cameraViewportBounds.size.x / 2;
             //Debug.Log(_cameraViewportBounds.max.x);
             GeneratePattern();
@@ -71,6 +61,7 @@ namespace Scripts.Games
         // Update is called once per frame
         void Update()
         {
+            if (!startGame) return;
             _time += Time.deltaTime;
             if (_time >= ROUND_TIME)
             {
@@ -83,7 +74,8 @@ namespace Scripts.Games
             CheckWin();
 
         }
-
+        
+        /*
         private void TimerEnded()
         {
 
@@ -102,6 +94,7 @@ namespace Scripts.Games
 
 
         }
+        */
 
         // Subscribes to playerPress()
         private void OnEnable()
@@ -110,7 +103,6 @@ namespace Scripts.Games
             _keys.Two.Input.action.performed += PlayerPress;
             _keys.Three.Input.action.performed += PlayerPress;
             _keys.Four.Input.action.performed += PlayerPress;
-           
         }
 
         private void OnDisable()
@@ -121,6 +113,31 @@ namespace Scripts.Games
             _keys.Four.Input.action.performed -= PlayerPress;
         }
 
+        private protected override void SetDifficulty()
+        {
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    count = 3;
+                    break;
+                case Difficulty.MEDIUM:
+                    count = 6;
+                    break;
+                case Difficulty.HARD:
+                    count = 9;
+                    break;
+                default:
+                    count = 3;
+                    break;
+            }
+        }
+        
+        private void UpdateDifficulty(Difficulty difficulty)
+        {
+            base.Difficulty = difficulty;
+            SetDifficulty();
+        }
+        
         // Creates a new random pattern 
         private void GeneratePattern()
         {
@@ -214,13 +231,6 @@ namespace Scripts.Games
 
         private void ScoreOneUp()
         {
-            
-            if (base._successes >= successesToWin)
-            {
-             
-              base.Harder();
-            }
-            
             base.Success();
         }
 
@@ -264,15 +274,7 @@ namespace Scripts.Games
         private void failed()
         {
             spriteLose.gameObject.SetActive(true);
-            base._successes = 0;
             Fail();
-
-            if (base._fails <= 0)
-            {
-                Debug.Log("Lost a heart!");
-                loseCounter = 0;
-                base.Easier();
-            }
         }
     }
 }

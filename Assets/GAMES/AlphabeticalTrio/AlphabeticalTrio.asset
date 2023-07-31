@@ -32,4 +32,4 @@ MonoBehaviour:
     four: {fileID: 0}
   prefab: {fileID: 8687728356415758773, guid: c2f1532ce82970b4789fde496fdb026c, type: 3}
   preview: {fileID: 21300000, guid: dd56fef6cd2b0fc4fa21d3a8c0ad4ba6, type: 3}
-  instructionText: "is it a \ntriplet"
+  instructionText: "are these \nordered?"

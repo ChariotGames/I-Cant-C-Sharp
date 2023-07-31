@@ -45,6 +45,11 @@ namespace Scripts.Models
         MainMenu, PlayField, GameOver
     }
 
+    public enum SpawnSide
+    {
+        Center, Side
+    }
+
     #endregion
 
     #region Flags

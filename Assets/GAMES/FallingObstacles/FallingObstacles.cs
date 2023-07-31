@@ -3,6 +3,7 @@ using Scripts.Models;
 using Scripts.Pascal;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,7 +23,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject obstacle, obstacleContainer;
         //[SerializeField] private TextMeshPro lifeCounter;
         [SerializeField] private float cannonMovementSpeed;
-        [SerializeField] private TextMeshPro infoText;
+        //[SerializeField] private TextMeshPro infoText;
         
 
         #endregion Serialized Fields
@@ -36,6 +37,7 @@ namespace Scripts.Games
         //private int _healthPoints = 3;
         private int _numObstacles;
         private float _elapsedTime;
+        private bool _gameStarted;
         //private int _currentScore;
 
         //private const int _scoreToWin = 15;
@@ -54,9 +56,10 @@ namespace Scripts.Games
             BottomBounds.DamageTaken += TakeDamage;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            infoText.gameObject.SetActive(true);
+            yield return StartCoroutine(base.AnimateInstruction());
+            //infoText.gameObject.SetActive(true);
             // Calculate the camera's viewport bounds
             _cameraViewportBounds = new Bounds(_mainCamera.transform.position, _mainCamera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f)) - _mainCamera.ViewportToWorldPoint(Vector3.zero));
             
@@ -67,6 +70,32 @@ namespace Scripts.Games
             cannon.gameObject.SetActive(true);
 
             // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
+            SetDifficulty();
+
+            StartCoroutine(SpawnCoroutine());
+        }
+
+        private void Update()
+        {
+            if (!_gameStarted) return;
+            _elapsedTime += Time.deltaTime;
+            /*if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
+            {
+                infoText.gameObject.SetActive(false);
+            }*/
+        }
+
+        private void OnDisable()
+        {
+            BottomBounds.DamageTaken -= TakeDamage;
+        }
+
+        #endregion Built-Ins / MonoBehaviours
+
+        #region Game Mechanics / Methods
+
+        private protected override void SetDifficulty()
+        {
             switch (Difficulty)
             {
                 case Difficulty.EASY:
@@ -83,29 +112,13 @@ namespace Scripts.Games
                     ActivateHorizontalMovement();
                     break;
             }
-
-            StartCoroutine(SpawnCoroutine());
         }
-
-        private void Update()
+        
+        private void UpdateDifficulty(Difficulty difficulty)
         {
-            _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
-            {
-                infoText.gameObject.SetActive(false);
-            }
+            base.Difficulty = difficulty;
+            SetDifficulty();
         }
-
-        private void OnDisable()
-        {
-            BottomBounds.DamageTaken -= TakeDamage;
-        }
-
-        #endregion Built-Ins / MonoBehaviours
-
-        #region Game Mechanics / Methods
-
-
 
         public void IncreasePoints()
         {
@@ -113,13 +126,6 @@ namespace Scripts.Games
            // base.AnimateSuccess(_currentScore, _scoreToWin);
            // base.ScoreUp();
            Success();
-            
-            if (base._successes >= base.successesToWin)
-            {
-                //_currentScore = 0;
-                base.Harder();
-                //base.Win();
-            }
         }
 
         /// <summary>
@@ -130,12 +136,6 @@ namespace Scripts.Games
             //_healthPoints--;
             //base.AnimateFail(_healthPoints, 3);
             base.Fail();
-            if (base._fails <= 0)
-            {
-                //_healthPoints = 3;
-                base.Easier();
-               // base.Lose();
-            }
             //lifeCounter.text = "Healthpoints : " + _healthPoints.ToString();
         }
         

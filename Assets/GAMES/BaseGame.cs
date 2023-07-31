@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace Scripts.Games
 {
@@ -17,7 +18,7 @@ namespace Scripts.Games
 
         [Header("Game Values")]
         [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
-        [SerializeField] protected int successesToWin = 5;
+        [SerializeField] protected int successesToWin = 5, successesToLevelUp;
         [SerializeField] protected int failsToLose = 3;
 
         #endregion Serialized Fields
@@ -34,6 +35,8 @@ namespace Scripts.Games
 
         protected KeyMap _keys;
         protected Rect _playarea;
+        protected SpawnSide _spawnSide;
+
         protected Genre _genre;
         protected int _successes, _fails;
         protected float _timer;
@@ -41,6 +44,8 @@ namespace Scripts.Games
         private Transform _parent;
         private GameObject _instructionPrefab;
         private float _instructionSpeed;
+        private int difficultyTracker;
+        private bool willGetHarder = false;
 
         #endregion Fields
 
@@ -52,13 +57,15 @@ namespace Scripts.Games
         /// <param name="difficulty">The difficulty loaded with.</param>
         /// <param name="keys">The keymap used.</param>
         /// <param name="area">The rect area defining the playfield.</param>
-        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area)
+        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area, SpawnSide type)
         {
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
+            SpawnSide = type;
             _parent = transform.parent;
             _fails = failsToLose;
+            difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
         }
 
         /// <summary>
@@ -69,7 +76,7 @@ namespace Scripts.Games
         /// <param name="duration">How far up the object should move.</param>
         public void SetInstructions(GameObject prefab, string message, float duration)
         {
-            _instructionPrefab = prefab;
+            _instructionPrefab = Instantiate(prefab, transform);
             _instructionPrefab.GetComponent<TMP_Text>().text = message;
             _instructionSpeed = duration;
         }
@@ -145,9 +152,23 @@ namespace Scripts.Games
             ScoreUp(score);
             StopTimer();
             AnimateSuccess(parent, _successes, successesToWin);
+            
+            difficultyTracker--;
+            if (difficultyTracker <= 0)
+            {
+                difficultyTracker = successesToLevelUp;
+                willGetHarder = true;
+            }
+            
             if (_successes >= successesToWin)
             {
                 _successes = 0;
+                _fails = failsToLose;
+                if (willGetHarder)
+                {
+                    Harder();
+                }
+                willGetHarder = false;
                 Win();
             }
         }
@@ -189,9 +210,14 @@ namespace Scripts.Games
             //ScoreDown(score);
             StopTimer();
             AnimateFail(parent, _fails, failsToLose);
+            
+            difficultyTracker++;
+
             if (_fails <= 0)
             {
+                _successes = 0;
                 _fails = failsToLose;
+                Easier();
                 Lose();
             }
         }
@@ -255,14 +281,38 @@ namespace Scripts.Games
         /// <summary>
         /// Makes the current game easier next time it's played.
         /// </summary>
-        protected void Easier() =>
+        protected void Easier()
+        {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
+            
+            if (SpawnSide == SpawnSide.Side) return;
+            
+            Difficulty = --difficulty;
+            SetDifficulty();
+        }
+            
 
         /// <summary>
         /// Makes the current game harder next time it's played.
         /// </summary>
-        protected void Harder() =>
+        protected void Harder()
+        {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
+            
+            if (SpawnSide == SpawnSide.Side) return;
+            
+            Difficulty = ++difficulty;
+            SetDifficulty();
+        }
+
+        /// <summary>
+        /// Override Method, you need to override if you check Difficulty in your Game ONCE.
+        /// </summary>
+        private protected virtual void SetDifficulty()
+        {
+            
+        }
+            
 
         /// <summary>
         /// Runs the timer and updates the UI.
@@ -277,7 +327,7 @@ namespace Scripts.Games
         protected void RunTimer(float time)
         {
             if (time <= 0) return;
-
+            
             OnTimerUpdate?.Invoke(transform.parent.name, time);
         }
 
@@ -358,9 +408,18 @@ namespace Scripts.Games
         public Difficulty Difficulty
         {
             get => difficulty;
-            set => difficulty = value;
+            set => difficulty = (Difficulty)Mathf.Clamp((int)value, (int)Difficulty.EASY, (int)Difficulty.HARD);
         }
 
+        /// <summary>
+        /// The game's current spawn side.
+        /// </summary>
+        public SpawnSide SpawnSide
+        {
+            get => _spawnSide;
+            set => _spawnSide = value;
+        }
+        
         /// <summary>
         /// The game's set key map.
         /// </summary>

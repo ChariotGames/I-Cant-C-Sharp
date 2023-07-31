@@ -442,6 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 2918756866687947655}
+  Button: {fileID: 0}
 --- !u!1 &2918756866687947654
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,12 +494,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 3
+  successesToLevelUp: 2
   failsToLose: 3
   equationText: {fileID: 2918756865153322556}
   leftAnswer: {fileID: 2918756866870625413}
   rightAnswer: {fileID: 2918756865382459727}
-  correctAnswer: {fileID: 851261883504539371}
-  wrongAnswer: {fileID: 2986298170242107932}
+  isAnswerScreen: 0
 --- !u!1 &2918756866870625412
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 2918756866687947655}
+  Button: {fileID: 0}
 --- !u!1 &4527099253384241662
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using Scripts.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,7 +57,6 @@ namespace Scripts.Games
         private int selectorIndex;
         private bool gameVariant;
         private bool playerHasSubmitted = false;
-        private int successCounter = 0;
 
         private struct trafficLight
         {
@@ -129,7 +130,6 @@ namespace Scripts.Games
             selector_ref.transform.Translate(SelectorPos);
             selector_ref.SetActive(true);
             EnableInputs();
-
         }
 
         private void EndOfRound()
@@ -176,9 +176,7 @@ namespace Scripts.Games
 
         private void OnDisable()
         {
-            _keys.One.Input.action.performed -= ButtonPressL;
-            _keys.Two.Input.action.performed -= ButtonPressSubmit;
-            _keys.Three.Input.action.performed -= ButtonPressR;
+            DisableInputs();
         }
 
         public void ButtonPressL(InputAction.CallbackContext ctx)
@@ -275,16 +273,11 @@ namespace Scripts.Games
         {
             if (correctColors.Contains(secondWaveColors[selectorIndex]))
             {
-                base.ScoreUp(5);
-                ++successCounter;
-                base.AnimateSuccess(gameObject.transform, successCounter, successToWin);
-                base.Harder();
-                base.Win();
+                Success();
             }
             else
             {
-                base.Easier();
-                base.Lose();
+                Fail();
             }
         }
 

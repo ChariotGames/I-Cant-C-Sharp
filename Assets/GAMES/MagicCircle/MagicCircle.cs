@@ -1,6 +1,7 @@
 using System;
 using Scripts.Models;
 using System.Collections;
+using Scripts.Controllers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,7 +21,7 @@ namespace Scripts.Games
         [Header("Game Specific Stuff")]
         [SerializeField] private Color[] ringColors;
         [SerializeField] private Key[] ringButtons;
-        [SerializeField] private GameObject ringContainer, ring, circle;
+        [SerializeField] private GameObject ringContainer, ring, circle, MainContainer;
         [SerializeField] private SpriteRenderer circleRenderer;
         [SerializeField] private Vector3 rotationDirection = Vector3.forward;
         [SerializeField] [Range(1, 5)] private float startTimeout = 3, spawnDelay;
@@ -31,14 +32,16 @@ namespace Scripts.Games
 
         #region Fields
 
-        private int _correctGuesses = 0, _wrongGuesses = 0;
+        //private int _successes = 0, _fails = 0;
 
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            MainContainer.SetActive(true);
             ringButtons = _keys.All;
             Invoke(nameof(SpawnRings), startTimeout);
         }
@@ -104,30 +107,19 @@ namespace Scripts.Games
             if (isWin)
             {
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.green, 0.25f));
-                _correctGuesses++;
-                base.AnimateSuccess(circle.transform, 1, 5);
-                base.ScoreUp();
-
-                if (_correctGuesses == 5)
-                {
-                    _correctGuesses = 0;
-                    base.Harder();
-                    base.Win();
-                }
+                //_correctGuesses++;
+                //base.AnimateSuccess(circle.transform, 1, 5);
+                //base.ScoreUp();
+                
+                base.Success();
             }
             else
             {
                 StartCoroutine(AnimateColor(circleRenderer, circle.GetComponent<SpriteRenderer>().color, Color.red, 0.25f));
-                _wrongGuesses++;
-                base.AnimateFail(circle.transform, 1, 3);
-
-                if (_wrongGuesses == 3)
-                {
-                    //stop = true;
-                    _wrongGuesses = 0;
-                    base.Easier();
-                    base.Lose();
-                }
+                //_fails++;
+                //base.AnimateFail(circle.transform, 1, 3);
+                
+                base.Fail();
             }
         }
 

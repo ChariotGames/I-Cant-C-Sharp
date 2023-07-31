@@ -12,7 +12,9 @@ public class AnimationPack : MonoBehaviour
     [SerializeField] ParticleSystem particles;
     [SerializeField] public Animator animator;
     [SerializeField] Image emojiFace;
-    
+
+    public Image EmojiFace { get => emojiFace; set => emojiFace = value; }
+
     /// <summary>
     /// Run chosen animation.
     /// </summary>

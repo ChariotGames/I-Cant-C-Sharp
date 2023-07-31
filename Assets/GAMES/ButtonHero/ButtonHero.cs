@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using Scripts.GameElements;
 using TMPro;
 using UnityEngine;
@@ -20,7 +22,7 @@ namespace Scripts.Games
         //[SerializeField] private TextMeshPro timerTextMesh;
         //[SerializeField] private SpriteRenderer damageTakenSprite;
         [SerializeField] private Transform container;
-        [SerializeField] private TextMeshPro infoText;
+        //[SerializeField] private TextMeshPro infoText;
 
         #endregion Serialized Fields
 
@@ -37,6 +39,7 @@ namespace Scripts.Games
         private int _currentScore;
         private float _buttonWidth;
         private const int _scoreToWin = 10;
+        private bool _gameStarted;
 
         private float _maxRoundTime;
 
@@ -45,6 +48,22 @@ namespace Scripts.Games
         #region Built-Ins / MonoBehaviours
 
         private void Awake()
+        {
+            SetDifficulty();
+            
+            for (var i = buttons.Count - 1; i >= 0; i--)
+            {
+                // just pool all the objects into a list
+                var button = Instantiate(buttons[i].gameObject, container);
+                var buttonText = button.GetComponent<TextMeshPro>();
+                buttonText.text = _keys.All[i].Icon;
+                button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;
+                _spawnedButtons.Add(buttonText);
+                button.SetActive(false);
+            }
+        }
+
+        private protected override void SetDifficulty()
         {
             switch (Difficulty)
             {
@@ -58,22 +77,13 @@ namespace Scripts.Games
                     _maxRoundTime = 1;
                     break;
             }
-
-            for (var i = buttons.Count - 1; i >= 0; i--)
-            {
-                // just pool all the objects into a list
-                var button = Instantiate(buttons[i].gameObject, container);
-                var buttonText = button.GetComponent<TextMeshPro>();
-                buttonText.text = _keys.All[i].Icon;
-                button.GetComponent<BasePressElement>().Button = _keys.All[i].Input;
-                _spawnedButtons.Add(buttonText);
-                button.SetActive(false);
-            }
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            infoText.gameObject.SetActive(true);
+            yield return StartCoroutine(base.AnimateInstruction());
+            _gameStarted = true;
+            //infoText.gameObject.SetActive(true);
             _buttonWidth = buttons[0].gameObject.GetComponent<RectTransform>().rect.width * 0.5f;
             
             StartCoroutine(SpawnCoroutine());
@@ -81,12 +91,13 @@ namespace Scripts.Games
 
         private void Update()
         {
+            if (!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
+            /*if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
             {
                 infoText.gameObject.SetActive(false);
             }
-            
+            */
             HandleTimer();
         }
 
@@ -131,10 +142,6 @@ namespace Scripts.Games
             //Destroy(damageIconGo, 1);
             ResetTimer();
             Fail();
-            if (base._fails <= 0)
-            {
-                base.Easier();
-            }
         }
 
         public void ResetTimer()
@@ -197,12 +204,6 @@ namespace Scripts.Games
             //base.AnimateSuccess(_currentScore, _scoreToWin);
             //base.ScoreUp();
             Success();
-            if (_currentScore >= base.successesToWin)
-            {
-                //_currentScore = 0;
-                base.Harder();
-                //base.Win();
-            }
         }
     }
 }

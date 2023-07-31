@@ -39,7 +39,6 @@ namespace Scripts.Controllers
 
         private void UpdateScores()
         {
-            Debug.Log(settings.Score);
             if (settings.Score < int.Parse(entries[^1].Score)) return;
 
             incoming.SetValues(settings.SelectedCharacter.Icon, settings.SelectedCharacter.Name, settings.Score, settings.Time);

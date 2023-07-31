@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5632558065659418745}
+  Button: {fileID: 0}
 --- !u!114 &8312722729078727491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5632558065659418745}
+  Button: {fileID: 0}
 --- !u!114 &1416684295349422997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,6 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5632558065659418745}
+  Button: {fileID: 0}
 --- !u!114 &2535413261064689162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +707,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 5
+  successesToLevelUp: 4
   failsToLose: 3
+  buttonContainer: {fileID: 6523924494337566846}
   buttons:
   - {fileID: 8501519039667537081}
   - {fileID: 2177521443612815604}
@@ -714,7 +719,6 @@ MonoBehaviour:
   spriteWin: {fileID: 7987759796246573266}
   spriteLose: {fileID: 8405632109183124170}
   sound: {fileID: 8647327928045669333}
-  buttonContainer: {fileID: 6523924494337566846}
 --- !u!1 &6243151330276785296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5632558065659418745}
+  Button: {fileID: 0}
 --- !u!114 &3857896799697220303
 MonoBehaviour:
   m_ObjectHideFlags: 0
