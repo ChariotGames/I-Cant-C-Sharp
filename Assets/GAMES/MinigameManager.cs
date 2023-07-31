@@ -59,7 +59,7 @@ namespace Scripts.Controllers
         private void OnDisable()
         {
             BaseGame.OnLose -= LoseCondition;
-            BaseGame.OnWin -= RemoveGame;
+            BaseGame.OnWin -= WinCondition;
             BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
         }
 
