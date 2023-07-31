@@ -45,7 +45,7 @@ namespace Scripts.Models
         MainMenu, PlayField, GameOver
     }
 
-    public enum GameType
+    public enum SpawnSide
     {
         Center, Side
     }

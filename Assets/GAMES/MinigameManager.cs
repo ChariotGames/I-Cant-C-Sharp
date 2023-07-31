@@ -87,7 +87,7 @@ namespace Scripts.Controllers
             centerPaper.SetTrigger("CenterIn");
             centerPaper.ResetTrigger("CenterOut");
             yield return StartCoroutine(Wait(1.0f));
-            LoadGame(game, keys, parent, GameType.Center);
+            LoadGame(game, keys, parent, SpawnSide.Center);
         }
 
         private void SpawnSides()
@@ -114,7 +114,7 @@ namespace Scripts.Controllers
                 thisGame = GetNext(gameList);
             }
 
-            LoadGame(thisGame, thisGame.SelectedKeys, _parent, GameType.Side);
+            LoadGame(thisGame, thisGame.SelectedKeys, _parent, SpawnSide.Side);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Scripts.Controllers
         /// <param name="game">The game asset to load from.</param>
         /// <param name="keys">The keymap to use.</param>
         /// <param name="parent">The parent to load it into.</param>
-        private void LoadGame(Minigame game, KeyMap keys, Transform parent, GameType type)
+        private void LoadGame(Minigame game, KeyMap keys, Transform parent, SpawnSide type)
         {
             if (game == null) return;
 

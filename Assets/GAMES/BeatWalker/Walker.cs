@@ -177,7 +177,6 @@ namespace Scripts.Games
                 {
                     removeClickedButton(i);
                     won();
-                    
                 }
             }
         }

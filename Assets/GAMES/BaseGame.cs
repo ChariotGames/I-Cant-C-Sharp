@@ -35,7 +35,8 @@ namespace Scripts.Games
 
         protected KeyMap _keys;
         protected Rect _playarea;
-        protected GameType _gameType;
+        protected SpawnSide _spawnSide;
+
         protected Genre _genre;
         protected int _successes, _fails;
         protected float _timer;
@@ -56,12 +57,12 @@ namespace Scripts.Games
         /// <param name="difficulty">The difficulty loaded with.</param>
         /// <param name="keys">The keymap used.</param>
         /// <param name="area">The rect area defining the playfield.</param>
-        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area, GameType type)
+        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area, SpawnSide type)
         {
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
-            _gameType = type;
+            SpawnSide = type;
             _parent = transform.parent;
             _fails = failsToLose;
             difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
@@ -284,9 +285,9 @@ namespace Scripts.Games
         {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
             
-            if (_gameType == GameType.Side) return;
+            if (SpawnSide == SpawnSide.Side) return;
             
-            difficulty = (Difficulty)Mathf.Clamp((int)--difficulty, (int)Difficulty.EASY, (int)Difficulty.HARD);
+            Difficulty = --difficulty;
             SetDifficulty();
         }
             
@@ -298,9 +299,9 @@ namespace Scripts.Games
         {
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
             
-            if (_gameType == GameType.Side) return;
+            if (SpawnSide == SpawnSide.Side) return;
             
-            difficulty = (Difficulty)Mathf.Clamp((int)++difficulty, (int)Difficulty.EASY, (int)Difficulty.HARD);
+            Difficulty = ++difficulty;
             SetDifficulty();
         }
 
@@ -407,9 +408,18 @@ namespace Scripts.Games
         public Difficulty Difficulty
         {
             get => difficulty;
-            set => difficulty = value;
+            set => difficulty = (Difficulty)Mathf.Clamp((int)value, (int)Difficulty.EASY, (int)Difficulty.HARD);
         }
 
+        /// <summary>
+        /// The game's current spawn side.
+        /// </summary>
+        public SpawnSide SpawnSide
+        {
+            get => _spawnSide;
+            set => _spawnSide = value;
+        }
+        
         /// <summary>
         /// The game's set key map.
         /// </summary>
