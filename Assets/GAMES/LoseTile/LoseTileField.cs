@@ -44,6 +44,7 @@ namespace Scripts.Games
         {
             if (collision.Equals(player) && visited && type == ElementType.ENEMY)
             {
+                visited = false;
                 game.PlayerTouched(type);
                 //Destroy(gameObject,timer * 2f);
                 box.isTrigger = false;

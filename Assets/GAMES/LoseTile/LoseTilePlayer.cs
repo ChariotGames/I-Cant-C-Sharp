@@ -12,6 +12,7 @@ namespace Scripts.Games
         [SerializeField][Range (2f, 4f)] float x = 2.5f;
         [SerializeField][Range (2f, 4f)] float y = 2.5f;
         [SerializeField] Rigidbody2D body;
+        [SerializeField] AudioSource walkSound;
 
         #endregion Serialized Fields
 
@@ -26,25 +27,33 @@ namespace Scripts.Games
         void Update()
         {
             Vector2 input = stick.action.ReadValue<Vector2>().normalized;
-            Vector2 newInput;
-
-            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+            if (input.magnitude > 0)
             {
-                newInput.x = input.x;
-                newInput.y = 0.0f;
-            }
-            else
-            {
-                newInput.y = input.y;
-                newInput.x = 0.0f;
-            }
+                Vector2 newInput;
 
-            gameObject.transform.Translate(speed * Time.deltaTime * newInput);
+                if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+                {
+                    newInput.x = input.x;
+                    newInput.y = 0.0f;
+                }
+                else
+                {
+                    newInput.y = input.y;
+                    newInput.x = 0.0f;
+                }
 
-            if (transform.localPosition.x >= x) transform.localPosition = new Vector2(x, transform.localPosition.y);
-            if (transform.localPosition.x <= -x) transform.localPosition = new Vector2(-x, transform.localPosition.y);
-            if (transform.localPosition.y >= y) transform.localPosition = new Vector2(transform.localPosition.x, y);
-            if (transform.localPosition.y <= -y) transform.localPosition = new Vector2(transform.localPosition.x, -y);
+                gameObject.transform.Translate(speed * Time.deltaTime * newInput);
+
+                if (!walkSound.isPlaying) walkSound.Play();
+       
+               
+                if (transform.localPosition.x >= x) transform.localPosition = new Vector2(x, transform.localPosition.y);
+                if (transform.localPosition.x <= -x) transform.localPosition = new Vector2(-x, transform.localPosition.y);
+                if (transform.localPosition.y >= y) transform.localPosition = new Vector2(transform.localPosition.x, y);
+                if (transform.localPosition.y <= -y) transform.localPosition = new Vector2(transform.localPosition.x, -y);
+            }
+             
+        
         }
 
 
