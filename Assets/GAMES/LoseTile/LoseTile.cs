@@ -22,6 +22,7 @@ namespace Scripts.Games
         #region Fields
 
         [SerializeField] private int remainingTiles = 0, ammountOfTiles = 0, lives = 3;
+        private int gridHalf;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -32,6 +33,7 @@ namespace Scripts.Games
             //failsToLose = 1;
             ammountOfTiles = gridSize * gridSize;
             player.Stick = _keys.One.Input;
+            gridHalf = gridSize / 2;
         }
 
         IEnumerator Start()
@@ -126,7 +128,7 @@ namespace Scripts.Games
 
             //        break;
             //}
-            if (difficulty == Difficulty.EASY)
+            if (difficulty == Difficulty.MEDIUM)
             {
                 
             }
@@ -135,7 +137,15 @@ namespace Scripts.Games
 
         private void SetGrid()
         {
-            int gridHalf = gridSize / 2;
+            int count = ((int)difficulty);
+            if (difficulty == Difficulty.HARD)
+            {
+                count = Random.Range(4, ((int)difficulty)) - 1;
+            }
+            if (difficulty == Difficulty.EASY) 
+            {
+                count = 0;
+            }
 
             for (int x = -gridHalf; x <= gridHalf; x++)
             {
@@ -145,13 +155,34 @@ namespace Scripts.Games
                     GameObject obj = Instantiate(tile, container);
                     obj.transform.Translate(x * space, y * space, 0);
                     obj.SetActive(true);
+                    int Chance = Random.Range(0, 2);
+                    if (Chance == 1 && count > 0)
+                    {
+                        obj.GetComponent<LoseTileField>().setInVisible();
+                        obj.GetComponent<LoseTileField>().visited = true;
+                        obj.GetComponent<LoseTileField>().type = ElementType.ENEMY;
+
+                        count--;
+                    }
+
                 }
                 //GameObject obj = Instantiate(tile, container);
                 //obj.transform.SetParent(container, true);
             }
+            SetPlayer();
+        }
 
+        private void SetPlayer()
+        {
             int PlayerX = Random.Range(-gridHalf, +gridHalf);
             int PlayerY = Random.Range(-gridHalf, +gridHalf);
+            LoseTileField Tile = container.GetChild((PlayerY + gridHalf) * gridSize + (PlayerX + gridHalf)).GetComponent<LoseTileField>();
+            while (!Tile.isVisable)
+            {
+                PlayerX = Random.Range(-gridHalf, +gridHalf);
+                PlayerY = Random.Range(-gridHalf, +gridHalf);
+                Tile = container.GetChild((PlayerY +gridHalf) * gridSize + (PlayerX + gridHalf)).GetComponent<LoseTileField>();
+            }
             player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);
         }
 

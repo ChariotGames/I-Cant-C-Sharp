@@ -21,8 +21,8 @@ namespace Scripts.Games
         #region Fields
 
         public ElementType type = ElementType.CHECKPOINT;
-        private bool visited = false;
-
+        public bool visited = false;
+        public bool isVisable = true;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -38,18 +38,29 @@ namespace Scripts.Games
                 game.PlayerTouched(type);
 
             }
+
+            if (collision.Equals(player) && visited && type == ElementType.ENEMY)
+            {
+
+                game.PlayerTouched(type);
+                //Destroy(gameObject,timer * 2f);
+                disableTile();
+                setInVisible();
+            }
+
         }
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.Equals(player) && visited && type == ElementType.ENEMY)
-            {
-                visited = false;
-                game.PlayerTouched(type);
-                //Destroy(gameObject,timer * 2f);
-                box.isTrigger = false;
-            }
+            
         }
+
+        public void disableTile()
+        {
+            visited = false;
+            box.isTrigger = false;
+        }
+
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
@@ -78,6 +89,7 @@ namespace Scripts.Games
 
         private IEnumerator AnimateTimes(int times)
         {
+
             SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
 
             for (int i = 0; i < times; i++)
@@ -89,10 +101,17 @@ namespace Scripts.Games
 
             }
             yield return new WaitForSeconds(1f);
+            setInVisible();
+        }
+
+        public void setInVisible()
+        {
+            SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
             sprite.color = Color.clear;
             outline.enabled = false;
+            isVisable = false;
             type = ElementType.ENEMY;
-
+            
         }
         #endregion Overarching Methods / Helpers
     }
