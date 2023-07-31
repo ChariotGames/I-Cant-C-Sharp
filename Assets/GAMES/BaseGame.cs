@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace Scripts.Games
 {
@@ -43,7 +44,7 @@ namespace Scripts.Games
         private GameObject _instructionPrefab;
         private float _instructionSpeed;
         private int difficultyTracker;
-        private bool willBeHarder = false;
+        private bool willGetHarder = false;
 
         #endregion Fields
 
@@ -155,18 +156,18 @@ namespace Scripts.Games
             if (difficultyTracker <= 0)
             {
                 difficultyTracker = successesToLevelUp;
-                willBeHarder = true;
+                willGetHarder = true;
             }
             
             if (_successes >= successesToWin)
             {
                 _successes = 0;
                 _fails = failsToLose;
-                if (willBeHarder)
+                if (willGetHarder)
                 {
                     Harder();
                 }
-                willBeHarder = false;
+                willGetHarder = false;
                 Win();
             }
         }
@@ -325,7 +326,7 @@ namespace Scripts.Games
         protected void RunTimer(float time)
         {
             if (time <= 0) return;
-
+            
             OnTimerUpdate?.Invoke(transform.parent.name, time);
         }
 
