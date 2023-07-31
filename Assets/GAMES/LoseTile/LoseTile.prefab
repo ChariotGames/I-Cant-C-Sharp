@@ -140,6 +140,7 @@ MonoBehaviour:
   gridSize: 5
   space: 1.1
   tile: {fileID: 5241422682149599240}
+  dangerzone: {fileID: 5241422682805226549}
   player: {fileID: 5241422683056287857}
   container: {fileID: 5241422681582535110}
   remainingTiles: 0
@@ -473,7 +474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5241422682805226554
 Transform:
   m_ObjectHideFlags: 0
@@ -561,7 +562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5241422683056287856
 Transform:
   m_ObjectHideFlags: 0

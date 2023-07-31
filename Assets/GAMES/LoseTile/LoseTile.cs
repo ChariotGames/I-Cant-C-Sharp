@@ -1,6 +1,7 @@
 //using System;
 using UnityEngine;
 using Scripts.Models;
+using System.Collections;
 
 namespace Scripts.Games
 {
@@ -12,7 +13,7 @@ namespace Scripts.Games
         [Header("Game Specific Stuff")]
         [SerializeField] [Range(3, 5)] private int gridSize = 3;
         [SerializeField] [Range(1, 2)] private float space = 1.1f;
-        [SerializeField] private GameObject tile;
+        [SerializeField] private GameObject tile, dangerzone;
         [SerializeField] private LoseTilePlayer player;
         [SerializeField] private Transform container;
 
@@ -33,8 +34,10 @@ namespace Scripts.Games
             player.Stick = _keys.One.Input;
         }
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+
             ResetGame();
         }
 
@@ -102,6 +105,34 @@ namespace Scripts.Games
 
         #region Overarching Methods / Helpers
 
+        private protected override void SetDifficulty()
+        {
+            //switch (Difficulty)
+            //{
+            //    case Difficulty.EASY:
+
+
+            //        break;
+            //    case Difficulty.MEDIUM:
+
+
+            //        break;
+            //    case Difficulty.HARD:
+
+
+            //        break;
+            //    default:
+
+
+            //        break;
+            //}
+            if (difficulty == Difficulty.EASY)
+            {
+                
+            }
+        }
+
+
         private void SetGrid()
         {
             int gridHalf = gridSize / 2;
@@ -128,6 +159,8 @@ namespace Scripts.Games
         {
             remainingTiles = ammountOfTiles;
             if (container.childCount > 0) ClearGrid();
+            dangerzone.SetActive(true);
+            player.gameObject.SetActive(true);
             SetGrid();
         }
 
