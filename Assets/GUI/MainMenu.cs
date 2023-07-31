@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,7 +38,7 @@ namespace Scripts.Controllers
         {
             if (mainCamera) mainCamera = Camera.main;
 
-            //ResetSettings();
+            ResetBaseSettings();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             livesText.text = settings.Lives.ToString();
             difficulty.value = (int)settings.BaseDifficulty;
@@ -114,7 +115,7 @@ namespace Scripts.Controllers
         /// </summary>
         public void ResetSettings()
         {
-            settings.Lives = defaultSettings.Lives;
+            settings.Lives = PlayerPrefs.GetInt("lives")/*defaultSettings.Lives*/;
             SetLives(0); // Updates the menu text
             settings.Players = defaultSettings.Players;
             settings.SelectedGame = defaultSettings.SelectedGame;
@@ -123,6 +124,15 @@ namespace Scripts.Controllers
             ResetDifficulties();
             settings.Characters = defaultSettings.Characters;
             settings.BaseDifficulty = defaultSettings.BaseDifficulty;
+            settings.Time = defaultSettings.Time;
+            settings.Score = defaultSettings.Score;
+        }
+
+        private void ResetBaseSettings()
+        {
+            settings.Lives = PlayerPrefs.GetInt("lives")/*defaultSettings.Lives*/;
+            SetLives(0);
+            settings.SelectedGame = defaultSettings.SelectedGame;
             settings.Time = defaultSettings.Time;
             settings.Score = defaultSettings.Score;
         }
