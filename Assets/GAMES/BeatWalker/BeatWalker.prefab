@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2351859286838668530}
-  m_Father: {fileID: 2351859287407049709}
+  m_Father: {fileID: 5196320887926758678}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2351859286759309348
@@ -193,11 +193,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2351859286943156194}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2351859287407049709}
+  m_Father: {fileID: 5196320887926758678}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2351859287136820212
@@ -226,11 +226,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2351859287136820212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -4.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2351859287407049709}
+  m_Father: {fileID: 5196320887926758678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2351859287136820209
@@ -257,7 +257,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 10}
+  m_Size: {x: 10, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &2351859287136820214
 MonoBehaviour:
@@ -301,7 +301,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2351859288167036300}
-  m_Father: {fileID: 2351859287407049709}
+  m_Father: {fileID: 5196320887926758678}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2351859287293921843
@@ -364,7 +364,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2351859287407049709}
+  - component: {fileID: 5196320887926758678}
   - component: {fileID: 2351859287407049708}
   m_Layer: 0
   m_Name: BeatWalker
@@ -373,8 +373,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &2351859287407049709
-Transform:
+--- !u!224 &5196320887926758678
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -393,6 +393,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2351859287407049708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,8 +411,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  successesToWin: 5
-  failsToLose: 3
+  successesToWin: 16
+  successesToLevelUp: 15
+  failsToLose: 4
   button: {fileID: 772639466455137530, guid: ad8f0f8464d5b46e8ac0655f6f814b72, type: 3}
   buttonContainer: {fileID: 2351859286943156194}
   spriteWin: {fileID: 2351859287293921843}
@@ -523,11 +529,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2351859288299289071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 2351859287407049709}
+  m_Father: {fileID: 5196320887926758678}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2351859288299289065

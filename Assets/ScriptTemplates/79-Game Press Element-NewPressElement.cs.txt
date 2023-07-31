@@ -1,6 +1,6 @@
 using UnityEngine.InputSystem;
 
-namespace _Scripts.Games
+namespace Scripts.Games
 {
     public class #SCRIPTNAME#PressElement : BasePressElement
     {

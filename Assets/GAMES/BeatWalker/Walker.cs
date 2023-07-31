@@ -1,8 +1,10 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts._Input;
+using Scripts.Controllers;
 using Scripts.Games;
 using Scripts.Models;
 using Random = UnityEngine.Random;
@@ -23,8 +25,8 @@ namespace Scripts.Games
         #endregion Serialized Fields
 
         #region Fields
-        private float leftBound;
-        private float rightBound;
+        private float lowerBound;
+        private float upperBound;
         private bool buttonPressed = false;
         private bool lost = false;
         private List<GameObject> buttons = new();
@@ -49,46 +51,16 @@ namespace Scripts.Games
         {
             //button.GetComponent<BasePressElement>().Button = Keys.One.Input;
             //Physics2D.gravity = new Vector2(-9.8f, 0);
-
+            
             //Get coords of activation region
-            float regionSizeX = GameObject.Find("ActivationRegion").GetComponent<Collider2D>().bounds.size.x;
-            float regionPosX = GameObject.Find("ActivationRegion").transform.position.x;
+            float regionSizeY = GameObject.Find("ActivationRegion").GetComponent<Collider2D>().bounds.size.y;
+            float regionPosY = GameObject.Find("ActivationRegion").transform.position.y;
 
-            leftBound = regionPosX - regionSizeX / 2;
-            rightBound = regionPosX + regionSizeX / 2;
+            lowerBound = regionPosY - regionSizeY / 2;
+            upperBound = regionPosY + regionSizeY / 2;
             //button.GetComponent<BasePressElement>().Button = _keys.One.Input;
             
-            switch(Difficulty)
-                {
-                    case Difficulty.EASY:
-                        PlayerPrefs.SetFloat("speed", 3f);
-                        repeatNumber = 2;
-                        minRange = 0.5f;
-                        maxRange = 2.0f;
-                        
-                        break;
-                    case Difficulty.MEDIUM:
-                        PlayerPrefs.SetFloat("speed", 10f);
-                        repeatNumber = 4;
-                        minRange = 0.1f;
-                        maxRange = 0.5f;
-                        
-                        break;
-                    case Difficulty.HARD:
-                        PlayerPrefs.SetFloat("speed", 15f);
-                    repeatNumber = 8;
-                        minRange = 0.0f;
-                        maxRange = 0.2f;
-                        
-                        break;
-                    default:
-                        PlayerPrefs.SetFloat("speed", 3f);
-                        minRange = 0.5f;
-                        maxRange = 2.0f;
-                        
-                        break;
-                }
-          
+            SetDifficulty();
         }
 
         private void OnEnable()
@@ -97,12 +69,16 @@ namespace Scripts.Games
             _keys.One.Input.action.performed += ButtonPress;
         }
 
-        void Start()
+        private void OnDisable()
         {
+            _keys.One.Input.action.performed -= ButtonPress;
+        }
+
+        private IEnumerator Start()
+        {
+            yield return StartCoroutine(AnimateInstruction());
             //instantiateButton();
             StartCoroutine(InstantiateButtonsWithDelay());
-           
-
         }
 
         void Update()
@@ -113,6 +89,40 @@ namespace Scripts.Games
             CheckWin();
             //}
             //TODO wird nach ein mal lose immer noch aufgerufen
+        }
+
+        private protected override void SetDifficulty()
+        {
+            switch(Difficulty)
+            {
+                case Difficulty.EASY:
+                    PlayerPrefs.SetFloat("speed", 3f);
+                    repeatNumber = 2;
+                    minRange = 0.5f;
+                    maxRange = 2.0f;
+                        
+                    break;
+                case Difficulty.MEDIUM:
+                    PlayerPrefs.SetFloat("speed", 10f);
+                    repeatNumber = 4;
+                    minRange = 0.1f;
+                    maxRange = 0.5f;
+                        
+                    break;
+                case Difficulty.HARD:
+                    PlayerPrefs.SetFloat("speed", 15f);
+                    repeatNumber = 8;
+                    minRange = 0.0f;
+                    maxRange = 0.2f;
+                        
+                    break;
+                default:
+                    PlayerPrefs.SetFloat("speed", 3f);
+                    minRange = 0.5f;
+                    maxRange = 2.0f;
+                        
+                    break;
+            }
         }
 
         private void OnDrawGizmos()
@@ -148,26 +158,25 @@ namespace Scripts.Games
 
             for (int i = 0; i < buttons.Count; i++)
             {
-                float buttonPosX = buttonContainer.transform.GetChild(i).gameObject.transform.position.x;
+                float buttonPosY = buttonContainer.transform.GetChild(i).gameObject.transform.position.y;
 
-                if (buttonPosX < leftBound)
+                if (buttonPosY < lowerBound)
                 {
                     
                     removeClickedButton(i);
                     failed();
 
                 }
-                else if (buttonPosX > rightBound && buttonPressed)
+                else if (buttonPosY > upperBound && buttonPressed)
                 {
                     removeClickedButton(i);
                     failed();
                     
                 }
-                else if (buttonPosX > leftBound && buttonPosX < rightBound && buttonPressed)
+                else if (buttonPosY > lowerBound && buttonPosY < upperBound && buttonPressed)
                 {
                     removeClickedButton(i);
                     won();
-                    
                 }
             }
         }
@@ -180,12 +189,6 @@ namespace Scripts.Games
 
         private void failed()
         {
-
-            if(base._fails <= 0)
-            {
-                base.Easier();
-            }
-            base._successes = 0;
             Debug.Log("Lose");
             lost = true;
             Fail();
@@ -196,11 +199,6 @@ namespace Scripts.Games
 
         private void won()
         {
-
-            if(base._successes >= 32) 
-            {
-                base.Harder();
-            }
             Debug.Log("Win");
             lost = false;
             Success();

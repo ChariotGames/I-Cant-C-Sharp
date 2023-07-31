@@ -32,4 +32,4 @@ MonoBehaviour:
     four: {fileID: 0}
   prefab: {fileID: 1302581166809503853, guid: c9c73196acb57f641bc759b14f3a72fa, type: 3}
   preview: {fileID: 21300000, guid: f3924eca85340c44da711aba89899953, type: 3}
-  instructionText: "is the roman number \ngreater?"
+  instructionText: compare the numbers

@@ -15,6 +15,11 @@ MonoBehaviour:
   description: 
   difficulty: 1
   genre: 8
+  actionNames:
+    one: 
+    two: 
+    three: 
+    four: 
   keysLeft:
     one: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
     two: {fileID: 0}
@@ -25,11 +30,6 @@ MonoBehaviour:
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
-  actionNames:
-    one: 
-    two: 
-    three: 
-    four: 
-    other: 
   prefab: {fileID: 2351859287407049683, guid: a215d3234a3d549d99773e17adb082c4, type: 3}
   preview: {fileID: 0}
+  instructionText: "press button \non time!"

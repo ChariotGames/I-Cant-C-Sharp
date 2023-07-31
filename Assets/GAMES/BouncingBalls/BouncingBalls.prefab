@@ -184,7 +184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Count the Number of Bounces
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
   m_sharedMaterial: {fileID: -7160962544614530396, guid: cf4dffe0a2acd4da2905abd404d12051, type: 2}
@@ -1684,6 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 1
   successesToWin: 3
+  successesToLevelUp: 2
   failsToLose: 3
   bouncingBalls:
   - {fileID: 4321193698007213356}
@@ -1693,7 +1694,6 @@ MonoBehaviour:
   balls: {fileID: 3306906542473228485}
   guessingOverlay: {fileID: 5307354073733101283}
   groundMaterial: {fileID: 6200000, guid: e6f6803ad269fa049bbc2a4e72f58d7a, type: 2}
-  infoText: {fileID: 5795129178731659981}
   resultText: {fileID: 8104434513277550652}
 --- !u!82 &8247213196729409848
 AudioSource:

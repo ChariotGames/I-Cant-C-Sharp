@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Controllers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
@@ -20,21 +21,14 @@ namespace Scripts.Games
         [SerializeField] private TMP_Text stepBackText,  buttonYes, buttonNo;
         [SerializeField] private int maxStepsBack;
         [SerializeField] private int timeout;
-        [SerializeField] private int successesToLevelUp;
 
         private LinkedList<int> _lastIndices = new();
-        private const string _stepsText = "steps: ";
+        private const string _stepsText = "think back: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
-        private int difficultyTracker, defaultFailsToLose;
 
         void Start()
         {
-            difficultyTracker = successesToLevelUp;
-            _fails = failsToLose;
-            defaultFailsToLose = failsToLose;
-            buttonYes.text = _keys.One.Icon;
-            buttonNo.text = _keys.Two.Icon;
             StartCoroutine(GameStartCoroutine());
         }
 
@@ -100,7 +94,7 @@ namespace Scripts.Games
                 if (options[0].activeSelf || options[1].activeSelf)
                 {
                     //Debug.Log(lastIndices.Count);
-                    Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tsteps: " + (_steps + 1));
+                    //Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tthink back: " + (_steps + 1));
 
                     float timer = Time.time;
                     RunTimer(timeout);
@@ -108,19 +102,11 @@ namespace Scripts.Games
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         gamestateWin.SetActive(true);
-                        //GameWon();
-                        if (difficultyTracker <= 0)
-                        {
-                            difficultyTracker = successesToLevelUp;
-                            Harder();
-                        }
                         Success();
                     }
                     else
                     {
                         gamestateLose.SetActive(true);
-                        //GameLost();
-                        difficultyTracker++;
                         Fail();
                     }
                     yield return new WaitForSeconds(1);
@@ -142,35 +128,6 @@ namespace Scripts.Games
             }
         }
 
-
-        private void GameWon()
-        {
-            ScoreUp();
-            _successes++;
-            difficultyTracker--;
-            if (difficultyTracker <= 0)
-            {
-                difficultyTracker = successesToLevelUp;
-                Harder();
-            }
-            if (_successes >= successesToWin)
-            {
-                Win(); 
-            }
-        }
-        
-        private void GameLost()
-        {
-            _fails--;
-            difficultyTracker++;
-            if (_fails <= 0)
-            {
-                _fails = failsToLose;
-                Easier();
-                Lose();
-            }
-        }
-        
         private void OnEnable()
         {
             _keys.Two.Input.action.performed += YesButtonPressed;

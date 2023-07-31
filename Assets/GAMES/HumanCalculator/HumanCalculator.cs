@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using Scripts.Models;
+using Random = UnityEngine.Random;
 
 
 namespace Scripts.Games
@@ -26,6 +29,7 @@ namespace Scripts.Games
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
+        private bool _gameStarted;
         
         public bool isAnswerScreen;
         //private int _currentScore;
@@ -44,13 +48,16 @@ namespace Scripts.Games
             rightAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(base.AnimateInstruction());
+            _gameStarted = true;
             StartCoroutine(GenerateNewEquation());
         }
 
         private void Update()
         {
+            if(!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
             if (isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
             {
@@ -199,13 +206,6 @@ namespace Scripts.Games
                 //base.ScoreUp();
                 //base.AnimateSuccess(_currentScore, _scoreToWin);
                 base.Success();
-                if (base._successes >= base.successesToWin)
-                {
-                    //_currentScore = 0;
-                    base.Harder();
-                    //base.Win();
-                }
-                
             }
             else {
                 Debug.Log("Wrong");
@@ -213,14 +213,6 @@ namespace Scripts.Games
                 //wrongAnswer.gameObject.SetActive(true);
                 //base.AnimateFail(_remainingLives , 3);
                 base.Fail();
-                if (base._fails <= 0)
-                {
-                    Debug.Log("GAME LOST");
-                    //_remainingLives = 3;
-                    base.Easier();
-                    //base.Lose();
-                }
-                
             }
 
             isAnswerScreen = false;

@@ -1,4 +1,5 @@
 using System.Collections;
+using Scripts.Controllers;
 using UnityEngine;
 using Scripts.Models;
 using TMPro;
@@ -14,7 +15,7 @@ namespace Scripts.Games
             [SerializeField] private TMP_Text letters;
             [SerializeField] private TMP_Text buttonYes, buttonNo;
             [SerializeField] private GameObject letterContainer, gamestateWin, gamestateLose;
-            [SerializeField] private int timeout, successesToLevelUp;
+            [SerializeField] private int timeout;
 
         #endregion Serialized Fields
 
@@ -23,7 +24,6 @@ namespace Scripts.Games
             private bool _isYes;
             private bool _isNo;
             private float _timeElapsed;
-            private int difficultyTracker;
 
         #endregion Fields
 
@@ -33,8 +33,6 @@ namespace Scripts.Games
             {
                 buttonYes.text = _keys.One.Icon;
                 buttonNo.text = _keys.Two.Icon;
-                difficultyTracker = successesToLevelUp;
-                _fails = failsToLose;
                 StartCoroutine(GameCoroutine());
             }
 
@@ -79,55 +77,18 @@ namespace Scripts.Games
                 if (_timeElapsed < timeout && _timeElapsed >= 0 && _isYes == isTrio && _isNo != isTrio)
                 {
                     gamestateWin.SetActive(true);
-                    //GameWon();
-                    difficultyTracker--;
-                    if (difficultyTracker <= 0)
-                    {
-                        difficultyTracker = successesToLevelUp;
-                        Harder();
-                    }
                     Success();
                 }
                 else
                 {
                     gamestateLose.SetActive(true);
-                    //GameLost();
-                    difficultyTracker++;
                     Fail();
                 }
                 yield return new WaitForSeconds(1);
                 SceneReset();
                 yield return new WaitForSeconds(0.5f);
             }
-            
-            private void GameWon()
-            {
-                ScoreUp();
-                _successes++;
-                difficultyTracker--;
-                if (difficultyTracker <= 0)
-                {
-                    difficultyTracker = successesToLevelUp;
-                    Harder();
-                }
-                if (_successes >= successesToWin)
-                {
-                    Win(); 
-                }
-            }
-        
-            private void GameLost()
-            {
-                _fails--;
-                difficultyTracker++;
-                if (_fails <= 0)
-                {
-                    _fails = failsToLose;
-                    Easier();
-                    Lose();
-                }
-            }
-        
+
             private void ShowLetters(bool isTrio)
             {
                 Debug.Log(isTrio);
@@ -155,6 +116,7 @@ namespace Scripts.Games
                         };
                         break;
                 }
+                Debug.Log("Letter: " + newLetters[0] + " " + newLetters[1] + " " + newLetters[2]);
                 SetLettersByDifficulty(newLetters);
                 letterContainer.SetActive(true);
             }
@@ -200,6 +162,7 @@ namespace Scripts.Games
                 gamestateWin.SetActive(false);
                 gamestateLose.SetActive(false);
             }
+            
         
             private void OnEnable()
             {
