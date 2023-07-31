@@ -48,20 +48,12 @@ namespace Scripts.Controllers
             _previous = new();
             ResetGames();
         }
-
-        void Start()
+        
+        private void OnEnable()
         {
             BaseGame.OnLose += LoseCondition;
             BaseGame.OnWin += WinCondition;
             BaseGame.OnUpdateDifficulty += UpdateDifficulty;
-
-            if (settings.SelectedGame != null)
-            {
-                StartCoroutine(LoadCenter(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter));
-                return;
-            }
-
-            SpawnSides();
         }
 
         private void OnDisable()
@@ -69,6 +61,17 @@ namespace Scripts.Controllers
             BaseGame.OnLose -= LoseCondition;
             BaseGame.OnWin -= RemoveGame;
             BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
+        }
+
+        void Start()
+        {
+            if (settings.SelectedGame != null)
+            {
+                StartCoroutine(LoadCenter(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter));
+                return;
+            }
+
+            SpawnSides();
         }
 
         #endregion
