@@ -51,17 +51,7 @@ namespace Scripts.Games
         {
             return Keys.Four.Input.action; // right
         }
-
-        public void easier()
-        {
-            base.Easier();
-            
-        }
-
-        public void harder()
-        {
-            base.Harder();
-        }
+        
         public void winCondition()
         {
             base.Success();
@@ -72,18 +62,10 @@ namespace Scripts.Games
             base.Fail();
         }
 
-        public void Score()
+        private protected override void SetDifficulty()
         {
-            //base.ScoreUp(1);
-            //++successCounter;
-            //base.AnimateSuccess(gameObject.transform,successCounter, successesToWin );
-            Success();
-        }
-
-        //private protected override void SetDifficulty()
-        //{
             
-       // }
+        }
 
         public Sprite getCharacter()
         {
@@ -93,6 +75,11 @@ namespace Scripts.Games
         public int getSuccessToWin()
         {
             return successesToWin;
+        }
+
+        public int getFails()
+        {
+            return _fails;
         }
 
         #endregion Game Mechanics / Methods
