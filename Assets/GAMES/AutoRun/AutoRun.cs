@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Scripts.Models;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -29,6 +31,10 @@ namespace Scripts.Games
         
         #region Game Mechanics / Methods
 
+        private IEnumerator Start()
+        {
+            yield return StartCoroutine(AnimateInstruction());
+        }
         public InputAction getJumpInput()
         { 
             return Keys.One.Input.action; // Up
@@ -70,7 +76,7 @@ namespace Scripts.Games
         {
             base.ScoreUp(1);
             ++successCounter;
-            base.AnimateSuccess(gameObject.transform,successCounter, successesToWin );
+            base.AnimateSuccess(successCounter, successesToWin );
         }
 
         public Sprite getCharacter()
