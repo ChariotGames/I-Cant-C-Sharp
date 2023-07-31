@@ -26,6 +26,22 @@ namespace Scripts.Games
         void Update()
         {
             Vector2 input = stick.action.ReadValue<Vector2>().normalized;
+            //float x = input.x;
+            //float y = input.y;
+            //Vector2 newInput;
+
+            //if (Mathf.Abs(x) > Mathf.Abs(y))
+            //{
+            //    Debug.Log("x = " + (1.0f / Mathf.Abs(x)));
+            //    newInput.x = (1.0f /Mathf.Abs(x)) * x;
+            //    newInput.y = 0.0f;
+            //}
+            //else
+            //{
+            //    Debug.Log("y = " + (1.0f / Mathf.Abs(y)));
+            //    newInput.y = (1.0f / Mathf.Abs(y)) * y;
+            //    newInput.x = 0.0f;
+            //}
 
             gameObject.transform.Translate(speed * Time.deltaTime * input);
 
@@ -35,6 +51,7 @@ namespace Scripts.Games
             if (transform.localPosition.y <= -y) transform.localPosition = new Vector2(transform.localPosition.x, -y);
         }
 
+
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
@@ -42,5 +59,6 @@ namespace Scripts.Games
         public InputActionReference Stick { get => stick; set => stick = value; }
 
         #endregion GetSets / Properties
+        
     }
 }
