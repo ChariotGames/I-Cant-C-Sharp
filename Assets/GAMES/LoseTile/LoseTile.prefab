@@ -136,7 +136,7 @@ MonoBehaviour:
   difficulty: 1
   successesToWin: 3
   successesToLevelUp: 3
-  failsToLose: 1
+  failsToLose: 2
   gridSize: 5
   space: 1.1
   tile: {fileID: 5241422682149599240}
@@ -380,6 +380,8 @@ MonoBehaviour:
   timer: 1
   box: {fileID: 5241422682149599241}
   type: 3
+  visited: 0
+  isVisable: 1
 --- !u!212 &5241422682149599246
 SpriteRenderer:
   m_ObjectHideFlags: 0

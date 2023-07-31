@@ -82,7 +82,7 @@ namespace Scripts.Games
                     //}
 
                     Fail();
-                    ResetGame();
+                    //ResetGame();
 
                     break;
                 case ElementType.GOAL:
@@ -161,7 +161,6 @@ namespace Scripts.Games
                         obj.GetComponent<LoseTileField>().setInVisible();
                         obj.GetComponent<LoseTileField>().visited = true;
                         obj.GetComponent<LoseTileField>().type = ElementType.ENEMY;
-
                         count--;
                     }
 
