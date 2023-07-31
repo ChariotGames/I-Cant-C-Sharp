@@ -16,6 +16,8 @@ namespace Scripts.Games
         [SerializeField] private GameObject tile, dangerzone;
         [SerializeField] private LoseTilePlayer player;
         [SerializeField] private Transform container;
+        [SerializeField] AudioSource WinSound;
+
 
         #endregion Serialized Fields
 
@@ -23,14 +25,18 @@ namespace Scripts.Games
 
         [SerializeField] private int remainingTiles = 0, ammountOfTiles = 0, lives = 3;
         private int gridHalf;
+        private int removeCount;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
 
         private void Awake()
         {
-            //successesToWin = 3;
-            //failsToLose = 1;
+            failsToLose = 3;
+            if (Difficulty.EASY == difficulty)
+            {
+                failsToLose--;
+            }
             ammountOfTiles = gridSize * gridSize;
             player.Stick = _keys.One.Input;
             gridHalf = gridSize / 2;
@@ -51,45 +57,20 @@ namespace Scripts.Games
 
         public void PlayerTouched(ElementType type)
         {
-            //ElementType type = obj.GetComponent<LoseTileField>().type;
-
             switch (type)
             {
                 case ElementType.CHECKPOINT:
-                    //Destroy(obj);
                     remainingTiles--;
 
                     if (remainingTiles == 0)
                     {
-                        //successesToWin--;
-                        Success();
-                        ResetGame();
-
-                        //if (successesToWin == 0)
-                        //{
-                        //    Debug.Log("you win");
-                        //    base.Win();
-                        //}
+                        base.Success();
+                        WinSound.Play();
+                        Invoke(nameof(ResetGame),1);
                     }
                     break;
                 case ElementType.ENEMY:
-
-                    //failsToLose--;
-                    //if (failsToLose == 0)
-                    //{
-                    //    Debug.Log("you lose");
-                    //    base.Lose();
-                    //}
-
                     Fail();
-                    //ResetGame();
-
-                    break;
-                case ElementType.GOAL:
-                    //if (remainingTiles == ammountOfTiles -1)
-                    //{
-                    //    base.Win();
-                    //}
                     break;
             }
         }
@@ -107,46 +88,18 @@ namespace Scripts.Games
 
         #region Overarching Methods / Helpers
 
-        private protected override void SetDifficulty()
-        {
-            //switch (Difficulty)
-            //{
-            //    case Difficulty.EASY:
-
-
-            //        break;
-            //    case Difficulty.MEDIUM:
-
-
-            //        break;
-            //    case Difficulty.HARD:
-
-
-            //        break;
-            //    default:
-
-
-            //        break;
-            //}
-            if (difficulty == Difficulty.MEDIUM)
-            {
-                
-            }
-        }
-
-
         private void SetGrid()
         {
-            int count = ((int)difficulty);
+            removeCount = ((int)difficulty);
             if (difficulty == Difficulty.HARD)
             {
-                count = Random.Range(4, ((int)difficulty)) - 1;
+                removeCount = Random.Range(4, ((int)difficulty)*2) - 1;
             }
             if (difficulty == Difficulty.EASY) 
             {
-                count = 0;
+                removeCount = 0;
             }
-
+            remainingTiles -= removeCount;
             for (int x = -gridHalf; x <= gridHalf; x++)
             {
                 for (int y = -gridHalf; y <= gridHalf; y++)
@@ -156,17 +109,15 @@ namespace Scripts.Games
                     obj.transform.Translate(x * space, y * space, 0);
                     obj.SetActive(true);
                     int Chance = Random.Range(0, 2);
-                    if (Chance == 1 && count > 0)
+                    if (Chance == 1 && removeCount > 0)
                     {
                         obj.GetComponent<LoseTileField>().setInVisible();
                         obj.GetComponent<LoseTileField>().visited = true;
                         obj.GetComponent<LoseTileField>().type = ElementType.ENEMY;
-                        count--;
+                        removeCount--;
                     }
 
                 }
-                //GameObject obj = Instantiate(tile, container);
-                //obj.transform.SetParent(container, true);
             }
             SetPlayer();
         }
