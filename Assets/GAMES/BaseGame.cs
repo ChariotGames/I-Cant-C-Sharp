@@ -43,6 +43,7 @@ namespace Scripts.Games
         private GameObject _instructionPrefab;
         private float _instructionSpeed;
         private int difficultyTracker;
+        private bool willBeHarder = false;
 
         #endregion Fields
 
@@ -154,13 +155,18 @@ namespace Scripts.Games
             if (difficultyTracker <= 0)
             {
                 difficultyTracker = successesToLevelUp;
-                Harder();
+                willBeHarder = true;
             }
             
             if (_successes >= successesToWin)
             {
                 _successes = 0;
                 _fails = failsToLose;
+                if (willBeHarder)
+                {
+                    Harder();
+                }
+                willBeHarder = false;
                 Win();
             }
         }
