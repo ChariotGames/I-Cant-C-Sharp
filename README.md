@@ -59,7 +59,7 @@ Milana brings her flair to the table, adorning our project with delightful visua
 
 Pascal takes charge of the app's technical design elements. With a keen eye for play mechanics, game design and understanding of Unity, he keeps our app running like a well-oiled machine.
 
-# Jerome - The Changeling (Web, PR & Support)
+### Jerome - The Changeling (Web, PR & Support)
 
 Jerome, our jack-of-all-trades, takes on the roles of Web Design, PR Department & Support. He seamlessly transitions between web design, gathering required materials for the fair and providing unwavering support to ensure our project's success.
 
