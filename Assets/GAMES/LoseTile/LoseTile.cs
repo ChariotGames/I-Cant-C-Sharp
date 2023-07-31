@@ -124,13 +124,13 @@ namespace Scripts.Games
 
         private void SetPlayer()
         {
-            int PlayerX = Random.Range(-gridHalf, +gridHalf);
-            int PlayerY = Random.Range(-gridHalf, +gridHalf);
+            int PlayerX = Random.Range(-gridHalf, +gridHalf + 1);
+            int PlayerY = Random.Range(-gridHalf, +gridHalf + 1);
             LoseTileField Tile = container.GetChild((PlayerY + gridHalf) * gridSize + (PlayerX + gridHalf)).GetComponent<LoseTileField>();
             while (!Tile.isVisable)
             {
-                PlayerX = Random.Range(-gridHalf, +gridHalf);
-                PlayerY = Random.Range(-gridHalf, +gridHalf);
+                PlayerX = Random.Range(-gridHalf, +gridHalf + 1);
+                PlayerY = Random.Range(-gridHalf, +gridHalf + 1);
                 Tile = container.GetChild((PlayerY +gridHalf) * gridSize + (PlayerX + gridHalf)).GetComponent<LoseTileField>();
             }
             player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);
