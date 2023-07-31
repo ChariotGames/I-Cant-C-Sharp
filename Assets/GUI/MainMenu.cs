@@ -38,7 +38,7 @@ namespace Scripts.Controllers
         {
             if (mainCamera) mainCamera = Camera.main;
 
-            ResetBaseSettings();
+            ResetSettings();
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
             livesText.text = settings.Lives.ToString();
             difficulty.value = (int)settings.BaseDifficulty;
@@ -115,23 +115,11 @@ namespace Scripts.Controllers
         /// </summary>
         public void ResetSettings()
         {
-            settings.Lives = PlayerPrefs.GetInt("lives")/*defaultSettings.Lives*/;
-            SetLives(0); // Updates the menu text
-            settings.Players = defaultSettings.Players;
-            settings.SelectedGame = defaultSettings.SelectedGame;
+            settings.Lives = settings.MaxLives;
             settings.Games = new List<Minigame>(defaultSettings.Games);
             settings.SoloGames = new List<Minigame>(defaultSettings.SoloGames);
-            ResetDifficulties();
-            settings.Characters = defaultSettings.Characters;
+            settings.Characters = new List<Character>(defaultSettings.Characters);
             settings.BaseDifficulty = defaultSettings.BaseDifficulty;
-            settings.Time = defaultSettings.Time;
-            settings.Score = defaultSettings.Score;
-        }
-
-        private void ResetBaseSettings()
-        {
-            settings.Lives = PlayerPrefs.GetInt("lives")/*defaultSettings.Lives*/;
-            SetLives(0);
             settings.SelectedGame = defaultSettings.SelectedGame;
             settings.Time = defaultSettings.Time;
             settings.Score = defaultSettings.Score;
@@ -144,7 +132,6 @@ namespace Scripts.Controllers
         public void SetLives(int change)
         {
             settings.Lives = Mathf.Clamp(settings.Lives + change, 1, 9);
-            PlayerPrefs.SetInt("lives",settings.Lives);
             settings.MaxLives = Mathf.Clamp(settings.MaxLives + change, 1, 9);
             livesText.text = settings.Lives.ToString();
         }
@@ -169,7 +156,7 @@ namespace Scripts.Controllers
         /// Resets the difficulty of all games back to easy.
         /// Just in case! But you lose all progress!
         /// </summary>
-        private void ResetDifficulties()
+        public void ResetDifficulties()
         {
             foreach (Minigame game in settings.Games)
             {
