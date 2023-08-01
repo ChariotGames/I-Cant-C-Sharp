@@ -266,8 +266,8 @@ namespace Scripts.Games
 
         private void won()
         {
-            ScoreOneUp();
-
+            //ScoreOneUp();
+            base.Success();
             spriteWin.gameObject.SetActive(true);
         }
 
