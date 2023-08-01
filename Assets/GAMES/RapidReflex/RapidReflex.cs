@@ -5,6 +5,7 @@ using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -28,7 +29,8 @@ namespace Scripts.Games
         [SerializeField] private Transform lightsTop, lightsBottom;
         [SerializeField] private SpriteRenderer[] bulbsSpriteTop, bulbsSpriteBottom;
         [SerializeField] private SpriteRenderer backgroundSprite;
-        [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen, backroundColor;
+        [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen;
+        [SerializeField] private Color backgroundColor;
         [SerializeField] private List<Color> flashColor;
         [SerializeField] private float lightTimer;
 
@@ -36,6 +38,7 @@ namespace Scripts.Games
 
     #region Fields
 
+        private AudioSource audioSource;
         private const int NUMBER_LIGHTS = 5;
         private float _timeElapsed = 0, _randomDelay = 0, _timeToAnswer;
         private bool _isButtonPressed = false;
@@ -46,7 +49,8 @@ namespace Scripts.Games
     
     void Start()
     {
-        backgroundSprite.color = backroundColor;
+        audioSource = GetComponent<AudioSource>();
+        backgroundSprite.color = backgroundColor;
         flashColor.Add(lightRed);
         flashColor.Add(lightGreen);
         //backgroundSprite = background.GetComponent<SpriteRenderer>();
@@ -117,15 +121,19 @@ namespace Scripts.Games
         private IEnumerator LightAnimation()
         {
             _isButtonPressed = false;
+            audioSource.pitch = 0.75f;
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
-                if (CheckForEarlyLose()) yield break; 
+                if (CheckForEarlyLose()) yield break;
+                audioSource.Play();
                 UpdateLightColor(bulbsSpriteTop[i], lightRed);
                 if (Difficulty == Difficulty.HARD && i == NUMBER_LIGHTS-1) StartCoroutine(RandomDistraction());
                 yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && Difficulty != Difficulty.EASY ? _randomDelay : 0));
                 if (CheckForEarlyLose()) yield break; 
             }
             //Debug.Log("Delay: " + (_randomDelay + _randomDelay) + " s");
+            audioSource.pitch = 1.5f;
+            audioSource.Play();
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
                 UpdateLightColor(bulbsSpriteBottom[i], lightGreen);
@@ -180,7 +188,7 @@ namespace Scripts.Games
             //background.SetActive(true);
             yield return new WaitForSeconds(0.2f);
             //background.SetActive(false);
-            backgroundSprite.color = backroundColor;
+            backgroundSprite.color = backgroundColor;
         }
 
         private void UpdateRandomDelay()
