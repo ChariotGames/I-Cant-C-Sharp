@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: AlphabeticalTrio
   m_EditorClassIdentifier: 
-  description: 
+  description: Three letters are shown and you have to decide wether they are in
+    alphabetical order or not. In igher difficulties the letters maybe shown in reverse
+    alphabetical order.
   difficulty: 1
   genre: 4
   actionNames:

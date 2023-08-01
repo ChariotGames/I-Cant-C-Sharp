@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: SameAsBefore
   m_EditorClassIdentifier: 
-  description: 
+  description: Different symbols appear and after each you have to tell if it was
+    the same as the one x steps before.
   difficulty: 1
   genre: 3
   actionNames:

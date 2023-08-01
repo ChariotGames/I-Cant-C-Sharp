@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: RomanNumbers
   m_EditorClassIdentifier: 
-  description: 
+  description: A roman and a decimal number are shown. The player has to compare
+    both and decide wether the comparison is true or false.
   difficulty: 1
   genre: 4
   actionNames:
