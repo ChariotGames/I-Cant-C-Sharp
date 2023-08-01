@@ -3,7 +3,6 @@ using System.Collections;
 using Scripts.Models;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace Scripts.Controllers
@@ -12,6 +11,7 @@ namespace Scripts.Controllers
     {
         #region Serialized Fields
         
+        [SerializeField] private Animator endAnimator;
         [SerializeField] private HighscorePanel highscorePanel;
         [SerializeField] private Settings settings;
         [SerializeField] private Animator animator;
@@ -28,10 +28,10 @@ namespace Scripts.Controllers
 
         private void Awake()
         {
+            endAnimator.SetTrigger("EndIn");
             scoreText.text = settings.Score.ToString("D3");
             timerText.text = TimeSpan.FromSeconds(settings.Time).ToString("mm':'ss");
             highscorePanel.DisplayScores();
-            animator.ResetTrigger("CameraIn");
         }
 
         #endregion Built-Ins / MonoBehaviours
