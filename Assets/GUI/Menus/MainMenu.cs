@@ -20,8 +20,7 @@ namespace Scripts.Controllers
         [SerializeField] private Animator startAnimator;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private CanvasScaler canvasScaler;
-        [SerializeField] private GameObject templateGameButton, templateCharacterButton;
-        [SerializeField] private Transform gamesContainer, characterContainer;
+        [SerializeField] private GameObject templateGameButton, templateCharacterButton, gamesContainer, characterContainer;
         [SerializeField] private Settings defaultSettings, settings;
         [SerializeField] private TMP_Text livesText;
         [SerializeField] private TMP_Dropdown difficulty;
@@ -54,27 +53,27 @@ namespace Scripts.Controllers
         /// </summary>
         public void FillGamesContainer()
         {
-            if (gamesContainer.childCount != 0)
+            if (gamesContainer.transform.childCount != 0)
             {
-                EventSystem.current.SetSelectedGameObject(gamesContainer.GetChild(0).gameObject);
+                EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
                 return;
             }
 
             foreach (Minigame game in settings.Games)
             {
-                GameObject button = Instantiate(templateGameButton, gamesContainer);
+                GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
                 button.GetComponent<MainMenuGame>().SetupButton(game);
                 //gameButtons.Add(button);
             }
 
             foreach (Minigame game in settings.SoloGames)
             {
-                GameObject button = Instantiate(templateGameButton, gamesContainer);
+                GameObject button = Instantiate(templateGameButton, gamesContainer.transform);
                 button.GetComponent<MainMenuGame>().SetupButton(game);
                 //gameButtons.Add(button);
             }
 
-            EventSystem.current.SetSelectedGameObject(gamesContainer.GetChild(0).gameObject);
+            EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
         }
 
         /// <summary>
@@ -82,17 +81,17 @@ namespace Scripts.Controllers
         /// </summary>
         public void FillCharacterContainer()
         {
-            if (characterContainer.childCount == 0)
+            if (characterContainer.transform.childCount == 0)
             {
                 foreach (Character character in settings.Characters)
                 {
-                    GameObject button = Instantiate(templateCharacterButton, characterContainer);
+                    GameObject button = Instantiate(templateCharacterButton, characterContainer.transform);
                     button.GetComponent<MainMenuCharacter>().SetupButton(character);
                     //gameButtons.Add(button);
                 }
             }
 
-            EventSystem.current.SetSelectedGameObject(characterContainer.GetChild(0).gameObject);
+            EventSystem.current.SetSelectedGameObject(characterContainer.transform.GetChild(0).gameObject);
         }
 
         public void RunEndless()
