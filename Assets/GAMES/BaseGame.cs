@@ -17,8 +17,8 @@ namespace Scripts.Games
         #region Serialized Fields
 
         [Header("Game Values")]
-        [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
-        [SerializeField] protected int successesToWin = 5, successesToLevelUp;
+        [SerializeField] protected int successesToWin = 5;
+        [SerializeField] protected int successesToLevelUp;
         [SerializeField] protected int failsToLose = 3;
 
         #endregion Serialized Fields
@@ -33,6 +33,7 @@ namespace Scripts.Games
         //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
         public static event Action<Transform, AnimType, int, float, float> OnPlayAnimations;
 
+        protected Difficulty difficulty = Difficulty.EASY;
         protected KeyMap _keys;
         protected Rect _playarea;
         protected SpawnSide _spawnSide;
@@ -44,9 +45,9 @@ namespace Scripts.Games
         private Transform _parent;
         private GameObject _instructionPrefab;
         private float _instructionSpeed;
-        private int difficultyTracker;
-        private bool willGetHarder = false;
-        private bool isVarying = true;
+        private int _difficultyTracker;
+        private bool _willGetHarder = false;
+        private bool _isVarying = true;
 
         #endregion Fields
 
@@ -66,8 +67,8 @@ namespace Scripts.Games
             SpawnSide = type;
             _parent = transform.parent;
             _fails = failsToLose;
-            isVarying = varying;
-            difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
+            _isVarying = varying;
+            _difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
         }
 
         /// <summary>
@@ -155,22 +156,22 @@ namespace Scripts.Games
             StopTimer();
             AnimateSuccess(parent, _successes, successesToWin);
             
-            difficultyTracker--;
-            if (difficultyTracker <= 0)
+            _difficultyTracker--;
+            if (_difficultyTracker <= 0)
             {
-                difficultyTracker = successesToLevelUp;
-                willGetHarder = true;
+                _difficultyTracker = successesToLevelUp;
+                _willGetHarder = true;
             }
             
             if (_successes >= successesToWin)
             {
                 _successes = 0;
                 _fails = failsToLose;
-                if (willGetHarder)
+                if (_willGetHarder)
                 {
                     Harder();
                 }
-                willGetHarder = false;
+                _willGetHarder = false;
                 Win();
             }
         }
@@ -213,7 +214,7 @@ namespace Scripts.Games
             StopTimer();
             AnimateFail(parent, _fails, failsToLose);
             
-            difficultyTracker++;
+            _difficultyTracker++;
 
             if (_fails <= 0)
             {
@@ -285,7 +286,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Easier()
         {
-            if(!isVarying) return; 
+            if(!_isVarying) return; 
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
             
             if (SpawnSide == SpawnSide.Side) return;
@@ -300,7 +301,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Harder()
         {
-            if(!isVarying) return; 
+            if(!_isVarying) return; 
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
             
             if (SpawnSide == SpawnSide.Side) return;

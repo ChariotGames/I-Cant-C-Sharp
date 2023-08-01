@@ -8,13 +8,15 @@ namespace Scripts.Models
     {
         #region Fields
 
-        [SerializeField] private int lives = 3, maxLives = 3, players = 1;
+        [SerializeField] private int lives = 3, maxLives = 3;
         [SerializeField] private Difficulty baseDifficulty;
         [SerializeField] private Minigame selectedGame = null;
         [SerializeField] private Character selectedCharacter = null;
         [SerializeField] private List<Minigame> games, soloGames;
         [SerializeField] private List<Character> characters;
-        [SerializeField] private int  _score, _time;
+
+        private float mainVolume, musicVolume, soundVolume;
+        private int  _score, _time, players = 1;
 
         #endregion
 
@@ -118,6 +120,33 @@ namespace Scripts.Models
         {
             get => _score;
             set => _score = value;
+        }
+
+        /// <summary>
+        /// The main volume value set by the player.
+        /// </summary>
+        public float MainVolume
+        {
+            get => mainVolume;
+            set => mainVolume = value;
+        }
+
+        /// <summary>
+        /// The music volume value set by the player.
+        /// </summary>
+        public float MusicVolume
+        {
+            get => musicVolume;
+            set => musicVolume = value;
+        }
+
+        /// <summary>
+        /// The sound volume value set by the player.
+        /// </summary>
+        public float SoundVolume
+        {
+            get => soundVolume;
+            set => soundVolume = value;
         }
 
         #endregion

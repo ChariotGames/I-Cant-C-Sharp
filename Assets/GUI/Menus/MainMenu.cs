@@ -1,12 +1,12 @@
-using System;
+using Scripts.Games;
+using Scripts.Models;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
-using Scripts.Models;
 using UnityEngine.SceneManagement;
-using Scripts.Games;
+using UnityEngine.UI;
 
 namespace Scripts.Controllers
 {
@@ -24,6 +24,9 @@ namespace Scripts.Controllers
         [SerializeField] private Settings defaultSettings, settings;
         [SerializeField] private TMP_Text livesText;
         [SerializeField] private TMP_Dropdown difficulty;
+        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private Button parallelButton;
+        [SerializeField] private Slider mainVolume, musicVolume, soundVolume;
 
         #endregion Serialized Fields
 
@@ -38,10 +41,12 @@ namespace Scripts.Controllers
         void Start()
         {
             if (mainCamera) mainCamera = Camera.main;
+            canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
 
             startAnimator.SetTrigger("BookIn");
-            ResetSettings();
-            canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
+            ClearSettings();
+            ResetAudio(false);
+            if (settings.BaseDifficulty == Difficulty.TUTORIAL) parallelButton.interactable = false;
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -111,20 +116,31 @@ namespace Scripts.Controllers
         }
 
         /// <summary>
-        /// Resets all settings back to default.
+        /// Clears the primary game relevant setting after a run.
         /// </summary>
-        public void ResetSettings()
+        private void ClearSettings()
         {
             settings.Lives = settings.MaxLives;
+            livesText.text = settings.Lives.ToString();
+            difficulty.value = (int)settings.BaseDifficulty;
+            difficulty.RefreshShownValue();
+            settings.Time = 0;
+            settings.Score = 0;
+        }
+
+        /// <summary>
+        /// Resets all settings back to default.
+        /// </summary>
+        public void RestoreDefaults()
+        {
+            settings.MaxLives = defaultSettings.MaxLives;
             settings.Games = new List<Minigame>(defaultSettings.Games);
             settings.SoloGames = new List<Minigame>(defaultSettings.SoloGames);
             settings.Characters = new List<Character>(defaultSettings.Characters);
-            //settings.BaseDifficulty = defaultSettings.BaseDifficulty;
             settings.SelectedGame = defaultSettings.SelectedGame;
-            settings.Time = defaultSettings.Time;
-            settings.Score = defaultSettings.Score;
-            livesText.text = settings.Lives.ToString();
-            difficulty.value = (int)settings.BaseDifficulty;
+            ClearSettings();
+            ClearHighscores();
+            ResetAudio(true);
         }
 
         /// <summary>
@@ -145,12 +161,6 @@ namespace Scripts.Controllers
         public void SetDifficulty(int value)
         {
             settings.BaseDifficulty = (Difficulty)Mathf.Clamp(value, (int)Difficulty.TUTORIAL, (int)Difficulty.VARYING);
-            //difficultyText.text = settings.BaseDifficulty.ToString();
-        }
-
-        public void ClearHighscores()
-        {
-            PlayerPrefs.DeleteKey("HighscoreList");
         }
 
         /// <summary>
@@ -159,6 +169,8 @@ namespace Scripts.Controllers
         /// </summary>
         public void ResetDifficulties()
         {
+            settings.BaseDifficulty = defaultSettings.BaseDifficulty;
+
             foreach (Minigame game in settings.Games)
             {
                 game.Difficulty = Difficulty.EASY;
@@ -170,6 +182,69 @@ namespace Scripts.Controllers
                 game.Difficulty = Difficulty.EASY;
                 game.Prefab.GetComponent<BaseGame>().Difficulty = Difficulty.EASY;
             }
+        }
+
+        /// <summary>
+        /// Clears the highscoretable.
+        /// </summary>
+        private void ClearHighscores()
+        {
+            PlayerPrefs.DeleteKey("HighscoreList");
+        }
+
+        /// <summary>
+        /// Resets audio settings back to user values or default.
+        /// </summary>
+        /// <param name="clear">If true, back to default: all zeroes.</param>
+        private void ResetAudio(bool clear)
+        {
+            if (clear)
+            {
+                settings.MainVolume = defaultSettings.MainVolume;
+                settings.MusicVolume = defaultSettings.MusicVolume;
+                settings.SoundVolume = defaultSettings.SoundVolume;
+            }
+
+            float main = settings.MainVolume;
+            float music = settings.MusicVolume;
+            float sound = settings.SoundVolume;
+            
+            SetMainVolume(main);
+            SetMusicVolume(music);
+            SetSoundVolume(sound);
+            mainVolume.value = main;
+            musicVolume.value = music;
+            soundVolume.value = sound;
+        }
+
+        /// <summary>
+        /// Sets the main volume with the slider.
+        /// </summary>
+        /// <param name="volume">The value from the inspector or dynamic from slider.</param>
+        public void SetMainVolume(float volume)
+        {
+            audioMixer.SetFloat("MasterVolume", volume);
+            settings.MainVolume = volume;
+        }
+
+        /// <summary>
+        /// Sets the music volume with the slider.
+        /// </summary>
+        /// <param name="volume">The value from the inspector or dynamic from slider.</param>
+        public void SetMusicVolume(float volume)
+        {
+            audioMixer.SetFloat("MusicVolume", volume);
+            settings.MusicVolume = volume;
+        }
+
+        /// <summary>
+        /// Sets the sound volume with the slider.
+        /// </summary>
+        /// <param name="volume">The value from the inspector or dynamic from slider.</param>
+        public void SetSoundVolume(float volume)
+        {
+            audioMixer.SetFloat("SoundVolume", volume);
+            settings.SoundVolume = volume;
         }
 
         // Obsolete Codes, just in case.
