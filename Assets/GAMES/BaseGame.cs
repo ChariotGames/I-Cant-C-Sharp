@@ -40,12 +40,13 @@ namespace Scripts.Games
         protected Genre _genre;
         protected int _successes, _fails;
         protected float _timer;
-
+        
         private Transform _parent;
         private GameObject _instructionPrefab;
         private float _instructionSpeed;
         private int difficultyTracker;
         private bool willGetHarder = false;
+        private bool isVarying = true;
 
         #endregion Fields
 
@@ -57,7 +58,7 @@ namespace Scripts.Games
         /// <param name="difficulty">The difficulty loaded with.</param>
         /// <param name="keys">The keymap used.</param>
         /// <param name="area">The rect area defining the playfield.</param>
-        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area, SpawnSide type)
+        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area, SpawnSide type, bool varying)
         {
             this.difficulty = difficulty;
             _keys = keys;
@@ -65,6 +66,7 @@ namespace Scripts.Games
             SpawnSide = type;
             _parent = transform.parent;
             _fails = failsToLose;
+            isVarying = varying;
             difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
         }
 
@@ -283,6 +285,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Easier()
         {
+            if(!isVarying) return; 
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
             
             if (SpawnSide == SpawnSide.Side) return;
@@ -297,6 +300,7 @@ namespace Scripts.Games
         /// </summary>
         protected void Harder()
         {
+            if(!isVarying) return; 
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
             
             if (SpawnSide == SpawnSide.Side) return;

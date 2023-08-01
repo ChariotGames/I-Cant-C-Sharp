@@ -119,7 +119,7 @@ namespace Scripts.Controllers
             settings.Games = new List<Minigame>(defaultSettings.Games);
             settings.SoloGames = new List<Minigame>(defaultSettings.SoloGames);
             settings.Characters = new List<Character>(defaultSettings.Characters);
-            settings.BaseDifficulty = defaultSettings.BaseDifficulty;
+            //settings.BaseDifficulty = defaultSettings.BaseDifficulty;
             settings.SelectedGame = defaultSettings.SelectedGame;
             settings.Time = defaultSettings.Time;
             settings.Score = defaultSettings.Score;
@@ -134,7 +134,7 @@ namespace Scripts.Controllers
         public void SetLives(int change)
         {
             settings.Lives = Mathf.Clamp(settings.Lives + change, 1, 9);
-            settings.MaxLives = Mathf.Clamp(settings.MaxLives + change, 1, 9);
+            settings.MaxLives = settings.Lives;
             livesText.text = settings.Lives.ToString();
         }
 
@@ -144,8 +144,7 @@ namespace Scripts.Controllers
         /// <param name="change">The difference to set to.</param>
         public void SetDifficulty(int value)
         {
-            int current = value + 1;
-            settings.BaseDifficulty = (Difficulty)Mathf.Clamp(current, (int)Difficulty.EASY, (int)Difficulty.VARYING);
+            settings.BaseDifficulty = (Difficulty)Mathf.Clamp(value, (int)Difficulty.TUTORIAL, (int)Difficulty.VARYING);
             //difficultyText.text = settings.BaseDifficulty.ToString();
         }
 

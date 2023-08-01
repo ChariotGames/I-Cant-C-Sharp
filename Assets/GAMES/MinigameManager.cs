@@ -172,8 +172,12 @@ namespace Scripts.Controllers
             {
                 difficulty = game.Difficulty;
             }
+            if (settings.BaseDifficulty == Difficulty.TUTORIAL)
+            {
+                difficulty = Difficulty.EASY;
+            }
 
-            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect, type);
+            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect, type, settings.BaseDifficulty == Difficulty.VARYING);
             baseGame.SetInstructions(instructionPrefab, game.InstructionText, instructionDistance);
             OnSetKeys?.Invoke(parent.name, keys, game.ActionNames);
             obj.SetActive(true);

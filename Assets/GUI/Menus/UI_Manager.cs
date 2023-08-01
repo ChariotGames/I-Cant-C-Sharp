@@ -94,11 +94,11 @@ namespace Scripts.Controllers
                 //TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 //PlayerPrefs.SetString("Time", timePlaying.ToString("mm':'ss"));
                 
-                if(settings.BaseDifficulty != Difficulty.TUTORIAL)
-                {
+                //if(settings.BaseDifficulty != Difficulty.TUTORIAL)
+                //{
                     settings.Score = _score;
                     settings.Time = (int)_time;
-                }
+                //}
                 SceneManager.LoadScene((int)SceneNr.GameOver);
             }
 

@@ -168,7 +168,7 @@ namespace Scripts.Games
            
             for (int i = 0; i < count; i++)
             {
-                GameObject obj = Instantiate(pattern[i], new Vector3(0, 0, 0), Quaternion.identity, buttonContainer.transform);
+                GameObject obj = Instantiate(pattern[i], buttonContainer.transform);
                 obj.GetComponent<BasePressElement>().Button = pattern[i].GetComponent<BasePressElement>().Button;
                 obj.SetActive(true);
             }

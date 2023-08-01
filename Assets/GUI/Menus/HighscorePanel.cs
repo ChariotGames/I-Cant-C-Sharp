@@ -39,6 +39,7 @@ namespace Scripts.Controllers
 
         private void UpdateScores()
         {
+            if(settings.BaseDifficulty == Difficulty.TUTORIAL) return;
             if (settings.Score < int.Parse(entries[^1].Score)) return;
 
             incoming.SetValues(settings.SelectedCharacter.Icon, settings.SelectedCharacter.Name, settings.Score, settings.Time);
