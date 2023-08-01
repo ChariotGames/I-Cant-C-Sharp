@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: LoseTile
   m_EditorClassIdentifier: 
-  description: 
+  description: A field consisting of individual tiles that disappear when you touch
+    them. Try to get to the last tile and not miss it. The more difficult the difficulty
+    is, the more fields disappear and you can no longer easily walk everywhere.
   difficulty: 1
   genre: 4
   actionNames:
