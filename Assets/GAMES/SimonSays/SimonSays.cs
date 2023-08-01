@@ -133,7 +133,7 @@ namespace Scripts.Games
         /// <param name="color">Enum of the color to add to the pattern.</param>
         private void SetGuessPattern(Colors color)
         {
-            if (displayPattern.Count <= (int)Difficulty)
+            if (displayPattern.Count <= (int)difficulty)
             {
                 // Only do the extra difficulty after the 3rd round!
                 infoPattern.Add(Modifier.NORMAL);
@@ -143,7 +143,7 @@ namespace Scripts.Games
 
             int chance = Random.Range(0, CHANCE);
 
-            if (base.Difficulty == Difficulty.HARD && chance < 1)
+            if (difficulty == Difficulty.HARD && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
                 infoPattern.Add(Modifier.NONE);
@@ -153,7 +153,7 @@ namespace Scripts.Games
             infoPattern.Add(Modifier.NORMAL);
             guessPattern.Add(color);
 
-            if (base.Difficulty != Difficulty.EASY && chance > 1)
+            if (difficulty != Difficulty.EASY && chance > 1)
             {
                 // On Level 2 the color is doubled
                 infoPattern[^1] = Modifier.DOUBLE;
@@ -288,7 +288,7 @@ namespace Scripts.Games
 
             //nothing.Animate();
 
-            _successes = Mathf.Clamp((successesToWin -= (int)Difficulty), 0, 9);
+            //_successes = Mathf.Clamp((successesToWin -= (int)Difficulty), 0, 9);
             ResetTurn();
             StartCoroutine(AnimateButtons(_animationTime, BLINK_TIME));
         }
@@ -299,7 +299,7 @@ namespace Scripts.Games
         /// </summary>
         private void GuessingDone()
         {
-            UpdateDifficulty(_successes);
+            //UpdateDifficulty(_successes);
             
             Success();
             //ok.Animate();
