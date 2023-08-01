@@ -123,6 +123,7 @@ namespace Scripts.Controllers
             settings.Lives = settings.MaxLives;
             livesText.text = settings.Lives.ToString();
             difficulty.value = (int)settings.BaseDifficulty;
+            settings.SelectedGame = null;
             difficulty.RefreshShownValue();
             settings.Time = 0;
             settings.Score = 0;
@@ -137,7 +138,7 @@ namespace Scripts.Controllers
             settings.Games = new List<Minigame>(defaultSettings.Games);
             settings.SoloGames = new List<Minigame>(defaultSettings.SoloGames);
             settings.Characters = new List<Character>(defaultSettings.Characters);
-            settings.SelectedGame = defaultSettings.SelectedGame;
+            
             ClearSettings();
             ClearHighscores();
             ResetAudio(true);
