@@ -40,7 +40,7 @@ namespace Scripts.Games
         [Space]
         [Header("Game Specific Stuff")]
         [SerializeField] private List<GameObject> trafficLights;
-        [SerializeField] private GameObject trafficLightPrefab,selector_ref,simonNot_ref, simonOk_ref, text_ref;
+        [SerializeField] private GameObject trafficLightPrefab,selector_ref,simonNot_ref, simonOk_ref;
         [SerializeField] private int delaySecondWave = 5;
         [SerializeField] private int timeToSelectLight = 5;
         [SerializeField] private int successToWin = 5;
@@ -75,8 +75,10 @@ namespace Scripts.Games
         #region Built-Ins / MonoBehaviours
 
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            selector_ref.SetActive(true);
             StartCoroutine(GameCoroutine());
         }
 
@@ -120,7 +122,6 @@ namespace Scripts.Games
 
         private void SecondWave()
         {
-            text_ref.SetActive(false);
             //Mix correct colors with random generated ones and set them.
             secondWaveColors = MixCorrectColorsIntoWrongOnes(
                 GenLightColors(trafficLightAmount, correctColors), correctColors);
@@ -154,7 +155,6 @@ namespace Scripts.Games
             }
             DisableInputs();
             playerHasSubmitted = false;
-            text_ref.SetActive(true);
         }
 
         #endregion Built-Ins / MonoBehaviours
