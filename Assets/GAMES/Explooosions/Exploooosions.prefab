@@ -647,7 +647,7 @@ AudioSource:
   m_GameObject: {fileID: 2641797602288821860}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7272951172123379120, guid: bf7be36fae8244945aec18b2a24556f5, type: 2}
   m_audioClip: {fileID: 8300000, guid: 73993dc0ed30e4243915837748156b87, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -873,7 +873,7 @@ AudioSource:
   m_GameObject: {fileID: 2641797602970142051}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7272951172123379120, guid: bf7be36fae8244945aec18b2a24556f5, type: 2}
   m_audioClip: {fileID: 8300000, guid: 73993dc0ed30e4243915837748156b87, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1005,7 +1005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1550a09f7adcb3645bb7f0329cea2e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
   successesToWin: 10
   successesToLevelUp: 9
   failsToLose: 3
@@ -1705,7 +1704,7 @@ AudioSource:
   m_GameObject: {fileID: 2641797603801668330}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7272951172123379120, guid: bf7be36fae8244945aec18b2a24556f5, type: 2}
   m_audioClip: {fileID: 8300000, guid: 73993dc0ed30e4243915837748156b87, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

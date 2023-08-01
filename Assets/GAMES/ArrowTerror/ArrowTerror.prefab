@@ -903,7 +903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53836c4eedddc452599a3a0e7afdd7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
   successesToWin: 5
   successesToLevelUp: 4
   failsToLose: 2
@@ -933,7 +932,7 @@ AudioSource:
   m_GameObject: {fileID: 5464692928381225925}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7272951172123379120, guid: bf7be36fae8244945aec18b2a24556f5, type: 2}
   m_audioClip: {fileID: 8300000, guid: acea0b851045b5742beb06b74ea35284, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
