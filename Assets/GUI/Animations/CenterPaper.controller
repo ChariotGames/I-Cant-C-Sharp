@@ -359,7 +359,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerOut
+  m_Name: PaperOut
   m_Speed: -1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -436,7 +436,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerIn
+  m_Name: PaperIn
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

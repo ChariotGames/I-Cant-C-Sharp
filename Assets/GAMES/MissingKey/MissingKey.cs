@@ -39,7 +39,7 @@ namespace Scripts.Games
             for (int i = 0; i < buttons.Count; i++)
             {
                 BasePressElement bpe = buttons[i].GetComponent<BasePressElement>();
-                buttons[i].GetComponent<BasePressElement>().Button = _keys.All[i].Input;
+                bpe.Button = _keys.All[i].Input;
             }
         }
 

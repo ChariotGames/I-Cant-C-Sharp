@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  parent: {fileID: 5632558065659418745}
   Button: {fileID: 0}
 --- !u!114 &7690450413405842026
 MonoBehaviour:
@@ -136,8 +136,6 @@ GameObject:
   m_Component:
   - component: {fileID: 433907849187237177}
   - component: {fileID: 936511014240155604}
-  - component: {fileID: 1643398399967405846}
-  - component: {fileID: 5419016034432798778}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -217,40 +215,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1643398399967405846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2760526779336450189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  Button: {fileID: 0}
---- !u!114 &5419016034432798778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2760526779336450189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &2849540109274930549
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,8 +336,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5464239041725588542}
   - component: {fileID: 2689048720952032975}
-  - component: {fileID: 7506358670469568095}
-  - component: {fileID: 1198212467709248825}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -453,40 +415,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7506358670469568095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289362663913869572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  Button: {fileID: 0}
---- !u!114 &1198212467709248825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289362663913869572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &5632558065066060133
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0cfd97c562848239892c39b4ca0ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
   successesToWin: 5
   successesToLevelUp: 4
   failsToLose: 3
@@ -862,7 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  parent: {fileID: 5632558065659418745}
   Button: {fileID: 0}
 --- !u!114 &5025231725828754517
 MonoBehaviour:
@@ -894,8 +821,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1469559122139203111}
   - component: {fileID: 7245682356395894250}
-  - component: {fileID: 8321795402556419941}
-  - component: {fileID: 7273585447656373164}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -975,40 +900,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8321795402556419941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6502813936308440978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  Button: {fileID: 0}
---- !u!114 &7273585447656373164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6502813936308440978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &6523924494337566846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  parent: {fileID: 5632558065659418745}
   Button: {fileID: 0}
 --- !u!114 &1935032646459058446
 MonoBehaviour:
@@ -1401,8 +1292,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7832336927636223990}
   - component: {fileID: 104125560518645613}
-  - component: {fileID: 4209113895046436789}
-  - component: {fileID: 7743238591228939141}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -1482,40 +1371,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4209113895046436789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6960794137110105338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  Button: {fileID: 0}
---- !u!114 &7743238591228939141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6960794137110105338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &8555116965462184449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,7 +1603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa61eb9000ec994dacbdb69f59d3586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  parent: {fileID: 5632558065659418745}
   Button: {fileID: 0}
 --- !u!114 &5423119989449352647
 MonoBehaviour:
