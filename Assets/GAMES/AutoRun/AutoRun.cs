@@ -1,7 +1,11 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Scripts.Models;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Scripts.Games
@@ -24,11 +28,44 @@ namespace Scripts.Games
         [Space]
         [Header("Game Specific Stuff")]
         [SerializeField] private Settings settings;
-        int successCounter = 0;
+        [SerializeField] private GameObject spike, wall, ceilingSpike;
+        [SerializeField] public List<GameObject> obstacles = new List<GameObject>();
 
-        
+        public float scrollSpeed = 1.5f;
+
+
         #region Game Mechanics / Methods
 
+        private IEnumerator Start()
+        {
+            SetDifficulty();
+            yield return StartCoroutine(AnimateInstruction());
+            gameObject.GetComponent<ScriptMachine>().enabled = true;
+        }
+        
+        private protected override void SetDifficulty()
+        {
+            obstacles = new List<GameObject>();
+            obstacles.Add(spike);
+            
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    scrollSpeed = 1.5f;
+                    break;
+                case Difficulty.MEDIUM:
+                    scrollSpeed = 1.5f;
+                    obstacles.Add(wall);
+                    break;
+                case Difficulty.HARD:
+                    scrollSpeed = 2f;
+                    obstacles.Add(wall);
+                    obstacles.Add(ceilingSpike);
+                    break;
+            }
+        }
+
+        #region inputs
         public InputAction getJumpInput()
         { 
             return Keys.One.Input.action; // Up
@@ -45,32 +82,17 @@ namespace Scripts.Games
         {
             return Keys.Four.Input.action; // right
         }
-
-        public void easier()
+        
+        #endregion
+        
+        public void baseSuccess()
         {
-            base.Easier();
-            
+            base.Success();
         }
 
-        public void harder()
+        public void baseFail()
         {
-            base.Harder();
-        }
-        public void winCondition()
-        {
-            base.Win();
-        }
-
-        public void loseCondition()
-        {
-            base.Lose();
-        }
-
-        public void Score()
-        {
-            base.ScoreUp(1);
-            ++successCounter;
-            base.AnimateSuccess(gameObject.transform,successCounter, successesToWin );
+            base.Fail();
         }
 
         public Sprite getCharacter()
@@ -78,9 +100,19 @@ namespace Scripts.Games
             return settings.SelectedCharacter.Preview;
         }
 
-        public int getSuccessToWin()
+        public int getSuccessesToWin()
         {
             return successesToWin;
+        }
+
+        public int getFailsToLose()
+        {
+            return failsToLose;
+        }
+
+        public int getFails()
+        {
+            return _fails;
         }
 
         #endregion Game Mechanics / Methods
