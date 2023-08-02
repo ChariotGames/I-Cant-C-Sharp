@@ -8,8 +8,8 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] private InputActionReference[] allowedButtons;
-        [SerializeField] private string code = "UUDDLRLRWN";
+        [SerializeField] private InputActionAsset playerMap;
+        [SerializeField] private InputActionReference[] code;
         [SerializeField] private Animator camImator, konamiMator, endAnimator;
         [SerializeField] private Button backButton;
 
@@ -17,7 +17,6 @@ namespace Scripts.Games
 
         #region Fields
 
-        private char[] codes;
         private int _index;
 
         #endregion Fields
@@ -26,45 +25,38 @@ namespace Scripts.Games
 
         void OnEnable()
         {
-            Restart();
-
-            foreach (InputActionReference button in allowedButtons)
-                button.action.performed += ButtonPressed;
+            foreach (InputAction action in playerMap.actionMaps[0].actions)
+                action.performed += ButtonPressed;
         }
 
         void OnDisable()
         {
-            foreach (InputActionReference button in allowedButtons)
-                button.action.performed -= ButtonPressed;
+            foreach (InputAction action in playerMap.actionMaps[0].actions)
+                action.performed -= ButtonPressed;
         }
 
         #endregion Built-Ins / MonoBehaviours
 
         #region Game Mechanics / Methods
 
-        private void Restart()
-        {
-            _index = 0;
-            codes = code.ToCharArray();
-        }
-
         private void ButtonPressed(InputAction.CallbackContext ctx)
         {
-            if (!ctx.action.name.Contains(codes[_index]))
+            if (!(code[_index].action == ctx.action))
             {
-                Restart();
+                _index = 0;
                 return;
             }
             
             _index++;
 
-            if (_index >= codes.Length)
+            if (_index >= code.Length)
             {
                 camImator.SetTrigger("KonamIN");
                 endAnimator.SetTrigger("EndOut");
                 konamiMator.SetTrigger("KonamIN");
                 _index = 0;
                 backButton.enabled = true;
+                this.enabled = false;
             }
         }
 
