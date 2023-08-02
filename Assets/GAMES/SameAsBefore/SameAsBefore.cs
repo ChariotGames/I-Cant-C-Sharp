@@ -21,20 +21,26 @@ namespace Scripts.Games
         [SerializeField] private TMP_Text stepBackText,  buttonYes, buttonNo;
         [SerializeField] private int maxStepsBack;
         [SerializeField] private int timeout;
+        [SerializeField] private AudioClip[] clips;
 
         private LinkedList<int> _lastIndices = new();
+        private AudioSource audio;
         private const string _stepsText = "think back: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
 
         void Start()
         {
+            audio = GetComponent<AudioSource>();
+            audio.clip = clips[0];
             StartCoroutine(GameStartCoroutine());
         }
 
         private void SpawnSymbol()
         {
             _index = Random.Range(0, options.Count);
+            audio.clip = clips[_index];
+            audio.Play();
             options[_index].SetActive(true);
         }
 
