@@ -133,7 +133,7 @@ namespace Scripts.Games
                 PlayerY = Random.Range(-gridHalf, +gridHalf + 1);
                 Tile = container.GetChild((PlayerY +gridHalf) * gridSize + (PlayerX + gridHalf)).GetComponent<LoseTileField>();
             }
-            player.transform.position = new Vector3(PlayerX * space, PlayerY * space, 0);
+            player.transform.localPosition = new Vector3(PlayerX * space, PlayerY * space, 0);
         }
 
         private void ResetGame()
