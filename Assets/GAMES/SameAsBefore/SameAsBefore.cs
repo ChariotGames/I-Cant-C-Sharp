@@ -41,7 +41,14 @@ namespace Scripts.Games
             _index = Random.Range(0, options.Count);
             audio.clip = clips[_index];
             audio.Play();
+            if(_index != 0) StartCoroutine(PlaySoundAfterTime(0.15f));
             options[_index].SetActive(true);
+        }
+
+        IEnumerator PlaySoundAfterTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            audio.Play();
         }
 
         private void UpdateSteps()
