@@ -31,7 +31,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject spike, wall, ceilingSpike;
         [SerializeField] public List<GameObject> obstacles = new List<GameObject>();
 
-        public float scrollSpeed = 1.5f;
+        public float scrollSpeed = 0;
 
 
         #region Game Mechanics / Methods
@@ -51,14 +51,14 @@ namespace Scripts.Games
             switch (Difficulty)
             {
                 case Difficulty.EASY:
-                    scrollSpeed = 1.5f;
+                    scrollSpeed = 0.75f;
                     break;
                 case Difficulty.MEDIUM:
-                    scrollSpeed = 1.5f;
+                    scrollSpeed = 1f;
                     obstacles.Add(wall);
                     break;
                 case Difficulty.HARD:
-                    scrollSpeed = 2f;
+                    scrollSpeed = 1.25f;
                     obstacles.Add(wall);
                     obstacles.Add(ceilingSpike);
                     break;
