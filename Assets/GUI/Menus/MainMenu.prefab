@@ -6177,8 +6177,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 648859395000940805}
     m_Modifications:
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
+      propertyPath: m_Value
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
+      propertyPath: m_MaxValue
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -7013,8 +7021,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 648859395000940805}
     m_Modifications:
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
+      propertyPath: m_Value
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
+      propertyPath: m_MaxValue
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -7423,8 +7439,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 648859395000940805}
     m_Modifications:
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
+      propertyPath: m_Value
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
+      propertyPath: m_MaxValue
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_Navigation.m_Mode
