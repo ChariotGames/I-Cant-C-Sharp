@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: MissingKey
   m_EditorClassIdentifier: 
-  description: 
+  description: Press a button in a direction that is not shown on the screen
   difficulty: 3
   genre: 4
   actionNames:
