@@ -1,5 +1,6 @@
 using Scripts.Games;
 using Scripts.Models;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -46,6 +47,8 @@ namespace Scripts.Controllers
             startAnimator.SetTrigger("BookIn");
             ClearSettings();
             ResetAudio(false);
+            FillCharacterContainer();
+            FillGamesContainer();
             if (settings.BaseDifficulty == Difficulty.TUTORIAL) parallelButton.interactable = false;
         }
 
@@ -77,8 +80,6 @@ namespace Scripts.Controllers
                 button.GetComponent<MainMenuGame>().SetupButton(game);
                 //gameButtons.Add(button);
             }
-
-            EventSystem.current.SetSelectedGameObject(gamesContainer.transform.GetChild(0).gameObject);
         }
 
         /// <summary>
@@ -95,12 +96,25 @@ namespace Scripts.Controllers
                     //gameButtons.Add(button);
                 }
             }
+        }
 
-            EventSystem.current.SetSelectedGameObject(characterContainer.transform.GetChild(0).gameObject);
+        /// <summary>
+        /// On menu change, set the given button as selected.
+        /// </summary>
+        /// <param name="button">The buton to select.</param>
+        public void SetSelected(GameObject button)
+        {
+            EventSystem.current.SetSelectedGameObject(button.transform.GetChild(0).gameObject);
         }
 
         public void RunEndless()
         {
+            StartCoroutine(ToPlayfield());
+        }
+
+        private IEnumerator ToPlayfield()
+        {
+            yield return new WaitForSeconds(1.05f);
             SceneManager.LoadScene((int)SceneNr.PlayField);
         }
 
@@ -257,15 +271,6 @@ namespace Scripts.Controllers
         public void SetPlayers(int count)
         {
             settings.Players = count;
-        }
-
-        /// <summary>
-        /// On menu change, set the given button as selected.
-        /// </summary>
-        /// <param name="button">The buton to select.</param>
-        public void SetSelected(GameObject button)
-        {
-            EventSystem.current.SetSelectedGameObject(button);
         }
 
         /// <summary>

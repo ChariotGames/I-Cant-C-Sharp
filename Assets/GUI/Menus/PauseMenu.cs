@@ -1,4 +1,5 @@
 using Scripts.Models;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -22,9 +23,10 @@ namespace Scripts.Controllers
         #region Fields
             
             private InputActionMap playerMap, uiMap;
-            
-            // TODO: maybe not static?
-            private static bool _isPaused;
+            public static event Action OnChangeMenu;
+
+        // TODO: maybe not static?
+        private static bool _isPaused;
 
         #endregion Fields
         
@@ -102,9 +104,10 @@ namespace Scripts.Controllers
             public void EndRun()
             {
                 uiMap.Disable();
-                playerMap.Enable();
+            //playerMap.Enable();
+            ResumeGame();
                 settings.Lives = 0;
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
             }
 
             public void GoToMenu()
