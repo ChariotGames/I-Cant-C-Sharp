@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: AutoRun
   m_EditorClassIdentifier: 
-  description: 
+  description: 'a simplified Autorunne!
+
+    The player has to dodge obstacles by
+    Jumping, Ducking and bracing himself!'
   difficulty: 1
   genre: 2
   actionNames:
