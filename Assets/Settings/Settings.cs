@@ -15,7 +15,7 @@ namespace Scripts.Models
         [SerializeField] private List<Minigame> games, soloGames;
         [SerializeField] private List<Character> characters;
 
-        private float mainVolume = -25.0f, musicVolume, soundVolume;
+        [SerializeField] private float mainVolume = -20.0f, musicVolume, soundVolume;
         private int  _score, _time, players = 1;
 
         #endregion
