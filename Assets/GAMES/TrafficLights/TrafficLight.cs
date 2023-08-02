@@ -91,15 +91,14 @@ namespace Scripts.Games
                 yield return new WaitForSeconds(delaySecondWave);
                 SecondWave();
                 base.RunTimer(timeToSelectLight);
-                yield return new WaitForSeconds(timeToSelectLight);
-                if (!playerHasSubmitted)
-                {
-                    EndOfRound();
-                }
+                //timer anstatt waitforseconds damit der timer vorher abgebrochen werden kann
+                float timer = Time.time;
+                yield return new WaitUntil(() => playerHasSubmitted || Time.time - timer > timeToSelectLight);
+                
+                EndOfRound();
                 yield return new WaitForSeconds(1);
                 Reset();
             }
-
         }
 
         private void Setup()
@@ -145,7 +144,6 @@ namespace Scripts.Games
             CheckSelector();
             GameObject selector = Instantiate(selector_ref, gameObject.transform);
             selector_ref = selector;
-            //Destroy(owner_ref.transform.GetChild(0));
             GameObject horizontalLayout = gameObject.transform.GetChild(0).gameObject;
             int count = horizontalLayout.transform.childCount;
             horizontalLayout.transform.DetachChildren();
@@ -205,9 +203,8 @@ namespace Scripts.Games
 
         public void ButtonPressSubmit(InputAction.CallbackContext ctx)
         {
-            playerHasSubmitted = true;
-            EndOfRound();
             GetComponent<AudioSource>().Play();
+            playerHasSubmitted = true;
         }
 
         #endregion Inputs
