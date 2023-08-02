@@ -44,7 +44,7 @@ namespace Scripts.Games
         
         private Transform _parent;
         private GameObject _instructionPrefab;
-        private float _instructionSpeed;
+        private float _instructionDistance;
         private int _difficultyTracker;
         private bool _willGetHarder = false;
         private bool _isVarying = true;
@@ -81,7 +81,7 @@ namespace Scripts.Games
         {
             _instructionPrefab = Instantiate(prefab, transform);
             _instructionPrefab.GetComponent<TMP_Text>().text = message;
-            _instructionSpeed = duration;
+            _instructionDistance = duration;
         }
 
         /// <summary>
@@ -349,7 +349,7 @@ namespace Scripts.Games
         /// </summary>
         protected IEnumerator AnimateInstruction()
         {
-            yield return StartCoroutine(AnimateInstruction(_instructionPrefab, _instructionSpeed));
+            yield return StartCoroutine(AnimateInstruction(_instructionPrefab, _instructionDistance));
         }
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace Scripts.Games
         /// <param name="container">The TMP_Text to animate.</param>
         protected IEnumerator AnimateInstruction(GameObject container)
         {
-            yield return StartCoroutine(AnimateInstruction(container, _instructionSpeed));
+            yield return StartCoroutine(AnimateInstruction(container, _instructionDistance));
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace Scripts.Games
             float offset = 0;
             while (offset < distance)
             {
-                float delta = Time.deltaTime * _instructionSpeed;
+                float delta = Time.deltaTime * _instructionDistance;
                 obj.transform.Translate(0, delta, 0, Space.Self);
                 offset += delta;
                 yield return new WaitForSeconds(Time.deltaTime);

@@ -1,6 +1,7 @@
 using Scripts.Games;
 using Scripts.Models;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,10 +18,11 @@ namespace Scripts.Controllers
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
-        [SerializeField] private GameObject templateKeys;
+        [SerializeField] private GameObject scoreNStuff, templateKeys;
         [SerializeField] private Timer leftTimer, rightTimer;
         [SerializeField] private Transform leftAnim, rightAnim;
         [SerializeField] private AnimationPack tempWin, tempLose;
+        [SerializeField] private Animator bigBook, centerPaper;
 
         private int _score = 0;
         private float _time = 0;
@@ -29,6 +31,9 @@ namespace Scripts.Controllers
 
         private void Start()
         {
+            bigBook.SetTrigger("BigBookIn");
+            StartCoroutine(DisplayUI(1.05f, true));
+
             _timerOn = true;
             characterImage.sprite = settings.SelectedCharacter.Icon;
             if (settings.Lives > 3)
@@ -63,6 +68,7 @@ namespace Scripts.Controllers
             MinigameManager.OnLoseLife += UpdateHearts;
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
+            MinigameManager.OnCenterDisplay += DisplayCenter;
         }
 
         private void OnDisable()
@@ -74,6 +80,7 @@ namespace Scripts.Controllers
             MinigameManager.OnLoseLife -= UpdateHearts;
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
+            MinigameManager.OnCenterDisplay -= DisplayCenter;
         }
 
         // Update is called once per frame
@@ -108,6 +115,12 @@ namespace Scripts.Controllers
                 TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 timeCounter.text = timePlaying.ToString("mm':'ss");
             }
+        }
+
+        public IEnumerator DisplayUI(float delay, bool state)
+        {
+            yield return new WaitForSeconds(delay);
+            scoreNStuff.SetActive(state);
         }
 
         private void UpdateHearts()
@@ -148,6 +161,20 @@ namespace Scripts.Controllers
                 texts[0].text = keys.All[i].Icon;
                 texts[1].text = actions.All[i];
                 key.SetActive(true);
+            }
+        }
+
+        private void DisplayCenter(bool centerLoaded)
+        {
+            if (centerLoaded)
+            {
+                centerPaper.SetTrigger("CenterIn");
+                bigBook.SetTrigger("BigBookOut");
+            }
+            else
+            {
+                centerPaper.SetTrigger("CenterOut");
+                bigBook.SetTrigger("BigBookIn");
             }
         }
 

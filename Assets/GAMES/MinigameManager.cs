@@ -19,7 +19,6 @@ namespace Scripts.Controllers
         [SerializeField] private Transform spawnLeft, spawnRight, spawnCenter;
         [SerializeField] private GameObject instructionPrefab;
         [SerializeField] [Range(0.0f, 2.0f)] private float instructionDistance = 2.0f;
-        [SerializeField] private Animator centerPaper;
 
         #endregion
 
@@ -27,6 +26,7 @@ namespace Scripts.Controllers
 
         public static event Action<string, KeyMap, ActionNames> OnSetKeys;
         public static event Action<string> OnClearKeys;
+        public static event Action<bool> OnCenterDisplay;
         public static event Action OnLoseLife;
         
 
@@ -62,14 +62,16 @@ namespace Scripts.Controllers
             BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
         }
 
-        void Start()
+        IEnumerator Start()
         {
             if (settings.SelectedGame != null)
             {
                 StartCoroutine(LoadCenter(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter));
-                return;
+                yield break;
             }
 
+            OnCenterDisplay?.Invoke(false);
+            yield return new WaitForSeconds(1.05f);
             SpawnSides();
         }
 
@@ -82,10 +84,10 @@ namespace Scripts.Controllers
             Minigame bossGame = _soloGames[Random.Range(0, _soloGames.Count)];
             yield return StartCoroutine(LoadCenter(bossGame, bossGame.KeysRight, spawnCenter));
         }
+
         private IEnumerator LoadCenter(Minigame game, KeyMap keys, Transform parent)
         {
-            centerPaper.SetTrigger("CenterIn");
-            centerPaper.ResetTrigger("CenterOut");
+            OnCenterDisplay?.Invoke(true);
             yield return StartCoroutine(Wait(1.0f));
             LoadGame(game, keys, parent, SpawnSide.Center);
         }
@@ -196,8 +198,7 @@ namespace Scripts.Controllers
             if (_parent == spawnCenter)
             {
                 RemoveAllGames();
-                centerPaper.ResetTrigger("CenterIn");
-                centerPaper.SetTrigger("CenterOut");
+                OnCenterDisplay?.Invoke(false);
                 StartCoroutine(Wait(1f));
                 SpawnSides();
                 return;
