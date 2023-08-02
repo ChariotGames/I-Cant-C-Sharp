@@ -154,7 +154,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4511076258982885394}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f035bf46ae476f341ad8c28b34490ff1, type: 3}
@@ -476,6 +476,7 @@ MonoBehaviour:
   - {r: 1, g: 0.12549019, b: 0.58168685, a: 0.9019608}
   timer: 1
   box: {fileID: 5241422682149599241}
+  walkSound: {fileID: 0}
   type: 3
   visited: 0
   isVisable: 1
