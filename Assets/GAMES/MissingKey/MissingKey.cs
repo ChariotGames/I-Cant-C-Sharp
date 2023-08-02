@@ -207,7 +207,7 @@ namespace Scripts.Games
                 //Debug.Log("Clicked!");
                 _playerPressed = true;
                 _time = 0;
-                sound.time = 0.7f;
+               
                 sound.Play();
                 DeleteAll();
                 _isAnswerScreen = false;

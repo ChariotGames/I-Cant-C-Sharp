@@ -186,7 +186,7 @@ namespace Scripts.Controllers
             }
             else
             {
-                centerPaper.SetTrigger("CenterOut");
+                //centerPaper.SetTrigger("CenterOut");
                 bigBook.SetTrigger("BigBookIn");
             }
         }
