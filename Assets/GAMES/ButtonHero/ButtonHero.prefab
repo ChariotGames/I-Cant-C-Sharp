@@ -111,7 +111,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278254847
-  m_fontColor: {r: 1, g: 1, b: 0.10588236, a: 0.9019608}
+  m_fontColor: {r: 0.8, g: 0.8, b: 0.10588236, a: 0.9019608}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294903296
-  m_fontColor: {r: 0, g: 0.6666667, b: 1, a: 0.9019608}
+  m_fontColor: {r: 0, g: 0.6666667, b: 0.8, a: 0.9019608}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -455,7 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8a423baa9afdd47a12200b94646979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
   successesToWin: 10
   successesToLevelUp: 9
   failsToLose: 3
