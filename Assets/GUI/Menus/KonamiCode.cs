@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -18,6 +20,7 @@ namespace Scripts.Games
         #region Fields
 
         private int _index;
+        private bool done = false;
 
         #endregion Fields
 
@@ -58,6 +61,30 @@ namespace Scripts.Games
                 backButton.enabled = true;
                 this.enabled = false;
             }
+        }
+
+        private IEnumerator ThankYou()
+        {
+            yield return new WaitForSeconds(0.5f);
+            konamiMator.SetTrigger("ThankYOU");
+        }
+
+        public void BackToEnd()
+        {
+            if (!done)  StartCoroutine(ThankYou());
+            else StartCoroutine(AnimateKonamiOut());
+            done = !done;
+        }
+
+        private IEnumerator AnimateKonamiOut()
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            endAnimator.SetTrigger("EndIn");
+            camImator.SetTrigger("KonamOUT");
+            enabled = true;
+            yield return new WaitForSeconds(0.25f);
+            konamiMator.SetTrigger("KonamOUT");
         }
 
         #endregion Game Mechanics / Methods
