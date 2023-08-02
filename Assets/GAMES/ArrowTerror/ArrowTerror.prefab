@@ -908,12 +908,7 @@ MonoBehaviour:
   failsToLose: 2
   sound: {fileID: 4907860675227133321}
   clips:
-  - {fileID: 8300000, guid: fe6bb70433500eb42bfd4303fb73fad5, type: 3}
-  - {fileID: 8300000, guid: 3fcf9e421cc7d864fb6914abc8736ea9, type: 3}
-  - {fileID: 8300000, guid: b8707b02a1c3ca549b2d73398b8502e1, type: 3}
-  - {fileID: 8300000, guid: 38559e22284f29c44bf6a968c4b32302, type: 3}
   - {fileID: 8300000, guid: acea0b851045b5742beb06b74ea35284, type: 3}
-  - {fileID: 8300000, guid: 63893e30aa0cd4944831163b18161825, type: 3}
   border: {fileID: 4214015382067313150}
   player: {fileID: 7650764543142258503}
   goal: {fileID: 3889990457547165737}

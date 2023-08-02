@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209e024bf920aa74c9a54e6f89835efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
   successesToWin: 5
   successesToLevelUp: 4
   failsToLose: 3
@@ -157,7 +156,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 02d817e08a2ebf64bbd1e88aa53af07d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 30e771be8e29a6e49b22d8f661ee1334, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.4
   m_Pitch: 1
