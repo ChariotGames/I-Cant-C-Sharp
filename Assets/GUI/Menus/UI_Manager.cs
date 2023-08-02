@@ -18,11 +18,11 @@ namespace Scripts.Controllers
         [SerializeField] private Sprite fullHeart, emptyHeart;
         [SerializeField] private TMP_Text heartCounter, scoreCounter, timeCounter;
         [SerializeField] private Transform leftKeys, rightKeys, centerKeys;
-        [SerializeField] private GameObject scoreNStuff, templateKeys;
+        [SerializeField] private GameObject scoreNStuff, keysNTimes, minigameManager, templateKeys;
         [SerializeField] private Timer leftTimer, rightTimer;
         [SerializeField] private Transform leftAnim, rightAnim;
         [SerializeField] private AnimationPack tempWin, tempLose;
-        [SerializeField] private Animator bigBook, centerPaper;
+        [SerializeField] private Animator bigBook, centerPaper, camAnimator;
 
         private int _score = 0;
         private float _time = 0;
@@ -31,7 +31,6 @@ namespace Scripts.Controllers
 
         private void Start()
         {
-            bigBook.SetTrigger("BigBookIn");
             StartCoroutine(DisplayUI(1.05f, true));
 
             _timerOn = true;
@@ -69,6 +68,7 @@ namespace Scripts.Controllers
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
             MinigameManager.OnCenterDisplay += DisplayCenter;
+            PauseMenu.OnChangeMenu += () => StartCoroutine(ToGameOver());
         }
 
         private void OnDisable()
@@ -81,6 +81,7 @@ namespace Scripts.Controllers
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
             MinigameManager.OnCenterDisplay -= DisplayCenter;
+            PauseMenu.OnChangeMenu -= () => StartCoroutine(ToGameOver());
         }
 
         // Update is called once per frame
@@ -106,7 +107,7 @@ namespace Scripts.Controllers
                     settings.Score = _score;
                     settings.Time = (int)_time;
                 //}
-                SceneManager.LoadScene((int)SceneNr.GameOver);
+                StartCoroutine(ToGameOver());
             }
 
             if (_timerOn)
@@ -115,6 +116,18 @@ namespace Scripts.Controllers
                 TimeSpan timePlaying = TimeSpan.FromSeconds(_time);
                 timeCounter.text = timePlaying.ToString("mm':'ss");
             }
+        }
+
+        private IEnumerator ToGameOver()
+        {
+            minigameManager.SetActive(false);
+            scoreNStuff.SetActive(false);
+            keysNTimes.SetActive(false);
+            bigBook.SetTrigger("BigBookOut");
+            centerPaper.SetTrigger("CenterOut");
+            camAnimator.SetTrigger("CamToEnd");
+            yield return new WaitForSeconds(1.05f);
+            SceneManager.LoadScene((int)SceneNr.GameOver);
         }
 
         public IEnumerator DisplayUI(float delay, bool state)

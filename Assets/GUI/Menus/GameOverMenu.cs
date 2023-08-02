@@ -48,7 +48,7 @@ namespace Scripts.Controllers
         public void GoToMenu()
         {
             StartCoroutine(AnimateToMenu());
-            animator.SetTrigger("CameraIn");
+            animator.SetTrigger("CamToMain");
         }
 
         public void QuitGame()
