@@ -181,12 +181,16 @@ namespace Scripts.Controllers
         {
             if (centerLoaded)
             {
+                centerPaper.ResetTrigger("CenterOut");
+                bigBook.ResetTrigger("BigBookIn");
                 centerPaper.SetTrigger("CenterIn");
                 bigBook.SetTrigger("BigBookOut");
             }
             else
             {
-                //centerPaper.SetTrigger("CenterOut");
+                centerPaper.ResetTrigger("CenterIn");
+                bigBook.ResetTrigger("BigBookOut");
+                centerPaper.SetTrigger("CenterOut");
                 bigBook.SetTrigger("BigBookIn");
             }
         }
