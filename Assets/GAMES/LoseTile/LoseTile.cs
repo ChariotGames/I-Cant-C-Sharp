@@ -16,7 +16,7 @@ namespace Scripts.Games
         [SerializeField] private GameObject tile, dangerzone;
         [SerializeField] private LoseTilePlayer player;
         [SerializeField] private Transform container;
-        [SerializeField] AudioSource WinSound;
+        //[SerializeField] AudioSource WinSound;
 
 
         #endregion Serialized Fields
@@ -65,7 +65,7 @@ namespace Scripts.Games
                     if (remainingTiles == 0)
                     {
                         base.Success();
-                        WinSound.Play();
+                        //WinSound.Play();
                         Invoke(nameof(ResetGame),1);
                     }
                     break;

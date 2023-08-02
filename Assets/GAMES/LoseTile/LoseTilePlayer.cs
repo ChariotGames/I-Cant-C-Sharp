@@ -12,7 +12,7 @@ namespace Scripts.Games
         [SerializeField][Range (2f, 4f)] float x = 2.5f;
         [SerializeField][Range (2f, 4f)] float y = 2.5f;
         [SerializeField] Rigidbody2D body;
-        [SerializeField] AudioSource walkSound;
+        //[SerializeField] AudioSource walkSound;
 
         #endregion Serialized Fields
 
@@ -44,7 +44,7 @@ namespace Scripts.Games
 
                 gameObject.transform.Translate(speed * Time.deltaTime * newInput);
 
-                if (!walkSound.isPlaying) walkSound.Play();
+                //if (!walkSound.isPlaying) walkSound.Play();
        
                
                 if (transform.localPosition.x >= x) transform.localPosition = new Vector2(x, transform.localPosition.y);
