@@ -36,7 +36,7 @@ namespace Scripts.Controllers
         private KeyMap _otherKeys;
         private Transform _parent;
         private const int MAX_QUE = 10, WIN_NEEDED = 5;
-        private int _winCounter;
+        private int _winCounter = 3;
 
         #endregion
 
@@ -198,7 +198,6 @@ namespace Scripts.Controllers
             if (_parent == spawnCenter)
             {
                 RemoveAllGames();
-                OnCenterDisplay?.Invoke(false);
                 StartCoroutine(Wait(1f));
                 SpawnSides();
                 return;
@@ -209,7 +208,10 @@ namespace Scripts.Controllers
             if (_winCounter >= WIN_NEEDED)
             {
                 if ((spawnLeft.childCount + spawnRight.childCount + spawnCenter.childCount) <= 1)
+                {
                     StartCoroutine(LoadCenter());
+                    _winCounter = 0;
+                }
             }
             else
             {
@@ -230,8 +232,6 @@ namespace Scripts.Controllers
 
             if (spawnCenter.childCount != 0)
                 Destroy(spawnCenter.GetChild(0).gameObject);
-
-            _winCounter = 0;
         }
 
         /// <summary>
