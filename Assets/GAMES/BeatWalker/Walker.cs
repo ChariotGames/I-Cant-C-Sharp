@@ -20,6 +20,7 @@ namespace Scripts.Games
         [SerializeField] private SpriteRenderer spriteWin;
         [SerializeField] private SpriteRenderer spriteLose;
         [SerializeField] private Settings settings;
+        [SerializeField] private AudioSource sound;
 
 
         #endregion Serialized Fields
@@ -184,6 +185,7 @@ namespace Scripts.Games
         private void ButtonPress(InputAction.CallbackContext ctx)
         {
             buttonPressed = true;
+            sound.Play();
             Debug.Log("clicked!");
         }
 
