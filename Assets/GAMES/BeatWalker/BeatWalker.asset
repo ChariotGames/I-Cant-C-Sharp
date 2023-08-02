@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BeatWalker
   m_EditorClassIdentifier: 
   description: Press the button in rhythm when the elements reach the star field
-  difficulty: 1
+  difficulty: 2
   genre: 8
   actionNames:
-    one: 
+    one: Catch
     two: 
     three: 
     four: 
