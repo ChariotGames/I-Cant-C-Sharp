@@ -2043,7 +2043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2656173507221902095, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
       propertyPath: m_Value
-      value: -25
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 2656173507221902095, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
       propertyPath: m_Enabled
@@ -2051,7 +2051,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2656173507221902095, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
       propertyPath: m_MaxValue
-      value: 10
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656173507221902095, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
+      propertyPath: m_MinValue
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 2656173507221902095, guid: 2c57c5a0c210e284d99e40b9495d09aa, type: 3}
       propertyPath: m_Interactable
