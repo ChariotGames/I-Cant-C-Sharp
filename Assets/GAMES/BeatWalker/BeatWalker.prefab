@@ -410,7 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f95f891ce864fff9dd983da3a4e492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
   successesToWin: 16
   successesToLevelUp: 15
   failsToLose: 4
@@ -574,8 +573,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1941433999
-  m_SortingLayer: -1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2f4471b5f7e5a476386d9dfaa7d122a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
