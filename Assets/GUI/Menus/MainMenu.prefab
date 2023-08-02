@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6769298439616402544}
         m_TargetAssemblyTypeName: Scripts.Controllers.MainMenu, Assembly-CSharp
         m_MethodName: SetDifficulty
         m_Mode: 0
@@ -4100,6 +4100,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6769298438785661489}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OptionIn
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6769298439118515293}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PlayerOut
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6769298438480614235}
+        m_TargetAssemblyTypeName: UnityEngine.EventSystems.EventSystem, UnityEngine.UI
+        m_MethodName: SetSelectedGameObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7893188863750568398}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6769298439836436996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6472,7 +6508,7 @@ PrefabInstance:
       objectReference: {fileID: 5556901404198642038}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -6481,11 +6517,11 @@ PrefabInstance:
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402544}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402555}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -6496,7 +6532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ResetAudio
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -6574,7 +6610,7 @@ PrefabInstance:
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402544}
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetSoundVolume
@@ -7440,7 +7476,7 @@ PrefabInstance:
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402544}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Quit
@@ -8201,7 +8237,7 @@ PrefabInstance:
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402544}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetLives
@@ -8278,6 +8314,10 @@ PrefabInstance:
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 6769298439616402544}
+    - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMainVolume
       objectReference: {fileID: 0}
     - target: {fileID: 1960301158598564981, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -9762,7 +9802,7 @@ PrefabInstance:
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402544}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -10754,7 +10794,7 @@ PrefabInstance:
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402544}
     - target: {fileID: 3493487516650952957, guid: 98f8c961239a349468b99be467316842, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetLives
@@ -10819,7 +10859,7 @@ PrefabInstance:
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6769298439616402544}
     - target: {fileID: 1220323158486212038, guid: 69d45a975f3e3b9439c07c18d57828b6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetMusicVolume
