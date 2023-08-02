@@ -104,14 +104,14 @@ namespace Scripts.Games
                         
                     break;
                 case Difficulty.MEDIUM:
-                    PlayerPrefs.SetFloat("speed", 10f);
+                    PlayerPrefs.SetFloat("speed", 7f);
                     repeatNumber = 4;
                     minRange = 0.1f;
                     maxRange = 0.5f;
                         
                     break;
                 case Difficulty.HARD:
-                    PlayerPrefs.SetFloat("speed", 15f);
+                    PlayerPrefs.SetFloat("speed", 10f);
                     repeatNumber = 8;
                     minRange = 0.0f;
                     maxRange = 0.2f;
