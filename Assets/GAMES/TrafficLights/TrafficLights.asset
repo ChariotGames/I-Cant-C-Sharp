@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: TrafficLights
   m_EditorClassIdentifier: 
-  description: 
+  description: in Traffic Lights the player has to remember the colors combinations
+    at the beginning and choose them in the second activation of the traffic lights!
   difficulty: 1
   genre: 1
   actionNames:
