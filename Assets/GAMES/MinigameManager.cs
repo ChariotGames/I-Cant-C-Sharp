@@ -36,7 +36,7 @@ namespace Scripts.Controllers
         private KeyMap _otherKeys;
         private Transform _parent;
         private const int MAX_QUE = 10, WIN_NEEDED = 5;
-        private int _winCounter = 3;
+        private int _winCounter;
 
         #endregion
 
@@ -62,17 +62,16 @@ namespace Scripts.Controllers
             BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
         }
 
-        IEnumerator Start()
+        void Start()
         {
             if (settings.SelectedGame != null)
             {
                 StartCoroutine(LoadCenter(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter));
-                yield break;
+                return;
             }
 
-            OnCenterDisplay?.Invoke(false);
-            yield return new WaitForSeconds(1.05f);
-            SpawnSides();
+            
+            StartCoroutine(SpawnSides());
         }
 
         #endregion
@@ -92,8 +91,10 @@ namespace Scripts.Controllers
             LoadGame(game, keys, parent, SpawnSide.Center);
         }
 
-        private void SpawnSides()
+        private IEnumerator SpawnSides()
         {
+            OnCenterDisplay?.Invoke(false);
+            yield return StartCoroutine(Wait(1.0f));
             _parent = spawnLeft;
             PickGame(new List<Minigame>(_mixGames));
             _parent = spawnRight;
@@ -198,8 +199,7 @@ namespace Scripts.Controllers
             if (_parent == spawnCenter)
             {
                 RemoveAllGames();
-                StartCoroutine(Wait(1f));
-                SpawnSides();
+                StartCoroutine(SpawnSides());
                 return;
             }
 
