@@ -3,7 +3,6 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace Scripts.Controllers
 {
@@ -23,7 +22,7 @@ namespace Scripts.Controllers
         #region Fields
             
             private InputActionMap playerMap, uiMap;
-            public static event Action OnChangeMenu;
+            public static event Action OnToMenu;
 
         // TODO: maybe not static?
         private static bool _isPaused;
@@ -104,8 +103,8 @@ namespace Scripts.Controllers
             public void EndRun()
             {
                 uiMap.Disable();
-            //playerMap.Enable();
-            ResumeGame();
+                //playerMap.Enable();
+                ResumeGame();
                 settings.Lives = 0;
                 //Time.timeScale = 1;
             }
@@ -115,7 +114,7 @@ namespace Scripts.Controllers
                 Time.timeScale = 1;
                 uiMap.Disable();
                 playerMap.Enable();
-                SceneManager.LoadScene((int)SceneNr.MainMenu);
+                OnToMenu?.Invoke();
             }
 
             public void QuitGame()

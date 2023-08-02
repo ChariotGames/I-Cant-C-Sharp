@@ -61,9 +61,7 @@ namespace Scripts.Games
             if (_index >= codes.Length)
             {
                 camImator.SetTrigger("KonamIN");
-                camImator.ResetTrigger("KonamOUT");
                 endAnimator.SetTrigger("EndOut");
-                endAnimator.ResetTrigger("EndIn");
                 konamiMator.SetTrigger("KonamIN");
                 _index = 0;
                 backButton.enabled = true;

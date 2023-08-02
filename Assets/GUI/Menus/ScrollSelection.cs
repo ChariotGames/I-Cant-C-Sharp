@@ -63,18 +63,6 @@ namespace Scripts.Controllers
             return -1;
         }
 
-        public void ResetToFirst()
-        {
-            StartCoroutine(BackToOne());
-        }
-
-        private IEnumerator BackToOne()
-        {
-            yield return new WaitForSeconds(1);
-            getGameIndex(0);
-            focusOnselected();
-        }
-
         #endregion Game Mechanics / Methods
 
         #region Overarching Methods / Helpers

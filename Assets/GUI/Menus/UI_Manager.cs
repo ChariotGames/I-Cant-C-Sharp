@@ -68,7 +68,7 @@ namespace Scripts.Controllers
             MinigameManager.OnSetKeys += DisplayKeys;
             MinigameManager.OnClearKeys += ClearKeys;
             MinigameManager.OnCenterDisplay += DisplayCenter;
-            PauseMenu.OnChangeMenu += () => StartCoroutine(ToGameOver());
+            PauseMenu.OnToMenu += OnToMenu;
         }
 
         private void OnDisable()
@@ -81,7 +81,7 @@ namespace Scripts.Controllers
             MinigameManager.OnSetKeys -= DisplayKeys;
             MinigameManager.OnClearKeys -= ClearKeys;
             MinigameManager.OnCenterDisplay -= DisplayCenter;
-            PauseMenu.OnChangeMenu -= () => StartCoroutine(ToGameOver());
+            PauseMenu.OnToMenu -= OnToMenu;
         }
 
         // Update is called once per frame
@@ -120,14 +120,32 @@ namespace Scripts.Controllers
 
         private IEnumerator ToGameOver()
         {
+            PrepareScreenChange();
+            camAnimator.SetTrigger("PlayToEnd");
+            yield return new WaitForSeconds(1.05f);
+            SceneManager.LoadScene((int)SceneNr.GameOver);
+        }
+
+        private void OnToMenu()
+        {
+            StartCoroutine(ToMainScreen());
+        }
+        
+        private IEnumerator ToMainScreen()
+        {
+            PrepareScreenChange();
+            camAnimator.SetTrigger("PlayToMenu");
+            yield return new WaitForSeconds(1.05f);
+            SceneManager.LoadScene((int)SceneNr.MainMenu);
+        }
+
+        private void PrepareScreenChange()
+        {
             minigameManager.SetActive(false);
             scoreNStuff.SetActive(false);
             keysNTimes.SetActive(false);
             bigBook.SetTrigger("BigBookOut");
             centerPaper.SetTrigger("CenterOut");
-            camAnimator.SetTrigger("CamToEnd");
-            yield return new WaitForSeconds(1.05f);
-            SceneManager.LoadScene((int)SceneNr.GameOver);
         }
 
         public IEnumerator DisplayUI(float delay, bool state)

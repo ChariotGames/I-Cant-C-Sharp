@@ -11,10 +11,9 @@ namespace Scripts.Controllers
     {
         #region Serialized Fields
         
-        [SerializeField] private Animator endAnimator;
+        [SerializeField] private Animator endAnimator, camAnimator;
         [SerializeField] private HighscorePanel highscorePanel;
         [SerializeField] private Settings settings;
-        [SerializeField] private Animator animator;
         [SerializeField] private TMP_Text scoreText, timerText;
 
         #endregion Serialized Fields
@@ -41,14 +40,14 @@ namespace Scripts.Controllers
         public void Restart()
         {
             settings.Lives = settings.MaxLives;
-            //string t = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene((int)SceneNr.PlayField);
+            StartCoroutine(AnimateToPlay());
+            camAnimator.SetTrigger("EndToPlay");
         }
 
         public void GoToMenu()
         {
             StartCoroutine(AnimateToMenu());
-            animator.SetTrigger("CamToMain");
+            camAnimator.SetTrigger("EndToMenu");
         }
 
         public void QuitGame()
@@ -63,6 +62,12 @@ namespace Scripts.Controllers
         {
             yield return new WaitForSeconds(1.0f);
             SceneManager.LoadScene((int)SceneNr.MainMenu);
+        }
+
+        private IEnumerator AnimateToPlay()
+        {
+            yield return new WaitForSeconds(1.0f);
+            SceneManager.LoadScene((int)SceneNr.PlayField);
         }
 
         #endregion Game Mechanics / Methods
