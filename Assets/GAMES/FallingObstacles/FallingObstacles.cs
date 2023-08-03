@@ -38,6 +38,7 @@ namespace Scripts.Games
         private int _numObstacles;
         private float _elapsedTime;
         private bool _gameStarted;
+        private AudioSource _audioSource;
         //private int _currentScore;
 
         //private const int _scoreToWin = 15;
@@ -48,6 +49,7 @@ namespace Scripts.Games
 
         private void Awake()
         {
+            _audioSource = GetComponent<AudioSource>();
             _mainCamera = Camera.main;
         }
 
@@ -201,6 +203,10 @@ namespace Scripts.Games
 
         #region Overarching Methods / Helpers
 
+        public void PlayHitSound()
+        {
+            _audioSource.Play();
+        }
 
         /// <summary>
         /// Activates horizontal movement for level 3.

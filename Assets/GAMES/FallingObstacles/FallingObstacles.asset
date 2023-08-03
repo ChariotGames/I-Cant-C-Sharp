@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: FallingObstacles
   m_EditorClassIdentifier: 
-  description: 
+  description: Man
   difficulty: 1
   genre: 6
   actionNames:
