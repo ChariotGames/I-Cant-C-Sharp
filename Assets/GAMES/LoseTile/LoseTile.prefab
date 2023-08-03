@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313fb1c4bd0fc49b1834999808289cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 1
   successesToWin: 3
   successesToLevelUp: 3
   failsToLose: 2
@@ -155,10 +154,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4511076258982885394}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: de6a4f96e6a0e77478bb171a793513e9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f035bf46ae476f341ad8c28b34490ff1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -477,6 +476,7 @@ MonoBehaviour:
   - {r: 1, g: 0.12549019, b: 0.58168685, a: 0.9019608}
   timer: 1
   box: {fileID: 5241422682149599241}
+  walkSound: {fileID: 0}
   type: 3
   visited: 0
   isVisable: 1
@@ -796,7 +796,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f0c80a8f003a3fb47818676d59259922, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 60064dace31ea6349b334e905b6f1a71, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

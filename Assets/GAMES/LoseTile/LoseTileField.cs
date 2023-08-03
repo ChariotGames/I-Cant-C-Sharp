@@ -15,6 +15,7 @@ namespace Scripts.Games
         [SerializeField] private Color[] colors;
         [SerializeField] [Range(1, 3)] private float timer = 1f;
         [SerializeField] private BoxCollider2D box;
+        [SerializeField] AudioSource walkSound;
 
         #endregion Serialized Fields
 
@@ -36,7 +37,7 @@ namespace Scripts.Games
                 StartCoroutine(AnimateTimes(3));
 
                 game.PlayerTouched(type);
-
+                walkSound.Play();
             }
 
             if (collision.Equals(player) && visited && type == ElementType.ENEMY)
