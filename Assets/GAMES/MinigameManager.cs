@@ -70,13 +70,22 @@ namespace Scripts.Controllers
                 return;
             }
 
-            
             StartCoroutine(SpawnSides());
         }
 
         #endregion
 
         #region Instance Management
+
+        public void RestartManager()
+        {
+            StopAllCoroutines();
+            _winCounter = 0;
+            _previous = new();
+            ResetGames();
+            RemoveAllGames();
+            Start();
+        }
 
         private IEnumerator LoadCenter()
         {
@@ -202,7 +211,7 @@ namespace Scripts.Controllers
                 StartCoroutine(SpawnSides());
                 return;
             }
-
+            
             Destroy(game);
 
             if (_winCounter >= WIN_NEEDED)
@@ -225,13 +234,32 @@ namespace Scripts.Controllers
         private void RemoveAllGames()
         {
             if (spawnLeft.childCount != 0)
-                Destroy(spawnLeft.GetChild(0).gameObject);
+            {
+                GameObject obj = spawnLeft.GetChild(0).gameObject;
+                BaseGame game = obj.GetComponent<BaseGame>();
+                game.RestartGame();
+                Destroy(obj);
+                OnClearKeys?.Invoke(spawnLeft.name);
+            }
+                
 
             if (spawnRight.childCount != 0)
-                Destroy(spawnRight.GetChild(0).gameObject);
+            {
+                GameObject obj = spawnRight.GetChild(0).gameObject;
+                BaseGame game = obj.GetComponent<BaseGame>();
+                game.RestartGame();
+                Destroy(obj);
+                OnClearKeys?.Invoke(spawnRight.name);
+            }
 
             if (spawnCenter.childCount != 0)
-                Destroy(spawnCenter.GetChild(0).gameObject);
+            {
+                GameObject obj = spawnCenter.GetChild(0).gameObject;
+                BaseGame game = obj.GetComponent<BaseGame>();
+                game.RestartGame();
+                Destroy(obj);
+                OnClearKeys?.Invoke(spawnCenter.name);
+            }
         }
 
         /// <summary>
@@ -277,13 +305,13 @@ namespace Scripts.Controllers
 
         #region Game Mechanics
 
-        public void WinCondition(GameObject game)
+        private void WinCondition(GameObject game)
         {
             _winCounter++;
             RemoveGame(game);
         }
 
-        public void LoseCondition(GameObject game)
+        private void LoseCondition(GameObject game)
         {
             if (settings.BaseDifficulty == Difficulty.TUTORIAL) return;
             settings.Lives--;
@@ -292,7 +320,7 @@ namespace Scripts.Controllers
             RemoveGame(game);
         }
 
-        public void UpdateDifficulty(GameObject game, Difficulty difficulty)
+        private void UpdateDifficulty(GameObject game, Difficulty difficulty)
         {
             List<Minigame> all = new();
             all.AddRange(settings.Games);

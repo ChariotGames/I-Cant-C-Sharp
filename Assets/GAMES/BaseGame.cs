@@ -84,6 +84,12 @@ namespace Scripts.Games
             _instructionDistance = duration;
         }
 
+        public void RestartGame()
+        {
+            StopAllCoroutines();
+            Destroy(_instructionPrefab);
+        }
+
         /// <summary>
         /// Decreases the score by 1-3 = difficulty.
         /// </summary>

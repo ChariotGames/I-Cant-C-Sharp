@@ -39,7 +39,7 @@ namespace Scripts.Controllers
 
         #region Built-Ins / MonoBehaviours
 
-        void Start()
+        void Awake()
         {
             if (mainCamera) mainCamera = Camera.main;
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
@@ -176,6 +176,7 @@ namespace Scripts.Controllers
         public void SetDifficulty(int value)
         {
             settings.BaseDifficulty = (Difficulty)Mathf.Clamp(value, (int)Difficulty.TUTORIAL, (int)Difficulty.VARYING);
+            if (settings.BaseDifficulty == Difficulty.TUTORIAL) parallelButton.interactable = false;
         }
 
         /// <summary>
