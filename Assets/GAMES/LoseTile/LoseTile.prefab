@@ -156,7 +156,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7272951172123379120, guid: bf7be36fae8244945aec18b2a24556f5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: f035bf46ae476f341ad8c28b34490ff1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: abb68bf48d03ec349b00dc8f17d5a88e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -762,7 +762,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -2}
   serializedVersion: 2
-  m_Radius: 2.75
+  m_Radius: 2
 --- !u!50 &5241422683056287862
 Rigidbody2D:
   serializedVersion: 4
