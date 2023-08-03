@@ -8,6 +8,7 @@ namespace Scripts.Pascal
         [SerializeField] private FallingObstacles fallingObstacles;
         private void OnTriggerEnter2D(Collider2D other)
         {
+            fallingObstacles.PlayHitSound();
             fallingObstacles.IncreasePoints();
             Destroy(gameObject);
             Destroy(other.gameObject);

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using Scripts.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -35,8 +37,10 @@ namespace Scripts.Games
 
         #region Serialized Fields
 
-        [SerializeField] private GameObject trafficLightPrefab,selector_ref,simonNot_ref, simonOk_ref, text_ref;
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<GameObject> trafficLights;
+        [SerializeField] private GameObject trafficLightPrefab,selector_ref,simonNot_ref, simonOk_ref;
         [SerializeField] private int delaySecondWave = 5;
         [SerializeField] private int timeToSelectLight = 5;
         [SerializeField] private int successToWin = 5;
@@ -53,7 +57,6 @@ namespace Scripts.Games
         private int selectorIndex;
         private bool gameVariant;
         private bool playerHasSubmitted = false;
-        private int successCounter = 0;
 
         private struct trafficLight
         {
@@ -72,8 +75,10 @@ namespace Scripts.Games
         #region Built-Ins / MonoBehaviours
 
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            selector_ref.SetActive(true);
             StartCoroutine(GameCoroutine());
         }
 
@@ -86,15 +91,14 @@ namespace Scripts.Games
                 yield return new WaitForSeconds(delaySecondWave);
                 SecondWave();
                 base.RunTimer(timeToSelectLight);
-                yield return new WaitForSeconds(timeToSelectLight);
-                if (!playerHasSubmitted)
-                {
-                    EndOfRound();
-                }
+                //timer anstatt waitforseconds damit der timer vorher abgebrochen werden kann
+                float timer = Time.time;
+                yield return new WaitUntil(() => playerHasSubmitted || Time.time - timer > timeToSelectLight);
+                
+                EndOfRound();
                 yield return new WaitForSeconds(1);
                 Reset();
             }
-
         }
 
         private void Setup()
@@ -117,7 +121,6 @@ namespace Scripts.Games
 
         private void SecondWave()
         {
-            text_ref.SetActive(false);
             //Mix correct colors with random generated ones and set them.
             secondWaveColors = MixCorrectColorsIntoWrongOnes(
                 GenLightColors(trafficLightAmount, correctColors), correctColors);
@@ -127,7 +130,6 @@ namespace Scripts.Games
             selector_ref.transform.Translate(SelectorPos);
             selector_ref.SetActive(true);
             EnableInputs();
-
         }
 
         private void EndOfRound()
@@ -142,7 +144,6 @@ namespace Scripts.Games
             CheckSelector();
             GameObject selector = Instantiate(selector_ref, gameObject.transform);
             selector_ref = selector;
-            //Destroy(owner_ref.transform.GetChild(0));
             GameObject horizontalLayout = gameObject.transform.GetChild(0).gameObject;
             int count = horizontalLayout.transform.childCount;
             horizontalLayout.transform.DetachChildren();
@@ -152,7 +153,6 @@ namespace Scripts.Games
             }
             DisableInputs();
             playerHasSubmitted = false;
-            text_ref.SetActive(true);
         }
 
         #endregion Built-Ins / MonoBehaviours
@@ -174,9 +174,7 @@ namespace Scripts.Games
 
         private void OnDisable()
         {
-            _keys.One.Input.action.performed -= ButtonPressL;
-            _keys.Two.Input.action.performed -= ButtonPressSubmit;
-            _keys.Three.Input.action.performed -= ButtonPressR;
+            DisableInputs();
         }
 
         public void ButtonPressL(InputAction.CallbackContext ctx)
@@ -205,9 +203,8 @@ namespace Scripts.Games
 
         public void ButtonPressSubmit(InputAction.CallbackContext ctx)
         {
-            playerHasSubmitted = true;
-            EndOfRound();
             GetComponent<AudioSource>().Play();
+            playerHasSubmitted = true;
         }
 
         #endregion Inputs
@@ -273,16 +270,11 @@ namespace Scripts.Games
         {
             if (correctColors.Contains(secondWaveColors[selectorIndex]))
             {
-                base.ScoreUp(5);
-                ++successCounter;
-                base.AnimateSuccess(gameObject.transform, successCounter, successToWin);
-                base.Harder();
-                base.Win();
+                Success();
             }
             else
             {
-                base.Easier();
-                base.Lose();
+                Fail();
             }
         }
 

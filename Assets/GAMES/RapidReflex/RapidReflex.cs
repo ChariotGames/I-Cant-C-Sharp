@@ -1,9 +1,11 @@
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Scripts.Games
@@ -19,25 +21,27 @@ namespace Scripts.Games
     public class RapidReflex : BaseGame
     {
     #region Serialized Fields
-        
-        [SerializeField] private GameObject lightTemplate, overlayContainer;
+
+        [Space]
+        [Header("Game Specific Stuff")]
+        [SerializeField] private TMP_Text gameState;
+        [SerializeField] private GameObject lightTemplate, overlayContainer, lightContainer;
         [SerializeField] private Transform lightsTop, lightsBottom;
         [SerializeField] private SpriteRenderer[] bulbsSpriteTop, bulbsSpriteBottom;
         [SerializeField] private SpriteRenderer backgroundSprite;
-        [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen, backroundColor;
+        [SerializeField] private Color darkRed, lightRed, darkGreen, lightGreen;
+        [SerializeField] private Color backgroundColor;
         [SerializeField] private List<Color> flashColor;
-        [SerializeField] private TMP_Text gameState;
         [SerializeField] private float lightTimer;
-        [SerializeField] private int successesToLevelUp;
 
-        #endregion Serialized Fields
+    #endregion Serialized Fields
 
     #region Fields
 
+        private AudioSource audioSource;
         private const int NUMBER_LIGHTS = 5;
         private float _timeElapsed = 0, _randomDelay = 0, _timeToAnswer;
         private bool _isButtonPressed = false;
-        private int difficultyTracker, defaultFailsToLose;
 
     #endregion Fields
 
@@ -45,14 +49,13 @@ namespace Scripts.Games
     
     void Start()
     {
-        backgroundSprite.color = backroundColor;
+        audioSource = GetComponent<AudioSource>();
+        backgroundSprite.color = backgroundColor;
         flashColor.Add(lightRed);
         flashColor.Add(lightGreen);
         //backgroundSprite = background.GetComponent<SpriteRenderer>();
         bulbsSpriteTop = SpawnLights(NUMBER_LIGHTS, darkRed, lightsTop);
         bulbsSpriteBottom = SpawnLights(NUMBER_LIGHTS, darkGreen, lightsBottom);
-        difficultyTracker = successesToLevelUp;
-        _fails = failsToLose;
         StartCoroutine(GameCoroutine());
     }
 
@@ -68,7 +71,8 @@ namespace Scripts.Games
 
         private IEnumerator GameCoroutine()
         {
-            yield return new WaitForSeconds(1);
+            yield return StartCoroutine(AnimateInstruction());
+            lightContainer.SetActive(true);
             while (true)
             {
                 UpdateRandomDelay();
@@ -117,15 +121,19 @@ namespace Scripts.Games
         private IEnumerator LightAnimation()
         {
             _isButtonPressed = false;
+            audioSource.pitch = 0.75f;
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
-                if (CheckForEarlyLose()) yield break; 
+                if (CheckForEarlyLose()) yield break;
+                audioSource.Play();
                 UpdateLightColor(bulbsSpriteTop[i], lightRed);
                 if (Difficulty == Difficulty.HARD && i == NUMBER_LIGHTS-1) StartCoroutine(RandomDistraction());
                 yield return new WaitForSeconds(lightTimer + (i == NUMBER_LIGHTS-1 && Difficulty != Difficulty.EASY ? _randomDelay : 0));
                 if (CheckForEarlyLose()) yield break; 
             }
             //Debug.Log("Delay: " + (_randomDelay + _randomDelay) + " s");
+            audioSource.pitch = 1.5f;
+            audioSource.Play();
             for (int i = 0; i < NUMBER_LIGHTS; i++)
             {
                 UpdateLightColor(bulbsSpriteBottom[i], lightGreen);
@@ -149,20 +157,11 @@ namespace Scripts.Games
             if (_timeElapsed < _timeToAnswer && _timeElapsed >= 0)
             {
                 gameState.text = "rapid reflex: " + (int)(_timeElapsed * 1000) + " ms";
-                //GameWon();
-                difficultyTracker--;
-                if (difficultyTracker <= 0)
-                {
-                    difficultyTracker = successesToLevelUp;
-                    Harder();
-                }
                 Success();
             }
             else
             {
                 gameState.text = _timeElapsed > 0 ? "too slow!" : "too early!";
-                //GameLost();
-                difficultyTracker++;
                 Fail();
             }
             yield return new WaitForSeconds(1);
@@ -180,7 +179,6 @@ namespace Scripts.Games
 
             float delay = Random.Range(0.5f, lightTimer + _randomDelay / 3);
             yield return new WaitForSeconds(delay);
-            //Debug.Log("Flashdelay: " + delay);
             StartCoroutine(FlashBackground());
         }
 
@@ -190,37 +188,7 @@ namespace Scripts.Games
             //background.SetActive(true);
             yield return new WaitForSeconds(0.2f);
             //background.SetActive(false);
-            backgroundSprite.color = backroundColor;
-        }
-
-        public void Test(GameObject obj) { }
-
-        private void GameWon()
-        {
-            ScoreUp();
-            _successes++;
-            difficultyTracker--;
-            if (difficultyTracker <= 0)
-            {
-                difficultyTracker = successesToLevelUp;
-                Harder();
-            }
-            if (_successes >= successesToWin)
-            {
-                Win(); 
-            }
-        }
-        
-        private void GameLost()
-        {
-            _fails--;
-            difficultyTracker++;
-            if (_fails <= 0)
-            {
-                _fails = failsToLose;
-                Easier();
-                Lose();
-            }
+            backgroundSprite.color = backgroundColor;
         }
 
         private void UpdateRandomDelay()
@@ -236,11 +204,15 @@ namespace Scripts.Games
             }
             return false;
         }
+        
+        private protected override void SetDifficulty()
+        {
+            _timeToAnswer = 1.33f - (int)difficulty * 0.33f;
+        }
 
         private void OnEnable()
         {
-            _timeToAnswer = 1.33f - (int)difficulty * 0.33f;
-            Debug.Log("AnswerTime: " + _timeToAnswer);
+            SetDifficulty();
             _keys.One.Input.action.started += EastButtonPressed;
         }
 

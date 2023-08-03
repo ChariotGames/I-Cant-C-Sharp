@@ -17,6 +17,8 @@ namespace Scripts.Controllers
 
         [SerializeField] private Settings settings;
         [SerializeField] private Transform spawnLeft, spawnRight, spawnCenter;
+        [SerializeField] private GameObject instructionPrefab;
+        [SerializeField] [Range(0.0f, 2.0f)] private float instructionDistance = 2.0f;
 
         #endregion
 
@@ -24,14 +26,17 @@ namespace Scripts.Controllers
 
         public static event Action<string, KeyMap, ActionNames> OnSetKeys;
         public static event Action<string> OnClearKeys;
+        public static event Action<bool> OnCenterDisplay;
+        public static event Action OnLoseLife;
+        
 
         private List<Minigame> _mixGames, _soloGames;
         private Queue<Minigame> _previous;
         private Genre _otherGenre;
         private KeyMap _otherKeys;
         private Transform _parent;
-        private const int MAX_QUE = 10;
-        private int _winCounter = MAX_QUE/2;
+        private const int MAX_QUE = 10, WIN_NEEDED = 5;
+        private int _winCounter;
 
         #endregion
 
@@ -42,49 +47,63 @@ namespace Scripts.Controllers
             _previous = new();
             ResetGames();
         }
-
-        void Start()
+        
+        private void OnEnable()
         {
             BaseGame.OnLose += LoseCondition;
-            BaseGame.OnWin += RemoveGame;
+            BaseGame.OnWin += WinCondition;
             BaseGame.OnUpdateDifficulty += UpdateDifficulty;
-
-            if (settings.SelectedGame != null)
-            {
-                LoadGame(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter);
-                return;
-            }
-
-            SpawnSides();
-        }
-
-        void Update()
-        {
-            if (_mixGames.Count <= 1 || _soloGames.Count <= 1)
-                ResetGames();
-
-            if (_winCounter <= 0)
-            {
-                if (spawnLeft.childCount != 0 || spawnRight.childCount != 0 || spawnCenter.childCount != 0) return;
-                List<Minigame> gameList = new(_soloGames);
-                Minigame bossGame = gameList[Random.Range(0, gameList.Count)];
-                LoadGame(bossGame, bossGame.KeysRight, spawnCenter);
-            }
         }
 
         private void OnDisable()
         {
             BaseGame.OnLose -= LoseCondition;
-            BaseGame.OnWin -= RemoveGame;
+            BaseGame.OnWin -= WinCondition;
             BaseGame.OnUpdateDifficulty -= UpdateDifficulty;
+        }
+
+        void Start()
+        {
+            if (settings.SelectedGame != null)
+            {
+                StartCoroutine(LoadCenter(settings.SelectedGame, settings.SelectedGame.KeysRight, spawnCenter));
+                return;
+            }
+
+            StartCoroutine(SpawnSides());
         }
 
         #endregion
 
         #region Instance Management
 
-        private void SpawnSides()
+        public void RestartManager()
         {
+            StopAllCoroutines();
+            _winCounter = 0;
+            _previous = new();
+            ResetGames();
+            RemoveAllGames();
+            Start();
+        }
+
+        private IEnumerator LoadCenter()
+        {
+            Minigame bossGame = _soloGames[Random.Range(0, _soloGames.Count)];
+            yield return StartCoroutine(LoadCenter(bossGame, bossGame.KeysRight, spawnCenter));
+        }
+
+        private IEnumerator LoadCenter(Minigame game, KeyMap keys, Transform parent)
+        {
+            OnCenterDisplay?.Invoke(true);
+            yield return StartCoroutine(Wait(1.0f));
+            LoadGame(game, keys, parent, SpawnSide.Center);
+        }
+
+        private IEnumerator SpawnSides()
+        {
+            OnCenterDisplay?.Invoke(false);
+            yield return StartCoroutine(Wait(1.0f));
             _parent = spawnLeft;
             PickGame(new List<Minigame>(_mixGames));
             _parent = spawnRight;
@@ -107,7 +126,7 @@ namespace Scripts.Controllers
                 thisGame = GetNext(gameList);
             }
 
-            LoadGame(thisGame, thisGame.SelectedKeys, _parent);
+            LoadGame(thisGame, thisGame.SelectedKeys, _parent, SpawnSide.Side);
         }
 
         /// <summary>
@@ -148,13 +167,13 @@ namespace Scripts.Controllers
         /// <param name="game">The game asset to load from.</param>
         /// <param name="keys">The keymap to use.</param>
         /// <param name="parent">The parent to load it into.</param>
-        private void LoadGame(Minigame game, KeyMap keys, Transform parent)
+        private void LoadGame(Minigame game, KeyMap keys, Transform parent, SpawnSide type)
         {
             if (game == null) return;
 
             _mixGames.Remove(game);
             if (_previous.Count == MAX_QUE) _mixGames.Add(_previous.Dequeue());
-            _previous.Enqueue(game);
+            if (parent != spawnCenter) _previous.Enqueue(game);
 
             game.Prefab.SetActive(false);
             GameObject obj = Instantiate(game.Prefab, parent);
@@ -165,8 +184,13 @@ namespace Scripts.Controllers
             {
                 difficulty = game.Difficulty;
             }
+            if (settings.BaseDifficulty == Difficulty.TUTORIAL)
+            {
+                difficulty = Difficulty.EASY;
+            }
 
-            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect);
+            baseGame.SetUp(difficulty, keys, parent.GetComponent<RectTransform>().rect, type, settings.BaseDifficulty == Difficulty.VARYING);
+            baseGame.SetInstructions(instructionPrefab, game.InstructionText, instructionDistance);
             OnSetKeys?.Invoke(parent.name, keys, game.ActionNames);
             obj.SetActive(true);
         }
@@ -179,21 +203,27 @@ namespace Scripts.Controllers
             if (settings.SelectedGame != null) return;
 
             _parent = game.transform.parent;
+            OnClearKeys?.Invoke(_parent.name);
 
             if (_parent == spawnCenter)
             {
                 RemoveAllGames();
-                StartCoroutine(Wait(3f));
-                SpawnSides();
+                StartCoroutine(SpawnSides());
                 return;
             }
-
-            OnClearKeys?.Invoke(_parent.name);
+            
             Destroy(game);
 
-            if (_winCounter > 0)
+            if (_winCounter >= WIN_NEEDED)
             {
-                StartCoroutine(Wait(3f));
+                if ((spawnLeft.childCount + spawnRight.childCount + spawnCenter.childCount) <= 1)
+                {
+                    StartCoroutine(LoadCenter());
+                    _winCounter = 0;
+                }
+            }
+            else
+            {
                 PickGame(new List<Minigame>(_mixGames));
             }
         }
@@ -204,15 +234,32 @@ namespace Scripts.Controllers
         private void RemoveAllGames()
         {
             if (spawnLeft.childCount != 0)
-                Destroy(spawnLeft.GetChild(0).gameObject);
+            {
+                GameObject obj = spawnLeft.GetChild(0).gameObject;
+                BaseGame game = obj.GetComponent<BaseGame>();
+                game.RestartGame();
+                Destroy(obj);
+                OnClearKeys?.Invoke(spawnLeft.name);
+            }
+                
 
             if (spawnRight.childCount != 0)
-                Destroy(spawnRight.GetChild(0).gameObject);
+            {
+                GameObject obj = spawnRight.GetChild(0).gameObject;
+                BaseGame game = obj.GetComponent<BaseGame>();
+                game.RestartGame();
+                Destroy(obj);
+                OnClearKeys?.Invoke(spawnRight.name);
+            }
 
             if (spawnCenter.childCount != 0)
-                Destroy(spawnCenter.GetChild(0).gameObject);
-
-            _winCounter = MAX_QUE;
+            {
+                GameObject obj = spawnCenter.GetChild(0).gameObject;
+                BaseGame game = obj.GetComponent<BaseGame>();
+                game.RestartGame();
+                Destroy(obj);
+                OnClearKeys?.Invoke(spawnCenter.name);
+            }
         }
 
         /// <summary>
@@ -258,20 +305,22 @@ namespace Scripts.Controllers
 
         #region Game Mechanics
 
-        public void WinCondition(GameObject game)
+        private void WinCondition(GameObject game)
         {
-            _winCounter--;
+            _winCounter++;
             RemoveGame(game);
         }
 
-        public void LoseCondition(GameObject game)
+        private void LoseCondition(GameObject game)
         {
+            if (settings.BaseDifficulty == Difficulty.TUTORIAL) return;
             settings.Lives--;
+            OnLoseLife?.Invoke();
             //_winCounter--;
             RemoveGame(game);
         }
 
-        public void UpdateDifficulty(GameObject game, Difficulty difficulty)
+        private void UpdateDifficulty(GameObject game, Difficulty difficulty)
         {
             List<Minigame> all = new();
             all.AddRange(settings.Games);
@@ -282,7 +331,6 @@ namespace Scripts.Controllers
             if (found != null)
             {
                 found.Difficulty = difficulty;
-                return;
             }
         }
 
@@ -297,6 +345,7 @@ namespace Scripts.Controllers
 
         private void OnDrawGizmos()
         {
+            /*
             if (spawnLeft.gameObject.activeInHierarchy)
             {
                 Gizmos.color = new Color(0, 1, 0, 0.2f);
@@ -307,6 +356,7 @@ namespace Scripts.Controllers
                 Gizmos.color = new Color(1, 0, 0, 0.2f);
                 Gizmos.DrawCube(spawnRight.position, spawnRight.GetComponent<RectTransform>().rect.size);
             }
+            */
             if (spawnCenter.gameObject.activeInHierarchy)
             {
                 Gizmos.color = new Color(1, 0, 1, 0.2f);

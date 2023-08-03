@@ -15,14 +15,15 @@ namespace Scripts.Games
         [SerializeField] private Color[] colors;
         [SerializeField] [Range(1, 3)] private float timer = 1f;
         [SerializeField] private BoxCollider2D box;
+        [SerializeField] AudioSource walkSound;
 
         #endregion Serialized Fields
 
         #region Fields
 
         public ElementType type = ElementType.CHECKPOINT;
-        private bool visited = false;
-
+        public bool visited = false;
+        public bool isVisable = true;
         #endregion Fields
 
         #region Built-Ins / MonoBehaviours
@@ -36,19 +37,31 @@ namespace Scripts.Games
                 StartCoroutine(AnimateTimes(3));
 
                 game.PlayerTouched(type);
-
+                walkSound.Play();
             }
+
+            if (collision.Equals(player) && visited && type == ElementType.ENEMY)
+            {
+
+                game.PlayerTouched(type);
+                //Destroy(gameObject,timer * 2f);
+                disableTile();
+                setInVisible();
+            }
+
         }
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.Equals(player) && visited && type == ElementType.ENEMY)
-            {
-                game.PlayerTouched(type);
-                //Destroy(gameObject,timer * 2f);
-                box.isTrigger = false;
-            }
+            
         }
+
+        public void disableTile()
+        {
+            visited = false;
+            box.isTrigger = false;
+        }
+
         #endregion Built-Ins / MonoBehaviours
 
         #region GetSets / Properties
@@ -77,6 +90,7 @@ namespace Scripts.Games
 
         private IEnumerator AnimateTimes(int times)
         {
+
             SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
 
             for (int i = 0; i < times; i++)
@@ -88,10 +102,17 @@ namespace Scripts.Games
 
             }
             yield return new WaitForSeconds(1f);
+            setInVisible();
+        }
+
+        public void setInVisible()
+        {
+            SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
             sprite.color = Color.clear;
             outline.enabled = false;
+            isVisable = false;
             type = ElementType.ENEMY;
-
+            
         }
         #endregion Overarching Methods / Helpers
     }

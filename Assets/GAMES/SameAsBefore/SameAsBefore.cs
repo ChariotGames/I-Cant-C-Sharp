@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Controllers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
@@ -13,33 +14,41 @@ namespace Scripts.Games
 {
     public class SameAsBefore : BaseGame
     {
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<GameObject> options;
         [SerializeField] private GameObject startText, gamestateWin, gamestateLose;
         [SerializeField] private TMP_Text stepBackText,  buttonYes, buttonNo;
         [SerializeField] private int maxStepsBack;
         [SerializeField] private int timeout;
-        [SerializeField] private int successesToLevelUp;
+        [SerializeField] private AudioClip[] clips;
 
         private LinkedList<int> _lastIndices = new();
-        private const string _stepsText = "steps: ";
+        private AudioSource audio;
+        private const string _stepsText = "think back: ";
         private int _index, _steps;
         private bool _isYes, _isNo;
-        private int difficultyTracker, defaultFailsToLose;
 
         void Start()
         {
-            difficultyTracker = successesToLevelUp;
-            _fails = failsToLose;
-            defaultFailsToLose = failsToLose;
-            buttonYes.text = _keys.One.Icon;
-            buttonNo.text = _keys.Two.Icon;
+            audio = GetComponent<AudioSource>();
+            audio.clip = clips[0];
             StartCoroutine(GameStartCoroutine());
         }
 
         private void SpawnSymbol()
         {
             _index = Random.Range(0, options.Count);
+            audio.clip = clips[_index];
+            audio.Play();
+            if(_index != 0) StartCoroutine(PlaySoundAfterTime(0.15f));
             options[_index].SetActive(true);
+        }
+
+        IEnumerator PlaySoundAfterTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            audio.Play();
         }
 
         private void UpdateSteps()
@@ -74,14 +83,14 @@ namespace Scripts.Games
                 float delta = Time.deltaTime * 2;
                 startText.transform.Translate(0, delta, 0, Space.Self);
                 offset += delta;
-                yield return new WaitForSeconds(0.001f);
+                yield return new WaitForSeconds(Time.deltaTime);
             }
             startText.SetActive(false);
         }
 
         private IEnumerator GameStartCoroutine()
         {
-            yield return StartCoroutine(AnimationStartText(2.1f));
+            yield return StartCoroutine(AnimateInstruction());
             SpawnSymbol();
             _lastIndices.AddFirst(_index);
             if (_lastIndices.Count > maxStepsBack) { _lastIndices.RemoveLast(); }
@@ -98,7 +107,7 @@ namespace Scripts.Games
                 if (options[0].activeSelf || options[1].activeSelf)
                 {
                     //Debug.Log(lastIndices.Count);
-                    Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tsteps: " + (_steps + 1));
+                    //Debug.Log(_index + " : " + _lastIndices.ElementAt(_steps) + "\tthink back: " + (_steps + 1));
 
                     float timer = Time.time;
                     RunTimer(timeout);
@@ -106,19 +115,11 @@ namespace Scripts.Games
                     if ((_index == _lastIndices.ElementAt(_steps) && _isYes && !_isNo) || (_index != _lastIndices.ElementAt(_steps) && _isNo && !_isYes))
                     {
                         gamestateWin.SetActive(true);
-                        //GameWon();
-                        if (difficultyTracker <= 0)
-                        {
-                            difficultyTracker = successesToLevelUp;
-                            Harder();
-                        }
                         Success();
                     }
                     else
                     {
                         gamestateLose.SetActive(true);
-                        //GameLost();
-                        difficultyTracker++;
                         Fail();
                     }
                     yield return new WaitForSeconds(1);
@@ -140,35 +141,6 @@ namespace Scripts.Games
             }
         }
 
-
-        private void GameWon()
-        {
-            ScoreUp();
-            _successes++;
-            difficultyTracker--;
-            if (difficultyTracker <= 0)
-            {
-                difficultyTracker = successesToLevelUp;
-                Harder();
-            }
-            if (_successes >= successesToWin)
-            {
-                Win(); 
-            }
-        }
-        
-        private void GameLost()
-        {
-            _fails--;
-            difficultyTracker++;
-            if (_fails <= 0)
-            {
-                _fails = failsToLose;
-                Easier();
-                Lose();
-            }
-        }
-        
         private void OnEnable()
         {
             _keys.Two.Input.action.performed += YesButtonPressed;

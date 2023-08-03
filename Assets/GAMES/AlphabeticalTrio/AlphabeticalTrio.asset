@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: AlphabeticalTrio
   m_EditorClassIdentifier: 
-  description: 
+  description: Three letters are shown and you have to decide wether they are in
+    alphabetical order or not. In igher difficulties the letters maybe shown in reverse
+    alphabetical order.
   difficulty: 1
   genre: 4
+  actionNames:
+    one: No
+    two: Yes
+    three: 
+    four: 
   keysLeft:
     one: {fileID: 11400000, guid: ebcda37e637bd11459d614f349f0400f, type: 2}
     two: {fileID: 11400000, guid: 890a9bb1fef2d554084cbdd6d1dca441, type: 2}
@@ -25,11 +32,6 @@ MonoBehaviour:
     two: {fileID: 11400000, guid: ae76fd2c11623d94da24d8716aa5cd5b, type: 2}
     three: {fileID: 0}
     four: {fileID: 0}
-  actionNames:
-    one: No
-    two: Yes
-    three: 
-    four: 
-    other: 
   prefab: {fileID: 8687728356415758773, guid: c2f1532ce82970b4789fde496fdb026c, type: 3}
   preview: {fileID: 21300000, guid: dd56fef6cd2b0fc4fa21d3a8c0ad4ba6, type: 3}
+  instructionText: "are these \nordered?"

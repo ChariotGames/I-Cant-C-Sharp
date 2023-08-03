@@ -9,6 +9,8 @@ public class ExpBomb : MonoBehaviour
     [SerializeField] private float size;
     [SerializeField] private SpriteRenderer spriteBomb;
     [SerializeField] private SpriteRenderer spriteBase;
+    [SerializeField] private AudioSource sound;
+    [SerializeField] private AudioClip[] clips;
 
     private bool active = false;
     private bool danger = false;
@@ -24,6 +26,9 @@ public class ExpBomb : MonoBehaviour
     public void SetDefault()
     {
         active = false;
+        sound.time = 0.65f;
+        sound.clip = clips[Random.Range(0, clips.Length)];
+        sound.Play();
         spriteBomb.enabled = true;
         spriteBase.enabled = true;
     }
@@ -34,6 +39,7 @@ public class ExpBomb : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", colors[0]);
             CancelInvoke();
+            
             Vector3 newSize = new(size, size, transform.position.z);
             StartCoroutine(AnimateSize(gameObject.transform.localScale, newSize, 0.1f));
             StartCoroutine(AnimateColor(gameObject.GetComponent<SpriteRenderer>(), colors[0], colors[1], 0.45f));

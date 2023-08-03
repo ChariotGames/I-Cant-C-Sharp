@@ -18,6 +18,7 @@ namespace Scripts.Games
         public override void ButtonPressed(InputAction.CallbackContext ctx)
         {
             gameObject.SetActive(false);
+            
         }
     }
 }

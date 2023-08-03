@@ -2,6 +2,7 @@ using Scripts.GameElements;
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,14 +14,16 @@ namespace Scripts.Games
     {
         #region Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<Rigidbody2D> bouncingBalls;
         [SerializeField] private TextMeshPro guessedNumber;
         [SerializeField] private GameObject balls;
         [SerializeField] private GameObject guessingOverlay;
         [SerializeField] private PhysicsMaterial2D groundMaterial;
-        [SerializeField] private TextMeshPro infoText;
-        [SerializeField] private SpriteRenderer correctAnswer;
-        [SerializeField] private SpriteRenderer wrongAnswer;
+        //[SerializeField] private TextMeshPro infoText;
+        //[SerializeField] private SpriteRenderer correctAnswer;
+        //[SerializeField] private SpriteRenderer wrongAnswer;
         [SerializeField] private TextMeshPro resultText;
 
         private AudioSource _audio;
@@ -30,6 +33,7 @@ namespace Scripts.Games
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
+        private bool _gameStarted;
 
         //private int _currentScore;
         private bool hasRandomGravity;
@@ -45,35 +49,26 @@ namespace Scripts.Games
         private void Awake()
         {
             _audio = GetComponent<AudioSource>();
-            switch (Difficulty)
-            {
-                case Difficulty.EASY:
-                    groundMaterial.bounciness = 1.05f;
-                    break;
-                case Difficulty.MEDIUM:
-                    groundMaterial.bounciness = 1f;
-                    break;
-                case Difficulty.HARD:
-                    groundMaterial.bounciness = 0.975f;
-                    hasRandomGravity = true;
-                    break;
-            }
+            SetDifficulty();
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+            _gameStarted = true;
             //groundMaterial = new PhysicsMaterial2D();
             StartCoroutine(ReleaseBallsAfterDelay());
-            infoText.gameObject.SetActive(true);
+            //infoText.gameObject.SetActive(true);
         }
 
         private void Update()
         {
+            if (!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime >= 2 && infoText.gameObject.activeSelf)
+            /*if (_elapsedTime >= 3 && infoText.gameObject.activeSelf)
             {
                 infoText.gameObject.SetActive(false);
-            }
+            }*/
 
             if (_elapsedTime >= _maxRoundTime && !_guessingStage)
             {
@@ -111,20 +106,29 @@ namespace Scripts.Games
 
         #region Game Mechanics / Methods
 
+        private protected override void SetDifficulty()
+        {
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    groundMaterial.bounciness = 1.05f;
+                    break;
+                case Difficulty.MEDIUM:
+                    groundMaterial.bounciness = 1f;
+                    break;
+                case Difficulty.HARD:
+                    groundMaterial.bounciness = 0.975f;
+                    hasRandomGravity = true;
+                    break;
+            }
+        }
+        
         private void IncreaseScore()
         {
             //_currentScore++;
             //base.AnimateSuccess(_currentScore, _scoreToWin);
            // base.ScoreUp();
            base.Success();
-            if (base._successes >= base.successesToWin)
-            {
-                //_currentScore = 0;
-                base.Harder();
-                //base.Win();
-            }
-
-           
         }
 
         private void SubmitGuess(InputAction.CallbackContext ctx)
@@ -137,25 +141,17 @@ namespace Scripts.Games
             {
                 IncreaseScore();
                 Debug.Log("Correct Answer");
-                correctAnswer.gameObject.SetActive(true);
+                //correctAnswer.gameObject.SetActive(true);
             }
             else
             {
                 //_remainingLives--;
                 //base.AnimateFail(_remainingLives , 3);
                 Fail();
-                if (base._fails <= 0)
-                {
-                    //_remainingLives = 3;
-                    base.Easier();
-                    guessingOverlay.gameObject.SetActive(false);
-                    Debug.Log("You lost all your lives in this game");
-                    //Lose();
-                }
-                
+
                 guessingOverlay.gameObject.SetActive(false);
                 resultText.gameObject.SetActive(true);
-                wrongAnswer.gameObject.SetActive(true);
+                //wrongAnswer.gameObject.SetActive(true);
             }
 
             StartCoroutine(StartNewRound());
@@ -222,8 +218,8 @@ namespace Scripts.Games
                 yield return new WaitForSeconds(2f); // Adjust the duration as needed
 
                 resultText.gameObject.SetActive(false);
-                correctAnswer.gameObject.SetActive(false);
-                wrongAnswer.gameObject.SetActive(false);
+                //correctAnswer.gameObject.SetActive(false);
+                //wrongAnswer.gameObject.SetActive(false);
 
                 foreach (var ball in bouncingBalls)
                 {
@@ -234,7 +230,7 @@ namespace Scripts.Games
                 }
                 _elapsedTime = 0f;
                 balls.gameObject.SetActive(true);
-                infoText.gameObject.SetActive(true);
+                //infoText.gameObject.SetActive(true);
                 
 
                 StartCoroutine(ReleaseBallsAfterDelay());

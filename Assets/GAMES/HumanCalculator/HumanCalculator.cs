@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Scripts.Controllers;
 using TMPro;
 using UnityEngine;
 using Scripts.Models;
+using Random = UnityEngine.Random;
 
 
 namespace Scripts.Games
@@ -13,18 +16,22 @@ namespace Scripts.Games
     {
         #region Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private TextMeshPro equationText;
         [SerializeField] private TextMeshPro leftAnswer;
         [SerializeField] private TextMeshPro rightAnswer;
-        [SerializeField] private SpriteRenderer correctAnswer;
-        [SerializeField] private SpriteRenderer wrongAnswer;
+        //[SerializeField] private SpriteRenderer correctAnswer;
+        //[SerializeField] private SpriteRenderer wrongAnswer;
 
         private int _missingNumber;
         private int _equationResult;
         //private int _remainingLives = 3;
         private float _elapsedTime;
         private float _timeoutStemp;
-        private bool _isAnswerScreen;
+        private bool _gameStarted;
+        
+        public bool isAnswerScreen;
         //private int _currentScore;
         //private int _scoreToWin = 5;
         
@@ -41,17 +48,20 @@ namespace Scripts.Games
             rightAnswer.GetComponent<BasePressElement>().Button = _keys.Two.Input;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return StartCoroutine(base.AnimateInstruction());
+            _gameStarted = true;
             StartCoroutine(GenerateNewEquation());
         }
 
         private void Update()
         {
+            if(!_gameStarted) return;
             _elapsedTime += Time.deltaTime;
-            if (_isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
+            if (isAnswerScreen && _elapsedTime >= _timeoutStemp + _maxRoundTime)
             {
-                _isAnswerScreen = false;
+                isAnswerScreen = false;
                 CheckAnswer("");
                 
             }
@@ -66,8 +76,8 @@ namespace Scripts.Games
         {
             yield return new WaitForSeconds(1.5f);
             
-            wrongAnswer.gameObject.SetActive(false);
-            correctAnswer.gameObject.SetActive(false);
+            //wrongAnswer.gameObject.SetActive(false);
+            //correctAnswer.gameObject.SetActive(false);
             
             switch (Difficulty)
             {
@@ -171,7 +181,7 @@ namespace Scripts.Games
         {
             var randomCorrectPos = Random.Range(0, 2);
             var randomNumOffset = Random.Range(1, 21);
-            _isAnswerScreen = true;
+            isAnswerScreen = true;
             _timeoutStemp = _elapsedTime;
             base.RunTimer(_maxRoundTime);
             if (randomCorrectPos == 0)
@@ -191,34 +201,21 @@ namespace Scripts.Games
             if (selectedAnswer == _missingNumber.ToString())
             {
                 Debug.Log("Correct");
-                correctAnswer.gameObject.SetActive(true);
+                //correctAnswer.gameObject.SetActive(true);
                // _currentScore++;
                 //base.ScoreUp();
                 //base.AnimateSuccess(_currentScore, _scoreToWin);
                 base.Success();
-                if (base._successes >= base.successesToWin)
-                {
-                    //_currentScore = 0;
-                    base.Harder();
-                    //base.Win();
-                }
-                
             }
             else {
                 Debug.Log("Wrong");
                 //_remainingLives--;
-                wrongAnswer.gameObject.SetActive(true);
+                //wrongAnswer.gameObject.SetActive(true);
                 //base.AnimateFail(_remainingLives , 3);
                 base.Fail();
-                if (base._fails <= 0)
-                {
-                    Debug.Log("GAME LOST");
-                    //_remainingLives = 3;
-                    base.Easier();
-                    //base.Lose();
-                }
-                
             }
+
+            isAnswerScreen = false;
             StartCoroutine(GenerateNewEquation());
         }
 

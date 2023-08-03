@@ -17,6 +17,7 @@ namespace Scripts.Games
         [SerializeField] private Colors colorEnum;
         [SerializeField] private SpriteRenderer spriteRenderer, outline;
         [SerializeField] [Range(0.1f, 1)] private float duration = 0.30f;
+        [SerializeField] private AudioSource note;
 
         #endregion Serialized Fields
 
@@ -84,6 +85,8 @@ namespace Scripts.Games
         public void Animate()
         {
             StartCoroutine(AnimateColor(spriteRenderer, originalColor, targetColor, duration));
+            if(note != null)
+                note.Play();
             if(outline != null)
                 StartCoroutine(AnimateColor(outline, originalColor, targetColor, duration));
         }

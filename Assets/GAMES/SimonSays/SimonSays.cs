@@ -1,7 +1,6 @@
 using Scripts.Models;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace Scripts.Games
@@ -22,10 +21,11 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] private List<Colors> displayPattern, guessPattern;
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<Modifier> infoPattern;
-        [SerializeField] private List<TMP_Text> inputTexts;
-        [SerializeField] private GameObject buttonsContainer, inputOverlay, infoOverlay, middle;
+        [SerializeField] private List<Colors> displayPattern, guessPattern;
+        [SerializeField] private GameObject buttonsContainer, infoOverlay, middle;
         [SerializeField] private SimonElement blue, red, yellow, green;
         [SerializeField] private SimonElement twice, nothing, ok;
         //[SerializeField] private Image timer;
@@ -59,10 +59,12 @@ namespace Scripts.Games
         }
 
         // Start is called before the first frame update
-        void Start()
+        IEnumerator Start()
         {
+            yield return StartCoroutine(AnimateInstruction());
+
             _animationTime = BLINK_TIME * COLORS / MODIFIER;
-            infoOverlay.SetActive(true);
+            //infoOverlay.SetActive(true);
             StartCoroutine(ActivateButtons(BLINK_TIME/ (MODIFIER *2)));
             GeneratePattern(displayPattern.Count + 1);
             StartCoroutine(AnimateButtons(_animationTime * MODIFIER, _animationTime));
@@ -72,12 +74,6 @@ namespace Scripts.Games
             red.GetComponent<BasePressElement>().Button = _keys.Two.Input;
             yellow.GetComponent<BasePressElement>().Button = _keys.Three.Input;
             green.GetComponent<BasePressElement>().Button = _keys.Four.Input;
-
-            // Set Icons
-            inputTexts[0].text = _keys.One.Icon;
-            inputTexts[1].text = _keys.Two.Icon;
-            inputTexts[2].text = _keys.Three.Icon;
-            inputTexts[3].text = _keys.Four.Icon;
         }
 
         #endregion
@@ -137,7 +133,7 @@ namespace Scripts.Games
         /// <param name="color">Enum of the color to add to the pattern.</param>
         private void SetGuessPattern(Colors color)
         {
-            if (displayPattern.Count <= (int)Difficulty)
+            if (displayPattern.Count <= (int)difficulty)
             {
                 // Only do the extra difficulty after the 3rd round!
                 infoPattern.Add(Modifier.NORMAL);
@@ -147,7 +143,7 @@ namespace Scripts.Games
 
             int chance = Random.Range(0, CHANCE);
 
-            if (base.Difficulty == Difficulty.HARD && chance < 1)
+            if (difficulty == Difficulty.HARD && chance < 1)
             {
                 // On Level 3 nothing gets added if the chance is right
                 infoPattern.Add(Modifier.NONE);
@@ -157,7 +153,7 @@ namespace Scripts.Games
             infoPattern.Add(Modifier.NORMAL);
             guessPattern.Add(color);
 
-            if (base.Difficulty != Difficulty.EASY && chance > 1)
+            if (difficulty != Difficulty.EASY && chance > 1)
             {
                 // On Level 2 the color is doubled
                 infoPattern[^1] = Modifier.DOUBLE;
@@ -183,8 +179,6 @@ namespace Scripts.Games
         {
             foreach (SimonElement button in _buttonObjects.Values)
                 button.ToggleInput(isPlayersTurn);
-
-            inputOverlay.SetActive(isPlayersTurn);
         }
 
         #endregion
@@ -294,7 +288,7 @@ namespace Scripts.Games
 
             //nothing.Animate();
 
-            _successes = Mathf.Clamp((successesToWin -= (int)Difficulty), 0, 9);
+            //_successes = Mathf.Clamp((successesToWin -= (int)Difficulty), 0, 9);
             ResetTurn();
             StartCoroutine(AnimateButtons(_animationTime, BLINK_TIME));
         }
@@ -305,7 +299,7 @@ namespace Scripts.Games
         /// </summary>
         private void GuessingDone()
         {
-            UpdateDifficulty(_successes);
+            //UpdateDifficulty(_successes);
             
             Success();
             //ok.Animate();

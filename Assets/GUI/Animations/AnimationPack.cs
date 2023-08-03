@@ -10,9 +10,11 @@ public class AnimationPack : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
     [SerializeField] ParticleSystem particles;
-    [SerializeField] Animator animator;
+    [SerializeField] public Animator animator;
     [SerializeField] Image emojiFace;
-    
+
+    public Image EmojiFace { get => emojiFace; set => emojiFace = value; }
+
     /// <summary>
     /// Run chosen animation.
     /// </summary>

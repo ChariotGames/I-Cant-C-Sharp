@@ -1,7 +1,9 @@
 using Scripts.Models;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace Scripts.Games
 {
@@ -14,14 +16,15 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
-        [SerializeField] protected Difficulty difficulty = Difficulty.EASY;
+        [Header("Game Values")]
         [SerializeField] protected int successesToWin = 5;
+        [SerializeField] protected int successesToLevelUp;
         [SerializeField] protected int failsToLose = 3;
 
         #endregion Serialized Fields
 
         #region Fields
-        
+
         public static event Action<GameObject> OnWin, OnLose;
         public static event Action<GameObject, Difficulty> OnUpdateDifficulty;
         public static event Action<int> OnScoreUpdate;
@@ -30,13 +33,21 @@ namespace Scripts.Games
         //public static event Action<(string side, int score, float timer, int toWin, int toLose)> OnSetVariables;
         public static event Action<Transform, AnimType, int, float, float> OnPlayAnimations;
 
+        protected Difficulty difficulty = Difficulty.EASY;
         protected KeyMap _keys;
         protected Rect _playarea;
+        protected SpawnSide _spawnSide;
+
         protected Genre _genre;
         protected int _successes, _fails;
         protected float _timer;
-
+        
         private Transform _parent;
+        private GameObject _instructionPrefab;
+        private float _instructionDistance;
+        private int _difficultyTracker;
+        private bool _willGetHarder = false;
+        private bool _isVarying = true;
 
         #endregion Fields
 
@@ -48,13 +59,35 @@ namespace Scripts.Games
         /// <param name="difficulty">The difficulty loaded with.</param>
         /// <param name="keys">The keymap used.</param>
         /// <param name="area">The rect area defining the playfield.</param>
-        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area)
+        public void SetUp(Difficulty difficulty, KeyMap keys, Rect area, SpawnSide type, bool varying)
         {
             this.difficulty = difficulty;
             _keys = keys;
             _playarea = area;
+            SpawnSide = type;
             _parent = transform.parent;
             _fails = failsToLose;
+            _isVarying = varying;
+            _difficultyTracker = successesToWin < successesToLevelUp ? successesToWin : successesToLevelUp;
+        }
+
+        /// <summary>
+        /// Called to setup the Instruction text object.
+        /// </summary>
+        /// <param name="prefab">The Prefab itself.</param>
+        /// <param name="message">The Message from the Minigame.</param>
+        /// <param name="duration">How far up the object should move.</param>
+        public void SetInstructions(GameObject prefab, string message, float duration)
+        {
+            _instructionPrefab = Instantiate(prefab, transform);
+            _instructionPrefab.GetComponent<TMP_Text>().text = message;
+            _instructionDistance = duration;
+        }
+
+        public void RestartGame()
+        {
+            StopAllCoroutines();
+            Destroy(_instructionPrefab);
         }
 
         /// <summary>
@@ -128,9 +161,23 @@ namespace Scripts.Games
             ScoreUp(score);
             StopTimer();
             AnimateSuccess(parent, _successes, successesToWin);
+            
+            _difficultyTracker--;
+            if (_difficultyTracker <= 0)
+            {
+                _difficultyTracker = successesToLevelUp;
+                _willGetHarder = true;
+            }
+            
             if (_successes >= successesToWin)
             {
                 _successes = 0;
+                _fails = failsToLose;
+                if (_willGetHarder)
+                {
+                    Harder();
+                }
+                _willGetHarder = false;
                 Win();
             }
         }
@@ -172,9 +219,14 @@ namespace Scripts.Games
             //ScoreDown(score);
             StopTimer();
             AnimateFail(parent, _fails, failsToLose);
+            
+            _difficultyTracker++;
+
             if (_fails <= 0)
             {
+                _successes = 0;
                 _fails = failsToLose;
+                Easier();
                 Lose();
             }
         }
@@ -238,14 +290,40 @@ namespace Scripts.Games
         /// <summary>
         /// Makes the current game easier next time it's played.
         /// </summary>
-        protected void Easier() =>
+        protected void Easier()
+        {
+            if(!_isVarying) return; 
             OnUpdateDifficulty?.Invoke(gameObject, difficulty - 1);
+            
+            if (SpawnSide == SpawnSide.Side) return;
+            
+            Difficulty = --difficulty;
+            SetDifficulty();
+        }
+            
 
         /// <summary>
         /// Makes the current game harder next time it's played.
         /// </summary>
-        protected void Harder() =>
+        protected void Harder()
+        {
+            if(!_isVarying) return; 
             OnUpdateDifficulty?.Invoke(gameObject, difficulty + 1);
+            
+            if (SpawnSide == SpawnSide.Side) return;
+            
+            Difficulty = ++difficulty;
+            SetDifficulty();
+        }
+
+        /// <summary>
+        /// Override Method, you need to override if you check Difficulty in your Game ONCE.
+        /// </summary>
+        private protected virtual void SetDifficulty()
+        {
+            
+        }
+            
 
         /// <summary>
         /// Runs the timer and updates the UI.
@@ -260,13 +338,75 @@ namespace Scripts.Games
         protected void RunTimer(float time)
         {
             if (time <= 0) return;
-
+            
             OnTimerUpdate?.Invoke(transform.parent.name, time);
         }
 
+        /// <summary>
+        /// Stops the currently displayed timer.
+        /// </summary>
         protected void StopTimer()
         {
             OnTimerStop?.Invoke(transform.parent.name);
+        }
+
+        /// <summary>
+        /// Animates the inital game instruction.
+        /// </summary>
+        protected IEnumerator AnimateInstruction()
+        {
+            yield return StartCoroutine(AnimateInstruction(_instructionPrefab, _instructionDistance));
+        }
+
+        /// <summary>
+        /// Animates the inital game instruction in a GameObject.
+        /// </summary>
+        /// <param name="container">The TMP_Text to animate.</param>
+        protected IEnumerator AnimateInstruction(GameObject container)
+        {
+            yield return StartCoroutine(AnimateInstruction(container, _instructionDistance));
+        }
+
+        /// <summary>
+        /// Animates the inital game instruction in a GameObject.
+        /// </summary>
+        /// <param name="distance">How far to move.</param>
+        protected IEnumerator AnimateInstruction(float distance)
+        {
+            yield return StartCoroutine(AnimateInstruction(_instructionPrefab, distance));
+        }
+
+        /// <summary>
+        /// Does the actual animation.
+        /// </summary>
+        /// <param name="container">The GameObject holding the TMP_Text.</param>
+        /// <param name="distance">How far to move.</param>
+        /// <returns></returns>
+        protected IEnumerator AnimateInstruction(GameObject container, float distance)
+        {
+            GameObject obj = Instantiate(container, transform.position, Quaternion.identity, transform);
+            obj.SetActive(true);
+            TMP_Text tmp = obj.GetComponent<TMP_Text>();
+
+            float offset = 0;
+            while (offset < distance)
+            {
+                float delta = Time.deltaTime * _instructionDistance;
+                obj.transform.Translate(0, delta, 0, Space.Self);
+                offset += delta;
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+
+            float countdown = 3.0f;
+            tmp.text = countdown.ToString();
+            yield return new WaitForSeconds(Time.deltaTime);
+            while (0 < countdown)
+            {
+                countdown -= Time.deltaTime;
+                tmp.text = ((int)countdown+1).ToString();
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            obj.SetActive(false);
         }
 
         #endregion  Methods
@@ -279,9 +419,18 @@ namespace Scripts.Games
         public Difficulty Difficulty
         {
             get => difficulty;
-            set => difficulty = value;
+            set => difficulty = (Difficulty)Mathf.Clamp((int)value, (int)Difficulty.EASY, (int)Difficulty.HARD);
         }
 
+        /// <summary>
+        /// The game's current spawn side.
+        /// </summary>
+        public SpawnSide SpawnSide
+        {
+            get => _spawnSide;
+            set => _spawnSide = value;
+        }
+        
         /// <summary>
         /// The game's set key map.
         /// </summary>

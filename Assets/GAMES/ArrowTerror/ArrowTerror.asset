@@ -15,6 +15,11 @@ MonoBehaviour:
   description: 
   difficulty: 1
   genre: 4
+  actionNames:
+    one: Move
+    two: 
+    three: 
+    four: 
   keysLeft:
     one: {fileID: 11400000, guid: 5b68a930ae7af724b80502d9028d70e4, type: 2}
     two: {fileID: 0}
@@ -25,11 +30,6 @@ MonoBehaviour:
     two: {fileID: 0}
     three: {fileID: 0}
     four: {fileID: 0}
-  actionNames:
-    one: Move
-    two: 
-    three: 
-    four: 
-    other: 
   prefab: {fileID: 5464692928381225925, guid: ed3cb08cacecb47188b43efa7f30c768, type: 3}
   preview: {fileID: 21300000, guid: b6b798d8f30d3a1409be88fbcb2cd675, type: 3}
+  instructionText: "Save the \nkittens!"

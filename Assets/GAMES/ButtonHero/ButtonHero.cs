@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts.Controllers;
 using Scripts.GameElements;
 using TMPro;
 using UnityEngine;
@@ -12,12 +14,15 @@ namespace Scripts.Games
     {
         #region Serialized Fields
 
+        [Space]
+        [Header("Game Specific Stuff")]
         [SerializeField] private List<ButtonHeroElement> buttons;
         [SerializeField] private float spawnTimeUpperBounds;
         [SerializeField] private float spawnTimeLowerBounds;
-        [SerializeField] private TextMeshPro timerTextMesh;
-        [SerializeField] private SpriteRenderer damageTakenSprite;
+        //[SerializeField] private TextMeshPro timerTextMesh;
+        //[SerializeField] private SpriteRenderer damageTakenSprite;
         [SerializeField] private Transform container;
+        //[SerializeField] private TextMeshPro infoText;
 
         #endregion Serialized Fields
 
@@ -25,16 +30,18 @@ namespace Scripts.Games
 
         private TextMeshPro _previousButton;
         private readonly List<TextMeshPro> _spawnedButtons = new();
-        private static float _timer;
+        private float _timerIntern;
+        
 
         //private int _remainingLives = 3;
         private float _elapsedTime;
-        private float _timeoutStemp;
+        //private float _timeoutStemp;
         private int _currentScore;
         private float _buttonWidth;
         private const int _scoreToWin = 10;
+        private bool _gameStarted;
 
-        private float _timeoutDelay;
+        private float _maxRoundTime;
 
         #endregion Fields
 
@@ -42,19 +49,8 @@ namespace Scripts.Games
 
         private void Awake()
         {
-            switch (Difficulty)
-            {
-                case Difficulty.EASY:
-                    _timeoutDelay = 3;
-                    break;
-                case Difficulty.MEDIUM:
-                    _timeoutDelay = 2;
-                    break;
-                case Difficulty.HARD:
-                    _timeoutDelay = 1;
-                    break;
-            }
-
+            SetDifficulty();
+            
             for (var i = buttons.Count - 1; i >= 0; i--)
             {
                 // just pool all the objects into a list
@@ -67,8 +63,27 @@ namespace Scripts.Games
             }
         }
 
-        private void Start()
+        private protected override void SetDifficulty()
         {
+            switch (Difficulty)
+            {
+                case Difficulty.EASY:
+                    _maxRoundTime = 3;
+                    break;
+                case Difficulty.MEDIUM:
+                    _maxRoundTime = 2;
+                    break;
+                case Difficulty.HARD:
+                    _maxRoundTime = 1;
+                    break;
+            }
+        }
+
+        private IEnumerator Start()
+        {
+            yield return StartCoroutine(base.AnimateInstruction());
+            _gameStarted = true;
+            //infoText.gameObject.SetActive(true);
             _buttonWidth = buttons[0].gameObject.GetComponent<RectTransform>().rect.width * 0.5f;
             
             StartCoroutine(SpawnCoroutine());
@@ -76,6 +91,13 @@ namespace Scripts.Games
 
         private void Update()
         {
+            if (!_gameStarted) return;
+            _elapsedTime += Time.deltaTime;
+            /*if (_elapsedTime >=  3 && infoText.gameObject.activeSelf)
+            {
+                infoText.gameObject.SetActive(false);
+            }
+            */
             HandleTimer();
         }
 
@@ -91,8 +113,9 @@ namespace Scripts.Games
         {
             if (_previousButton && _previousButton.gameObject.activeSelf)
             {
-                _timer += Time.deltaTime;
-                var remainingTime = _timeoutDelay - _timer;
+                _timerIntern += Time.deltaTime;
+                base.RunTimer(_maxRoundTime);
+                /*var remainingTime = _timeoutDelay - _timer;
                 var remainingSeconds = Mathf.Floor(remainingTime);
                 var remainingMilliseconds = Mathf.Floor((remainingTime - remainingSeconds) * 1000f);
     
@@ -101,8 +124,8 @@ namespace Scripts.Games
                 {
                     timerTextMesh.text = remainingText;
                 }
-
-                if (_timer >= _timeoutDelay)
+                */
+                if (_timerIntern >= _maxRoundTime)
                 {
                     HandleScoreChange();
                 
@@ -114,21 +137,17 @@ namespace Scripts.Games
         {
             //base.AnimateFail(failsToLose , 3);
             _previousButton.gameObject.SetActive(false);
-            var damageIconGo = Instantiate(damageTakenSprite.gameObject, transform.parent);
-            damageIconGo.SetActive(true);
-            Destroy(damageIconGo, 1);
+            //var damageIconGo = Instantiate(damageTakenSprite.gameObject, transform.parent);
+            //damageIconGo.SetActive(true);
+            //Destroy(damageIconGo, 1);
             ResetTimer();
             Fail();
-            if (base._fails <= 0)
-            {
-                base.Easier();
-            }
         }
 
         public void ResetTimer()
         {
-            Debug.Log("It took " + _timer + " to react");
-            _timer = 0;
+            Debug.Log("It took " + _timerIntern + " to react");
+            _timerIntern = 0;
         }
 
         #endregion Game Mechanics / Methods
@@ -139,6 +158,7 @@ namespace Scripts.Games
         {
             // Make sure only one Button is visible at a time
             if (_previousButton && _previousButton.gameObject.activeSelf) return;
+            
 
             // Get a random TextMeshPro from the list
             var randomIndex = Random.Range(0, _spawnedButtons.Count);
@@ -184,12 +204,6 @@ namespace Scripts.Games
             //base.AnimateSuccess(_currentScore, _scoreToWin);
             //base.ScoreUp();
             Success();
-            if (_currentScore >= base.successesToWin)
-            {
-                //_currentScore = 0;
-                base.Harder();
-                //base.Win();
-            }
         }
     }
 }

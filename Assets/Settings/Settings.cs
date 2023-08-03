@@ -8,16 +8,15 @@ namespace Scripts.Models
     {
         #region Fields
 
-        [SerializeField] private int lives = 3, players = 1;
+        [SerializeField] private int lives = 3, maxLives = 3;
         [SerializeField] private Difficulty baseDifficulty;
         [SerializeField] private Minigame selectedGame = null;
         [SerializeField] private Character selectedCharacter = null;
         [SerializeField] private List<Minigame> games, soloGames;
         [SerializeField] private List<Character> characters;
 
-        [SerializeField] private float _time;
-        [SerializeField] private int _score, _highscore;
-        
+        [SerializeField] private float mainVolume = -20.0f, musicVolume, soundVolume;
+        private int  _score, _time, players = 1;
 
         #endregion
 
@@ -31,6 +30,15 @@ namespace Scripts.Models
         {
             get => lives;
             set => lives = Mathf.Clamp(value, 0, 9);
+        }
+
+        /// <summary>
+        /// The set maximum of lives.
+        /// </summary>
+        public int MaxLives
+        {
+            get => maxLives;
+            set => maxLives = Mathf.Clamp(value, 0, 9);
         }
 
         /// <summary>
@@ -99,7 +107,7 @@ namespace Scripts.Models
         /// <summary>
         /// The play time.
         /// </summary>
-        public float Time
+        public int Time
         {
             get => _time;
             set => _time = value;
@@ -115,12 +123,30 @@ namespace Scripts.Models
         }
 
         /// <summary>
-        /// The score of the game.
+        /// The main volume value set by the player.
         /// </summary>
-        public int Highscore
+        public float MainVolume
         {
-            get => _highscore;
-            set => _highscore = value;
+            get => mainVolume;
+            set => mainVolume = value;
+        }
+
+        /// <summary>
+        /// The music volume value set by the player.
+        /// </summary>
+        public float MusicVolume
+        {
+            get => musicVolume;
+            set => musicVolume = value;
+        }
+
+        /// <summary>
+        /// The sound volume value set by the player.
+        /// </summary>
+        public float SoundVolume
+        {
+            get => soundVolume;
+            set => soundVolume = value;
         }
 
         #endregion

@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7044b58c54904054a8a190e9ceacd658, type: 3}
   m_Name: TrafficLights
   m_EditorClassIdentifier: 
-  description: 
+  description: in Traffic Lights the player has to remember the colors combinations
+    at the beginning and choose them in the second activation of the traffic lights!
   difficulty: 1
   genre: 1
+  actionNames:
+    one: Left
+    two: Submit
+    three: Right
+    four: 
   keysLeft:
     one: {fileID: 11400000, guid: 2ea1f1bde713d0a4489f9dee5c16638f, type: 2}
     two: {fileID: 11400000, guid: 0d0cb775b6d9e4e46b2f59563212aec6, type: 2}
@@ -25,11 +31,6 @@ MonoBehaviour:
     two: {fileID: 11400000, guid: 9a205af9329cb8043969e87b9dae043a, type: 2}
     three: {fileID: 11400000, guid: b9045294dd4be2041b72349f7633898a, type: 2}
     four: {fileID: 0}
-  actionNames:
-    one: Left
-    two: Submit
-    three: Right
-    four: 
-    other: 
   prefab: {fileID: 989249342879803052, guid: 228c6c5429a838840b26610954a3fc8f, type: 3}
   preview: {fileID: 21300000, guid: abf85c2c91331bb43a321c8ed283a995, type: 3}
+  instructionText: "Remember these \ncolors!"
