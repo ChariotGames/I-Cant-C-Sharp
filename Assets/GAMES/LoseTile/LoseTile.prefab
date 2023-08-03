@@ -143,7 +143,6 @@ MonoBehaviour:
   dangerzone: {fileID: 5241422682805226549}
   player: {fileID: 5241422683056287857}
   container: {fileID: 5241422681582535110}
-  WinSound: {fileID: 6688784841852574943}
   remainingTiles: 0
   ammountOfTiles: 0
   lives: 3
@@ -154,9 +153,9 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4511076258982885394}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7272951172123379120, guid: bf7be36fae8244945aec18b2a24556f5, type: 2}
   m_audioClip: {fileID: 8300000, guid: f035bf46ae476f341ad8c28b34490ff1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -476,7 +475,7 @@ MonoBehaviour:
   - {r: 1, g: 0.12549019, b: 0.58168685, a: 0.9019608}
   timer: 1
   box: {fileID: 5241422682149599241}
-  walkSound: {fileID: 0}
+  walkSound: {fileID: 6688784841852574943}
   type: 3
   visited: 0
   isVisable: 1
@@ -696,7 +695,6 @@ MonoBehaviour:
   x: 2.5
   y: 2.5
   body: {fileID: 5241422683056287862}
-  walkSound: {fileID: 7076866439736954766}
 --- !u!212 &5241422683056287860
 SpriteRenderer:
   m_ObjectHideFlags: 0
