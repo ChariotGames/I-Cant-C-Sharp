@@ -44,6 +44,7 @@ namespace Scripts.Controllers
             if (mainCamera) mainCamera = Camera.main;
             canvasScaler.scaleFactor = mainCamera.pixelWidth / REFERENCE_WIDTH;
 
+            LoadPrefs();
             startAnimator.SetTrigger("BookIn");
             ClearSettings();
             ResetAudio(false);
@@ -55,6 +56,55 @@ namespace Scripts.Controllers
         #endregion Built-Ins / MonoBehaviours
 
         #region Game Mechanics / Methods
+
+        /// <summary>
+        /// Loads settings from PlayerPrefs
+        /// </summary>
+        public void LoadPrefs()
+        {
+            if (PlayerPrefs.HasKey("Difficulty")) SetDifficulty(PlayerPrefs.GetInt("Difficulty"));
+
+            if (PlayerPrefs.HasKey("MaxLives")) SetLives(PlayerPrefs.GetInt("MaxLives"));
+
+            if (PlayerPrefs.HasKey("MainVolume")) SetMainVolume(PlayerPrefs.GetFloat("MainVolume"));
+
+            if (PlayerPrefs.HasKey("MusicVolume")) SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+
+            if (PlayerPrefs.HasKey("SoundVolume")) SetSoundVolume(PlayerPrefs.GetFloat("SoundVolume"));
+
+            if (PlayerPrefs.HasKey("CharacterName"))
+            {
+                string name = PlayerPrefs.GetString("CharacterName");
+                foreach (Character character in settings.Characters)
+                {
+                    if (character.Name.Equals(name))
+                    {
+                        GameObject button = Instantiate(templateCharacterButton, characterContainer.transform);
+                        MainMenuCharacter characterButton = button.GetComponent<MainMenuCharacter>();
+                        characterButton.SetupButton(character);
+                        characterButton.SetCharacter();
+                    }
+                }  
+            }
+        }
+
+        /// <summary>
+        /// Saves settings to PlayerPrefs
+        /// </summary>
+        public void SavePrefs()
+        {
+            PlayerPrefs.SetInt("Difficulty", (int)settings.BaseDifficulty);
+
+            PlayerPrefs.SetInt("MaxLives", settings.MaxLives);
+
+            PlayerPrefs.SetFloat("MainVolume", settings.MainVolume);
+
+            PlayerPrefs.SetFloat("MusicVolume", settings.MusicVolume);
+
+            PlayerPrefs.SetFloat("SoundVolume", settings.SoundVolume);
+
+            PlayerPrefs.SetString("CharacterName", settings.SelectedCharacter.Name);
+        }
 
         /// <summary>
         /// Fills the games page with game assets on the first run.
@@ -123,6 +173,7 @@ namespace Scripts.Controllers
         /// </summary>
         public void Quit()
         {
+            SavePrefs();
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #endif

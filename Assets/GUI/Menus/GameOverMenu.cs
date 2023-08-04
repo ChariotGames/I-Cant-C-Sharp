@@ -52,10 +52,31 @@ namespace Scripts.Controllers
 
         public void QuitGame()
         {
+            SavePrefs();
             #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
             #endif
                 Application.Quit();
+        }
+
+
+
+        /// <summary>
+        /// Saves settings to PlayerPrefs
+        /// </summary>
+        public void SavePrefs()
+        {
+            PlayerPrefs.SetInt("Difficulty", (int)settings.BaseDifficulty);
+
+            PlayerPrefs.SetInt("MaxLives", settings.MaxLives);
+
+            PlayerPrefs.SetFloat("MainVolume", settings.MainVolume);
+
+            PlayerPrefs.SetFloat("MusicVolume", settings.MusicVolume);
+
+            PlayerPrefs.SetFloat("SoundVolume", settings.SoundVolume);
+
+            PlayerPrefs.SetString("CharacterName", settings.SelectedCharacter.Name);
         }
 
         private IEnumerator AnimateToMenu()
