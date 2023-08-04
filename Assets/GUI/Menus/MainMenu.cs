@@ -77,13 +77,7 @@ namespace Scripts.Controllers
                 string name = PlayerPrefs.GetString("CharacterName");
                 foreach (Character character in settings.Characters)
                 {
-                    if (character.Name.Equals(name))
-                    {
-                        GameObject button = Instantiate(templateCharacterButton, characterContainer.transform);
-                        MainMenuCharacter characterButton = button.GetComponent<MainMenuCharacter>();
-                        characterButton.SetupButton(character);
-                        characterButton.SetCharacter();
-                    }
+                    if (character.Name.Equals(name)) settings.SelectedCharacter = character;
                 }  
             }
         }
