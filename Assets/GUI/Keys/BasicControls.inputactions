@@ -281,6 +281,17 @@
                 },
                 {
                     "name": "",
+                    "id": "bdda3908-56c0-4548-9be1-b2ce9b822cb2",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TriggerRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fa720480-de8a-486f-90d5-256d06236281",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -468,6 +479,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1434b20f-cff9-4dc7-8968-f12294a3f3df",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TriggerLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d074e2a3-9070-4295-bdba-e3b235c8556d",
                     "path": "<Gamepad>/select",
                     "interactions": "",
@@ -496,6 +518,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ButtonStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3903a471-724c-4c58-b17e-7c307cb73109",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StickLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
